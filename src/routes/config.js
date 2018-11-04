@@ -60,6 +60,13 @@ export default {
             ],
         },
         {
+            key: '/app/auth', title: '审核管理', icon: 'safety',
+            subs: [
+                { key: '/app/auth/basic', title: '开户审核', component: 'AuthBasic' },
+                { key: '/app/auth/routerEnter', title: '开户审核', component: 'RouterEnter', auth: 'auth/testPage' },
+            ],
+        },
+        {
             key: '/app/cssModule', title: 'cssModule', icon: 'star', component: 'Cssmodule'
         },
     ],
