@@ -115,46 +115,9 @@ class Basic extends Component {
     componentDidMount() {
         console.log("hcia", " componentDidMount ")
 
-        // axios.post('http://mobile.nooko.cn:8090/open/getOpenApplyList', {
-        //     firstName: 'Fred',
-        //     lastName: 'Flintstone'
-        // })
-        //     .then(function (response) {
-        //         console.log(response);
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
+
         this.test()
 
-        // this.setState({testtt: '123321'});
-        // var aa=this
-        // axios.post('http://mobile.nooko.cn:8090/open/getOpenApplyList', {
-        //     // firstName: 'Fred',
-        //     // lastName: 'Flintstone'
-        // }).then(function (response) {
-        //     console.log(response);
-        //     aa.setState({testtt : 'wwwww'});
-        //
-        //
-        //
-        //     aa.setState({testtt : response.data.code});
-        //     aa.setState({userList : response.data.data.list});
-        //
-        //     //
-        //     // this.state.data = response;
-        //     //
-        //     // this.state.userList  =response.data.data.list;
-        //     // this.setState({userList: response.data.data.list});
-        //
-        //     // this.set
-        //     // message.info(response);
-        //
-        // }).catch(function (error) {
-        //     console.log(error);
-        //     // message.warn(error);
-        //
-        // });
     }
 
     componentWillUnmount() {

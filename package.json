@@ -83,7 +83,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "theme": "node theme.js"
+    "theme": "node theme.js",
+    "open ": "open  http://localhost:3006/"
   },
   "eslintConfig": {
     "extends": "react-app"
