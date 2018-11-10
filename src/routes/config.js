@@ -1,6 +1,13 @@
 export default {
     menus: [ // 菜单相关路由
-        { key: '/app/dashboard/index', title: '首页', icon: 'mobile', component: 'Dashboard' },
+        { key: '/app/dashboard/index', title: '歡迎', icon: 'mobile', component: 'Dashboard' },
+        {
+            key: '/app/pass', title: '审核管理', icon: 'safety',
+            subs: [
+                { key: '/app/pass/open', title: '开户审核', component: 'PassOpen' },
+                { key: '/app/pass/lever', title: '杠杆审核', component: 'PassLever', auth: 'auth/testPage' },
+            ],
+        },
         {
             key: '/app/ui', title: 'UI', icon: 'scan',
             subs: [
@@ -53,19 +60,13 @@ export default {
             ],
         },
         {
-            key: '/app/auth', title: '审核管理', icon: 'safety',
+            key: '/app/auth', title: '權限測試', icon: 'safety',
             subs: [
                 { key: '/app/auth/basic', title: '开户审核', component: 'AuthBasic' },
                 { key: '/app/auth/routerEnter', title: '开户审核', component: 'RouterEnter', auth: 'auth/testPage' },
             ],
         },
-        {
-            key: '/app/auth', title: '审核管理', icon: 'safety',
-            subs: [
-                { key: '/app/auth/basic', title: '开户审核', component: 'AuthBasic' },
-                { key: '/app/auth/routerEnter', title: '开户审核', component: 'RouterEnter', auth: 'auth/testPage' },
-            ],
-        },
+
         {
             key: '/app/cssModule', title: 'cssModule', icon: 'star', component: 'Cssmodule'
         },
