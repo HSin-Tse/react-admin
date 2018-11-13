@@ -21,22 +21,7 @@ class HeaderCustom extends Component {
     };
     componentDidMount() {
         const QueryString = queryString();
-        // if (QueryString.hasOwnProperty('code')) {
-        //     console.log(QueryString);
-        //     const _user = JSON.parse(localStorage.getItem('user'));
-        //     !_user && gitOauthToken(QueryString.code).then(res => {
-        //         console.log(res);
-        //         gitOauthInfo(res.access_token).then(info => {
-        //             this.setState({
-        //                 user: info
-        //             });
-        //             localStorage.setItem('user', JSON.stringify(info));
-        //         });
-        //     });
-        //     _user && this.setState({
-        //         user: _user
-        //     });
-        // }
+
         const _user = JSON.parse(localStorage.getItem('user')) || '测试';
         if (!_user && QueryString.hasOwnProperty('code')) {
             gitOauthToken(QueryString.code).then(res => {
@@ -100,12 +85,15 @@ class HeaderCustom extends Component {
                     <Menu.Item key="full" onClick={this.screenFull} >
                         <Icon type="arrows-alt" onClick={this.screenFull} />
                     </Menu.Item>
-                    <Menu.Item key="1">
-                        <Badge count={25} overflowCount={10} style={{marginLeft: 10}}>
-                            <Icon type="notification" />
-                        </Badge>
-                    </Menu.Item>
-                    <SubMenu title={<span className="avatar"><img src={avater} alt="头像" /><i className="on bottom b-white" /></span>}>
+                    {/*<Menu.Item key="1">*/}
+                        {/*<Badge count={25} overflowCount={10} style={{marginLeft: 10}}>*/}
+                            {/*<Icon type="notification" />*/}
+                        {/*</Badge>*/}
+                    {/*</Menu.Item>*/}
+                    <SubMenu title={<span className="avatar">
+                        <img src={avater} alt="头像" />
+
+                        <i className="on bottom b-white" /></span>}>
                         <MenuItemGroup title="用户中心">
                             <Menu.Item key="setting:1">你好 - {this.props.user.userName}</Menu.Item>
                             <Menu.Item key="setting:2">个人信息</Menu.Item>

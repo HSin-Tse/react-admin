@@ -118,37 +118,37 @@ class Dashboard extends React.Component {
                                             <img src={b1} className="img-responsive img-circle" alt="test" />
                                         </span>
                                         <div className="clear">
-                                            <span className="block">鸣人</span>
-                                            <span className="text-muted">终于当上火影了！</span>
+                                            <span className="block">test</span>
+                                            <span className="text-muted">crmv1</span>
                                         </div>
                                     </li>
-                                    <li className="list-group-item">
-                                        <span className="pull-left w-40 mr-m">
-                                            <img src={b1} className="img-responsive img-circle" alt="test" />
-                                        </span>
-                                        <div className="clear">
-                                            <span className="block">佐助</span>
-                                            <span className="text-muted">吊车尾~~</span>
-                                        </div>
-                                    </li>
-                                    <li className="list-group-item">
-                                        <span className="pull-left w-40 mr-m">
-                                            <img src={b1} className="img-responsive img-circle" alt="test" />
-                                        </span>
-                                        <div className="clear">
-                                            <span className="block">小樱</span>
-                                            <span className="text-muted">佐助，你好帅！</span>
-                                        </div>
-                                    </li>
-                                    <li className="list-group-item">
-                                        <span className="pull-left w-40 mr-m">
-                                            <img src={b1} className="img-responsive img-circle" alt="test" />
-                                        </span>
-                                        <div className="clear">
-                                            <span className="block">雏田</span>
-                                            <span className="text-muted">鸣人君。。。那个。。。我。。喜欢你..</span>
-                                        </div>
-                                    </li>
+                                    {/*<li className="list-group-item">*/}
+                                        {/*<span className="pull-left w-40 mr-m">*/}
+                                            {/*<img src={b1} className="img-responsive img-circle" alt="test" />*/}
+                                        {/*</span>*/}
+                                        {/*<div className="clear">*/}
+                                            {/*<span className="block">佐助</span>*/}
+                                            {/*<span className="text-muted">吊车尾~~</span>*/}
+                                        {/*</div>*/}
+                                    {/*</li>*/}
+                                    {/*<li className="list-group-item">*/}
+                                        {/*<span className="pull-left w-40 mr-m">*/}
+                                            {/*<img src={b1} className="img-responsive img-circle" alt="test" />*/}
+                                        {/*</span>*/}
+                                        {/*<div className="clear">*/}
+                                            {/*<span className="block">小樱</span>*/}
+                                            {/*<span className="text-muted">佐助，你好帅！</span>*/}
+                                        {/*</div>*/}
+                                    {/*</li>*/}
+                                    {/*<li className="list-group-item">*/}
+                                        {/*<span className="pull-left w-40 mr-m">*/}
+                                            {/*<img src={b1} className="img-responsive img-circle" alt="test" />*/}
+                                        {/*</span>*/}
+                                        {/*<div className="clear">*/}
+                                            {/*<span className="block">雏田</span>*/}
+                                            {/*<span className="text-muted">鸣人君。。。那个。。。我。。喜欢你..</span>*/}
+                                        {/*</div>*/}
+                                    {/*</li>*/}
                                 </ul>
                             </Card>
                         </div>
