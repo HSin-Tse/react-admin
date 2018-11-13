@@ -5,7 +5,7 @@
  *
  */
 import React, {Component} from 'react';
-import {Col, Card, Row, Button, Avatar ,Modal} from 'antd';
+import {Col, Card, Row, Button, Avatar, Modal} from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
 import axios from "axios";
 import PhotoSwipe from "photoswipe";
@@ -26,14 +26,16 @@ class PassOpenD extends Component {
             date: new Date()
             , userList: []
             , testtt: 'asdasd'
-            ,visible: false
+            , visible: false
+            , recordData: {}
+            , gallery: null
 
         };
     }
 
-    state = {
-        gallery: null
-    };
+    //
+    // state = {
+    // };
 
     componentDidMount() {
 
@@ -46,18 +48,54 @@ class PassOpenD extends Component {
         if (window.sss) {
             console.log('window.sss AAA', window.sss)
             var record = window.sss;
+            this.setState({
+                recordData: JSON.parse(record),
+            });
 
         } else {
             console.log('window.sss VVVV', window.sss)
-            var record = {'id': 0};
+            var recordData = {'id': 0};
 
         }
 
 
-        // axios.post('http://mobile.nooko.cn:8090/open/getExistOpenAccount', {
+        window.Axios.post('open/getExistOpenAccount', {
+            // "language":"zh-CN","userId":"#############################"
+            'language': 'zh-CN',
+            'userId': this.state.recordData.id
+        }).then(function (response) {
+            console.log(response);
+
+        }).catch(function (error) {
+            console.log(error);
+            // message.warn(error);
+        });
+
+    }
+
+    componentWillUnmount = () => {
+        this.closeGallery();
+    };
+    openOK = () => {
+        this.showModal()
+        var me = this;
+
+        window.Axios.post('/open/passOpenApply', {
+            // "language":"zh-CN","userId":"#############################"
+            'language': 'zh-CN',
+            'id': me.state.recordData.id,
+        }).then(function (response) {
+            console.log(response);
+
+        }).catch(function (error) {
+            console.log(error);
+            // message.warn(error);
+        });
+
+        // window.Axios.post('/open/passOpenApply', {
         //     // "language":"zh-CN","userId":"#############################"
         //     'language': 'zh-CN',
-        //     'userId': '21057'
+        //     'id': 111
         // }).then(function (response) {
         //     console.log(response);
         //
@@ -66,13 +104,35 @@ class PassOpenD extends Component {
         //     // message.warn(error);
         // });
 
-    }
-
-    componentWillUnmount = () => {
-        this.closeGallery();
     };
-    openOK = () =>{
-        this.showModal()
+    saveData = () => {
+
+        // this.showModal()
+        this.props.history.goBack()
+    };
+    saveReject = () => {
+
+
+        console.log(this.state.recordData)
+        var me = this;
+        console.log(me.state.recordData.id)
+        console.log(me.state.recordData.id)
+        console.log(me.state.recordData.id)
+        console.log(me.state.recordData.id)
+        console.log(me.state.recordData.id)
+
+        window.Axios.post('/open/cancelOpenApply', {
+            // "language":"zh-CN","userId":"#############################"
+            'language': 'zh-CN',
+            'id': me.state.recordData.id
+        }).then(function (response) {
+            console.log(response);
+
+        }).catch(function (error) {
+            console.log(error);
+            // message.warn(error);
+        });
+
 
     };
     showModal = () => {
@@ -220,31 +280,9 @@ class PassOpenD extends Component {
                 <Card title="IX账户审核" bordered={true}>
                     <div>
                         <Button onClick={() => this.openOK()}>开户通过</Button>
-                        <Button>保存</Button>
-                        <Button>拒绝</Button>
+                        <Button onClick={() => this.saveData()}>保存</Button>
+                        <Button onClick={() => this.saveReject()}>拒绝</Button>
                     </div>
-                    <Row gutter={8}>
-                        <Col md={6}>
-                            <Card title="cssModule" bordered={true}>
-                                <div>
-                                    <p>IX账户审核</p>
-                                </div>
-                            </Card>
-                        </Col>
-                        <Col md={6}>
-                            <Card title="cssModule" bordered={true}>
-                                <div>
-                                    <p>IX账户审核</p>
-                                </div>
-                                <Meta
-                                    avatar={<Avatar
-                                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>}
-                                    title="Card title"
-                                    description="This is the description"
-                                />
-                            </Card>
-                        </Col>
-                    </Row>
                 </Card>
 
                 <div className="gutter-example button-demo">

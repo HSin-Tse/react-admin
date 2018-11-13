@@ -10,13 +10,19 @@ import Page from './Page';
 import './style/lib/animate.css';
 import './style/antd/index.less';
 import './style/index.less';
+import axios from "axios";
 
 // redux 注入操作
 const middleware = [thunk];
 const store = createStore(reducer, applyMiddleware(...middleware));
+var Axios = axios.create({
+    baseURL: 'http://mobile.nooko.cn:8090/'
+});
+
+window.Axios=Axios;
+
+
 console.log(store.getState());
-
-
 // const render = Component => { // 增加react-hot-loader保持状态刷新操作，如果不需要可去掉并把下面注释的打开
 //     ReactDOM.render(
 //         <AppContainer>
