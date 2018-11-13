@@ -5,7 +5,7 @@
  *
  */
 import React, {Component} from 'react';
-import {Col, Card, Row, Button, Avatar} from 'antd';
+import {Col, Card, Row, Button, Avatar ,Modal} from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
 import axios from "axios";
 import PhotoSwipe from "photoswipe";
@@ -26,6 +26,8 @@ class PassOpenD extends Component {
             date: new Date()
             , userList: []
             , testtt: 'asdasd'
+            ,visible: false
+
         };
     }
 
@@ -35,10 +37,6 @@ class PassOpenD extends Component {
 
     componentDidMount() {
 
-        console.log(this.props.match.params.id)
-        console.log(this.props.match.params.id)
-        console.log(this.props.match.params.id)
-        console.log(this.props.match.params.id)
         console.log(this.props.match.params.id)
         // var record = JSON.parse(window.sss==null?{id:0}:window.sss);
         // console.log('sss',record.id)
@@ -56,22 +54,38 @@ class PassOpenD extends Component {
         }
 
 
-        axios.post('http://mobile.nooko.cn:8090/open/getExistOpenAccount', {
-            // "language":"zh-CN","userId":"#############################"
-            'language': 'zh-CN',
-            'userId': record.id
-        }).then(function (response) {
-            console.log(response);
+        // axios.post('http://mobile.nooko.cn:8090/open/getExistOpenAccount', {
+        //     // "language":"zh-CN","userId":"#############################"
+        //     'language': 'zh-CN',
+        //     'userId': '21057'
+        // }).then(function (response) {
+        //     console.log(response);
+        //
+        // }).catch(function (error) {
+        //     console.log(error);
+        //     // message.warn(error);
+        // });
 
-        }).catch(function (error) {
-            console.log(error);
-            // message.warn(error);
-        });
     }
 
     componentWillUnmount = () => {
         this.closeGallery();
     };
+    openOK = () =>{
+        this.showModal()
+
+    };
+    showModal = () => {
+        this.setState({
+            visible: true,
+        });
+    }
+
+    hideModal = () => {
+        this.setState({
+            visible: false,
+        });
+    }
     openGallery = (item) => {
         const items = [
             {
@@ -160,17 +174,21 @@ class PassOpenD extends Component {
                                     description="This is the description"
                                 />
                             </Card>
-                        </Col> <Col md={6}>
-                        <Card className="gutter-box"  bordered={true} bodyStyle={{padding: 0}}>
-                            <div>
-                                <img onClick={() => this.openGallery('http://mobile.nooko.cn:9080/MediaCenter/data/REGISTER/2c902bd8661e123f016676ea1fb10013/idcard_0-203906pgP2t.jpg')} alt="example" width="100%" src={'http://mobile.nooko.cn:9080/MediaCenter/data/REGISTER/2c902bd8661e123f016676ea1fb10013/idcard_0-203906pgP2t.jpg'}/>
-                            </div>
-                            <div className="pa-m">
-                                <h3>React Admin</h3>
-                                <small><a href="https://yezihaohao.github.io/" target="_blank"
-                                          rel="noopener noreferrer">https://yezihaohao.github.io/</a></small>
-                            </div>
-                        </Card>
+                        </Col>
+                        <Col md={6}>
+                            <Card className="gutter-box" bordered={true} bodyStyle={{padding: 0}}>
+                                <div>
+                                    <img
+                                        onClick={() => this.openGallery('http://mobile.nooko.cn:9080/MediaCenter/data/REGISTER/2c902bd8661e123f016676ea1fb10013/idcard_0-203906pgP2t.jpg')}
+                                        alt="example" width="100%"
+                                        src={'http://mobile.nooko.cn:9080/MediaCenter/data/REGISTER/2c902bd8661e123f016676ea1fb10013/idcard_0-203906pgP2t.jpg'}/>
+                                </div>
+                                <div className="pa-m">
+                                    <h3>React Admin</h3>
+                                    <small><a href="https://yezihaohao.github.io/" target="_blank"
+                                              rel="noopener noreferrer">https://yezihaohao.github.io/</a></small>
+                                </div>
+                            </Card>
                         </Col>
                     </Row>
                 </Card>
@@ -199,7 +217,35 @@ class PassOpenD extends Component {
                         </Col>
                     </Row>
                 </Card>
-                {/*{imgsTag[0]}*/}
+                <Card title="IX账户审核" bordered={true}>
+                    <div>
+                        <Button onClick={() => this.openOK()}>开户通过</Button>
+                        <Button>保存</Button>
+                        <Button>拒绝</Button>
+                    </div>
+                    <Row gutter={8}>
+                        <Col md={6}>
+                            <Card title="cssModule" bordered={true}>
+                                <div>
+                                    <p>IX账户审核</p>
+                                </div>
+                            </Card>
+                        </Col>
+                        <Col md={6}>
+                            <Card title="cssModule" bordered={true}>
+                                <div>
+                                    <p>IX账户审核</p>
+                                </div>
+                                <Meta
+                                    avatar={<Avatar
+                                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>}
+                                    title="Card title"
+                                    description="This is the description"
+                                />
+                            </Card>
+                        </Col>
+                    </Row>
+                </Card>
 
                 <div className="gutter-example button-demo">
 
@@ -225,7 +271,6 @@ class PassOpenD extends Component {
 
                                     <button className="pswp__button pswp__button--close" title="Close (Esc)"/>
 
-                                    {/*<button className="pswp__button pswp__button--share" title="Share" />*/}
 
                                     <button className="pswp__button pswp__button--fs" title="Toggle fullscreen"/>
 
@@ -264,7 +309,18 @@ class PassOpenD extends Component {
                     }
                 `}</style>
                 </div>
-
+                <Modal
+                    title="Modal"
+                    visible={this.state.visible}
+                    onOk={this.hideModal}
+                    onCancel={this.hideModal}
+                    okText="确认"
+                    cancelText="取消"
+                >
+                    <p>Bla bla ...</p>
+                    <p>Bla bla ...</p>
+                    <p>Bla bla ...</p>
+                </Modal>
             </div>
         )
     }
