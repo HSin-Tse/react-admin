@@ -8,7 +8,6 @@ import {Button, Table, Icon} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import axios from 'axios';
 
-
 class Basic extends Component {
     columns;
 
@@ -54,7 +53,7 @@ class Basic extends Component {
                 key: '审核状态',
                 render: (text, record) => (
                     <Button>审核状态</Button>),
-            },, {
+            }, {
                 title: '处理备注',
                 dataIndex: '处理备注',
                 key: '处理备注',
@@ -67,42 +66,43 @@ class Basic extends Component {
                 width: 100,
                 render: (text, record) => (
                     <div>
-            <span className="ant-divider"/>
-            <Button className="ant-dropdown-link" onClick={() => this.handleEdit(record)}>审核</Button>
+                        <span className="ant-divider"/>
+                        <Button className="ant-dropdown-link" onClick={() => this.handleEdit(record)}>审核</Button>
 
-        </div>
+                    </div>
                 ),
             }];
         this.test()
-
     }
 
 
     handleEdit = (record) => {
+
         console.log('hcia', 'ss', record);
-        this.props.history.push(  '/app/cssModule/'  )
+
+        window.sss=JSON.stringify(record);
+        this.props.history.push('/app/pass/passopen/detail' + record.id)
     };
     itemDeleteClick = (id) => console.log('hcia', 'itemDeleteClick', id);
     click = (recored, key, ww) => {
 
         console.log('hcia', recored);
-
         console.log('hcia', key);
         console.log('hcia', ww);
 
     };
 
-     timestampToTime =(timestamp) =>{
+    timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
         const year = dateObj.getFullYear() // 获取年，
         const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
         const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
         const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
-        const minutes =  this.pad(dateObj.getMinutes()) // 获取分
-        const seconds =  this.pad(dateObj.getSeconds()) // 获取秒
+        const minutes = this.pad(dateObj.getMinutes()) // 获取分
+        const seconds = this.pad(dateObj.getSeconds()) // 获取秒
         return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
     }
-     pad = (str) => {
+    pad = (str) => {
         return +str >= 10 ? str : '0' + str
     }
 
@@ -110,14 +110,9 @@ class Basic extends Component {
     test = () => {
         this.setState({testtt: '123321'});
         var aa = this;
-        axios.post('http://mobile.nooko.cn:8090/open/getOpenApplyList', {
-            // firstName: 'Fred',
-            // lastName: 'Flintstone'
-        }).then(function (response) {
+        axios.post('http://mobile.nooko.cn:8090/open/getOpenApplyList', {}).then(function (response) {
             console.log(response);
             aa.setState({testtt: 'wwwww'});
-
-
             aa.setState({testtt: response.data.code});
             aa.setState({userList: response.data.data.list});
 
@@ -125,7 +120,6 @@ class Basic extends Component {
         }).catch(function (error) {
             console.log(error);
             // message.warn(error);
-
         });
     };
 
@@ -157,7 +151,7 @@ class Basic extends Component {
 
                 <Table rowKey="id"
                        columns={this.columns} dataSource={this.state.userList}
-                       scroll={{ x: 1300 }}
+                       scroll={{x: 1300}}
                     // onRow={(record,rowkey,ww)=>{
                     //
                     //     return{

@@ -6,6 +6,12 @@ export default {
             subs: [
                 { key: '/app/pass/open', title: '开户审核', component: 'PassOpen' },
                 { key: '/app/pass/lever', title: '杠杆审核', component: 'PassLever', auth: 'auth/testPage' },
+                // {
+                //     key: '/app/auth', title: '權限測試', icon: 'safety',
+                //     subs: [
+                //         { key: '/app/auth/basic', title: '开户审核', component: 'AuthBasic' },
+                //     ],
+                // },
             ],
         },
         {
@@ -29,14 +35,6 @@ export default {
             subs: [
                 { key: '/app/animation/basicAnimations', title: '基础动画', component: 'BasicAnimations'},
                 { key: '/app/animation/exampleAnimations', title: '动画案例', component: 'ExampleAnimations'},
-            ],
-        },
-        {
-            key: '/app/table', title: '表格', icon: 'copy',
-            subs: [
-                { key: '/app/table/basicTable', title: '基础表格', component: 'BasicTable'},
-                { key: '/app/table/advancedTable', title: '高级表格', component: 'AdvancedTable'},
-                { key: '/app/table/asynchronousTable', title: '异步表格', component: 'AsynchronousTable'},
             ],
         },
         {
@@ -71,5 +69,6 @@ export default {
             key: '/app/cssModule', title: 'cssModule', icon: 'star', component: 'Cssmodule'
         },
     ],
-    others: [] // 非菜单相关路由
+
+    others: [ {route: '/app/pass/passopen/detail:id', title: 'PassOpenD', icon: 'star', component: 'PassOpenD'}] // 非菜单相关路由
 }

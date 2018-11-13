@@ -25,6 +25,7 @@ import ExampleAnimations from './animation/ExampleAnimations';
 import AuthBasic from './auth/Basic';
 import RouterEnter from './auth/RouterEnter';
 import PassOpen from './pass/Open';
+import PassOpenD from './pass/OpenD';
 import PassLever from './pass/Lever';
 
 
@@ -40,6 +41,6 @@ export default {
     BasicForm, BasicTable, AdvancedTable, AsynchronousTable,
     Echarts, Recharts, Icons, Buttons, Spins, Modals, Notifications,
     Tabs, Banners, Drags,PassOpen,PassLever, Dashboard, Gallery, BasicAnimations,
-    ExampleAnimations, AuthBasic, RouterEnter, WysiwygBundle,
+    ExampleAnimations, AuthBasic, RouterEnter, WysiwygBundle,PassOpenD,
     Cssmodule, MapUi
 }

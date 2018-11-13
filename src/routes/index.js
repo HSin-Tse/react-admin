@@ -33,8 +33,7 @@ export default class CRouter extends Component {
                                 return (
                                     <Route
                                         key={r.route || r.key}
-                                        exact
-                                        path={r.route || r.key}
+                                        exact path={r.route || r.key}
                                         render={props => r.login ? 
                                             <Component {...props} />
                                             : this.requireLogin(<Component {...props} />, r.auth)}
@@ -46,7 +45,7 @@ export default class CRouter extends Component {
                     )
                 }
 
-                {/*<Route render={() => <Redirect to="/404" />} />*/}
+                <Route render={() => <Redirect to="/" />} />
             </Switch>
         )
     }
