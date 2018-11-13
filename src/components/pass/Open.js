@@ -10,50 +10,76 @@ import axios from 'axios';
 
 
 class Basic extends Component {
+    columns;
 
-    columns = [
-        {
-            title: 'ID',
-            dataIndex: 'id',
-            key: 'id',
-            render: (text, record) => (
-                <span>
-            <Button>{record.id}</Button>
+    componentWillUnmount() {
+    }
 
-        </span>
-            ),
-        }, {
-            title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
-            render: (text, record) => (
-                <span>
-            <Button>{record.cnName}</Button>
-
-        </span>
-            ),
-
-        }, {
-            title: 'Action',
-            key: 'action',
-
-            render: (text, record) => (
-                <span>
-            <Button>Action 一 {record.city}</Button>
+    componentDidMount() {
+        this.columns = [
+            {
+                title: '手机号',
+                dataIndex: 'phoneNumber',
+                key: 'phoneNumber',
+                fixed: 'left',
+                width: 100,
+                render: (text, record) => (
+                    <Button>{record.phoneNumber}</Button>),
+            }, {
+                title: '姓名',
+                dataIndex: 'name',
+                key: 'name',
+                render: (text, record) => (
+                    <Button>{record.cnName + record.lastName + record.firstName}</Button>),
+            }, {
+                title: '申请序号',
+                dataIndex: '申请序号',
+                key: '申请序号',
+                render: (text, record) => (<Button>{record.id}</Button>),
+            }, {
+                title: '账号类型',
+                dataIndex: '账号类型',
+                key: '账号类型',
+                render: (text, record) => (
+                    <Button>{record.applySTAR == null ? "資料供待處理" : "BB" + record.stringify() + record.stringify()}</Button>),
+            }, {
+                title: '申请时间',
+                dataIndex: '申请时间',
+                key: '申请时间',
+                render: (text, record) => (
+                    <Button>{this.timestampToTime(record.updateDate)}</Button>),
+            }, {
+                title: '审核状态',
+                dataIndex: '审核状态',
+                key: '审核状态',
+                render: (text, record) => (
+                    <Button>审核状态</Button>),
+            },, {
+                title: '处理备注',
+                dataIndex: '处理备注',
+                key: '处理备注',
+                render: (text, record) => (
+                    <Button>{record.note}</Button>),
+            }, {
+                title: '操作',
+                key: 'action',
+                fixed: 'right',
+                width: 100,
+                render: (text, record) => (
+                    <div>
             <span className="ant-divider"/>
-            <Button onClick={()=>this.handleEdit(record)}>Delete</Button>
-            <span className="ant-divider"/>
-            <Button className="ant-dropdown-link">
-                More actions <Icon type="down"/>
-            </Button>
+            <Button className="ant-dropdown-link" onClick={() => this.handleEdit(record)}>审核</Button>
 
-        </span>
-            ),
-        }];
+        </div>
+                ),
+            }];
+        this.test()
+
+    }
+
+
     handleEdit = (record) => {
-
-        console.log('hcia', 'ss',record);
-
+        console.log('hcia', 'ss', record);
     };
     itemDeleteClick = (id) => console.log('hcia', 'itemDeleteClick', id);
     click = (recored, key, ww) => {
@@ -64,6 +90,22 @@ class Basic extends Component {
         console.log('hcia', ww);
 
     };
+
+     timestampToTime =(timestamp) =>{
+        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
+        const year = dateObj.getFullYear() // 获取年，
+        const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
+        const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
+        const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
+        const minutes =  this.pad(dateObj.getMinutes()) // 获取分
+        const seconds =  this.pad(dateObj.getSeconds()) // 获取秒
+        return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
+    }
+     pad = (str) => {
+        return +str >= 10 ? str : '0' + str
+    }
+
+
     test = () => {
         this.setState({testtt: '123321'});
         var aa = this;
@@ -91,35 +133,18 @@ class Basic extends Component {
         super(props);
         this.state = {
             date: new Date()
-            // , data: []
             , userList: []
             , testtt: 'asdasd'
 
         };
-
-
     }
 
-    componentDidMount() {
-        console.log("hcia", " componentDidMount ")
-
-
-        this.test()
-
-    }
-
-    componentWillUnmount() {
-        console.log("hcia", " componentWillUnmount ")
-    }
 
     render() {
         return (
             <div>
                 <div>log: {this.state.testtt}</div>
-                {/*<div>  {this.state.date}</div>*/}
 
-
-                {/*<div>  {this.state.userList}</div>*/}
 
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
                 <div>
@@ -129,9 +154,9 @@ class Basic extends Component {
                     <Button type="danger">Danger</Button>
                 </div>
 
-                <Table
-                    columns={this.columns} dataSource={this.state.userList}
-
+                <Table rowKey="id"
+                       columns={this.columns} dataSource={this.state.userList}
+                       scroll={{ x: 1300 }}
                     // onRow={(record,rowkey,ww)=>{
                     //
                     //     return{
