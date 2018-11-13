@@ -46,7 +46,7 @@ export default class CRouter extends Component {
                     )
                 }
 
-                <Route render={() => <Redirect to="/404" />} />
+                {/*<Route render={() => <Redirect to="/404" />} />*/}
             </Switch>
         )
     }

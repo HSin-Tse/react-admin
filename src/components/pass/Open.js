@@ -80,6 +80,7 @@ class Basic extends Component {
 
     handleEdit = (record) => {
         console.log('hcia', 'ss', record);
+        this.props.history.push(  '/app/cssModule/'  )
     };
     itemDeleteClick = (id) => console.log('hcia', 'itemDeleteClick', id);
     click = (recored, key, ww) => {
