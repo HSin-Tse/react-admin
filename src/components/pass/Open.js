@@ -146,7 +146,6 @@ class Basic extends Component {
                     <Button onClick={this.test} type="primary">Primary</Button>
                     <Button onClick={() => this.itemDeleteClick()}> Default</Button>
                     <Button type="dashed">Dashed</Button>
-                    <Button type="danger">Danger</Button>
                 </div>
 
                 <Table rowKey="id"
