@@ -7,15 +7,12 @@
 import React, {Component} from 'react';
 import {Col, Card, Row, Button, Avatar, Modal} from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
-import axios from "axios";
 import PhotoSwipe from "photoswipe";
 import PhotoswipeUIDefault from "photoswipe/dist/photoswipe-ui-default";
 import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
 
 const {Meta} = Card;
-
-// import styles from './index.module.less';
 
 class PassOpenD extends Component {
 
@@ -33,43 +30,56 @@ class PassOpenD extends Component {
         };
     }
 
-    //
-    // state = {
-    // };
 
     componentDidMount() {
 
-        console.log(this.props.match.params.id)
-        // var record = JSON.parse(window.sss==null?{id:0}:window.sss);
-        // console.log('sss',record.id)
-        // console.log('sss',record.id)
-        // console.log('sss',record.id)
+        console.log('hcia',this.props.match.params.id)
 
-        if (window.sss) {
-            console.log('window.sss AAA', window.sss)
-            var record = window.sss;
-            this.setState({
-                recordData: JSON.parse(record),
+        // http://mobile.nooko.cn:8090/open/getOpenApplyList
+       var self = this
+
+        window.Axios.post('http://mobile.nooko.cn:8090/open/getOpenApplyDetail', {
+            // "language":"zh-CN","userId":"#############################"
+            'id': self.props.match.params.id,
+            // 'loginName': this.props.match.params.id,
+            // 'token': this.props.match.params.id,
+            'language': "zh-CN"
+        }).then(function (response) {
+            console.log('hcia',response.data.data);
+            console.log('hcia',response.data.code);
+
+            self.setState({
+                recordData: response.data.data,
             });
 
-        } else {
-            console.log('window.sss VVVV', window.sss)
-            var recordData = {'id': 0};
 
-        }
+            console.log('hcia',self.state.recordData);
 
-
-        window.Axios.post('open/getExistOpenAccount', {
-            // "language":"zh-CN","userId":"#############################"
-            'language': 'zh-CN',
-            'userId': this.state.recordData.id
-        }).then(function (response) {
-            console.log(response);
 
         }).catch(function (error) {
             console.log(error);
             // message.warn(error);
         });
+
+
+
+
+
+        // if (window.sss) {
+        //     console.log('window.sss AAA', window.sss)
+        //     var record = window.sss;
+        //     // this.setState({
+        //     //     recordData: JSON.parse(record),
+        //     // });
+        //
+        // } else {
+        //     console.log('window.sss VVVV', window.sss)
+        //     var recordData = {'id': 0};
+        //
+        // }
+
+
+
 
     }
 
@@ -116,17 +126,16 @@ class PassOpenD extends Component {
         console.log(this.state.recordData)
         var me = this;
         console.log(me.state.recordData.id)
-        console.log(me.state.recordData.id)
-        console.log(me.state.recordData.id)
-        console.log(me.state.recordData.id)
-        console.log(me.state.recordData.id)
+
 
         window.Axios.post('/open/cancelOpenApply', {
             // "language":"zh-CN","userId":"#############################"
             'language': 'zh-CN',
             'id': me.state.recordData.id
         }).then(function (response) {
-            console.log(response);
+            console.log('hcia response',response);
+
+            console.log('hcia',response);
 
         }).catch(function (error) {
             console.log(error);
@@ -211,13 +220,20 @@ class PassOpenD extends Component {
 
         return (
             <div>
+                <div>log: {this.state.testtt}</div>
+
+                <div>log: {this.state.recordData.id}</div>
+                <div>{this.state.recordData.id}</div>
+
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
-                <Card title="IX账户审核" bordered={true}>
+                <Card title="IX账户审核 {this.state.recordData.data.id} " bordered={true}>
 
                     <Row gutter={8}>
                         <Col md={6}>
                             <Card title="cssModule" bordered={true}>
                                 <div>
+
+                                    <p>IX账户审核</p>
                                     <p>IX账户审核</p>
                                 </div>
                             </Card>
