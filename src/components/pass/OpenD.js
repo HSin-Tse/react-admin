@@ -5,7 +5,7 @@
  *
  */
 import React, {Component} from 'react';
-import {Col, Card, Row, Button, Avatar, Modal} from 'antd';
+import {Col, Card, Row, Button, Avatar, Modal , message} from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
 import PhotoSwipe from "photoswipe";
 import PhotoswipeUIDefault from "photoswipe/dist/photoswipe-ui-default";
@@ -16,17 +16,14 @@ const {Meta} = Card;
 
 class PassOpenD extends Component {
 
-
     constructor(props) {
         super(props);
         this.state = {
             date: new Date()
             , userList: []
-            , testtt: 'asdasd'
             , visible: false
             , recordData: {}
             , gallery: null
-
         };
     }
 
@@ -35,11 +32,9 @@ class PassOpenD extends Component {
 
         console.log('hcia',this.props.match.params.id)
 
-        // http://mobile.nooko.cn:8090/open/getOpenApplyList
        var self = this
 
         window.Axios.post('http://mobile.nooko.cn:8090/open/getOpenApplyDetail', {
-            // "language":"zh-CN","userId":"#############################"
             'id': self.props.match.params.id,
             // 'loginName': this.props.match.params.id,
             // 'token': this.props.match.params.id,
@@ -52,33 +47,11 @@ class PassOpenD extends Component {
                 recordData: response.data.data,
             });
 
-
             console.log('hcia',self.state.recordData);
-
 
         }).catch(function (error) {
             console.log(error);
-            // message.warn(error);
         });
-
-
-
-
-
-        // if (window.sss) {
-        //     console.log('window.sss AAA', window.sss)
-        //     var record = window.sss;
-        //     // this.setState({
-        //     //     recordData: JSON.parse(record),
-        //     // });
-        //
-        // } else {
-        //     console.log('window.sss VVVV', window.sss)
-        //     var recordData = {'id': 0};
-        //
-        // }
-
-
 
 
     }
@@ -99,34 +72,18 @@ class PassOpenD extends Component {
 
         }).catch(function (error) {
             console.log(error);
-            // message.warn(error);
         });
 
-        // window.Axios.post('/open/passOpenApply', {
-        //     // "language":"zh-CN","userId":"#############################"
-        //     'language': 'zh-CN',
-        //     'id': 111
-        // }).then(function (response) {
-        //     console.log(response);
-        //
-        // }).catch(function (error) {
-        //     console.log(error);
-        //     // message.warn(error);
-        // });
+
 
     };
     saveData = () => {
-
-        // this.showModal()
         this.props.history.goBack()
     };
     saveReject = () => {
 
 
-        console.log(this.state.recordData)
         var me = this;
-        console.log(me.state.recordData.id)
-
 
         window.Axios.post('/open/cancelOpenApply', {
             // "language":"zh-CN","userId":"#############################"
@@ -220,17 +177,17 @@ class PassOpenD extends Component {
 
         return (
             <div>
-                <div>log: {this.state.testtt}</div>
 
-                <div>log: {this.state.recordData.id}</div>
-                <div>{this.state.recordData.id}</div>
+                <div>id: {this.state.recordData.id}</div>
+                <div>id: {this.state.recordData.id}</div>
+                <div>idcard_0 :{this.state.recordData.idcard_0}</div>
 
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
-                <Card title="IX账户审核 {this.state.recordData.data.id} " bordered={true}>
+                <Card title="IX账户审核 " bordered={true}>
 
                     <Row gutter={8}>
                         <Col md={6}>
-                            <Card title="cssModule" bordered={true}>
+                            <Card title="客户姓名:{this.state.recordData.idv}" bordered={true}>
                                 <div>
 
                                     <p>IX账户审核</p>
@@ -257,7 +214,7 @@ class PassOpenD extends Component {
                                     <img
                                         onClick={() => this.openGallery('http://mobile.nooko.cn:9080/MediaCenter/data/REGISTER/2c902bd8661e123f016676ea1fb10013/idcard_0-203906pgP2t.jpg')}
                                         alt="example" width="100%"
-                                        src={'http://mobile.nooko.cn:9080/MediaCenter/data/REGISTER/2c902bd8661e123f016676ea1fb10013/idcard_0-203906pgP2t.jpg'}/>
+                                        src={this.state.recordData.idcard_0}/>
                                 </div>
                                 <div className="pa-m">
                                     <h3>React Admin</h3>
