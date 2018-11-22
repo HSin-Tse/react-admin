@@ -5,9 +5,8 @@
  *
  */
 import React, {Component} from 'react';
-import {Col, Card, Row, Button, Avatar, Modal} from 'antd';
+import {Col, Card, Row, Button, Avatar, Modal , message} from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
-import axios from "axios";
 import PhotoSwipe from "photoswipe";
 import PhotoswipeUIDefault from "photoswipe/dist/photoswipe-ui-default";
 import 'photoswipe/dist/photoswipe.css';
@@ -15,61 +14,45 @@ import 'photoswipe/dist/default-skin/default-skin.css';
 
 const {Meta} = Card;
 
-// import styles from './index.module.less';
-
 class PassOpenD extends Component {
-
 
     constructor(props) {
         super(props);
         this.state = {
             date: new Date()
             , userList: []
-            , testtt: 'asdasd'
             , visible: false
             , recordData: {}
             , gallery: null
-
         };
     }
 
-    //
-    // state = {
-    // };
 
     componentDidMount() {
 
-        console.log(this.props.match.params.id)
-        // var record = JSON.parse(window.sss==null?{id:0}:window.sss);
-        // console.log('sss',record.id)
-        // console.log('sss',record.id)
-        // console.log('sss',record.id)
+        console.log('hcia',this.props.match.params.id)
 
-        if (window.sss) {
-            console.log('window.sss AAA', window.sss)
-            var record = window.sss;
-            this.setState({
-                recordData: JSON.parse(record),
+       var self = this
+
+        window.Axios.post('http://mobile.nooko.cn:8090/open/getOpenApplyDetail', {
+            'id': self.props.match.params.id,
+            // 'loginName': this.props.match.params.id,
+            // 'token': this.props.match.params.id,
+            'language': "zh-CN"
+        }).then(function (response) {
+            console.log('hcia',response.data.data);
+            console.log('hcia',response.data.code);
+
+            self.setState({
+                recordData: response.data.data,
             });
 
-        } else {
-            console.log('window.sss VVVV', window.sss)
-            var recordData = {'id': 0};
-
-        }
-
-
-        window.Axios.post('open/getExistOpenAccount', {
-            // "language":"zh-CN","userId":"#############################"
-            'language': 'zh-CN',
-            'userId': this.state.recordData.id
-        }).then(function (response) {
-            console.log(response);
+            console.log('hcia',self.state.recordData);
 
         }).catch(function (error) {
             console.log(error);
-            // message.warn(error);
         });
+
 
     }
 
@@ -89,44 +72,27 @@ class PassOpenD extends Component {
 
         }).catch(function (error) {
             console.log(error);
-            // message.warn(error);
         });
 
-        // window.Axios.post('/open/passOpenApply', {
-        //     // "language":"zh-CN","userId":"#############################"
-        //     'language': 'zh-CN',
-        //     'id': 111
-        // }).then(function (response) {
-        //     console.log(response);
-        //
-        // }).catch(function (error) {
-        //     console.log(error);
-        //     // message.warn(error);
-        // });
+
 
     };
     saveData = () => {
-
-        // this.showModal()
         this.props.history.goBack()
     };
     saveReject = () => {
 
 
-        console.log(this.state.recordData)
         var me = this;
-        console.log(me.state.recordData.id)
-        console.log(me.state.recordData.id)
-        console.log(me.state.recordData.id)
-        console.log(me.state.recordData.id)
-        console.log(me.state.recordData.id)
 
         window.Axios.post('/open/cancelOpenApply', {
             // "language":"zh-CN","userId":"#############################"
             'language': 'zh-CN',
             'id': me.state.recordData.id
         }).then(function (response) {
-            console.log(response);
+            console.log('hcia response',response);
+
+            console.log('hcia',response);
 
         }).catch(function (error) {
             console.log(error);
@@ -211,13 +177,20 @@ class PassOpenD extends Component {
 
         return (
             <div>
+
+                <div>id: {this.state.recordData.id}</div>
+                <div>id: {this.state.recordData.id}</div>
+                <div>idcard_0 :{this.state.recordData.idcard_0}</div>
+
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
-                <Card title="IX账户审核" bordered={true}>
+                <Card title="IX账户审核 " bordered={true}>
 
                     <Row gutter={8}>
                         <Col md={6}>
-                            <Card title="cssModule" bordered={true}>
+                            <Card title="客户姓名:{this.state.recordData.idv}" bordered={true}>
                                 <div>
+
+                                    <p>IX账户审核</p>
                                     <p>IX账户审核</p>
                                 </div>
                             </Card>
@@ -241,7 +214,7 @@ class PassOpenD extends Component {
                                     <img
                                         onClick={() => this.openGallery('http://mobile.nooko.cn:9080/MediaCenter/data/REGISTER/2c902bd8661e123f016676ea1fb10013/idcard_0-203906pgP2t.jpg')}
                                         alt="example" width="100%"
-                                        src={'http://mobile.nooko.cn:9080/MediaCenter/data/REGISTER/2c902bd8661e123f016676ea1fb10013/idcard_0-203906pgP2t.jpg'}/>
+                                        src={this.state.recordData.idcard_0}/>
                                 </div>
                                 <div className="pa-m">
                                     <h3>React Admin</h3>

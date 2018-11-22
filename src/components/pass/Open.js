@@ -40,7 +40,7 @@ class Basic extends Component {
                 dataIndex: '账号类型',
                 key: '账号类型',
                 render: (text, record) => (
-                    <Button>{record.applySTAR == null ? "資料供待處理" : "BB" + record.stringify() + record.stringify()}</Button>),
+                    <Button>{record.accountType}</Button>),
             }, {
                 title: '申请时间',
                 dataIndex: '申请时间',
@@ -52,7 +52,7 @@ class Basic extends Component {
                 dataIndex: '审核状态',
                 key: '审核状态',
                 render: (text, record) => (
-                    <Button>审核状态</Button>),
+                    <Button>待审核</Button>),
             }, {
                 title: '处理备注',
                 dataIndex: '处理备注',
@@ -69,6 +69,7 @@ class Basic extends Component {
                         <span className="ant-divider"/>
                         <Button className="ant-dropdown-link" onClick={() => this.handleEdit(record)}>审核</Button>
 
+
                     </div>
                 ),
             }];
@@ -77,10 +78,6 @@ class Basic extends Component {
 
 
     handleEdit = (record) => {
-
-        console.log('hcia', 'ss', record);
-
-        window.sss=JSON.stringify(record);
         this.props.history.push('/app/pass/passopen/detail' + record.id)
     };
     itemDeleteClick = (id) => console.log('hcia', 'itemDeleteClick', id);
@@ -101,10 +98,10 @@ class Basic extends Component {
         const minutes = this.pad(dateObj.getMinutes()) // 获取分
         const seconds = this.pad(dateObj.getSeconds()) // 获取秒
         return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
-    }
+    };
     pad = (str) => {
         return +str >= 10 ? str : '0' + str
-    }
+    };
 
 
     test = () => {
@@ -139,7 +136,6 @@ class Basic extends Component {
         return (
             <div>
                 <div>log: {this.state.testtt}</div>
-
 
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
                 <div>
