@@ -13,8 +13,19 @@ export default {
                 //     ],
                 // },
             ],
-        }
-
+        },
+        {
+            key: '/app/CustomerManager', title: '用戶管理', icon: 'safety',
+            subs: [
+                { key: '/app/CustomerManager/LeadManager', title: 'Lead管理', component: 'LeadManager' },
+                // {
+                //     key: '/app/auth', title: '權限測試', icon: 'safety',
+                //     subs: [
+                //         { key: '/app/auth/basic', title: '开户审核', component: 'AuthBasic' },
+                //     ],
+                // },
+            ],
+        },
 
         // ,
         // {
