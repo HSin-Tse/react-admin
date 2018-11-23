@@ -4,9 +4,40 @@
 import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import AllComponents from '../components';
-import routesConfig from './config';
-
+// import routesConfig from './config';
+import routesConfigadmin from './configadmin';
+//
 export default class CRouter extends Component {
+
+
+    constructor(props) {
+        super(props);
+        console.log('hcia constructor' )
+
+        this.state = {
+             config: []
+            , visible: false
+            , gallery: null
+        };
+    }
+
+
+    componentWillMount() {
+        console.log('hcia componentWillMount' )
+        this.setState({config: routesConfigadmin});
+
+    }
+
+    componentDidMount() {
+
+
+        console.log('hcia componentDidMount' )
+
+
+
+    }
+
+
     requireAuth = (permission, component) => {
         const { auth } = this.props;
         const { permissions } = auth.data;
@@ -29,8 +60,11 @@ export default class CRouter extends Component {
         return (
             <Switch>
                 {
-                    Object.keys(routesConfig).map(key => 
-                        routesConfig[key].map(r => {
+
+
+
+                    Object.keys(this.state.config).map(key =>
+                        this.state.config[key].map(r => {
                             const route = r => {
                                 const Component = AllComponents[r.component];
                                 return (
