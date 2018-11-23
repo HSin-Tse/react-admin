@@ -64,13 +64,13 @@ export default {
         //         { key: '/app/chart/recharts', title: 'recharts', component: 'Recharts' },
         //     ],
         // },
-        // {
-        //     key: '/subs4', title: '页面', icon: 'switcher',
-        //     subs: [
-        //         { key: '/login', title: '登录' },
-        //         { key: '/404', title: '404' },
-        //     ],
-        // },
+        {
+            key: '/subs4', title: '页面', icon: 'switcher',
+            subs: [
+                { key: '/login', title: '登录' },
+                { key: '/404', title: '404' },
+            ],
+        },
         // {
         //     key: '/app/auth', title: '權限測試', icon: 'safety',
         //     subs: [
