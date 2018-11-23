@@ -21,7 +21,6 @@ class App extends Component {
 
         console.log(user)
         console.log('hcia user' , user)
-        console.log('hcia user' , user)
 
         // receiveData({a: 213}, 'auth');
         // fetchData({funcName: 'admin', stateName: 'auth'});

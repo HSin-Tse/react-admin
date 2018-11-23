@@ -5,11 +5,31 @@ import React, { Component } from 'react';
 import { Layout } from 'antd';
 import { withRouter } from 'react-router-dom';
 import routes from '../routes/config';
+import routesConfigadmin from '../routes/configadmin';
 import SiderMenu from './SiderMenu';
 
 const { Sider } = Layout;
 
 class SiderCustom extends Component {
+
+    constructor(props) {
+        super(props);
+        console.log('hcia constructor' )
+
+        this.state = {
+            config: []
+            , visible: false
+            , gallery: null
+        };
+    }
+    componentWillMount() {
+        console.log('hcia SiderCustom componentWillMount' )
+        // this.setState({config: routesConfigadmin});
+
+    }
+
+
+
     static getDerivedStateFromProps (props, state) { 
         if (props.collapsed !== state.collapsed) {
             const state1 = SiderCustom.setMenuOpen(props);
@@ -49,6 +69,16 @@ class SiderCustom extends Component {
         // this.setMenuOpen(this.props);
         const state = SiderCustom.setMenuOpen(this.props);
         this.setState(state);
+
+        if( '超级管理员' == localStorage.getItem('displayName')){
+            this.setState({config: routes});
+
+        }else{
+
+            this.setState({config: routesConfigadmin});
+
+        }
+
     }
     menuClick = e => {
         this.setState({
@@ -65,6 +95,8 @@ class SiderCustom extends Component {
             firstHide: false,
         })
     };
+
+
     render() {
         return (
             <Sider
@@ -75,7 +107,7 @@ class SiderCustom extends Component {
             >
                 <div className="logo" />
                 <SiderMenu
-                    menus={routes.menus}
+                    menus={this.state.config.menus}
                     onClick={this.menuClick}
                     mode="inline"
                     selectedKeys={[this.state.selectedKey]}
