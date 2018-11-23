@@ -10,8 +10,8 @@ class LeadManager extends Component {
                 title: '手机号',
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
-                fixed: 'left',
-                width: 100,
+                // fixed: 'left',
+                // width: 100,
                 render: (text, record) => (
                     <Button>{record.phoneNumber}</Button>),
             }, {
@@ -51,8 +51,8 @@ class LeadManager extends Component {
             }, {
                 title: '操作',
                 key: 'action',
-                fixed: 'right',
-                width: 100,
+                // fixed: 'right',
+                // width: 100,
                 render: (text, record) => (
                     <div>
                         <span className="ant-divider"/>
@@ -68,7 +68,7 @@ class LeadManager extends Component {
         return(
              <div>
                 <div>log: {this.state.testtt}</div>
-
+                <div>FUcking log: Lead</div>
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
                 <div>
                     <Button onClick={this.test} type="primary">Primary</Button>
