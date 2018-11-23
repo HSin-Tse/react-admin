@@ -52,7 +52,7 @@ class Basic extends Component {
                 dataIndex: '审核状态',
                 key: '审核状态',
                 render: (text, record) => (
-                    <Button>待审核</Button>),
+                    <Button>{record.status  == 0?'审核中': (record.status  == 1)? '审核通过' :'审核拒绝'}</Button>),
             }, {
                 title: '处理备注',
                 dataIndex: '处理备注',
