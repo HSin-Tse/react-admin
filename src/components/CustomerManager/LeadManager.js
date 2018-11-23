@@ -67,7 +67,7 @@ class LeadManager extends Component {
     render() {
         return(
              <div>
-                <div>log: {this.state.testtt}</div>
+                <div>log: {this.state.any_thing}</div>
                 <div>FUcking log: Lead</div>
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
                 <div>
@@ -99,17 +99,17 @@ class LeadManager extends Component {
         this.state = {
             date: new Date()
             , userList: []
-            , testtt: 'asdasd'
+            , any_thing: 'asdasd'
 
         };
     }
     test = () => {
-        this.setState({testtt: '123321'});
+        this.setState({is_tag: '123321'});
         var aa = this;
         axios.post('http://mobile.nooko.cn:8090/open/getOpenApplyList', {}).then(function (response) {
             console.log(response);
-            aa.setState({testtt: 'wwwww'});
-            aa.setState({testtt: response.data.code});
+            aa.setState({any_thing: 'wwwww'});
+            aa.setState({any_thing: response.data.code});
             aa.setState({userList: response.data.data.list});
 
 
