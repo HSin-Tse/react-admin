@@ -137,7 +137,14 @@ class LeadManager extends Component {
         	'token' : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmVUaW1lIjoxNTQ1NTI4ODM0MTk5LCJsb2dpbk5hbWUiOiJhZG1pbiJ9.F7moE4DsMUiajkKB1S_wemwsozlUW5VMxQKsg4KsSUQ'
 
         }).then(function (response) {
-            console.log(response);
+            console.log('xxx',response);
+            var bb = response.data.data.list;
+            for (var i = bb.length - 1; i >= 0; i--) {
+            	let userInfo = bb[i]
+            	if (userInfo.name == null || " ") {
+            		userInfo.name = '沒資料'
+            	}
+            }
             aa.setState({anyThing: 'wwwww'});
             aa.setState({anyThing: response.data.code});
             aa.setState({userList: response.data.data.list});
