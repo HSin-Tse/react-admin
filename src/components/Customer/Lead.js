@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {Button, Table, Icon} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import axios from 'axios';
-class LeadManager extends Component {
+class Lead extends Component {
 	componentDidMount() {
         this.columns = [
             {
@@ -43,34 +43,32 @@ class LeadManager extends Component {
                 dataIndex: '11审核状态',
                 key: '11审核状态',
                 render: (text, record) => (
-                	// if record.date == null{
-
-                	// }
-                    <Button>待审核</Button>)
+                	
+                    <Button>{record.date}</Button>)
             }, {
                 title: '下载平台',
                 dataIndex: '下载平台',
                 key: '下载平台',
                 render: (text, record) => (
-                    <Button>{record.note}</Button>),
+                    <Button>{record.channelInfo}</Button>),
             }, {
                 title: '地理位置',
                 dataIndex: '地理位置',
                 key: '地理位置',
                 render: (text, record) => (
-                    <Button>{record.note}</Button>),
+                    <Button>{record.location}</Button>),
             }, {
                 title: '备注',
                 dataIndex: '备注',
                 key: '备注',
                 render: (text, record) => (
-                    <Button>{record.note}</Button>),
+                    <Button>{record.comment}</Button>),
             }, {
                 title: '操作人',
                 dataIndex: '操作人',
                 key: '操作人',
                 render: (text, record) => (
-                    <Button>{record.note}</Button>),
+                    <Button>{record.operator}</Button>),
             }
             , {
                 title: '操作',
@@ -93,7 +91,7 @@ class LeadManager extends Component {
         return(
              <div>
                 <div>log: {this.state.anyThing}</div>
-                <div>FUcking log: Lead</div>
+                <div>yyxLog log: Lead</div>
 
                 <BreadcrumbCustom first="用户管理" second="Laeds管理"/>
                 <div>
@@ -158,4 +156,4 @@ class LeadManager extends Component {
     };
 }
 
-export default LeadManager;
+export default Lead;

@@ -15,9 +15,9 @@ export default {
             ],
         },
         {
-            key: '/app/CustomerManager', title: '用戶管理', icon: 'safety',
+            key: '/app/Customer', title: '用戶管理', icon: 'safety',
             subs: [
-                { key: '/app/CustomerManager/LeadManager', title: 'Lead管理', component: 'LeadManager' },
+                { key: '/app/Customer/Lead', title: 'Lead管理', component: 'Lead' },
                 // {
                 //     key: '/app/auth', title: '權限測試', icon: 'safety',
                 //     subs: [
