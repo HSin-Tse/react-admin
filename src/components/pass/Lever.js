@@ -14,7 +14,10 @@ class Basic extends Component {
                 <BreadcrumbCustom first="权限管理" second="基础演示" />
                 <AuthWidget
                     children={auth => (
+
                         <Row>
+                            {auth}
+
                             <Col span={24}>
                                 <Card bordered={false} bodyStyle={{minHeight: 600}}>
                                     {!auth.uid && <h2 style={{height: 500}} className="center">登录之后你将看到一张美女图</h2>}

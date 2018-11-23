@@ -18,11 +18,16 @@ class App extends Component {
         const { receiveData } = this.props;
         const user = JSON.parse(localStorage.getItem('user'));
         user && receiveData(user, 'auth');
+
+        console.log(user)
+        console.log('hcia user' , user)
+        console.log('hcia user' , user)
+
         // receiveData({a: 213}, 'auth');
         // fetchData({funcName: 'admin', stateName: 'auth'});
         this.getClientWidth();
         window.onresize = () => {
-            console.log('屏幕变化了');
+            // console.log('屏幕变化了');
             this.getClientWidth();
         }
     }
