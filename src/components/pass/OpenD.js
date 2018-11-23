@@ -47,6 +47,8 @@ class PassOpenD extends Component {
             // 'token': this.props.match.params.id,
             'language': "zh-CN"
         }).then(function (response) {
+             console.log('hcia', response);
+
             console.log('hcia', response.data.code);
 
             self.setState({

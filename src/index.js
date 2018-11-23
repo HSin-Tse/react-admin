@@ -21,6 +21,33 @@ var Axios = axios.create({
 
 window.Axios=Axios;
 
+window.Axios.interceptors.request.use(
+    config => {
+        var xtoken = localStorage.getItem('too')
+        var loginName = localStorage.getItem('loginName')
+
+        if(xtoken != null){
+            config.headers['X-Token'] = xtoken
+            if(config.method=='post'){
+                config.data = {
+                    ...config.data,
+                    'token': xtoken,
+                    'loginName': loginName,
+
+                }
+            }else if(config.method=='get'){
+                config.params = {
+                    _t: Date.parse(new Date())/1000,
+                    ...config.params
+                }
+            }
+        }
+
+        return config
+    },function(error){
+        return Promise.reject(error)
+    })
+
 
 console.log(store.getState());
 // const render = Component => { // 增加react-hot-loader保持状态刷新操作，如果不需要可去掉并把下面注释的打开

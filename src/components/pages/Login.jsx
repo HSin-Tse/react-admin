@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fetchData, receiveData} from '@/action';
 import {message} from 'antd';
+import axios from "axios";
 
 const FormItem = Form.Item;
 
@@ -55,7 +56,7 @@ class Login extends React.Component {
             localStorage.removeItem('too')
 
             if (!err) {
-                window.Axios.post('http://mobile.nooko.cn:8090/auth/login', {
+                axios.post('http://mobile.nooko.cn:8090/auth/login', {
                     'loginName': values.userName,
                     'password': values.password,
                     // 'loginName': this.props.match.params.id,
@@ -81,6 +82,8 @@ class Login extends React.Component {
                         const {fetchData} = self.props;
                         fetchData({funcName: 'admin', stateName: 'auth'});
                         localStorage.setItem('too', response.data.data.token);
+                        localStorage.setItem('displayName', response.data.data.displayName);
+                        localStorage.setItem('loginName', response.data.data.loginName);
 
                         // localStorage.setItem('user', JSON.stringify(nextAuth.data));
                         // self.prop.history.push('/');
