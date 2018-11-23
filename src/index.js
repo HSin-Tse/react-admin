@@ -11,6 +11,7 @@ import './style/lib/animate.css';
 import './style/antd/index.less';
 import './style/index.less';
 import axios from "axios";
+import {message} from 'antd';
 
 // redux 注入操作
 const middleware = [thunk];
@@ -48,6 +49,29 @@ window.Axios.interceptors.request.use(
         return Promise.reject(error)
     })
 
+
+
+window.Axios.interceptors.response.use(function (response) {
+    // token 已过期，重定向到登录页面
+    console.log('hcia response' , response)
+
+    if (response.data.code != 1){
+
+        // localStorage.clear()
+        // router.replace({
+        //     path: '/signin',
+        //     query: {redirect: router.currentRoute.fullPath}
+        // })
+        message.error(response.data.msg)
+
+    }
+    return response
+}, function (error) {
+    // Do something with response error
+    return Promise.reject(error)
+
+
+})
 
 console.log(store.getState());
 // const render = Component => { // 增加react-hot-loader保持状态刷新操作，如果不需要可去掉并把下面注释的打开
