@@ -94,11 +94,12 @@ class LeadManager extends Component {
              <div>
                 <div>log: {this.state.anyThing}</div>
                 <div>FUcking log: Lead</div>
-                <BreadcrumbCustom first="审核管理" second="开户审核"/>
+
+                <BreadcrumbCustom first="用户管理" second="Laeds管理"/>
                 <div>
-                    <Button onClick={this.test} type="primary">Primary</Button>
-                    <Button onClick={() => this.itemDeleteClick()}> Default</Button>
-                    <Button type="dashed">Dashed</Button>
+                    <Button onClick={this.test} type="primary">潛在用戶</Button>
+                    <Button onClick={this.test} type="primary">模擬用戶</Button>
+                    <Button onClick={this.test} type="primary">意向用戶</Button>
                 </div>
 
                 <Table rowKey="id"
