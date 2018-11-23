@@ -20,51 +20,55 @@ class LeadManager extends Component {
                 dataIndex: 'name',
                 key: 'name',
                 render: (text, record) => (
-                    <Button>{record.cnName + record.lastName + record.firstName}</Button>),
+                	
+                    <Button>{record.name}</Button>),
             }, {
                 title: 'APP版本',
-                dataIndex: '申请序号',
-                key: '申请序号',
-                render: (text, record) => (<Button>{record.id}</Button>),
+                dataIndex: '11申请序号',
+                key: '11申请序号',
+                render: (text, record) => (<Button>{record.versionInfo}</Button>),
             }, {
                 title: '手机型号',
-                dataIndex: '账号类型',
-                key: '账号类型',
+                dataIndex: '11账号类型',
+                key: '11账号类型',
                 render: (text, record) => (
-                    <Button>{record.accountType}</Button>),
+                    <Button>{record.systemInfo}</Button>),
             }, {
                 title: '操作系统型号',
-                dataIndex: '申请时间',
-                key: '申请时间',
+                dataIndex: '11申请时间',
+                key: '11申请时间',
               
             }, {
                 title: '注册时间',
-                dataIndex: '审核状态',
-                key: '审核状态',
+                dataIndex: '11审核状态',
+                key: '11审核状态',
                 render: (text, record) => (
-                    <Button>待审核</Button>),
+                	// if record.date == null{
+
+                	// }
+                    <Button>待审核</Button>)
             }, {
                 title: '下载平台',
-                dataIndex: '处理备注',
-                key: '处理备注',
+                dataIndex: '下载平台',
+                key: '下载平台',
                 render: (text, record) => (
                     <Button>{record.note}</Button>),
             }, {
                 title: '地理位置',
-                dataIndex: '处理备注',
-                key: '处理备注',
+                dataIndex: '地理位置',
+                key: '地理位置',
                 render: (text, record) => (
                     <Button>{record.note}</Button>),
             }, {
                 title: '备注',
-                dataIndex: '处理备注',
-                key: '处理备注',
+                dataIndex: '备注',
+                key: '备注',
                 render: (text, record) => (
                     <Button>{record.note}</Button>),
             }, {
                 title: '操作人',
-                dataIndex: '处理备注',
-                key: '处理备注',
+                dataIndex: '操作人',
+                key: '操作人',
                 render: (text, record) => (
                     <Button>{record.note}</Button>),
             }
