@@ -73,6 +73,7 @@ class PassOpenD extends Component {
 
         window.Axios.post('/open/passOpenApply', {
             'language': 'zh-CN',
+            'belongUserId':me.state.recordData.belongUserId,
             'id': me.state.recordData.id,
         }).then(function (response) {
             console.log(response);
