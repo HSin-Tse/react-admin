@@ -5,7 +5,7 @@
  *
  */
 import React, {Component} from 'react';
-import {Col, Card, Row, Button, Avatar, Modal, Select, Input, Checkbox} from 'antd';
+import {Col, Card, Row, Button, Avatar, Modal, Select, Input, Checkbox, DatePicker} from 'antd';
 import {Radio} from 'antd';
 import {message} from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
@@ -127,7 +127,7 @@ class PassOpenD extends Component {
                 </Card>
                 <Card title="IX账户设置" bordered={true}>
 
-                    <Row gutter={16} >
+                    <Row gutter={16}>
                         <Col md={24}>
                             <Card bordered={false}>
 
@@ -181,7 +181,7 @@ class PassOpenD extends Component {
                         </Col>
 
                     </Row>
-                    <Row gutter={16} >
+                    <Row gutter={16}>
 
                         <Col md={8}>
                             <Card bordered={false}>
@@ -226,38 +226,149 @@ class PassOpenD extends Component {
 
                     <Row gutter={8}>
                         <Col md={12}>
-                            <Card title="基本信息" bordered={true}>
-                                <div>
-                                    <p>国家: {this.state.recordData.country} </p>
-
-                                </div>
-                                <div>
-                                    <p>*姓（中文）</p>
-                                </div>
-                                <div>
-                                    <p>IX账户审核<Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
-                                                    style={{marginLeft: 10, width: 120}} placeholder="Basic usage"/></p>
-                                </div>
-                            </Card>
+                            <h2>   基本信息 </h2>
                             <Card bordered={true}>
-                                <div>
 
-                                    <p>*姓（中文）</p>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{width: 120}}>国家:</span>
+
+                                    <Input defaultValue={this.state.recordData.country} disabled={true}
+                                           style={{width: 120}} placeholder="Basic usage"/>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{width: 120}}>*姓（中文）</span>
+                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                           style={{width: 120}} placeholder="Basic usage"/>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{width: 120}}>*名（中文）</span>
+                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                           style={{width: 120}} placeholder="Basic usage"/>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{width: 120}}>*姓</span>
+                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                           style={{width: 120}} placeholder="Basic usage"/>
+                                </div>
+
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}> *名</span>
+                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                           style={{width: 120}} placeholder="Basic usage"/>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>*出生日期</span>
+                                    <DatePicker/>
+                                    {/*<Input defaultValue={this.state.sss} onChange={this.onChangeSSS}*/}
+                                    {/*style={{ width: 120}} placeholder="Basic usage"/>*/}
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>*性别</span>
+                                    <Select defaultValue="男" style={{ width: 120 }} >
+                                        <Option value="0">男</Option>
+                                        <Option value="1">女</Option>
+                                    </Select>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>*身份证号码</span>
+                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                           style={{width: 120}} placeholder="Basic usage"/>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>*城市</span>
+                                    <Select defaultValue="上海" style={{ width: 120 }} >
+                                        <Option value="0">上海</Option>
+                                        <Option value="1">？</Option>
+                                    </Select>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>*详细地址</span>
+                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                           style={{width: 120}} placeholder="Basic usage"/>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>*联系电话</span>
+                                    <Input defaultValue={this.state.sss} disabled={true}
+                                           style={{width: 120}} placeholder="Basic usage"/>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>*邮箱地址</span>
+                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                           style={{width: 120}} placeholder="Basic usage"/>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>*邮编</span>
+                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                           style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                             </Card>
+
+
 
                         </Col>
                         <Col md={12}>
-                            <Card title="资产&风险审核" bordered={true}>
-                                <div>
-                                    <p>IX账户审核</p>
+                            <h2>   资产&风险审核 </h2>
+
+                            <Card  bordered={true}>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>当前年收入</span>
+                                    <Select defaultValue="0-15k" style={{ width: 120 }} >
+                                        <Option value="0">0-15k</Option>
+                                    </Select>
                                 </div>
-                                <Meta
-                                    avatar={<Avatar
-                                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>}
-                                    title="Card title"
-                                    description="This is the description"
-                                />
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>初始入金金额占比</span>
+                                    <Select defaultValue="0-15k" style={{ width: 120 }} >
+                                        <Option value="0">0-15k</Option>
+                                    </Select>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>交易本金来源</span>
+                                    <Select defaultValue="0-15k" style={{ width: 120 }} >
+                                        <Option value="0">0-15k</Option>
+                                    </Select>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>*是否美国公民</span>
+                                    <Select defaultValue="0-15k" style={{ width: 120 }} >
+                                        <Option value="0">0-15k</Option>
+                                    </Select>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>交易经验</span>
+                                    <Select defaultValue="0-15k" style={{ width: 120 }} >
+                                        <Option value="0">0-15k</Option>
+                                    </Select>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>交易目的</span>
+                                    <Select defaultValue="0-15k" style={{ width: 120 }} >
+                                        <Option value="0">0-15k</Option>
+                                    </Select>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>*风险承受力</span>
+                                    <Select defaultValue="0-15k" style={{ width: 120 }} >
+                                        <Option value="0">0-15k</Option>
+                                    </Select>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{width: 120}}>账户类型</span>
+
+                                    <Input defaultValue={this.state.recordData.country} disabled={true}
+                                           style={{width: 120}} placeholder="Basic usage"/>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{width: 120}}>交易货币</span>
+
+                                    <Input defaultValue={this.state.recordData.country} disabled={true}
+                                           style={{width: 120}} placeholder="Basic usage"/>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>*交易密码</span>
+                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                           style={{width: 120}} placeholder="Basic usage"/>
+                                </div>
                             </Card>
                         </Col>
                     </Row>
