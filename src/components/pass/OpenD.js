@@ -5,30 +5,33 @@
  *
  */
 import React, {Component} from 'react';
-import {Col, Card, Row, Button, Avatar, Modal, Select, Input} from 'antd';
+import {Col, Card, Row, Button, Avatar, Modal, Select, Input,Checkbox} from 'antd';
 import {Radio} from 'antd';
 import { message } from 'antd';
-
 import BreadcrumbCustom from '../BreadcrumbCustom';
 import PhotoSwipe from "photoswipe";
 import PhotoswipeUIDefault from "photoswipe/dist/photoswipe-ui-default";
 import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
 
+const CheckboxGroup = Checkbox.Group;
 
 const RadioGroup = Radio.Group;
 const {Meta} = Card;
 const Option = Select.Option;
 
-const options = [
-    {label: 'Apple', value: 'Apple'},
-    {label: 'Pear', value: 'Pear'},
-    {label: 'Orange', value: 'Orange'},
+
+
+const accountType = [
+    { label: 'MT4', value: 'MT4' },
+    { label: 'MT5', value: 'MT5' },
+    { label: 'TRADER', value: 'TRADER', disabled: false },
 ];
-const optionsWithDisabled = [
-    {label: 'Apple', value: 'Apple'},
-    {label: 'Pear', value: 'Pear'},
-    {label: 'Orange', value: 'Orange', disabled: false},
+
+const accountTypeCheckList = [
+    { label: 'MT4', value: 'MT4' },
+    { label: 'MT5', value: 'MT5' },
+    { label: 'TRADER', value: 'TRADER', disabled: false },
 ];
 
 
@@ -64,11 +67,8 @@ class PassOpenD extends Component {
 
     }
 
-    componentWillUnmount = () => {
-        this.closeGallery();
-    };
+
     openOK = () => {
-        this.showModal()
         var me = this;
 
         window.Axios.post('/open/passOpenApply', {
@@ -78,6 +78,13 @@ class PassOpenD extends Component {
         }).then(function (response) {
             console.log(response);
 
+            if (response.data.code == 1){
+
+                message.success('開戶通過')
+                me.props.history.goBack()
+
+            }
+
         }).catch(function (error) {
             console.log(error);
         });
@@ -85,8 +92,10 @@ class PassOpenD extends Component {
 
     };
     saveData = () => {
+
+        this.showModal()
+
         message.success('ok 開戶成功')
-        this.props.history.goBack()
     };
     saveReject = () => {
 
@@ -154,17 +163,16 @@ class PassOpenD extends Component {
         console.log(value); // { key: "lucy", label: "Lucy (101)" }
     };
 
-    state = {
-        value3: 'Apple',
-    }
 
 
-    onChange3 = (e) => {
-        console.log('radio3 checked', e.target.value);
+
+    onChangeActypes = (checkedValues) => {
+        console.log('hcia','radio3 checked', checkedValues);
         this.setState({
-            value3: e.target.value,
+            accountTypeCheckList: checkedValues,
         });
     }
+
 
 
     onChangeSSS = (e) => {
@@ -182,19 +190,22 @@ class PassOpenD extends Component {
             , visible: false
             , recordData: {}
             , sss: 'aa'
+            ,acTypes: 'MT4'
+            ,accountTypeCheckList:[
+                'MT4','MT5'
+            ]
             , gallery: null
+
         };
     }
-
     render() {
-
 
         return (
             <div>
 
                 <div>id: {this.state.recordData.id}</div>
                 <div>idcard_0 :{this.state.recordData.idcard_0}</div>
-                <div>sss :{this.state.sss}</div>
+                <div>test check :{this.state.sss}</div>
 
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
                 <Card title="IX账户审核 " bordered={true}>
@@ -238,14 +249,13 @@ class PassOpenD extends Component {
                             <Card bordered={true}>
 
                                 <div>
-                                    账户类型 :
-                                    <RadioGroup options={optionsWithDisabled} onChange={this.onChange3}
-                                                value={this.state.value3}/>
+                                    账户类型:
+                                    <CheckboxGroup onChange={this.onChangeActypes} options={accountType}  value={this.state.accountTypeCheckList}  style={{marginLeft: 20 , width: 520}  }
+                                                />
                                 </div>
                             </Card>
                             <Card bordered={true}>
                                 <div>
-                                    {/*<p>服务器</p>*/}
                                     服务器 :
                                     <Select labelInValue defaultValue={{key: 'lucy'}} style={{width: 120}}
                                             onChange={this.handleChange}>
@@ -266,7 +276,8 @@ class PassOpenD extends Component {
                         <Col md={12}>
                             <Card title="基本信息" bordered={true}>
                                 <div>
-                                    <p>国家<Select  labelInValue defaultValue={{key: 'lucy'}} style={{marginLeft: 10 , width: 120}}
+                                    <p>国家
+                                        <Select  labelInValue defaultValue={{key: 'lucy'}} style={{marginLeft: 10 , width: 120}}
                                                   onChange={this.handleChange}>
                                         <Option value="jack">Jack (100)</Option>
                                         <Option value="lucy">a (101)</Option>
@@ -275,7 +286,8 @@ class PassOpenD extends Component {
                                         <Option value="lucyc">Lucdy (101)</Option>
                                         <Option value="lucyd">Lucys (101)</Option>
                                         <Option value="lucye">Lucy a(101)</Option>
-                                    </Select></p>
+                                    </Select>
+                                    </p>
                                 </div>
                                 <div>
                                     <p>*姓（中文）</p>
