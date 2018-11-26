@@ -5,9 +5,9 @@
  *
  */
 import React, {Component} from 'react';
-import {Col, Card, Row, Button, Avatar, Modal, Select, Input,Checkbox} from 'antd';
+import {Col, Card, Row, Button, Avatar, Modal, Select, Input, Checkbox} from 'antd';
 import {Radio} from 'antd';
-import { message } from 'antd';
+import {message} from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
 import PhotoSwipe from "photoswipe";
 import PhotoswipeUIDefault from "photoswipe/dist/photoswipe-ui-default";
@@ -21,17 +21,16 @@ const {Meta} = Card;
 const Option = Select.Option;
 
 
-
 const accountType = [
-    { label: 'MT4', value: 'MT4' },
-    { label: 'MT5', value: 'MT5' },
-    { label: 'TRADER', value: 'TRADER', disabled: false },
+    {label: 'MT4', value: 'MT4'},
+    {label: 'MT5', value: 'MT5'},
+    {label: 'TRADER', value: 'TRADER', disabled: false},
 ];
 
-const accountTypeCheckList = [
-    { label: 'MT4', value: 'MT4' },
-    { label: 'MT5', value: 'MT5' },
-    { label: 'TRADER', value: 'TRADER', disabled: false },
+const tradeType = [
+    {label: 'CFD', value: 'CFD'},
+    {label: 'CFD_2', value: 'CFD_2'},
+    {label: 'CFD_3', value: 'CFD_3'},
 ];
 
 
@@ -50,7 +49,7 @@ class PassOpenD extends Component {
             // 'token': this.props.match.params.id,
             'language': "zh-CN"
         }).then(function (response) {
-             console.log('hcia', response);
+            console.log('hcia', response);
 
             console.log('hcia', response.data.code);
 
@@ -73,12 +72,12 @@ class PassOpenD extends Component {
 
         window.Axios.post('/open/passOpenApply', {
             'language': 'zh-CN',
-            'belongUserId':me.state.recordData.belongUserId,
+            'belongUserId': me.state.recordData.belongUserId,
             'id': me.state.recordData.id,
         }).then(function (response) {
             console.log(response);
 
-            if (response.data.code == 1){
+            if (response.data.code == 1) {
 
                 message.success('開戶通過')
                 me.props.history.goBack()
@@ -155,24 +154,25 @@ class PassOpenD extends Component {
         });
         this.gallery.init();
     };
-    closeGallery = () => {
-        if (!this.gallery) return;
-        this.gallery.close();
-    };
     handleChange = (value) => {
         console.log(value); // { key: "lucy", label: "Lucy (101)" }
     };
 
 
-
-
     onChangeActypes = (checkedValues) => {
-        console.log('hcia','radio3 checked', checkedValues);
+        console.log('hcia', 'radio3 checked', checkedValues);
         this.setState({
             accountTypeCheckList: checkedValues,
         });
-    }
+    };
 
+
+    onChangetradeType = (e) => {
+        console.log('radio3 checked', e.target.value);
+        this.setState({
+            tradrType: e.target.value,
+        });
+    }
 
 
     onChangeSSS = (e) => {
@@ -185,19 +185,20 @@ class PassOpenD extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            date: new Date()
-            , userList: []
+            userList: []
             , visible: false
+            , tradrType: 'CFD'
             , recordData: {}
             , sss: 'aa'
-            ,acTypes: 'MT4'
-            ,accountTypeCheckList:[
-                'MT4','MT5'
+            , acTypes: 'MT4'
+            , accountTypeCheckList: [
+                'MT4', 'MT5'
             ]
             , gallery: null
 
         };
     }
+
     render() {
 
         return (
@@ -250,8 +251,19 @@ class PassOpenD extends Component {
 
                                 <div>
                                     账户类型:
-                                    <CheckboxGroup onChange={this.onChangeActypes} options={accountType}  value={this.state.accountTypeCheckList}  style={{marginLeft: 20 , width: 520}  }
-                                                />
+                                    <CheckboxGroup onChange={this.onChangeActypes} options={accountType}
+                                                   value={this.state.accountTypeCheckList}
+                                                   style={{marginLeft: 20, width: 520}}
+                                    />
+                                </div>
+                            </Card>
+                            <Card bordered={true}>
+
+                                <div>
+                                    交易类型:
+                                    <RadioGroup onChange={this.onChangetradeType} options={tradeType}
+                                                value={this.state.tradrType} style={{marginLeft: 20, width: 520}}
+                                    />
                                 </div>
                             </Card>
                             <Card bordered={true}>
@@ -282,7 +294,8 @@ class PassOpenD extends Component {
                                     <p>*姓（中文）</p>
                                 </div>
                                 <div>
-                                    <p>IX账户审核<Input defaultValue={this.state.sss}  onChange={this.onChangeSSS} style={{marginLeft: 10, width: 120}} placeholder="Basic usage"/></p>
+                                    <p>IX账户审核<Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                                    style={{marginLeft: 10, width: 120}} placeholder="Basic usage"/></p>
                                 </div>
                             </Card>
                             <Card bordered={true}>

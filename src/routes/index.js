@@ -21,7 +21,6 @@ export default class CRouter extends Component {
         };
     }
 
-
     componentWillMount() {
         console.log('hcia componentWillMount' )
         this.setState({config: routesConfigadmin});
