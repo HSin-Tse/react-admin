@@ -7,7 +7,7 @@ class PotentialUser extends Component {
 	componentDidMount() {
         this.columns = [
             {
-                title: '手机x号',
+                title: '手机号',
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
                 // fixed: 'left',
@@ -85,7 +85,8 @@ class PotentialUser extends Component {
                 ),
             }
             ];
-        this.test()
+        this.requestListData("1")
+        
     }
     render() {
         return(
@@ -95,9 +96,9 @@ class PotentialUser extends Component {
 
                 <BreadcrumbCustom first="用户管理" second="Leads管理"/>
                 <div>
-                    <Button onClick={this.test} type="primary">潛在用戶</Button>
-                    <Button onClick={this.test} type="primary">模擬用戶</Button>
-                    <Button onClick={this.test} type="primary">意向用戶</Button>
+                    <Button onClick={() => this.requestListData("1")} type="primary">潛在用戶</Button>
+                    <Button onClick={() => this.requestListData("2")} type="primary">模擬用戶</Button>
+                    <Button onClick={() => this.requestListData("3")} type="primary">意向用戶</Button>
                 </div>
 
                 <Table rowKey="id"
@@ -130,11 +131,13 @@ class PotentialUser extends Component {
     examine = (theId) =>{
 
     }
-    test = () => {
+    
+    
+    requestListData = (listType) => {
         this.setState({is_tag: '123321'});
         var aa = this;
         axios.post('http://mobile.nooko.cn:8090/ixuser/getUserList', {
-        	'listType' : '1',
+        	'listType' : listType,
         	'loginName' : 'admin',
         	'token' : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmVUaW1lIjoxNTQ1NTI4ODM0MTk5LCJsb2dpbk5hbWUiOiJhZG1pbiJ9.F7moE4DsMUiajkKB1S_wemwsozlUW5VMxQKsg4KsSUQ'
 
