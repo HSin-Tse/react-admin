@@ -17,7 +17,7 @@ export default {
         {
             key: '/app/customer', title: '用戶管理', icon: 'safety',
             subs: [
-                { key: '/app/customer/Lead', title: 'Lead管理', component: 'Lead' },
+                { key: '/app/customer/potentialUser', title: 'Lead管理', component: 'potentialUser' },
                 // {
                 //     key: '/app/auth', title: '權限測試', icon: 'safety',
                 //     subs: [

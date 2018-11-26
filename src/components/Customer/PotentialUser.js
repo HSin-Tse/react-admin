@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import {Button, Table, Icon} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import axios from 'axios';
-class Lead extends Component {
+class PotentialUser extends Component {
 	componentDidMount() {
         this.columns = [
             {
-                title: '手机号',
+                title: '手机x号',
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
                 // fixed: 'left',
@@ -20,7 +20,7 @@ class Lead extends Component {
                 dataIndex: 'name',
                 key: 'name',
                 render: (text, record) => (
-                	
+
                     <Button>{record.name}</Button>),
             }, {
                 title: 'APP版本',
@@ -37,13 +37,13 @@ class Lead extends Component {
                 title: '操作系统型号',
                 dataIndex: '11申请时间',
                 key: '11申请时间',
-              
+
             }, {
                 title: '注册时间',
                 dataIndex: '11审核状态',
                 key: '11审核状态',
                 render: (text, record) => (
-                	
+
                     <Button>{record.date}</Button>)
             }, {
                 title: '下载平台',
@@ -78,7 +78,7 @@ class Lead extends Component {
                 render: (text, record) => (
                     <div>
                         <span className="ant-divider"/>
-                        <Button className="ant-dropdown-link" onClick={() => this.handleEdit(record)}>审核</Button>
+                        <Button className="ant-dropdown-link" onClick={() => this.examine(record)}>审核</Button>
 
 
                     </div>
@@ -93,7 +93,7 @@ class Lead extends Component {
                 <div>log: {this.state.anyThing}</div>
                 <div>yyxLog log: Lead</div>
 
-                <BreadcrumbCustom first="用户管理" second="Laeds管理"/>
+                <BreadcrumbCustom first="用户管理" second="Leads管理"/>
                 <div>
                     <Button onClick={this.test} type="primary">潛在用戶</Button>
                     <Button onClick={this.test} type="primary">模擬用戶</Button>
@@ -127,6 +127,9 @@ class Lead extends Component {
 
         };
     }
+    examine = (theId) =>{
+
+    }
     test = () => {
         this.setState({is_tag: '123321'});
         var aa = this;
@@ -148,7 +151,6 @@ class Lead extends Component {
             aa.setState({anyThing: response.data.code});
             aa.setState({userList: response.data.data.list});
 
-
         }).catch(function (error) {
             console.log(error);
             // message.warn(error);
@@ -156,4 +158,4 @@ class Lead extends Component {
     };
 }
 
-export default Lead;
+export default PotentialUser;
