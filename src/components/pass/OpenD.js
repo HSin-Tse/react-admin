@@ -26,16 +26,30 @@ const accountType = [
     {label: 'MT5', value: 'MT5'},
     {label: 'TRADER', value: 'TRADER', disabled: false},
 ];
-
 const tradeType = [
     {label: 'CFD', value: 'CFD'},
     {label: 'CFD_2', value: 'CFD_2'},
     {label: 'CFD_3', value: 'CFD_3'},
 ];
 
-
 class PassOpenD extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            userList: []
+            , recordData: {}
+            , visible: false
+            , tradrType: 'CFD'
+            , sss: 'aa'
+            , acTypes: 'MT4'
+            , accountTypeCheckList: [
+                'MT4', 'MT5'
+            ]
+            , gallery: null
+
+        };
+    }
 
     componentDidMount() {
 
@@ -66,138 +80,6 @@ class PassOpenD extends Component {
 
     }
 
-
-    openOK = () => {
-        var me = this;
-
-        window.Axios.post('/open/passOpenApply', {
-            'language': 'zh-CN',
-            'belongUserId': me.state.recordData.belongUserId,
-            'id': me.state.recordData.id,
-        }).then(function (response) {
-            console.log(response);
-
-            if (response.data.code == 1) {
-
-                message.success('開戶通過')
-                me.props.history.goBack()
-
-            }
-
-        }).catch(function (error) {
-            console.log(error);
-        });
-
-
-    };
-    saveData = () => {
-
-        this.showModal()
-
-        message.success('ok 開戶成功')
-    };
-    saveReject = () => {
-
-
-        var me = this;
-
-        window.Axios.post('/open/cancelOpenApply', {
-            // "language":"zh-CN","userId":"#############################"
-            'language': 'zh-CN',
-            'id': me.state.recordData.id
-        }).then(function (response) {
-            console.log('hcia response', response);
-
-            console.log('hcia', response);
-
-        }).catch(function (error) {
-            console.log(error);
-            // message.warn(error);
-        });
-
-
-    };
-    showModal = () => {
-        this.setState({
-            visible: true,
-        });
-    }
-
-    hideModal = () => {
-        this.setState({
-            visible: false,
-        });
-    }
-    openGallery = (item) => {
-        const items = [
-            {
-                src: item,
-                w: 0,
-                h: 0,
-            }
-        ];
-        const pswpElement = this.pswpElement;
-        const options = {index: 0};
-        this.gallery = new PhotoSwipe(pswpElement, PhotoswipeUIDefault, items, options);
-        this.gallery.listen('gettingData', (index, item) => {
-            const _this = this;
-            if (item.w < 1 || item.h < 1) { // unknown size
-                var img = new Image();
-                img.onload = function () { // will get size after load
-                    item.w = this.width; // set image width
-                    item.h = this.height; // set image height
-                    _this.gallery.invalidateCurrItems(); // reinit Items
-                    _this.gallery.updateSize(true); // reinit Items
-                };
-                img.src = item.src; // let's download image
-            }
-        });
-        this.gallery.init();
-    };
-    handleChange = (value) => {
-        console.log(value); // { key: "lucy", label: "Lucy (101)" }
-    };
-
-
-    onChangeActypes = (checkedValues) => {
-        console.log('hcia', 'radio3 checked', checkedValues);
-        this.setState({
-            accountTypeCheckList: checkedValues,
-        });
-    };
-
-
-    onChangetradeType = (e) => {
-        console.log('radio3 checked', e.target.value);
-        this.setState({
-            tradrType: e.target.value,
-        });
-    }
-
-
-    onChangeSSS = (e) => {
-        console.log('radio3 checked', e.target.value);
-        this.setState({
-            sss: e.target.value,
-        });
-    }
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            userList: []
-            , visible: false
-            , tradrType: 'CFD'
-            , recordData: {}
-            , sss: 'aa'
-            , acTypes: 'MT4'
-            , accountTypeCheckList: [
-                'MT4', 'MT5'
-            ]
-            , gallery: null
-
-        };
-    }
 
     render() {
 
@@ -245,9 +127,9 @@ class PassOpenD extends Component {
                 </Card>
                 <Card title="IX账户设置" bordered={true}>
 
-                    <Row gutter={16}>
+                    <Row gutter={16} >
                         <Col md={24}>
-                            <Card bordered={true}>
+                            <Card bordered={false}>
 
                                 <div>
                                     账户类型:
@@ -257,7 +139,7 @@ class PassOpenD extends Component {
                                     />
                                 </div>
                             </Card>
-                            <Card bordered={true}>
+                            <Card bordered={false}>
 
                                 <div>
                                     交易类型:
@@ -266,19 +148,78 @@ class PassOpenD extends Component {
                                     />
                                 </div>
                             </Card>
-                            <Card bordered={true}>
+
+
+                        </Col>
+                        <Col md={8}>
+                            <Card bordered={false}>
                                 <div>
+
                                     服务器 :
-                                    <Select labelInValue defaultValue={{key: 'lucy'}} style={{width: 120}}
+                                    <Select labelInValue defaultValue={{key: 'lucy'}}
+                                            style={{marginLeft: 20, width: 120}}
+                                            onChange={this.handleChange}>
+                                        <Option value="jack">Jack (100)</Option>
+                                        <Option value="lucy">Lucy (101)</Option>
+                                    </Select>
+
+                                </div>
+                            </Card>
+                        </Col>
+                        <Col md={8}>
+                            <Card bordered={false}>
+                                <div>
+                                    交易组 :
+                                    <Select labelInValue defaultValue={{key: 'lucy'}}
+                                            style={{marginLeft: 20, width: 120}}
                                             onChange={this.handleChange}>
                                         <Option value="jack">Jack (100)</Option>
                                         <Option value="lucy">Lucy (101)</Option>
                                     </Select>
                                 </div>
                             </Card>
-
                         </Col>
 
+                    </Row>
+                    <Row gutter={16} >
+
+                        <Col md={8}>
+                            <Card bordered={false}>
+                                <div>
+                                    杠杆组 :
+                                    <Select labelInValue defaultValue={{key: 'lucy'}}
+                                            style={{marginLeft: 20, width: 120}}
+                                            onChange={this.handleChange}>
+                                        <Option value="jack">Jack (100)</Option>
+                                        <Option value="lucy">Lucy (101)</Option>
+                                    </Select>
+                                </div>
+                            </Card>
+                        </Col>
+                        <Col md={8}>
+                            <Card bordered={false}>
+                                <div>
+                                    <Select labelInValue defaultValue={{key: 'lucy'}}
+                                            style={{marginLeft: 20}}
+                                            onChange={this.handleChange}>
+                                        <Option value="jack">Jack (100)</Option>
+                                        <Option value="lucy">Lucy (101)</Option>
+                                    </Select>
+                                </div>
+                            </Card>
+                        </Col>
+                        <Col md={8}>
+                            <Card bordered={false}>
+                                <div>
+                                    <Select labelInValue defaultValue={{key: 'lucy'}}
+                                            style={{marginLeft: 20}}
+                                            onChange={this.handleChange}>
+                                        <Option value="jack">Jack (100)</Option>
+                                        <Option value="lucy">Lucy (101)</Option>
+                                    </Select>
+                                </div>
+                            </Card>
+                        </Col>
                     </Row>
                 </Card>
                 <Card title="IX账户申请表单" bordered={true}>
@@ -481,6 +422,122 @@ class PassOpenD extends Component {
                 </Modal>
             </div>
         )
+    }
+
+
+    openOK = () => {
+        var me = this;
+
+        window.Axios.post('/open/passOpenApply', {
+            'language': 'zh-CN',
+            'belongUserId': me.state.recordData.belongUserId,
+            'id': me.state.recordData.id,
+        }).then(function (response) {
+            console.log(response);
+
+            if (response.data.code == 1) {
+
+                message.success('開戶通過')
+                me.props.history.goBack()
+
+            }
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+
+    };
+    saveData = () => {
+
+        this.showModal()
+
+        message.success('ok 開戶成功')
+    };
+    saveReject = () => {
+
+
+        var me = this;
+
+        window.Axios.post('/open/cancelOpenApply', {
+            // "language":"zh-CN","userId":"#############################"
+            'language': 'zh-CN',
+            'id': me.state.recordData.id
+        }).then(function (response) {
+            console.log('hcia response', response);
+
+            console.log('hcia', response);
+
+        }).catch(function (error) {
+            console.log(error);
+            // message.warn(error);
+        });
+
+
+    };
+    showModal = () => {
+        this.setState({
+            visible: true,
+        });
+    }
+
+    hideModal = () => {
+        this.setState({
+            visible: false,
+        });
+    }
+    openGallery = (item) => {
+        const items = [
+            {
+                src: item,
+                w: 0,
+                h: 0,
+            }
+        ];
+        const pswpElement = this.pswpElement;
+        const options = {index: 0};
+        this.gallery = new PhotoSwipe(pswpElement, PhotoswipeUIDefault, items, options);
+        this.gallery.listen('gettingData', (index, item) => {
+            const _this = this;
+            if (item.w < 1 || item.h < 1) { // unknown size
+                var img = new Image();
+                img.onload = function () { // will get size after load
+                    item.w = this.width; // set image width
+                    item.h = this.height; // set image height
+                    _this.gallery.invalidateCurrItems(); // reinit Items
+                    _this.gallery.updateSize(true); // reinit Items
+                };
+                img.src = item.src; // let's download image
+            }
+        });
+        this.gallery.init();
+    };
+    handleChange = (value) => {
+        console.log(value); // { key: "lucy", label: "Lucy (101)" }
+    };
+
+
+    onChangeActypes = (checkedValues) => {
+        console.log('hcia', 'radio3 checked', checkedValues);
+        this.setState({
+            accountTypeCheckList: checkedValues,
+        });
+    };
+
+
+    onChangetradeType = (e) => {
+        console.log('radio3 checked', e.target.value);
+        this.setState({
+            tradrType: e.target.value,
+        });
+    }
+
+
+    onChangeSSS = (e) => {
+        console.log('radio3 checked', e.target.value);
+        this.setState({
+            sss: e.target.value,
+        });
     }
 }
 
