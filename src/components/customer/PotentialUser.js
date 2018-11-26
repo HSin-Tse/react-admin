@@ -1,12 +1,25 @@
 
 import React, { Component } from 'react';
-import {Button, Table, Icon} from 'antd';
+import {Button, Table, Icon,Checkbox} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import axios from 'axios';
 class PotentialUser extends Component {
 	componentDidMount() {
         this.columns = [
-            {
+					{
+							title: '手机号',
+							dataIndex: 'phoneNumber',
+							key: 'phoneNumber',
+							// fixed: 'left',
+							// width: 100,
+							render: (text, record) => (
+							<Checkbox
+				 				// checked={this.state.checked}
+				 				// disabled={this.state.disabled}
+				 				onChange={this.hasChange}
+							></Checkbox>),
+					 }
+						,{
                 title: '手机号',
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
@@ -86,7 +99,7 @@ class PotentialUser extends Component {
             }
             ];
         this.requestListData("1")
-        
+
     }
     render() {
         return(
@@ -128,11 +141,12 @@ class PotentialUser extends Component {
 
         };
     }
-    examine = (theId) =>{
+    hasChange = (status) =>{
+			console.log('sssss',status.target.checked)
 
     }
-    
-    
+
+
     requestListData = (listType) => {
         this.setState({is_tag: '123321'});
         var aa = this;
@@ -142,7 +156,6 @@ class PotentialUser extends Component {
         	'token' : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmVUaW1lIjoxNTQ1NTI4ODM0MTk5LCJsb2dpbk5hbWUiOiJhZG1pbiJ9.F7moE4DsMUiajkKB1S_wemwsozlUW5VMxQKsg4KsSUQ'
 
         }).then(function (response) {
-            console.log('xxx',response);
             var bb = response.data.data.list;
             for (var i = bb.length - 1; i >= 0; i--) {
             	let userInfo = bb[i]
