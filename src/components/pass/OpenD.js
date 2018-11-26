@@ -5,7 +5,7 @@
  *
  */
 import React, {Component} from 'react';
-import {Col, Card, Row, Button, Avatar, Modal, Select, Input, Checkbox, DatePicker} from 'antd';
+import {Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker} from 'antd';
 import {Radio} from 'antd';
 import {message} from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
@@ -17,7 +17,6 @@ import 'photoswipe/dist/default-skin/default-skin.css';
 const CheckboxGroup = Checkbox.Group;
 
 const RadioGroup = Radio.Group;
-const {Meta} = Card;
 const Option = Select.Option;
 
 
@@ -89,7 +88,6 @@ class PassOpenD extends Component {
             <div>
 
                 <div>id: {this.state.recordData.id}</div>
-                <div>idcard_0 :{this.state.recordData.idcard_0}</div>
                 <div>test check :{this.state.sss}</div>
 
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
@@ -239,23 +237,23 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*姓（中文）</span>
-                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.lastNameCn} onChange={this.onChangeSSS}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*名（中文）</span>
-                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.firstNameCn} onChange={this.onChangeSSS}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*姓</span>
-                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.lastName} onChange={this.onChangeSSS}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
 
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}> *名</span>
-                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.firstName} onChange={this.onChangeSSS}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
@@ -266,14 +264,14 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*性别</span>
-                                    <Select defaultValue="男" style={{ width: 120 }} >
+                                    <Select defaultValue={this.state.recordData.gender} style={{ width: 120 }} >
                                         <Option value="0">男</Option>
                                         <Option value="1">女</Option>
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*身份证号码</span>
-                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.nationalID} onChange={this.onChangeSSS}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
@@ -285,26 +283,25 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*详细地址</span>
-                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.street} onChange={this.onChangeSSS}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*联系电话</span>
-                                    <Input defaultValue={this.state.sss} disabled={true}
+                                    <Input defaultValue={this.state.recordData.phoneNumber} disabled={true}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*邮箱地址</span>
-                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.email} onChange={this.onChangeSSS}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*邮编</span>
-                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.postalCode} onChange={this.onChangeSSS}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                             </Card>
-
 
 
                         </Col>
@@ -607,14 +604,12 @@ class PassOpenD extends Component {
                 iconcanLoading: false,
             });
 
-            message.info('拒絕成功')
-            console.log('hcia response', response);
-
-            console.log('hcia', response);
+            if( response.data.code == 1 ){
+                message.info('拒絕成功')
+            }
 
         }).catch(function (error) {
             console.log(error);
-            // message.warn(error);
         });
 
 
