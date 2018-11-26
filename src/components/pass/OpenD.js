@@ -39,6 +39,8 @@ class PassOpenD extends Component {
         this.state = {
             userList: []
             , recordData: {}
+            , iconLoading: false
+            , iconcanLoading: false
             , visible: false
             , tradrType: 'CFD'
             , sss: 'aa'
@@ -464,9 +466,9 @@ class PassOpenD extends Component {
                 </Card>
                 <Card title="IX账户审核备注" bordered={true} style={{marginTop : 30}}>
                     <div>
-                        <Button onClick={() => this.openOK()}>开户通过</Button>
-                        <Button onClick={() => this.saveData()}>保存</Button>
-                        <Button onClick={() => this.saveReject()}>拒绝</Button>
+                        <Button loading={this.state.iconLoading} onClick={() => this.openOK()}>开户通过</Button>
+                        <Button   onClick={() => this.saveData()}>保存</Button>
+                        <Button  loading={this.state.iconcanLoading} onClick={() => this.saveReject()}>拒绝</Button>
                     </div>
                 </Card>
 
@@ -550,6 +552,10 @@ class PassOpenD extends Component {
 
 
     openOK = () => {
+
+        this.setState({
+            iconLoading: true,
+        });
         var me = this;
 
         window.Axios.post('/open/passOpenApply', {
@@ -557,6 +563,11 @@ class PassOpenD extends Component {
             'belongUserId': me.state.recordData.belongUserId,
             'id': me.state.recordData.id,
         }).then(function (response) {
+
+
+            me.setState({
+                iconLoading: false,
+            });
             console.log(response);
 
             if (response.data.code == 1) {
@@ -574,13 +585,16 @@ class PassOpenD extends Component {
     };
     saveData = () => {
 
+
         this.showModal()
 
         message.success('ok 開戶成功')
     };
     saveReject = () => {
 
-
+        this.setState({
+            iconcanLoading: true,
+        });
         var me = this;
 
         window.Axios.post('/open/cancelOpenApply', {
@@ -588,6 +602,12 @@ class PassOpenD extends Component {
             'language': 'zh-CN',
             'id': me.state.recordData.id
         }).then(function (response) {
+
+            me.setState({
+                iconcanLoading: false,
+            });
+
+            message.info('拒絕成功')
             console.log('hcia response', response);
 
             console.log('hcia', response);
