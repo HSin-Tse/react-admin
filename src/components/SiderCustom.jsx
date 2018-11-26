@@ -62,8 +62,9 @@ class SiderCustom extends Component {
         collapsed: false,
         mode: 'inline',
         openKey: '',
+        displayName: '',
         selectedKey: '',
-        firstHide: true, // 点击收缩菜单，第一次隐藏展开子菜单，openMenu时恢复
+        firstHide: false, // 点击收缩菜单，第一次隐藏展开子菜单，openMenu时恢复
     };
     componentDidMount() {
         // this.setMenuOpen(this.props);
@@ -78,6 +79,7 @@ class SiderCustom extends Component {
             this.setState({config: routesConfigadmin});
 
         }
+        this.setState({displayName: localStorage.getItem('displayName')});
 
     }
     menuClick = e => {
