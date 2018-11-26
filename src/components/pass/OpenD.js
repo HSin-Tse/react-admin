@@ -125,7 +125,7 @@ class PassOpenD extends Component {
 
                     </Row>
                 </Card>
-                <Card title="IX账户设置" bordered={true}>
+                <Card title="IX账户设置" bordered={true} style={{marginTop : 30}}>
 
                     <Row gutter={16}>
                         <Col md={24}>
@@ -222,7 +222,7 @@ class PassOpenD extends Component {
                         </Col>
                     </Row>
                 </Card>
-                <Card title="IX账户申请表单" bordered={true}>
+                <Card title="IX账户申请表单" bordered={true} style={{marginTop : 30}}>
 
                     <Row gutter={8}>
                         <Col md={12}>
@@ -373,7 +373,7 @@ class PassOpenD extends Component {
                         </Col>
                     </Row>
                 </Card>
-                <Card title="IX账户身份信息" bordered={true}>
+                <Card title="IX账户身份信息" bordered={true} style={{marginTop : 30}}>
                     <Row gutter={16}>
 
                         <Col md={8}>
@@ -424,7 +424,7 @@ class PassOpenD extends Component {
                     </Row>
 
                 </Card>
-                <Card title="IX账户身份查重" bordered={true}>
+                <Card title="IX账户身份查重" bordered={true} style={{marginTop : 30}}>
 
                     <Row gutter={12}>
                         <Col md={4}>
@@ -456,14 +456,13 @@ class PassOpenD extends Component {
                             </div>
                         </Col>
                         <Col md={24}>
-                            <div style={{display: 'flex', minHeight: 40  , alignItems: 'center'}}>
-                                <h3>本库查询结果：本库有1条信息重合</h3>
-
+                            <div style={{display: 'flex', minHeight: 40  }}>
+                                <h3 style={{margin: 'auto'}}>本库查询结果：本库有1条信息重合</h3>
                             </div>
                         </Col>
                     </Row>
                 </Card>
-                <Card title="IX账户审核备注" bordered={true}>
+                <Card title="IX账户审核备注" bordered={true} style={{marginTop : 30}}>
                     <div>
                         <Button onClick={() => this.openOK()}>开户通过</Button>
                         <Button onClick={() => this.saveData()}>保存</Button>
