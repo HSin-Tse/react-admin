@@ -22,11 +22,11 @@ class SiderCustom extends Component {
             , gallery: null
         };
     }
-    componentWillMount() {
-        console.log('hcia SiderCustom componentWillMount' )
-        // this.setState({config: routesConfigadmin});
-
-    }
+    // componentWillMount() {
+    //     console.log('hcia SiderCustom componentWillMount' )
+    //     // this.setState({config: routesConfigadmin});
+    //
+    // }
 
 
 
