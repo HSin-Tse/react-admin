@@ -13,6 +13,7 @@ import PhotoSwipe from "photoswipe";
 import PhotoswipeUIDefault from "photoswipe/dist/photoswipe-ui-default";
 import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
+import moment from 'moment';
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -30,8 +31,9 @@ const tradeType = [
     {label: 'CFD_2', value: 'CFD_2'},
     {label: 'CFD_3', value: 'CFD_3'},
 ];
-
+const dateFormat = 'YYYY-MM-DD';
 class PassOpenD extends Component {
+    onChangeBirth;
 
     constructor(props) {
         super(props);
@@ -42,6 +44,7 @@ class PassOpenD extends Component {
             , iconcanLoading: false
             , visible: false
             , tradrType: 'CFD'
+            , testeee: '1976-11-23'
             , sss: 'aa'
             , acTypes: 'MT4'
             , accountTypeCheckList: [
@@ -70,6 +73,12 @@ class PassOpenD extends Component {
 
             self.setState({
                 recordData: response.data.data,
+
+            });
+
+            self.setState({
+                recordData: response.data.data,
+                testeee:self.timestampToTime(response.data.data.dateOfBirth)
 
             });
 
@@ -162,10 +171,10 @@ class PassOpenD extends Component {
                                 <div>
 
                                     服务器 :
-                                    <Select labelInValue defaultValue={{key: 'lucy'}}
+                                    <Select labelInValue defaultValue={{key: 'jack'}}
                                             style={{marginLeft: 20, width: 120}}
                                             onChange={this.handleChange}>
-                                        <Option value="jack">Jack (100)</Option>
+                                        <Option value="jack">服务器地址</Option>
                                         <Option value="lucy">Lucy (101)</Option>
                                     </Select>
 
@@ -180,7 +189,7 @@ class PassOpenD extends Component {
                                             style={{marginLeft: 20, width: 120}}
                                             onChange={this.handleChange}>
                                         <Option value="jack">Jack (100)</Option>
-                                        <Option value="lucy">Lucy (101)</Option>
+                                        <Option value="lucy">S-STP</Option>
                                     </Select>
                                 </div>
                             </Card>
@@ -264,15 +273,22 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*出生日期</span>
-                                    <DatePicker/>
+                                    <DatePicker value={moment(this.state.testeee, dateFormat)}
+                                                onChange={this.onChangeBirth}
+
+                                                format={dateFormat} />
+
+                                    {/*<DatePicker defaultValue={moment(this.timestampToTime('1976-11-26'), dateFormat)} format={dateFormat}/>*/}
+                                    {this.timestampToTime(this.state.recordData.dateOfBirth)}
                                     {/*<Input defaultValue={this.state.sss} onChange={this.onChangeSSS}*/}
                                     {/*style={{ width: 120}} placeholder="Basic usage"/>*/}
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*性别</span>
-                                    <Select defaultValue={this.state.recordData.gender} style={{ width: 120 }} >
-                                        <Option value="0">男</Option>
-                                        <Option value="1">女</Option>
+                                    <Select defaultValue={this.state.recordData.gender}
+                                            style={{ width: 120 }} >
+                                        <Option value="Male">男</Option>
+                                        <Option value="FeMale">女</Option>
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
@@ -554,6 +570,19 @@ class PassOpenD extends Component {
     }
 
 
+    timestampToTime = (timestamp) => {
+        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
+        const year = dateObj.getFullYear() // 获取年，
+        const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
+        const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
+        const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
+        const minutes = this.pad(dateObj.getMinutes()) // 获取分
+        const seconds = this.pad(dateObj.getSeconds()) // 获取秒
+        return year + '-' + month + '-' + date
+    };
+    pad = (str) => {
+        return +str >= 10 ? str : '0' + str
+    };
     openOK = () => {
 
         this.setState({
@@ -683,6 +712,11 @@ class PassOpenD extends Component {
         this.setState({
             sss: e.target.value,
         });
+    }
+    onChangeBirth = (value, dateString) => {
+        console.log('hcia value' , value)
+        console.log('hcia dateString' , dateString)
+       
     }
 }
 
