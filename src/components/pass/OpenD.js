@@ -263,7 +263,6 @@ class PassOpenD extends Component {
                                         <Option value="lucy">Lucy (101)</Option>
                                     </Select>
                                 </div>
-
                             </Card>
 
                         </Col>
@@ -276,18 +275,8 @@ class PassOpenD extends Component {
                         <Col md={12}>
                             <Card title="基本信息" bordered={true}>
                                 <div>
-                                    <p>国家
-                                        <Select  labelInValue defaultValue={{key: 'lucy'}} style={{marginLeft: 10 , width: 120}}
-                                                  onChange={this.handleChange}>
-                                        <Option value="jack">Jack (100)</Option>
-                                        <Option value="lucy">a (101)</Option>
-                                        <Option value="lucya">b (101)</Option>
-                                        <Option value="lucyb">Lubcy (101)</Option>
-                                        <Option value="lucyc">Lucdy (101)</Option>
-                                        <Option value="lucyd">Lucys (101)</Option>
-                                        <Option value="lucye">Lucy a(101)</Option>
-                                    </Select>
-                                    </p>
+                                    <p>国家: {this.state.recordData.country} </p>
+
                                 </div>
                                 <div>
                                     <p>*姓（中文）</p>
