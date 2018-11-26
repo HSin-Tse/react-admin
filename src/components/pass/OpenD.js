@@ -427,25 +427,39 @@ class PassOpenD extends Component {
                 <Card title="IX账户身份查重" bordered={true}>
 
                     <Row gutter={12}>
-                        <Col md={12}>
-                            <Card title="cssModule" bordered={true}>
-                                <div>
-                                    <p>IX账户审核</p>
-                                </div>
-                            </Card>
+                        <Col md={4}>
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <Select defaultValue="聯繫電話" style={{ width: 120 }} >
+                                    <Option value="0">聯繫電話</Option>
+                                    <Option value="1">女</Option>
+                                </Select>
+                            </div>
+
                         </Col>
-                        <Col md={12}>
-                            <Card title="cssModule" bordered={true}>
-                                <div>
-                                    <p>IX账户审核</p>
-                                </div>
-                                <Meta
-                                    avatar={<Avatar
-                                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>}
-                                    title="Card title"
-                                    description="This is the description"
-                                />
-                            </Card>
+                        <Col md={8}>
+                            <div style={{display: 'flex', minHeight: 40}}>
+
+                                <Input defaultValue={this.state.recordData.country}
+                                       style={{width: 220}} placeholder="输入要查询的内容"/>
+                            </div>
+                        </Col>
+                        <Col md={4}>
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <Button onClick={() => this.openOK()}>本库查询</Button>
+
+                            </div>
+                        </Col>
+                        <Col md={4}>
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <Button onClick={() => this.openOK()}>异库查询</Button>
+
+                            </div>
+                        </Col>
+                        <Col md={24}>
+                            <div style={{display: 'flex', minHeight: 40  , alignItems: 'center'}}>
+                                <h3>本库查询结果：本库有1条信息重合</h3>
+
+                            </div>
                         </Col>
                     </Row>
                 </Card>
