@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {Button, Table, Icon} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import axios from 'axios';
-class Lead extends Component {
+class PotentialUser extends Component {
 	componentDidMount() {
         this.columns = [
             {
@@ -20,7 +20,7 @@ class Lead extends Component {
                 dataIndex: 'name',
                 key: 'name',
                 render: (text, record) => (
-                	
+
                     <Button>{record.name}</Button>),
             }, {
                 title: 'APP版本',
@@ -37,13 +37,13 @@ class Lead extends Component {
                 title: '操作系统型号',
                 dataIndex: '11申请时间',
                 key: '11申请时间',
-              
+
             }, {
                 title: '注册时间',
                 dataIndex: '11审核状态',
                 key: '11审核状态',
                 render: (text, record) => (
-                	
+
                     <Button>{record.date}</Button>)
             }, {
                 title: '下载平台',
@@ -78,14 +78,15 @@ class Lead extends Component {
                 render: (text, record) => (
                     <div>
                         <span className="ant-divider"/>
-                        <Button className="ant-dropdown-link" onClick={() => this.handleEdit(record)}>审核</Button>
+                        <Button className="ant-dropdown-link" onClick={() => this.examine(record)}>审核</Button>
 
 
                     </div>
                 ),
             }
             ];
-        this.test()
+        this.requestListData("1")
+        
     }
     render() {
         return(
@@ -93,11 +94,11 @@ class Lead extends Component {
                 <div>log: {this.state.anyThing}</div>
                 <div>yyxLog log: Lead</div>
 
-                <BreadcrumbCustom first="用户管理" second="Laeds管理"/>
+                <BreadcrumbCustom first="用户管理" second="Leads管理"/>
                 <div>
-                    <Button onClick={this.test} type="primary">潛在用戶</Button>
-                    <Button onClick={this.test} type="primary">模擬用戶</Button>
-                    <Button onClick={this.test} type="primary">意向用戶</Button>
+                    <Button onClick={() => this.requestListData("1")} type="primary">潛在用戶</Button>
+                    <Button onClick={() => this.requestListData("2")} type="primary">模擬用戶</Button>
+                    <Button onClick={() => this.requestListData("3")} type="primary">意向用戶</Button>
                 </div>
 
                 <Table rowKey="id"
@@ -127,11 +128,16 @@ class Lead extends Component {
 
         };
     }
-    test = () => {
+    examine = (theId) =>{
+
+    }
+    
+    
+    requestListData = (listType) => {
         this.setState({is_tag: '123321'});
         var aa = this;
         axios.post('http://mobile.nooko.cn:8090/ixuser/getUserList', {
-        	'listType' : '1',
+        	'listType' : listType,
         	'loginName' : 'admin',
         	'token' : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmVUaW1lIjoxNTQ1NTI4ODM0MTk5LCJsb2dpbk5hbWUiOiJhZG1pbiJ9.F7moE4DsMUiajkKB1S_wemwsozlUW5VMxQKsg4KsSUQ'
 
@@ -148,7 +154,6 @@ class Lead extends Component {
             aa.setState({anyThing: response.data.code});
             aa.setState({userList: response.data.data.list});
 
-
         }).catch(function (error) {
             console.log(error);
             // message.warn(error);
@@ -156,4 +161,4 @@ class Lead extends Component {
     };
 }
 
-export default Lead;
+export default PotentialUser;
