@@ -70,6 +70,7 @@ class PassOpenD extends Component {
 
             self.setState({
                 recordData: response.data.data,
+
             });
 
             console.log('hcia', self.state.recordData);
@@ -132,11 +133,16 @@ class PassOpenD extends Component {
                             <Card bordered={false}>
 
                                 <div>
+
+
                                     账户类型:
-                                    <CheckboxGroup onChange={this.onChangeActypes} options={accountType}
-                                                   value={this.state.accountTypeCheckList}
-                                                   style={{marginLeft: 20, width: 520}}
-                                    />
+                                    <Checkbox style={{marginLeft: 20}} checked={this.state.recordData.applyMT4} disabled={true}>MT4</Checkbox>
+                                    <Checkbox checked={this.state.recordData.applyMT5} disabled={true}>MT5</Checkbox>
+                                    <Checkbox checked={this.state.recordData.applySTAR}  disabled={true}>TRADER</Checkbox>
+                                    {/*<CheckboxGroup onChange={this.onChangeActypes} options={accountType}*/}
+                                                   {/*value={this.state.accountTypeCheckList}*/}
+                                                   {/*style={{marginLeft: 20, width: 520}}*/}
+                                    {/*/>*/}
                                 </div>
                             </Card>
                             <Card bordered={false}>
@@ -414,7 +420,7 @@ class PassOpenD extends Component {
                                         src={this.state.recordData.idcard_2}/>
                                 </div>
                                 <div className="pa-m">
-                                    <h3>身份证正面照片</h3>
+                                    <h3>手持身份证照片</h3>
                                     <small><a href={this.state.recordData.idcard_2} target="_blank"
                                               rel="noopener noreferrer">手持身份证照片</a></small>
                                 </div>
