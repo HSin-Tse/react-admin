@@ -30,7 +30,6 @@ const dateFormat = 'YYYY-MM-DD';
 
 class PassOpenD extends Component {
 
-
     constructor(props) {
         super(props);
         this.state = {
@@ -51,21 +50,16 @@ class PassOpenD extends Component {
     }
 
     componentDidMount() {
-
-        var self = this
-
+        var self = this;
         window.Axios.post('dict/openDict', {
             'keys': 'IX_Income,IX_FundsSource,IX_Percentage,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
         }).then(function (response) {
-
             self.setState({
                 recordDictirys: response.data.data,
             });
-
         }).catch(function (error) {
             console.log(error);
         });
-
 
         window.Axios.post('open/getOpenApplyDetail', {
             'id': self.props.match.params.id,
@@ -79,9 +73,7 @@ class PassOpenD extends Component {
         }).catch(function (error) {
             console.log(error);
         });
-
     }
-
 
     render() {
 
@@ -92,7 +84,7 @@ class PassOpenD extends Component {
                 <div>gender: {this.state.recordData.gender}</div>
                 <div>isNeedSave :{this.state.isNeedSave.toString()}</div>
                 <div>test waitUpdate :{JSON.stringify(this.state.waitUpdate)}</div>
-                {/*<div>test check :{JSON.stringify(this.state.recordDictirys)}</div>*/}
+                <div>test check :{JSON.stringify(this.state.recordDictirys)}</div>
 
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
                 <Card title="IX账户审核 " bordered={true}>
@@ -298,7 +290,7 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*详细地址</span>
-                                    <Input defaultValue={this.state.recordData.street} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.street} onChange={this.onChangestreet}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
@@ -484,7 +476,6 @@ class PassOpenD extends Component {
                         {/*<Button>Top</Button>*/}
                         {/*</Popconfirm>*/}
                         <Button disabled={!this.state.isNeedSave} onClick={() => this.saveData()}>保存</Button>
-                        <Button onClick={() => this.saveData()}>保存@@</Button>
                         <Button disabled={this.state.isNeedSave} loading={this.state.iconcanLoading}
                                 onClick={() => this.saveReject()}>拒绝</Button>
                     </div>
@@ -567,6 +558,8 @@ class PassOpenD extends Component {
                     <p>出生日期 :{ this.timestampToTime(this.state.recordData.dateOfBirth)}-->{this.timestampToTime(this.state.waitUpdate.dateOfBirth)}</p>
                     <p>性别 :{this.state.recordData.gender}-->{this.state.waitUpdate.gender==0?'Female':'Male'}</p>
                     <p>身份证号码 :{this.state.recordData.nationalID}-->{this.state.waitUpdate.nationalId}</p>
+                    <p>城市 :{this.state.recordData.nationalID}-->{this.state.waitUpdate.nationalId}</p>
+                    <p>详细地址 :{this.state.recordData.street}-->{this.state.waitUpdate.street}</p>
                 </Modal>
             </div>
         )
@@ -750,6 +743,12 @@ class PassOpenD extends Component {
 
     onChangefirstName = (e) => {
         this.state.waitUpdate.firstName = e.target.value
+        this.setState({
+            isNeedSave: true,
+        });
+    }
+    onChangestreet = (e) => {
+        this.state.waitUpdate.street = e.target.value
         this.setState({
             isNeedSave: true,
         });
