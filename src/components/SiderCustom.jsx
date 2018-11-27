@@ -14,7 +14,6 @@ class SiderCustom extends Component {
 
     constructor(props) {
         super(props);
-        console.log('hcia constructor' )
 
         this.state = {
             config: []

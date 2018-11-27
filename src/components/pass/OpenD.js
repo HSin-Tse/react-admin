@@ -5,7 +5,7 @@
  *
  */
 import React, {Component} from 'react';
-import {Col, Card, Row, Button, Avatar, Modal, Select, Input, Checkbox, DatePicker} from 'antd';
+import {Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, Popconfirm} from 'antd';
 import {Radio} from 'antd';
 import {message} from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
@@ -13,82 +13,89 @@ import PhotoSwipe from "photoswipe";
 import PhotoswipeUIDefault from "photoswipe/dist/photoswipe-ui-default";
 import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
+import moment from 'moment';
 
 const CheckboxGroup = Checkbox.Group;
 
 const RadioGroup = Radio.Group;
-const {Meta} = Card;
 const Option = Select.Option;
 
 
-const accountType = [
-    {label: 'MT4', value: 'MT4'},
-    {label: 'MT5', value: 'MT5'},
-    {label: 'TRADER', value: 'TRADER', disabled: false},
-];
 const tradeType = [
     {label: 'CFD', value: 'CFD'},
     {label: 'CFD_2', value: 'CFD_2'},
     {label: 'CFD_3', value: 'CFD_3'},
 ];
+const dateFormat = 'YYYY-MM-DD';
 
 class PassOpenD extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            userList: []
+             isNeedSave: false
             , recordData: {}
+            , recordDictirys: {}
+            , waitUpdate: {}
+            , iconLoading: false
+            , iconcanLoading: false
             , visible: false
             , tradrType: 'CFD'
+            , testeee: '1976-11-23'
+            , mGender: ''
+            , mAnnualIncome: ''
             , sss: 'aa'
-            , acTypes: 'MT4'
-            , accountTypeCheckList: [
-                'MT4', 'MT5'
-            ]
+            , IXIncomeList: []
             , gallery: null
 
         };
     }
 
     componentDidMount() {
-
-        console.log('hcia', this.props.match.params.id)
-
-        var self = this
-
-        window.Axios.post('http://mobile.nooko.cn:8090/open/getOpenApplyDetail', {
-            'id': self.props.match.params.id,
-            // 'loginName': this.props.match.params.id,
-            // 'token': this.props.match.params.id,
-            'language': "zh-CN"
+        var self = this;
+        window.Axios.post('dict/openDict', {
+            'keys': 'IX_Income,IX_FundsSource,IX_Percentage,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
         }).then(function (response) {
-            console.log('hcia', response);
-
-            console.log('hcia', response.data.code);
-
             self.setState({
-                recordData: response.data.data,
+                recordDictirys: response.data.data,
+                IXIncomeList: response.data.data.IX_Income,
+
             });
-
-            console.log('hcia', self.state.recordData);
-
         }).catch(function (error) {
             console.log(error);
         });
 
 
+        window.Axios.post('open/getOpenApplyDetail', {
+            'id': self.props.match.params.id,
+        }).then(function (response) {
+
+            self.setState({
+                recordData: response.data.data,
+                testeee: self.timestampToTime(response.data.data.dateOfBirth),
+                mGender: response.data.data.gender,
+                mAnnualIncome: response.data.data.annualIncome
+            });
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 
-
     render() {
+        //  this.mIncomesOPS = this.state.IXIncomeList.map(d =>
+        //     {<Option key={d.value}>{d.value}</Option>}
+        // );
+        this.mIncomesOPS = this.state.IXIncomeList.map(d => <Option key={d.name}>{d.name}</Option>);
+
 
         return (
             <div>
 
                 <div>id: {this.state.recordData.id}</div>
-                <div>idcard_0 :{this.state.recordData.idcard_0}</div>
-                <div>test check :{this.state.sss}</div>
+                <div>gender: {this.state.recordData.gender}</div>
+                <div>isNeedSave :{this.state.isNeedSave.toString()}</div>
+                <div>test waitUpdate :{JSON.stringify(this.state.waitUpdate)}</div>
+                <div>test check :{JSON.stringify(this.state.recordDictirys)}</div>
 
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
                 <Card title="IX账户审核 " bordered={true}>
@@ -125,18 +132,22 @@ class PassOpenD extends Component {
 
                     </Row>
                 </Card>
-                <Card title="IX账户设置" bordered={true}>
+                <Card title="IX账户设置" bordered={true} style={{marginTop: 30}}>
 
                     <Row gutter={16}>
                         <Col md={24}>
                             <Card bordered={false}>
 
                                 <div>
+
+
                                     账户类型:
-                                    <CheckboxGroup onChange={this.onChangeActypes} options={accountType}
-                                                   value={this.state.accountTypeCheckList}
-                                                   style={{marginLeft: 20, width: 520}}
-                                    />
+                                    <Checkbox style={{marginLeft: 20}} checked={this.state.recordData.applyMT4}
+                                              disabled={true}>MT4</Checkbox>
+                                    <Checkbox checked={this.state.recordData.applyMT5} disabled={true}>MT5</Checkbox>
+                                    <Checkbox checked={this.state.recordData.applySTAR}
+                                              disabled={true}>TRADER</Checkbox>
+
                                 </div>
                             </Card>
                             <Card bordered={false}>
@@ -156,10 +167,10 @@ class PassOpenD extends Component {
                                 <div>
 
                                     服务器 :
-                                    <Select labelInValue defaultValue={{key: 'lucy'}}
+                                    <Select labelInValue defaultValue={{key: 'jack'}}
                                             style={{marginLeft: 20, width: 120}}
                                             onChange={this.handleChange}>
-                                        <Option value="jack">Jack (100)</Option>
+                                        <Option value="jack">服务器地址</Option>
                                         <Option value="lucy">Lucy (101)</Option>
                                     </Select>
 
@@ -174,7 +185,7 @@ class PassOpenD extends Component {
                                             style={{marginLeft: 20, width: 120}}
                                             onChange={this.handleChange}>
                                         <Option value="jack">Jack (100)</Option>
-                                        <Option value="lucy">Lucy (101)</Option>
+                                        <Option value="lucy">S-STP</Option>
                                     </Select>
                                 </div>
                             </Card>
@@ -222,11 +233,11 @@ class PassOpenD extends Component {
                         </Col>
                     </Row>
                 </Card>
-                <Card title="IX账户申请表单" bordered={true}>
+                <Card title="IX账户申请表单" bordered={true} style={{marginTop: 30}}>
 
                     <Row gutter={8}>
                         <Col md={12}>
-                            <h2>   基本信息 </h2>
+                            <h2> 基本信息 </h2>
                             <Card bordered={true}>
 
                                 <div style={{display: 'flex', minHeight: 40}}>
@@ -237,118 +248,126 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*姓（中文）</span>
-                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                    <Input defaultValue={this.state.recordData.lastNameCn}
+                                           onChange={this.onChangelastNameCn}
+                                           style={{width: 120}} placeholder="Basic usage" tagkey="lastNameCn"
+                                           sdsd={'dd'}/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*名（中文）</span>
-                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.firstNameCn}
+                                           onChange={this.onChangefirstNameCn}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*姓</span>
-                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.lastName}
+                                           onChange={this.onChangelastName}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
-
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}> *名</span>
-                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.firstName}
+                                           onChange={this.onChangefirstName}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*出生日期</span>
-                                    <DatePicker/>
-                                    {/*<Input defaultValue={this.state.sss} onChange={this.onChangeSSS}*/}
-                                    {/*style={{ width: 120}} placeholder="Basic usage"/>*/}
+                                    <DatePicker value={moment(this.state.testeee, dateFormat)}
+                                                onChange={this.onChangeBirth}
+                                                format={dateFormat}/>
+
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*性别</span>
-                                    <Select defaultValue="男" style={{ width: 120 }} >
-                                        <Option value="0">男</Option>
-                                        <Option value="1">女</Option>
+                                    <Select value={this.state.mGender}
+                                            onChange={this.onChangegender}
+                                            style={{width: 120}}>
+                                        <Option value="Male">男</Option>
+                                        <Option value="Female">女</Option>
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*身份证号码</span>
-                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.nationalID} onChange={this.onChangenationalId}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*城市</span>
-                                    <Select defaultValue="上海" style={{ width: 120 }} >
+                                    <Select defaultValue="上海" style={{width: 120}}>
                                         <Option value="0">上海</Option>
                                         <Option value="1">？</Option>
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*详细地址</span>
-                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.street} onChange={this.onChangestreet}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*联系电话</span>
-                                    <Input defaultValue={this.state.sss} disabled={true}
+                                    <Input defaultValue={this.state.recordData.phoneNumber} disabled={true}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*邮箱地址</span>
-                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.email} onChange={this.onChangeemail}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*邮编</span>
-                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.postalCode} onChange={this.onChangepostalCode}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                             </Card>
 
 
-
                         </Col>
                         <Col md={12}>
-                            <h2>   资产&风险审核 </h2>
+                            <h2> 资产&风险审核 </h2>
 
-                            <Card  bordered={true}>
+                            <Card bordered={true}>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>当前年收入</span>
-                                    <Select defaultValue="0-15k" style={{ width: 120 }} >
-                                        <Option value="0">0-15k</Option>
+                                    <Select value={this.state.mAnnualIncome}
+                                            onChange={this.onChangeannualIncome}
+                                            style={{width: 120}}>
+                                        {this.mIncomesOPS}
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>初始入金金额占比</span>
-                                    <Select defaultValue="0-15k" style={{ width: 120 }} >
+                                    <Select defaultValue="0-15k" style={{width: 120}}>
                                         <Option value="0">0-15k</Option>
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>交易本金来源</span>
-                                    <Select defaultValue="0-15k" style={{ width: 120 }} >
+                                    <Select defaultValue="0-15k" style={{width: 120}}>
                                         <Option value="0">0-15k</Option>
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*是否美国公民</span>
-                                    <Select defaultValue="0-15k" style={{ width: 120 }} >
+                                    <Select defaultValue="0-15k" style={{width: 120}}>
                                         <Option value="0">0-15k</Option>
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>交易经验</span>
-                                    <Select defaultValue="0-15k" style={{ width: 120 }} >
+                                    <Select defaultValue="0-15k" style={{width: 120}}>
                                         <Option value="0">0-15k</Option>
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>交易目的</span>
-                                    <Select defaultValue="0-15k" style={{ width: 120 }} >
+                                    <Select defaultValue="0-15k" style={{width: 120}}>
                                         <Option value="0">0-15k</Option>
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*风险承受力</span>
-                                    <Select defaultValue="0-15k" style={{ width: 120 }} >
+                                    <Select defaultValue="0-15k" style={{width: 120}}>
                                         <Option value="0">0-15k</Option>
                                     </Select>
                                 </div>
@@ -373,7 +392,7 @@ class PassOpenD extends Component {
                         </Col>
                     </Row>
                 </Card>
-                <Card title="IX账户身份信息" bordered={true}>
+                <Card title="IX账户身份信息" bordered={true} style={{marginTop: 30}}>
                     <Row gutter={16}>
 
                         <Col md={8}>
@@ -415,7 +434,7 @@ class PassOpenD extends Component {
                                         src={this.state.recordData.idcard_2}/>
                                 </div>
                                 <div className="pa-m">
-                                    <h3>身份证正面照片</h3>
+                                    <h3>手持身份证照片</h3>
                                     <small><a href={this.state.recordData.idcard_2} target="_blank"
                                               rel="noopener noreferrer">手持身份证照片</a></small>
                                 </div>
@@ -424,36 +443,54 @@ class PassOpenD extends Component {
                     </Row>
 
                 </Card>
-                <Card title="IX账户身份查重" bordered={true}>
+                <Card title="IX账户身份查重" bordered={true} style={{marginTop: 30}}>
 
                     <Row gutter={12}>
-                        <Col md={12}>
-                            <Card title="cssModule" bordered={true}>
-                                <div>
-                                    <p>IX账户审核</p>
-                                </div>
-                            </Card>
+                        <Col md={4}>
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <Select defaultValue="聯繫電話" style={{width: 120}}>
+                                    <Option value="0">聯繫電話</Option>
+                                    <Option value="1">女</Option>
+                                </Select>
+                            </div>
+
                         </Col>
-                        <Col md={12}>
-                            <Card title="cssModule" bordered={true}>
-                                <div>
-                                    <p>IX账户审核</p>
-                                </div>
-                                <Meta
-                                    avatar={<Avatar
-                                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>}
-                                    title="Card title"
-                                    description="This is the description"
-                                />
-                            </Card>
+                        <Col md={8}>
+                            <div style={{display: 'flex', minHeight: 40}}>
+
+                                <Input defaultValue={this.state.recordData.country}
+                                       style={{width: 220}} placeholder="输入要查询的内容"/>
+                            </div>
+                        </Col>
+                        <Col md={4}>
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <Button onClick={() => this.openOK()}>本库查询</Button>
+
+                            </div>
+                        </Col>
+                        <Col md={4}>
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <Button onClick={() => this.openOK()}>异库查询</Button>
+
+                            </div>
+                        </Col>
+                        <Col md={24}>
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <h3 style={{margin: 'auto'}}>本库查询结果：本库有1条信息重合</h3>
+                            </div>
                         </Col>
                     </Row>
                 </Card>
-                <Card title="IX账户审核备注" bordered={true}>
+                <Card title="IX账户审核备注" bordered={true} style={{marginTop: 30}}>
                     <div>
-                        <Button onClick={() => this.openOK()}>开户通过</Button>
-                        <Button onClick={() => this.saveData()}>保存</Button>
-                        <Button onClick={() => this.saveReject()}>拒绝</Button>
+                        <Button disabled={this.state.isNeedSave} loading={this.state.iconLoading}
+                                onClick={() => this.openOK()}>开户通过</Button>
+                        {/*<Popconfirm placement="top" title={'save data'} onConfirm={this.confirm} okText="Yes" cancelText="No">*/}
+                        {/*<Button>Top</Button>*/}
+                        {/*</Popconfirm>*/}
+                        <Button disabled={!this.state.isNeedSave} onClick={() => this.saveData()}>保存</Button>
+                        <Button disabled={this.state.isNeedSave} loading={this.state.iconcanLoading}
+                                onClick={() => this.saveReject()}>拒绝</Button>
                     </div>
                 </Card>
 
@@ -522,21 +559,52 @@ class PassOpenD extends Component {
                 <Modal
                     title="Modal"
                     visible={this.state.visible}
-                    onOk={this.hideModal}
+                    onOk={this.checkSaveData}
                     onCancel={this.hideModal}
                     okText="确认"
                     cancelText="取消"
                 >
-                    <p>Bla bla ...</p>
-                    <p>Bla bla ...</p>
-                    <p>Bla bla ...</p>
+
+                    { this.state.waitUpdate.lastNameCn == null ? null : <p >*姓（中文）:{this.state.recordData.lastNameCn}-->{this.state.waitUpdate.lastNameCn}</p> }
+
+
+                    <p>*名（中文）:{this.state.recordData.firstNameCn}-->{this.state.waitUpdate.firstNameCn}</p>
+                    <p>*名 :{this.state.recordData.firstName}-->{this.state.waitUpdate.firstName}</p>
+                    <p>*名 :{this.state.recordData.lastName}-->{this.state.waitUpdate.lastName}</p>
+                    <p>出生日期 :{ this.timestampToTime(this.state.recordData.dateOfBirth)}-->{this.timestampToTime(this.state.waitUpdate.dateOfBirth)}</p>
+                    <p>性别 :{this.state.recordData.gender}-->{this.state.waitUpdate.gender==0?'Female':'Male'}</p>
+                    <p>身份证号码 :{this.state.recordData.nationalID}-->{this.state.waitUpdate.nationalId}</p>
+                    <p>城市 :{this.state.recordData.nationalID}-->{this.state.waitUpdate.nationalId}</p>
+                    <p>详细地址 :{this.state.recordData.street}-->{this.state.waitUpdate.street}</p>
+                    <p>邮箱地址 :{this.state.recordData.email}-->{this.state.waitUpdate.email}</p>
+                    <p>*邮编 :{this.state.recordData.postalCode}-->{this.state.waitUpdate.postalCode}</p>
+                    <p>*当前年收入:{this.state.recordData.annualIncome}-->{this.state.ix_IncomeNAME}:{this.state.waitUpdate.ix_Income}</p>
                 </Modal>
             </div>
         )
     }
 
-
+    confirm = () => {
+        message.info('Clicked on Yes.');
+    };
+    timestampToTime = (timestamp) => {
+        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
+        const year = dateObj.getFullYear() // 获取年，
+        const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
+        const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
+        const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
+        const minutes = this.pad(dateObj.getMinutes()) // 获取分
+        const seconds = this.pad(dateObj.getSeconds()) // 获取秒
+        return year + '-' + month + '-' + date
+    };
+    pad = (str) => {
+        return +str >= 10 ? str : '0' + str
+    };
     openOK = () => {
+
+        this.setState({
+            iconLoading: true,
+        });
         var me = this;
 
         window.Axios.post('/open/passOpenApply', {
@@ -544,6 +612,11 @@ class PassOpenD extends Component {
             'belongUserId': me.state.recordData.belongUserId,
             'id': me.state.recordData.id,
         }).then(function (response) {
+
+
+            me.setState({
+                iconLoading: false,
+            });
             console.log(response);
 
             if (response.data.code == 1) {
@@ -560,14 +633,13 @@ class PassOpenD extends Component {
 
     };
     saveData = () => {
-
         this.showModal()
-
-        message.success('ok 開戶成功')
     };
     saveReject = () => {
 
-
+        this.setState({
+            iconcanLoading: true,
+        });
         var me = this;
 
         window.Axios.post('/open/cancelOpenApply', {
@@ -575,13 +647,17 @@ class PassOpenD extends Component {
             'language': 'zh-CN',
             'id': me.state.recordData.id
         }).then(function (response) {
-            console.log('hcia response', response);
 
-            console.log('hcia', response);
+            me.setState({
+                iconcanLoading: false,
+            });
+
+            if (response.data.code == 1) {
+                message.info('拒絕成功')
+            }
 
         }).catch(function (error) {
             console.log(error);
-            // message.warn(error);
         });
 
 
@@ -590,13 +666,12 @@ class PassOpenD extends Component {
         this.setState({
             visible: true,
         });
-    }
-
+    };
     hideModal = () => {
         this.setState({
             visible: false,
         });
-    }
+    };
     openGallery = (item) => {
         const items = [
             {
@@ -626,30 +701,153 @@ class PassOpenD extends Component {
     handleChange = (value) => {
         console.log(value); // { key: "lucy", label: "Lucy (101)" }
     };
-
-
-    onChangeActypes = (checkedValues) => {
-        console.log('hcia', 'radio3 checked', checkedValues);
-        this.setState({
-            accountTypeCheckList: checkedValues,
-        });
-    };
-
-
     onChangetradeType = (e) => {
         console.log('radio3 checked', e.target.value);
         this.setState({
             tradrType: e.target.value,
         });
     }
+    checkSaveData = () => {
+
+        let self = this
+        this.setState({
+            visible: false,
+        });
+
+        window.Axios.post('open/prestore',
+            {
+                id: self.state.recordData.id,
+                ...self.state.waitUpdate
+            }
+        ).then(function (response) {
+
+            console.log('hcia response', response)
+            if (response.data.code === 1) {
+                message.success('save ok!')
+                self.setState({
+                    isNeedSave: false,
+                });
+            }
+
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+    }
+    onChangelastNameCn = (e) => {
+        this.state.waitUpdate.lastNameCn = e.target.value
+        this.setState({
+            isNeedSave: true,
+        });
+    }
+    onChangefirstNameCn = (e) => {
+        this.state.waitUpdate.firstNameCn = e.target.value
+        this.setState({
+            isNeedSave: true,
+        });
+    }
+    onChangelastName = (e) => {
+        this.state.waitUpdate.lastName = e.target.value
+        this.setState({
+            isNeedSave: true,
+        });
+    }
+    onChangenationalId = (e) => {
+        this.state.waitUpdate.nationalId = e.target.value
+        this.setState({
+            isNeedSave: true,
+        });
+    }
+
+    onChangefirstName = (e) => {
+        this.state.waitUpdate.firstName = e.target.value
+        this.setState({
+            isNeedSave: true,
+        });
+    }
+    onChangestreet = (e) => {
+        this.state.waitUpdate.street = e.target.value
+        this.setState({
+            isNeedSave: true,
+        });
+    }
+    onChangeemail = (e) => {
+        this.state.waitUpdate.email = e.target.value
+        this.setState({
+            isNeedSave: true,
+        });
+    }
+    onChangepostalCode = (e) => {
+        this.state.waitUpdate.postalCode = e.target.value
+        this.setState({
+            isNeedSave: true,
+        });
+    }
+    onChangeBirth = (value, dateString) => {
+        console.log('hcia dateString', dateString)
+        var date = new Date(dateString+' 00:00:00:000');
+        // 有三种方式获取
+        var time1 = date.getTime();
+        var time2 = date.valueOf();
+        var time3 = Date.parse(date);
+        console.log('hcia',time1);//1398250549123
+        console.log('hcia',time2);//1398250549123
+        console.log('hcia',time3);//1398250549000
+
+        this.state.waitUpdate.dateOfBirth = time1;
+
+        this.setState({
+            testeee: dateString,
+            isNeedSave: true,
+
+        });
+
+    }
+    onChangegender = (value) => {
+
+        console.log('hcia value' , value)
+        this.state.waitUpdate.gender = (value === 'Male'?1:0);
+
+        this.setState({
+            mGender:value,//1:male 0:female
+            isNeedSave: true,
+        });
+
+    }
+
+    onChangeannualIncome = (value) => {
+
+
+        var tmpv = ''
+        this.state.IXIncomeList.forEach(function(element) {
+            if(element.name == value){
+                tmpv = element.value
+            }
+        });
+
+        this.state.waitUpdate.ix_Income = tmpv;
+        this.state.ix_IncomeNAME = value;
+        //
+        this.setState({
+            mAnnualIncome:value,//1:male 0:female
+            isNeedSave: true,
+        });
+
+    }
+
 
 
     onChangeSSS = (e) => {
-        console.log('radio3 checked', e.target.value);
+        console.log('hcia', e.target.getAttribute('tagkey'));
+        console.log('hcia', 'radio3 checked', e.target.value);
+
+
+        this.state.waitUpdate.lastNameCn = e.target.value
         this.setState({
-            sss: e.target.value,
+            isNeedSave: true,
         });
-    }
+    };
 }
 
 export default PassOpenD;
