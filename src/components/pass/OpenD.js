@@ -253,18 +253,18 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*名（中文）</span>
-                                    <Input defaultValue={this.state.recordData.firstNameCn} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.firstNameCn} onChange={this.onChangefirstNameCn}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*姓</span>
-                                    <Input defaultValue={this.state.recordData.lastName} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.lastName} onChange={this.onChangelastName}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
 
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}> *名</span>
-                                    <Input defaultValue={this.state.recordData.firstName} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.firstName} onChange={this.onChangefirstName}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
@@ -564,6 +564,9 @@ class PassOpenD extends Component {
                     cancelText="取消"
                 >
                     <p>*姓（中文）:{this.state.recordData.lastNameCn}-->{this.state.waitUpdate.lastNameCn}</p>
+                    <p>*名（中文）:{this.state.recordData.firstNameCn}-->{this.state.waitUpdate.firstNameCn}</p>
+                    <p>*名       :{this.state.recordData.firstName}-->{this.state.waitUpdate.firstName}</p>
+                    <p>*名       :{this.state.recordData.lastName}-->{this.state.waitUpdate.lastName}</p>
                 </Modal>
             </div>
         )
@@ -690,8 +693,6 @@ class PassOpenD extends Component {
     handleChange = (value) => {
         console.log(value); // { key: "lucy", label: "Lucy (101)" }
     };
-
-
     onChangetradeType = (e) => {
         console.log('radio3 checked', e.target.value);
         this.setState({
@@ -729,8 +730,26 @@ class PassOpenD extends Component {
 
     }
     onChangelastNameCn = (e) => {
-
         this.state.waitUpdate.lastNameCn = e.target.value
+        this.setState({
+            isNeedSave: true,
+        });
+    }
+    onChangefirstNameCn = (e) => {
+        this.state.waitUpdate.firstNameCn = e.target.value
+        this.setState({
+            isNeedSave: true,
+        });
+    }
+
+    onChangelastName = (e) => {
+        this.state.waitUpdate.lastName = e.target.value
+        this.setState({
+            isNeedSave: true,
+        });
+    }
+    onChangefirstName = (e) => {
+        this.state.waitUpdate.firstName = e.target.value
         this.setState({
             isNeedSave: true,
         });
