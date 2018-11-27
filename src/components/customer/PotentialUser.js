@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import {Button, Table, Icon,Checkbox} from 'antd';
+import {Modal,Button, Table, Icon,Checkbox} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import axios from 'axios';
 class PotentialUser extends Component {
@@ -86,12 +86,13 @@ class PotentialUser extends Component {
             , {
                 title: '操作',
                 key: 'action',
-                // fixed: 'right',
-                // width: 100,
+								align: 'center',
+                width: 300,
                 render: (text, record) => (
                     <div>
                         <span className="ant-divider"/>
-                        <Button className="ant-dropdown-link" onClick={() => this.examine(record)}>审核</Button>
+                        <Button className="ant-dropdown-link" onClick={() => this.xxx()}>添加備註</Button>
+												<Button className="ant-dropdown-link" onClick={() => this.xxx()}>操作日誌</Button>
 
 
                     </div>
@@ -145,7 +146,9 @@ class PotentialUser extends Component {
 			console.log('sssss',status.target.checked)
 
     }
-
+		xxx = () =>{
+			
+		}
 
     requestListData = (listType) => {
         this.setState({is_tag: '123321'});
