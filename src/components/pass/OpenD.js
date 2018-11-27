@@ -395,7 +395,9 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>交易目的</span>
-                                    <Select value={this.state.mtradingObjectives}>
+                                    <Select
+                                        onChange={this.onChangemtradingObjectives}
+                                        value={this.state.mtradingObjectives}>
                                         {this.mIXTradingObjectives}
                                     </Select>
                                 </div>
@@ -616,7 +618,7 @@ class PassOpenD extends Component {
                     <p>*初始入金金额占流动资产净值比:{this.state.recordData.fundsSource}-->{this.state.ix_FundsSourceNAME}:{this.state.waitUpdate.ix_FundsSource}</p>
                     <p>*是否美国公民 :{this.state.recordData.usCitizenOrResidentForTaxPurpposes}-->{this.state.ix_UStaxNAME}:{this.state.waitUpdate.ix_UStax}</p>
                     <p>*交易经验 :{this.state.recordData.yearsTrading}-->{this.state.ix_Trading_ExperienceNAME}:{this.state.waitUpdate.ix_Trading_Experience}</p>
-                    <p>*交易目的 :{this.state.recordData.tradingObjectives}-->{this.state.ix_UStaxNAME}:{this.state.waitUpdate.ix_UStax}</p>
+                    <p>*交易目的 :{this.state.recordData.tradingObjectives}-->{this.state.ix_Trading_ObjectivesNAME}:{this.state.waitUpdate.ix_Trading_Objectives}</p>
                     <p>*风险承受力 :{this.state.recordData.riskTolerance}-->{this.state.ix_UStaxNAME}:{this.state.waitUpdate.ix_UStax}</p>
                 </Modal>
             </div>
@@ -943,11 +945,30 @@ class PassOpenD extends Component {
             }
         });
 
-        this.state.waitUpdate.ix_Trading_Experience = tmpv;
-        this.state.ix_Trading_ExperienceNAME = value;
+        this.state.waitUpdate.ix_Trading_Objectives = tmpv;
+        this.state.ix_Trading_ObjectivesNAME = value;
         //
         this.setState({
-            myearsTrading: value,
+            mtradingObjectives: value,
+            isNeedSave: true,
+        });
+
+    }
+    onChangemtradingObjectives = (value) => {
+
+
+        var tmpv = ''
+        this.state.IXTradingObjectives.forEach(function (element) {
+            if (element.name == value) {
+                tmpv = element.value
+            }
+        });
+
+        this.state.waitUpdate.ix_Trading_Objectives = tmpv;
+        this.state.ix_Trading_ObjectivesNAME = value;
+        //
+        this.setState({
+            mtradingObjectives: value,
             isNeedSave: true,
         });
 
