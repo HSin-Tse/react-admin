@@ -40,40 +40,28 @@ class PotentialUser extends Component {
 	componentDidMount() {
 				this.modalColumns = [{
 						title: '時間',
-						dataIndex: 'operationDiary_Date',
+						dataIndex: 'createDate',
 						key: 'operationDiary_Date',
 						// fixed: 'left',
 						// width: 100,
 						render: (text, record) => (
-						<Checkbox
-							// checked={this.state.checked}
-							// disabled={this.state.disabled}
-							onChange={this.hasChange}
-						></Checkbox>),
+								<Button>{record.createDate}</Button>),
 				 },{
  						title: '狀態',
- 						dataIndex: 'operationDiary_Status',
+ 						dataIndex: 'comment',
  						key: 'operationDiary_Status',
  						// fixed: 'left',
  						// width: 100,
- 						render: (text, record) => (
- 						<Checkbox
- 							// checked={this.state.checked}
- 							// disabled={this.state.disabled}
- 							onChange={this.hasChange}
- 						></Checkbox>),
+						render: (text, record) => (
+								<Button>{record.comment}</Button>),
  				 },{
  						title: '操作人',
- 						dataIndex: 'operationDiary_User',
+ 						dataIndex: 'bkUserName',
  						key: 'operationDiary_User',
  						// fixed: 'left',
  						// width: 100,
- 						render: (text, record) => (
- 						<Checkbox
- 							// checked={this.state.checked}
- 							// disabled={this.state.disabled}
- 							onChange={this.hasChange}
- 						></Checkbox>),
+						render: (text, record) => (
+								<Button>{record.bkUserName}</Button>),
  				 }]
 
 
@@ -195,18 +183,8 @@ class PotentialUser extends Component {
                 <Table rowKey="id"
                        columns={this.columns} dataSource={this.state.userList}
                        scroll={{x: 1300}}
-                    // onRow={(record,rowkey,ww)=>{
-                    //
-                    //     return{
-                    //
-                    //         onClick : this.click.bind(this,record,rowkey,ww)    //点击行 record 指的本行的数据内容，rowkey指的是本行的索引
-                    //
-                    //     }
-                    //
-                    // }}
-
-
                 />
+
 								<Modal
 									id = 'modal1'
 				          title="添加備註"
@@ -228,7 +206,12 @@ class PotentialUser extends Component {
 									okText="確認"
 									cancelText="取消"
 								>
-									<p><Input placeholder="操作日誌" /></p>
+									<p>
+									<Table rowKey="id"
+												 columns={this.modalColumns} dataSource={this.state.operationDiaryHistory}
+												 scroll={{x: 1300}}
+									/>
+									</p>
 								</Modal>
 
             </div>
@@ -293,14 +276,19 @@ class PotentialUser extends Component {
 			//pageSize
 			//language
 			const url = 'http://mobile.nooko.cn:8090/auth/getUserCommentList'
+
+			var tmp = this;
+
 			axios.post(url, {
 				'belongUserId':'4028b2a4631f770f01631f7770df0000',
 				'loginName' : 'admin',
 				'token' : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmVUaW1lIjoxNTQ1NTI4ODM0MTk5LCJsb2dpbk5hbWUiOiJhZG1pbiJ9.F7moE4DsMUiajkKB1S_wemwsozlUW5VMxQKsg4KsSUQ'
 
 			}).then(function (response) {
-					console.log('xxx',response);
+				console.log('yyy',response);
 
+					tmp.setState({operationDiaryHistory: response.data.data.list});
+					console.log('xxx',this.state.operationDiaryHistory);
 
 			}).catch(function (error) {
 					console.log(error);
