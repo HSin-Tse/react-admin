@@ -5,7 +5,7 @@
  *
  */
 import React, {Component} from 'react';
-import {Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker , Popconfirm} from 'antd';
+import {Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, Popconfirm} from 'antd';
 import {Radio} from 'antd';
 import {message} from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
@@ -246,8 +246,10 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*姓（中文）</span>
-                                    <Input   defaultValue={this.state.recordData.lastNameCn} onChange={this.onChangelastNameCn}
-                                           style={{width: 120}} placeholder="Basic usage" tagkey = "lastNameCn" sdsd = {'dd'}/>
+                                    <Input defaultValue={this.state.recordData.lastNameCn}
+                                           onChange={this.onChangelastNameCn}
+                                           style={{width: 120}} placeholder="Basic usage" tagkey="lastNameCn"
+                                           sdsd={'dd'}/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*名（中文）</span>
@@ -482,10 +484,10 @@ class PassOpenD extends Component {
                         <Button disabled={this.state.isNeedSave} loading={this.state.iconLoading}
                                 onClick={() => this.openOK()}>开户通过</Button>
                         {/*<Popconfirm placement="top" title={'save data'} onConfirm={this.confirm} okText="Yes" cancelText="No">*/}
-                            {/*<Button>Top</Button>*/}
+                        {/*<Button>Top</Button>*/}
                         {/*</Popconfirm>*/}
                         <Button disabled={!this.state.isNeedSave} onClick={() => this.saveData()}>保存</Button>
-                        <Button  onClick={() => this.saveData()}>保存@@</Button>
+                        <Button onClick={() => this.saveData()}>保存@@</Button>
                         <Button disabled={this.state.isNeedSave} loading={this.state.iconcanLoading}
                                 onClick={() => this.saveReject()}>拒绝</Button>
                     </div>
@@ -616,11 +618,7 @@ class PassOpenD extends Component {
 
     };
     saveData = () => {
-
-
         this.showModal()
-
-        message.success('ok 開戶成功')
     };
 
     saveReject = () => {
@@ -702,28 +700,27 @@ class PassOpenD extends Component {
     }
 
 
-
     checkSaveData = () => {
 
-       let self = this
+        let self = this
         this.setState({
             visible: false,
         });
 
         window.Axios.post('open/prestore',
-
-
             {
-                 id:self.state.recordData.id ,
+                id: self.state.recordData.id,
                 ...self.state.waitUpdate
             }
         ).then(function (response) {
 
-            console.log('hcia response' , response)
-            if(response.data.code === 1 ){
+            console.log('hcia response', response)
+            if (response.data.code === 1) {
                 message.success('save ok!')
+                self.setState({
+                    isNeedSave: false,
+                });
             }
-
 
 
         }).catch(function (error) {
@@ -735,18 +732,18 @@ class PassOpenD extends Component {
 
         this.state.waitUpdate.lastNameCn = e.target.value
         this.setState({
-            isNeedSave:true,
+            isNeedSave: true,
         });
     }
 
     onChangeSSS = (e) => {
-        console.log('hcia',e.target.getAttribute('tagkey'));
-        console.log('hcia','radio3 checked', e.target.value);
+        console.log('hcia', e.target.getAttribute('tagkey'));
+        console.log('hcia', 'radio3 checked', e.target.value);
 
 
         this.state.waitUpdate.lastNameCn = e.target.value
         this.setState({
-            isNeedSave:true,
+            isNeedSave: true,
         });
     }
     onChangeBirth = (value, dateString) => {
