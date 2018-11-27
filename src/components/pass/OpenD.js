@@ -564,7 +564,10 @@ class PassOpenD extends Component {
                     okText="确认"
                     cancelText="取消"
                 >
-                    <p>*姓（中文）:{this.state.recordData.lastNameCn}-->{this.state.waitUpdate.lastNameCn}</p>
+
+                    { this.state.waitUpdate.lastNameCn == null ? null : <p >*姓（中文）:{this.state.recordData.lastNameCn}-->{this.state.waitUpdate.lastNameCn}</p> }
+
+
                     <p>*名（中文）:{this.state.recordData.firstNameCn}-->{this.state.waitUpdate.firstNameCn}</p>
                     <p>*名 :{this.state.recordData.firstName}-->{this.state.waitUpdate.firstName}</p>
                     <p>*名 :{this.state.recordData.lastName}-->{this.state.waitUpdate.lastName}</p>
