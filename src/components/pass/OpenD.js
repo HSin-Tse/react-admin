@@ -43,6 +43,7 @@ class PassOpenD extends Component {
             , tradrType: 'CFD'
             , testeee: '1976-11-23'
             , mGender: ''
+            , mAnnualIncome: ''
             , sss: 'aa'
             , IXIncomeList: []
             , gallery: null
@@ -72,7 +73,8 @@ class PassOpenD extends Component {
             self.setState({
                 recordData: response.data.data,
                 testeee: self.timestampToTime(response.data.data.dateOfBirth),
-                mGender: response.data.data.gender
+                mGender: response.data.data.gender,
+                mAnnualIncome: response.data.data.annualIncome
             });
         }).catch(function (error) {
             console.log(error);
@@ -327,7 +329,8 @@ class PassOpenD extends Component {
                             <Card bordered={true}>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>当前年收入</span>
-                                    <Select value={this.state.recordData.annualIncome}
+                                    <Select value={this.state.mAnnualIncome}
+                                            onChange={this.onChangeannualIncome}
                                             style={{width: 120}}>
                                         {this.mIncomesOPS}
                                     </Select>
@@ -572,6 +575,7 @@ class PassOpenD extends Component {
                     <p>详细地址 :{this.state.recordData.street}-->{this.state.waitUpdate.street}</p>
                     <p>邮箱地址 :{this.state.recordData.email}-->{this.state.waitUpdate.email}</p>
                     <p>*邮编 :{this.state.recordData.postalCode}-->{this.state.waitUpdate.postalCode}</p>
+                    <p>*当前年收入:{this.state.recordData.annualIncome}-->{this.state.ix_IncomeNAME}:{this.state.waitUpdate.ix_Income}</p>
                 </Modal>
             </div>
         )
@@ -804,6 +808,26 @@ class PassOpenD extends Component {
 
         this.setState({
             mGender:value,//1:male 0:female
+            isNeedSave: true,
+        });
+
+    }
+
+    onChangeannualIncome = (value) => {
+
+
+        var tmpv = ''
+        this.state.IXIncomeList.forEach(function(element) {
+            if(element.name == value){
+                tmpv = element.value
+            }
+        });
+
+        this.state.waitUpdate.ix_Income = tmpv;
+        this.state.ix_IncomeNAME = value;
+        //
+        this.setState({
+            mAnnualIncome:value,//1:male 0:female
             isNeedSave: true,
         });
 
