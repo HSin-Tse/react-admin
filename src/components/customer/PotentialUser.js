@@ -29,7 +29,7 @@ class PotentialUser extends Component {
 	componentDidMount() {
         this.columns = [
 					{
-							title: '手机号',
+							title: '選擇',
 							dataIndex: 'phoneNumber',
 							key: 'phoneNumber',
 							// fixed: 'left',
@@ -156,6 +156,7 @@ class PotentialUser extends Component {
 
                 />
 								<Modal
+									id = 'modal1'
 				          title="添加備註"
 				          visible={this.state.visible}
 				          onOk={this.handleOk}
@@ -166,6 +167,7 @@ class PotentialUser extends Component {
 				          <p><DatePicker onChange={this.selectDate} /></p>
 				          <p><Input placeholder="填写回访次数以及结果" /></p>
 				        </Modal>
+
             </div>
         )
     }
