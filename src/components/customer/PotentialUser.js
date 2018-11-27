@@ -4,11 +4,20 @@ import {DatePicker,Input,Modal,Button, Table, Icon,Checkbox} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import axios from 'axios';
 class PotentialUser extends Component {
-	state = { visible: false }
+	state = { visible: false,modal2Visible:false }
 
+
+ showModal2 = () =>{
+	 this.setState({
+		 modal2Visible: true,
+		 visible: false,
+
+	 });
+ }
  showModal = () => {
 	 this.setState({
 		 visible: true,
+		 modal2Visible: false,
 	 });
  }
 
@@ -16,6 +25,7 @@ class PotentialUser extends Component {
 	 console.log(e);
 	 this.setState({
 		 visible: false,
+		 modal2Visible: false,
 	 });
  }
 
@@ -23,6 +33,7 @@ class PotentialUser extends Component {
 	 console.log(e);
 	 this.setState({
 		 visible: false,
+		 modal2Visible: false,
 	 });
  }
 
@@ -114,7 +125,7 @@ class PotentialUser extends Component {
                     <div>
                         <span className="ant-divider"/>
                         <Button className="ant-dropdown-link" onClick={() => this.showModal()}>添加備註</Button>
-												<Button className="ant-dropdown-link" onClick={() => this.showModal()}>操作日誌</Button>
+												<Button className="ant-dropdown-link" onClick={() => this.showModal2()}>操作日誌</Button>
 
 
                     </div>
@@ -167,6 +178,17 @@ class PotentialUser extends Component {
 				          <p><DatePicker onChange={this.selectDate} /></p>
 				          <p><Input placeholder="填写回访次数以及结果" /></p>
 				        </Modal>
+								<Modal
+									id = 'modal2'
+									title="操作日誌"
+									visible={this.state.modal2Visible}
+									onOk={this.handleOk}
+									onCancel={this.handleCancel}
+									okText="確認"
+									cancelText="取消"
+								>
+									<p><Input placeholder="操作日誌" /></p>
+								</Modal>
 
             </div>
         )
@@ -186,7 +208,9 @@ class PotentialUser extends Component {
 			console.log('sssss',status.target.checked)
 
     }
+		checkDiary = () => {
 
+		}
 		selectDate = (value,date) => {
   	       console.log('ggggg',date);
 		}
