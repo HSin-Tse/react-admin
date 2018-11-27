@@ -172,6 +172,7 @@ class PotentialUser extends Component {
             }
             ];
         this.requestListData("1")
+				this.requestUserCommentList()
 
     }
     render() {
@@ -185,6 +186,7 @@ class PotentialUser extends Component {
                 <BreadcrumbCustom first="用户管理" second="Leads管理"/>
 
                 <div>
+
                     <Button onClick={() => this.requestListData("1")} type="primary">潛在用戶</Button>
                     <Button onClick={() => this.requestListData("2")} type="primary">模擬用戶</Button>
                     <Button onClick={() => this.requestListData("3")} type="primary">意向用戶</Button>
@@ -280,6 +282,31 @@ class PotentialUser extends Component {
             // message.warn(error);
         });
     };
+		requestUserCommentList = () =>{
+			// must request data
+			//belongUserId
+			//loginName
+			//token
+
+			//refernce request data
+			//pageNo
+			//pageSize
+			//language
+			const url = 'http://mobile.nooko.cn:8090/auth/getUserCommentList'
+			axios.post(url, {
+				'belongUserId':'4028b2a4631f770f01631f7770df0000',
+				'loginName' : 'admin',
+				'token' : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmVUaW1lIjoxNTQ1NTI4ODM0MTk5LCJsb2dpbk5hbWUiOiJhZG1pbiJ9.F7moE4DsMUiajkKB1S_wemwsozlUW5VMxQKsg4KsSUQ'
+
+			}).then(function (response) {
+					console.log('xxx',response);
+
+
+			}).catch(function (error) {
+					console.log(error);
+					// message.warn(error);
+			});
+		}
 }
 
 export default PotentialUser;
