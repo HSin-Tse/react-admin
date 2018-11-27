@@ -29,7 +29,7 @@ const tradeType = [
 const dateFormat = 'YYYY-MM-DD';
 
 class PassOpenD extends Component {
-    onChangeBirth;
+
 
     constructor(props) {
         super(props);
@@ -253,31 +253,28 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*名（中文）</span>
-                                    <Input defaultValue={this.state.recordData.firstNameCn} onChange={this.onChangefirstNameCn}
+                                    <Input defaultValue={this.state.recordData.firstNameCn}
+                                           onChange={this.onChangefirstNameCn}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*姓</span>
-                                    <Input defaultValue={this.state.recordData.lastName} onChange={this.onChangelastName}
+                                    <Input defaultValue={this.state.recordData.lastName}
+                                           onChange={this.onChangelastName}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
-
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}> *名</span>
-                                    <Input defaultValue={this.state.recordData.firstName} onChange={this.onChangefirstName}
+                                    <Input defaultValue={this.state.recordData.firstName}
+                                           onChange={this.onChangefirstName}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*出生日期</span>
                                     <DatePicker value={moment(this.state.testeee, dateFormat)}
                                                 onChange={this.onChangeBirth}
-
                                                 format={dateFormat}/>
 
-                                    {/*<DatePicker defaultValue={moment(this.timestampToTime('1976-11-26'), dateFormat)} format={dateFormat}/>*/}
-                                    {this.timestampToTime(this.state.recordData.dateOfBirth)}
-                                    {/*<Input defaultValue={this.state.sss} onChange={this.onChangeSSS}*/}
-                                    {/*style={{ width: 120}} placeholder="Basic usage"/>*/}
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*性别</span>
@@ -565,8 +562,9 @@ class PassOpenD extends Component {
                 >
                     <p>*姓（中文）:{this.state.recordData.lastNameCn}-->{this.state.waitUpdate.lastNameCn}</p>
                     <p>*名（中文）:{this.state.recordData.firstNameCn}-->{this.state.waitUpdate.firstNameCn}</p>
-                    <p>*名       :{this.state.recordData.firstName}-->{this.state.waitUpdate.firstName}</p>
-                    <p>*名       :{this.state.recordData.lastName}-->{this.state.waitUpdate.lastName}</p>
+                    <p>*名 :{this.state.recordData.firstName}-->{this.state.waitUpdate.firstName}</p>
+                    <p>*名 :{this.state.recordData.lastName}-->{this.state.waitUpdate.lastName}</p>
+                    <p>出生日期 :{ this.timestampToTime(this.state.recordData.dateOfBirth)}-->{this.timestampToTime(this.state.waitUpdate.dateOfBirth)}</p>
                 </Modal>
             </div>
         )
@@ -754,7 +752,26 @@ class PassOpenD extends Component {
             isNeedSave: true,
         });
     }
+    onChangeBirth = (value, dateString) => {
+        console.log('hcia dateString', dateString)
+        var date = new Date(dateString+' 00:00:00:000');
+        // 有三种方式获取
+        var time1 = date.getTime();
+        var time2 = date.valueOf();
+        var time3 = Date.parse(date);
+        console.log('hcia',time1);//1398250549123
+        console.log('hcia',time2);//1398250549123
+        console.log('hcia',time3);//1398250549000
 
+        this.state.waitUpdate.dateOfBirth = time1;
+
+        this.setState({
+            testeee: dateString,
+            isNeedSave: true,
+
+        });
+
+    }
     onChangeSSS = (e) => {
         console.log('hcia', e.target.getAttribute('tagkey'));
         console.log('hcia', 'radio3 checked', e.target.value);
@@ -764,12 +781,7 @@ class PassOpenD extends Component {
         this.setState({
             isNeedSave: true,
         });
-    }
-    onChangeBirth = (value, dateString) => {
-        console.log('hcia value', value)
-        console.log('hcia dateString', dateString)
-
-    }
+    };
 }
 
 export default PassOpenD;
