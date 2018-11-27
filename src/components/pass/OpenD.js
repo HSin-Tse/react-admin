@@ -286,7 +286,7 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*身份证号码</span>
-                                    <Input defaultValue={this.state.recordData.nationalID} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.nationalID} onChange={this.onChangenationalId}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
@@ -566,6 +566,7 @@ class PassOpenD extends Component {
                     <p>*名 :{this.state.recordData.lastName}-->{this.state.waitUpdate.lastName}</p>
                     <p>出生日期 :{ this.timestampToTime(this.state.recordData.dateOfBirth)}-->{this.timestampToTime(this.state.waitUpdate.dateOfBirth)}</p>
                     <p>性别 :{this.state.recordData.gender}-->{this.state.waitUpdate.gender==0?'Female':'Male'}</p>
+                    <p>身份证号码 :{this.state.recordData.nationalID}-->{this.state.waitUpdate.nationalId}</p>
                 </Modal>
             </div>
         )
@@ -740,6 +741,13 @@ class PassOpenD extends Component {
             isNeedSave: true,
         });
     }
+    onChangenationalId = (e) => {
+        this.state.waitUpdate.nationalId = e.target.value
+        this.setState({
+            isNeedSave: true,
+        });
+    }
+
     onChangefirstName = (e) => {
         this.state.waitUpdate.firstName = e.target.value
         this.setState({
