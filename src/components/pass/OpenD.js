@@ -61,6 +61,22 @@ class PassOpenD extends Component {
 
         var self = this
 
+        window.Axios.post('dict/openDict', {
+            'keys': 'IX_Income,IX_FundsSource,IX_Percentage,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
+            // 'loginName': this.props.match.params.id,
+            // 'token': this.props.match.params.id,
+            'language': "zh-CN"
+        }).then(function (response) {
+            console.log('hcia', response);
+
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+
+
+
         window.Axios.post('http://mobile.nooko.cn:8090/open/getOpenApplyDetail', {
             'id': self.props.match.params.id,
             // 'loginName': this.props.match.params.id,
@@ -263,7 +279,7 @@ class PassOpenD extends Component {
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*姓</span>
                                     <Input defaultValue={this.state.recordData.lastName} onChange={this.onChangeSSS}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                           style={{width: 120} } placeholder="Basic usage"/>
                                 </div>
 
                                 <div style={{display: 'flex', minHeight: 40}}>

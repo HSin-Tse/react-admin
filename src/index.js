@@ -34,6 +34,7 @@ window.Axios.interceptors.request.use(
                     ...config.data,
                     'token': xtoken,
                     'loginName': loginName,
+                    'language': 'zh-CN',
 
                 }
             }else if(config.method=='get'){
