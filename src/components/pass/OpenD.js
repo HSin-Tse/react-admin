@@ -33,7 +33,7 @@ class PassOpenD extends Component {
     constructor(props) {
         super(props);
         this.state = {
-             isNeedSave: false
+            isNeedSave: false
             , recordData: {}
             , recordDictirys: {}
             , waitUpdate: {}
@@ -56,7 +56,6 @@ class PassOpenD extends Component {
 
         };
     }
-
 
 
     componentDidMount() {
@@ -104,12 +103,12 @@ class PassOpenD extends Component {
 
     render() {
         this.mIncomesOPS = this.state.IXIncomeList.map(d => <Option key={d.name}>{d.name}</Option>);
-        this.mIXPercentage= this.state.IXPercentage.map(d => <Option key={d.name}>{d.name}</Option>);
-        this.mIXFundsSource= this.state.IXFundsSource.map(d => <Option key={d.name}>{d.name}</Option>);
-        this.mIXUStax= this.state.IXUStax.map(d => <Option key={d.name}>{d.name}</Option>);
-        this.mIXTradingExperience= this.state.IXTradingExperience.map(d => <Option key={d.name}>{d.name}</Option>);
-        this.mIXTradingObjectives= this.state.IXTradingObjectives.map(d => <Option key={d.name}>{d.name}</Option>);
-        this.mIXRisk_Tolerance= this.state.IXRisk_Tolerance.map(d => <Option key={d.name}>{d.name}</Option>);
+        this.mIXPercentage = this.state.IXPercentage.map(d => <Option key={d.name}>{d.name}</Option>);
+        this.mIXFundsSource = this.state.IXFundsSource.map(d => <Option key={d.name}>{d.name}</Option>);
+        this.mIXUStax = this.state.IXUStax.map(d => <Option key={d.name}>{d.name}</Option>);
+        this.mIXTradingExperience = this.state.IXTradingExperience.map(d => <Option key={d.name}>{d.name}</Option>);
+        this.mIXTradingObjectives = this.state.IXTradingObjectives.map(d => <Option key={d.name}>{d.name}</Option>);
+        this.mIXRisk_Tolerance = this.state.IXRisk_Tolerance.map(d => <Option key={d.name}>{d.name}</Option>);
 
 
         return (
@@ -313,7 +312,8 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*身份证号码</span>
-                                    <Input defaultValue={this.state.recordData.nationalID} onChange={this.onChangenationalId}
+                                    <Input defaultValue={this.state.recordData.nationalID}
+                                           onChange={this.onChangenationalId}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
@@ -340,7 +340,8 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*邮编</span>
-                                    <Input defaultValue={this.state.recordData.postalCode} onChange={this.onChangepostalCode}
+                                    <Input defaultValue={this.state.recordData.postalCode}
+                                           onChange={this.onChangepostalCode}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                             </Card>
@@ -369,43 +370,46 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>交易本金来源</span>
-                                    <Select value={this.state.mfundsSource} style={{width: 120}}>
+                                    <Select value={this.state.mfundsSource}
+                                            onChange={this.onChangemfundsSource}
+                                    >
                                         {this.mIXFundsSource}
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*是否美国公民</span>
-                                    <Select value={this.state.musCitizenOrResidentForTaxPurpposes} style={{width: 120}}>
+                                    <Select value={this.state.musCitizenOrResidentForTaxPurpposes}
+                                            onChange={this.onChangemusCitizenOrResidentForTaxPurpposes}
+
+                                    >
                                         {this.mIXUStax}
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>交易经验</span>
-                                    <Select value={this.state.myearsTrading} >
+                                    <Select value={this.state.myearsTrading}>
                                         {this.mIXTradingExperience}
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>交易目的</span>
-                                    <Select value={this.state.mtradingObjectives} >
+                                    <Select value={this.state.mtradingObjectives}>
                                         {this.mIXTradingObjectives}
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*风险承受力</span>
-                                    <Select value={this.state.mriskTolerance} >
+                                    <Select value={this.state.mriskTolerance}>
                                         {this.mIXRisk_Tolerance}
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>账户类型</span>
-
                                     <Input defaultValue={this.state.recordData.country} disabled={true}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>交易货币</span>
-
                                     <Input defaultValue={this.state.recordData.country} disabled={true}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
@@ -597,8 +601,9 @@ class PassOpenD extends Component {
                     <p>*名（中文）:{this.state.recordData.firstNameCn}-->{this.state.waitUpdate.firstNameCn}</p>
                     <p>*名 :{this.state.recordData.firstName}-->{this.state.waitUpdate.firstName}</p>
                     <p>*名 :{this.state.recordData.lastName}-->{this.state.waitUpdate.lastName}</p>
-                    <p>出生日期 :{ this.timestampToTime(this.state.recordData.dateOfBirth)}-->{this.timestampToTime(this.state.waitUpdate.dateOfBirth)}</p>
-                    <p>性别 :{this.state.recordData.gender}-->{this.state.waitUpdate.gender==0?'Female':'Male'}</p>
+                    <p>出生日期
+                        :{this.timestampToTime(this.state.recordData.dateOfBirth)}-->{this.timestampToTime(this.state.waitUpdate.dateOfBirth)}</p>
+                    <p>性别 :{this.state.recordData.gender}-->{this.state.waitUpdate.gender == 0 ? 'Female' : 'Male'}</p>
                     <p>身份证号码 :{this.state.recordData.nationalID}-->{this.state.waitUpdate.nationalId}</p>
                     <p>城市 :{this.state.recordData.nationalID}-->{this.state.waitUpdate.nationalId}</p>
                     <p>详细地址 :{this.state.recordData.street}-->{this.state.waitUpdate.street}</p>
@@ -606,6 +611,8 @@ class PassOpenD extends Component {
                     <p>*邮编 :{this.state.recordData.postalCode}-->{this.state.waitUpdate.postalCode}</p>
                     <p>*当前年收入:{this.state.recordData.annualIncome}-->{this.state.ix_IncomeNAME}:{this.state.waitUpdate.ix_Income}</p>
                     <p>*初始入金金额占流动资产净值比:{this.state.recordData.initialDepositToYourNetLiquidAssets}-->{this.state.ix_PercentageNAME}:{this.state.waitUpdate.ix_Percentage}</p>
+                    <p>*初始入金金额占流动资产净值比:{this.state.recordData.fundsSource}-->{this.state.ix_FundsSourceNAME}:{this.state.waitUpdate.ix_FundsSource}</p>
+                    <p>*是否美国公民 :{this.state.recordData.usCitizenOrResidentForTaxPurpposes}-->{this.state.ix_UStaxNAME}:{this.state.waitUpdate.ix_UStax}</p>
                 </Modal>
             </div>
         )
@@ -813,14 +820,14 @@ class PassOpenD extends Component {
     }
     onChangeBirth = (value, dateString) => {
         console.log('hcia dateString', dateString)
-        var date = new Date(dateString+' 00:00:00:000');
+        var date = new Date(dateString + ' 00:00:00:000');
         // 有三种方式获取
         var time1 = date.getTime();
         var time2 = date.valueOf();
         var time3 = Date.parse(date);
-        console.log('hcia',time1);//1398250549123
-        console.log('hcia',time2);//1398250549123
-        console.log('hcia',time3);//1398250549000
+        console.log('hcia', time1);//1398250549123
+        console.log('hcia', time2);//1398250549123
+        console.log('hcia', time3);//1398250549000
 
         this.state.waitUpdate.dateOfBirth = time1;
 
@@ -833,11 +840,11 @@ class PassOpenD extends Component {
     }
     onChangegender = (value) => {
 
-        console.log('hcia value' , value)
-        this.state.waitUpdate.gender = (value === 'Male'?1:0);
+        console.log('hcia value', value)
+        this.state.waitUpdate.gender = (value === 'Male' ? 1 : 0);
 
         this.setState({
-            mGender:value,//1:male 0:female
+            mGender: value,//1:male 0:female
             isNeedSave: true,
         });
 
@@ -847,8 +854,8 @@ class PassOpenD extends Component {
 
 
         var tmpv = ''
-        this.state.IXIncomeList.forEach(function(element) {
-            if(element.name == value){
+        this.state.IXIncomeList.forEach(function (element) {
+            if (element.name == value) {
                 tmpv = element.value
             }
         });
@@ -857,7 +864,7 @@ class PassOpenD extends Component {
         this.state.ix_IncomeNAME = value;
         //
         this.setState({
-            mAnnualIncome:value,//1:male 0:female
+            mAnnualIncome: value,//1:male 0:female
             isNeedSave: true,
         });
 
@@ -866,8 +873,8 @@ class PassOpenD extends Component {
 
 
         var tmpv = ''
-        this.state.IXPercentage.forEach(function(element) {
-            if(element.name == value){
+        this.state.IXPercentage.forEach(function (element) {
+            if (element.name == value) {
                 tmpv = element.value
             }
         });
@@ -876,12 +883,49 @@ class PassOpenD extends Component {
         this.state.ix_PercentageNAME = value;
         //
         this.setState({
-            mInitialDepositToYourNetLiquidAssets:value,
+            mInitialDepositToYourNetLiquidAssets: value,
             isNeedSave: true,
         });
 
     }
+    onChangemfundsSource = (value) => {
 
+
+        var tmpv = ''
+        this.state.IXFundsSource.forEach(function (element) {
+            if (element.name == value) {
+                tmpv = element.value
+            }
+        });
+
+        this.state.waitUpdate.ix_FundsSource = tmpv;
+        this.state.ix_FundsSourceNAME = value;
+        //
+        this.setState({
+            mfundsSource: value,
+            isNeedSave: true,
+        });
+
+    }
+    onChangemusCitizenOrResidentForTaxPurpposes = (value) => {
+
+
+        var tmpv = ''
+        this.state.IXUStax.forEach(function (element) {
+            if (element.name == value) {
+                tmpv = element.value
+            }
+        });
+
+        this.state.waitUpdate.ix_UStax = tmpv;
+        this.state.ix_UStaxNAME = value;
+        //
+        this.setState({
+            musCitizenOrResidentForTaxPurpposes: value,
+            isNeedSave: true,
+        });
+
+    }
 
 
     onChangeSSS = (e) => {
