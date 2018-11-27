@@ -47,20 +47,32 @@ class PassOpenD extends Component {
             , sss: 'aa'
             , IXIncomeList: []
             , IXPercentage: []
+            , IXFundsSource: []
+            , IXUStax: []
+            , IXTradingExperience: []
+            , IXTradingObjectives: []
+            , IXRisk_Tolerance: []
             , gallery: null
 
         };
     }
 
+
+
     componentDidMount() {
         var self = this;
         window.Axios.post('dict/openDict', {
-            'keys': 'IX_Income,IX_FundsSource,IX_Percentage,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
+            'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
         }).then(function (response) {
             self.setState({
                 recordDictirys: response.data.data,
                 IXIncomeList: response.data.data.IX_Income,
                 IXPercentage: response.data.data.IX_Percentage,
+                IXFundsSource: response.data.data.IX_FundsSource,
+                IXUStax: response.data.data.IX_UStax,
+                IXTradingExperience: response.data.data.IX_Trading_Experience,
+                IXTradingObjectives: response.data.data.IX_Trading_Objectives,
+                IXRisk_Tolerance: response.data.data.IX_Risk_Tolerance,
 
             });
         }).catch(function (error) {
@@ -76,17 +88,28 @@ class PassOpenD extends Component {
                 recordData: response.data.data,
                 testeee: self.timestampToTime(response.data.data.dateOfBirth),
                 mGender: response.data.data.gender,
-                mAnnualIncome: response.data.data.annualIncome,
-                mInitialDepositToYourNetLiquidAssets: response.data.data.initialDepositToYourNetLiquidAssets
+                mAnnualIncome: response.data.data.annualIncome,//当前年收入
+                mInitialDepositToYourNetLiquidAssets: response.data.data.initialDepositToYourNetLiquidAssets,
+                mfundsSource: response.data.data.fundsSource,
+                musCitizenOrResidentForTaxPurpposes: response.data.data.usCitizenOrResidentForTaxPurpposes,
+                myearsTrading: response.data.data.yearsTrading,
+                mtradingObjectives: response.data.data.tradingObjectives,
+                mriskTolerance: response.data.data.riskTolerance,
             });
         }).catch(function (error) {
             console.log(error);
         });
     }
 
+
     render() {
         this.mIncomesOPS = this.state.IXIncomeList.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXPercentage= this.state.IXPercentage.map(d => <Option key={d.name}>{d.name}</Option>);
+        this.mIXFundsSource= this.state.IXFundsSource.map(d => <Option key={d.name}>{d.name}</Option>);
+        this.mIXUStax= this.state.IXUStax.map(d => <Option key={d.name}>{d.name}</Option>);
+        this.mIXTradingExperience= this.state.IXTradingExperience.map(d => <Option key={d.name}>{d.name}</Option>);
+        this.mIXTradingObjectives= this.state.IXTradingObjectives.map(d => <Option key={d.name}>{d.name}</Option>);
+        this.mIXRisk_Tolerance= this.state.IXRisk_Tolerance.map(d => <Option key={d.name}>{d.name}</Option>);
 
 
         return (
@@ -346,32 +369,32 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>交易本金来源</span>
-                                    <Select defaultValue="0-15k" style={{width: 120}}>
-                                        <Option value="0">0-15k</Option>
+                                    <Select value={this.state.mfundsSource} style={{width: 120}}>
+                                        {this.mIXFundsSource}
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*是否美国公民</span>
-                                    <Select defaultValue="0-15k" style={{width: 120}}>
-                                        <Option value="0">0-15k</Option>
+                                    <Select value={this.state.musCitizenOrResidentForTaxPurpposes} style={{width: 120}}>
+                                        {this.mIXUStax}
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>交易经验</span>
-                                    <Select defaultValue="0-15k" style={{width: 120}}>
-                                        <Option value="0">0-15k</Option>
+                                    <Select value={this.state.myearsTrading} >
+                                        {this.mIXTradingExperience}
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>交易目的</span>
-                                    <Select defaultValue="0-15k" style={{width: 120}}>
-                                        <Option value="0">0-15k</Option>
+                                    <Select value={this.state.mtradingObjectives} >
+                                        {this.mIXTradingObjectives}
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*风险承受力</span>
-                                    <Select defaultValue="0-15k" style={{width: 120}}>
-                                        <Option value="0">0-15k</Option>
+                                    <Select value={this.state.mriskTolerance} >
+                                        {this.mIXRisk_Tolerance}
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
