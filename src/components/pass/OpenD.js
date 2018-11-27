@@ -44,6 +44,7 @@ class PassOpenD extends Component {
             , testeee: '1976-11-23'
             , mGender: ''
             , sss: 'aa'
+            , IXIncomeList: []
             , gallery: null
 
         };
@@ -56,10 +57,13 @@ class PassOpenD extends Component {
         }).then(function (response) {
             self.setState({
                 recordDictirys: response.data.data,
+                IXIncomeList: response.data.data.IX_Income,
+
             });
         }).catch(function (error) {
             console.log(error);
         });
+
 
         window.Axios.post('open/getOpenApplyDetail', {
             'id': self.props.match.params.id,
@@ -76,6 +80,11 @@ class PassOpenD extends Component {
     }
 
     render() {
+        //  this.mIncomesOPS = this.state.IXIncomeList.map(d =>
+        //     {<Option key={d.value}>{d.value}</Option>}
+        // );
+        this.mIncomesOPS = this.state.IXIncomeList.map(d => <Option key={d.value}>{d.name}</Option>);
+
 
         return (
             <div>
@@ -300,12 +309,12 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*邮箱地址</span>
-                                    <Input defaultValue={this.state.recordData.email} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.email} onChange={this.onChangeemail}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*邮编</span>
-                                    <Input defaultValue={this.state.recordData.postalCode} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.postalCode} onChange={this.onChangepostalCode}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                             </Card>
@@ -319,7 +328,7 @@ class PassOpenD extends Component {
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>当前年收入</span>
                                     <Select defaultValue="0-15k" style={{width: 120}}>
-                                        <Option value="0">0-15k</Option>
+                                        {this.mIncomesOPS}
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
@@ -560,6 +569,8 @@ class PassOpenD extends Component {
                     <p>身份证号码 :{this.state.recordData.nationalID}-->{this.state.waitUpdate.nationalId}</p>
                     <p>城市 :{this.state.recordData.nationalID}-->{this.state.waitUpdate.nationalId}</p>
                     <p>详细地址 :{this.state.recordData.street}-->{this.state.waitUpdate.street}</p>
+                    <p>邮箱地址 :{this.state.recordData.email}-->{this.state.waitUpdate.email}</p>
+                    <p>*邮编 :{this.state.recordData.postalCode}-->{this.state.waitUpdate.postalCode}</p>
                 </Modal>
             </div>
         )
@@ -749,6 +760,18 @@ class PassOpenD extends Component {
     }
     onChangestreet = (e) => {
         this.state.waitUpdate.street = e.target.value
+        this.setState({
+            isNeedSave: true,
+        });
+    }
+    onChangeemail = (e) => {
+        this.state.waitUpdate.email = e.target.value
+        this.setState({
+            isNeedSave: true,
+        });
+    }
+    onChangepostalCode = (e) => {
+        this.state.waitUpdate.postalCode = e.target.value
         this.setState({
             isNeedSave: true,
         });
