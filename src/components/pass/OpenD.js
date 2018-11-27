@@ -46,6 +46,7 @@ class PassOpenD extends Component {
             , mAnnualIncome: ''
             , sss: 'aa'
             , IXIncomeList: []
+            , IXPercentage: []
             , gallery: null
 
         };
@@ -59,6 +60,7 @@ class PassOpenD extends Component {
             self.setState({
                 recordDictirys: response.data.data,
                 IXIncomeList: response.data.data.IX_Income,
+                IXPercentage: response.data.data.IX_Percentage,
 
             });
         }).catch(function (error) {
@@ -74,7 +76,8 @@ class PassOpenD extends Component {
                 recordData: response.data.data,
                 testeee: self.timestampToTime(response.data.data.dateOfBirth),
                 mGender: response.data.data.gender,
-                mAnnualIncome: response.data.data.annualIncome
+                mAnnualIncome: response.data.data.annualIncome,
+                mInitialDepositToYourNetLiquidAssets: response.data.data.initialDepositToYourNetLiquidAssets
             });
         }).catch(function (error) {
             console.log(error);
@@ -82,10 +85,8 @@ class PassOpenD extends Component {
     }
 
     render() {
-        //  this.mIncomesOPS = this.state.IXIncomeList.map(d =>
-        //     {<Option key={d.value}>{d.value}</Option>}
-        // );
         this.mIncomesOPS = this.state.IXIncomeList.map(d => <Option key={d.name}>{d.name}</Option>);
+        this.mIXPercentage= this.state.IXPercentage.map(d => <Option key={d.name}>{d.name}</Option>);
 
 
         return (
@@ -94,8 +95,8 @@ class PassOpenD extends Component {
                 <div>id: {this.state.recordData.id}</div>
                 <div>gender: {this.state.recordData.gender}</div>
                 <div>isNeedSave :{this.state.isNeedSave.toString()}</div>
-                <div>test waitUpdate :{JSON.stringify(this.state.waitUpdate)}</div>
-                <div>test check :{JSON.stringify(this.state.recordDictirys)}</div>
+                <div>waitUpdate :{JSON.stringify(this.state.waitUpdate)}</div>
+                {/*<div>recordDictirys :{JSON.stringify(this.state.recordDictirys)}</div>*/}
 
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
                 <Card title="IX账户审核 " bordered={true}>
@@ -337,8 +338,10 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>初始入金金额占比</span>
-                                    <Select defaultValue="0-15k" style={{width: 120}}>
-                                        <Option value="0">0-15k</Option>
+                                    <Select value={this.state.mInitialDepositToYourNetLiquidAssets}
+                                            onChange={this.onChangemInitialDepositToYourNetLiquidAssets}
+                                    >
+                                        {this.mIXPercentage}
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
@@ -565,9 +568,9 @@ class PassOpenD extends Component {
                     cancelText="取消"
                 >
 
-                    { this.state.waitUpdate.lastNameCn == null ? null : <p >*姓（中文）:{this.state.recordData.lastNameCn}-->{this.state.waitUpdate.lastNameCn}</p> }
+                    {/*{ this.state.waitUpdate.lastNameCn == null ? null : <p >*姓（中文）:{this.state.recordData.lastNameCn}-->{this.state.waitUpdate.lastNameCn}</p> }*/}
 
-
+                    <p>*姓（中文）:{this.state.recordData.lastNameCn}-->{this.state.waitUpdate.lastNameCn}</p>
                     <p>*名（中文）:{this.state.recordData.firstNameCn}-->{this.state.waitUpdate.firstNameCn}</p>
                     <p>*名 :{this.state.recordData.firstName}-->{this.state.waitUpdate.firstName}</p>
                     <p>*名 :{this.state.recordData.lastName}-->{this.state.waitUpdate.lastName}</p>
@@ -579,6 +582,7 @@ class PassOpenD extends Component {
                     <p>邮箱地址 :{this.state.recordData.email}-->{this.state.waitUpdate.email}</p>
                     <p>*邮编 :{this.state.recordData.postalCode}-->{this.state.waitUpdate.postalCode}</p>
                     <p>*当前年收入:{this.state.recordData.annualIncome}-->{this.state.ix_IncomeNAME}:{this.state.waitUpdate.ix_Income}</p>
+                    <p>*初始入金金额占流动资产净值比:{this.state.recordData.initialDepositToYourNetLiquidAssets}-->{this.state.ix_PercentageNAME}:{this.state.waitUpdate.ix_Percentage}</p>
                 </Modal>
             </div>
         )
@@ -831,6 +835,25 @@ class PassOpenD extends Component {
         //
         this.setState({
             mAnnualIncome:value,//1:male 0:female
+            isNeedSave: true,
+        });
+
+    }
+    onChangemInitialDepositToYourNetLiquidAssets = (value) => {
+
+
+        var tmpv = ''
+        this.state.IXPercentage.forEach(function(element) {
+            if(element.name == value){
+                tmpv = element.value
+            }
+        });
+
+        this.state.waitUpdate.ix_Percentage = tmpv;
+        this.state.ix_PercentageNAME = value;
+        //
+        this.setState({
+            mInitialDepositToYourNetLiquidAssets:value,
             isNeedSave: true,
         });
 
