@@ -38,6 +38,45 @@ class PotentialUser extends Component {
  }
 
 	componentDidMount() {
+				this.modalColumns = [{
+						title: '時間',
+						dataIndex: 'operationDiary_Date',
+						key: 'operationDiary_Date',
+						// fixed: 'left',
+						// width: 100,
+						render: (text, record) => (
+						<Checkbox
+							// checked={this.state.checked}
+							// disabled={this.state.disabled}
+							onChange={this.hasChange}
+						></Checkbox>),
+				 },{
+ 						title: '狀態',
+ 						dataIndex: 'operationDiary_Status',
+ 						key: 'operationDiary_Status',
+ 						// fixed: 'left',
+ 						// width: 100,
+ 						render: (text, record) => (
+ 						<Checkbox
+ 							// checked={this.state.checked}
+ 							// disabled={this.state.disabled}
+ 							onChange={this.hasChange}
+ 						></Checkbox>),
+ 				 },{
+ 						title: '操作人',
+ 						dataIndex: 'operationDiary_User',
+ 						key: 'operationDiary_User',
+ 						// fixed: 'left',
+ 						// width: 100,
+ 						render: (text, record) => (
+ 						<Checkbox
+ 							// checked={this.state.checked}
+ 							// disabled={this.state.disabled}
+ 							onChange={this.hasChange}
+ 						></Checkbox>),
+ 				 }]
+
+
         this.columns = [
 					{
 							title: '選擇',
@@ -198,6 +237,7 @@ class PotentialUser extends Component {
         this.state = {
             date: new Date()
             , userList: []
+						, operationDiaryHistory: []
             , anyThing: 'asdasd'
 
 
