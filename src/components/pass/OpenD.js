@@ -556,7 +556,7 @@ class PassOpenD extends Component {
                 <Modal
                     title="Modal"
                     visible={this.state.visible}
-                    onOk={this.hideModal}
+                    onOk={this.checkSaveData}
                     onCancel={this.hideModal}
                     okText="确认"
                     cancelText="取消"
@@ -703,7 +703,34 @@ class PassOpenD extends Component {
 
 
 
+    checkSaveData = () => {
 
+       let self = this
+        this.setState({
+            visible: false,
+        });
+
+        window.Axios.post('open/prestore',
+
+
+            {
+                 id:self.state.recordData.id ,
+                ...self.state.waitUpdate
+            }
+        ).then(function (response) {
+
+            console.log('hcia response' , response)
+            if(response.data.code === 1 ){
+                message.success('save ok!')
+            }
+
+
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+    }
     onChangelastNameCn = (e) => {
 
         this.state.waitUpdate.lastNameCn = e.target.value
