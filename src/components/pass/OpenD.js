@@ -83,7 +83,7 @@ class PassOpenD extends Component {
         //  this.mIncomesOPS = this.state.IXIncomeList.map(d =>
         //     {<Option key={d.value}>{d.value}</Option>}
         // );
-        this.mIncomesOPS = this.state.IXIncomeList.map(d => <Option key={d.value}>{d.name}</Option>);
+        this.mIncomesOPS = this.state.IXIncomeList.map(d => <Option key={d.name}>{d.name}</Option>);
 
 
         return (
@@ -327,7 +327,8 @@ class PassOpenD extends Component {
                             <Card bordered={true}>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>当前年收入</span>
-                                    <Select defaultValue="0-15k" style={{width: 120}}>
+                                    <Select value={this.state.recordData.annualIncome}
+                                            style={{width: 120}}>
                                         {this.mIncomesOPS}
                                     </Select>
                                 </div>
