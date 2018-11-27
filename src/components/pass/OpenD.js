@@ -39,6 +39,7 @@ class PassOpenD extends Component {
         super(props);
         this.state = {
             userList: []
+            , isNeedSave: false
             , recordData: {}
             , iconLoading: false
             , iconcanLoading: false
@@ -501,9 +502,9 @@ class PassOpenD extends Component {
                 </Card>
                 <Card title="IX账户审核备注" bordered={true} style={{marginTop : 30}}>
                     <div>
-                        <Button loading={this.state.iconLoading} onClick={() => this.openOK()}>开户通过</Button>
-                        <Button   onClick={() => this.saveData()}>保存</Button>
-                        <Button  loading={this.state.iconcanLoading} onClick={() => this.saveReject()}>拒绝</Button>
+                        <Button  disabled = {this.state.isNeedSave} loading={this.state.iconLoading} onClick={() => this.openOK()}>开户通过</Button>
+                        <Button  disabled = {!this.state.isNeedSave}   onClick={() => this.saveData()}>保存</Button>
+                        <Button  disabled = {this.state.isNeedSave}  loading={this.state.iconcanLoading} onClick={() => this.saveReject()}>拒绝</Button>
                     </div>
                 </Card>
 
