@@ -380,14 +380,16 @@ class PassOpenD extends Component {
                                     <span style={{minWidth: 120}}>*是否美国公民</span>
                                     <Select value={this.state.musCitizenOrResidentForTaxPurpposes}
                                             onChange={this.onChangemusCitizenOrResidentForTaxPurpposes}
-
                                     >
                                         {this.mIXUStax}
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>交易经验</span>
-                                    <Select value={this.state.myearsTrading}>
+                                    <Select value={this.state.myearsTrading}
+                                            onChange={this.onChangemyearsTrading}
+
+                                    >
                                         {this.mIXTradingExperience}
                                     </Select>
                                 </div>
@@ -613,8 +615,13 @@ class PassOpenD extends Component {
                     <p>*初始入金金额占流动资产净值比:{this.state.recordData.initialDepositToYourNetLiquidAssets}-->{this.state.ix_PercentageNAME}:{this.state.waitUpdate.ix_Percentage}</p>
                     <p>*初始入金金额占流动资产净值比:{this.state.recordData.fundsSource}-->{this.state.ix_FundsSourceNAME}:{this.state.waitUpdate.ix_FundsSource}</p>
                     <p>*是否美国公民 :{this.state.recordData.usCitizenOrResidentForTaxPurpposes}-->{this.state.ix_UStaxNAME}:{this.state.waitUpdate.ix_UStax}</p>
+                    <p>*交易经验 :{this.state.recordData.yearsTrading}-->{this.state.ix_Trading_ExperienceNAME}:{this.state.waitUpdate.ix_Trading_Experience}</p>
+                    <p>*交易目的 :{this.state.recordData.tradingObjectives}-->{this.state.ix_UStaxNAME}:{this.state.waitUpdate.ix_UStax}</p>
+                    <p>*风险承受力 :{this.state.recordData.riskTolerance}-->{this.state.ix_UStaxNAME}:{this.state.waitUpdate.ix_UStax}</p>
                 </Modal>
             </div>
+
+
         )
     }
 
@@ -922,6 +929,25 @@ class PassOpenD extends Component {
         //
         this.setState({
             musCitizenOrResidentForTaxPurpposes: value,
+            isNeedSave: true,
+        });
+
+    }
+    onChangemyearsTrading = (value) => {
+
+
+        var tmpv = ''
+        this.state.IXTradingExperience.forEach(function (element) {
+            if (element.name == value) {
+                tmpv = element.value
+            }
+        });
+
+        this.state.waitUpdate.ix_Trading_Experience = tmpv;
+        this.state.ix_Trading_ExperienceNAME = value;
+        //
+        this.setState({
+            myearsTrading: value,
             isNeedSave: true,
         });
 
