@@ -12,7 +12,7 @@ export default class CRouter extends Component {
 
     constructor(props) {
         super(props);
-        console.log('hcia constructor' )
+        // console.log('hcia constructor' )
 
         this.state = {
              config: []
@@ -22,19 +22,11 @@ export default class CRouter extends Component {
     }
 
     componentWillMount() {
-        console.log('hcia componentWillMount' )
+        // console.log('hcia componentWillMount' )
         this.setState({config: routesConfigadmin});
 
     }
 
-    componentDidMount() {
-
-
-        console.log('hcia componentDidMount' )
-
-
-
-    }
 
 
     requireAuth = (permission, component) => {

@@ -21,9 +21,9 @@ class Login extends React.Component {
         const {auth: nextAuth = {}, history} = this.props;
 
         var ssss = localStorage.getItem('too');
-        console.log('hcia ssss', ssss);
+        // console.log('hcia ssss', ssss);
 
-        console.log('hcia nextAuth', nextAuth)
+        // console.log('hcia nextAuth', nextAuth)
         if (nextAuth.data && nextAuth.data.uid) { // 判断是否登陆
             localStorage.setItem('user', JSON.stringify(nextAuth.data));
         }

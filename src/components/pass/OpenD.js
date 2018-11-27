@@ -5,7 +5,7 @@
  *
  */
 import React, {Component} from 'react';
-import {Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker} from 'antd';
+import {Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker , Popconfirm} from 'antd';
 import {Radio} from 'antd';
 import {message} from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
@@ -21,17 +21,13 @@ const RadioGroup = Radio.Group;
 const Option = Select.Option;
 
 
-const accountType = [
-    {label: 'MT4', value: 'MT4'},
-    {label: 'MT5', value: 'MT5'},
-    {label: 'TRADER', value: 'TRADER', disabled: false},
-];
 const tradeType = [
     {label: 'CFD', value: 'CFD'},
     {label: 'CFD_2', value: 'CFD_2'},
     {label: 'CFD_3', value: 'CFD_3'},
 ];
 const dateFormat = 'YYYY-MM-DD';
+
 class PassOpenD extends Component {
     onChangeBirth;
 
@@ -41,16 +37,14 @@ class PassOpenD extends Component {
             userList: []
             , isNeedSave: false
             , recordData: {}
+            , recordDictirys: {}
+            , waitUpdate: {}
             , iconLoading: false
             , iconcanLoading: false
             , visible: false
             , tradrType: 'CFD'
             , testeee: '1976-11-23'
             , sss: 'aa'
-            , acTypes: 'MT4'
-            , accountTypeCheckList: [
-                'MT4', 'MT5'
-            ]
             , gallery: null
 
         };
@@ -58,53 +52,35 @@ class PassOpenD extends Component {
 
     componentDidMount() {
 
-        console.log('hcia', this.props.match.params.id)
-
         var self = this
 
         window.Axios.post('dict/openDict', {
             'keys': 'IX_Income,IX_FundsSource,IX_Percentage,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
-            // 'loginName': this.props.match.params.id,
-            // 'token': this.props.match.params.id,
-            'language': "zh-CN"
         }).then(function (response) {
-            console.log('hcia', response);
 
+            self.setState({
+                recordDictirys: response.data.data,
+            });
 
         }).catch(function (error) {
             console.log(error);
         });
 
 
-
-
-        window.Axios.post('http://mobile.nooko.cn:8090/open/getOpenApplyDetail', {
+        window.Axios.post('open/getOpenApplyDetail', {
             'id': self.props.match.params.id,
-            // 'loginName': this.props.match.params.id,
-            // 'token': this.props.match.params.id,
-            'language': "zh-CN"
         }).then(function (response) {
-            console.log('hcia', response);
-
-            console.log('hcia', response.data.code);
 
             self.setState({
                 recordData: response.data.data,
+                testeee: self.timestampToTime(response.data.data.dateOfBirth)
 
             });
 
-            self.setState({
-                recordData: response.data.data,
-                testeee:self.timestampToTime(response.data.data.dateOfBirth)
-
-            });
-
-            console.log('hcia', self.state.recordData);
 
         }).catch(function (error) {
             console.log(error);
         });
-
 
     }
 
@@ -115,7 +91,9 @@ class PassOpenD extends Component {
             <div>
 
                 <div>id: {this.state.recordData.id}</div>
-                <div>test check :{this.state.sss}</div>
+                <div>isNeedSave :{this.state.isNeedSave.toString()}</div>
+                <div>test waitUpdate :{JSON.stringify(this.state.waitUpdate)}</div>
+                {/*<div>test check :{JSON.stringify(this.state.recordDictirys)}</div>*/}
 
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
                 <Card title="IX账户审核 " bordered={true}>
@@ -152,7 +130,7 @@ class PassOpenD extends Component {
 
                     </Row>
                 </Card>
-                <Card title="IX账户设置" bordered={true} style={{marginTop : 30}}>
+                <Card title="IX账户设置" bordered={true} style={{marginTop: 30}}>
 
                     <Row gutter={16}>
                         <Col md={24}>
@@ -162,13 +140,12 @@ class PassOpenD extends Component {
 
 
                                     账户类型:
-                                    <Checkbox style={{marginLeft: 20}} checked={this.state.recordData.applyMT4} disabled={true}>MT4</Checkbox>
+                                    <Checkbox style={{marginLeft: 20}} checked={this.state.recordData.applyMT4}
+                                              disabled={true}>MT4</Checkbox>
                                     <Checkbox checked={this.state.recordData.applyMT5} disabled={true}>MT5</Checkbox>
-                                    <Checkbox checked={this.state.recordData.applySTAR}  disabled={true}>TRADER</Checkbox>
-                                    {/*<CheckboxGroup onChange={this.onChangeActypes} options={accountType}*/}
-                                                   {/*value={this.state.accountTypeCheckList}*/}
-                                                   {/*style={{marginLeft: 20, width: 520}}*/}
-                                    {/*/>*/}
+                                    <Checkbox checked={this.state.recordData.applySTAR}
+                                              disabled={true}>TRADER</Checkbox>
+
                                 </div>
                             </Card>
                             <Card bordered={false}>
@@ -254,11 +231,11 @@ class PassOpenD extends Component {
                         </Col>
                     </Row>
                 </Card>
-                <Card title="IX账户申请表单" bordered={true} style={{marginTop : 30}}>
+                <Card title="IX账户申请表单" bordered={true} style={{marginTop: 30}}>
 
                     <Row gutter={8}>
                         <Col md={12}>
-                            <h2>   基本信息 </h2>
+                            <h2> 基本信息 </h2>
                             <Card bordered={true}>
 
                                 <div style={{display: 'flex', minHeight: 40}}>
@@ -269,8 +246,8 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*姓（中文）</span>
-                                    <Input defaultValue={this.state.recordData.lastNameCn} onChange={this.onChangeSSS}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                    <Input   defaultValue={this.state.recordData.lastNameCn} onChange={this.onChangelastNameCn}
+                                           style={{width: 120}} placeholder="Basic usage" tagkey = "lastNameCn" sdsd = {'dd'}/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*名（中文）</span>
@@ -280,7 +257,7 @@ class PassOpenD extends Component {
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*姓</span>
                                     <Input defaultValue={this.state.recordData.lastName} onChange={this.onChangeSSS}
-                                           style={{width: 120} } placeholder="Basic usage"/>
+                                           style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
 
                                 <div style={{display: 'flex', minHeight: 40}}>
@@ -293,7 +270,7 @@ class PassOpenD extends Component {
                                     <DatePicker value={moment(this.state.testeee, dateFormat)}
                                                 onChange={this.onChangeBirth}
 
-                                                format={dateFormat} />
+                                                format={dateFormat}/>
 
                                     {/*<DatePicker defaultValue={moment(this.timestampToTime('1976-11-26'), dateFormat)} format={dateFormat}/>*/}
                                     {this.timestampToTime(this.state.recordData.dateOfBirth)}
@@ -303,7 +280,7 @@ class PassOpenD extends Component {
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*性别</span>
                                     <Select defaultValue={this.state.recordData.gender}
-                                            style={{ width: 120 }} >
+                                            style={{width: 120}}>
                                         <Option value="Male">男</Option>
                                         <Option value="FeMale">女</Option>
                                     </Select>
@@ -315,7 +292,7 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*城市</span>
-                                    <Select defaultValue="上海" style={{ width: 120 }} >
+                                    <Select defaultValue="上海" style={{width: 120}}>
                                         <Option value="0">上海</Option>
                                         <Option value="1">？</Option>
                                     </Select>
@@ -345,48 +322,48 @@ class PassOpenD extends Component {
 
                         </Col>
                         <Col md={12}>
-                            <h2>   资产&风险审核 </h2>
+                            <h2> 资产&风险审核 </h2>
 
-                            <Card  bordered={true}>
+                            <Card bordered={true}>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>当前年收入</span>
-                                    <Select defaultValue="0-15k" style={{ width: 120 }} >
+                                    <Select defaultValue="0-15k" style={{width: 120}}>
                                         <Option value="0">0-15k</Option>
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>初始入金金额占比</span>
-                                    <Select defaultValue="0-15k" style={{ width: 120 }} >
+                                    <Select defaultValue="0-15k" style={{width: 120}}>
                                         <Option value="0">0-15k</Option>
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>交易本金来源</span>
-                                    <Select defaultValue="0-15k" style={{ width: 120 }} >
+                                    <Select defaultValue="0-15k" style={{width: 120}}>
                                         <Option value="0">0-15k</Option>
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*是否美国公民</span>
-                                    <Select defaultValue="0-15k" style={{ width: 120 }} >
+                                    <Select defaultValue="0-15k" style={{width: 120}}>
                                         <Option value="0">0-15k</Option>
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>交易经验</span>
-                                    <Select defaultValue="0-15k" style={{ width: 120 }} >
+                                    <Select defaultValue="0-15k" style={{width: 120}}>
                                         <Option value="0">0-15k</Option>
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>交易目的</span>
-                                    <Select defaultValue="0-15k" style={{ width: 120 }} >
+                                    <Select defaultValue="0-15k" style={{width: 120}}>
                                         <Option value="0">0-15k</Option>
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*风险承受力</span>
-                                    <Select defaultValue="0-15k" style={{ width: 120 }} >
+                                    <Select defaultValue="0-15k" style={{width: 120}}>
                                         <Option value="0">0-15k</Option>
                                     </Select>
                                 </div>
@@ -411,7 +388,7 @@ class PassOpenD extends Component {
                         </Col>
                     </Row>
                 </Card>
-                <Card title="IX账户身份信息" bordered={true} style={{marginTop : 30}}>
+                <Card title="IX账户身份信息" bordered={true} style={{marginTop: 30}}>
                     <Row gutter={16}>
 
                         <Col md={8}>
@@ -462,12 +439,12 @@ class PassOpenD extends Component {
                     </Row>
 
                 </Card>
-                <Card title="IX账户身份查重" bordered={true} style={{marginTop : 30}}>
+                <Card title="IX账户身份查重" bordered={true} style={{marginTop: 30}}>
 
                     <Row gutter={12}>
                         <Col md={4}>
                             <div style={{display: 'flex', minHeight: 40}}>
-                                <Select defaultValue="聯繫電話" style={{ width: 120 }} >
+                                <Select defaultValue="聯繫電話" style={{width: 120}}>
                                     <Option value="0">聯繫電話</Option>
                                     <Option value="1">女</Option>
                                 </Select>
@@ -494,17 +471,23 @@ class PassOpenD extends Component {
                             </div>
                         </Col>
                         <Col md={24}>
-                            <div style={{display: 'flex', minHeight: 40  }}>
+                            <div style={{display: 'flex', minHeight: 40}}>
                                 <h3 style={{margin: 'auto'}}>本库查询结果：本库有1条信息重合</h3>
                             </div>
                         </Col>
                     </Row>
                 </Card>
-                <Card title="IX账户审核备注" bordered={true} style={{marginTop : 30}}>
+                <Card title="IX账户审核备注" bordered={true} style={{marginTop: 30}}>
                     <div>
-                        <Button  disabled = {this.state.isNeedSave} loading={this.state.iconLoading} onClick={() => this.openOK()}>开户通过</Button>
-                        <Button  disabled = {!this.state.isNeedSave}   onClick={() => this.saveData()}>保存</Button>
-                        <Button  disabled = {this.state.isNeedSave}  loading={this.state.iconcanLoading} onClick={() => this.saveReject()}>拒绝</Button>
+                        <Button disabled={this.state.isNeedSave} loading={this.state.iconLoading}
+                                onClick={() => this.openOK()}>开户通过</Button>
+                        {/*<Popconfirm placement="top" title={'save data'} onConfirm={this.confirm} okText="Yes" cancelText="No">*/}
+                            {/*<Button>Top</Button>*/}
+                        {/*</Popconfirm>*/}
+                        <Button disabled={!this.state.isNeedSave} onClick={() => this.saveData()}>保存</Button>
+                        <Button  onClick={() => this.saveData()}>保存@@</Button>
+                        <Button disabled={this.state.isNeedSave} loading={this.state.iconcanLoading}
+                                onClick={() => this.saveReject()}>拒绝</Button>
                     </div>
                 </Card>
 
@@ -578,15 +561,15 @@ class PassOpenD extends Component {
                     okText="确认"
                     cancelText="取消"
                 >
-                    <p>Bla bla ...</p>
-                    <p>Bla bla ...</p>
-                    <p>Bla bla ...</p>
+                    <p>*姓（中文）:{this.state.recordData.lastNameCn}-->{this.state.waitUpdate.lastNameCn}</p>
                 </Modal>
             </div>
         )
     }
 
-
+    confirm = () => {
+        message.info('Clicked on Yes.');
+    };
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
         const year = dateObj.getFullYear() // 获取年，
@@ -639,6 +622,7 @@ class PassOpenD extends Component {
 
         message.success('ok 開戶成功')
     };
+
     saveReject = () => {
 
         this.setState({
@@ -656,7 +640,7 @@ class PassOpenD extends Component {
                 iconcanLoading: false,
             });
 
-            if( response.data.code == 1 ){
+            if (response.data.code == 1) {
                 message.info('拒絕成功')
             }
 
@@ -673,6 +657,8 @@ class PassOpenD extends Component {
     }
 
     hideModal = () => {
+
+
         this.setState({
             visible: false,
         });
@@ -708,14 +694,6 @@ class PassOpenD extends Component {
     };
 
 
-    onChangeActypes = (checkedValues) => {
-        console.log('hcia', 'radio3 checked', checkedValues);
-        this.setState({
-            accountTypeCheckList: checkedValues,
-        });
-    };
-
-
     onChangetradeType = (e) => {
         console.log('radio3 checked', e.target.value);
         this.setState({
@@ -724,16 +702,30 @@ class PassOpenD extends Component {
     }
 
 
-    onChangeSSS = (e) => {
-        console.log('radio3 checked', e.target.value);
+
+
+    onChangelastNameCn = (e) => {
+
+        this.state.waitUpdate.lastNameCn = e.target.value
         this.setState({
-            sss: e.target.value,
+            isNeedSave:true,
+        });
+    }
+
+    onChangeSSS = (e) => {
+        console.log('hcia',e.target.getAttribute('tagkey'));
+        console.log('hcia','radio3 checked', e.target.value);
+
+
+        this.state.waitUpdate.lastNameCn = e.target.value
+        this.setState({
+            isNeedSave:true,
         });
     }
     onChangeBirth = (value, dateString) => {
-        console.log('hcia value' , value)
-        console.log('hcia dateString' , dateString)
-       
+        console.log('hcia value', value)
+        console.log('hcia dateString', dateString)
+
     }
 }
 

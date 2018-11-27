@@ -54,7 +54,7 @@ window.Axios.interceptors.request.use(
 
 window.Axios.interceptors.response.use(function (response) {
     // token 已过期，重定向到登录页面
-    console.log('hcia response' , response)
+    // console.log('hcia response' , response)
 
     if (response.data.code != 1){
 
