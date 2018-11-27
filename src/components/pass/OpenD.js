@@ -34,8 +34,7 @@ class PassOpenD extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userList: []
-            , isNeedSave: false
+             isNeedSave: false
             , recordData: {}
             , recordDictirys: {}
             , waitUpdate: {}
@@ -44,6 +43,7 @@ class PassOpenD extends Component {
             , visible: false
             , tradrType: 'CFD'
             , testeee: '1976-11-23'
+            , mGender: ''
             , sss: 'aa'
             , gallery: null
 
@@ -73,11 +73,9 @@ class PassOpenD extends Component {
 
             self.setState({
                 recordData: response.data.data,
-                testeee: self.timestampToTime(response.data.data.dateOfBirth)
-
+                testeee: self.timestampToTime(response.data.data.dateOfBirth),
+                mGender: response.data.data.gender
             });
-
-
         }).catch(function (error) {
             console.log(error);
         });
@@ -91,6 +89,7 @@ class PassOpenD extends Component {
             <div>
 
                 <div>id: {this.state.recordData.id}</div>
+                <div>gender: {this.state.recordData.gender}</div>
                 <div>isNeedSave :{this.state.isNeedSave.toString()}</div>
                 <div>test waitUpdate :{JSON.stringify(this.state.waitUpdate)}</div>
                 {/*<div>test check :{JSON.stringify(this.state.recordDictirys)}</div>*/}
@@ -278,10 +277,11 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*性别</span>
-                                    <Select defaultValue={this.state.recordData.gender}
+                                    <Select value={this.state.mGender}
+                                            onChange={this.onChangegender}
                                             style={{width: 120}}>
                                         <Option value="Male">男</Option>
-                                        <Option value="FeMale">女</Option>
+                                        <Option value="Female">女</Option>
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
@@ -565,6 +565,7 @@ class PassOpenD extends Component {
                     <p>*名 :{this.state.recordData.firstName}-->{this.state.waitUpdate.firstName}</p>
                     <p>*名 :{this.state.recordData.lastName}-->{this.state.waitUpdate.lastName}</p>
                     <p>出生日期 :{ this.timestampToTime(this.state.recordData.dateOfBirth)}-->{this.timestampToTime(this.state.waitUpdate.dateOfBirth)}</p>
+                    <p>性别 :{this.state.recordData.gender}-->{this.state.waitUpdate.gender==0?'Female':'Male'}</p>
                 </Modal>
             </div>
         )
@@ -621,7 +622,6 @@ class PassOpenD extends Component {
     saveData = () => {
         this.showModal()
     };
-
     saveReject = () => {
 
         this.setState({
@@ -653,15 +653,12 @@ class PassOpenD extends Component {
         this.setState({
             visible: true,
         });
-    }
-
+    };
     hideModal = () => {
-
-
         this.setState({
             visible: false,
         });
-    }
+    };
     openGallery = (item) => {
         const items = [
             {
@@ -697,8 +694,6 @@ class PassOpenD extends Component {
             tradrType: e.target.value,
         });
     }
-
-
     checkSaveData = () => {
 
         let self = this
@@ -739,7 +734,6 @@ class PassOpenD extends Component {
             isNeedSave: true,
         });
     }
-
     onChangelastName = (e) => {
         this.state.waitUpdate.lastName = e.target.value
         this.setState({
@@ -772,6 +766,20 @@ class PassOpenD extends Component {
         });
 
     }
+    onChangegender = (value) => {
+
+        console.log('hcia value' , value)
+        this.state.waitUpdate.gender = (value === 'Male'?1:0);
+
+        this.setState({
+            mGender:value,//1:male 0:female
+            isNeedSave: true,
+        });
+
+    }
+
+
+
     onChangeSSS = (e) => {
         console.log('hcia', e.target.getAttribute('tagkey'));
         console.log('hcia', 'radio3 checked', e.target.value);
