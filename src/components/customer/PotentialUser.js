@@ -161,7 +161,7 @@ class PotentialUser extends Component {
             }
             ];
         this.requestListData("1")
-				this.requestUserCommentList()
+		this.requestUserCommentList()
 
     }
     render() {
