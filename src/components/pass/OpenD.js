@@ -403,7 +403,10 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*风险承受力</span>
-                                    <Select value={this.state.mriskTolerance}>
+                                    <Select
+                                        style={{maxWidth: 220}}
+                                        onChange={this.onChangemriskTolerance}
+                                        value={this.state.mriskTolerance}>
                                         {this.mIXRisk_Tolerance}
                                     </Select>
                                 </div>
@@ -619,7 +622,7 @@ class PassOpenD extends Component {
                     <p>*是否美国公民 :{this.state.recordData.usCitizenOrResidentForTaxPurpposes}-->{this.state.ix_UStaxNAME}:{this.state.waitUpdate.ix_UStax}</p>
                     <p>*交易经验 :{this.state.recordData.yearsTrading}-->{this.state.ix_Trading_ExperienceNAME}:{this.state.waitUpdate.ix_Trading_Experience}</p>
                     <p>*交易目的 :{this.state.recordData.tradingObjectives}-->{this.state.ix_Trading_ObjectivesNAME}:{this.state.waitUpdate.ix_Trading_Objectives}</p>
-                    <p>*风险承受力 :{this.state.recordData.riskTolerance}-->{this.state.ix_UStaxNAME}:{this.state.waitUpdate.ix_UStax}</p>
+                    <p>*风险承受力 :{this.state.recordData.riskTolerance}-->{this.state.ix_Risk_ToleranceNAME}:{this.state.waitUpdate.ix_Risk_Tolerance}</p>
                 </Modal>
             </div>
 
@@ -945,11 +948,11 @@ class PassOpenD extends Component {
             }
         });
 
-        this.state.waitUpdate.ix_Trading_Objectives = tmpv;
-        this.state.ix_Trading_ObjectivesNAME = value;
+        this.state.waitUpdate.ix_Trading_Experience = tmpv;
+        this.state.ix_Trading_ExperienceNAME = value;
         //
         this.setState({
-            mtradingObjectives: value,
+            myearsTrading: value,
             isNeedSave: true,
         });
 
@@ -969,6 +972,25 @@ class PassOpenD extends Component {
         //
         this.setState({
             mtradingObjectives: value,
+            isNeedSave: true,
+        });
+
+    }
+    onChangemriskTolerance = (value) => {
+
+
+        var tmpv = ''
+        this.state.IXRisk_Tolerance.forEach(function (element) {
+            if (element.name == value) {
+                tmpv = element.value
+            }
+        });
+
+        this.state.waitUpdate.ix_Risk_Tolerance = tmpv;
+        this.state.ix_Risk_ToleranceNAME = value;
+        //
+        this.setState({
+            mriskTolerance: value,
             isNeedSave: true,
         });
 
