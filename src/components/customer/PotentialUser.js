@@ -1,3 +1,4 @@
+/* eslint-disable react/sort-comp */
 
 import React, { Component } from 'react';
 import {Col, Card, Row,DatePicker,Input,Modal,Button, Table, Icon,Checkbox} from 'antd';
@@ -77,7 +78,7 @@ class PotentialUser extends Component {
 				 				// checked={this.state.checked}
 				 				// disabled={this.state.disabled}
 				 				onChange={this.hasChange}
-							></Checkbox>),
+							 />),
 					 }
 						,{
                 title: '手机号',
@@ -150,7 +151,7 @@ class PotentialUser extends Component {
                 width: 300,
                 render: (text, record) => (
                     <div>
-                        <span className="ant-divider"/>
+                        <span className="ant-divider" />
                         <Button className="ant-dropdown-link" onClick={() => this.showModal()}>添加備註</Button>
 												<Button className="ant-dropdown-link" onClick={() => this.showModal2()}>操作日誌</Button>
 
@@ -186,19 +187,17 @@ class PotentialUser extends Component {
                 />
 
 								<Modal
-									id = 'modal1'
 				          title="添加備註"
 				          visible={this.state.visible}
 				          onOk={this.handleOk}
 				          onCancel={this.handleCancel}
 									okText="確認"
 									cancelText="取消"
-				        >
+								>
 				          <p><DatePicker onChange={this.selectDate} /></p>
 				          <p><Input placeholder="填写回访次数以及结果" /></p>
 				        </Modal>
 								<Modal
-									id = 'modal2'
 									title="操作日誌"
 									visible={this.state.modal2Visible}
 									onOk={this.handleOk}
@@ -230,14 +229,14 @@ class PotentialUser extends Component {
         };
     }
     hasChange = (status) =>{
-			console.log('sssss',status.target.checked)
+			console.log('yyx',status.target.checked)
 
     }
 		checkDiary = () => {
 
 		}
 		selectDate = (date, dateString) => {
-  	       console.log(dateString,'ggggg',date);
+  	       console.log(dateString,'yyx',date);
 		}
 
     requestListData = (listType) => {
