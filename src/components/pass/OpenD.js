@@ -14,7 +14,7 @@ import PhotoswipeUIDefault from "photoswipe/dist/photoswipe-ui-default";
 import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
 import moment from 'moment';
-
+const Search = Input.Search;
 const CheckboxGroup = Checkbox.Group;
 
 const RadioGroup = Radio.Group;
@@ -43,6 +43,7 @@ class PassOpenD extends Component {
             , tradrType: 'CFD'
             , testeee: '1976-11-23'
             , mGender: ''
+            , checkfromdbName: ''
             , mAnnualIncome: ''
             , sss: 'aa'
             , IXIncomeList: []
@@ -94,6 +95,7 @@ class PassOpenD extends Component {
                 myearsTrading: response.data.data.yearsTrading,
                 mtradingObjectives: response.data.data.tradingObjectives,
                 mriskTolerance: response.data.data.riskTolerance,
+                checkfromdbName: response.data.data.phoneNumber,
             });
         }).catch(function (error) {
             console.log(error);
@@ -101,7 +103,11 @@ class PassOpenD extends Component {
 
 
     }
-
+    onTodoChange(value){
+        this.setState({
+            checkfromdbName: value
+        });
+    }
 
     render() {
         this.mIncomesOPS = this.state.IXIncomeList.map(d => <Option key={d.name}>{d.name}</Option>);
@@ -117,9 +123,9 @@ class PassOpenD extends Component {
             <div>
 
                 <div>id: {this.state.recordData.id}</div>
-                <div>gender: {this.state.recordData.gender}</div>
                 <div>isNeedSave :{this.state.isNeedSave.toString()}</div>
                 <div>waitUpdate :{JSON.stringify(this.state.waitUpdate)}</div>
+                <div>checkfromdbName :{JSON.stringify(this.state.checkfromdbName)}</div>
                 {/*<div>recordDictirys :{JSON.stringify(this.state.recordDictirys)}</div>*/}
 
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
@@ -194,7 +200,8 @@ class PassOpenD extends Component {
                                     服务器 :
                                     <Select labelInValue defaultValue={{key: 'jack'}}
                                             style={{marginLeft: 20, width: 120}}
-                                            onChange={this.handleChange}>
+                                            onChange={this.handleChange}
+                                    >
                                         <Option value="jack">服务器地址</Option>
                                         <Option value="lucy">Lucy (101)</Option>
                                     </Select>
@@ -487,17 +494,22 @@ class PassOpenD extends Component {
                     <Row gutter={12}>
                         <Col md={4}>
                             <div style={{display: 'flex', minHeight: 40}}>
-                                <Select defaultValue="聯繫電話" style={{width: 120}}>
-                                    <Option value="0">聯繫電話</Option>
-                                    <Option value="1">女</Option>
+                                <Select
+                                    onChange={this.checkfromdbType}
+                                    defaultValue="0"
+                                    style={{width: 120}}>
+                                    <Option value="0">手机号</Option>
+                                    <Option value="1">身份证</Option>
+                                    <Option value="2">邮箱</Option>
                                 </Select>
                             </div>
 
                         </Col>
                         <Col md={8}>
                             <div style={{display: 'flex', minHeight: 40}}>
-
-                                <Input defaultValue={this.state.recordData.country}
+                                <Search
+                                       value={this.state.checkfromdbName}
+                                       onChange={e => this.onTodoChange(e.target.value)}
                                        style={{width: 220}} placeholder="输入要查询的内容"/>
                             </div>
                         </Col>
@@ -747,7 +759,15 @@ class PassOpenD extends Component {
         this.gallery.init();
     };
     handleChange = (value) => {
-        console.log(value); // { key: "lucy", label: "Lucy (101)" }
+        console.log('hcia value' , value)
+    };
+    checkfromdbType = (value) => {
+        console.log('hcia value' , value)
+
+        this.setState({
+            checkfromdbName: (value==0 ? this.state.recordData.phoneNumber : value==1 ? this.state.recordData.nationalID : this.state.recordData.email)
+        });
+
     };
     onChangetradeType = (e) => {
         console.log('radio3 checked', e.target.value);
