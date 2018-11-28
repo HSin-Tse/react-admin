@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, Icon} from 'antd';
+import {Button, Table, Icon,Input} from 'antd';
 
 
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
@@ -10,6 +10,15 @@ import axios from 'axios';
 
 class Basic extends Component {
 
+    handleSearch = (selectedKeys, confirm) => () => {
+        confirm();
+        this.setState({ searchPhone: selectedKeys[0] });
+    }
+
+    handleReset = clearFilters => () => {
+        clearFilters();
+        this.setState({ searchPhone: '' });
+    }
 
     componentDidMount() {
         this.columns = [
@@ -18,6 +27,21 @@ class Basic extends Component {
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
                 fixed: 'left',
+                onFilter: (value, record) => record.phoneNumber == this.state.searchPhone,
+
+                filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
+                    <div className="custom-filter-dropdown">
+                        <Input
+                            ref={ele => this.searchInput = ele}
+                            placeholder="Search name"
+                            value={selectedKeys[0]}
+                            onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+                            onPressEnter={this.handleSearch(selectedKeys, confirm)}
+                        />
+                        <Button type="primary" onClick={this.handleSearch(selectedKeys, confirm)}>Search</Button>
+                        <Button onClick={this.handleReset(clearFilters)}>Reset</Button>
+                    </div>
+                ),
                 width: 100,
                 render: (text, record) => (
                     <Button>{record.phoneNumber}</Button>),
