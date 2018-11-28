@@ -38,15 +38,17 @@ export default class CRouter extends Component {
         return component;
     };
     requireLogin = (component, permission) => {
-        const { auth } = this.props;
-        const { permissions } = auth.data;
+        // const { auth } = this.props;
+        // const { permissions } = auth.data;
 
 
 
         if ( !localStorage.getItem('too')) { // 线上环境判断是否登录
             return <Redirect to={'/login'} />;
+        }else{
+            return component
         }
-        return permission ? this.requireAuth(permission, component) : component;
+        // return permission ? this.requireAuth(permission, component) : component;
     };
     render() {
         return (
