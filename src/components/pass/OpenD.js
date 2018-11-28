@@ -17,7 +17,7 @@ import moment from 'moment';
 
 const Search = Input.Search;
 const CheckboxGroup = Checkbox.Group;
-
+const {TextArea} = Input;
 const RadioGroup = Radio.Group;
 const Option = Select.Option;
 
@@ -38,6 +38,8 @@ class PassOpenD extends Component {
             , recordData: {}
             , recordDictirys: {}
             , waitUpdate: {}
+            , changeNoteV: ''
+            , changeNoteB: false
             , waitSearchDb: {}
             , iconLoading: false
             , checkderes: null
@@ -533,7 +535,8 @@ class PassOpenD extends Component {
                         </Col>
                         <Col md={24}>
                             <div style={{display: 'flex', minHeight: 40}}>
-                                { this.state.checkderes == null ? null : <h3 style={{margin: 'auto'}}>本库查询结果：{this.state.checkderes?'有':'無'}重合</h3> }
+                                {this.state.checkderes == null ? null :
+                                    <h3 style={{margin: 'auto'}}>本库查询结果：{this.state.checkderes ? '有' : '無'}重合</h3>}
 
 
                             </div>
@@ -541,16 +544,34 @@ class PassOpenD extends Component {
                     </Row>
                 </Card>
                 <Card title="IX账户审核备注" bordered={true} style={{marginTop: 30}}>
-                    <div>
-                        <Button disabled={this.state.isNeedSave} loading={this.state.iconLoading}
-                                onClick={() => this.openOK()}>开户通过</Button>
-                        {/*<Popconfirm placement="top" title={'save data'} onConfirm={this.confirm} okText="Yes" cancelText="No">*/}
-                        {/*<Button>Top</Button>*/}
-                        {/*</Popconfirm>*/}
-                        <Button disabled={!this.state.isNeedSave} onClick={() => this.saveData()}>保存</Button>
-                        <Button disabled={this.state.isNeedSave} loading={this.state.iconcanLoading}
-                                onClick={() => this.saveReject()}>拒绝</Button>
-                    </div>
+                    <Row gutter={12}>
+
+                        <Col md={24}>
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <TextArea rows={4} onChange={this.changeNote}/>
+                            </div>
+                        </Col>
+                        {/*<Input defaultValue={this.state.recordData.lastNameCn}*/}
+                        {/*onChange={this.onChangelastNameCn}*/}
+                        {/*style={{width: 120}} placeholder="Basic usage" tagkey="lastNameCn"*/}
+                        {/*sdsd={'dd'}/>*/}
+
+                    </Row>
+                    <Row gutter={12}>
+                        <Card style={{marginTop: 10}}>
+
+                            <div>
+                                <Button disabled={this.state.isNeedSave} loading={this.state.iconLoading}
+                                        onClick={() => this.openOK()}>开户通过</Button>
+                                <Button disabled={!this.state.isNeedSave} onClick={() => this.saveData()}>保存客戶信息</Button>
+                                {/*<Button disabled={!this.state.changeNoteB} onClick={() => this.saveNote()}>保存备注</Button>*/}
+                                <Button disabled={this.state.isNeedSave} loading={this.state.iconcanLoading}
+                                        onClick={() => this.saveReject()}>拒绝</Button>
+                            </div>
+                        </Card>
+
+                    </Row>
+
                 </Card>
 
                 <div className="gutter-example button-demo">
@@ -681,6 +702,7 @@ class PassOpenD extends Component {
 
         window.Axios.post('/open/passOpenApply', {
             'language': 'zh-CN',
+            'content': me.state.changeNoteV,
             'belongUserId': me.state.recordData.belongUserId,
             'id': me.state.recordData.id,
         }).then(function (response) {
@@ -718,25 +740,25 @@ class PassOpenD extends Component {
                 console.log('hcia response', response)
                 me.setState({
                     icondbALoading: false,
-                    checkderes:response.data.data.isExist
+                    checkderes: response.data.data.isExist
 
                 });
             }).catch(function (error) {
                 console.log(error);
             });
-        }else if(this.state.checkfromdbTypeV == 1){
+        } else if (this.state.checkfromdbTypeV == 1) {
             window.Axios.post('/open/localExistOpenAccount', {
                 'nationalId': me.state.checkfromdbName,
             }).then(function (response) {
                 console.log('hcia response', response)
                 me.setState({
                     icondbALoading: false,
-                    checkderes:response.data.data.isExist
+                    checkderes: response.data.data.isExist
                 });
             }).catch(function (error) {
                 console.log(error);
             });
-        }else if(this.state.checkfromdbTypeV == 2){
+        } else if (this.state.checkfromdbTypeV == 2) {
             window.Axios.post('/open/localExistOpenAccount', {
                 'email': me.state.checkfromdbName,
             }).then(function (response) {
@@ -748,7 +770,6 @@ class PassOpenD extends Component {
                 console.log(error);
             });
         }
-
 
 
     };
@@ -787,6 +808,27 @@ class PassOpenD extends Component {
     saveData = () => {
         this.showModal()
     };
+
+    // saveNote = () => {
+    //     let me = this;
+    //     window.Axios.post('/star/unBindStarLiveAccount', {
+    //         // "language":"zh-CN","userId":"#############################"
+    //         'belongUserId': me.state.recordData.belongUserId,
+    //         'content': me.state.changeNoteV
+    //     }).then(function (response) {
+    //
+    //         me.setState({
+    //             changeNoteB: false,
+    //         });
+    //
+    //         if (response.data.code == 1) {
+    //             message.success('saveNote ok')
+    //         }
+    //
+    //     }).catch(function (error) {
+    //         console.log(error);
+    //     });
+    // };
     saveReject = () => {
 
         this.setState({
@@ -796,7 +838,7 @@ class PassOpenD extends Component {
 
         window.Axios.post('/open/cancelOpenApply', {
             // "language":"zh-CN","userId":"#############################"
-            'language': 'zh-CN',
+            'content': me.state.changeNoteV,
             'id': me.state.recordData.id
         }).then(function (response) {
 
@@ -896,6 +938,16 @@ class PassOpenD extends Component {
         });
 
     }
+    changeNote = (e) => {
+        this.state.changeNoteV = e.target.value
+        this.state.changeNoteB = true
+        this.setState({
+            changeNoteB: true,
+        });
+        console.log('hcia this.state.changeNoteV', this.state.changeNoteV)
+    }
+
+
     onChangelastNameCn = (e) => {
         this.state.waitUpdate.lastNameCn = e.target.value
         this.setState({
