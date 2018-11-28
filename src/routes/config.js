@@ -65,13 +65,13 @@ export default {
         //         { key: '/app/chart/recharts', title: 'recharts', component: 'Recharts' },
         //     ],
         // },
-        {
-            key: '/subs4', title: '页面', icon: 'switcher',
-            subs: [
-                { key: '/login', title: '登录' },
-                { key: '/404', title: '404' },
-            ],
-        },
+        // {
+        //     key: '/subs4', title: '页面', icon: 'switcher',
+        //     subs: [
+        //         { key: '/login', title: '登录' },
+        //         { key: '/404', title: '404' },
+        //     ],
+        // },
         // {
         //     key: '/app/auth', title: '權限測試', icon: 'safety',
         //     subs: [
@@ -85,5 +85,10 @@ export default {
         // },
     ],
 
-    others: [ {route: '/app/pass/passopen/detail:id', title: 'PassOpenD', icon: 'star', component: 'PassOpenD'}] // 非菜单相关路由
+    others:
+        [
+            {route: '/app/pass/passopen/detail:id', title: 'PassOpenD', icon: 'star', component: 'PassOpenD'},
+            {route: '/app/customer/SimulatorUser', title: 'SimulatorUser', icon: 'star', component: 'SimulatorUser'},
+            {route: '/app/pass/IntendingUser', title: 'IntendingUser', icon: 'star', component: 'IntendingUser'}
+        ] // 非菜单相关路] // 非菜单相关路由
 }

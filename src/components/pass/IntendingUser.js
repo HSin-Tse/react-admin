@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import {Col, Card, Row,DatePicker,Input,Modal,Button, Table, Icon,Checkbox} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import axios from 'axios';
-class PotentialUser extends Component {
+class IntendingUser extends Component {
 	state = { visible: false,modal2Visible:false }
 
 
@@ -172,7 +172,7 @@ class PotentialUser extends Component {
         return(
              <div>
                 <div>log: {this.state.anyThing}</div>
-                <div>yyxLog log: PotentialUser</div>
+                <div>yyxLog log: 意向用戶</div>
 								<div />
                 <BreadcrumbCustom first="用户管理" second="Leads管理" />
 
@@ -180,7 +180,7 @@ class PotentialUser extends Component {
 
                     <Button type="primary">潛在用戶</Button>
                     <Button onClick={() => this.goToSimulator()} type="primary">模擬用戶</Button>
-                    <Button onClick={() => this.goToIntend()} type="primary">意向用戶</Button>
+                    <Button onClick={() => this.requestListData("3")} type="primary">意向用戶</Button>
                 </div>
 
                 <Table rowKey="id"
@@ -236,11 +236,7 @@ class PotentialUser extends Component {
 		this.props.history.push('/app/customer/SimulatorUser')
 
 	}
-	goToIntend =() =>{
-		//
-		this.props.history.push('/app/pass/IntendingUser')
-
-	}
+	
     hasChange = (status) =>{
 			console.log('yyx',status.target.checked)
 
@@ -308,4 +304,4 @@ class PotentialUser extends Component {
 		}
 }
 
-export default PotentialUser;
+export default IntendingUser;

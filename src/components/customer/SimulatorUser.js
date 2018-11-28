@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import {Col, Card, Row,DatePicker,Input,Modal,Button, Table, Icon,Checkbox} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import axios from 'axios';
-class PotentialUser extends Component {
+class SimulatorUser extends Component {
 	state = { visible: false,modal2Visible:false }
 
 
@@ -88,7 +88,7 @@ class PotentialUser extends Component {
 					/>),
 			 }
 				,{
-		title: '手ㄋ机号',
+		title: '手机号',
 		dataIndex: 'phoneNumber',
 		key: 'phoneNumber',
 		// fixed: 'left',
@@ -167,20 +167,21 @@ class PotentialUser extends Component {
 		),
 	}
 	];
+	// this.columns = null
 	}
     render() {
         return(
              <div>
                 <div>log: {this.state.anyThing}</div>
-                <div>yyxLog log: PotentialUser</div>
+                <div>yyxLog log: SimulatorUser</div>
 								<div />
                 <BreadcrumbCustom first="用户管理" second="Leads管理" />
 
                 <div>
 
-                    <Button type="primary">潛在用戶</Button>
-                    <Button onClick={() => this.goToSimulator()} type="primary">模擬用戶</Button>
-                    <Button onClick={() => this.goToIntend()} type="primary">意向用戶</Button>
+                    <Button onClick={() => this.requestListData("1")} type="primary">潛在用戶</Button>
+                    <Button onClick={() => this.requestListData("2")} type="primary">模擬用戶</Button>
+                    <Button onClick={() => this.requestListData("3")} type="primary">意向用戶</Button>
                 </div>
 
                 <Table rowKey="id"
@@ -231,26 +232,17 @@ class PotentialUser extends Component {
 
 
         };
-	}
-	goToSimulator = () => {
-		this.props.history.push('/app/customer/SimulatorUser')
-
-	}
-	goToIntend =() =>{
-		//
-		this.props.history.push('/app/pass/IntendingUser')
-
-	}
+    }
     hasChange = (status) =>{
 			console.log('yyx',status.target.checked)
 
     }
-	checkDiary = () => {
+		checkDiary = () => {
 
-	}
-	selectDate = (date, dateString) => {
+		}
+		selectDate = (date, dateString) => {
   	       console.log(dateString,'yyx',date);
-	}
+		}
 
     requestListData = (listType) => {
 		this.setState({is_tag: '123321',tableType: listType});
@@ -308,4 +300,4 @@ class PotentialUser extends Component {
 		}
 }
 
-export default PotentialUser;
+export default SimulatorUser;

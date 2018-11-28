@@ -27,10 +27,15 @@ import RouterEnter from './auth/RouterEnter';
 import PassOpen from './pass/Open';
 import PassOpenD from './pass/OpenD';
 import PassLever from './pass/Lever';
+
+import SimulatorUser from './customer/SimulatorUser';
+import IntendingUser from './pass/IntendingUser';
 import PotentialUser from './customer/PotentialUser'
 import BlackList from './customer/BlackList'
 import WhiteList from './customer/WhiteList'
 
+//IntendingUser
+//IntendingUser
 import Cssmodule from './cssmodule';
 import MapUi from './ui/map';
 
@@ -43,6 +48,5 @@ export default {
     BasicForm, BasicTable, AdvancedTable, AsynchronousTable,
     Echarts, Recharts, Icons, Buttons, Spins, Modals, Notifications,
     Tabs, Banners, Drags,PassOpen,PassLever, Dashboard, Gallery, BasicAnimations,
-    ExampleAnimations, AuthBasic, RouterEnter, WysiwygBundle,PassOpenD,
-    Cssmodule, MapUi,PotentialUser,BlackList,WhiteList
+    ExampleAnimations, AuthBasic, RouterEnter, WysiwygBundle,PassOpenD, MapUi,PotentialUser,SimulatorUser,IntendingUser
 }
