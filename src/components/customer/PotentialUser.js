@@ -167,19 +167,18 @@ class PotentialUser extends Component {
 		),
 	}
 	];
-	// this.columns = null
 	}
     render() {
         return(
              <div>
                 <div>log: {this.state.anyThing}</div>
-                <div>yyxLog log: Lead</div>
+                <div>yyxLog log: PotentialUser</div>
 								<div />
                 <BreadcrumbCustom first="用户管理" second="Leads管理" />
 
                 <div>
 
-                    <Button onClick={() => this.requestListData("1")} type="primary">潛在用戶</Button>
+                    <Button type="primary">潛在用戶</Button>
                     <Button onClick={() => this.goToSimulator()} type="primary">模擬用戶</Button>
                     <Button onClick={() => this.requestListData("3")} type="primary">意向用戶</Button>
                 </div>
@@ -237,16 +236,19 @@ class PotentialUser extends Component {
 		this.props.history.push('/app/customer/SimulatorUser')
 
 	}
+	goToIntend =() =>{
+
+	}
     hasChange = (status) =>{
 			console.log('yyx',status.target.checked)
 
     }
-		checkDiary = () => {
+	checkDiary = () => {
 
-		}
-		selectDate = (date, dateString) => {
+	}
+	selectDate = (date, dateString) => {
   	       console.log(dateString,'yyx',date);
-		}
+	}
 
     requestListData = (listType) => {
 		this.setState({is_tag: '123321',tableType: listType});

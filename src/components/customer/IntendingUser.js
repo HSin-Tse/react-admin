@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import {Col, Card, Row,DatePicker,Input,Modal,Button, Table, Icon,Checkbox} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import axios from 'axios';
-class SimulatorUser extends Component {
+class IntendingUser extends Component {
 	state = { visible: false,modal2Visible:false }
 
 
@@ -300,4 +300,4 @@ class SimulatorUser extends Component {
 		}
 }
 
-export default SimulatorUser;
+export default IntendingUser;
