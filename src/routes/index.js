@@ -32,8 +32,9 @@ export default class CRouter extends Component {
     requireAuth = (permission, component) => {
         const { auth } = this.props;
         const { permissions } = auth.data;
+        console.log('hcia permissions' , permissions)
         // const { auth } = store.getState().httpData;
-        if (!permissions || !permissions.includes(permission)) return <Redirect to={'404'} />;
+        // if (!permissions || !permissions.includes(permission)) return <Redirect to={'404'} />;
         return component;
     };
     requireLogin = (component, permission) => {
