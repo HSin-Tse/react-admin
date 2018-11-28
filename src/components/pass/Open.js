@@ -21,6 +21,7 @@ export default class Basic extends Component {
 
         };
     }
+
     handleSearch = (selectedKeys, confirm) => () => {
         confirm();
         this.setState({searchPhone: selectedKeys[0]});
@@ -135,10 +136,15 @@ export default class Basic extends Component {
     };
 
     requestPage = (pg) => {
-        pg=pg-1
-        let self = this
 
-        console.log('hcia pg' , pg)
+
+        pg = pg - 1
+        let self = this
+        self.setState({
+                loading: true,
+            }
+        );
+        console.log('hcia pg', pg)
         window.Axios.post('open/getOpenApplyList', {
             'pageSize': this.state.pgsize,
             'pageNo': pg,
@@ -147,6 +153,7 @@ export default class Basic extends Component {
 
             self.setState({
                     totalPage: response.data.data.totalPage,
+                    loading: false,
                     userList: response.data.data.list
                 }
             );
