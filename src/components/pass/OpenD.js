@@ -14,6 +14,7 @@ import PhotoswipeUIDefault from "photoswipe/dist/photoswipe-ui-default";
 import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
 import moment from 'moment';
+
 const Search = Input.Search;
 const CheckboxGroup = Checkbox.Group;
 
@@ -37,13 +38,17 @@ class PassOpenD extends Component {
             , recordData: {}
             , recordDictirys: {}
             , waitUpdate: {}
+            , waitSearchDb: {}
             , iconLoading: false
+            , checkderes: null
+            , icondbALoading: false
             , iconcanLoading: false
             , visible: false
             , tradrType: 'CFD'
             , testeee: '1976-11-23'
             , mGender: ''
             , checkfromdbName: ''
+            , checkfromdbTypeV: 0
             , mAnnualIncome: ''
             , sss: 'aa'
             , IXIncomeList: []
@@ -103,7 +108,8 @@ class PassOpenD extends Component {
 
 
     }
-    onTodoChange(value){
+
+    onTodoChange(value) {
         this.setState({
             checkfromdbName: value
         });
@@ -508,26 +514,28 @@ class PassOpenD extends Component {
                         <Col md={8}>
                             <div style={{display: 'flex', minHeight: 40}}>
                                 <Search
-                                       value={this.state.checkfromdbName}
-                                       onChange={e => this.onTodoChange(e.target.value)}
-                                       style={{width: 220}} placeholder="输入要查询的内容"/>
+                                    value={this.state.checkfromdbName}
+                                    onChange={e => this.onTodoChange(e.target.value)}
+                                    style={{width: 220}} placeholder="输入要查询的内容"/>
                             </div>
                         </Col>
                         <Col md={4}>
                             <div style={{display: 'flex', minHeight: 40}}>
-                                <Button onClick={() => this.openOK()}>本库查询</Button>
-
+                                <Button loading={this.state.icondbALoading}
+                                        onClick={() => this.searchFromLocalDB()}>本库查询</Button>
                             </div>
                         </Col>
                         <Col md={4}>
                             <div style={{display: 'flex', minHeight: 40}}>
-                                <Button onClick={() => this.openOK()}>异库查询</Button>
+                                <Button onClick={() => this.searchFromOtherDB()}>异库查询</Button>
 
                             </div>
                         </Col>
                         <Col md={24}>
                             <div style={{display: 'flex', minHeight: 40}}>
-                                <h3 style={{margin: 'auto'}}>本库查询结果：本库有1条信息重合</h3>
+                                { this.state.checkderes == null ? null : <h3 style={{margin: 'auto'}}>本库查询结果：{this.state.checkderes?'有':'無'}重合</h3> }
+
+
                             </div>
                         </Col>
                     </Row>
@@ -633,10 +641,14 @@ class PassOpenD extends Component {
                     <p>*当前年收入:{this.state.recordData.annualIncome}-->{this.state.ix_IncomeNAME}:{this.state.waitUpdate.ix_Income}</p>
                     <p>*初始入金金额占流动资产净值比:{this.state.recordData.initialDepositToYourNetLiquidAssets}-->{this.state.ix_PercentageNAME}:{this.state.waitUpdate.ix_Percentage}</p>
                     <p>*初始入金金额占流动资产净值比:{this.state.recordData.fundsSource}-->{this.state.ix_FundsSourceNAME}:{this.state.waitUpdate.ix_FundsSource}</p>
-                    <p>*是否美国公民 :{this.state.recordData.usCitizenOrResidentForTaxPurpposes}-->{this.state.ix_UStaxNAME}:{this.state.waitUpdate.ix_UStax}</p>
-                    <p>*交易经验 :{this.state.recordData.yearsTrading}-->{this.state.ix_Trading_ExperienceNAME}:{this.state.waitUpdate.ix_Trading_Experience}</p>
-                    <p>*交易目的 :{this.state.recordData.tradingObjectives}-->{this.state.ix_Trading_ObjectivesNAME}:{this.state.waitUpdate.ix_Trading_Objectives}</p>
-                    <p>*风险承受力 :{this.state.recordData.riskTolerance}-->{this.state.ix_Risk_ToleranceNAME}:{this.state.waitUpdate.ix_Risk_Tolerance}</p>
+                    <p>*是否美国公民
+                        :{this.state.recordData.usCitizenOrResidentForTaxPurpposes}-->{this.state.ix_UStaxNAME}:{this.state.waitUpdate.ix_UStax}</p>
+                    <p>*交易经验
+                        :{this.state.recordData.yearsTrading}-->{this.state.ix_Trading_ExperienceNAME}:{this.state.waitUpdate.ix_Trading_Experience}</p>
+                    <p>*交易目的
+                        :{this.state.recordData.tradingObjectives}-->{this.state.ix_Trading_ObjectivesNAME}:{this.state.waitUpdate.ix_Trading_Objectives}</p>
+                    <p>*风险承受力
+                        :{this.state.recordData.riskTolerance}-->{this.state.ix_Risk_ToleranceNAME}:{this.state.waitUpdate.ix_Risk_Tolerance}</p>
                 </Modal>
             </div>
 
@@ -661,6 +673,86 @@ class PassOpenD extends Component {
         return +str >= 10 ? str : '0' + str
     };
     openOK = () => {
+
+        this.setState({
+            iconLoading: true,
+        });
+        var me = this;
+
+        window.Axios.post('/open/passOpenApply', {
+            'language': 'zh-CN',
+            'belongUserId': me.state.recordData.belongUserId,
+            'id': me.state.recordData.id,
+        }).then(function (response) {
+
+
+            me.setState({
+                iconLoading: false,
+            });
+            console.log(response);
+
+            if (response.data.code == 1) {
+
+                message.success('開戶通過')
+                me.props.history.goBack()
+
+            }
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+
+    };
+    searchFromLocalDB = () => {
+
+        this.setState({
+            icondbALoading: true,
+        });
+        var me = this;
+
+        if (this.state.checkfromdbTypeV == 0) {
+            window.Axios.post('/open/localExistOpenAccount', {
+                'phoneNumber': me.state.checkfromdbName,
+            }).then(function (response) {
+                console.log('hcia response', response)
+                me.setState({
+                    icondbALoading: false,
+                    checkderes:response.data.data.isExist
+
+                });
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }else if(this.state.checkfromdbTypeV == 1){
+            window.Axios.post('/open/localExistOpenAccount', {
+                'nationalId': me.state.checkfromdbName,
+            }).then(function (response) {
+                console.log('hcia response', response)
+                me.setState({
+                    icondbALoading: false,
+                    checkderes:response.data.data.isExist
+                });
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }else if(this.state.checkfromdbTypeV == 2){
+            window.Axios.post('/open/localExistOpenAccount', {
+                'email': me.state.checkfromdbName,
+            }).then(function (response) {
+                console.log('hcia response', response.data.data.isExist)
+                me.setState({
+                    icondbALoading: false,
+                });
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+
+
+
+    };
+    searchFromOtherDB = () => {
 
         this.setState({
             iconLoading: true,
@@ -759,13 +851,14 @@ class PassOpenD extends Component {
         this.gallery.init();
     };
     handleChange = (value) => {
-        console.log('hcia value' , value)
+        console.log('hcia value', value)
     };
     checkfromdbType = (value) => {
-        console.log('hcia value' , value)
+        console.log('hcia value', value)
 
         this.setState({
-            checkfromdbName: (value==0 ? this.state.recordData.phoneNumber : value==1 ? this.state.recordData.nationalID : this.state.recordData.email)
+            checkfromdbName: (value == 0 ? this.state.recordData.phoneNumber : value == 1 ? this.state.recordData.nationalID : this.state.recordData.email),
+            checkfromdbTypeV: value
         });
 
     };
