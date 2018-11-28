@@ -7,7 +7,12 @@ export default class BlackList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            bklistA: {}
+            bklistA: {},
+            current: 0,
+            totalpage: 0,
+            pgsize: 2,
+            loading: false,
+
         };
     }
 
@@ -67,28 +72,56 @@ export default class BlackList extends Component {
                     </div>
                 ),
             }];
+
+        this.requestPage(0)
+
+
+    }
+
+    requestPage = (pg) => {
         let self = this
+
         window.Axios.post('auth/getBlackList', {
             'listType': '2',//1:合规 2:开户 3:交易
+            'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
         }).then((response) => {
             console.log('hcia response', response)
 
             self.setState({
+                pageNO: pg,
+                totalpage: response.data.data.totalPage,
                 bklistA: response.data.data,
             });
         }).catch(function (error) {
             console.log(error);
         });
-
     }
 
+    changePage = (page) => {
+        console.log('hcia page', page)
+        this.setState({
+            current: page,
+        }, () => {
+
+            this.requestPage(page)
+
+            // console.log('hcia current' , current)
+            // let param = JSON.parse(JSON.stringify(this.state.param))
+            // param = {
+            //     ...param,
+            //     pageNum: this.state.current,
+            //     pageSize: 10,
+            // }
+            // this.getActivityRestDetailList(param)
+        })
+    }
 
     render() {
         return (
 
 
             <div>
-                <div>waitUpdate :{JSON.stringify(this.state.bklistA)}</div>
+                <div>waitUpdate :{JSON.stringify(this.state)}</div>
                 <BreadcrumbCustom first="用戶管理" second="黑名單"/>
                 <div>
                     <Button onClick={this.test} type="primary">Primary</Button>
@@ -97,23 +130,21 @@ export default class BlackList extends Component {
                 </div>
 
                 <Table rowKey="id"
-                       columns={this.columns} dataSource={this.state.bklistA.list}
+                       columns={this.columns}
+                       dataSource={this.state.bklistA.list}
                        scroll={{x: 1300}}
                        loading={this.state.loading}
-                       total={this.state.totalPage}
-                    // onRow={(record,rowkey,ww)=>{
-                    //
-                    //     return{
-                    //
-                    //         onClick : this.click.bind(this,record,rowkey,ww)    //点击行 record 指的本行的数据内容，rowkey指的是本行的索引
-                    //
-                    //     }
-                    //
-                    // }}
+                       defaultCurrent={1}
+                       total={1}
+                       pagination={{  // 分页
+                           total: this.state.totalpage * this.state.pgsize,
+                           pageSize: this.state.pgsize,
+                           onChange: this.changePage,
+                       }}
 
 
                 />
-                BlackList
+
 
             </div>
 
