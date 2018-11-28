@@ -42,7 +42,6 @@ export default class Basic extends Component {
                 onFilter: (value, record) => {
                     if (!record.phoneNumber)
                         return false
-
                     return record.phoneNumber.includes(value)
                 },
 
@@ -102,7 +101,7 @@ export default class Basic extends Component {
                 dataIndex: '处理备注',
                 key: '处理备注',
                 render: (text, record) => (
-                    <Button>{record.note}</Button>),
+                    <Button>{record.comment}</Button>),
             }, {
                 title: '操作',
                 key: 'action',
