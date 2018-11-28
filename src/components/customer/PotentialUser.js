@@ -66,104 +66,108 @@ class PotentialUser extends Component {
  				 }]
 
 
-        this.columns = [
-					{
-							title: '選擇',
-							dataIndex: 'phoneNumber',
-							key: 'phoneNumber',
-							// fixed: 'left',
-							// width: 100,
-							render: (text, record) => (
-							<Checkbox
-				 				// checked={this.state.checked}
-				 				// disabled={this.state.disabled}
-				 				onChange={this.hasChange}
-							 />),
-					 }
-						,{
-                title: '手机号',
-                dataIndex: 'phoneNumber',
-                key: 'phoneNumber',
-                // fixed: 'left',
-                // width: 100,
-                render: (text, record) => (
-                    <Button>{record.mobile}</Button>),
-             }
-            , {
-                title: '姓名',
-                dataIndex: 'name',
-                key: 'name',
-                render: (text, record) => (
-
-                    <Button>{record.name}</Button>),
-            }, {
-                title: 'APP版本',
-                dataIndex: '11申请序号',
-                key: '11申请序号',
-                render: (text, record) => (<Button>{record.versionInfo}</Button>),
-            }, {
-                title: '手机型号',
-                dataIndex: '11账号类型',
-                key: '11账号类型',
-                render: (text, record) => (
-                    <Button>{record.systemInfo}</Button>),
-            }, {
-                title: '操作系统型号',
-                dataIndex: '11申请时间',
-                key: '11申请时间',
-
-            }, {
-                title: '注册时间',
-                dataIndex: '11审核状态',
-                key: '11审核状态',
-                render: (text, record) => (
-
-                    <Button>{record.date}</Button>)
-            }, {
-                title: '下载平台',
-                dataIndex: '下载平台',
-                key: '下载平台',
-                render: (text, record) => (
-                    <Button>{record.channelInfo}</Button>),
-            }, {
-                title: '地理位置',
-                dataIndex: '地理位置',
-                key: '地理位置',
-                render: (text, record) => (
-                    <Button>{record.location}</Button>),
-            }, {
-                title: '备注',
-                dataIndex: '备注',
-                key: '备注',
-                render: (text, record) => (
-                    <Button>{record.comment}</Button>),
-            }, {
-                title: '操作人',
-                dataIndex: '操作人',
-                key: '操作人',
-                render: (text, record) => (
-                    <Button>{record.operator}</Button>),
-            }
-            , {
-                title: '操作',
-                key: 'action',
-								align: 'center',
-                width: 300,
-                render: (text, record) => (
-                    <div>
-                        <span className="ant-divider" />
-                        <Button className="ant-dropdown-link" onClick={() => this.showModal()}>添加備註</Button>
-												<Button className="ant-dropdown-link" onClick={() => this.showModal2()}>操作日誌</Button>
-
-
-                    </div>
-                ),
-            }
-            ];
+		this.editTableType1Columns()
+		//
         this.requestListData("1")
 		this.requestUserCommentList()
 
-    }
+	}
+	editTableType1Columns =() =>{
+		this.columns = [
+			{
+					title: '選擇',
+					dataIndex: 'phoneNumber',
+					key: 'phoneNumber',
+					// fixed: 'left',
+					// width: 100,
+					render: (text, record) => (
+					<Checkbox
+						 // checked={this.state.checked}
+						 // disabled={this.state.disabled}
+						 onChange={this.hasChange}
+					 />),
+			 }
+				,{
+		title: '手机号',
+		dataIndex: 'phoneNumber',
+		key: 'phoneNumber',
+		// fixed: 'left',
+		// width: 100,
+		render: (text, record) => (
+			<Button>{record.mobile}</Button>),
+	 }
+	, {
+		title: '姓名',
+		dataIndex: 'name',
+		key: 'name',
+		render: (text, record) => (
+
+			<Button>{record.name}</Button>),
+	}, {
+		title: 'APP版本',
+		dataIndex: '11申请序号',
+		key: '11申请序号',
+		render: (text, record) => (<Button>{record.versionInfo}</Button>),
+	}, {
+		title: '手机型号',
+		dataIndex: '11账号类型',
+		key: '11账号类型',
+		render: (text, record) => (
+			<Button>{record.systemInfo}</Button>),
+	}, {
+		title: '操作系统型号',
+		dataIndex: '11申请时间',
+		key: '11申请时间',
+
+	}, {
+		title: '注册时间',
+		dataIndex: '11审核状态',
+		key: '11审核状态',
+		render: (text, record) => (
+
+			<Button>{record.date}</Button>)
+	}, {
+		title: '下载平台',
+		dataIndex: '下载平台',
+		key: '下载平台',
+		render: (text, record) => (
+			<Button>{record.channelInfo}</Button>),
+	}, {
+		title: '地理位置',
+		dataIndex: '地理位置',
+		key: '地理位置',
+		render: (text, record) => (
+			<Button>{record.location}</Button>),
+	}, {
+		title: '备注',
+		dataIndex: '备注',
+		key: '备注',
+		render: (text, record) => (
+			<Button>{record.comment}</Button>),
+	}, {
+		title: '操作人',
+		dataIndex: '操作人',
+		key: '操作人',
+		render: (text, record) => (
+			<Button>{record.operator}</Button>),
+	}
+	, {
+		title: '操作',
+		key: 'action',
+						align: 'center',
+		width: 300,
+		render: (text, record) => (
+			<div>
+				<span className="ant-divider" />
+				<Button className="ant-dropdown-link" onClick={() => this.showModal()}>添加備註</Button>
+										<Button className="ant-dropdown-link" onClick={() => this.showModal2()}>操作日誌</Button>
+
+
+			</div>
+		),
+	}
+	];
+	}
     render() {
         return(
              <div>
