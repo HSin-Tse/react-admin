@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import {DatePicker,Input,Modal,Button, Table, Icon,Checkbox} from 'antd';
+import {Col, Card, Row,DatePicker,Input,Modal,Button, Table, Icon,Checkbox} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import axios from 'axios';
 class PotentialUser extends Component {
@@ -236,8 +236,8 @@ class PotentialUser extends Component {
 		checkDiary = () => {
 
 		}
-		selectDate = (value,date) => {
-  	       console.log('ggggg',date);
+		selectDate = (date, dateString) => {
+  	       console.log(dateString,'ggggg',date);
 		}
 
     requestListData = (listType) => {
@@ -266,12 +266,12 @@ class PotentialUser extends Component {
         });
     };
 		requestUserCommentList = () =>{
-			// must request data
+			// must request data:
 			//belongUserId
 			//loginName
 			//token
 
-			//refernce request data
+			//refernce request data:
 			//pageNo
 			//pageSize
 			//language
@@ -285,10 +285,8 @@ class PotentialUser extends Component {
 				'token' : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmVUaW1lIjoxNTQ1NTI4ODM0MTk5LCJsb2dpbk5hbWUiOiJhZG1pbiJ9.F7moE4DsMUiajkKB1S_wemwsozlUW5VMxQKsg4KsSUQ'
 
 			}).then(function (response) {
-				console.log('yyy',response);
 
 					tmp.setState({operationDiaryHistory: response.data.data.list});
-					console.log('xxx',this.state.operationDiaryHistory);
 
 			}).catch(function (error) {
 					console.log(error);
