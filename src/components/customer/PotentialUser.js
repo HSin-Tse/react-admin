@@ -68,7 +68,7 @@ class PotentialUser extends Component {
 
 		this.editTableType1Columns()
 		//
-        this.requestListData("1")
+        this.requestListData(this.state.tableType)
 		this.requestUserCommentList()
 
 	}
@@ -225,8 +225,9 @@ class PotentialUser extends Component {
         this.state = {
             date: new Date()
             , userList: []
-						, operationDiaryHistory: []
-            , anyThing: 'asdasd'
+			, operationDiaryHistory: []
+			, anyThing: 'asdasd'
+			,tableType: '1'
 
 
 
@@ -244,7 +245,8 @@ class PotentialUser extends Component {
 		}
 
     requestListData = (listType) => {
-        this.setState({is_tag: '123321'});
+		this.setState({is_tag: '123321',tableType: listType});
+		console.log('jjj',this.state.tableType)
         var aa = this;
         axios.post('http://mobile.nooko.cn:8090/ixuser/getUserList', {
         	'listType' : listType,
