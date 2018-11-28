@@ -9,10 +9,7 @@ import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import axios from 'axios';
 
 class Basic extends Component {
-    columns;
 
-    componentWillUnmount() {
-    }
 
     componentDidMount() {
         this.columns = [
@@ -50,9 +47,15 @@ class Basic extends Component {
             }, {
                 title: '审核状态',
                 dataIndex: '审核状态',
+                filters: [
+                    {text: '审核中', value: 0},
+                    {text: '审核通过', value: 1},
+                    {text: '审核拒绝', value: 2},
+                ],
+                onFilter: (value, record) => record.status == value,
                 key: '审核状态',
                 render: (text, record) => (
-                    <Button>{record.status  == 0?'审核中': (record.status  == 1)? '审核通过' :'审核拒绝'}</Button>),
+                    <Button>{record.status == 0 ? '审核中' : (record.status == 1) ? '审核通过' : '审核拒绝'}</Button>),
             }, {
                 title: '处理备注',
                 dataIndex: '处理备注',
@@ -68,8 +71,6 @@ class Basic extends Component {
                     <div>
                         <span className="ant-divider"/>
                         <Button className="ant-dropdown-link" onClick={() => this.handleEdit(record)}>审核</Button>
-
-
                     </div>
                 ),
             }];
@@ -81,13 +82,7 @@ class Basic extends Component {
         this.props.history.push('/app/pass/passopen/detail' + record.id)
     };
     itemDeleteClick = (id) => console.log('hcia', 'itemDeleteClick', id);
-    click = (recored, key, ww) => {
 
-        console.log('hcia', recored);
-        console.log('hcia', key);
-        console.log('hcia', ww);
-
-    };
 
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
@@ -105,13 +100,11 @@ class Basic extends Component {
 
 
     test = () => {
-        this.setState({testtt: '123321'});
         var aa = this;
         axios.post('http://mobile.nooko.cn:8090/open/getOpenApplyList', {}).then(function (response) {
             console.log(response);
-            aa.setState({testtt: 'wwwww'});
-            aa.setState({testtt: response.data.code});
             aa.setState({userList: response.data.data.list});
+            aa.setState({totalPage: response.data.data.totalPage});
 
 
         }).catch(function (error) {
@@ -126,7 +119,10 @@ class Basic extends Component {
         this.state = {
             date: new Date()
             , userList: []
-            , testtt: 'asdasd'
+            , loading: false
+            , searchPhone: ''
+            , totalPage: 0
+
 
         };
     }
@@ -135,7 +131,7 @@ class Basic extends Component {
     render() {
         return (
             <div>
-                <div>log: {this.state.testtt}</div>
+                {/*<div>log: {this.state.testtt}</div>*/}
 
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
                 <div>
@@ -147,6 +143,8 @@ class Basic extends Component {
                 <Table rowKey="id"
                        columns={this.columns} dataSource={this.state.userList}
                        scroll={{x: 1300}}
+                       loading={this.state.loading}
+                       total={this.state.totalPage}
                     // onRow={(record,rowkey,ww)=>{
                     //
                     //     return{
