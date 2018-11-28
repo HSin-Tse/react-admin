@@ -27,7 +27,12 @@ class Basic extends Component {
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
                 fixed: 'left',
-                onFilter: (value, record) => record.phoneNumber == this.state.searchPhone,
+                onFilter: (value, record) => {
+                    if(!record.phoneNumber)
+                        return false
+
+                    return   record.phoneNumber.includes(value)
+                },
 
                 filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
                     <div className="custom-filter-dropdown">
@@ -135,6 +140,9 @@ class Basic extends Component {
             console.log(error);
             // message.warn(error);
         });
+
+
+
     };
 
 
