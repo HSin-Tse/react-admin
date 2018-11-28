@@ -83,6 +83,6 @@ export default {
         //     key: '/app/cssModule', title: 'cssModule', icon: 'star', component: 'Cssmodule'
         // },
     ],
-
-    others: [ {route: '/app/pass/passopen/detail:id', title: 'PassOpenD', icon: 'star', component: 'PassOpenD'}] // 非菜单相关路由
+//SimulatorUser
+    others: [ {route: '/app/pass/passopen/detail:id', title: 'PassOpenD', icon: 'star', component: 'PassOpenD'},{route: '/app/customer/SimulatorUser', title: 'PotentialUser', icon: 'star', component: 'SimulatorUser'}] // 非菜单相关路由
 }

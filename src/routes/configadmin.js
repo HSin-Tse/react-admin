@@ -84,5 +84,5 @@ export default {
         // },
     ],
 
-    others: [ {route: '/app/pass/passopen/detail:id', title: 'PassOpenD', icon: 'star', component: 'PassOpenD'}] // 非菜单相关路由
+    others: [ {route: '/app/pass/passopen/detail:id', title: 'PassOpenD', icon: 'star', component: 'PassOpenD'},{route: '/app/customer/SimulatorUser', title: 'PotentialUser', icon: 'star', component: 'SimulatorUser'}] // 非菜单相关路] // 非菜单相关路由
 }
