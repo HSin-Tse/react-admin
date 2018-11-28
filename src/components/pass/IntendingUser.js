@@ -178,9 +178,9 @@ class IntendingUser extends Component {
 
                 <div>
 
-                    <Button type="primary">潛在用戶</Button>
+                    <Button onClick={() => this.goToPotential()} type="primary">潛在用戶</Button>
                     <Button onClick={() => this.goToSimulator()} type="primary">模擬用戶</Button>
-                    <Button onClick={() => this.requestListData("3")} type="primary">意向用戶</Button>
+                    <Button  type="primary">意向用戶</Button>
                 </div>
 
                 <Table rowKey="id"
@@ -236,6 +236,19 @@ class IntendingUser extends Component {
 		this.props.history.push('/app/customer/SimulatorUser')
 
 	}
+	goToIntend =() =>{
+		//
+		this.props.history.push('/app/pass/IntendingUser')
+
+	}
+	goToPotential = () =>{
+		this.props.history.push('/app/customer/PotentialUser')
+
+	}
+    hasChange = (status) =>{
+			console.log('yyx',status.target.checked)
+
+    }
 	
     hasChange = (status) =>{
 			console.log('yyx',status.target.checked)

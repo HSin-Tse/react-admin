@@ -241,6 +241,10 @@ class PotentialUser extends Component {
 		this.props.history.push('/app/pass/IntendingUser')
 
 	}
+	goToPotential = () =>{
+		this.props.history.push('/app/customer/PotentialUser')
+
+	}
     hasChange = (status) =>{
 			console.log('yyx',status.target.checked)
 
