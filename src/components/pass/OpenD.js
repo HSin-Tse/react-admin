@@ -15,6 +15,7 @@ import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
 import moment from 'moment';
 
+const Search = Input.Search;
 const CheckboxGroup = Checkbox.Group;
 
 const RadioGroup = Radio.Group;
@@ -33,16 +34,21 @@ class PassOpenD extends Component {
     constructor(props) {
         super(props);
         this.state = {
-             isNeedSave: false
+            isNeedSave: false
             , recordData: {}
             , recordDictirys: {}
             , waitUpdate: {}
+            , waitSearchDb: {}
             , iconLoading: false
+            , checkderes: null
+            , icondbALoading: false
             , iconcanLoading: false
             , visible: false
             , tradrType: 'CFD'
             , testeee: '1976-11-23'
             , mGender: ''
+            , checkfromdbName: ''
+            , checkfromdbTypeV: 0
             , mAnnualIncome: ''
             , sss: 'aa'
             , IXIncomeList: []
@@ -56,7 +62,6 @@ class PassOpenD extends Component {
 
         };
     }
-
 
 
     componentDidMount() {
@@ -95,30 +100,38 @@ class PassOpenD extends Component {
                 myearsTrading: response.data.data.yearsTrading,
                 mtradingObjectives: response.data.data.tradingObjectives,
                 mriskTolerance: response.data.data.riskTolerance,
+                checkfromdbName: response.data.data.phoneNumber,
             });
         }).catch(function (error) {
             console.log(error);
         });
+
+
     }
 
+    onTodoChange(value) {
+        this.setState({
+            checkfromdbName: value
+        });
+    }
 
     render() {
         this.mIncomesOPS = this.state.IXIncomeList.map(d => <Option key={d.name}>{d.name}</Option>);
-        this.mIXPercentage= this.state.IXPercentage.map(d => <Option key={d.name}>{d.name}</Option>);
-        this.mIXFundsSource= this.state.IXFundsSource.map(d => <Option key={d.name}>{d.name}</Option>);
-        this.mIXUStax= this.state.IXUStax.map(d => <Option key={d.name}>{d.name}</Option>);
-        this.mIXTradingExperience= this.state.IXTradingExperience.map(d => <Option key={d.name}>{d.name}</Option>);
-        this.mIXTradingObjectives= this.state.IXTradingObjectives.map(d => <Option key={d.name}>{d.name}</Option>);
-        this.mIXRisk_Tolerance= this.state.IXRisk_Tolerance.map(d => <Option key={d.name}>{d.name}</Option>);
+        this.mIXPercentage = this.state.IXPercentage.map(d => <Option key={d.name}>{d.name}</Option>);
+        this.mIXFundsSource = this.state.IXFundsSource.map(d => <Option key={d.name}>{d.name}</Option>);
+        this.mIXUStax = this.state.IXUStax.map(d => <Option key={d.name}>{d.name}</Option>);
+        this.mIXTradingExperience = this.state.IXTradingExperience.map(d => <Option key={d.name}>{d.name}</Option>);
+        this.mIXTradingObjectives = this.state.IXTradingObjectives.map(d => <Option key={d.name}>{d.name}</Option>);
+        this.mIXRisk_Tolerance = this.state.IXRisk_Tolerance.map(d => <Option key={d.name}>{d.name}</Option>);
 
 
         return (
             <div>
 
                 <div>id: {this.state.recordData.id}</div>
-                <div>gender: {this.state.recordData.gender}</div>
                 <div>isNeedSave :{this.state.isNeedSave.toString()}</div>
                 <div>waitUpdate :{JSON.stringify(this.state.waitUpdate)}</div>
+                <div>checkfromdbName :{JSON.stringify(this.state.checkfromdbName)}</div>
                 {/*<div>recordDictirys :{JSON.stringify(this.state.recordDictirys)}</div>*/}
 
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
@@ -193,7 +206,8 @@ class PassOpenD extends Component {
                                     服务器 :
                                     <Select labelInValue defaultValue={{key: 'jack'}}
                                             style={{marginLeft: 20, width: 120}}
-                                            onChange={this.handleChange}>
+                                            onChange={this.handleChange}
+                                    >
                                         <Option value="jack">服务器地址</Option>
                                         <Option value="lucy">Lucy (101)</Option>
                                     </Select>
@@ -313,7 +327,8 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*身份证号码</span>
-                                    <Input defaultValue={this.state.recordData.nationalID} onChange={this.onChangenationalId}
+                                    <Input defaultValue={this.state.recordData.nationalID}
+                                           onChange={this.onChangenationalId}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
@@ -340,7 +355,8 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*邮编</span>
-                                    <Input defaultValue={this.state.recordData.postalCode} onChange={this.onChangepostalCode}
+                                    <Input defaultValue={this.state.recordData.postalCode}
+                                           onChange={this.onChangepostalCode}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                             </Card>
@@ -369,43 +385,53 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>交易本金来源</span>
-                                    <Select value={this.state.mfundsSource} style={{width: 120}}>
+                                    <Select value={this.state.mfundsSource}
+                                            onChange={this.onChangemfundsSource}
+                                    >
                                         {this.mIXFundsSource}
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*是否美国公民</span>
-                                    <Select value={this.state.musCitizenOrResidentForTaxPurpposes} style={{width: 120}}>
+                                    <Select value={this.state.musCitizenOrResidentForTaxPurpposes}
+                                            onChange={this.onChangemusCitizenOrResidentForTaxPurpposes}
+                                    >
                                         {this.mIXUStax}
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>交易经验</span>
-                                    <Select value={this.state.myearsTrading} >
+                                    <Select value={this.state.myearsTrading}
+                                            onChange={this.onChangemyearsTrading}
+
+                                    >
                                         {this.mIXTradingExperience}
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>交易目的</span>
-                                    <Select value={this.state.mtradingObjectives} >
+                                    <Select
+                                        onChange={this.onChangemtradingObjectives}
+                                        value={this.state.mtradingObjectives}>
                                         {this.mIXTradingObjectives}
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*风险承受力</span>
-                                    <Select value={this.state.mriskTolerance} >
+                                    <Select
+                                        style={{maxWidth: 220}}
+                                        onChange={this.onChangemriskTolerance}
+                                        value={this.state.mriskTolerance}>
                                         {this.mIXRisk_Tolerance}
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>账户类型</span>
-
                                     <Input defaultValue={this.state.recordData.country} disabled={true}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>交易货币</span>
-
                                     <Input defaultValue={this.state.recordData.country} disabled={true}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
@@ -474,35 +500,42 @@ class PassOpenD extends Component {
                     <Row gutter={12}>
                         <Col md={4}>
                             <div style={{display: 'flex', minHeight: 40}}>
-                                <Select defaultValue="聯繫電話" style={{width: 120}}>
-                                    <Option value="0">聯繫電話</Option>
-                                    <Option value="1">女</Option>
+                                <Select
+                                    onChange={this.checkfromdbType}
+                                    defaultValue="0"
+                                    style={{width: 120}}>
+                                    <Option value="0">手机号</Option>
+                                    <Option value="1">身份证</Option>
+                                    <Option value="2">邮箱</Option>
                                 </Select>
                             </div>
 
                         </Col>
                         <Col md={8}>
                             <div style={{display: 'flex', minHeight: 40}}>
-
-                                <Input defaultValue={this.state.recordData.country}
-                                       style={{width: 220}} placeholder="输入要查询的内容"/>
+                                <Search
+                                    value={this.state.checkfromdbName}
+                                    onChange={e => this.onTodoChange(e.target.value)}
+                                    style={{width: 220}} placeholder="输入要查询的内容"/>
                             </div>
                         </Col>
                         <Col md={4}>
                             <div style={{display: 'flex', minHeight: 40}}>
-                                <Button onClick={() => this.openOK()}>本库查询</Button>
-
+                                <Button loading={this.state.icondbALoading}
+                                        onClick={() => this.searchFromLocalDB()}>本库查询</Button>
                             </div>
                         </Col>
                         <Col md={4}>
                             <div style={{display: 'flex', minHeight: 40}}>
-                                <Button onClick={() => this.openOK()}>异库查询</Button>
+                                <Button onClick={() => this.searchFromOtherDB()}>异库查询</Button>
 
                             </div>
                         </Col>
                         <Col md={24}>
                             <div style={{display: 'flex', minHeight: 40}}>
-                                <h3 style={{margin: 'auto'}}>本库查询结果：本库有1条信息重合</h3>
+                                { this.state.checkderes == null ? null : <h3 style={{margin: 'auto'}}>本库查询结果：{this.state.checkderes?'有':'無'}重合</h3> }
+
+
                             </div>
                         </Col>
                     </Row>
@@ -597,8 +630,9 @@ class PassOpenD extends Component {
                     <p>*名（中文）:{this.state.recordData.firstNameCn}-->{this.state.waitUpdate.firstNameCn}</p>
                     <p>*名 :{this.state.recordData.firstName}-->{this.state.waitUpdate.firstName}</p>
                     <p>*名 :{this.state.recordData.lastName}-->{this.state.waitUpdate.lastName}</p>
-                    <p>出生日期 :{ this.timestampToTime(this.state.recordData.dateOfBirth)}-->{this.timestampToTime(this.state.waitUpdate.dateOfBirth)}</p>
-                    <p>性别 :{this.state.recordData.gender}-->{this.state.waitUpdate.gender==0?'Female':'Male'}</p>
+                    <p>出生日期
+                        :{this.timestampToTime(this.state.recordData.dateOfBirth)}-->{this.timestampToTime(this.state.waitUpdate.dateOfBirth)}</p>
+                    <p>性别 :{this.state.recordData.gender}-->{this.state.waitUpdate.gender == 0 ? 'Female' : 'Male'}</p>
                     <p>身份证号码 :{this.state.recordData.nationalID}-->{this.state.waitUpdate.nationalId}</p>
                     <p>城市 :{this.state.recordData.nationalID}-->{this.state.waitUpdate.nationalId}</p>
                     <p>详细地址 :{this.state.recordData.street}-->{this.state.waitUpdate.street}</p>
@@ -606,8 +640,19 @@ class PassOpenD extends Component {
                     <p>*邮编 :{this.state.recordData.postalCode}-->{this.state.waitUpdate.postalCode}</p>
                     <p>*当前年收入:{this.state.recordData.annualIncome}-->{this.state.ix_IncomeNAME}:{this.state.waitUpdate.ix_Income}</p>
                     <p>*初始入金金额占流动资产净值比:{this.state.recordData.initialDepositToYourNetLiquidAssets}-->{this.state.ix_PercentageNAME}:{this.state.waitUpdate.ix_Percentage}</p>
+                    <p>*初始入金金额占流动资产净值比:{this.state.recordData.fundsSource}-->{this.state.ix_FundsSourceNAME}:{this.state.waitUpdate.ix_FundsSource}</p>
+                    <p>*是否美国公民
+                        :{this.state.recordData.usCitizenOrResidentForTaxPurpposes}-->{this.state.ix_UStaxNAME}:{this.state.waitUpdate.ix_UStax}</p>
+                    <p>*交易经验
+                        :{this.state.recordData.yearsTrading}-->{this.state.ix_Trading_ExperienceNAME}:{this.state.waitUpdate.ix_Trading_Experience}</p>
+                    <p>*交易目的
+                        :{this.state.recordData.tradingObjectives}-->{this.state.ix_Trading_ObjectivesNAME}:{this.state.waitUpdate.ix_Trading_Objectives}</p>
+                    <p>*风险承受力
+                        :{this.state.recordData.riskTolerance}-->{this.state.ix_Risk_ToleranceNAME}:{this.state.waitUpdate.ix_Risk_Tolerance}</p>
                 </Modal>
             </div>
+
+
         )
     }
 
@@ -628,6 +673,86 @@ class PassOpenD extends Component {
         return +str >= 10 ? str : '0' + str
     };
     openOK = () => {
+
+        this.setState({
+            iconLoading: true,
+        });
+        var me = this;
+
+        window.Axios.post('/open/passOpenApply', {
+            'language': 'zh-CN',
+            'belongUserId': me.state.recordData.belongUserId,
+            'id': me.state.recordData.id,
+        }).then(function (response) {
+
+
+            me.setState({
+                iconLoading: false,
+            });
+            console.log(response);
+
+            if (response.data.code == 1) {
+
+                message.success('開戶通過')
+                me.props.history.goBack()
+
+            }
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+
+    };
+    searchFromLocalDB = () => {
+
+        this.setState({
+            icondbALoading: true,
+        });
+        var me = this;
+
+        if (this.state.checkfromdbTypeV == 0) {
+            window.Axios.post('/open/localExistOpenAccount', {
+                'phoneNumber': me.state.checkfromdbName,
+            }).then(function (response) {
+                console.log('hcia response', response)
+                me.setState({
+                    icondbALoading: false,
+                    checkderes:response.data.data.isExist
+
+                });
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }else if(this.state.checkfromdbTypeV == 1){
+            window.Axios.post('/open/localExistOpenAccount', {
+                'nationalId': me.state.checkfromdbName,
+            }).then(function (response) {
+                console.log('hcia response', response)
+                me.setState({
+                    icondbALoading: false,
+                    checkderes:response.data.data.isExist
+                });
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }else if(this.state.checkfromdbTypeV == 2){
+            window.Axios.post('/open/localExistOpenAccount', {
+                'email': me.state.checkfromdbName,
+            }).then(function (response) {
+                console.log('hcia response', response.data.data.isExist)
+                me.setState({
+                    icondbALoading: false,
+                });
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+
+
+
+    };
+    searchFromOtherDB = () => {
 
         this.setState({
             iconLoading: true,
@@ -726,7 +851,16 @@ class PassOpenD extends Component {
         this.gallery.init();
     };
     handleChange = (value) => {
-        console.log(value); // { key: "lucy", label: "Lucy (101)" }
+        console.log('hcia value', value)
+    };
+    checkfromdbType = (value) => {
+        console.log('hcia value', value)
+
+        this.setState({
+            checkfromdbName: (value == 0 ? this.state.recordData.phoneNumber : value == 1 ? this.state.recordData.nationalID : this.state.recordData.email),
+            checkfromdbTypeV: value
+        });
+
     };
     onChangetradeType = (e) => {
         console.log('radio3 checked', e.target.value);
@@ -813,14 +947,14 @@ class PassOpenD extends Component {
     }
     onChangeBirth = (value, dateString) => {
         console.log('hcia dateString', dateString)
-        var date = new Date(dateString+' 00:00:00:000');
+        var date = new Date(dateString + ' 00:00:00:000');
         // 有三种方式获取
         var time1 = date.getTime();
         var time2 = date.valueOf();
         var time3 = Date.parse(date);
-        console.log('hcia',time1);//1398250549123
-        console.log('hcia',time2);//1398250549123
-        console.log('hcia',time3);//1398250549000
+        console.log('hcia', time1);//1398250549123
+        console.log('hcia', time2);//1398250549123
+        console.log('hcia', time3);//1398250549000
 
         this.state.waitUpdate.dateOfBirth = time1;
 
@@ -833,11 +967,11 @@ class PassOpenD extends Component {
     }
     onChangegender = (value) => {
 
-        console.log('hcia value' , value)
-        this.state.waitUpdate.gender = (value === 'Male'?1:0);
+        console.log('hcia value', value)
+        this.state.waitUpdate.gender = (value === 'Male' ? 1 : 0);
 
         this.setState({
-            mGender:value,//1:male 0:female
+            mGender: value,//1:male 0:female
             isNeedSave: true,
         });
 
@@ -847,8 +981,8 @@ class PassOpenD extends Component {
 
 
         var tmpv = ''
-        this.state.IXIncomeList.forEach(function(element) {
-            if(element.name == value){
+        this.state.IXIncomeList.forEach(function (element) {
+            if (element.name == value) {
                 tmpv = element.value
             }
         });
@@ -857,7 +991,7 @@ class PassOpenD extends Component {
         this.state.ix_IncomeNAME = value;
         //
         this.setState({
-            mAnnualIncome:value,//1:male 0:female
+            mAnnualIncome: value,//1:male 0:female
             isNeedSave: true,
         });
 
@@ -866,8 +1000,8 @@ class PassOpenD extends Component {
 
 
         var tmpv = ''
-        this.state.IXPercentage.forEach(function(element) {
-            if(element.name == value){
+        this.state.IXPercentage.forEach(function (element) {
+            if (element.name == value) {
                 tmpv = element.value
             }
         });
@@ -876,12 +1010,106 @@ class PassOpenD extends Component {
         this.state.ix_PercentageNAME = value;
         //
         this.setState({
-            mInitialDepositToYourNetLiquidAssets:value,
+            mInitialDepositToYourNetLiquidAssets: value,
             isNeedSave: true,
         });
 
     }
+    onChangemfundsSource = (value) => {
 
+
+        var tmpv = ''
+        this.state.IXFundsSource.forEach(function (element) {
+            if (element.name == value) {
+                tmpv = element.value
+            }
+        });
+
+        this.state.waitUpdate.ix_FundsSource = tmpv;
+        this.state.ix_FundsSourceNAME = value;
+        //
+        this.setState({
+            mfundsSource: value,
+            isNeedSave: true,
+        });
+
+    }
+    onChangemusCitizenOrResidentForTaxPurpposes = (value) => {
+
+
+        var tmpv = ''
+        this.state.IXUStax.forEach(function (element) {
+            if (element.name == value) {
+                tmpv = element.value
+            }
+        });
+
+        this.state.waitUpdate.ix_UStax = tmpv;
+        this.state.ix_UStaxNAME = value;
+        //
+        this.setState({
+            musCitizenOrResidentForTaxPurpposes: value,
+            isNeedSave: true,
+        });
+
+    }
+    onChangemyearsTrading = (value) => {
+
+
+        var tmpv = ''
+        this.state.IXTradingExperience.forEach(function (element) {
+            if (element.name == value) {
+                tmpv = element.value
+            }
+        });
+
+        this.state.waitUpdate.ix_Trading_Experience = tmpv;
+        this.state.ix_Trading_ExperienceNAME = value;
+        //
+        this.setState({
+            myearsTrading: value,
+            isNeedSave: true,
+        });
+
+    }
+    onChangemtradingObjectives = (value) => {
+
+
+        var tmpv = ''
+        this.state.IXTradingObjectives.forEach(function (element) {
+            if (element.name == value) {
+                tmpv = element.value
+            }
+        });
+
+        this.state.waitUpdate.ix_Trading_Objectives = tmpv;
+        this.state.ix_Trading_ObjectivesNAME = value;
+        //
+        this.setState({
+            mtradingObjectives: value,
+            isNeedSave: true,
+        });
+
+    }
+    onChangemriskTolerance = (value) => {
+
+
+        var tmpv = ''
+        this.state.IXRisk_Tolerance.forEach(function (element) {
+            if (element.name == value) {
+                tmpv = element.value
+            }
+        });
+
+        this.state.waitUpdate.ix_Risk_Tolerance = tmpv;
+        this.state.ix_Risk_ToleranceNAME = value;
+        //
+        this.setState({
+            mriskTolerance: value,
+            isNeedSave: true,
+        });
+
+    }
 
 
     onChangeSSS = (e) => {

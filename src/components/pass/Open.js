@@ -2,16 +2,34 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, Icon} from 'antd';
+import {Button, Table, Icon, Input} from 'antd';
 
 
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
-import axios from 'axios';
 
-class Basic extends Component {
-    columns;
+export default class Basic extends Component {
 
-    componentWillUnmount() {
+    constructor(props) {
+        super(props);
+        this.state = {
+            date: new Date()
+            , userList: []
+            , loading: false
+            , searchPhone: ''
+            , totalPage: 1
+            , pgsize: 10
+
+        };
+    }
+
+    handleSearch = (selectedKeys, confirm) => () => {
+        confirm();
+        this.setState({searchPhone: selectedKeys[0]});
+    }
+
+    handleReset = clearFilters => () => {
+        clearFilters();
+        this.setState({searchPhone: ''});
     }
 
     componentDidMount() {
@@ -21,6 +39,26 @@ class Basic extends Component {
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
                 fixed: 'left',
+                onFilter: (value, record) => {
+                    if (!record.phoneNumber)
+                        return false
+
+                    return record.phoneNumber.includes(value)
+                },
+
+                filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
+                    <div className="custom-filter-dropdown">
+                        <Input
+                            ref={ele => this.searchInput = ele}
+                            placeholder="Search name"
+                            value={selectedKeys[0]}
+                            onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
+                            onPressEnter={this.handleSearch(selectedKeys, confirm)}
+                        />
+                        <Button type="primary" onClick={this.handleSearch(selectedKeys, confirm)}>Search</Button>
+                        <Button onClick={this.handleReset(clearFilters)}>Reset</Button>
+                    </div>
+                ),
                 width: 100,
                 render: (text, record) => (
                     <Button>{record.phoneNumber}</Button>),
@@ -50,9 +88,15 @@ class Basic extends Component {
             }, {
                 title: '审核状态',
                 dataIndex: '审核状态',
+                filters: [
+                    {text: '审核中', value: 0},
+                    {text: '审核通过', value: 1},
+                    {text: '审核拒绝', value: 2},
+                ],
+                onFilter: (value, record) => record.status == value,
                 key: '审核状态',
                 render: (text, record) => (
-                    <Button>{record.status  == 0?'审核中': (record.status  == 1)? '审核通过' :'审核拒绝'}</Button>),
+                    <Button>{record.status == 0 ? '审核中' : (record.status == 1) ? '审核通过' : '审核拒绝'}</Button>),
             }, {
                 title: '处理备注',
                 dataIndex: '处理备注',
@@ -68,27 +112,15 @@ class Basic extends Component {
                     <div>
                         <span className="ant-divider"/>
                         <Button className="ant-dropdown-link" onClick={() => this.handleEdit(record)}>审核</Button>
-
-
                     </div>
                 ),
             }];
-        this.test()
+        this.requestPage(1)
     }
-
 
     handleEdit = (record) => {
         this.props.history.push('/app/pass/passopen/detail' + record.id)
     };
-    itemDeleteClick = (id) => console.log('hcia', 'itemDeleteClick', id);
-    click = (recored, key, ww) => {
-
-        console.log('hcia', recored);
-        console.log('hcia', key);
-        console.log('hcia', ww);
-
-    };
-
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
         const year = dateObj.getFullYear() // 获取年，
@@ -103,61 +135,65 @@ class Basic extends Component {
         return +str >= 10 ? str : '0' + str
     };
 
+    requestPage = (pg) => {
 
-    test = () => {
-        this.setState({testtt: '123321'});
-        var aa = this;
-        axios.post('http://mobile.nooko.cn:8090/open/getOpenApplyList', {}).then(function (response) {
+
+        pg = pg - 1
+        let self = this
+        self.setState({
+                loading: true,
+            }
+        );
+        console.log('hcia pg', pg)
+        window.Axios.post('open/getOpenApplyList', {
+            'pageSize': this.state.pgsize,
+            'pageNo': pg,
+        }).then(function (response) {
             console.log(response);
-            aa.setState({testtt: 'wwwww'});
-            aa.setState({testtt: response.data.code});
-            aa.setState({userList: response.data.data.list});
+
+            self.setState({
+                    totalPage: response.data.data.totalPage,
+                    loading: false,
+                    userList: response.data.data.list
+                }
+            );
 
 
         }).catch(function (error) {
             console.log(error);
             // message.warn(error);
         });
-    };
+    }
 
+    changePage = (page) => {
+        console.log('hcia page', page)
+        this.setState({
+            current: page,
+        }, () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            date: new Date()
-            , userList: []
-            , testtt: 'asdasd'
+            this.requestPage(page)
 
-        };
+        })
     }
 
 
     render() {
         return (
             <div>
-                <div>log: {this.state.testtt}</div>
+                {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
 
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
-                <div>
-                    <Button onClick={this.test} type="primary">Primary</Button>
-                    <Button onClick={() => this.itemDeleteClick()}> Default</Button>
-                    <Button type="dashed">Dashed</Button>
-                </div>
 
                 <Table rowKey="id"
-                       columns={this.columns} dataSource={this.state.userList}
+                       columns={this.columns}
+                       dataSource={this.state.userList}
                        scroll={{x: 1300}}
-                    // onRow={(record,rowkey,ww)=>{
-                    //
-                    //     return{
-                    //
-                    //         onClick : this.click.bind(this,record,rowkey,ww)    //点击行 record 指的本行的数据内容，rowkey指的是本行的索引
-                    //
-                    //     }
-                    //
-                    // }}
-
-
+                       loading={this.state.loading}
+                       pagination={{  // 分页
+                           total: this.state.pgsize * this.state.totalPage,
+                           pageSize: this.state.pgsize,
+                           onChange: this.changePage,
+                       }}
                 />
             </div>
 
@@ -165,4 +201,3 @@ class Basic extends Component {
     }
 }
 
-export default Basic

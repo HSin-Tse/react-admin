@@ -32,20 +32,23 @@ export default class CRouter extends Component {
     requireAuth = (permission, component) => {
         const { auth } = this.props;
         const { permissions } = auth.data;
+        console.log('hcia permissions' , permissions)
         // const { auth } = store.getState().httpData;
-        if (!permissions || !permissions.includes(permission)) return <Redirect to={'404'} />;
+        // if (!permissions || !permissions.includes(permission)) return <Redirect to={'404'} />;
         return component;
     };
     requireLogin = (component, permission) => {
-        const { auth } = this.props;
-        const { permissions } = auth.data;
+        // const { auth } = this.props;
+        // const { permissions } = auth.data;
 
 
 
         if ( !localStorage.getItem('too')) { // 线上环境判断是否登录
             return <Redirect to={'/login'} />;
+        }else{
+            return component
         }
-        return permission ? this.requireAuth(permission, component) : component;
+        // return permission ? this.requireAuth(permission, component) : component;
     };
     render() {
         return (
