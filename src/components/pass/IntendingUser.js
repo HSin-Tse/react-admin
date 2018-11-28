@@ -88,7 +88,7 @@ class IntendingUser extends Component {
 					/>),
 			 }
 				,{
-		title: '手ㄋ机号',
+		title: '手机号',
 		dataIndex: 'phoneNumber',
 		key: 'phoneNumber',
 		// fixed: 'left',
@@ -234,11 +234,6 @@ class IntendingUser extends Component {
 	}
 	goToSimulator = () => {
 		this.props.history.push('/app/customer/SimulatorUser')
-
-	}
-	goToIntend =() =>{
-		//
-		this.props.history.push('/app/pass/IntendingUser')
 
 	}
 	goToPotential = () =>{

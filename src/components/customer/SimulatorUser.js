@@ -233,10 +233,6 @@ class SimulatorUser extends Component {
 
         };
 	}
-	goToSimulator = () => {
-		this.props.history.push('/app/customer/SimulatorUser')
-
-	}
 	goToIntend =() =>{
 		//
 		this.props.history.push('/app/pass/IntendingUser')
