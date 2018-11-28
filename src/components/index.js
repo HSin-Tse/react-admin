@@ -27,10 +27,12 @@ import RouterEnter from './auth/RouterEnter';
 import PassOpen from './pass/Open';
 import PassOpenD from './pass/OpenD';
 import PassLever from './pass/Lever';
-import PotentialUser from './customer/PotentialUser'
-import SimulatorUser from './customer/SimulatorUser'
+import PotentialUser from './customer/PotentialUser';
+import SimulatorUser from './customer/SimulatorUser';
+import IntendingUser from './pass/IntendingUser';
 
-//SimulatorUser
+//IntendingUser
+//IntendingUser
 import Cssmodule from './cssmodule';
 import MapUi from './ui/map';
 
@@ -44,5 +46,5 @@ export default {
     Echarts, Recharts, Icons, Buttons, Spins, Modals, Notifications,
     Tabs, Banners, Drags,PassOpen,PassLever, Dashboard, Gallery, BasicAnimations,
     ExampleAnimations, AuthBasic, RouterEnter, WysiwygBundle,PassOpenD,
-    Cssmodule, MapUi,PotentialUser,SimulatorUser
+    Cssmodule, MapUi,PotentialUser,SimulatorUser,IntendingUser
 }

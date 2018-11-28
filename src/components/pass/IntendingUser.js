@@ -88,7 +88,7 @@ class IntendingUser extends Component {
 					/>),
 			 }
 				,{
-		title: '手机号',
+		title: '手ㄋ机号',
 		dataIndex: 'phoneNumber',
 		key: 'phoneNumber',
 		// fixed: 'left',
@@ -167,20 +167,19 @@ class IntendingUser extends Component {
 		),
 	}
 	];
-	// this.columns = null
 	}
     render() {
         return(
              <div>
                 <div>log: {this.state.anyThing}</div>
-                <div>yyxLog log: SimulatorUser</div>
+                <div>yyxLog log: 意向用戶</div>
 								<div />
                 <BreadcrumbCustom first="用户管理" second="Leads管理" />
 
                 <div>
 
-                    <Button onClick={() => this.requestListData("1")} type="primary">潛在用戶</Button>
-                    <Button onClick={() => this.requestListData("2")} type="primary">模擬用戶</Button>
+                    <Button type="primary">潛在用戶</Button>
+                    <Button onClick={() => this.goToSimulator()} type="primary">模擬用戶</Button>
                     <Button onClick={() => this.requestListData("3")} type="primary">意向用戶</Button>
                 </div>
 
@@ -232,17 +231,22 @@ class IntendingUser extends Component {
 
 
         };
-    }
+	}
+	goToSimulator = () => {
+		this.props.history.push('/app/customer/SimulatorUser')
+
+	}
+	
     hasChange = (status) =>{
 			console.log('yyx',status.target.checked)
 
     }
-		checkDiary = () => {
+	checkDiary = () => {
 
-		}
-		selectDate = (date, dateString) => {
+	}
+	selectDate = (date, dateString) => {
   	       console.log(dateString,'yyx',date);
-		}
+	}
 
     requestListData = (listType) => {
 		this.setState({is_tag: '123321',tableType: listType});
