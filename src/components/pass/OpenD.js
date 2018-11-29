@@ -5,7 +5,7 @@
  *
  */
 import React, {Component} from 'react';
-import {Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, Popconfirm,notification} from 'antd';
+import {Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, Popconfirm, notification} from 'antd';
 import {Radio} from 'antd';
 import {message} from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
@@ -563,7 +563,8 @@ class PassOpenD extends Component {
                             <div>
                                 <Button disabled={this.state.isNeedSave} loading={this.state.iconLoading}
                                         onClick={() => this.openOK()}>开户通过</Button>
-                                <Button disabled={!this.state.isNeedSave} onClick={() => this.saveData()}>保存客戶信息</Button>
+                                <Button disabled={!this.state.isNeedSave}
+                                        onClick={() => this.saveData()}>保存客戶信息</Button>
                                 {/*<Button disabled={!this.state.changeNoteB} onClick={() => this.saveNote()}>保存备注</Button>*/}
                                 <Button disabled={this.state.isNeedSave} loading={this.state.iconcanLoading}
                                         onClick={() => this.saveReject()}>拒绝</Button>
@@ -1156,24 +1157,33 @@ class PassOpenD extends Component {
         });
     };
 
-    addBlackRequest(key){
+    addBlackRequest(key) {
         let me = this
+
+        // var content =  ?
+        //     if{}
+
+        if (!me.state.changeNoteV) {
+            message.error('備註必填')
+            return
+
+        }
+
         window.Axios.post('auth/addBlackUser', {
 
             'content': me.state.changeNoteV,
             // 'belongUserId': me.state.recordData.belongUserId,
             'id': me.state.recordData.id,
-            'type': '2',//1:合规 2:开户 3:交易
+            'listType': 2,//1:合规 2:开户 3:交易
 
         }).then(function (response) {
-
-
-            if(response.data.code ===1){
+            if (response.data.code === 1) {
                 notification.close(key)
                 message.success('added  open  black ')
             }
         }).catch(function (error) {
             console.log(error);
+
         });
     }
 
@@ -1186,7 +1196,7 @@ class PassOpenD extends Component {
             </Button>
         );
         const close = (e) => {
-            console.log('hcia e' , e)
+            console.log('hcia e', e)
         };
 
         notification.open({

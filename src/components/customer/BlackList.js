@@ -7,10 +7,11 @@ export default class BlackList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            bklistA: {},
+            res: {},
+            bklistA: [],
             current: 0,
             totalpage: 0,
-            pgsize: 2,
+            pgsize: 10,
             loading: false,
 
         };
@@ -25,19 +26,14 @@ export default class BlackList extends Component {
                 fixed: 'left',
                 width: 100,
                 render: (text, record) => (
-                    <Button>{record.phoneNumber}</Button>),
+                    <Button>{record.mobile}</Button>),
             }, {
                 title: '姓名',
                 dataIndex: 'name',
                 key: 'name',
                 render: (text, record) => (
-                    <Button>{record.cnName + record.lastName + record.firstName}</Button>),
-            }, {
-                title: '申请序号',
-                dataIndex: '申请序号',
-                key: '申请序号',
-                render: (text, record) => (<Button>{record.id}</Button>),
-            }, {
+                    <Button>{record.name}</Button>),
+            },  {
                 title: '账号类型',
                 dataIndex: '账号类型',
                 key: '账号类型',
@@ -59,7 +55,7 @@ export default class BlackList extends Component {
                 dataIndex: '处理备注',
                 key: '处理备注',
                 render: (text, record) => (
-                    <Button>{record.note}</Button>),
+                    <Button>{record.comment}</Button>),
             }, {
                 title: '操作',
                 key: 'action',
@@ -80,6 +76,9 @@ export default class BlackList extends Component {
 
     requestPage = (pg) => {
         let self = this
+        this.setState({
+            loading:true
+        })
         window.Axios.post('auth/getBlackList', {
             'listType': '2',//1:合规 2:开户 3:交易
             'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
@@ -88,7 +87,9 @@ export default class BlackList extends Component {
 
             self.setState({
                 totalpage: response.data.data.totalPage,
-                bklistA: response.data.data,
+                res: response.data.data,
+                bklistA: response.data.data.list,
+                loading:false
             });
         }).catch(function (error) {
             console.log(error);
@@ -123,7 +124,7 @@ export default class BlackList extends Component {
 
                 <Table rowKey="id"
                        columns={this.columns}
-                       dataSource={this.state.bklistA.list}
+                       dataSource={this.state.bklistA}
                        scroll={{x: 1300}}
                        loading={this.state.loading}
                        pagination={{  // 分页
