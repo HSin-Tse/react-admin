@@ -5,7 +5,7 @@
  *
  */
 import React, {Component} from 'react';
-import {Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, Popconfirm} from 'antd';
+import {Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, Popconfirm,notification} from 'antd';
 import {Radio} from 'antd';
 import {message} from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
@@ -701,7 +701,6 @@ class PassOpenD extends Component {
         var me = this;
 
         window.Axios.post('/open/passOpenApply', {
-            'language': 'zh-CN',
             'content': me.state.changeNoteV,
             'belongUserId': me.state.recordData.belongUserId,
             'id': me.state.recordData.id,
@@ -809,26 +808,7 @@ class PassOpenD extends Component {
         this.showModal()
     };
 
-    // saveNote = () => {
-    //     let me = this;
-    //     window.Axios.post('/star/unBindStarLiveAccount', {
-    //         // "language":"zh-CN","userId":"#############################"
-    //         'belongUserId': me.state.recordData.belongUserId,
-    //         'content': me.state.changeNoteV
-    //     }).then(function (response) {
-    //
-    //         me.setState({
-    //             changeNoteB: false,
-    //         });
-    //
-    //         if (response.data.code == 1) {
-    //             message.success('saveNote ok')
-    //         }
-    //
-    //     }).catch(function (error) {
-    //         console.log(error);
-    //     });
-    // };
+
     saveReject = () => {
 
         this.setState({
@@ -848,6 +828,7 @@ class PassOpenD extends Component {
 
             if (response.data.code == 1) {
                 message.info('拒絕成功')
+                me.openTipBlack()
             }
 
         }).catch(function (error) {
@@ -1174,6 +1155,57 @@ class PassOpenD extends Component {
             isNeedSave: true,
         });
     };
+
+    addBlackRequest(key){
+        let me = this
+        window.Axios.post('auth/addBlackUser', {
+
+            'content': me.state.changeNoteV,
+            // 'belongUserId': me.state.recordData.belongUserId,
+            'id': me.state.recordData.id,
+            'type': '2',//1:合规 2:开户 3:交易
+
+        }).then(function (response) {
+
+
+            if(response.data.code ===1){
+                notification.close(key)
+                message.success('added  open  black ')
+            }
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+
+    openTipBlack() {
+
+        const key = `open${Date.now()}`;
+        const btn = (
+            <Button type="primary" size="small" onClick={(key) => this.addBlackRequest(key)}>
+                Confirm
+            </Button>
+        );
+        const close = (e) => {
+            console.log('hcia e' , e)
+        };
+
+        notification.open({
+            message: '是否同时加入开户黑名单',
+            description: '是否同时加入开户黑名单',
+            btn,
+            key,
+            placement: 'bottomRight',
+            onClose: close,
+        });
+
+        // const args = {
+        //     message: 'Notification Title',
+        //     description: 'I will never close automatically. I will be close automatically. I will never close automatically.',
+        //     duration: 0,
+        //     placement: 'bottomRight',
+        // };
+        // notification.open(args);
+    }
 }
 
 export default PassOpenD;

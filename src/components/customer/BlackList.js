@@ -105,6 +105,9 @@ export default class BlackList extends Component {
 
         })
     }
+    itemDeleteClick= ()=>{
+
+    }
 
     render() {
         return (
@@ -114,7 +117,6 @@ export default class BlackList extends Component {
                 <div>waitUpdate :{JSON.stringify(this.state)}</div>
                 <BreadcrumbCustom first="用戶管理" second="黑名單"/>
                 <div>
-                    <Button onClick={this.test} type="primary">Primary</Button>
                     <Button onClick={() => this.itemDeleteClick()}> Default</Button>
                     <Button type="dashed">Dashed</Button>
                 </div>
