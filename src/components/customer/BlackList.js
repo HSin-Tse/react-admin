@@ -18,6 +18,7 @@ export default class BlackList extends Component {
             totalpageA: 0,
             totalpageB: 0,
             totalpageC: 0,
+            nowKey: 0,
             pgsize: 20,
             loadingA: false,
             loadingB: false,
@@ -87,7 +88,9 @@ export default class BlackList extends Component {
         window.Axios.post('auth/removeBlackUser', {
             'id': record.id//1:合规 2:开户 3:交易
         }).then((response) => {
+
             message.success('操作成功')
+
         }).catch(function (error) {
             console.log(error);
         });
