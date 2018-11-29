@@ -68,7 +68,7 @@ class PotentialUser extends Component {
 
 		this.editTableType1Columns()
 		//
-        this.requestListData(this.state.tableType)
+        this.requestListData("1")
 		this.requestUserCommentList()
 
 	}

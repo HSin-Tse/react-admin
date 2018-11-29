@@ -68,7 +68,7 @@ class SimulatorUser extends Component {
 
 		this.editTableType1Columns()
 		//
-        this.requestListData(this.state.tableType)
+        this.requestListData("2")
 		this.requestUserCommentList()
 
 	}
