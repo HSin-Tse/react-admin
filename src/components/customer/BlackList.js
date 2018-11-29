@@ -124,11 +124,11 @@ export default class BlackList extends Component {
             'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
         }).then((response) => {
             console.log('hcia response', response)
-                self.setState({
-                    totalpageB: response.data.data.totalPage,
-                    bklistB: response.data.data.list,
-                    loadingB: false
-                });
+            self.setState({
+                totalpageB: response.data.data.totalPage,
+                bklistB: response.data.data.list,
+                loadingB: false
+            });
 
 
         }).catch(function (error) {
@@ -184,6 +184,11 @@ export default class BlackList extends Component {
     }
 
     render() {
+        const { loading, selectedRowKeys } = this.state;
+        const rowSelection = {
+            selectedRowKeys,
+            // onChange: this.onSelectChange,
+        };
         return (
 
 
@@ -193,6 +198,7 @@ export default class BlackList extends Component {
                 <Tabs onChange={this.callback} type="card">
                     <TabPane tab="合规黑名单" key="1">
                         <Table rowKey="id"
+                               rowSelection={rowSelection}
                                columns={this.columns}
                                dataSource={this.state.bklistA}
                                scroll={{x: 1300}}
