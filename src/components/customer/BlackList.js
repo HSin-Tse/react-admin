@@ -18,6 +18,7 @@ export default class BlackList extends Component {
             totalpageA: 0,
             totalpageB: 0,
             totalpageC: 0,
+            nowKey: 0,
             pgsize: 20,
             loadingA: false,
             loadingB: false,
@@ -33,36 +34,38 @@ export default class BlackList extends Component {
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
                 fixed: 'left',
-                width: 100,
                 render: (text, record) => (
-                    <Button>{record.mobile}</Button>),
+
+                    <span>{record.mobile}</span>
+
+                ),
             }, {
                 title: '姓名',
                 dataIndex: 'name',
                 key: 'name',
                 render: (text, record) => (
-                    <Button>{record.name}</Button>),
+                    <span>{record.name}</span>),
             }, {
                 title: '活跃度',
                 dataIndex: '活跃度',
                 key: '活跃度',
-                render: (text, record) => (<Button>{record.activeFlag}</Button>),
+                render: (text, record) => (<span>{record.activeFlag}</span>),
             }, {
                 title: 'APP注册时间',
                 dataIndex: 'APP注册时间',
                 key: 'APP注册时间',
-                render: (text, record) => (<Button>{record.date}</Button>),
+                render: (text, record) => (<span>{record.date}</span>),
             }, {
                 title: '操作人',
                 dataIndex: '操作人',
                 key: '操作人',
-                render: (text, record) => (<Button>{record.operator}</Button>),
+                render: (text, record) => (<span>{record.operator}</span>),
             }, {
                 title: '处理备注',
                 dataIndex: '处理备注',
                 key: '处理备注',
                 render: (text, record) => (
-                    <Button>{record.comment}</Button>),
+                    <span>{record.comment}</span>),
             }, {
                 title: '操作',
                 key: 'action',
@@ -85,7 +88,9 @@ export default class BlackList extends Component {
         window.Axios.post('auth/removeBlackUser', {
             'id': record.id//1:合规 2:开户 3:交易
         }).then((response) => {
+
             message.success('操作成功')
+
         }).catch(function (error) {
             console.log(error);
         });
@@ -224,6 +229,7 @@ export default class BlackList extends Component {
                             批量移除
                         </Button>
                         <Table rowKey="id"
+                               bordered
                                rowSelection={rowSelection}
                                columns={this.columns}
                                dataSource={this.state.bklistA}

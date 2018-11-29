@@ -21,6 +21,12 @@ const {TextArea} = Input;
 const RadioGroup = Radio.Group;
 const Option = Select.Option;
 
+const provinceData = ['Zhejiang', 'Jiangsu'];
+const cityData = {
+    Zhejiang: ['Hangzhou', 'Ningbo', 'Wenzhou'],
+    Jiangsu: ['Nanjing', 'Suzhou', 'Zhenjiang'],
+};
+
 
 const tradeType = [
     {label: 'CFD', value: 'CFD'},
@@ -30,11 +36,29 @@ const tradeType = [
 const dateFormat = 'YYYY-MM-DD';
 
 class PassOpenD extends Component {
+    handleProvinceChange = (value) => {
+
+        console.log('hcia value', value)
+        this.setState({
+            mState: value,
+        });
+
+    };
+
+    onSecondCityChange = (value) => {
+        this.setState({
+            secondCity: value,
+        });
+    }
 
     constructor(props) {
         super(props);
         this.state = {
+            cities: cityData[provinceData[0]],
+            secondCity: cityData[provinceData[0]][0],
             isNeedSave: false
+            , provinceDatAarra: []
+            , cityDatAarra: []
             , recordData: {}
             , recordDictirys: {}
             , waitUpdate: {}
@@ -51,6 +75,7 @@ class PassOpenD extends Component {
             , testeee: '1976-11-23'
             , mGender: ''
             , checkfromdbName: ''
+            , mState: ''
             , checkfromdbTypeV: 0
             , mAnnualIncome: ''
             , sss: 'aa'
@@ -69,6 +94,15 @@ class PassOpenD extends Component {
 
     componentDidMount() {
         var self = this;
+
+
+        window.Axios.post('dict/leverageList', {
+            'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
+        }).then((response) => {
+
+
+        });
+
         window.Axios.post('dict/openDict', {
             'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
         }).then(function (response) {
@@ -103,7 +137,52 @@ class PassOpenD extends Component {
                 myearsTrading: response.data.data.yearsTrading,
                 mtradingObjectives: response.data.data.tradingObjectives,
                 mriskTolerance: response.data.data.riskTolerance,
+                mState: response.data.data.state,
                 checkfromdbName: response.data.data.phoneNumber,
+            }, () => {
+
+                window.Axios.post('dict/openDict', {
+                    'keys': 'div_type',
+                    'division': 'province',
+                    'code': '1',
+                }).then(function (response) {
+                    console.log('hcia response', response)
+
+                    self.setState({
+                        provinceDatAarra: response.data.data.div_type,
+                    }, () => {
+
+                        var nowCity = self.state.provinceDatAarra.filter(function(item, index, array){
+                            return item.value == self.state.mState;
+                        });
+
+                        console.log('hcia self.state.provinceDatAarra' , self.state.provinceDatAarra)
+                        console.log('hcia nowCity' , nowCity[0])
+                        console.log('hcia nowCity' , nowCity[0].value)
+                        console.log('hcia nowCity' , nowCity[0].code)
+
+                        console.log('hcia self.setState.state' , self.state.mState)
+
+
+                        window.Axios.post('dict/openDict', {
+                            'keys': 'div_type',
+                            'division': 'city',
+                            'code': nowCity[0].code
+                        }).then((response) => {
+
+
+                            self.setState({
+                                cityDatAarra:response.data.data.div_type
+                            })
+                        });
+                    });
+
+
+                }).catch(function (error) {
+                    console.log(error);
+                });
+
+
             });
         }).catch(function (error) {
             console.log(error);
@@ -199,8 +278,6 @@ class PassOpenD extends Component {
                                     />
                                 </div>
                             </Card>
-
-
                         </Col>
                         <Col md={8}>
                             <Card bordered={false}>
@@ -231,7 +308,6 @@ class PassOpenD extends Component {
                                 </div>
                             </Card>
                         </Col>
-
                     </Row>
                     <Row gutter={16}>
 
@@ -336,11 +412,43 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*城市</span>
-                                    <Select defaultValue="上海" style={{width: 120}}>
-                                        <Option value="0">上海</Option>
-                                        <Option value="1">？</Option>
+
+                                    <Select
+                                        defaultValue={provinceData[0]}
+                                        style={{width: 120}}
+                                        // onChange={this.handleProvinceChange}
+                                    >
+                                        {provinceData.map(province => <Option key={province}>{province}</Option>)}
+                                    </Select>
+                                    <Select
+                                        style={{width: 120}}
+                                        value={this.state.secondCity}
+                                        // onChange={this.onSecondCityChange}
+                                    >
+                                        {this.state.cities.map(city => <Option key={city}>{city}</Option>)}
                                     </Select>
                                 </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>*城市</span>
+
+                                    <Select
+                                        value={this.state.mState}
+                                        style={{width: 120}}
+                                        onChange={this.handleProvinceChange}
+                                    >
+                                        {this.state.provinceDatAarra.map(province => <Option
+                                            key={province.name}>{province.name}</Option>)}
+                                    </Select>
+                                    <Select
+                                        style={{width: 120}}
+                                        value={this.state.secondCity}
+                                        // onChange={this.onSecondCityChange}
+                                    >
+                                        {this.state.cities.map(city => <Option key={city}>{city}</Option>)}
+                                    </Select>
+                                </div>
+
+
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*详细地址</span>
                                     <Input defaultValue={this.state.recordData.street} onChange={this.onChangestreet}
@@ -530,14 +638,17 @@ class PassOpenD extends Component {
                         </Col>
                         <Col md={4}>
                             <div style={{display: 'flex', minHeight: 40}}>
-                                <Button loading={this.state.icondbALoadingA} onClick={() => this.searchFromOtherDB()}>异库查询</Button>
+                                <Button loading={this.state.icondbALoadingA}
+                                        onClick={() => this.searchFromOtherDB()}>异库查询</Button>
 
                             </div>
                         </Col>
                         <Col md={24}>
                             <div style={{display: 'flex', minHeight: 40}}>
-                                {this.state.checkderesb == null ? null : <h3 style={{margin: 'auto'}}>本库查询结果：{this.state.checkderesb ? '有' : '無'}重合</h3>}
-                                {this.state.checkderesa == null ? null : <h3 style={{margin: 'auto'}}>异库查询结果：{this.state.checkderesa ? '有' : '無'}重合</h3>}
+                                {this.state.checkderesb == null ? null :
+                                    <h3 style={{margin: 'auto'}}>本库查询结果：{this.state.checkderesb ? '有' : '無'}重合</h3>}
+                                {this.state.checkderesa == null ? null :
+                                    <h3 style={{margin: 'auto'}}>异库查询结果：{this.state.checkderesa ? '有' : '無'}重合</h3>}
 
 
                             </div>
