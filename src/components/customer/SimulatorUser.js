@@ -254,7 +254,6 @@ class SimulatorUser extends Component {
 		}
 
     requestListData = (listType) => {
-		console.log('jjj',this.state.tableType)
         var aa = this;
         axios.post('http://mobile.nooko.cn:8090/ixuser/getUserList', {
         	'listType' : listType,
