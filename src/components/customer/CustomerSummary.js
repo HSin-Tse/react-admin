@@ -133,7 +133,8 @@ class CustomerSummary extends Component {
 		key: '备asasas注',
 		render: (text, record) => (
 			<Button></Button>),
-	}, {
+	},
+	 {
 		title: '操作人',
 		dataIndex: 'operator',
 		key: 'operator',
@@ -148,8 +149,6 @@ class CustomerSummary extends Component {
 			<div>
 				<Button className="ant-dropdown-link" onClick={() => this.showModal()}>添加備註</Button>
 				<Button className="ant-dropdown-link" onClick={() => this.showModal2()}>操作日誌</Button>
-
-
 			</div>
 		)
 	}
