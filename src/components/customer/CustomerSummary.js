@@ -176,7 +176,7 @@ class CustomerSummary extends Component {
 			
              <div>
                 <div>log: {this.state.anyThing}</div>
-                <div>yyxLog log: PotentialUser</div>
+                <div>yyxLog log: CustomerSummary</div>
 								<div />
                 <BreadcrumbCustom first="用户管理" second="Leads管理" />
 
