@@ -68,26 +68,20 @@ class CustomerSummary extends Component {
 
 		this.editTableType1Columns()
 		//
-        this.requestListData("1")
+        this.requestListData("4")
 		this.requestUserCommentList()
 
 	}
 	editTableType1Columns =() =>{
 		this.columns = [
-			{
-					title: '選擇',
-					dataIndex: 'phoneNumber',
-					key: 'phoneNumber',
-					// fixed: 'left',
-					// width: 100,
-					render: (text, record) => (
-					<Checkbox
-						 // checked={this.state.checked}
-						 // disabled={this.state.disabled}
-						 onChange={this.hasChange}
-					/>),
-			 }
-				,{
+	{
+		title: '選擇',
+		dataIndex: 'aaaaa',
+		key: 'aasasasas',
+		render: (text, record) => (
+			<Checkbox onChange={this.hasChange}/>)				
+	}
+	,{
 		title: '手机号',
 		dataIndex: 'phoneNumber',
 		key: 'phoneNumber',
@@ -104,58 +98,57 @@ class CustomerSummary extends Component {
 
 			<Button>{record.name}</Button>),
 	}, {
-		title: 'APP版本',
-		dataIndex: '11申请序号',
-		key: '11申请序号',
+		title: '账户类型',
+		dataIndex: 'accountType',
+		key: 'accountType',
 		render: (text, record) => (<Button>{record.versionInfo}</Button>),
 	}, {
-		title: '手机型号',
+		title: '交易账号',
 		dataIndex: '11账号类型',
 		key: '11账号类型',
 		render: (text, record) => (
 			<Button>{record.systemInfo}</Button>),
 	}, {
-		title: '操作系统型号',
-		dataIndex: '11申请时间',
-		key: '11申请时间',
+		title: '最近登录时间',
+		dataIndex: 'date',
+		key: 'date',
 
 	}, {
-		title: '注册时间',
-		dataIndex: '11审核状态',
-		key: '11审核状态',
+		title: '客诉次数',
+		dataIndex: 'complaintNum',
+		key: 'complaintNum',
 		render: (text, record) => (
 
 			<Button>{record.date}</Button>)
 	}, {
-		title: '下载平台',
-		dataIndex: '下载平台',
-		key: '下载平台',
+		title: '回访次数',
+		dataIndex: 'commentNum',
+		key: 'commentNum',
 		render: (text, record) => (
 			<Button>{record.channelInfo}</Button>),
 	}, {
-		title: '地理位置',
-		dataIndex: '地理位置',
-		key: '地理位置',
+		title: '备注信息',
+		dataIndex: '地理位置xxzxzx',
+		key: '地理位置zxzxxzx',
 		render: (text, record) => (
 			<Button>{record.location}</Button>),
 	}, {
-		title: '备注',
-		dataIndex: '备注',
-		key: '备注',
+		title: '查看',
+		dataIndex: 'asas备注',
+		key: '备asasas注',
 		render: (text, record) => (
 			<Button>{record.comment}</Button>),
 	}, {
 		title: '操作人',
-		dataIndex: '操作人',
-		key: '操作人',
+		dataIndex: 'operator',
+		key: 'operator',
 		render: (text, record) => (
 			<Button>{record.operator}</Button>),
 	}
 	, {
-		title: '操作',
+		title: '业务操作',
 		key: 'action',
-						align: 'center',
-		width: 300,
+		align: 'center',
 		render: (text, record) => (
 			<div>
 				<span className="ant-divider" />
@@ -164,7 +157,21 @@ class CustomerSummary extends Component {
 
 
 			</div>
-		),
+		)
+	}
+	, {
+		title: '其他',
+		key: 'action',
+		align: 'center',
+		render: (text, record) => (
+			<div>
+				<span className="ant-divider" />
+				<Button className="ant-dropdown-link" onClick={() => this.showModal()}>添加備註</Button>
+										<Button className="ant-dropdown-link" onClick={() => this.showModal2()}>操作日誌</Button>
+
+
+			</div>
+		)
 	}
 	];
 	}
@@ -177,14 +184,10 @@ class CustomerSummary extends Component {
              <div>
                 <div>log: {this.state.anyThing}</div>
                 <div>yyxLog log: CustomerSummary</div>
-								<div />
-                <BreadcrumbCustom first="用户管理" second="Leads管理" />
+			<div />
 
                 <div>
-
-                    <Button type="primary">潛在用戶</Button>
-                    <Button onClick={() => this.goToSimulator()} type="primary">模擬用戶</Button>
-                    <Button onClick={() => this.goToIntend()} type="primary">意向用戶</Button>
+                    <Button>用戶列表</Button>
                 </div>
 
                 <Table rowKey="id"
@@ -275,12 +278,6 @@ class CustomerSummary extends Component {
 
         }).then(function (response) {
             var bb = response.data.data.list;
-            for (var i = bb.length - 1; i >= 0; i--) {
-            	let userInfo = bb[i]
-            	if (userInfo.name == null || " ") {
-            		userInfo.name = '沒資料'
-            	}
-            }
             aa.setState({anyThing: 'wwwww'});
             aa.setState({anyThing: response.data.code});
             aa.setState({userList: response.data.data.list});
