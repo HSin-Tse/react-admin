@@ -43,24 +43,21 @@ class CustomerSummary extends Component {
 						title: '時間',
 						dataIndex: 'createDate',
 						key: 'operationDiary_Date',
-						// fixed: 'left',
-						// width: 100,
+
 						render: (text, record) => (
 								<Button>{record.createDate}</Button>),
 				 },{
  						title: '狀態',
  						dataIndex: 'comment',
  						key: 'operationDiary_Status',
- 						// fixed: 'left',
- 						// width: 100,
+ 						
 						render: (text, record) => (
 								<Button>{record.comment}</Button>),
  				 },{
  						title: '操作人',
  						dataIndex: 'bkUserName',
  						key: 'operationDiary_User',
- 						// fixed: 'left',
- 						// width: 100,
+ 						
 						render: (text, record) => (
 								<Button>{record.bkUserName}</Button>),
  				 }]
@@ -85,8 +82,7 @@ class CustomerSummary extends Component {
 		title: '手机号',
 		dataIndex: 'phoneNumber',
 		key: 'phoneNumber',
-		// fixed: 'left',
-		// width: 100,
+		
 		render: (text, record) => (
 			<Button>{record.mobile}</Button>),
 	 }
@@ -95,7 +91,6 @@ class CustomerSummary extends Component {
 		dataIndex: 'name',
 		key: 'name',
 		render: (text, record) => (
-
 			<Button>{record.name}</Button>),
 	}, {
 		title: '账户类型',
@@ -113,14 +108,12 @@ class CustomerSummary extends Component {
 		dataIndex: 'date',
 		key: 'date',
 		render: (text, record) => (
-
 			<Button>{record.date}</Button>)
 	}, {
 		title: '客诉次数',
 		dataIndex: 'complaintNum',
 		key: 'complaintNum',
 		render: (text, record) => (
-
 			<Button>{record.complaintNum}</Button>)
 	}, {
 		title: '回访次数',
@@ -155,7 +148,7 @@ class CustomerSummary extends Component {
 			<div>
 				<span className="ant-divider" />
 				<Button className="ant-dropdown-link" onClick={() => this.showModal()}>添加備註</Button>
-										<Button className="ant-dropdown-link" onClick={() => this.showModal2()}>操作日誌</Button>
+				<Button className="ant-dropdown-link" onClick={() => this.showModal2()}>操作日誌</Button>
 
 
 			</div>
@@ -169,7 +162,7 @@ class CustomerSummary extends Component {
 			<div>
 				<span className="ant-divider" />
 				<Button className="ant-dropdown-link" onClick={() => this.showModal()}>添加備註</Button>
-										<Button className="ant-dropdown-link" onClick={() => this.showModal2()}>操作日誌</Button>
+				<Button className="ant-dropdown-link" onClick={() => this.showModal2()}>操作日誌</Button>
 
 
 			</div>
@@ -183,8 +176,7 @@ class CustomerSummary extends Component {
 		  };
         return(
 			
-             <div>
-                <div>log: {this.state.anyThing}</div>
+            <div>
                 <div>yyxLog log: CustomerSummary</div>
 			<div />
 
@@ -207,9 +199,7 @@ class CustomerSummary extends Component {
                     </Row>
 				
 				</div>
-				
-
-								<Modal
+						<Modal
 				          title="添加備註"
 				          visible={this.state.visible}
 				          onOk={this.handleOk}
@@ -220,21 +210,21 @@ class CustomerSummary extends Component {
 				          <p><DatePicker onChange={this.selectDate} /></p>
 				          <p><Input placeholder="填写回访次数以及结果" /></p>
 				        </Modal>
-								<Modal
+						<Modal
 									title="操作日誌"
 									visible={this.state.modal2Visible}
 									onOk={this.handleOk}
 									onCancel={this.handleCancel}
 									okText="確認"
 									cancelText="取消"
-								>
-									<p>
-									<Table rowKey="id"
+						>
+							<p>
+								<Table rowKey="id"
 												 columns={this.modalColumns} dataSource={this.state.operationDiaryHistory}
 												 scroll={{x: 1300}}
-									/>
-									</p>
-								</Modal>
+								/>
+							</p>
+						</Modal>
 
             </div>
 		)
@@ -250,19 +240,15 @@ class CustomerSummary extends Component {
 	}
 	goToSimulator = () => {
 		this.props.history.push('/app/customer/SimulatorUser')
-
 	}
 	goToIntend =() =>{
-		//
 		this.props.history.push('/app/pass/IntendingUser')
-
 	}
 	hasChangeAll = () =>{
 
 	}
     hasChange = (status) =>{
-			console.log('yyx',status.target.checked)
-
+		console.log('yyx',status.target.checked)
     }
 	checkDiary = () => {
 
@@ -286,7 +272,6 @@ class CustomerSummary extends Component {
 
         }).catch(function (error) {
             console.log(error);
-            // message.warn(error);
         });
     };
 		requestUserCommentList = () =>{
