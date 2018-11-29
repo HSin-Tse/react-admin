@@ -101,37 +101,39 @@ class CustomerSummary extends Component {
 		title: '账户类型',
 		dataIndex: 'accountType',
 		key: 'accountType',
-		render: (text, record) => (<Button>{record.versionInfo}</Button>),
+		render: (text, record) => (<Button>{record.accountType}</Button>),
 	}, {
 		title: '交易账号',
 		dataIndex: '11账号类型',
 		key: '11账号类型',
 		render: (text, record) => (
-			<Button>{record.systemInfo}</Button>),
+			<Button>{record.accountNo}</Button>),
 	}, {
 		title: '最近登录时间',
 		dataIndex: 'date',
 		key: 'date',
+		render: (text, record) => (
 
+			<Button>{record.date}</Button>)
 	}, {
 		title: '客诉次数',
 		dataIndex: 'complaintNum',
 		key: 'complaintNum',
 		render: (text, record) => (
 
-			<Button>{record.date}</Button>)
+			<Button>{record.complaintNum}</Button>)
 	}, {
 		title: '回访次数',
 		dataIndex: 'commentNum',
 		key: 'commentNum',
 		render: (text, record) => (
-			<Button>{record.channelInfo}</Button>),
+			<Button>{record.commentNum}</Button>),
 	}, {
 		title: '备注信息',
 		dataIndex: '地理位置xxzxzx',
 		key: '地理位置zxzxxzx',
 		render: (text, record) => (
-			<Button>{record.location}</Button>),
+			<Button>{record.comment}</Button>),
 	}, {
 		title: '查看',
 		dataIndex: 'asas备注',
@@ -187,7 +189,7 @@ class CustomerSummary extends Component {
 			<div />
 
                 <div>
-                    <Button>用戶列表</Button>
+                    <Button>用戶總表</Button>
                 </div>
 
                 <Table rowKey="id"
