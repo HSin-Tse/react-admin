@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {DatePicker, Input, Modal, Button, Table, Icon, message} from 'antd';
+import {DatePicker, Input, Modal, Button, Table, Tabs, message} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 
+const TabPane = Tabs.TabPane;
 export default class BlackList extends Component {
 
     constructor(props) {
@@ -33,7 +34,7 @@ export default class BlackList extends Component {
                 key: 'name',
                 render: (text, record) => (
                     <Button>{record.name}</Button>),
-            },  {
+            }, {
                 title: '活跃度',
                 dataIndex: '活跃度',
                 key: '活跃度',
@@ -48,7 +49,7 @@ export default class BlackList extends Component {
                 dataIndex: '操作人',
                 key: '操作人',
                 render: (text, record) => (<Button>{record.operator}</Button>),
-            },    {
+            }, {
                 title: '处理备注',
                 dataIndex: '处理备注',
                 key: '处理备注',
@@ -71,6 +72,7 @@ export default class BlackList extends Component {
 
 
     }
+
     handleremove = (record) => {
 
 
@@ -89,10 +91,10 @@ export default class BlackList extends Component {
     requestPage = (pg) => {
         let self = this
         this.setState({
-            loading:true
+            loading: true
         })
         window.Axios.post('auth/getBlackList', {
-            pageNo:this.state.current,
+            pageNo: this.state.current,
             'listType': '2',//1:合规 2:开户 3:交易
             'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
         }).then((response) => {
@@ -102,7 +104,7 @@ export default class BlackList extends Component {
                 totalpage: response.data.data.totalPage,
                 res: response.data.data,
                 bklistA: response.data.data.list,
-                loading:false
+                loading: false
             });
         }).catch(function (error) {
             console.log(error);
@@ -110,7 +112,7 @@ export default class BlackList extends Component {
     }
 
     changePage = (page) => {
-        
+
         console.log('hcia page', page)
         this.setState({
             current: page,
@@ -120,8 +122,9 @@ export default class BlackList extends Component {
 
         })
     }
-    itemDeleteClick= ()=>{
 
+    callback(key) {
+        console.log('hcia key', key)
     }
 
     render() {
@@ -131,21 +134,25 @@ export default class BlackList extends Component {
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 <BreadcrumbCustom first="用戶管理" second="黑名單"/>
-                <div>
-                    <Button onClick={() => this.itemDeleteClick()}> Default</Button>
-                </div>
+                <Tabs onChange={this.callback} type="card">
+                    <TabPane tab="Tab 1" key="1">
+                        <Table rowKey="id"
+                               columns={this.columns}
+                               dataSource={this.state.bklistA}
+                               scroll={{x: 1300}}
+                               loading={this.state.loading}
+                               pagination={{  // 分页
+                                   total: this.state.totalpage * this.state.pgsize,
+                                   pageSize: this.state.pgsize,
+                                   onChange: this.changePage,
+                               }}
+                        />
+                    </TabPane>
+                    <TabPane tab="Tab 2" key="2">Content of Tab Pane 2</TabPane>
+                    <TabPane tab="Tab 3" key="3">Content of Tab Pane 3</TabPane>
+                </Tabs>
 
-                <Table rowKey="id"
-                       columns={this.columns}
-                       dataSource={this.state.bklistA}
-                       scroll={{x: 1300}}
-                       loading={this.state.loading}
-                       pagination={{  // 分页
-                           total: this.state.totalpage * this.state.pgsize,
-                           pageSize: this.state.pgsize,
-                           onChange: this.changePage,
-                       }}
-                />
+
             </div>
 
         )
