@@ -132,7 +132,7 @@ class CustomerSummary extends Component {
 		dataIndex: 'asas备注',
 		key: '备asasas注',
 		render: (text, record) => (
-			<Button>{record.comment}</Button>),
+			<Button></Button>),
 	}, {
 		title: '操作人',
 		dataIndex: 'operator',
@@ -146,7 +146,6 @@ class CustomerSummary extends Component {
 		align: 'center',
 		render: (text, record) => (
 			<div>
-				<span className="ant-divider" />
 				<Button className="ant-dropdown-link" onClick={() => this.showModal()}>添加備註</Button>
 				<Button className="ant-dropdown-link" onClick={() => this.showModal2()}>操作日誌</Button>
 
