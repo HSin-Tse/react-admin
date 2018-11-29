@@ -17,7 +17,7 @@ export default class BlackList extends Component {
             totalpageA: 0,
             totalpageB: 0,
             totalpageC: 0,
-            pgsize: 3,
+            pgsize: 20,
             loadingA: false,
             loadingB: false,
             loadingC: false,
