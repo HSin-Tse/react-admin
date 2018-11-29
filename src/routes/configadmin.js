@@ -18,6 +18,8 @@ export default {
             key: '/app/customer', title: '用戶管理', icon: 'safety',
             subs: [
                 { key: '/app/customer/PotentialUser', title: 'Lead管理', component: 'PotentialUser' },
+                { key: '/app/customer/CustomerSummary', title: '用戶總表', component: 'CustomerSummary' },
+
                 { key: '/app/customer/blacklist', title: '黑名單', component: 'BlackList' },
                 { key: '/app/customer/whitelist', title: '白名單', component: 'WhiteList' },
 
