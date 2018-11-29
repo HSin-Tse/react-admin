@@ -11,7 +11,7 @@ export default class BlackList extends Component {
             bklistA: [],
             current: 0,
             totalpage: 0,
-            pgsize: 2,
+            pgsize: 10,
             loading: false,
 
         };
@@ -92,6 +92,7 @@ export default class BlackList extends Component {
             loading:true
         })
         window.Axios.post('auth/getBlackList', {
+            pageNo:this.state.current,
             'listType': '2',//1:合规 2:开户 3:交易
             'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
         }).then((response) => {
@@ -109,6 +110,7 @@ export default class BlackList extends Component {
     }
 
     changePage = (page) => {
+        
         console.log('hcia page', page)
         this.setState({
             current: page,
