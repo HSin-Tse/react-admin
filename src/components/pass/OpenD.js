@@ -253,8 +253,8 @@ class PassOpenD extends Component {
                 </Card>
                 <Card title="IX账户设置" bordered={true} style={{marginTop: 30}}>
 
-                    <Row gutter={16}>
-                        <Col md={24}>
+                    <Row>
+                        <Col>
                             <Card bordered={false}>
 
                                 <div>

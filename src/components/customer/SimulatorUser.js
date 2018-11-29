@@ -66,13 +66,13 @@ class SimulatorUser extends Component {
  				 }]
 
 
-		this.editTableType1Columns()
+		this.editTableType2Columns()
 		//
-        this.requestListData(this.state.tableType)
+        this.requestListData("2")
 		this.requestUserCommentList()
 
 	}
-	editTableType1Columns =() =>{
+	editTableType2Columns =() =>{
 		this.columns = [
 			{
 					title: '選擇',
@@ -170,6 +170,9 @@ class SimulatorUser extends Component {
 	// this.columns = null
 	}
     render() {
+		const style1 = {
+			padding: '8px',
+		  };
         return(
              <div>
                 <div>log: {this.state.anyThing}</div>
@@ -188,6 +191,17 @@ class SimulatorUser extends Component {
                        columns={this.columns} dataSource={this.state.userList}
                        scroll={{x: 1300}}
                 />
+					<div style={style1}>
+					 <Row gutter={16} >
+                        <Col md={8}>
+                                     <Checkbox onChange={this.hasChangeAll}/>
+									  <Button>批量分組</Button>
+									 <Button>批量延期</Button>
+									 <Button>刪除</Button>
+                        </Col>
+                    </Row>
+				
+				</div>
 				
 
 								<Modal
@@ -227,10 +241,6 @@ class SimulatorUser extends Component {
             , userList: []
 			, operationDiaryHistory: []
 			, anyThing: 'asdasd'
-			,tableType: '1'
-
-
-
         };
 	}
 	goToIntend =() =>{
@@ -258,8 +268,6 @@ class SimulatorUser extends Component {
 		}
 
     requestListData = (listType) => {
-		this.setState({is_tag: '123321',tableType: listType});
-		console.log('jjj',this.state.tableType)
         var aa = this;
         axios.post('http://mobile.nooko.cn:8090/ixuser/getUserList', {
         	'listType' : listType,
