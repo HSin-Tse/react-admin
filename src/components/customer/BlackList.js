@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {DatePicker, Input, Modal, Button, Table, Icon, Checkbox} from 'antd';
+import {DatePicker, Input, Modal, Button, Table, Icon, message} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 
 export default class BlackList extends Component {
@@ -11,7 +11,7 @@ export default class BlackList extends Component {
             bklistA: [],
             current: 0,
             totalpage: 0,
-            pgsize: 10,
+            pgsize: 2,
             loading: false,
 
         };
@@ -34,23 +34,21 @@ export default class BlackList extends Component {
                 render: (text, record) => (
                     <Button>{record.name}</Button>),
             },  {
-                title: '账号类型',
-                dataIndex: '账号类型',
-                key: '账号类型',
-                render: (text, record) => (<Button>{record.accountType}</Button>),
+                title: '活跃度',
+                dataIndex: '活跃度',
+                key: '活跃度',
+                render: (text, record) => (<Button>{record.activeFlag}</Button>),
             }, {
-                title: '审核状态',
-                dataIndex: '审核状态',
-                filters: [
-                    {text: '审核中', value: 0},
-                    {text: '审核通过', value: 1},
-                    {text: '审核拒绝', value: 2},
-                ],
-                onFilter: (value, record) => record.status == value,
-                key: '审核状态',
-                render: (text, record) => (
-                    <Button>{record.status == 0 ? '审核中' : (record.status == 1) ? '审核通过' : '审核拒绝'}</Button>),
+                title: 'APP注册时间',
+                dataIndex: 'APP注册时间',
+                key: 'APP注册时间',
+                render: (text, record) => (<Button>{record.date}</Button>),
             }, {
+                title: '操作人',
+                dataIndex: '操作人',
+                key: '操作人',
+                render: (text, record) => (<Button>{record.operator}</Button>),
+            },    {
                 title: '处理备注',
                 dataIndex: '处理备注',
                 key: '处理备注',
@@ -64,7 +62,7 @@ export default class BlackList extends Component {
                 render: (text, record) => (
                     <div>
                         <span className="ant-divider"/>
-                        {/*<Button className="ant-dropdown-link" onClick={() => this.handleEdit(record)}>审核</Button>*/}
+                        <Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>移除</Button>
                     </div>
                 ),
             }];
@@ -73,7 +71,21 @@ export default class BlackList extends Component {
 
 
     }
+    handleremove = (record) => {
 
+
+        window.Axios.post('auth/removeBlackUser', {
+            'id': record.id//1:合规 2:开户 3:交易
+        }).then((response) => {
+            console.log('hcia response', response)
+            message.success('操作成功')
+
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+    };
     requestPage = (pg) => {
         let self = this
         this.setState({
@@ -115,11 +127,10 @@ export default class BlackList extends Component {
 
 
             <div>
-                <div>waitUpdate :{JSON.stringify(this.state)}</div>
+                {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 <BreadcrumbCustom first="用戶管理" second="黑名單"/>
                 <div>
                     <Button onClick={() => this.itemDeleteClick()}> Default</Button>
-                    <Button type="dashed">Dashed</Button>
                 </div>
 
                 <Table rowKey="id"
