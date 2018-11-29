@@ -58,32 +58,31 @@ export default class Basic extends Component {
                         <Button onClick={this.handleReset(clearFilters)}>Reset</Button>
                     </div>
                 ),
-                width: 100,
                 render: (text, record) => (
-                    <Button>{record.phoneNumber}</Button>),
+                    <span>{record.phoneNumber}</span>),
             }, {
                 title: '姓名',
                 dataIndex: 'name',
                 key: 'name',
                 render: (text, record) => (
-                    <Button>{record.cnName + record.lastName + record.firstName}</Button>),
+                    <span>{record.cnName + record.lastName + record.firstName}</span>),
             }, {
                 title: '申请序号',
                 dataIndex: '申请序号',
                 key: '申请序号',
-                render: (text, record) => (<Button>{record.id}</Button>),
+                render: (text, record) => (<span>{record.id}</span>),
             }, {
                 title: '账号类型',
                 dataIndex: '账号类型',
                 key: '账号类型',
                 render: (text, record) => (
-                    <Button>{record.accountType}</Button>),
+                    <span>{record.accountType}</span>),
             }, {
                 title: '申请时间',
                 dataIndex: '申请时间',
                 key: '申请时间',
                 render: (text, record) => (
-                    <Button>{this.timestampToTime(record.updateDate)}</Button>),
+                    <span>{this.timestampToTime(record.updateDate)}</span>),
             }, {
                 title: '审核状态',
                 dataIndex: '审核状态',
@@ -95,7 +94,7 @@ export default class Basic extends Component {
                 onFilter: (value, record) => record.status == value,
                 key: '审核状态',
                 render: (text, record) => (
-                    <Button>{record.status == 0 ? '审核中' : (record.status == 1) ? '审核通过' : '审核拒绝'}</Button>),
+                    <span>{record.status == 0 ? '审核中' : (record.status == 1) ? '审核通过' : '审核拒绝'}</span>),
             }, {
                 title: '处理备注',
                 dataIndex: '处理备注',
@@ -187,6 +186,7 @@ export default class Basic extends Component {
                        columns={this.columns}
                        dataSource={this.state.userList}
                        scroll={{x: 1300}}
+                       bordered
                        loading={this.state.loading}
                        pagination={{  // 分页
                            total: this.state.pgsize * this.state.totalPage,
