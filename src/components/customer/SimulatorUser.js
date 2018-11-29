@@ -66,13 +66,13 @@ class SimulatorUser extends Component {
  				 }]
 
 
-		this.editTableType1Columns()
+		this.editTableType2Columns()
 		//
         this.requestListData("2")
 		this.requestUserCommentList()
 
 	}
-	editTableType1Columns =() =>{
+	editTableType2Columns =() =>{
 		this.columns = [
 			{
 					title: '選擇',

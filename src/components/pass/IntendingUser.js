@@ -66,13 +66,13 @@ class IntendingUser extends Component {
  				 }]
 
 
-		this.editTableType1Columns()
+		this.editTableType3Columns()
 		//
         this.requestListData("3")
 		this.requestUserCommentList()
 
 	}
-	editTableType1Columns =() =>{
+	editTableType3Columns =() =>{
 		this.columns = [
 			{
 					title: '選擇',
