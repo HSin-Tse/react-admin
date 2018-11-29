@@ -8,12 +8,19 @@ export default class BlackList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            res: {},
             bklistA: [],
-            current: 0,
-            totalpage: 0,
-            pgsize: 10,
-            loading: false,
+            bklistB: [],
+            bklistC: [],
+            currentA: 0,
+            currentB: 0,
+            currentC: 0,
+            totalpageA: 0,
+            totalpageB: 0,
+            totalpageC: 0,
+            pgsize: 3,
+            loadingA: false,
+            loadingB: false,
+            loadingC: false,
 
         };
     }
@@ -67,59 +74,108 @@ export default class BlackList extends Component {
                     </div>
                 ),
             }];
-
-        this.requestPage(0)
-
-
+        this.requestPageA()//1:合规 2:开户 3:交易
+        this.requestPageB()
+        this.requestPageC()
     }
 
     handleremove = (record) => {
-
 
         window.Axios.post('auth/removeBlackUser', {
             'id': record.id//1:合规 2:开户 3:交易
         }).then((response) => {
             console.log('hcia response', response)
             message.success('操作成功')
-
-
         }).catch(function (error) {
             console.log(error);
         });
 
     };
-    requestPage = (pg) => {
+    requestPageA = () => {
         let self = this
-        this.setState({
-            loading: true
+        self.setState({
+            loadingA: true
         })
         window.Axios.post('auth/getBlackList', {
             pageNo: this.state.current,
-            'listType': '2',//1:合规 2:开户 3:交易
+            'listType': 1,//1:合规 2:开户 3:交易
             'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
         }).then((response) => {
             console.log('hcia response', response)
-
             self.setState({
-                totalpage: response.data.data.totalPage,
-                res: response.data.data,
+                totalpageA: response.data.data.totalPage,
                 bklistA: response.data.data.list,
-                loading: false
+                loadingA: false
+            });
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+    requestPageB = () => {
+        let self = this
+
+        self.setState({
+            loadingB: true
+        })
+        window.Axios.post('auth/getBlackList', {
+            pageNo: this.state.current,
+            'listType': 2,//1:合规 2:开户 3:交易
+            'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
+        }).then((response) => {
+            console.log('hcia response', response)
+                self.setState({
+                    totalpageB: response.data.data.totalPage,
+                    bklistB: response.data.data.list,
+                    loadingB: false
+                });
+
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+    requestPageC = () => {
+        let self = this
+        self.setState({
+            loadingC: true
+        })
+        window.Axios.post('auth/getBlackList', {
+            pageNo: this.state.current,
+            'listType': 3,//1:合规 2:开户 3:交易
+            'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
+        }).then((response) => {
+            console.log('hcia response', response)
+            self.setState({
+                totalpageC: response.data.data.totalPage,
+                bklistC: response.data.data.list,
+                loadingC: false
             });
         }).catch(function (error) {
             console.log(error);
         });
     }
 
-    changePage = (page) => {
 
-        console.log('hcia page', page)
+    changePageA = (page) => {
         this.setState({
-            current: page,
+            currentA: page,
         }, () => {
-
-            this.requestPage(page)
-
+            this.requestPageA()
+        })
+    }
+    changePageB = (page) => {
+        this.setState({
+            currentb: page,
+        }, () => {
+            this.requestPageB()
+        })
+    }
+    changePageC = (page) => {
+        this.setState({
+            currentC: page,
+        }, () => {
+            this.requestPageC()
         })
     }
 
@@ -135,21 +191,45 @@ export default class BlackList extends Component {
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 <BreadcrumbCustom first="用戶管理" second="黑名單"/>
                 <Tabs onChange={this.callback} type="card">
-                    <TabPane tab="Tab 1" key="1">
+                    <TabPane tab="合规黑名单" key="1">
                         <Table rowKey="id"
                                columns={this.columns}
                                dataSource={this.state.bklistA}
                                scroll={{x: 1300}}
                                loading={this.state.loading}
                                pagination={{  // 分页
-                                   total: this.state.totalpage * this.state.pgsize,
+                                   total: this.state.totalpageA * this.state.pgsize,
                                    pageSize: this.state.pgsize,
-                                   onChange: this.changePage,
+                                   onChange: this.changePageA,
                                }}
                         />
                     </TabPane>
-                    <TabPane tab="Tab 2" key="2">Content of Tab Pane 2</TabPane>
-                    <TabPane tab="Tab 3" key="3">Content of Tab Pane 3</TabPane>
+                    <TabPane tab="开户黑名单" key="2">
+                        <Table rowKey="id"
+                               columns={this.columns}
+                               dataSource={this.state.bklistB}
+                               scroll={{x: 1300}}
+                               loading={this.state.loading}
+                               pagination={{  // 分页
+                                   total: this.state.totalpageB * this.state.pgsize,
+                                   pageSize: this.state.pgsize,
+                                   onChange: this.changePageB,
+                               }}
+                        />
+                    </TabPane>
+                    <TabPane tab="交易黑名单" key="3">
+                        <Table rowKey="id"
+                               columns={this.columns}
+                               dataSource={this.state.bklistC}
+                               scroll={{x: 1300}}
+                               loading={this.state.loading}
+                               pagination={{  // 分页
+                                   total: this.state.totalpageC * this.state.pgsize,
+                                   pageSize: this.state.pgsize,
+                                   onChange: this.changePageC,
+                               }}
+                        />
+                    </TabPane>
                 </Tabs>
 
 
