@@ -227,10 +227,6 @@ class SimulatorUser extends Component {
             , userList: []
 			, operationDiaryHistory: []
 			, anyThing: 'asdasd'
-			,tableType: '1'
-
-
-
         };
 	}
 	goToIntend =() =>{
@@ -258,7 +254,6 @@ class SimulatorUser extends Component {
 		}
 
     requestListData = (listType) => {
-		this.setState({is_tag: '123321',tableType: listType});
 		console.log('jjj',this.state.tableType)
         var aa = this;
         axios.post('http://mobile.nooko.cn:8090/ixuser/getUserList', {
