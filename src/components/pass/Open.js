@@ -100,7 +100,7 @@ export default class Basic extends Component {
                 dataIndex: '处理备注',
                 key: '处理备注',
                 render: (text, record) => (
-                    <Button>{record.comment}</Button>),
+                    <span>{record.comment}</span>),
             }, {
                 title: '操作',
                 key: 'action',
