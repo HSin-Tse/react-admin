@@ -221,7 +221,7 @@ export default class BlackList extends Component {
                             disabled={!hasSelected}
                             loading={loading}
                         >
-                            移除
+                            批量移除
                         </Button>
                         <Table rowKey="id"
                                rowSelection={rowSelection}
