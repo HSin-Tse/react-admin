@@ -170,6 +170,9 @@ class SimulatorUser extends Component {
 	// this.columns = null
 	}
     render() {
+		const style1 = {
+			padding: '8px',
+		  };
         return(
              <div>
                 <div>log: {this.state.anyThing}</div>
@@ -188,6 +191,17 @@ class SimulatorUser extends Component {
                        columns={this.columns} dataSource={this.state.userList}
                        scroll={{x: 1300}}
                 />
+					<div style={style1}>
+					 <Row gutter={16} >
+                        <Col md={8}>
+                                     <Checkbox onChange={this.hasChangeAll}/>
+									  <Button>批量分組</Button>
+									 <Button>批量延期</Button>
+									 <Button>刪除</Button>
+                        </Col>
+                    </Row>
+				
+				</div>
 				
 
 								<Modal
