@@ -5,7 +5,7 @@
  *
  */
 import React, {Component} from 'react';
-import {Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, Popconfirm} from 'antd';
+import {Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, Popconfirm, notification} from 'antd';
 import {Radio} from 'antd';
 import {message} from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
@@ -42,7 +42,8 @@ class PassOpenD extends Component {
             , changeNoteB: false
             , waitSearchDb: {}
             , iconLoading: false
-            , checkderes: null
+            , checkderesb: null
+            , checkderesa: null
             , icondbALoading: false
             , iconcanLoading: false
             , visible: false
@@ -529,14 +530,14 @@ class PassOpenD extends Component {
                         </Col>
                         <Col md={4}>
                             <div style={{display: 'flex', minHeight: 40}}>
-                                <Button onClick={() => this.searchFromOtherDB()}>异库查询</Button>
+                                <Button loading={this.state.icondbALoadingA} onClick={() => this.searchFromOtherDB()}>异库查询</Button>
 
                             </div>
                         </Col>
                         <Col md={24}>
                             <div style={{display: 'flex', minHeight: 40}}>
-                                {this.state.checkderes == null ? null :
-                                    <h3 style={{margin: 'auto'}}>本库查询结果：{this.state.checkderes ? '有' : '無'}重合</h3>}
+                                {this.state.checkderesb == null ? null : <h3 style={{margin: 'auto'}}>本库查询结果：{this.state.checkderesb ? '有' : '無'}重合</h3>}
+                                {this.state.checkderesa == null ? null : <h3 style={{margin: 'auto'}}>异库查询结果：{this.state.checkderesa ? '有' : '無'}重合</h3>}
 
 
                             </div>
@@ -563,7 +564,8 @@ class PassOpenD extends Component {
                             <div>
                                 <Button disabled={this.state.isNeedSave} loading={this.state.iconLoading}
                                         onClick={() => this.openOK()}>开户通过</Button>
-                                <Button disabled={!this.state.isNeedSave} onClick={() => this.saveData()}>保存客戶信息</Button>
+                                <Button disabled={!this.state.isNeedSave}
+                                        onClick={() => this.saveData()}>保存客戶信息</Button>
                                 {/*<Button disabled={!this.state.changeNoteB} onClick={() => this.saveNote()}>保存备注</Button>*/}
                                 <Button disabled={this.state.isNeedSave} loading={this.state.iconcanLoading}
                                         onClick={() => this.saveReject()}>拒绝</Button>
@@ -701,7 +703,6 @@ class PassOpenD extends Component {
         var me = this;
 
         window.Axios.post('/open/passOpenApply', {
-            'language': 'zh-CN',
             'content': me.state.changeNoteV,
             'belongUserId': me.state.recordData.belongUserId,
             'id': me.state.recordData.id,
@@ -734,37 +735,39 @@ class PassOpenD extends Component {
         var me = this;
 
         if (this.state.checkfromdbTypeV == 0) {
-            window.Axios.post('/open/localExistOpenAccount', {
+            window.Axios.post('open/localExistOpenAccount', {
                 'phoneNumber': me.state.checkfromdbName,
             }).then(function (response) {
                 console.log('hcia response', response)
                 me.setState({
                     icondbALoading: false,
-                    checkderes: response.data.data.isExist
+                    checkderesb: response.data.data.isExist
 
                 });
             }).catch(function (error) {
                 console.log(error);
             });
         } else if (this.state.checkfromdbTypeV == 1) {
-            window.Axios.post('/open/localExistOpenAccount', {
+            window.Axios.post('open/localExistOpenAccount', {
                 'nationalId': me.state.checkfromdbName,
             }).then(function (response) {
                 console.log('hcia response', response)
                 me.setState({
                     icondbALoading: false,
-                    checkderes: response.data.data.isExist
+                    checkderesb: response.data.data.isExist
                 });
             }).catch(function (error) {
                 console.log(error);
             });
         } else if (this.state.checkfromdbTypeV == 2) {
-            window.Axios.post('/open/localExistOpenAccount', {
+            window.Axios.post('open/localExistOpenAccount', {
                 'email': me.state.checkfromdbName,
             }).then(function (response) {
                 console.log('hcia response', response.data.data.isExist)
                 me.setState({
                     icondbALoading: false,
+                    checkderesb: response.data.data.isExist
+
                 });
             }).catch(function (error) {
                 console.log(error);
@@ -775,33 +778,50 @@ class PassOpenD extends Component {
     };
     searchFromOtherDB = () => {
 
+
         this.setState({
-            iconLoading: true,
+            icondbALoadingA: true,
         });
         var me = this;
 
-        window.Axios.post('/open/passOpenApply', {
-            'language': 'zh-CN',
-            'belongUserId': me.state.recordData.belongUserId,
-            'id': me.state.recordData.id,
-        }).then(function (response) {
+        if (this.state.checkfromdbTypeV == 0) {
+            window.Axios.post('open/remoteExistOpenAccount', {
+                'phoneNumber': me.state.checkfromdbName,
+            }).then(function (response) {
+                console.log('hcia response', response)
+                me.setState({
+                    icondbALoadingA: false,
+                    checkderesa: response.data.data.isExist
 
-
-            me.setState({
-                iconLoading: false,
+                });
+            }).catch(function (error) {
+                console.log(error);
             });
-            console.log(response);
-
-            if (response.data.code == 1) {
-
-                message.success('開戶通過')
-                me.props.history.goBack()
-
-            }
-
-        }).catch(function (error) {
-            console.log(error);
-        });
+        } else if (this.state.checkfromdbTypeV == 1) {
+            window.Axios.post('open/remoteExistOpenAccount', {
+                'nationalId': me.state.checkfromdbName,
+            }).then(function (response) {
+                console.log('hcia response', response)
+                me.setState({
+                    icondbALoadingA: false,
+                    checkderesa: response.data.data.isExist
+                });
+            }).catch(function (error) {
+                console.log(error);
+            });
+        } else if (this.state.checkfromdbTypeV == 2) {
+            window.Axios.post('open/remoteExistOpenAccount', {
+                'email': me.state.checkfromdbName,
+            }).then(function (response) {
+                console.log('hcia response', response.data.data.isExist)
+                me.setState({
+                    checkderesa: response.data.data.isExist,
+                    icondbALoadingA: false,
+                });
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
 
 
     };
@@ -809,26 +829,7 @@ class PassOpenD extends Component {
         this.showModal()
     };
 
-    // saveNote = () => {
-    //     let me = this;
-    //     window.Axios.post('/star/unBindStarLiveAccount', {
-    //         // "language":"zh-CN","userId":"#############################"
-    //         'belongUserId': me.state.recordData.belongUserId,
-    //         'content': me.state.changeNoteV
-    //     }).then(function (response) {
-    //
-    //         me.setState({
-    //             changeNoteB: false,
-    //         });
-    //
-    //         if (response.data.code == 1) {
-    //             message.success('saveNote ok')
-    //         }
-    //
-    //     }).catch(function (error) {
-    //         console.log(error);
-    //     });
-    // };
+
     saveReject = () => {
 
         this.setState({
@@ -848,6 +849,7 @@ class PassOpenD extends Component {
 
             if (response.data.code == 1) {
                 message.info('拒絕成功')
+                me.openTipBlack()
             }
 
         }).catch(function (error) {
@@ -1174,6 +1176,66 @@ class PassOpenD extends Component {
             isNeedSave: true,
         });
     };
+
+    addBlackRequest(key) {
+        let me = this
+
+        // var content =  ?
+        //     if{}
+
+        if (!me.state.changeNoteV) {
+            message.error('備註必填')
+            return
+
+        }
+
+        window.Axios.post('auth/addBlackUser', {
+
+            'content': me.state.changeNoteV,
+            // 'belongUserId': me.state.recordData.belongUserId,
+            'id': me.state.recordData.id,
+            'listType': 2,//1:合规 2:开户 3:交易
+
+        }).then(function (response) {
+            if (response.data.code === 1) {
+                notification.close(key)
+                message.success('added  open  black ')
+            }
+        }).catch(function (error) {
+            console.log(error);
+
+        });
+    }
+
+    openTipBlack() {
+
+        const key = `open${Date.now()}`;
+        const btn = (
+            <Button type="primary" size="small" onClick={(key) => this.addBlackRequest(key)}>
+                Confirm
+            </Button>
+        );
+        const close = (e) => {
+            console.log('hcia e', e)
+        };
+
+        notification.open({
+            message: '是否同时加入开户黑名单',
+            description: '是否同时加入开户黑名单',
+            btn,
+            key,
+            placement: 'bottomRight',
+            onClose: close,
+        });
+
+        // const args = {
+        //     message: 'Notification Title',
+        //     description: 'I will never close automatically. I will be close automatically. I will never close automatically.',
+        //     duration: 0,
+        //     placement: 'bottomRight',
+        // };
+        // notification.open(args);
+    }
 }
 
 export default PassOpenD;
