@@ -8,6 +8,7 @@ export default class BlackList extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            selectedRowKeys: [],
             bklistA: [],
             bklistB: [],
             bklistC: [],
@@ -84,11 +85,22 @@ export default class BlackList extends Component {
         window.Axios.post('auth/removeBlackUser', {
             'id': record.id//1:合规 2:开户 3:交易
         }).then((response) => {
-            console.log('hcia response', response)
             message.success('操作成功')
         }).catch(function (error) {
             console.log(error);
         });
+
+    };
+
+    handleremoveList = () => {
+        console.log('hcia selectedRowKeys', this.state.selectedRowKeys)
+        // window.Axios.post('auth/removeBlackUser', {
+        //     'id': record.id//1:合规 2:开户 3:交易
+        // }).then((response) => {
+        //     message.success('操作成功')
+        // }).catch(function (error) {
+        //     console.log(error);
+        // });
 
     };
     requestPageA = () => {
@@ -101,7 +113,6 @@ export default class BlackList extends Component {
             'listType': 1,//1:合规 2:开户 3:交易
             'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
         }).then((response) => {
-            console.log('hcia response', response)
             self.setState({
                 totalpageA: response.data.data.totalPage,
                 bklistA: response.data.data.list,
@@ -123,7 +134,6 @@ export default class BlackList extends Component {
             'listType': 2,//1:合规 2:开户 3:交易
             'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
         }).then((response) => {
-            console.log('hcia response', response)
             self.setState({
                 totalpageB: response.data.data.totalPage,
                 bklistB: response.data.data.list,
@@ -145,7 +155,7 @@ export default class BlackList extends Component {
             'listType': 3,//1:合规 2:开户 3:交易
             'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
         }).then((response) => {
-            console.log('hcia response', response)
+
             self.setState({
                 totalpageC: response.data.data.totalPage,
                 bklistC: response.data.data.list,
@@ -183,11 +193,18 @@ export default class BlackList extends Component {
         console.log('hcia key', key)
     }
 
+    onSelectChange = (selectedRowKeys) => {
+        console.log('hcia', 'selectedRowKeys changed: ', selectedRowKeys);
+        this.setState({selectedRowKeys});
+    }
+
     render() {
-        const { loading, selectedRowKeys } = this.state;
+
+        const {loading, selectedRowKeys} = this.state;
+        const hasSelected = selectedRowKeys.length > 0;
         const rowSelection = {
             selectedRowKeys,
-            // onChange: this.onSelectChange,
+            onChange: this.onSelectChange,
         };
         return (
 
@@ -195,8 +212,17 @@ export default class BlackList extends Component {
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 <BreadcrumbCustom first="用戶管理" second="黑名單"/>
+
                 <Tabs onChange={this.callback} type="card">
                     <TabPane tab="合规黑名单" key="1">
+                        <Button
+                            type="primary"
+                            onClick={() => this.handleremoveList()}
+                            disabled={!hasSelected}
+                            loading={loading}
+                        >
+                            移除
+                        </Button>
                         <Table rowKey="id"
                                rowSelection={rowSelection}
                                columns={this.columns}
