@@ -1,14 +1,20 @@
 import React, {Component} from 'react';
-import {DatePicker, Input, Modal, Button, Table, Tabs, message,Card} from 'antd';
+import {DatePicker, Input, Modal, Button, Table, Tabs, message, Card, Tag, Layout, Icon} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
+import { ThemePicker } from '@/components/widget';
+import classNames from "classnames";
+import {SketchPicker} from "react-color";
 
 const TabPane = Tabs.TabPane;
+const {CheckableTag} = Tag;
+
 export default class BlackList extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             selectedRowKeys: [],
+            mTags: [],
             bklistA: [],
             bklistB: [],
             bklistC: [],
@@ -19,7 +25,7 @@ export default class BlackList extends Component {
             totalpageB: 0,
             totalpageC: 0,
             nowKey: "1",
-            pgsize: 20,
+            pgsize: 40,
             loadingA: false,
             loadingB: false,
             loadingC: false,
@@ -92,13 +98,13 @@ export default class BlackList extends Component {
         }).then((response) => {
 
             message.success('操作成功')
-            if (self.state.nowKey==1){
+            if (self.state.nowKey == 1) {
                 this.requestPageA()//1:合规 2:开户 3:交易
             }
-            if (self.state.nowKey==2){
+            if (self.state.nowKey == 2) {
                 this.requestPageB()//1:合规 2:开户 3:交易
             }
-            if (self.state.nowKey==3){
+            if (self.state.nowKey == 3) {
                 this.requestPageC()//1:合规 2:开户 3:交易
             }
 
@@ -133,6 +139,14 @@ export default class BlackList extends Component {
                 totalpageA: response.data.data.totalPage,
                 bklistA: response.data.data.list,
                 loadingA: false
+            }, () => {
+                console.log('hcia self.state.bklistA', self.state.bklistA)
+                var tags = Object.keys(self.state.bklistA[0])
+                console.log('hcia tags', tags)
+                self.setState({
+                    mTags: tags
+                })
+
             });
 
         }).catch(function (error) {
@@ -218,6 +232,24 @@ export default class BlackList extends Component {
         this.setState({selectedRowKeys});
     }
 
+    state = {
+        switcherOn: false,
+        background: localStorage.getItem('@primary-color') || '#313653',
+    }
+    _switcherOn = () => {
+        this.setState({
+            switcherOn: !this.state.switcherOn
+        })
+    };
+    _handleChangeComplete = color => {
+        console.log(color);
+        this.setState({ background: color.hex });
+        localStorage.setItem('@primary-color', color.hex);
+        window.less.modifyVars({
+            '@primary-color': color.hex,
+        })
+    };
+
     render() {
 
         const {loading, selectedRowKeys} = this.state;
@@ -226,15 +258,53 @@ export default class BlackList extends Component {
             selectedRowKeys,
             onChange: this.onSelectChange,
         };
+        const { switcherOn, background } = this.state;
+
         return (
 
 
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 <div>nowKey :{this.state.nowKey}</div>
+                {/*<ThemePicker />*/}
+                <div className={classNames('switcher dark-white', { active: switcherOn })}>
+                <span className="sw-btn dark-white" onClick={this._switcherOn}>
+                    <Icon type="setting" className="text-dark" />
+                </span>
+                    <div style={{ padding: 10 }} className="clear">
+                        ＱＱ<Input placeholder="default size" />
+                        <Input placeholder="default size" />
+                        <Input placeholder="default size" />
+                        <Input placeholder="default size" />
+
+                        {/*<SketchPicker*/}
+                            {/*color={ background }*/}
+                            {/*onChangeComplete={ this._handleChangeComplete }*/}
+                        {/*/>*/}
+                    </div>
+                </div>
                 <BreadcrumbCustom first="用戶管理" second="黑名單"/>
 
+                <Card>
+                    <div>
+                        <h6 style={{ marginRight: 8, display: 'inline' }}>Categories:</h6>
+                        {this.state.mTags.map(tag => (
+                            <CheckableTag
+                                key={tag}
+                                // checked={selectedTags.indexOf(tag) > -1}
+                                // onChange={checked => this.handleChange(tag, checked)}
+                            >
+                                {tag}
+                            </CheckableTag>
+                        ))}
+                    </div>
 
+                    <div>
+                        <CheckableTag color="#2db7f5" checked={true}>CheckableTag1</CheckableTag>
+                        <CheckableTag color="#2db7f5">CheckableTag2</CheckableTag>
+                        <CheckableTag>CheckableTag3</CheckableTag>
+                    </div>
+                </Card>
                 <Card>
 
                     <Tabs
