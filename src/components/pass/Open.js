@@ -39,6 +39,7 @@ export default class Basic extends Component {
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
                 fixed: 'left',
+                width:150,
                 onFilter: (value, record) => {
                     if (!record.phoneNumber)
                         return false
@@ -86,6 +87,7 @@ export default class Basic extends Component {
             }, {
                 title: '审核状态',
                 dataIndex: '审核状态',
+                width:100,
                 filters: [
                     {text: '审核中', value: 0},
                     {text: '审核通过', value: 1},
@@ -109,7 +111,7 @@ export default class Basic extends Component {
                 render: (text, record) => (
                     <div>
                         <span className="ant-divider"/>
-                        <Button className="ant-dropdown-link" onClick={() => this.handleEdit(record)}>审核</Button>
+                        <Button className="ant-dropdown-link" onClick={() => this.handleEdit(record)}>{record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'}</Button>
                     </div>
                 ),
             }];

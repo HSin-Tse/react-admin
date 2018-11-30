@@ -41,13 +41,60 @@ class PassOpenD extends Component {
         console.log('hcia value', value)
         this.setState({
             mState: value,
+            mCity: '',
+        });
+////
+
+        let self = this
+
+        window.Axios.post('dict/openDict', {
+            'keys': 'div_type',
+            'division': 'province',
+            'code': '1',
+        }).then(function (response) {
+            console.log('hcia response', response)
+
+            self.setState({
+                provinceDatAarra: response.data.data.div_type,
+            }, () => {
+
+                var nowCity = self.state.provinceDatAarra.filter(function (item, index, array) {
+                    return item.value == self.state.mState;
+                });
+
+                console.log('hcia nowCity', nowCity[0].value)
+                console.log('hcia nowCity', nowCity[0].code)
+                console.log('hcia self.setState.state', self.state.mState)
+
+
+                window.Axios.post('dict/openDict', {
+                    'keys': 'div_type',
+                    'division': 'city',
+                    'code': nowCity[0].code
+                }).then((ress) => {
+
+                    console.log('hcia ress', ress)
+                    self.setState({
+                        cityDatAarra: ress.data.data.div_type
+                    })
+                });
+            });
+
+
+        }).catch(function (error) {
+            console.log(error);
         });
 
+
+        ////
     };
 
     onSecondCityChange = (value) => {
+
+        console.log('hcia value', value)
+
         this.setState({
-            secondCity: value,
+            mCity: value,
         });
     }
 
@@ -76,6 +123,7 @@ class PassOpenD extends Component {
             , mGender: ''
             , checkfromdbName: ''
             , mState: ''
+            , mCity: ''
             , checkfromdbTypeV: 0
             , mAnnualIncome: ''
             , sss: 'aa'
@@ -138,6 +186,7 @@ class PassOpenD extends Component {
                 mtradingObjectives: response.data.data.tradingObjectives,
                 mriskTolerance: response.data.data.riskTolerance,
                 mState: response.data.data.state,
+                mCity: response.data.data.city,
                 checkfromdbName: response.data.data.phoneNumber,
             }, () => {
 
@@ -152,27 +201,24 @@ class PassOpenD extends Component {
                         provinceDatAarra: response.data.data.div_type,
                     }, () => {
 
-                        var nowCity = self.state.provinceDatAarra.filter(function(item, index, array){
+                        var nowCity = self.state.provinceDatAarra.filter(function (item, index, array) {
                             return item.value == self.state.mState;
                         });
 
-                        console.log('hcia self.state.provinceDatAarra' , self.state.provinceDatAarra)
-                        console.log('hcia nowCity' , nowCity[0])
-                        console.log('hcia nowCity' , nowCity[0].value)
-                        console.log('hcia nowCity' , nowCity[0].code)
-
-                        console.log('hcia self.setState.state' , self.state.mState)
+                        console.log('hcia nowCity', nowCity[0].value)
+                        console.log('hcia nowCity', nowCity[0].code)
+                        console.log('hcia self.setState.state', self.state.mState)
 
 
                         window.Axios.post('dict/openDict', {
                             'keys': 'div_type',
                             'division': 'city',
                             'code': nowCity[0].code
-                        }).then((response) => {
+                        }).then((ress) => {
 
-
+                            console.log('hcia ress', ress)
                             self.setState({
-                                cityDatAarra:response.data.data.div_type
+                                cityDatAarra: ress.data.data.div_type
                             })
                         });
                     });
@@ -410,24 +456,7 @@ class PassOpenD extends Component {
                                            onChange={this.onChangenationalId}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
-                                <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{minWidth: 120}}>*城市</span>
 
-                                    <Select
-                                        defaultValue={provinceData[0]}
-                                        style={{width: 120}}
-                                        // onChange={this.handleProvinceChange}
-                                    >
-                                        {provinceData.map(province => <Option key={province}>{province}</Option>)}
-                                    </Select>
-                                    <Select
-                                        style={{width: 120}}
-                                        value={this.state.secondCity}
-                                        // onChange={this.onSecondCityChange}
-                                    >
-                                        {this.state.cities.map(city => <Option key={city}>{city}</Option>)}
-                                    </Select>
-                                </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*城市</span>
 
@@ -438,13 +467,15 @@ class PassOpenD extends Component {
                                     >
                                         {this.state.provinceDatAarra.map(province => <Option
                                             key={province.name}>{province.name}</Option>)}
+
                                     </Select>
                                     <Select
                                         style={{width: 120}}
-                                        value={this.state.secondCity}
-                                        // onChange={this.onSecondCityChange}
+                                        value={this.state.mCity}
+                                        onChange={this.onSecondCityChange}
                                     >
-                                        {this.state.cities.map(city => <Option key={city}>{city}</Option>)}
+                                        {this.state.cityDatAarra.map(ccty => <Option
+                                            key={ccty.name}>{ccty.name}</Option>)}
                                     </Select>
                                 </div>
 
