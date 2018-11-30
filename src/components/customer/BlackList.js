@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {DatePicker, Input, Modal, Button, Table, Tabs, message} from 'antd';
+import {DatePicker, Input, Modal, Button, Table, Tabs, message,Card} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 
 const TabPane = Tabs.TabPane;
@@ -18,7 +18,7 @@ export default class BlackList extends Component {
             totalpageA: 0,
             totalpageB: 0,
             totalpageC: 0,
-            nowKey: 0,
+            nowKey: "1",
             pgsize: 20,
             loadingA: false,
             loadingB: false,
@@ -33,6 +33,7 @@ export default class BlackList extends Component {
                 title: '手机号',
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
+                width: 150,
                 fixed: 'left',
                 render: (text, record) => (
 
@@ -85,11 +86,21 @@ export default class BlackList extends Component {
 
     handleremove = (record) => {
 
+        let self = this
         window.Axios.post('auth/removeBlackUser', {
             'id': record.id//1:合规 2:开户 3:交易
         }).then((response) => {
 
             message.success('操作成功')
+            if (self.state.nowKey==1){
+                this.requestPageA()//1:合规 2:开户 3:交易
+            }
+            if (self.state.nowKey==2){
+                this.requestPageB()//1:合规 2:开户 3:交易
+            }
+            if (self.state.nowKey==3){
+                this.requestPageC()//1:合规 2:开户 3:交易
+            }
 
         }).catch(function (error) {
             console.log(error);
@@ -194,8 +205,12 @@ export default class BlackList extends Component {
         })
     }
 
-    callback(key) {
-        console.log('hcia key', key)
+    callback = (key) => {
+
+        this.setState({
+            nowKey: key,
+        })
+
     }
 
     onSelectChange = (selectedRowKeys) => {
@@ -216,59 +231,66 @@ export default class BlackList extends Component {
 
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
+                <div>nowKey :{this.state.nowKey}</div>
                 <BreadcrumbCustom first="用戶管理" second="黑名單"/>
 
-                <Tabs onChange={this.callback} type="card">
-                    <TabPane tab="合规黑名单" key="1">
-                        <Button
-                            type="primary"
-                            onClick={() => this.handleremoveList()}
-                            disabled={!hasSelected}
-                            loading={loading}
-                        >
-                            批量移除
-                        </Button>
-                        <Table rowKey="id"
-                               bordered
-                               rowSelection={rowSelection}
-                               columns={this.columns}
-                               dataSource={this.state.bklistA}
-                               scroll={{x: 1300}}
-                               loading={this.state.loading}
-                               pagination={{  // 分页
-                                   total: this.state.totalpageA * this.state.pgsize,
-                                   pageSize: this.state.pgsize,
-                                   onChange: this.changePageA,
-                               }}
-                        />
-                    </TabPane>
-                    <TabPane tab="开户黑名单" key="2">
-                        <Table rowKey="id"
-                               columns={this.columns}
-                               dataSource={this.state.bklistB}
-                               scroll={{x: 1300}}
-                               loading={this.state.loading}
-                               pagination={{  // 分页
-                                   total: this.state.totalpageB * this.state.pgsize,
-                                   pageSize: this.state.pgsize,
-                                   onChange: this.changePageB,
-                               }}
-                        />
-                    </TabPane>
-                    <TabPane tab="交易黑名单" key="3">
-                        <Table rowKey="id"
-                               columns={this.columns}
-                               dataSource={this.state.bklistC}
-                               scroll={{x: 1300}}
-                               loading={this.state.loading}
-                               pagination={{  // 分页
-                                   total: this.state.totalpageC * this.state.pgsize,
-                                   pageSize: this.state.pgsize,
-                                   onChange: this.changePageC,
-                               }}
-                        />
-                    </TabPane>
-                </Tabs>
+
+                <Card>
+
+                    <Tabs
+                        onChange={this.callback}
+                        type="card">
+                        <TabPane tab="合规黑名单" key="1">
+                            <Button
+                                type="primary"
+                                onClick={() => this.handleremoveList()}
+                                disabled={!hasSelected}
+                                loading={loading}
+                            >
+                                批量移除
+                            </Button>
+                            <Table rowKey="id"
+                                   bordered
+                                   rowSelection={rowSelection}
+                                   columns={this.columns}
+                                   dataSource={this.state.bklistA}
+                                   scroll={{x: 1300}}
+                                   loading={this.state.loading}
+                                   pagination={{  // 分页
+                                       total: this.state.totalpageA * this.state.pgsize,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePageA,
+                                   }}
+                            />
+                        </TabPane>
+                        <TabPane tab="开户黑名单" key="2">
+                            <Table rowKey="id"
+                                   columns={this.columns}
+                                   dataSource={this.state.bklistB}
+                                   scroll={{x: 1300}}
+                                   loading={this.state.loading}
+                                   pagination={{  // 分页
+                                       total: this.state.totalpageB * this.state.pgsize,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePageB,
+                                   }}
+                            />
+                        </TabPane>
+                        <TabPane tab="交易黑名单" key="3">
+                            <Table rowKey="id"
+                                   columns={this.columns}
+                                   dataSource={this.state.bklistC}
+                                   scroll={{x: 1300}}
+                                   loading={this.state.loading}
+                                   pagination={{  // 分页
+                                       total: this.state.totalpageC * this.state.pgsize,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePageC,
+                                   }}
+                            />
+                        </TabPane>
+                    </Tabs>
+                </Card>
 
 
             </div>
