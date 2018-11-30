@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import {Col, Card, Row,DatePicker,Input,Modal,Button, Table, Icon,Checkbox} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import axios from 'axios';
-class CustomerSummary extends Component {
+class CustomerUserInfo extends Component {
 	state = { visible: false,modal2Visible:false }
 
 
@@ -179,7 +179,7 @@ class CustomerSummary extends Component {
         return(
 			
             <div>
-                <div>yyxLog log: CustomerSummary</div>
+                <div>yyxLog log: CustomerUserInfo</div>
 			<div />
 
                 <div>
@@ -312,4 +312,4 @@ class CustomerSummary extends Component {
 		}
 }
 
-export default CustomerSummary;
+export default CustomerUserInfo;
