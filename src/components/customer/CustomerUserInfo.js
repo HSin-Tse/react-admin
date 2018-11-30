@@ -51,23 +51,53 @@ class CustomerUserInfo extends Component {
 		  };
         return(
 			
-            <div>
-                <div>yyxLog log: CustomerUserInfo</div>
-			<div />
-            <div>
-                    <Button>用戶管理</Button>
-            </div>
-            <div> 
-                 <BreadcrumbCustom first="用户總表" second="行為信息" />
-            </div>
-
-          
+        <div>
+            <div>yyxLog log: CustomerUserInfo</div>
+            
+      <p
+      style={{
+        fontSize: 14,
+        color: 'rgba(0, 0, 0, 0.85)',
+        marginBottom: 16,
+        fontWeight: 500,
+      }}>
+     用戶管理
+      </p>
+    <div> <BreadcrumbCustom first="用户總表" second="行為信息" /></div>
+    <Card
+      type="inner"
+      title="基本信息"
+    >
+      Inner Card content
+    </Card>
+    <Card
+      style={{ marginTop: 16 }}
+      type="inner"
+      title="數據信息"
+    >
+      Inner Card content
+    </Card>
+    <Card
+      style={{ marginTop: 16 }}
+      type="inner"
+      title="行為信息"
+    >
+      Inner Card content
+    </Card>
+    <Card
+      style={{ marginTop: 16 }}
+      type="inner"
+      title="其他"
+    >
+      Inner Card content
+    </Card>
+           
 
               
 			
 
-            </div>
-		)
+        </div>
+		    )
     }
     constructor(props) {
         super(props);
