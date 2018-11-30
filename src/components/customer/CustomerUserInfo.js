@@ -39,28 +39,7 @@ class CustomerUserInfo extends Component {
  }
 
 	componentDidMount() {
-				this.modalColumns = [{
-						title: '時間',
-						dataIndex: 'createDate',
-						key: 'operationDiary_Date',
-
-						render: (text, record) => (
-								<Button>{record.createDate}</Button>),
-				 },{
- 						title: '狀態',
- 						dataIndex: 'comment',
- 						key: 'operationDiary_Status',
- 						
-						render: (text, record) => (
-								<Button>{record.comment}</Button>),
- 				 },{
- 						title: '操作人',
- 						dataIndex: 'bkUserName',
- 						key: 'operationDiary_User',
- 						
-						render: (text, record) => (
-								<Button>{record.bkUserName}</Button>),
- 				 }]
+				
 
 
         this.requestListData("4")
