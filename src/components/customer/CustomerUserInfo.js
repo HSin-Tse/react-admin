@@ -241,6 +241,8 @@ class CustomerUserInfo extends Component {
         };
 	}
 	goToUserInfo =() =>{
+        console.log('xxx')
+        this.props.history.push('/app/customer/CustomerUserInfo')
 
 	}
 	goToUserAccountInfo =() =>{

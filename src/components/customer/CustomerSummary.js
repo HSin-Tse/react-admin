@@ -241,16 +241,12 @@ class CustomerSummary extends Component {
         };
 	}
 	goToUserInfo =() =>{
+        console.log('xxx')
+        this.props.history.push('/app/customer/CustomerUserInfo')
 
 	}
 	goToUserAccountInfo =() =>{
 		
-	}
-	goToSimulator = () => {
-		this.props.history.push('/app/customer/SimulatorUser')
-	}
-	goToIntend =() =>{
-		this.props.history.push('/app/pass/IntendingUser')
 	}
 	hasChangeAll = () =>{
 
