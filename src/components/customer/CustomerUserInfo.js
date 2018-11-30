@@ -49,6 +49,10 @@ class CustomerUserInfo extends Component {
     const style1 = {
       padding: '8px',
     };
+    const {
+      Meta
+    } = Card;
+
     return (
 
       <div>
@@ -66,9 +70,18 @@ class CustomerUserInfo extends Component {
         <div> <BreadcrumbCustom first="用户總表" second="行為信息" /></div>
         <Card
           type="inner"
-          title="基本xx信息"
+          title="基本信息"
         >
-          Inner Card content
+          <Card
+            hoverable
+            style={{ width: 240 }}
+            cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+          >
+            <Meta
+              title="Europe Street beat"
+              description="www.instagram.com"
+            />
+          </Card>
     </Card>
         <Card
           style={{ marginTop: 16 }}
