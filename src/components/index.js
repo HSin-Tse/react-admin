@@ -34,9 +34,9 @@ import PotentialUser from './customer/PotentialUser'
 import CustomerSummary from './customer/CustomerSummary'
 import BlackList from './customer/BlackList'
 import WhiteList from './customer/WhiteList'
+import CustomerUserInfo from './customer/CustomerUserInfo'
 
-//CustomerSummary
-//IntendingUser
+//CustomerUserInfo
 import Cssmodule from './cssmodule';
 import MapUi from './ui/map';
 
@@ -50,4 +50,5 @@ export default {
     Echarts, Recharts, Icons, Buttons, Spins, Modals, Notifications,
     Tabs, Banners, Drags,PassOpen,PassLever, Dashboard, Gallery, BasicAnimations,BlackList,WhiteList,
     ExampleAnimations, AuthBasic, RouterEnter, WysiwygBundle,PassOpenD,PotentialUser,SimulatorUser,IntendingUser,CustomerSummary
+    ,CustomerUserInfo
 }
