@@ -187,6 +187,7 @@ class PassOpenD extends Component {
                 mriskTolerance: response.data.data.riskTolerance,
                 mState: response.data.data.state,
                 mCity: response.data.data.city,
+                changeNoteV: response.data.data.comment,
                 checkfromdbName: response.data.data.phoneNumber,
             }, () => {
 
@@ -691,7 +692,7 @@ class PassOpenD extends Component {
 
                         <Col md={24}>
                             <div style={{display: 'flex', minHeight: 40}}>
-                                <TextArea rows={4} onChange={this.changeNote}/>
+                                <TextArea  value={this.state.changeNoteV} rows={4} onChange={this.changeNote}/>
                             </div>
                         </Col>
                         {/*<Input defaultValue={this.state.recordData.lastNameCn}*/}
