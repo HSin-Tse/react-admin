@@ -272,10 +272,13 @@ export default class BlackList extends Component {
                     <Icon type="setting" className="text-dark" />
                 </span>
                     <div style={{ padding: 10 }} className="clear">
-                        ＱＱ<Input placeholder="default size" />
-                        <Input placeholder="default size" />
-                        <Input placeholder="default size" />
-                        <Input placeholder="default size" />
+                        <span>當前表搜索</span>
+                        <Input placeholder="手機好" />
+                        <Input placeholder="郵箱" />
+                        <Input placeholder="郵箱" />
+                        <Input placeholder="郵箱" />
+                        <Input placeholder="郵箱" />
+                        <Button placeholder="搜索" />
 
                         {/*<SketchPicker*/}
                             {/*color={ background }*/}
