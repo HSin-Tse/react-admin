@@ -111,7 +111,7 @@ export default class Basic extends Component {
                 render: (text, record) => (
                     <div>
                         <span className="ant-divider"/>
-                        <Button className="ant-dropdown-link" onClick={() => this.handleEdit(record)}>审核</Button>
+                        <Button className="ant-dropdown-link" onClick={() => this.handleEdit(record)}>{record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'}</Button>
                     </div>
                 ),
             }];
