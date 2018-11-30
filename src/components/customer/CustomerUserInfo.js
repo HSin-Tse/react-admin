@@ -73,14 +73,14 @@ class CustomerUserInfo extends Component {
           title="基本信息"
         >
           <Card
-            hoverable
-            style={{ width: 240 }}
+            
             cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
           >
-            <Meta
-              title="Europe Street beat"
-              description="www.instagram.com"
-            />
+            < Meta title = "姓名：张睿" />
+            < Meta title = "手机：15921455446" />
+            < Meta title = "邮箱：42342342@qq.com" />
+              
+ 
           </Card>
     </Card>
         <Card
