@@ -1,14 +1,20 @@
 import React, {Component} from 'react';
-import {DatePicker, Input, Modal, Button, Table, Tabs, message} from 'antd';
+import {DatePicker, Input, Modal, Button, Table, Tabs, message, Card, Tag, Layout, Icon} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
+import { ThemePicker } from '@/components/widget';
+import classNames from "classnames";
+import {SketchPicker} from "react-color";
 
 const TabPane = Tabs.TabPane;
+const {CheckableTag} = Tag;
+
 export default class BlackList extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             selectedRowKeys: [],
+            mTags: [],
             bklistA: [],
             bklistB: [],
             bklistC: [],
@@ -18,8 +24,8 @@ export default class BlackList extends Component {
             totalpageA: 0,
             totalpageB: 0,
             totalpageC: 0,
-            nowKey: 0,
-            pgsize: 20,
+            nowKey: "1",
+            pgsize: 40,
             loadingA: false,
             loadingB: false,
             loadingC: false,
@@ -33,6 +39,7 @@ export default class BlackList extends Component {
                 title: '手机号',
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
+                width: 150,
                 fixed: 'left',
                 render: (text, record) => (
 
@@ -85,11 +92,21 @@ export default class BlackList extends Component {
 
     handleremove = (record) => {
 
+        let self = this
         window.Axios.post('auth/removeBlackUser', {
             'id': record.id//1:合规 2:开户 3:交易
         }).then((response) => {
 
             message.success('操作成功')
+            if (self.state.nowKey == 1) {
+                this.requestPageA()//1:合规 2:开户 3:交易
+            }
+            if (self.state.nowKey == 2) {
+                this.requestPageB()//1:合规 2:开户 3:交易
+            }
+            if (self.state.nowKey == 3) {
+                this.requestPageC()//1:合规 2:开户 3:交易
+            }
 
         }).catch(function (error) {
             console.log(error);
@@ -122,6 +139,14 @@ export default class BlackList extends Component {
                 totalpageA: response.data.data.totalPage,
                 bklistA: response.data.data.list,
                 loadingA: false
+            }, () => {
+                console.log('hcia self.state.bklistA', self.state.bklistA)
+                var tags = Object.keys(self.state.bklistA[0])
+                console.log('hcia tags', tags)
+                self.setState({
+                    mTags: tags
+                })
+
             });
 
         }).catch(function (error) {
@@ -194,14 +219,36 @@ export default class BlackList extends Component {
         })
     }
 
-    callback(key) {
-        console.log('hcia key', key)
+    callback = (key) => {
+
+        this.setState({
+            nowKey: key,
+        })
+
     }
 
     onSelectChange = (selectedRowKeys) => {
         console.log('hcia', 'selectedRowKeys changed: ', selectedRowKeys);
         this.setState({selectedRowKeys});
     }
+
+    state = {
+        switcherOn: false,
+        background: localStorage.getItem('@primary-color') || '#313653',
+    }
+    _switcherOn = () => {
+        this.setState({
+            switcherOn: !this.state.switcherOn
+        })
+    };
+    _handleChangeComplete = color => {
+        console.log(color);
+        this.setState({ background: color.hex });
+        localStorage.setItem('@primary-color', color.hex);
+        window.less.modifyVars({
+            '@primary-color': color.hex,
+        })
+    };
 
     render() {
 
@@ -211,64 +258,112 @@ export default class BlackList extends Component {
             selectedRowKeys,
             onChange: this.onSelectChange,
         };
+        const { switcherOn, background } = this.state;
+
         return (
 
 
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
+                <div>nowKey :{this.state.nowKey}</div>
+                {/*<ThemePicker />*/}
+                <div className={classNames('switcher dark-white', { active: switcherOn })}>
+                <span className="sw-btn dark-white" onClick={this._switcherOn}>
+                    <Icon type="setting" className="text-dark" />
+                </span>
+                    <div style={{ padding: 10 }} className="clear">
+                        <span>當前表搜索</span>
+                        <Input placeholder="手機好" />
+                        <Input placeholder="郵箱" />
+                        <Input placeholder="郵箱" />
+                        <Input placeholder="郵箱" />
+                        <Input placeholder="郵箱" />
+                        <Button placeholder="搜索" />
+
+                        {/*<SketchPicker*/}
+                            {/*color={ background }*/}
+                            {/*onChangeComplete={ this._handleChangeComplete }*/}
+                        {/*/>*/}
+                    </div>
+                </div>
                 <BreadcrumbCustom first="用戶管理" second="黑名單"/>
 
-                <Tabs onChange={this.callback} type="card">
-                    <TabPane tab="合规黑名单" key="1">
-                        <Button
-                            type="primary"
-                            onClick={() => this.handleremoveList()}
-                            disabled={!hasSelected}
-                            loading={loading}
-                        >
-                            批量移除
-                        </Button>
-                        <Table rowKey="id"
-                               bordered
-                               rowSelection={rowSelection}
-                               columns={this.columns}
-                               dataSource={this.state.bklistA}
-                               scroll={{x: 1300}}
-                               loading={this.state.loading}
-                               pagination={{  // 分页
-                                   total: this.state.totalpageA * this.state.pgsize,
-                                   pageSize: this.state.pgsize,
-                                   onChange: this.changePageA,
-                               }}
-                        />
-                    </TabPane>
-                    <TabPane tab="开户黑名单" key="2">
-                        <Table rowKey="id"
-                               columns={this.columns}
-                               dataSource={this.state.bklistB}
-                               scroll={{x: 1300}}
-                               loading={this.state.loading}
-                               pagination={{  // 分页
-                                   total: this.state.totalpageB * this.state.pgsize,
-                                   pageSize: this.state.pgsize,
-                                   onChange: this.changePageB,
-                               }}
-                        />
-                    </TabPane>
-                    <TabPane tab="交易黑名单" key="3">
-                        <Table rowKey="id"
-                               columns={this.columns}
-                               dataSource={this.state.bklistC}
-                               scroll={{x: 1300}}
-                               loading={this.state.loading}
-                               pagination={{  // 分页
-                                   total: this.state.totalpageC * this.state.pgsize,
-                                   pageSize: this.state.pgsize,
-                                   onChange: this.changePageC,
-                               }}
-                        />
-                    </TabPane>
-                </Tabs>
+                <Card>
+                    <div>
+                        <h6 style={{ marginRight: 8, display: 'inline' }}>Categories:</h6>
+                        {this.state.mTags.map(tag => (
+                            <CheckableTag
+                                key={tag}
+                                // checked={selectedTags.indexOf(tag) > -1}
+                                // onChange={checked => this.handleChange(tag, checked)}
+                            >
+                                {tag}
+                            </CheckableTag>
+                        ))}
+                    </div>
+
+                    <div>
+                        <CheckableTag color="#2db7f5" checked={true}>CheckableTag1</CheckableTag>
+                        <CheckableTag color="#2db7f5">CheckableTag2</CheckableTag>
+                        <CheckableTag>CheckableTag3</CheckableTag>
+                    </div>
+                </Card>
+                <Card>
+
+                    <Tabs
+                        onChange={this.callback}
+                        type="card">
+                        <TabPane tab="合规黑名单" key="1">
+                            <Button
+                                type="primary"
+                                onClick={() => this.handleremoveList()}
+                                disabled={!hasSelected}
+                                loading={loading}
+                            >
+                                批量移除
+                            </Button>
+                            <Table rowKey="id"
+                                   bordered
+                                   rowSelection={rowSelection}
+                                   columns={this.columns}
+                                   dataSource={this.state.bklistA}
+                                   scroll={{x: 1300}}
+                                   loading={this.state.loading}
+                                   pagination={{  // 分页
+                                       total: this.state.totalpageA * this.state.pgsize,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePageA,
+                                   }}
+                            />
+                        </TabPane>
+                        <TabPane tab="开户黑名单" key="2">
+                            <Table rowKey="id"
+                                   columns={this.columns}
+                                   dataSource={this.state.bklistB}
+                                   scroll={{x: 1300}}
+                                   loading={this.state.loading}
+                                   pagination={{  // 分页
+                                       total: this.state.totalpageB * this.state.pgsize,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePageB,
+                                   }}
+                            />
+                        </TabPane>
+                        <TabPane tab="交易黑名单" key="3">
+                            <Table rowKey="id"
+                                   columns={this.columns}
+                                   dataSource={this.state.bklistC}
+                                   scroll={{x: 1300}}
+                                   loading={this.state.loading}
+                                   pagination={{  // 分页
+                                       total: this.state.totalpageC * this.state.pgsize,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePageC,
+                                   }}
+                            />
+                        </TabPane>
+                    </Tabs>
+                </Card>
 
 
             </div>

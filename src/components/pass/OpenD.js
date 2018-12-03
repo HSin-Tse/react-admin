@@ -187,6 +187,7 @@ class PassOpenD extends Component {
                 mriskTolerance: response.data.data.riskTolerance,
                 mState: response.data.data.state,
                 mCity: response.data.data.city,
+                changeNoteV: response.data.data.comment,
                 checkfromdbName: response.data.data.phoneNumber,
             }, () => {
 
@@ -257,13 +258,13 @@ class PassOpenD extends Component {
             <div>
 
                 <div>id: {this.state.recordData.id}</div>
+                <div>status: {this.state.recordData.status}</div>
                 <div>isNeedSave :{this.state.isNeedSave.toString()}</div>
                 <div>waitUpdate :{JSON.stringify(this.state.waitUpdate)}</div>
-                <div>checkfromdbName :{JSON.stringify(this.state.checkfromdbName)}</div>
                 {/*<div>recordDictirys :{JSON.stringify(this.state.recordDictirys)}</div>*/}
 
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
-                <Card title="IX账户审核 " bordered={true}>
+                <Card disabled={true} title="IX账户审核 " bordered={true}>
 
                     <Row gutter={16}>
                         <Col md={8}>
@@ -297,7 +298,7 @@ class PassOpenD extends Component {
 
                     </Row>
                 </Card>
-                <Card title="IX账户设置" bordered={true} style={{marginTop: 30}}>
+                <Card title="IX账户设置"  bordered={true} style={{marginTop: 30}}>
 
                     <Row>
                         <Col>
@@ -691,7 +692,7 @@ class PassOpenD extends Component {
 
                         <Col md={24}>
                             <div style={{display: 'flex', minHeight: 40}}>
-                                <TextArea rows={4} onChange={this.changeNote}/>
+                                <TextArea  value={this.state.changeNoteV} rows={4} onChange={this.changeNote}/>
                             </div>
                         </Col>
                         {/*<Input defaultValue={this.state.recordData.lastNameCn}*/}
@@ -704,12 +705,12 @@ class PassOpenD extends Component {
                         <Card style={{marginTop: 10}}>
 
                             <div>
-                                <Button disabled={this.state.isNeedSave} loading={this.state.iconLoading}
+                                <Button disabled={this.state.isNeedSave || this.state.recordData.status !=0} loading={this.state.iconLoading}
                                         onClick={() => this.openOK()}>开户通过</Button>
                                 <Button disabled={!this.state.isNeedSave}
-                                        onClick={() => this.saveData()}>保存客戶信息</Button>
+                                        onClick={() => this.saveData() || this.state.recordData.status !=0}>保存客戶信息</Button>
                                 {/*<Button disabled={!this.state.changeNoteB} onClick={() => this.saveNote()}>保存备注</Button>*/}
-                                <Button disabled={this.state.isNeedSave} loading={this.state.iconcanLoading}
+                                <Button disabled={this.state.isNeedSave  || this.state.recordData.status !=0} loading={this.state.iconcanLoading}
                                         onClick={() => this.saveReject()}>拒绝</Button>
                             </div>
                         </Card>

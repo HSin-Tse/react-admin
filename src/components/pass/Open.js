@@ -41,9 +41,14 @@ export default class Basic extends Component {
                 fixed: 'left',
                 width:150,
                 onFilter: (value, record) => {
-                    if (!record.phoneNumber)
-                        return false
-                    return record.phoneNumber.includes(value)
+                    // if (!record.phoneNumber)
+                    //     return false
+                    // return record.phoneNumber.includes(value)
+
+                    return true
+
+
+
                 },
 
                 filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
@@ -181,6 +186,7 @@ export default class Basic extends Component {
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
+                <div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>
 
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
 
