@@ -259,6 +259,19 @@ export default class BlackList extends Component {
             selectMail: e.target.value,
         });
     }
+    searchSelect = () => {
+        let self = this
+        console.log('hcia self.state.nowKey' , self.state.nowKey)
+        if (self.state.nowKey == 1) {
+            this.requestPageA()//1:合规 2:开户 3:交易
+        }
+        if (self.state.nowKey == 2) {
+            this.requestPageB()//1:合规 2:开户 3:交易
+        }
+        if (self.state.nowKey == 3) {
+            this.requestPageC()//1:合规 2:开户 3:交易
+        }
+    }
 
     render() {
 
@@ -288,12 +301,13 @@ export default class BlackList extends Component {
                               extra={<Button type="primary" onClick={() => this.handleremoveList()}
                               >清除條件</Button>}
                         >
-                            <Input  onChange={this.onChangeMail}  style={{marginBottom: 5}} placeholder="邮箱"/>
+                            <Input onChange={this.onChangeMail} style={{marginBottom: 5}} placeholder="邮箱"/>
                             <Input style={{marginBottom: 5}} placeholder="手机号"/>
                             <Input style={{marginBottom: 5}} placeholder="身份证号"/>
                             <Input style={{marginBottom: 5}} placeholder="账户"/>
                             <Input style={{marginBottom: 5}} placeholder="关键词"/>
-                            <Button style={{marginTop: 10}} type="primary" icon="search">Search</Button>
+                            <Button onClick={() => this.searchSelect()} style={{marginTop: 10}} type="primary"
+                                    icon="search">Search</Button>
 
                         </Card>
 
@@ -304,16 +318,16 @@ export default class BlackList extends Component {
 
                 <Card>
                     {/*<div>*/}
-                        {/*<h6 style={{marginRight: 8, display: 'inline'}}>Categories:</h6>*/}
-                        {/*{this.state.mTags.map(tag => (*/}
-                            {/*<CheckableTag*/}
-                                {/*key={tag}*/}
-                                {/*// checked={selectedTags.indexOf(tag) > -1}*/}
-                                {/*// onChange={checked => this.handleChange(tag, checked)}*/}
-                            {/*>*/}
-                                {/*{tag}*/}
-                            {/*</CheckableTag>*/}
-                        {/*))}*/}
+                    {/*<h6 style={{marginRight: 8, display: 'inline'}}>Categories:</h6>*/}
+                    {/*{this.state.mTags.map(tag => (*/}
+                    {/*<CheckableTag*/}
+                    {/*key={tag}*/}
+                    {/*// checked={selectedTags.indexOf(tag) > -1}*/}
+                    {/*// onChange={checked => this.handleChange(tag, checked)}*/}
+                    {/*>*/}
+                    {/*{tag}*/}
+                    {/*</CheckableTag>*/}
+                    {/*))}*/}
                     {/*</div>*/}
 
                     <div>
