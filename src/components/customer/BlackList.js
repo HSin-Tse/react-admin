@@ -128,6 +128,7 @@ export default class BlackList extends Component {
             selectMail: '',
             selectID: '',
             startTime: '',
+            selectPhone: '',
             selectTimeStart: '',
             selectTimeEnd: ''
         }, () => {
@@ -337,6 +338,7 @@ export default class BlackList extends Component {
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 <div>nowKey :{this.state.nowKey}</div>
                 <div>selectMail :{this.state.selectMail}</div>
+                <div>selectPhone :{this.state.selectPhone}</div>
                 {/*<ThemePicker />*/}
                 <div className={classNames('switcher dark-white', {active: switcherOn})}>
                 <span className="sw-btn dark-white" onClick={this._switcherOn}>
@@ -349,7 +351,7 @@ export default class BlackList extends Component {
                               >清除條件</Button>}
                         >
                             <Input onChange={this.onChangeMail} style={{marginBottom: 5}} placeholder="邮箱"/>
-                            <Input onChange={this.onChangePhone} style={{marginBottom: 5}} placeholder="手机号"/>
+                            <Input value={this.state.selectPhone} onChange={this.onChangePhone} style={{marginBottom: 5}} placeholder="手机号"/>
                             <Input onChange={this.onChangeID} style={{marginBottom: 5}} placeholder="身份证号"/>
                             <Input onChange={this.onChangeAccount} style={{marginBottom: 5}} placeholder="账户"/>
                             <Input onChange={this.onChangeKeyWord} style={{marginBottom: 5}} placeholder="关键词"/>
