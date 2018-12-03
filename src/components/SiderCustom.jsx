@@ -73,11 +73,9 @@ class SiderCustom extends Component {
 
         if( '超级管理员' == localStorage.getItem('displayName')){
             this.setState({config: routes});
-
         }else{
-
-            this.setState({config: routesConfigadmin});
-
+            // this.setState({config: routesConfigadmin});
+            this.setState({config: routes});
         }
         this.setState({displayName: localStorage.getItem('displayName')});
 
