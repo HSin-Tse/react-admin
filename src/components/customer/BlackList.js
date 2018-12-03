@@ -6,6 +6,7 @@ import classNames from "classnames";
 
 const TabPane = Tabs.TabPane;
 const {CheckableTag} = Tag;
+const {RangePicker} = DatePicker;
 
 export default class BlackList extends Component {
 
@@ -29,6 +30,10 @@ export default class BlackList extends Component {
             loadingB: false,
             loadingC: false,
             selectMail: "",
+            selectPhone: "",
+            selectID: "",
+            selectTimeStart: "",
+            selectTimeEnd: "",
 
 
         };
@@ -114,16 +119,45 @@ export default class BlackList extends Component {
         });
 
     };
-
     handleremoveList = () => {
-        console.log('hcia selectedRowKeys', this.state.selectedRowKeys)
-        // window.Axios.post('auth/removeBlackUser', {
-        //     'id': record.id//1:合规 2:开户 3:交易
-        // }).then((response) => {
-        //     message.success('操作成功')
-        // }).catch(function (error) {
-        //     console.log(error);
-        // });
+
+        let self = this
+        window.Axios.post('auth/removeBlackUserBulk', {
+            'idList': this.state.selectedRowKeys//1:合规 2:开户 3:交易
+        }).then((response) => {
+
+            message.success('操作成功')
+            if (self.state.nowKey == 1) {
+                this.requestPageA()//1:合规 2:开户 3:交易
+            }
+            if (self.state.nowKey == 2) {
+                this.requestPageB()//1:合规 2:开户 3:交易
+            }
+            if (self.state.nowKey == 3) {
+                this.requestPageC()//1:合规 2:开户 3:交易
+            }
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+    };
+
+    handleremoveSelect = () => {
+
+
+        let self = this
+        this.setState({
+            selectMail: '',
+            selectID: '',
+            startTime: '',
+            selectPhone: '',
+            selectTimeStart: '',
+            selectTimeEnd: ''
+        }, () => {
+            self.searchSelect()
+        })
+
 
     };
     requestPageA = () => {
@@ -135,6 +169,10 @@ export default class BlackList extends Component {
             pageNo: this.state.current,
             'listType': 1,//1:合规 2:开户 3:交易
             'email': this.state.selectMail,
+            'nationalId': this.state.selectID,
+            'startTime': this.state.selectTimeStart,
+            'endTime': this.state.selectTimeEnd,
+            'mobile': this.state.selectPhone,
             'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
         }).then((response) => {
             self.setState({
@@ -164,11 +202,17 @@ export default class BlackList extends Component {
         window.Axios.post('auth/getBlackList', {
             pageNo: this.state.current,
             'listType': 2,//1:合规 2:开户 3:交易
+            'email': this.state.selectMail,
+            'nationalId': this.state.selectID,
+            'startTime': this.state.selectTimeStart,
+            'endTime': this.state.selectTimeEnd,
+            'mobile': this.state.selectPhone,
             'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
         }).then((response) => {
             self.setState({
                 totalpageB: response.data.data.totalPage,
                 bklistB: response.data.data.list,
+
                 loadingB: false
             });
 
@@ -185,6 +229,11 @@ export default class BlackList extends Component {
         window.Axios.post('auth/getBlackList', {
             pageNo: this.state.current,
             'listType': 3,//1:合规 2:开户 3:交易
+            'email': this.state.selectMail,
+            'nationalId': this.state.selectID,
+            'startTime': this.state.selectTimeStart,
+            'endTime': this.state.selectTimeEnd,
+            'mobile': this.state.selectPhone,
             'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
         }).then((response) => {
 
@@ -253,24 +302,23 @@ export default class BlackList extends Component {
     };
 
     onChangeMail = (e) => {
-        // this.state.selectMail = e.target.value
-
         this.setState({
             selectMail: e.target.value,
         });
     }
-
     onChangePhone = (e) => {
-        // this.state.selectMail = e.target.value
-
         this.setState({
-            selectMail: e.target.value,
+            selectPhone: e.target.value,
         });
     }
-
+    onChangeID = (e) => {
+        this.setState({
+            selectID: e.target.value,
+        });
+    }
     searchSelect = () => {
         let self = this
-        console.log('hcia self.state.nowKey' , self.state.nowKey)
+        console.log('hcia self.state.nowKey', self.state.nowKey)
         if (self.state.nowKey == 1) {
             this.requestPageA()//1:合规 2:开户 3:交易
         }
@@ -280,6 +328,30 @@ export default class BlackList extends Component {
         if (self.state.nowKey == 3) {
             this.requestPageC()//1:合规 2:开户 3:交易
         }
+    }
+
+    onChangeDate = (value, dateString) => {
+    }
+
+    onOk = (value) => {
+        console.log('hcia', 'onOk: ', value);
+
+
+        var selectTimeStart = value[0].unix()+'000'
+        //1545275083
+        //26582400000
+        //27187200000
+        var selectTimeEnd = value[1].unix()+'000'
+
+        console.log('hcia selectTimeStart' , selectTimeStart)
+        console.log('hcia selectTimeEnd' , selectTimeEnd)
+
+
+        this.setState({
+            selectTimeStart: selectTimeStart,
+            selectTimeEnd: selectTimeEnd,
+
+        });
     }
 
     render() {
@@ -299,6 +371,7 @@ export default class BlackList extends Component {
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 <div>nowKey :{this.state.nowKey}</div>
                 <div>selectMail :{this.state.selectMail}</div>
+                <div>selectPhone :{this.state.selectPhone}</div>
                 {/*<ThemePicker />*/}
                 <div className={classNames('switcher dark-white', {active: switcherOn})}>
                 <span className="sw-btn dark-white" onClick={this._switcherOn}>
@@ -307,14 +380,22 @@ export default class BlackList extends Component {
                     <div>
 
                         <Card title="當前表搜索"
-                              extra={<Button type="primary" onClick={() => this.handleremoveList()}
+                              extra={<Button type="primary" onClick={() => this.handleremoveSelect()}
                               >清除條件</Button>}
                         >
                             <Input onChange={this.onChangeMail} style={{marginBottom: 5}} placeholder="邮箱"/>
-                            <Input onChange={this.onChangePhone}  style={{marginBottom: 5}} placeholder="手机号"/>
-                            <Input onChange={this.onChangeID}  style={{marginBottom: 5}} placeholder="身份证号"/>
-                            <Input onChange={this.onChangeAccount}  style={{marginBottom: 5}} placeholder="账户"/>
-                            <Input onChange={this.onChangeKeyWord}  style={{marginBottom: 5}} placeholder="关键词"/>
+                            <Input value={this.state.selectPhone} onChange={this.onChangePhone} style={{marginBottom: 5}} placeholder="手机号"/>
+                            <Input onChange={this.onChangeID} style={{marginBottom: 5}} placeholder="身份证号"/>
+                            <Input onChange={this.onChangeAccount} style={{marginBottom: 5}} placeholder="账户"/>
+                            <Input onChange={this.onChangeKeyWord} style={{marginBottom: 5}} placeholder="关键词"/>
+                            <RangePicker
+                                showTime={{format: 'YYYY-MM-DD HH:mm:ss'}}
+                                format="YYYY-MM-DD HH:mm:ss fff"
+                                placeholder={['Start Time', 'End Time']}
+                                onChange={this.onChangeDate}
+                                onOk={this.onOk}
+                            />
+
                             <Button onClick={() => this.searchSelect()} style={{marginTop: 10}} type="primary"
                                     icon="search">Search</Button>
 
