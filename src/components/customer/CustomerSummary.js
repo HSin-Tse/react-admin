@@ -13,6 +13,7 @@ export default class CustomerSummary extends Component {
 			selectedRowKeys: [],
 			// mTags: [],
 			bklistA: [],
+			operationDiaryHistory: [],
 			currentA: 0,
 			totalpageA: 0,
 			nowKey: "1",
@@ -29,6 +30,7 @@ export default class CustomerSummary extends Component {
 		this.ediftModalColumn()
 		this.editTableColumn()
 		this.requestData()
+		this.requestUserCommentList()
 		
 	}
 
@@ -116,7 +118,34 @@ export default class CustomerSummary extends Component {
 			console.log(error);
 		});
 	}
+requestUserCommentList = () =>{
+			// must request data:
+			//belongUserId
+			//loginName
+			//token
 
+			//refernce request data:
+			//pageNo
+			//pageSize
+			//language
+			const url = 'http://mobile.nooko.cn:8090/auth/getUserCommentList'
+
+			var tmp = this;
+
+			window.Axios.post(url, {
+				'belongUserId':'4028b2a4631f770f01631f7770df0000',
+				'loginName' : 'admin',
+				'token' : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmVUaW1lIjoxNTQ1NTI4ODM0MTk5LCJsb2dpbk5hbWUiOiJhZG1pbiJ9.F7moE4DsMUiajkKB1S_wemwsozlUW5VMxQKsg4KsSUQ'
+
+			}).then(function (response) {
+
+					tmp.setState({operationDiaryHistory: response.data.data.list});
+
+			}).catch(function (error) {
+					console.log(error);
+					// message.warn(error);
+			});
+		}
 
 
 	changePageA = (page) => {
