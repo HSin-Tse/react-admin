@@ -86,8 +86,8 @@ export default class WhiteList extends Component {
     handleremove = (record) => {
 
         let self = this
-        window.Axios.post('auth/removeBlackUser', {
-            'id': record.id//1:合规 2:开户 3:交易
+        window.Axios.post('auth/removeWhiteUser', {
+            'id': record.id//
         }).then((response) => {
 
             message.success('操作成功')
