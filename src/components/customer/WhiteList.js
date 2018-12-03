@@ -290,6 +290,22 @@ export default class WhiteList extends Component {
         //     showModaladdWhite: false,
         // });
     }
+    handleremoveList = () => {
+
+        let self = this
+        window.Axios.post('auth/removeWhiteUserBulk', {
+            'idList': this.state.selectedRowKeys//1:合规 2:开户 3:交易
+        }).then((response) => {
+
+            message.success('操作成功')
+                this.requestPageA()//1:合规 2:开户 3:交易
+
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+    };
 
     handleCancel = (e) => {
         console.log(e);
