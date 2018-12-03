@@ -14,14 +14,8 @@ export default class CustomerSummary extends Component {
 			selectedRowKeys: [],
 			// mTags: [],
 			bklistA: [],
-			bklistB: [],
-			bklistC: [],
 			currentA: 0,
-			currentB: 0,
-			currentC: 0,
 			totalpageA: 0,
-			totalpageB: 0,
-			totalpageC: 0,
 			nowKey: "1",
 			pgsize: 40,
 			loadingA: false,
@@ -122,7 +116,7 @@ export default class CustomerSummary extends Component {
 					</div>
 				),
 			}];
-		this.requestData()//1:合规 2:开户 3:交易
+		this.requestData()
 		
 	}
 
@@ -130,18 +124,12 @@ export default class CustomerSummary extends Component {
 
 		let self = this
 		window.Axios.post('auth/removeBlackUser', {
-			'id': record.id//1:合规 2:开户 3:交易
+			'id': record.id
 		}).then((response) => {
 
 			message.success('操作成功')
 			if (self.state.nowKey == 1) {
-				this.requestData()//1:合规 2:开户 3:交易
-			}
-			if (self.state.nowKey == 2) {
-				this.requestPageB()//1:合规 2:开户 3:交易
-			}
-			if (self.state.nowKey == 3) {
-				this.requestPageC()//1:合规 2:开户 3:交易
+				this.requestData()
 			}
 
 		}).catch(function (error) {
@@ -252,13 +240,7 @@ export default class CustomerSummary extends Component {
 		let self = this
 		console.log('hcia self.state.nowKey', self.state.nowKey)
 		if (self.state.nowKey == 1) {
-			this.requestData()//1:合规 2:开户 3:交易
-		}
-		if (self.state.nowKey == 2) {
-			this.requestPageB()//1:合规 2:开户 3:交易
-		}
-		if (self.state.nowKey == 3) {
-			this.requestPageC()//1:合规 2:开户 3:交易
+			this.requestData()
 		}
 	}
 
