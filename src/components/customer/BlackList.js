@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import {DatePicker, Input, Modal, Button, Table, Tabs, message, Card, Tag, Layout, Icon} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
-import { ThemePicker } from '@/components/widget';
+import {ThemePicker} from '@/components/widget';
 import classNames from "classnames";
-import {SketchPicker} from "react-color";
 
 const TabPane = Tabs.TabPane;
 const {CheckableTag} = Tag;
@@ -233,7 +232,7 @@ export default class BlackList extends Component {
     }
 
     state = {
-        switcherOn: false,
+        switcherOn: true,
         background: localStorage.getItem('@primary-color') || '#313653',
     }
     _switcherOn = () => {
@@ -243,7 +242,7 @@ export default class BlackList extends Component {
     };
     _handleChangeComplete = color => {
         console.log(color);
-        this.setState({ background: color.hex });
+        this.setState({background: color.hex});
         localStorage.setItem('@primary-color', color.hex);
         window.less.modifyVars({
             '@primary-color': color.hex,
@@ -258,7 +257,7 @@ export default class BlackList extends Component {
             selectedRowKeys,
             onChange: this.onSelectChange,
         };
-        const { switcherOn, background } = this.state;
+        const {switcherOn, background} = this.state;
 
         return (
 
@@ -267,30 +266,33 @@ export default class BlackList extends Component {
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 <div>nowKey :{this.state.nowKey}</div>
                 {/*<ThemePicker />*/}
-                <div className={classNames('switcher dark-white', { active: switcherOn })}>
+                <div className={classNames('switcher dark-white', {active: switcherOn})}>
                 <span className="sw-btn dark-white" onClick={this._switcherOn}>
-                    <Icon type="setting" className="text-dark" />
+                    <Icon type="setting" className="text-dark"/>
                 </span>
-                    <div style={{ padding: 10 }} className="clear">
-                        <span>當前表搜索</span>
-                        <Input placeholder="手機好" />
-                        <Input placeholder="郵箱" />
-                        <Input placeholder="郵箱" />
-                        <Input placeholder="郵箱" />
-                        <Input placeholder="郵箱" />
-                        <Button placeholder="搜索" />
+                    <div >
 
-                        {/*<SketchPicker*/}
-                            {/*color={ background }*/}
-                            {/*onChangeComplete={ this._handleChangeComplete }*/}
-                        {/*/>*/}
+                        <Card title="當前表搜索"
+                              extra={<Button type="primary" onClick={() => this.handleremoveList()}
+                              >清除條件</Button>}
+                        >
+                            <Input style={{marginBottom: 5}} placeholder="手機好"/>
+                            <Input style={{marginBottom: 5}} placeholder="郵箱"/>
+                            <Input style={{marginBottom: 5}} placeholder="郵箱"/>
+                            <Input style={{marginBottom: 5}} placeholder="郵箱"/>
+                            <Input style={{marginBottom: 5}} placeholder="郵箱"/>
+                            <Button style={{marginTop: 10}} type="primary" icon="search">Search</Button>
+
+                        </Card>
+
+
                     </div>
                 </div>
                 <BreadcrumbCustom first="用戶管理" second="黑名單"/>
 
                 <Card>
                     <div>
-                        <h6 style={{ marginRight: 8, display: 'inline' }}>Categories:</h6>
+                        <h6 style={{marginRight: 8, display: 'inline'}}>Categories:</h6>
                         {this.state.mTags.map(tag => (
                             <CheckableTag
                                 key={tag}
