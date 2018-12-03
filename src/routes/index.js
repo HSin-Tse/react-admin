@@ -4,8 +4,8 @@
 import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import AllComponents from '../components';
-// import routesConfig from './config';
-import routesConfigadmin from './configadmin';
+import routesConfig from './config';
+// import routesConfigadmin from './configadmin';
 //
 export default class CRouter extends Component {
 
@@ -23,7 +23,7 @@ export default class CRouter extends Component {
 
     componentWillMount() {
         // console.log('hcia componentWillMount' )
-        this.setState({config: routesConfigadmin});
+        this.setState({config: routesConfig});
 
     }
 

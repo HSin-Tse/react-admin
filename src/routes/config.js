@@ -20,6 +20,14 @@ export default {
             ],
         },
 
+        {
+            key: '/app/trade', title: '交易管理', icon: 'safety',
+            subs: [
+                {key: '/app/trade/account', title: '交易账户管理', component: 'TradeAccount'},
+                {key: '/app/trade/depart', title: '組管理', component: 'TradeDepart'},
+
+            ],
+        },
 
     ],
 
