@@ -179,11 +179,17 @@ export default class BlackList extends Component {
         window.Axios.post('auth/getBlackList', {
             pageNo: this.state.current,
             'listType': 2,//1:合规 2:开户 3:交易
+            'email': this.state.selectMail,
+            'nationalId': this.state.selectID,
+            'startTime': this.state.selectTimeStart,
+            'endTime': this.state.selectTimeEnd,
+            'mobile': this.state.selectPhone,
             'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
         }).then((response) => {
             self.setState({
                 totalpageB: response.data.data.totalPage,
                 bklistB: response.data.data.list,
+
                 loadingB: false
             });
 
@@ -200,6 +206,11 @@ export default class BlackList extends Component {
         window.Axios.post('auth/getBlackList', {
             pageNo: this.state.current,
             'listType': 3,//1:合规 2:开户 3:交易
+            'email': this.state.selectMail,
+            'nationalId': this.state.selectID,
+            'startTime': this.state.selectTimeStart,
+            'endTime': this.state.selectTimeEnd,
+            'mobile': this.state.selectPhone,
             'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
         }).then((response) => {
 
@@ -314,6 +325,11 @@ export default class BlackList extends Component {
 
         //1545448544000
         //1234567890123
+        //26582400000
+        //1546314526000
+        //1546314526000
+        //1546746108000
+        //1465816710020
         this.setState({
             selectTimeStart: selectTimeStart,
             selectTimeEnd: selectTimeEnd,
@@ -356,8 +372,8 @@ export default class BlackList extends Component {
                             <Input onChange={this.onChangeAccount} style={{marginBottom: 5}} placeholder="账户"/>
                             <Input onChange={this.onChangeKeyWord} style={{marginBottom: 5}} placeholder="关键词"/>
                             <RangePicker
-                                showTime={{format: 'HH:mm'}}
-                                format="YYYY-MM-DD HH:mm"
+                                showTime={{format: 'YYYY-MM-DD HH:mm:ss'}}
+                                format="YYYY-MM-DD HH:mm:ss fff"
                                 placeholder={['Start Time', 'End Time']}
                                 onChange={this.onChangeDate}
                                 onOk={this.onOk}
