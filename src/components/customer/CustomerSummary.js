@@ -17,10 +17,6 @@ export default class CustomerSummary extends Component {
 			totalpageA: 0,
 			nowKey: "1",
 			pgsize: 40,
-			loadingA: false,
-			loadingB: false,
-			loadingC: false,
-			selectMail: "",
 			visible:false,
 			modal2Visible:false,
 			
@@ -184,9 +180,7 @@ export default class CustomerSummary extends Component {
 	}
 	requestData = () => {
 		let self = this
-		self.setState({
-			loadingA: true
-		})
+	
 		window.Axios.post('ixuser/getUserList', {
 			pageNo: this.state.current,
 			'loginName': 'admin',
@@ -196,7 +190,7 @@ export default class CustomerSummary extends Component {
 			self.setState({
 				totalpageA: response.data.data.totalPage,
 				bklistA: response.data.data.list,
-				loadingA: false
+				
 			}, () => {
 				console.log('hcia self.state.bklistA', self.state.bklistA)
 				// var tags = Object.keys(self.state.bklistA[0])
