@@ -259,6 +259,15 @@ export default class BlackList extends Component {
             selectMail: e.target.value,
         });
     }
+
+    onChangePhone = (e) => {
+        // this.state.selectMail = e.target.value
+
+        this.setState({
+            selectMail: e.target.value,
+        });
+    }
+
     searchSelect = () => {
         let self = this
         console.log('hcia self.state.nowKey' , self.state.nowKey)
@@ -302,10 +311,10 @@ export default class BlackList extends Component {
                               >清除條件</Button>}
                         >
                             <Input onChange={this.onChangeMail} style={{marginBottom: 5}} placeholder="邮箱"/>
-                            <Input style={{marginBottom: 5}} placeholder="手机号"/>
-                            <Input style={{marginBottom: 5}} placeholder="身份证号"/>
-                            <Input style={{marginBottom: 5}} placeholder="账户"/>
-                            <Input style={{marginBottom: 5}} placeholder="关键词"/>
+                            <Input onChange={this.onChangePhone}  style={{marginBottom: 5}} placeholder="手机号"/>
+                            <Input onChange={this.onChangeID}  style={{marginBottom: 5}} placeholder="身份证号"/>
+                            <Input onChange={this.onChangeAccount}  style={{marginBottom: 5}} placeholder="账户"/>
+                            <Input onChange={this.onChangeKeyWord}  style={{marginBottom: 5}} placeholder="关键词"/>
                             <Button onClick={() => this.searchSelect()} style={{marginTop: 10}} type="primary"
                                     icon="search">Search</Button>
 
@@ -316,26 +325,6 @@ export default class BlackList extends Component {
                 </div>
                 <BreadcrumbCustom first="用戶管理" second="黑名單"/>
 
-                <Card>
-                    {/*<div>*/}
-                    {/*<h6 style={{marginRight: 8, display: 'inline'}}>Categories:</h6>*/}
-                    {/*{this.state.mTags.map(tag => (*/}
-                    {/*<CheckableTag*/}
-                    {/*key={tag}*/}
-                    {/*// checked={selectedTags.indexOf(tag) > -1}*/}
-                    {/*// onChange={checked => this.handleChange(tag, checked)}*/}
-                    {/*>*/}
-                    {/*{tag}*/}
-                    {/*</CheckableTag>*/}
-                    {/*))}*/}
-                    {/*</div>*/}
-
-                    <div>
-                        <CheckableTag color="#2db7f5" checked={true}>CheckableTag1</CheckableTag>
-                        <CheckableTag color="#2db7f5">CheckableTag2</CheckableTag>
-                        <CheckableTag>CheckableTag3</CheckableTag>
-                    </div>
-                </Card>
                 <Card>
 
                     <Tabs
