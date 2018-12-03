@@ -26,97 +26,8 @@ export default class CustomerSummary extends Component {
 	}
 
 	componentDidMount() {
-		this.columns = [
-			{
-				title: '手机号',
-				dataIndex: '手机号',
-				key: '手机号',
-				width: 150,
-				fixed: 'left',
-				render: (text, record) => (
-
-					<span>{record.mobile}</span>
-
-				),
-			}, {
-				title: '姓名',
-				dataIndex: '姓名',
-				key: '姓名',
-				render: (text, record) => (
-					<span>{record.name}</span>),
-			}, {
-				title: '开户状态',
-				dataIndex: '开户状态',
-				key: '开户状态',
-				render: (text, record) => (<span>已开户</span>),
-			},
-			{
-				title: '账户类型',
-				dataIndex: '账户类型',
-				key: '账户类型',
-				render: (text, record) => (<span>{record.accountType}</span>),
-			}, {
-				title: '交易账号',
-				dataIndex: '交易账号',
-				key: '交易账号',
-				render: (text, record) => (
-					<span>{record.accountNo}</span>),
-			}, {
-				title: '最近登录时间',
-				dataIndex: '最近登录时间',
-				key: '最近登录时间',
-				render: (text, record) => (<span>{record.date}</span>),
-			}, {
-				title: '客诉次数',
-				dataIndex: '客诉次数',
-				key: '客诉次数',
-				render: (text, record) => (<span>{record.complaintNum}</span>),
-			}, {
-				title: '回访次数',
-				dataIndex: '回访次数',
-				key: '回访次数',
-				render: (text, record) => (
-					<span>{record.commentNum}</span>),
-			}, {
-				title: '备注信息',
-				dataIndex: '备注信息',
-				key: '备注信息',
-				render: (text, record) => (
-					<span>{record.comment}</span>),
-			}, {
-				title: '查看',
-				dataIndex: '查看',
-				key: '查看',
-				render: (text, record) => (
-					<span>{record.comment}</span>),
-			}, {
-				title: '操作人',
-				dataIndex: '操作人',
-				key: '操作人',
-				render: (text, record) => (
-					<span>{record.operator}</span>),
-			}, {
-				title: '业务操作',
-				dataIndex: '业务操作',
-				key: '业务操作',
-				render: (text, record) => (
-					<span>{record.comment}</span>),
-			},{
-				title: '其他',
-				key: '其他',
-				fixed: '其他',
-				width: 100,
-				fixed: 'right',
-				render: (text, record) => (
-					<div>
-						{/* <span className="ant-divider" />
-						<Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>移除</Button> */}
-						<Button className="ant-dropdown-link" onClick={() => this.showModal()}>添加備註</Button>
-						<Button className="ant-dropdown-link" onClick={() => this.showModal2()}>操作日誌</Button>
-
-					</div>
-				),
-			}];
+		this.ediftModalColumn()
+		this.editTableColumn()
 		this.requestData()
 		
 	}
@@ -262,7 +173,121 @@ export default class CustomerSummary extends Component {
 			selectMail: e.target.value,
 		});
 	}
+	editTableColumn =() =>{this.columns = [
+			{
+				title: '手机号',
+				dataIndex: '手机号',
+				key: '手机号',
+				width: 150,
+				fixed: 'left',
+				render: (text, record) => (
 
+					<span>{record.mobile}</span>
+
+				),
+			}, {
+				title: '姓名',
+				dataIndex: '姓名',
+				key: '姓名',
+				render: (text, record) => (
+					<span>{record.name}</span>),
+			}, {
+				title: '开户状态',
+				dataIndex: '开户状态',
+				key: '开户状态',
+				render: (text, record) => (<span>已开户</span>),
+			},
+			{
+				title: '账户类型',
+				dataIndex: '账户类型',
+				key: '账户类型',
+				render: (text, record) => (<span>{record.accountType}</span>),
+			}, {
+				title: '交易账号',
+				dataIndex: '交易账号',
+				key: '交易账号',
+				render: (text, record) => (
+					<span>{record.accountNo}</span>),
+			}, {
+				title: '最近登录时间',
+				dataIndex: '最近登录时间',
+				key: '最近登录时间',
+				render: (text, record) => (<span>{record.date}</span>),
+			}, {
+				title: '客诉次数',
+				dataIndex: '客诉次数',
+				key: '客诉次数',
+				render: (text, record) => (<span>{record.complaintNum}</span>),
+			}, {
+				title: '回访次数',
+				dataIndex: '回访次数',
+				key: '回访次数',
+				render: (text, record) => (
+					<span>{record.commentNum}</span>),
+			}, {
+				title: '备注信息',
+				dataIndex: '备注信息',
+				key: '备注信息',
+				render: (text, record) => (
+					<span>{record.comment}</span>),
+			}, {
+				title: '查看',
+				dataIndex: '查看',
+				key: '查看',
+				render: (text, record) => (
+					<span>{record.comment}</span>),
+			}, {
+				title: '操作人',
+				dataIndex: '操作人',
+				key: '操作人',
+				render: (text, record) => (
+					<span>{record.operator}</span>),
+			}, {
+				title: '业务操作',
+				dataIndex: '业务操作',
+				key: '业务操作',
+				render: (text, record) => (
+					<span>{record.comment}</span>),
+			},{
+				title: '其他',
+				key: '其他',
+				fixed: '其他',
+				width: 100,
+				fixed: 'right',
+				render: (text, record) => (
+					<div>
+						{/* <span className="ant-divider" />
+						<Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>移除</Button> */}
+						<Button className="ant-dropdown-link" onClick={() => this.showModal()}>添加備註</Button>
+						<Button className="ant-dropdown-link" onClick={() => this.showModal2()}>操作日誌</Button>
+
+					</div>
+				),
+			}];}
+	ediftModalColumn =() =>{
+		this.modalColumns = [{
+			title: '時間',
+			dataIndex: 'createDate',
+			key: 'operationDiary_Date',
+
+			render: (text, record) => (
+				<Button>{record.createDate}</Button>),
+		}, {
+			title: '狀態',
+			dataIndex: 'comment',
+			key: 'operationDiary_Status',
+
+			render: (text, record) => (
+				<Button>{record.comment}</Button>),
+		}, {
+			title: '操作人',
+			dataIndex: 'bkUserName',
+			key: 'operationDiary_User',
+
+			render: (text, record) => (
+				<Button>{record.bkUserName}</Button>),
+		}]
+	}
 	searchSelect = () => {
 		let self = this
 		console.log('hcia self.state.nowKey', self.state.nowKey)
@@ -348,6 +373,21 @@ export default class CustomerSummary extends Component {
 					cancelText="取消"
 				>
 					<p><Input placeholder="填写回访次数以及结果" /></p>
+				</Modal>
+				<Modal
+					title="操作日誌"
+					visible={this.state.modal2Visible}
+					onOk={this.handleOk}
+					onCancel={this.handleCancel}
+					okText="確認"
+					cancelText="取消"
+				>
+					<p>
+						<Table rowKey="id"
+							columns={this.modalColumns} dataSource={this.state.operationDiaryHistory}
+							scroll={{ x: 1300 }}
+						/>
+					</p>
 				</Modal>
 			</div>
 
