@@ -116,9 +116,8 @@ export default class CustomerSummary extends Component {
 					</div>
 				),
 			}];
-		this.requestPageA()//1:合规 2:开户 3:交易
-		this.requestPageB()
-		this.requestPageC()
+		this.requestData()//1:合规 2:开户 3:交易
+		
 	}
 
 	handleremove = (record) => {
@@ -130,7 +129,7 @@ export default class CustomerSummary extends Component {
 
 			message.success('操作成功')
 			if (self.state.nowKey == 1) {
-				this.requestPageA()//1:合规 2:开户 3:交易
+				this.requestData()//1:合规 2:开户 3:交易
 			}
 			if (self.state.nowKey == 2) {
 				this.requestPageB()//1:合规 2:开户 3:交易
@@ -156,7 +155,7 @@ export default class CustomerSummary extends Component {
 		// });
 
 	};
-	requestPageA = () => {
+	requestData = () => {
 		let self = this
 		self.setState({
 			loadingA: true
@@ -185,69 +184,14 @@ export default class CustomerSummary extends Component {
 			console.log(error);
 		});
 	}
-	requestPageB = () => {
-		let self = this
 
-		self.setState({
-			loadingB: true
-		})
-		window.Axios.post('auth/getBlackList', {
-			pageNo: this.state.current,
-			'listType': 4,//1: 2: 3:,4:分頁查詢用戶總表
-			'pageSize': this.state.pgsize,
-		}).then((response) => {
-			self.setState({
-				totalpageB: response.data.data.totalPage,
-				bklistB: response.data.data.list,
-				loadingB: false
-			});
-
-
-		}).catch(function (error) {
-			console.log(error);
-		});
-	}
-	requestPageC = () => {
-		let self = this
-		self.setState({
-			loadingC: true
-		})
-		window.Axios.post('auth/getBlackList', {
-			pageNo: this.state.current,
-			'listType': 3,//1:合规 2:开户 3:交易
-			'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
-		}).then((response) => {
-
-			self.setState({
-				totalpageC: response.data.data.totalPage,
-				bklistC: response.data.data.list,
-				loadingC: false
-			});
-		}).catch(function (error) {
-			console.log(error);
-		});
-	}
 
 
 	changePageA = (page) => {
 		this.setState({
 			currentA: page,
 		}, () => {
-			this.requestPageA()
-		})
-	}
-	changePageB = (page) => {
-		this.setState({
-			currentb: page,
-		}, () => {
-			this.requestPageB()
-		})
-	}
-	changePageC = (page) => {
-		this.setState({
-			currentC: page,
-		}, () => {
-			this.requestPageC()
+			this.requestData()
 		})
 	}
 
@@ -302,7 +246,7 @@ export default class CustomerSummary extends Component {
 		let self = this
 		console.log('hcia self.state.nowKey', self.state.nowKey)
 		if (self.state.nowKey == 1) {
-			this.requestPageA()//1:合规 2:开户 3:交易
+			this.requestData()//1:合规 2:开户 3:交易
 		}
 		if (self.state.nowKey == 2) {
 			this.requestPageB()//1:合规 2:开户 3:交易
