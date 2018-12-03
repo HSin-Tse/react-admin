@@ -4,7 +4,6 @@ import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import { ThemePicker } from '@/components/widget';
 import classNames from "classnames";
 
-const TabPane = Tabs.TabPane;
 
 export default class CustomerSummary extends Component {
 
@@ -22,6 +21,9 @@ export default class CustomerSummary extends Component {
 			loadingB: false,
 			loadingC: false,
 			selectMail: "",
+			visible:false,
+			modal2Visible:false,
+			
 
 
 		};
@@ -111,8 +113,11 @@ export default class CustomerSummary extends Component {
 				fixed: 'right',
 				render: (text, record) => (
 					<div>
-						<span className="ant-divider" />
-						<Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>移除</Button>
+						{/* <span className="ant-divider" />
+						<Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>移除</Button> */}
+						<Button className="ant-dropdown-link" onClick={() => this.showModal()}>添加備註</Button>
+						<Button className="ant-dropdown-link" onClick={() => this.showModal2()}>操作日誌</Button>
+
 					</div>
 				),
 			}];
@@ -149,6 +154,34 @@ export default class CustomerSummary extends Component {
 		// });
 
 	};
+	showModal2 = () => {
+		this.setState({
+			modal2Visible: true,
+			visible: false,
+
+		});
+	}
+	showModal = () => {
+		this.setState({
+			visible: true,
+			modal2Visible: false,
+		});
+	}
+	handleOk = (e) => {
+		console.log(e);
+		this.setState({
+			visible: false,
+			modal2Visible: false,
+		});
+	}
+
+	handleCancel = (e) => {
+		console.log(e);
+		this.setState({
+			visible: false,
+			modal2Visible: false,
+		});
+	}
 	requestData = () => {
 		let self = this
 		self.setState({
@@ -273,8 +306,7 @@ export default class CustomerSummary extends Component {
 					<div>
 
 						<Card title="當前表搜索"
-							extra={<Button type="primary" onClick={() => this.handleremoveList()}
-							>清除條件</Button>}
+							extra={<Button type="primary" onClick={() => this.handleremoveList()}>清除條件</Button>}
 						>
 							<Input onChange={this.onChangeMail} style={{ marginBottom: 5 }} placeholder="邮箱" />
 							<Input onChange={this.onChangePhone} style={{ marginBottom: 5 }} placeholder="手机号" />
@@ -282,7 +314,8 @@ export default class CustomerSummary extends Component {
 							<Input onChange={this.onChangeAccount} style={{ marginBottom: 5 }} placeholder="账户" />
 							<Input onChange={this.onChangeKeyWord} style={{ marginBottom: 5 }} placeholder="关键词" />
 							<Button onClick={() => this.searchSelect()} style={{ marginTop: 10 }} type="primary"
-								icon="search">Search</Button>
+								icon="search"
+							>Search</Button>
 
 						</Card>
 
@@ -306,13 +339,22 @@ export default class CustomerSummary extends Component {
 					dataSource={this.state.bklistA}
 					scroll={{ x: 1300 }}
 					loading={this.state.loading}
-					pagination={{  // 分页
+					pagination={{ // 分页
 						total: this.state.totalpageA * this.state.pgsize,
 						pageSize: this.state.pgsize,
 						onChange: this.changePageA,
 					}}
 				/>
-				
+				<Modal
+					title="添加備註"
+					visible={this.state.visible}
+					onOk={this.handleOk}
+					onCancel={this.handleCancel}
+					okText="確認"
+					cancelText="取消"
+				>
+					<p><Input placeholder="填写回访次数以及结果" /></p>
+				</Modal>
 			</div>
 
 		)
