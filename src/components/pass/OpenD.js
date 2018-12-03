@@ -996,7 +996,7 @@ class PassOpenD extends Component {
             {
                 scale: 2,
                 allowTainft: true,
-                useCORS:true,
+                // useCORS:true,
                 onrendered: function (canvas) {
                 }
 
