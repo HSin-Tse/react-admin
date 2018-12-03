@@ -13,7 +13,7 @@ export default class BlackList extends Component {
         super(props);
         this.state = {
             selectedRowKeys: [],
-            mTags: [],
+            // mTags: [],
             bklistA: [],
             bklistB: [],
             bklistC: [],
@@ -28,6 +28,8 @@ export default class BlackList extends Component {
             loadingA: false,
             loadingB: false,
             loadingC: false,
+            selectMail: "",
+
 
         };
     }
@@ -132,6 +134,7 @@ export default class BlackList extends Component {
         window.Axios.post('auth/getBlackList', {
             pageNo: this.state.current,
             'listType': 1,//1:合规 2:开户 3:交易
+            'email': this.state.selectMail,
             'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
         }).then((response) => {
             self.setState({
@@ -140,11 +143,11 @@ export default class BlackList extends Component {
                 loadingA: false
             }, () => {
                 console.log('hcia self.state.bklistA', self.state.bklistA)
-                var tags = Object.keys(self.state.bklistA[0])
-                console.log('hcia tags', tags)
-                self.setState({
-                    mTags: tags
-                })
+                // var tags = Object.keys(self.state.bklistA[0])
+                // console.log('hcia tags', tags)
+                // self.setState({
+                //     mTags: tags
+                // })
 
             });
 
@@ -249,6 +252,14 @@ export default class BlackList extends Component {
         })
     };
 
+    onChangeMail = (e) => {
+        // this.state.selectMail = e.target.value
+
+        this.setState({
+            selectMail: e.target.value,
+        });
+    }
+
     render() {
 
         const {loading, selectedRowKeys} = this.state;
@@ -265,22 +276,23 @@ export default class BlackList extends Component {
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 <div>nowKey :{this.state.nowKey}</div>
+                <div>selectMail :{this.state.selectMail}</div>
                 {/*<ThemePicker />*/}
                 <div className={classNames('switcher dark-white', {active: switcherOn})}>
                 <span className="sw-btn dark-white" onClick={this._switcherOn}>
                     <Icon type="setting" className="text-dark"/>
                 </span>
-                    <div >
+                    <div>
 
                         <Card title="當前表搜索"
                               extra={<Button type="primary" onClick={() => this.handleremoveList()}
                               >清除條件</Button>}
                         >
-                            <Input style={{marginBottom: 5}} placeholder="手機好"/>
-                            <Input style={{marginBottom: 5}} placeholder="郵箱"/>
-                            <Input style={{marginBottom: 5}} placeholder="郵箱"/>
-                            <Input style={{marginBottom: 5}} placeholder="郵箱"/>
-                            <Input style={{marginBottom: 5}} placeholder="郵箱"/>
+                            <Input  onChange={this.onChangeMail}  style={{marginBottom: 5}} placeholder="邮箱"/>
+                            <Input style={{marginBottom: 5}} placeholder="手机号"/>
+                            <Input style={{marginBottom: 5}} placeholder="身份证号"/>
+                            <Input style={{marginBottom: 5}} placeholder="账户"/>
+                            <Input style={{marginBottom: 5}} placeholder="关键词"/>
                             <Button style={{marginTop: 10}} type="primary" icon="search">Search</Button>
 
                         </Card>
@@ -291,18 +303,18 @@ export default class BlackList extends Component {
                 <BreadcrumbCustom first="用戶管理" second="黑名單"/>
 
                 <Card>
-                    <div>
-                        <h6 style={{marginRight: 8, display: 'inline'}}>Categories:</h6>
-                        {this.state.mTags.map(tag => (
-                            <CheckableTag
-                                key={tag}
-                                // checked={selectedTags.indexOf(tag) > -1}
-                                // onChange={checked => this.handleChange(tag, checked)}
-                            >
-                                {tag}
-                            </CheckableTag>
-                        ))}
-                    </div>
+                    {/*<div>*/}
+                        {/*<h6 style={{marginRight: 8, display: 'inline'}}>Categories:</h6>*/}
+                        {/*{this.state.mTags.map(tag => (*/}
+                            {/*<CheckableTag*/}
+                                {/*key={tag}*/}
+                                {/*// checked={selectedTags.indexOf(tag) > -1}*/}
+                                {/*// onChange={checked => this.handleChange(tag, checked)}*/}
+                            {/*>*/}
+                                {/*{tag}*/}
+                            {/*</CheckableTag>*/}
+                        {/*))}*/}
+                    {/*</div>*/}
 
                     <div>
                         <CheckableTag color="#2db7f5" checked={true}>CheckableTag1</CheckableTag>
