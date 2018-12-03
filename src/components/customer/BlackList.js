@@ -6,6 +6,7 @@ import classNames from "classnames";
 
 const TabPane = Tabs.TabPane;
 const {CheckableTag} = Tag;
+const {RangePicker} = DatePicker;
 
 export default class BlackList extends Component {
 
@@ -31,6 +32,8 @@ export default class BlackList extends Component {
             selectMail: "",
             selectPhone: "",
             selectID: "",
+            selectTimeStart: "",
+            selectTimeEnd: "",
 
 
         };
@@ -120,12 +123,14 @@ export default class BlackList extends Component {
     handleremoveSelect = () => {
 
 
-        let self= this
+        let self = this
         this.setState({
             selectMail: '',
             selectID: '',
-            selectPhone: ''
-        },()=>{
+            startTime: '',
+            selectTimeStart: '',
+            selectTimeEnd: ''
+        }, () => {
             self.searchSelect()
         })
 
@@ -141,6 +146,8 @@ export default class BlackList extends Component {
             'listType': 1,//1:合规 2:开户 3:交易
             'email': this.state.selectMail,
             'nationalId': this.state.selectID,
+            'startTime': this.state.selectTimeStart,
+            'endTime': this.state.selectTimeEnd,
             'mobile': this.state.selectPhone,
             'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
         }).then((response) => {
@@ -260,29 +267,20 @@ export default class BlackList extends Component {
     };
 
     onChangeMail = (e) => {
-        // this.state.selectMail = e.target.value
-
         this.setState({
             selectMail: e.target.value,
         });
     }
-
     onChangePhone = (e) => {
-        // this.state.selectMail = e.target.value
-
         this.setState({
             selectPhone: e.target.value,
         });
     }
-
     onChangeID = (e) => {
-        // this.state.selectMail = e.target.value
-
         this.setState({
             selectID: e.target.value,
         });
     }
-
     searchSelect = () => {
         let self = this
         console.log('hcia self.state.nowKey', self.state.nowKey)
@@ -295,6 +293,31 @@ export default class BlackList extends Component {
         if (self.state.nowKey == 3) {
             this.requestPageC()//1:合规 2:开户 3:交易
         }
+    }
+
+    onChangeDate = (value, dateString) => {
+    }
+
+    onOk = (value) => {
+        console.log('hcia', 'onOk: ', value);
+
+
+        var selectTimeStart = value[0].unix()+'000'
+        //1545275083
+        //26582400000
+        //27187200000
+        var selectTimeEnd = value[1].unix()+'000'
+
+        console.log('hcia selectTimeStart' , selectTimeStart)
+        console.log('hcia selectTimeEnd' , selectTimeEnd)
+
+        //1545448544000
+        //1234567890123
+        this.setState({
+            selectTimeStart: selectTimeStart,
+            selectTimeEnd: selectTimeEnd,
+
+        });
     }
 
     render() {
@@ -330,6 +353,14 @@ export default class BlackList extends Component {
                             <Input onChange={this.onChangeID} style={{marginBottom: 5}} placeholder="身份证号"/>
                             <Input onChange={this.onChangeAccount} style={{marginBottom: 5}} placeholder="账户"/>
                             <Input onChange={this.onChangeKeyWord} style={{marginBottom: 5}} placeholder="关键词"/>
+                            <RangePicker
+                                showTime={{format: 'HH:mm'}}
+                                format="YYYY-MM-DD HH:mm"
+                                placeholder={['Start Time', 'End Time']}
+                                onChange={this.onChangeDate}
+                                onOk={this.onOk}
+                            />
+
                             <Button onClick={() => this.searchSelect()} style={{marginTop: 10}} type="primary"
                                     icon="search">Search</Button>
 
