@@ -56,7 +56,19 @@ export default class CustomerSummary extends Component {
 				title: '开户状态',
 				dataIndex: '开户状态',
 				key: '开户状态',
-				render: (text, record) => (<span>{record.activeFlag}</span>),
+				render: (text, record) => (<span>已开户</span>),
+			},
+			{
+				title: '账户类型',
+				dataIndex: '账户类型',
+				key: '账户类型',
+				render: (text, record) => (<span>{record.accountType}</span>),
+			}, {
+				title: '交易账号',
+				dataIndex: '交易账号',
+				key: '交易账号',
+				render: (text, record) => (
+					<span>{record.accountNo}</span>),
 			}, {
 				title: '最近登录时间',
 				dataIndex: '最近登录时间',
@@ -66,13 +78,13 @@ export default class CustomerSummary extends Component {
 				title: '客诉次数',
 				dataIndex: '客诉次数',
 				key: '客诉次数',
-				render: (text, record) => (<span>{record.operator}</span>),
+				render: (text, record) => (<span>{record.complaintNum}</span>),
 			}, {
 				title: '回访次数',
 				dataIndex: '回访次数',
 				key: '回访次数',
 				render: (text, record) => (
-					<span>{record.comment}</span>),
+					<span>{record.commentNum}</span>),
 			}, {
 				title: '备注信息',
 				dataIndex: '备注信息',
@@ -90,13 +102,7 @@ export default class CustomerSummary extends Component {
 				dataIndex: '操作人',
 				key: '操作人',
 				render: (text, record) => (
-					<span>{record.comment}</span>),
-			}, {
-				title: '操作人',
-				dataIndex: '操作人',
-				key: '操作人',
-				render: (text, record) => (
-					<span>{record.comment}</span>),
+					<span>{record.operator}</span>),
 			}, {
 				title: '业务操作',
 				dataIndex: '业务操作',
