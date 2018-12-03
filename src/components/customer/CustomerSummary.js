@@ -254,6 +254,9 @@ export default class CustomerSummary extends Component {
 		};
 		const { switcherOn, background } = this.state;
 
+		const hideStyle = {
+			visibility: "hidden"
+		};
 		return (
 
 
@@ -292,6 +295,7 @@ export default class CustomerSummary extends Component {
 					onClick={() => this.handleremoveList()}
 					disabled={!hasSelected}
 					loading={loading}
+					style = {hideStyle}
 				>
 					批量移除
                             </Button>
