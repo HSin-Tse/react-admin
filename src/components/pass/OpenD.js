@@ -595,7 +595,7 @@ class PassOpenD extends Component {
 
                         <Col md={8}>
                             <Card className="gutter-box" bordered={true} bodyStyle={{padding: 0}}>
-                                <div>
+                                <div >
                                     <img
                                         onClick={() => this.openGallery(this.state.recordData.idcard_0)}
                                         alt="example" width="100%"
@@ -626,7 +626,7 @@ class PassOpenD extends Component {
                         <Col md={8}>
                             <Card className="gutter-box" bordered={true} bodyStyle={{padding: 0}}>
                                 <div>
-                                    <img
+                                    <img id="idcard_2"
                                         onClick={() => this.openGallery(this.state.recordData.idcard_2)}
                                         alt="example" width="100%"
                                         src={this.state.recordData.idcard_2}/>
@@ -989,22 +989,32 @@ class PassOpenD extends Component {
 
         // html2canvas(document.getElementById('openD'), { letterRendering: 1, allowTaint : true, onrendered : function (canvas) { } });
 
+        const imgArr = [];
 
+        // const el = document.querySelector('#test')
+        // el.scrollIntoView()
+        // setTimeout(function () {
+        //     html2canvas(el, {
+        //         onrendered: function (canvas) {
+        //             document.body.appendChild(canvas)
+        //         },
+        //         useCORS: true
+        //     })
+        // }, 10)
+        ///
+        // var img = document.getElementById('idcard_2');
+        // img.crossOrigin = "http://mobile.nooko.cn:9080";
         const input = document.getElementById('openD');
         console.log('hcia input', input)
         html2canvas(input,
             {
-                scale: 2,
-                allowTainft: true,
-                useCORS: true,
-                proxy:'',
-                // useCORS:true,
-                onrendered:  (canvas) => {
-                    // var img = canvas.toDataURL();
-                    // $('#calendar_to_canvas').attr('src', img);
-                }
+                scale: 4,
+                logging: false,
+                imageTimeout: 60000,
+                useCORS: true
 
             })
+
             .then((canvas) => {
                 var contentWidth = canvas.width;
                 var contentHeight = canvas.height;
@@ -1036,7 +1046,7 @@ class PassOpenD extends Component {
                         }
                     }
                 }
-                pdf.save(`user.pdf`);
+                pdf.save(this.state.recordData.cnName + `user.pdf`);
             })
         ;
     }
