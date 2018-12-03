@@ -29,6 +29,8 @@ export default class BlackList extends Component {
             loadingB: false,
             loadingC: false,
             selectMail: "",
+            selectPhone: "",
+            selectID: "",
 
 
         };
@@ -115,15 +117,18 @@ export default class BlackList extends Component {
 
     };
 
-    handleremoveList = () => {
-        console.log('hcia selectedRowKeys', this.state.selectedRowKeys)
-        // window.Axios.post('auth/removeBlackUser', {
-        //     'id': record.id//1:合规 2:开户 3:交易
-        // }).then((response) => {
-        //     message.success('操作成功')
-        // }).catch(function (error) {
-        //     console.log(error);
-        // });
+    handleremoveSelect = () => {
+
+
+        let self= this
+        this.setState({
+            selectMail: '',
+            selectID: '',
+            selectPhone: ''
+        },()=>{
+            self.searchSelect()
+        })
+
 
     };
     requestPageA = () => {
@@ -135,6 +140,8 @@ export default class BlackList extends Component {
             pageNo: this.state.current,
             'listType': 1,//1:合规 2:开户 3:交易
             'email': this.state.selectMail,
+            'nationalId': this.state.selectID,
+            'mobile': this.state.selectPhone,
             'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
         }).then((response) => {
             self.setState({
@@ -264,13 +271,21 @@ export default class BlackList extends Component {
         // this.state.selectMail = e.target.value
 
         this.setState({
-            selectMail: e.target.value,
+            selectPhone: e.target.value,
+        });
+    }
+
+    onChangeID = (e) => {
+        // this.state.selectMail = e.target.value
+
+        this.setState({
+            selectID: e.target.value,
         });
     }
 
     searchSelect = () => {
         let self = this
-        console.log('hcia self.state.nowKey' , self.state.nowKey)
+        console.log('hcia self.state.nowKey', self.state.nowKey)
         if (self.state.nowKey == 1) {
             this.requestPageA()//1:合规 2:开户 3:交易
         }
@@ -307,14 +322,14 @@ export default class BlackList extends Component {
                     <div>
 
                         <Card title="當前表搜索"
-                              extra={<Button type="primary" onClick={() => this.handleremoveList()}
+                              extra={<Button type="primary" onClick={() => this.handleremoveSelect()}
                               >清除條件</Button>}
                         >
                             <Input onChange={this.onChangeMail} style={{marginBottom: 5}} placeholder="邮箱"/>
-                            <Input onChange={this.onChangePhone}  style={{marginBottom: 5}} placeholder="手机号"/>
-                            <Input onChange={this.onChangeID}  style={{marginBottom: 5}} placeholder="身份证号"/>
-                            <Input onChange={this.onChangeAccount}  style={{marginBottom: 5}} placeholder="账户"/>
-                            <Input onChange={this.onChangeKeyWord}  style={{marginBottom: 5}} placeholder="关键词"/>
+                            <Input onChange={this.onChangePhone} style={{marginBottom: 5}} placeholder="手机号"/>
+                            <Input onChange={this.onChangeID} style={{marginBottom: 5}} placeholder="身份证号"/>
+                            <Input onChange={this.onChangeAccount} style={{marginBottom: 5}} placeholder="账户"/>
+                            <Input onChange={this.onChangeKeyWord} style={{marginBottom: 5}} placeholder="关键词"/>
                             <Button onClick={() => this.searchSelect()} style={{marginTop: 10}} type="primary"
                                     icon="search">Search</Button>
 
