@@ -306,7 +306,6 @@ requestUserCommentList = () =>{
 				fixed: '其他',
 				width: 300,
 				align:'center',
-				fixed: 'right',
 				render: (text, record) => (
 					<div>
 						{/* <span className="ant-divider" />
