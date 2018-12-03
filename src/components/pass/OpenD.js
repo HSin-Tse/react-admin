@@ -996,9 +996,12 @@ class PassOpenD extends Component {
             {
                 scale: 2,
                 allowTainft: true,
+                useCORS: true,
+                proxy:'',
                 // useCORS:true,
-                onrendered: function (canvas) {
-                    
+                onrendered:  (canvas) => {
+                    // var img = canvas.toDataURL();
+                    // $('#calendar_to_canvas').attr('src', img);
                 }
 
             })
