@@ -78,18 +78,6 @@ export default class Basic extends Component {
                 render: (text, record) => (
                     <span>{record.netEquity}</span>),
             }, {
-                title: '操作',
-                key: 'action',
-                // fixed: 'right',
-                // width: 100,
-                render: (text, record) => (
-                    <div>
-                        <span className="ant-divider"/>
-                        <Button className="ant-dropdown-link"
-                                onClick={() => this.handleEdit(record)}>{record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'}</Button>
-                    </div>
-                ),
-            }, {
                 title: '当前状态',
                 dataIndex: '当前状态',
                 key: '当前状态',
@@ -115,6 +103,23 @@ export default class Basic extends Component {
                 key: '操作人',
                 render: (text, record) => (
                     <span>{record.operator}</span>)
+            }, {
+                title: '操作',
+                fixed: 'right',
+                width: 200,
+                key: 'action',
+                // fixed: 'right',
+                // width: 100,
+                render: (text, record) => (
+                    <div>
+                        <span className="ant-divider"/>
+                        <Button className="ant-dropdown-link"
+                                onClick={() => this.handleEdit(record)}>{record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'}</Button>    <Button className="ant-dropdown-link"
+                                onClick={() => this.handleEdit(record)}>详情</Button>
+
+
+                    </div>
+                ),
             }];
         this.requestPage(1)
     }
