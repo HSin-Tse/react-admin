@@ -323,13 +323,7 @@ export default class BlackList extends Component {
         console.log('hcia selectTimeStart' , selectTimeStart)
         console.log('hcia selectTimeEnd' , selectTimeEnd)
 
-        //1545448544000
-        //1234567890123
-        //26582400000
-        //1546314526000
-        //1546314526000
-        //1546746108000
-        //1465816710020
+
         this.setState({
             selectTimeStart: selectTimeStart,
             selectTimeEnd: selectTimeEnd,
