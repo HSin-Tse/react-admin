@@ -710,7 +710,9 @@ class PassOpenD extends Component {
                                         onClick={() => this.openOK()}>开户通过</Button>
                                 <Button disabled={!this.state.isNeedSave}
                                         onClick={() => this.saveData() || this.state.recordData.status != 0}>保存客戶信息</Button>
-                                {/*<Button disabled={!this.state.changeNoteB} onClick={() => this.saveNote()}>保存备注</Button>*/}
+
+                                <Button onClick={() => this.saveNote()}>下载资料</Button>
+
                                 <Button disabled={this.state.isNeedSave || this.state.recordData.status != 0}
                                         loading={this.state.iconcanLoading}
                                         onClick={() => this.saveReject()}>拒绝</Button>
@@ -972,6 +974,13 @@ class PassOpenD extends Component {
     };
     saveData = () => {
         this.showModal()
+    };
+
+    saveNote = () => {
+
+        console.log('hcia saveNote')
+
+
     };
 
 
