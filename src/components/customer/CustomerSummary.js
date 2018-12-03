@@ -286,7 +286,7 @@ export default class CustomerSummary extends Component {
 
 					</div>
 				</div>
-				<BreadcrumbCustom first="用戶管理" second="黑名單" />
+				<BreadcrumbCustom first="用戶管理" second="用戶總表" />
 				<Button
 					type="primary"
 					onClick={() => this.handleremoveList()}
