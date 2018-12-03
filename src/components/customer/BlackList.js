@@ -119,6 +119,29 @@ export default class BlackList extends Component {
         });
 
     };
+    handleremoveList = () => {
+
+        let self = this
+        window.Axios.post('auth/removeBlackUserBulk', {
+            'idList': this.state.selectedRowKeys//1:合规 2:开户 3:交易
+        }).then((response) => {
+
+            message.success('操作成功')
+            if (self.state.nowKey == 1) {
+                this.requestPageA()//1:合规 2:开户 3:交易
+            }
+            if (self.state.nowKey == 2) {
+                this.requestPageB()//1:合规 2:开户 3:交易
+            }
+            if (self.state.nowKey == 3) {
+                this.requestPageC()//1:合规 2:开户 3:交易
+            }
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+    };
 
     handleremoveSelect = () => {
 
