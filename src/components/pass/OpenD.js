@@ -298,7 +298,7 @@ class PassOpenD extends Component {
 
                     </Row>
                 </Card>
-                <Card title="IX账户设置"  bordered={true} style={{marginTop: 30}}>
+                <Card title="IX账户设置" bordered={true} style={{marginTop: 30}}>
 
                     <Row>
                         <Col>
@@ -692,7 +692,7 @@ class PassOpenD extends Component {
 
                         <Col md={24}>
                             <div style={{display: 'flex', minHeight: 40}}>
-                                <TextArea  value={this.state.changeNoteV} rows={4} onChange={this.changeNote}/>
+                                <TextArea value={this.state.changeNoteV} rows={4} onChange={this.changeNote}/>
                             </div>
                         </Col>
                         {/*<Input defaultValue={this.state.recordData.lastNameCn}*/}
@@ -705,12 +705,14 @@ class PassOpenD extends Component {
                         <Card style={{marginTop: 10}}>
 
                             <div>
-                                <Button disabled={this.state.isNeedSave || this.state.recordData.status !=0} loading={this.state.iconLoading}
+                                <Button disabled={this.state.isNeedSave || this.state.recordData.status != 0}
+                                        loading={this.state.iconLoading}
                                         onClick={() => this.openOK()}>开户通过</Button>
                                 <Button disabled={!this.state.isNeedSave}
-                                        onClick={() => this.saveData() || this.state.recordData.status !=0}>保存客戶信息</Button>
+                                        onClick={() => this.saveData() || this.state.recordData.status != 0}>保存客戶信息</Button>
                                 {/*<Button disabled={!this.state.changeNoteB} onClick={() => this.saveNote()}>保存备注</Button>*/}
-                                <Button disabled={this.state.isNeedSave  || this.state.recordData.status !=0} loading={this.state.iconcanLoading}
+                                <Button disabled={this.state.isNeedSave || this.state.recordData.status != 0}
+                                        loading={this.state.iconcanLoading}
                                         onClick={() => this.saveReject()}>拒绝</Button>
                             </div>
                         </Card>
@@ -1149,8 +1151,6 @@ class PassOpenD extends Component {
         var time1 = date.getTime();
         var time2 = date.valueOf();
         var time3 = Date.parse(date);
-        console.log('hcia', time1);//1398250549123
-        console.log('hcia', time2);//1398250549123
         console.log('hcia', time3);//1398250549000
 
         this.state.waitUpdate.dateOfBirth = time1;
