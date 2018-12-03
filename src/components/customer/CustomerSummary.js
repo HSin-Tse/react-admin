@@ -218,71 +218,94 @@ requestUserCommentList = () =>{
 				title: '姓名',
 				dataIndex: '姓名',
 				key: '姓名',
+				align: 'center',
+				width: 100,
 				render: (text, record) => (
 					<span>{record.name}</span>),
 			}, {
 				title: '开户状态',
 				dataIndex: '开户状态',
 				key: '开户状态',
+				width: 100,
+
 				render: (text, record) => (<span>已开户</span>),
 			},
 			{
 				title: '账户类型',
 				dataIndex: '账户类型',
 				key: '账户类型',
+				width: 100,
+
 				render: (text, record) => (<span>{record.accountType}</span>),
 			}, {
 				title: '交易账号',
 				dataIndex: '交易账号',
 				key: '交易账号',
+				width: 300,
 				render: (text, record) => (
 					<span>{record.accountNo}</span>),
 			}, {
 				title: '最近登录时间',
 				dataIndex: '最近登录时间',
 				key: '最近登录时间',
+				width: 300,
 				render: (text, record) => (<span>{record.date}</span>),
 			}, {
 				title: '客诉次数',
 				dataIndex: '客诉次数',
 				key: '客诉次数',
+				width: 100,
 				render: (text, record) => (<span>{record.complaintNum}</span>),
 			}, {
 				title: '回访次数',
 				dataIndex: '回访次数',
 				key: '回访次数',
+				width: 100,
 				render: (text, record) => (
 					<span>{record.commentNum}</span>),
 			}, {
 				title: '备注信息',
 				dataIndex: '备注信息',
 				key: '备注信息',
+				width: 100,
 				render: (text, record) => (
 					<span>{record.comment}</span>),
 			}, {
 				title: '查看',
 				dataIndex: '查看',
 				key: '查看',
+				width: 300,
+				align: 'center',
 				render: (text, record) => (
-					<span>{record.comment}</span>),
+					<div>
+						<Button className="ant-dropdown-link" onClick={() => this.goToUserAccountInfo()}>開戶信息</Button>
+						<Button className="ant-dropdown-link" onClick={() => this.goToUserInfo()}>行為信息</Button>
+					</div>
+					)
 			}, {
 				title: '操作人',
 				dataIndex: '操作人',
 				key: '操作人',
+				width: 100,
 				render: (text, record) => (
 					<span>{record.operator}</span>),
 			}, {
 				title: '业务操作',
 				dataIndex: '业务操作',
 				key: '业务操作',
+				width: 300,
 				render: (text, record) => (
-					<span>{record.comment}</span>),
+					<div>
+						<Button className="ant-dropdown-link">凍結</Button>
+						<Button className="ant-dropdown-link">手機號解綁</Button>
+					</div>
+					),
 			},{
 				title: '其他',
 				key: '其他',
 				fixed: '其他',
-				width: 100,
-				fixed: 'right',
+				width: 300,
+				align:'center',
 				render: (text, record) => (
 					<div>
 						{/* <span className="ant-divider" />
@@ -323,6 +346,13 @@ requestUserCommentList = () =>{
 		if (self.state.nowKey == 1) {
 			this.requestData()
 		}
+	}
+	goToUserInfo = () => {
+		this.props.history.push('/app/customer/CustomerUserInfo')
+
+	}
+	goToUserAccountInfo = () => {
+		console.log('goToUserAccountInfo')
 	}
 
 	render() {
@@ -385,7 +415,7 @@ requestUserCommentList = () =>{
 					rowSelection={rowSelection}
 					columns={this.columns}
 					dataSource={this.state.bklistA}
-					scroll={{ x: 1300 }}
+					scroll={{ x: 2500 }}
 					loading={this.state.loading}
 					pagination={{ // 分页
 						total: this.state.totalpageA * this.state.pgsize,
