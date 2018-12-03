@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, Icon, Input} from 'antd';
+import {Button, Table, Input} from 'antd';
 
 
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
@@ -35,90 +35,86 @@ export default class Basic extends Component {
     componentDidMount() {
         this.columns = [
             {
-                title: '手机号',
-                dataIndex: 'phoneNumber',
-                key: 'phoneNumber',
+                title: '客户姓名',
                 fixed: 'left',
-                width:150,
-                onFilter: (value, record) => {
-                    // if (!record.phoneNumber)
-                    //     return false
-                    // return record.phoneNumber.includes(value)
-
-                    return true
-
-
-
-                },
-
-                filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
-                    <div className="custom-filter-dropdown">
-                        <Input
-                            ref={ele => this.searchInput = ele}
-                            placeholder="Search name"
-                            value={selectedKeys[0]}
-                            onChange={e => setSelectedKeys(e.target.value ? [e.target.value] : [])}
-                            onPressEnter={this.handleSearch(selectedKeys, confirm)}
-                        />
-                        <Button type="primary" onClick={this.handleSearch(selectedKeys, confirm)}>Search</Button>
-                        <Button onClick={this.handleReset(clearFilters)}>Reset</Button>
-                    </div>
-                ),
-                render: (text, record) => (
-                    <span>{record.phoneNumber}</span>),
-            }, {
-                title: '姓名',
+                width: 100,
                 dataIndex: 'name',
                 key: 'name',
                 render: (text, record) => (
-                    <span>{record.cnName + record.lastName + record.firstName}</span>),
+                    <span>{record.name}</span>),
             }, {
-                title: '申请序号',
+                title: '账号',
                 dataIndex: '申请序号',
                 key: '申请序号',
-                render: (text, record) => (<span>{record.id}</span>),
+                render: (text, record) => (<span>{record.accountNo}</span>),
             }, {
                 title: '账号类型',
                 dataIndex: '账号类型',
                 key: '账号类型',
                 render: (text, record) => (
-                    <span>{record.accountType}</span>),
+                    <span>{record.broker}</span>),
             }, {
-                title: '申请时间',
-                dataIndex: '申请时间',
-                key: '申请时间',
+                title: '开户时间',
+                dataIndex: '开户时间',
+                key: '开户时间',
                 render: (text, record) => (
-                    <span>{this.timestampToTime(record.updateDate)}</span>),
+                    <span>{record.date}</span>),
             }, {
-                title: '审核状态',
-                dataIndex: '审核状态',
-                width:100,
-                filters: [
-                    {text: '审核中', value: 0},
-                    {text: '审核通过', value: 1},
-                    {text: '审核拒绝', value: 2},
-                ],
-                onFilter: (value, record) => record.status == value,
-                key: '审核状态',
+                title: '保证金占比',
+                dataIndex: '保证金占比',
+                key: '保证金占比',
                 render: (text, record) => (
-                    <span>{record.status == 0 ? '审核中' : (record.status == 1) ? '审核通过' : '审核拒绝'}</span>),
+                    <span>{record.marginLevel}</span>)
             }, {
-                title: '处理备注',
-                dataIndex: '处理备注',
-                key: '处理备注',
+                title: '浮动余额',
+                dataIndex: '浮动余额',
+                key: '浮动余额',
                 render: (text, record) => (
-                    <span>{record.comment}</span>),
+                    <span>{record.cashBalance}</span>),
+            }, {
+                title: '账户净值',
+                dataIndex: '账户净值',
+                key: '账户净值',
+                render: (text, record) => (
+                    <span>{record.netEquity}</span>),
             }, {
                 title: '操作',
                 key: 'action',
-                fixed: 'right',
-                width: 100,
+                // fixed: 'right',
+                // width: 100,
                 render: (text, record) => (
                     <div>
                         <span className="ant-divider"/>
-                        <Button className="ant-dropdown-link" onClick={() => this.handleEdit(record)}>{record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'}</Button>
+                        <Button className="ant-dropdown-link"
+                                onClick={() => this.handleEdit(record)}>{record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'}</Button>
                     </div>
                 ),
+            }, {
+                title: '当前状态',
+                dataIndex: '当前状态',
+                key: '当前状态',
+                render: (text, record) => (
+                    <span>{record.accountStatus == 1 ? '正常' : (record.accountStatus == 2) ? '禁止登陆' : '禁止交易'}</span>
+                )
+
+            }, {
+                title: '备注',
+                dataIndex: '备注',
+                key: '备注',
+                render: (text, record) => (
+                    <span>{record.comment}</span>)
+            }, {
+                title: '刷新时间',
+                dataIndex: '刷新时间',
+                key: '刷新时间',
+                render: (text, record) => (
+                    <span>{record.lastUpdateDate}</span>)
+            }, {
+                title: '操作人',
+                dataIndex: '操作人',
+                key: '操作人',
+                render: (text, record) => (
+                    <span>{record.operator}</span>)
             }];
         this.requestPage(1)
     }
@@ -150,7 +146,7 @@ export default class Basic extends Component {
             }
         );
         console.log('hcia pg', pg)
-        window.Axios.post('open/getOpenApplyList', {
+        window.Axios.post('star/getStarLiveAccountList', {
             'pageSize': this.state.pgsize,
             'pageNo': pg,
         }).then(function (response) {
@@ -186,7 +182,7 @@ export default class Basic extends Component {
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
-                <div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>
+                {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
 
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
 
