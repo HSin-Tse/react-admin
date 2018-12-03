@@ -117,6 +117,29 @@ export default class WhiteList extends Component {
 
 
     };
+    addWhite = () => {
+
+
+
+        let self = this
+        window.Axios.post('auth/addWhiteUser', {
+            pageNo: this.state.current,
+            'name': 'test',
+            'mobile': '11111111',
+            'content': '1111111111',
+        }).then((response) => {
+            console.log('hcia response' , response)
+            self.searchSelect()
+
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+
+    };
+
+
     requestPageA = () => {
         let self = this
         self.setState({
@@ -200,8 +223,6 @@ export default class WhiteList extends Component {
         });
     }
     searchSelect = () => {
-        let self = this
-        console.log('hcia self.state.nowKey', self.state.nowKey)
         this.requestPageA()//1:合规 2:开户 3:交易
 
     }
@@ -283,8 +304,10 @@ export default class WhiteList extends Component {
                 </div>
                 <BreadcrumbCustom first="用戶管理" second="白名單"/>
 
-                <Card>
-
+                <Card
+                    title={<div>當前表搜索</div>}
+                    extra={<Button onClick={() => this.addWhite()}>新增白名单用户</Button>}
+                >
                     <Button
                         type="primary"
                         onClick={() => this.handleremoveList()}
