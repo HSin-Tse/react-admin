@@ -995,10 +995,10 @@ class PassOpenD extends Component {
         html2canvas(input,
             {
                 scale: 2,
-                allowTaint: true,
-                useCORS:true,
-                onrendered: function (canvas) {
-                }
+                // allowTainft: true,
+                // useCORS:true,
+
+                
 
             })
             .then((canvas) => {
