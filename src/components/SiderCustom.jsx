@@ -7,6 +7,7 @@ import { withRouter } from 'react-router-dom';
 import routes from '../routes/config';
 import routesConfigadmin from '../routes/configadmin';
 import SiderMenu from './SiderMenu';
+import avater from "../style/imgs/ixlogo.png";
 
 const { Sider } = Layout;
 
@@ -72,11 +73,9 @@ class SiderCustom extends Component {
 
         if( '超级管理员' == localStorage.getItem('displayName')){
             this.setState({config: routes});
-
         }else{
-
-            this.setState({config: routesConfigadmin});
-
+            // this.setState({config: routesConfigadmin});
+            this.setState({config: routes});
         }
         this.setState({displayName: localStorage.getItem('displayName')});
 
@@ -108,7 +107,9 @@ class SiderCustom extends Component {
             >
 
                 <div className="logo">
-                    
+                    <img  style={{height : 50,width:50}} src={avater} alt="头像" />
+                   CRM操作系统v1.0
+
                 </div>
                 <SiderMenu
                     menus={this.state.config.menus}

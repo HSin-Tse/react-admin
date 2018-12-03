@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import {DatePicker, Input, Modal, Button, Table, message, Card, Layout, Icon} from 'antd';
+import {DatePicker, Input, Modal, Button, Table, message, Card, Layout, Icon, Select, Col, Row} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {ThemePicker} from '@/components/widget';
 import classNames from "classnames";
 
 const {RangePicker} = DatePicker;
+const {TextArea} = Input;
 
 export default class WhiteList extends Component {
 
@@ -18,11 +19,15 @@ export default class WhiteList extends Component {
             totalpageA: 0,
             pgsize: 40,
             loadingA: false,
+            showModaladdWhite: false,
             selectMail: "",
             selectPhone: "",
             selectID: "",
             selectTimeStart: "",
             selectTimeEnd: "",
+            NameCn: "",
+            phoneCn: "",
+            changeNoteV: "",
 
 
         };
@@ -117,27 +122,25 @@ export default class WhiteList extends Component {
 
 
     };
-    addWhite = () => {
-
-
-
-        let self = this
-        window.Axios.post('auth/addWhiteUser', {
-            pageNo: this.state.current,
-            'name': 'test',
-            'mobile': '11111111',
-            'content': '1111111111',
-        }).then((response) => {
-            console.log('hcia response' , response)
-            self.searchSelect()
-
-
-        }).catch(function (error) {
-            console.log(error);
-        });
-
-
-    };
+    // addWhite = () => {
+    //
+    //
+    //     let self = this
+    //     window.Axios.post('auth/addWhiteUser', {
+    //         name: this.state.NameCn,
+    //         mobile: this.state.phoneCn,
+    //         content: this.state.changeNoteV,
+    //     }).then((response) => {
+    //         console.log('hcia response', response)
+    //         self.searchSelect()
+    //
+    //
+    //     }).catch(function (error) {
+    //         console.log(error);
+    //     });
+    //
+    //
+    // };
 
 
     requestPageA = () => {
@@ -183,6 +186,12 @@ export default class WhiteList extends Component {
         })
     }
 
+    onChangelastNameCn = (e) => {
+        this.state.NameCn = e.target.value
+    }
+    onChangePhone = (e) => {
+        this.state.phoneCn = e.target.value
+    }
 
     onSelectChange = (selectedRowKeys) => {
         console.log('hcia', 'selectedRowKeys changed: ', selectedRowKeys);
@@ -212,11 +221,7 @@ export default class WhiteList extends Component {
             selectMail: e.target.value,
         });
     }
-    onChangePhone = (e) => {
-        this.setState({
-            selectPhone: e.target.value,
-        });
-    }
+
     onChangeID = (e) => {
         this.setState({
             selectID: e.target.value,
@@ -229,7 +234,15 @@ export default class WhiteList extends Component {
 
     onChangeDate = (value, dateString) => {
     }
+    changeNote = (e) => {
+        console.log('hcia e' , e)
 
+
+        this.setState({
+            changeNoteV: e.target.value,
+
+        });
+    }
     onOk = (value) => {
         console.log('hcia', 'onOk: ', value);
 
@@ -251,6 +264,56 @@ export default class WhiteList extends Component {
         });
     }
 
+
+    showModal = () => {
+        this.setState({
+            showModaladdWhite: true,
+        });
+    }
+
+    handleOk = (e) => {
+        // this.addWhite()
+        let self = this
+        window.Axios.post('auth/addWhiteUser', {
+            name: this.state.NameCn,
+            mobile: this.state.phoneCn,
+            content: this.state.changeNoteV,
+        }).then((response) => {
+            console.log('hcia response', response)
+            self.searchSelect()
+
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+        // this.setState({
+        //     showModaladdWhite: false,
+        // });
+    }
+    handleremoveList = () => {
+
+        let self = this
+        window.Axios.post('auth/removeWhiteUserBulk', {
+            'idList': this.state.selectedRowKeys//1:合规 2:开户 3:交易
+        }).then((response) => {
+
+            message.success('操作成功')
+                this.requestPageA()//1:合规 2:开户 3:交易
+
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+    };
+
+    handleCancel = (e) => {
+        console.log(e);
+        this.setState({
+            showModaladdWhite: false,
+        });
+    }
+
     render() {
 
         const {loading, selectedRowKeys} = this.state;
@@ -265,10 +328,47 @@ export default class WhiteList extends Component {
 
 
             <div>
+                <Modal
+                    title="新增白名单成员"
+                    visible={this.state.showModaladdWhite}
+                    onOk={this.handleOk}
+                    onCancel={this.handleCancel}
+                >
+
+                    <Card bordered={true}>
+
+
+                        <div style={{display: 'flex', minHeight: 40}}>
+                            <span style={{width: 120}}>*用户姓名：</span>
+                            <Input defaultValue={this.state.NameCn}
+                                   onChange={this.onChangelastNameCn}
+                                   style={{width: 120}} placeholder="Basic usage" tagkey="lastNameCn"
+                                   sdsd={'dd'}/>
+                        </div>
+
+                        <div style={{display: 'flex', minHeight: 40}}>
+                            <span style={{minWidth: 120}}>*手机号码：</span>
+                            <Input defaultValue={this.state.phoneCn}
+                                   onChange={this.onChangePhone}
+                                   style={{width: 120}} placeholder="Basic usage"/>
+                        </div>
+
+
+                        <div style={{display: 'flex', minHeight: 40}}>
+                            <span style={{minWidth: 100}}>操作备注</span>
+
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <TextArea value={this.state.changeNoteV} rows={4} onChange={this.changeNote}/>
+                            </div>
+                        </div>
+
+                    </Card>
+                </Modal>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 <div>nowKey :{this.state.nowKey}</div>
                 <div>selectMail :{this.state.selectMail}</div>
                 <div>selectPhone :{this.state.selectPhone}</div>
+                <div>changeNoteV :{this.state.changeNoteV}</div>
                 {/*<ThemePicker />*/}
                 <div className={classNames('switcher dark-white', {active: switcherOn})}>
                 <span className="sw-btn dark-white" onClick={this._switcherOn}>
@@ -305,8 +405,8 @@ export default class WhiteList extends Component {
                 <BreadcrumbCustom first="用戶管理" second="白名單"/>
 
                 <Card
-                    title={<div>當前表搜索</div>}
-                    extra={<Button onClick={() => this.addWhite()}>新增白名单用户</Button>}
+                    title={<div>白名单表</div>}
+                    extra={<Button onClick={() => this.showModal()}>新增白名单用户</Button>}
                 >
                     <Button
                         type="primary"
