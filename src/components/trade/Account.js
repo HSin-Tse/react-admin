@@ -24,6 +24,7 @@ export default class Basic extends Component {
             forbiddenValue: 0,
             current: 0,
             pgsize: 10,
+            loadFor: false,
             suspend_reason_type: []
 
         };
@@ -240,15 +241,10 @@ export default class Basic extends Component {
 
         }).catch(function (error) {
             console.log(error);
-            // message.warn(error);
         });
-        // this.props.history.push('/app/pass/passopen/detail' + record.id)
     };
     handleChange = (value, record) => {
         let self = this
-
-        // self.showModalOP()
-
         self.setState({
                 modeState: value,
                 opRecord: record
@@ -267,10 +263,6 @@ export default class Basic extends Component {
             }
         );
     };
-    handleEdit = (record) => {
-        let self = this
-        self.showModalOP()
-    };
 
 
     timestampToTime = (timestamp) => {
@@ -288,7 +280,6 @@ export default class Basic extends Component {
     };
 
     requestPage = () => {
-
 
         let self = this
         self.setState({
@@ -311,7 +302,6 @@ export default class Basic extends Component {
 
         }).catch(function (error) {
             console.log(error);
-            // message.warn(error);
         });
     }
 
@@ -335,11 +325,12 @@ export default class Basic extends Component {
         });
     }
     handleOk = () => {
-//1:正常 2:禁止登陆 3:禁止交易
-
         var mStatus = this.state.modeState == '正常' ? 1 : this.state.modeState == '禁止登陆' ? 2 : 3;
         // var reasonType = mStatus ==2?
         let self = this;
+        self.setState({
+            loadFor:true
+        })
         window.Axios.post('star/updateStarLiveAccount', {
             'id': self.state.opRecord.id,
             'status': mStatus,
@@ -348,6 +339,7 @@ export default class Basic extends Component {
             console.log(response);
             self.setState({
                 visibleOpM: false,
+                loadFor: false,
             }, () => {
                 self.state.forbiddenValue = 0
                 self.requestPage()
@@ -367,8 +359,7 @@ export default class Basic extends Component {
             visible: false,
             visibleOpM: false,
         });
-    }
-
+    };
 
     render() {
         return (
@@ -382,7 +373,7 @@ export default class Basic extends Component {
                     visible={this.state.visibleOpM}
                     footer={[
                         <Button key="back" onClick={this.handleCancel}>取消操作</Button>,
-                        <Button key="submit" type="primary" onClick={() => this.handleOk()}>
+                        <Button  loading={this.state.loadFor} key="submit" type="primary" onClick={() => this.handleOk()}>
                             提交
                         </Button>,
                     ]}
@@ -395,7 +386,8 @@ export default class Basic extends Component {
                     <div>
 
                         {this.state.modeState == '禁止登陆' ?
-                            <Select style={{width: 200, marginTop: 20}}  defaultValue='无效的邮箱' onChange={(value) => this.forbitChange(value)}>
+                            <Select style={{width: 200, marginTop: 20}} defaultValue='无效的邮箱'
+                                    onChange={(value) => this.forbitChange(value)}>
                                 {this.state.suspend_reason_type.map(ccty => <Option
                                     value={ccty.value} key={ccty.value}>{ccty.name}</Option>)}
                             </Select> : null}
