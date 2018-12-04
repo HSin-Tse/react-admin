@@ -311,7 +311,7 @@ export default class CustomerSummary extends Component {
 				render: (text, record) => (
 					<div>
 						<Button className="ant-dropdown-link" onClick={() => this.goToUserAccountInfo()}>開戶信息</Button>
-						<Button className="ant-dropdown-link" onClick={() => this.goToUserInfo()}>行為信息</Button>
+						<Button className="ant-dropdown-link" onClick={() => this.goToUserInfo(record.belongUserId)}>行為信息</Button>
 					</div>
 					)
 			}, {
@@ -379,8 +379,8 @@ export default class CustomerSummary extends Component {
 			this.requestData()
 		}
 	}
-	goToUserInfo = () => {
-		this.props.history.push('/app/customer/CustomerUserInfo')
+	goToUserInfo = (belongUserId) => {
+		this.props.history.push('/app/customer/CustomerUserInfo' + belongUserId)
 
 	}
 	goToUserAccountInfo = () => {
