@@ -12,6 +12,8 @@ export default class Basic extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            selectedRowKeys: [],
+
             visible: false,
             visibleOpM: false,
             date: new Date(),
@@ -313,6 +315,30 @@ export default class Basic extends Component {
             this.requestPage()
         })
     }
+    refleshNowpage = () => {
+
+
+        let self = this ;
+        var result=self.state.selectedRowKeys.map(Number);
+
+        window.Axios.post('star/refreshStarLiveAccount', {
+            idList: result,
+        }).then(function (response) {
+            console.log(response);
+            self.setState({
+                visibleOpM: false,
+                loadFor: false,
+            }, () => {
+                self.requestPage()
+            });
+            message.success('操作成功');
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+
+    }
 
     showModal = () => {
         this.setState({
@@ -360,8 +386,21 @@ export default class Basic extends Component {
             visibleOpM: false,
         });
     };
+    onSelectChange = (selectedRowKeys) => {
+        console.log('hcia', 'selectedRowKeys changed: ', selectedRowKeys);
 
+
+        this.setState({selectedRowKeys});
+    }
     render() {
+        const { selectedRowKeys} = this.state;
+
+
+
+        const rowSelection = {
+            selectedRowKeys,
+            onChange: this.onSelectChange,
+        };
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
@@ -411,18 +450,27 @@ export default class Basic extends Component {
                 </Modal>
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
 
-                <Table rowKey="id"
-                       columns={this.columns}
-                       dataSource={this.state.userList}
-                       scroll={{x: 1600}}
-                       bordered
-                       loading={this.state.loading}
-                       pagination={{  // 分页
-                           total: this.state.pgsize * this.state.totalPage,
-                           pageSize: this.state.pgsize,
-                           onChange: this.changePage,
-                       }}
-                />
+                <Card title="交易账户管理"
+                      extra={<Button type="default" onClick={() => this.refleshNowpage()}
+                      >刷新当前页面</Button>}
+                >
+
+                    <Table rowKey="id"
+                           rowSelection={rowSelection}
+
+                           columns={this.columns}
+                           dataSource={this.state.userList}
+                           scroll={{x: 1600}}
+                           bordered
+                           loading={this.state.loading}
+                           pagination={{  // 分页
+                               total: this.state.pgsize * this.state.totalPage,
+                               pageSize: this.state.pgsize,
+                               onChange: this.changePage,
+                           }}
+                    />
+                </Card>,
+
             </div>
 
         )
