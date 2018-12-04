@@ -21,6 +21,7 @@ export default class Basic extends Component {
             searchPhone: '',
             totalPage: 1,
             modeState: 1,
+            current: 0,
             pgsize: 10,
             suspend_reason_type: [{
                 "name": "无效的邮箱",
@@ -207,17 +208,16 @@ export default class Basic extends Component {
                 // width: 100,
                 render: (text, record) => (
                     <div>
-                        <Select value={record.displayStatus} style={{width: 100}} onChange={(value) => this.handleChange(value,record)}>
-                            <Option key ="1"  value="正常">正常</Option>
-                            <Option key ="2"  value="禁止登陆">禁止登陆</Option>
-                            <Option key ="3"  value="禁止交易">禁止交易</Option>
+                        <Select value={record.displayStatus} style={{width: 100}}
+                                onChange={(value) => this.handleChange(value, record)}>
+                            <Option key="1" value="正常">正常</Option>
+                            <Option key="2" value="禁止登陆">禁止登陆</Option>
+                            <Option key="3" value="禁止交易">禁止交易</Option>
 
                             {/*{this.state.suspend_reason_type.map(ccty => <Option*/}
-                                {/*key={ccty.value}>{ccty.name}</Option>)}*/}
+                            {/*key={ccty.value}>{ccty.name}</Option>)}*/}
                         </Select>
                         <span className="ant-divider"/>
-                        <Button className="ant-dropdown-link"
-                                onClick={() => this.handleEdit(record)}>{record.accountStatus == 1 ? '正常' : (record.accountStatus == 2) ? '禁止登陆' : '禁止交易'}</Button>
                     </div>
                 ),
             }];
@@ -246,7 +246,7 @@ export default class Basic extends Component {
                 render: (text, record) => (
                     <span>{record.bkUserName}</span>)
             }];
-        this.requestPage(1)
+        this.requestPage()
     }
 
     timestampToTime = (timestamp) => {
@@ -287,20 +287,21 @@ export default class Basic extends Component {
         });
         // this.props.history.push('/app/pass/passopen/detail' + record.id)
     };
-    handleChange = (value,record) => {
+    handleChange = (value, record) => {
         let self = this
 
         // self.showModalOP()
 
         self.setState({
-            modeState: value
+                modeState: value,
+                opRecord: record
             }, () => {
                 self.showModalOP()
             }
         );
 
-        console.log('hcia value' , value)
-        console.log('hcia record' , record)
+        console.log('hcia value', value)
+        console.log('hcia record', record)
     };
     handleEdit = (record) => {
         let self = this
@@ -322,19 +323,17 @@ export default class Basic extends Component {
         return +str >= 10 ? str : '0' + str
     };
 
-    requestPage = (pg) => {
+    requestPage = () => {
 
 
-        pg = pg - 1
         let self = this
         self.setState({
                 loading: true,
             }
         );
-        console.log('hcia pg', pg)
         window.Axios.post('star/getStarLiveAccountList', {
             'pageSize': self.state.pgsize,
-            'pageNo': pg,
+            'pageNo': self.state.current,
         }).then(function (response) {
             console.log(response);
 
@@ -355,11 +354,9 @@ export default class Basic extends Component {
     changePage = (page) => {
         console.log('hcia page', page)
         this.setState({
-            current: page,
+            current: page-1,
         }, () => {
-
-            this.requestPage(page)
-
+            this.requestPage()
         })
     }
 
@@ -368,33 +365,36 @@ export default class Basic extends Component {
             visible: true,
         });
     }
-
     showModalOP = () => {
         this.setState({
             visibleOpM: true,
         });
     }
-
     handleOk = () => {
+//1:正常 2:禁止登陆 3:禁止交易
 
+        var mStatus = this.state.modeState == '正常' ? 1 : this.state.modeState == '禁止登陆' ? 2 : 3;
+        // var reasonType = mStatus ==2?
         let self = this;
         window.Axios.post('star/updateStarLiveAccount', {
-            'id': 'suspend_reason_type',
-            'status': 'suspend_reason_type',
-            'reasonType': 'suspend_reason_type',
+            'id': self.state.opRecord.id,
+            'status': mStatus,
+            // 'reasonType': 'suspend_reason_type',
         }).then(function (response) {
             console.log(response);
-
+            self.setState({
+                visibleOpM: false,
+            },()=>{
+                self.requestPage()
+            });
+            message.success('操作成功');
 
         }).catch(function (error) {
             console.log(error);
         });
 
-        // self.setState({
-        //     visibleOpM: false,
-        // });
 
-        message.success('操作成功');
+
     }
 
     handleCancel = (e) => {
@@ -413,7 +413,7 @@ export default class Basic extends Component {
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
 
                 <Modal
-                    title={this.state.modeState}
+                    title={this.state.modeState == '正常' ? '恢复正常' : this.state.modeState}
                     onCancel={this.handleCancel}
                     visible={this.state.visibleOpM}
                     footer={[
