@@ -1,320 +1,473 @@
-/* eslint-disable react/sort-comp */
-
 import React, { Component } from 'react';
-import {Col, Card, Row,DatePicker,Input,Modal,Button, Table, Icon,Checkbox} from 'antd';
+import { DatePicker, Input, Modal, Button, Table, Tabs, message, Card, Tag, Layout, Icon } from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
-import axios from 'axios';
-class PotentialUser extends Component {
-	state = { visible: false,modal2Visible:false }
+import { ThemePicker } from '@/components/widget';
+import classNames from "classnames";
+
+const TabPane = Tabs.TabPane;
+const { CheckableTag } = Tag;
+const { RangePicker } = DatePicker;
+
+export default class BlackList extends Component {
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			selectedRowKeys: [],
+			// mTags: [],
+			bklistA: [],
+			bklistB: [],
+			bklistC: [],
+			currentA: 0,//PotentialUser
+			currentB: 0,//SimulatorUser
+			currentC: 0,//IntendingUser
+			totalpageA: 0,
+			totalpageB: 0,
+			totalpageC: 0,
+			nowKey: "1",
+			pgsize: 40,
+			loadingA: false,
+			loadingB: false,
+			loadingC: false,
+			selectMail: "",
+			selectPhone: "",
+			selectID: "",
+			selectTimeStart: "",
+			selectTimeEnd: "",
 
 
- showModal2 = () =>{
-	 this.setState({
-		 modal2Visible: true,
-		 visible: false,
-
-	 });
- }
- showModal = () => {
-	 this.setState({
-		 visible: true,
-		 modal2Visible: false,
-	 });
- }
-
- handleOk = (e) => {
-	 console.log(e);
-	 this.setState({
-		 visible: false,
-		 modal2Visible: false,
-	 });
- }
-
- handleCancel = (e) => {
-	 console.log(e);
-	 this.setState({
-		 visible: false,
-		 modal2Visible: false,
-	 });
- }
+		};
+	}
 
 	componentDidMount() {
-				this.modalColumns = [{
-						title: '時間',
-						dataIndex: 'createDate',
-						key: 'operationDiary_Date',
-						// fixed: 'left',
-						// width: 100,
-						render: (text, record) => (
-								<Button>{record.createDate}</Button>),
-				 },{
- 						title: '狀態',
- 						dataIndex: 'comment',
- 						key: 'operationDiary_Status',
- 						// fixed: 'left',
- 						// width: 100,
-						render: (text, record) => (
-								<Button>{record.comment}</Button>),
- 				 },{
- 						title: '操作人',
- 						dataIndex: 'bkUserName',
- 						key: 'operationDiary_User',
- 						// fixed: 'left',
- 						// width: 100,
-						render: (text, record) => (
-								<Button>{record.bkUserName}</Button>),
- 				 }]
-
-
-		this.editTableType1Columns()
-		//
-        this.requestListData("1")
-		this.requestUserCommentList()
-
-	}
-	editTableType1Columns =() =>{
 		this.columns = [
 			{
-					title: '選擇',
-					dataIndex: 'phoneNumber',
-					key: 'phoneNumber',
-					// fixed: 'left',
-					// width: 100,
-					render: (text, record) => (
-					<Checkbox
-						 // checked={this.state.checked}
-						 // disabled={this.state.disabled}
-						 onChange={this.hasChange}
-					/>),
-			 }
-				,{
-		title: '手机号',
-		dataIndex: 'phoneNumber',
-		key: 'phoneNumber',
-		// fixed: 'left',
-		// width: 100,
-		render: (text, record) => (
-			<Button>{record.mobile}</Button>),
-	 }
-	, {
-		title: '姓名',
-		dataIndex: 'name',
-		key: 'name',
-		render: (text, record) => (
+				title: '手机号',
+				dataIndex: 'phoneNumber',
+				key: 'phoneNumber',
+				width: 150,
+				fixed: 'left',
+				render: (text, record) => (
 
-			<Button>{record.name}</Button>),
-	}, {
-		title: 'APP版本',
-		dataIndex: '11申请序号',
-		key: '11申请序号',
-		render: (text, record) => (<Button>{record.versionInfo}</Button>),
-	}, {
-		title: '手机型号',
-		dataIndex: '11账号类型',
-		key: '11账号类型',
-		render: (text, record) => (
-			<Button>{record.systemInfo}</Button>),
-	}, {
-		title: '操作系统型号',
-		dataIndex: '11申请时间',
-		key: '11申请时间',
+					<span>{record.mobile}</span>
 
-	}, {
-		title: '注册时间',
-		dataIndex: '11审核状态',
-		key: '11审核状态',
-		render: (text, record) => (
-
-			<Button>{record.date}</Button>)
-	}, {
-		title: '下载平台',
-		dataIndex: '下载平台',
-		key: '下载平台',
-		render: (text, record) => (
-			<Button>{record.channelInfo}</Button>),
-	}, {
-		title: '地理位置',
-		dataIndex: '地理位置',
-		key: '地理位置',
-		render: (text, record) => (
-			<Button>{record.location}</Button>),
-	}, {
-		title: '备注',
-		dataIndex: '备注',
-		key: '备注',
-		render: (text, record) => (
-			<Button>{record.comment}</Button>),
-	}, {
-		title: '操作人',
-		dataIndex: '操作人',
-		key: '操作人',
-		render: (text, record) => (
-			<Button>{record.operator}</Button>),
+				),
+			}, {
+				title: '姓名',
+				dataIndex: 'name',
+				key: 'name',
+				render: (text, record) => (
+					<span>{record.name}</span>),
+			}, {
+				title: '活跃度',
+				dataIndex: '活跃度',
+				key: '活跃度',
+				render: (text, record) => (<span>{record.activeFlag}</span>),
+			}, {
+				title: 'APP注册时间',
+				dataIndex: 'APP注册时间',
+				key: 'APP注册时间',
+				render: (text, record) => (<span>{record.date}</span>),
+			}, {
+				title: '操作人',
+				dataIndex: '操作人',
+				key: '操作人',
+				render: (text, record) => (<span>{record.operator}</span>),
+			}, {
+				title: '处理备注',
+				dataIndex: '处理备注',
+				key: '处理备注',
+				render: (text, record) => (
+					<span>{record.comment}</span>),
+			}, {
+				title: '操作',
+				key: 'action',
+				fixed: 'right',
+				width: 100,
+				render: (text, record) => (
+					<div>
+						<span className="ant-divider" />
+						<Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>移除</Button>
+					</div>
+				),
+			}];
+		this.requestPageA()//1:合规 2:开户 3:交易
+		this.requestPageB()
+		this.requestPageC()
 	}
-	, {
-		title: '操作',
-		key: 'action',
-						align: 'center',
-		width: 300,
-		render: (text, record) => (
+
+	handleremove = (record) => {
+
+		let self = this
+		window.Axios.post('auth/removeBlackUser', {
+			'id': record.id//1:合规 2:开户 3:交易
+		}).then((response) => {
+
+			message.success('操作成功')
+			if (self.state.nowKey == 1) {
+				this.requestPageA()//1:合规 2:开户 3:交易
+			}
+			if (self.state.nowKey == 2) {
+				this.requestPageB()//1:合规 2:开户 3:交易
+			}
+			if (self.state.nowKey == 3) {
+				this.requestPageC()//1:合规 2:开户 3:交易
+			}
+
+		}).catch(function (error) {
+			console.log(error);
+		});
+
+	};
+	handleremoveList = () => {
+
+		let self = this
+		window.Axios.post('auth/removeBlackUserBulk', {
+			'idList': this.state.selectedRowKeys//1:合规 2:开户 3:交易
+		}).then((response) => {
+
+			message.success('操作成功')
+			if (self.state.nowKey == 1) {
+				this.requestPageA()//1:合规 2:开户 3:交易
+			}
+			if (self.state.nowKey == 2) {
+				this.requestPageB()//1:合规 2:开户 3:交易
+			}
+			if (self.state.nowKey == 3) {
+				this.requestPageC()//1:合规 2:开户 3:交易
+			}
+
+		}).catch(function (error) {
+			console.log(error);
+		});
+
+	};
+
+	handleremoveSelect = () => {
+
+
+		let self = this
+		this.setState({
+			selectMail: '',
+			selectID: '',
+			startTime: '',
+			selectPhone: '',
+			selectTimeStart: '',
+			selectTimeEnd: ''
+		}, () => {
+			self.searchSelect()
+		})
+
+
+	};
+	requestPageA = () => {
+		let self = this
+		self.setState({
+			loadingA: true
+		})
+		window.Axios.post('auth/getBlackList', {
+			pageNo: this.state.current,
+			'listType': 1,//1:合规 2:开户 3:交易
+			'email': this.state.selectMail,
+			'nationalId': this.state.selectID,
+			'startTime': this.state.selectTimeStart,
+			'endTime': this.state.selectTimeEnd,
+			'mobile': this.state.selectPhone,
+			'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
+		}).then((response) => {
+			self.setState({
+				totalpageA: response.data.data.totalPage,
+				bklistA: response.data.data.list,
+				loadingA: false
+			}, () => {
+				console.log('hcia self.state.bklistA', self.state.bklistA)
+				// var tags = Object.keys(self.state.bklistA[0])
+				// console.log('hcia tags', tags)
+				// self.setState({
+				//     mTags: tags
+				// })
+
+			});
+
+		}).catch(function (error) {
+			console.log(error);
+		});
+	}
+	requestPageB = () => {
+		let self = this
+
+		self.setState({
+			loadingB: true
+		})
+		window.Axios.post('auth/getBlackList', {
+			pageNo: this.state.current,
+			'listType': 2,//1:合规 2:开户 3:交易
+			'email': this.state.selectMail,
+			'nationalId': this.state.selectID,
+			'startTime': this.state.selectTimeStart,
+			'endTime': this.state.selectTimeEnd,
+			'mobile': this.state.selectPhone,
+			'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
+		}).then((response) => {
+			self.setState({
+				totalpageB: response.data.data.totalPage,
+				bklistB: response.data.data.list,
+
+				loadingB: false
+			});
+
+
+		}).catch(function (error) {
+			console.log(error);
+		});
+	}
+	requestPageC = () => {
+		let self = this
+		self.setState({
+			loadingC: true
+		})
+		window.Axios.post('auth/getBlackList', {
+			pageNo: this.state.current,
+			'listType': 3,//1:合规 2:开户 3:交易
+			'email': this.state.selectMail,
+			'nationalId': this.state.selectID,
+			'startTime': this.state.selectTimeStart,
+			'endTime': this.state.selectTimeEnd,
+			'mobile': this.state.selectPhone,
+			'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
+		}).then((response) => {
+
+			self.setState({
+				totalpageC: response.data.data.totalPage,
+				bklistC: response.data.data.list,
+				loadingC: false
+			});
+		}).catch(function (error) {
+			console.log(error);
+		});
+	}
+
+
+	changePageA = (page) => {
+		this.setState({
+			currentA: page,
+		}, () => {
+			this.requestPageA()
+		})
+	}
+	changePageB = (page) => {
+		this.setState({
+			currentb: page,
+		}, () => {
+			this.requestPageB()
+		})
+	}
+	changePageC = (page) => {
+		this.setState({
+			currentC: page,
+		}, () => {
+			this.requestPageC()
+		})
+	}
+
+	callback = (key) => {
+
+		this.setState({
+			nowKey: key,
+		})
+
+	}
+
+	onSelectChange = (selectedRowKeys) => {
+		console.log('hcia', 'selectedRowKeys changed: ', selectedRowKeys);
+		this.setState({ selectedRowKeys });
+	}
+
+	state = {
+		switcherOn: true,
+		background: localStorage.getItem('@primary-color') || '#313653',
+	}
+	_switcherOn = () => {
+		this.setState({
+			switcherOn: !this.state.switcherOn
+		})
+	};
+	_handleChangeComplete = color => {
+		console.log(color);
+		this.setState({ background: color.hex });
+		localStorage.setItem('@primary-color', color.hex);
+		window.less.modifyVars({
+			'@primary-color': color.hex,
+		})
+	};
+
+	onChangeMail = (e) => {
+		this.setState({
+			selectMail: e.target.value,
+		});
+	}
+	onChangePhone = (e) => {
+		this.setState({
+			selectPhone: e.target.value,
+		});
+	}
+	onChangeID = (e) => {
+		this.setState({
+			selectID: e.target.value,
+		});
+	}
+	searchSelect = () => {
+		let self = this
+		console.log('hcia self.state.nowKey', self.state.nowKey)
+		if (self.state.nowKey == 1) {
+			this.requestPageA()//1:Potential 2:simulator 3:intend
+		}
+		if (self.state.nowKey == 2) {
+			this.requestPageB()
+		}
+		if (self.state.nowKey == 3) {
+			this.requestPageC()
+		}
+	}
+
+	onChangeDate = (value, dateString) => {
+	}
+
+	onOk = (value) => {
+		console.log('hcia', 'onOk: ', value);
+
+
+		var selectTimeStart = value[0].unix() + '000'
+		//1545275083
+		//26582400000
+		//27187200000
+		var selectTimeEnd = value[1].unix() + '000'
+
+		console.log('hcia selectTimeStart', selectTimeStart)
+		console.log('hcia selectTimeEnd', selectTimeEnd)
+
+
+		this.setState({
+			selectTimeStart: selectTimeStart,
+			selectTimeEnd: selectTimeEnd,
+
+		});
+	}
+
+	render() {
+
+		const { loading, selectedRowKeys } = this.state;
+		const hasSelected = selectedRowKeys.length > 0;
+		const rowSelection = {
+			selectedRowKeys,
+			onChange: this.onSelectChange,
+		};
+		const { switcherOn, background } = this.state;
+
+		return (
+
+
 			<div>
-				<span className="ant-divider" />
-				<Button className="ant-dropdown-link" onClick={() => this.showModal()}>添加備註</Button>
-										<Button className="ant-dropdown-link" onClick={() => this.showModal2()}>操作日誌</Button>
+				{/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
+				<div>nowKey :{this.state.nowKey}</div>
+				<div>PotentialUser</div>
+				{/*<ThemePicker />*/}
+				<div className={classNames('switcher dark-white', { active: switcherOn })}>
+					<span className="sw-btn dark-white" onClick={this._switcherOn}>
+						<Icon type="setting" className="text-dark" />
+					</span>
+					<div>
+
+						<Card title="當前表搜索"
+							extra={<Button type="primary" onClick={() => this.handleremoveSelect()}
+							>清除條件</Button>}
+						>
+							<Input onChange={this.onChangeMail} style={{ marginBottom: 5 }} placeholder="邮箱" />
+							<Input value={this.state.selectPhone} onChange={this.onChangePhone} style={{ marginBottom: 5 }} placeholder="手机号" />
+							<Input onChange={this.onChangeID} style={{ marginBottom: 5 }} placeholder="身份证号" />
+							<Input onChange={this.onChangeAccount} style={{ marginBottom: 5 }} placeholder="账户" />
+							<Input onChange={this.onChangeKeyWord} style={{ marginBottom: 5 }} placeholder="关键词" />
+							<RangePicker
+								showTime={{ format: 'YYYY-MM-DD HH:mm:ss' }}
+								format="YYYY-MM-DD HH:mm:ss fff"
+								placeholder={['Start Time', 'End Time']}
+								onChange={this.onChangeDate}
+								onOk={this.onOk}
+							/>
+
+							<Button onClick={() => this.searchSelect()} style={{ marginTop: 10 }} type="primary"
+								icon="search">Search</Button>
+
+						</Card>
+
+
+					</div>
+				</div>
+				<BreadcrumbCustom first="用户管理" second="Leads管理" />
+
+				<Card>
+
+					<Tabs
+						onChange={this.callback}
+						type="card">
+						<TabPane tab="潛在用戶" key="1">
+							<Button
+								type="primary"
+								onClick={() => this.handleremoveList()}
+								disabled={!hasSelected}
+								loading={loading}
+							>
+								批量移除
+                            </Button>
+							<Table rowKey="id"
+								bordered
+								rowSelection={rowSelection}
+								columns={this.columns}
+								dataSource={this.state.bklistA}
+								scroll={{ x: 1300 }}
+								loading={this.state.loading}
+								pagination={{  // 分页
+									total: this.state.totalpageA * this.state.pgsize,
+									pageSize: this.state.pgsize,
+									onChange: this.changePageA,
+								}}
+							/>
+						</TabPane>
+						<TabPane tab="模擬用戶" key="2">
+							<Table rowKey="id"
+								columns={this.columns}
+								dataSource={this.state.bklistB}
+								scroll={{ x: 1300 }}
+								loading={this.state.loading}
+								pagination={{  // 分页
+									total: this.state.totalpageB * this.state.pgsize,
+									pageSize: this.state.pgsize,
+									onChange: this.changePageB,
+								}}
+							/>
+						</TabPane>
+						<TabPane tab="意向用戶" key="3">
+							<Table rowKey="id"
+								columns={this.columns}
+								dataSource={this.state.bklistC}
+								scroll={{ x: 1300 }}
+								loading={this.state.loading}
+								pagination={{  // 分页
+									total: this.state.totalpageC * this.state.pgsize,
+									pageSize: this.state.pgsize,
+									onChange: this.changePageC,
+								}}
+							/>
+						</TabPane>
+					</Tabs>
+				</Card>
 
 
 			</div>
-		),
-	}
-	];
-	}
-    render() {
-		const style1 = {
-			padding: '8px',
-		  };
-        return(
-			
-             <div>
-                <div>log: {this.state.anyThing}</div>
-                <div>yyxLog log: PotentialUser</div>
-								<div />
-                <BreadcrumbCustom first="用户管理" second="Leads管理" />
 
-                <div>
-
-                    <Button type="primary">潛在用戶</Button>
-                    <Button onClick={() => this.goToSimulator()} type="primary">模擬用戶</Button>
-                    <Button onClick={() => this.goToIntend()} type="primary">意向用戶</Button>
-                </div>
-
-                <Table rowKey="id"
-                       columns={this.columns} dataSource={this.state.userList}
-                       scroll={{x: 1300}}
-                />
-				<div style={style1}>
-					 <Row gutter={16} >
-                        <Col md={8}>
-                                     <Checkbox onChange={this.hasChangeAll}/>
-									  <Button>批量分組</Button>
-									 <Button>批量延期</Button>
-									 <Button>刪除</Button>
-                        </Col>
-                    </Row>
-				
-				</div>
-				
-
-								<Modal
-				          title="添加備註"
-				          visible={this.state.visible}
-				          onOk={this.handleOk}
-				          onCancel={this.handleCancel}
-									okText="確認"
-									cancelText="取消"
-								>
-				          <p><DatePicker onChange={this.selectDate} /></p>
-				          <p><Input placeholder="填写回访次数以及结果" /></p>
-				        </Modal>
-								<Modal
-									title="操作日誌"
-									visible={this.state.modal2Visible}
-									onOk={this.handleOk}
-									onCancel={this.handleCancel}
-									okText="確認"
-									cancelText="取消"
-								>
-									<p>
-									<Table rowKey="id"
-												 columns={this.modalColumns} dataSource={this.state.operationDiaryHistory}
-												 scroll={{x: 1300}}
-									/>
-									</p>
-								</Modal>
-
-            </div>
 		)
-    }
-    constructor(props) {
-        super(props);
-        this.state = {
-            date: new Date()
-            , userList: []
-			, operationDiaryHistory: []
-			, anyThing: 'asdasd'
-        };
-	}
-	goToSimulator = () => {
-		this.props.history.push('/app/customer/SimulatorUser')
-
-	}
-	goToIntend =() =>{
-		//
-		this.props.history.push('/app/pass/IntendingUser')
-
-	}
-	hasChangeAll = () =>{
-
-	}
-    hasChange = (status) =>{
-			console.log('yyx',status.target.checked)
-
-    }
-	checkDiary = () => {
-
-	}
-	selectDate = (date, dateString) => {
-  	       console.log(dateString,'yyx',date);
 	}
 
-    requestListData = (listType) => {
-        var aa = this;
-        axios.post('http://mobile.nooko.cn:8090/ixuser/getUserList', {
-        	'listType' : listType,
-        	'loginName' : 'admin',
-        	'token' : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmVUaW1lIjoxNTQ1NTI4ODM0MTk5LCJsb2dpbk5hbWUiOiJhZG1pbiJ9.F7moE4DsMUiajkKB1S_wemwsozlUW5VMxQKsg4KsSUQ'
 
-        }).then(function (response) {
-            var bb = response.data.data.list;
-            for (var i = bb.length - 1; i >= 0; i--) {
-            	let userInfo = bb[i]
-            }
-            aa.setState({anyThing: 'wwwww'});
-            aa.setState({anyThing: response.data.code});
-            aa.setState({userList: response.data.data.list});
-
-        }).catch(function (error) {
-            console.log(error);
-            // message.warn(error);
-        });
-    };
-		requestUserCommentList = () =>{
-			// must request data:
-			//belongUserId
-			//loginName
-			//token
-
-			//refernce request data:
-			//pageNo
-			//pageSize
-			//language
-			const url = 'http://mobile.nooko.cn:8090/auth/getUserCommentList'
-
-			var tmp = this;
-
-			axios.post(url, {
-				'belongUserId':'4028b2a4631f770f01631f7770df0000',
-				'loginName' : 'admin',
-				'token' : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmVUaW1lIjoxNTQ1NTI4ODM0MTk5LCJsb2dpbk5hbWUiOiJhZG1pbiJ9.F7moE4DsMUiajkKB1S_wemwsozlUW5VMxQKsg4KsSUQ'
-
-			}).then(function (response) {
-
-					tmp.setState({operationDiaryHistory: response.data.data.list});
-
-			}).catch(function (error) {
-					console.log(error);
-					// message.warn(error);
-			});
-		}
 }
 
-export default PotentialUser;
