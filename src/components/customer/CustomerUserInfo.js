@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Col, Card, Row, DatePicker, Input, Modal, Button, Table, Icon, Checkbox } from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import axios from 'axios';
+import { parse } from 'querystring';
 class CustomerUserInfo extends Component {
   state = { visible: false, modal2Visible: false }
 
@@ -88,8 +89,8 @@ class CustomerUserInfo extends Component {
           type="inner"
           title="數據信息"
         >
-          < Meta title={this.state.userList.length == 0 ? '注册时间：' : '注册时间：' + this.state.userList.base.regDate} />
-          < Meta title={this.state.userList.length == 0 ? '上次访问时间：' : '上次访问时间：' + this.state.userList.base.lastLoginTime} />
+          < Meta title={this.state.userList.length == 0 ? '注册时间：' : '注册时间：' + this.timestampToTime(this.state.userList.base.regDate)} />
+          < Meta title={this.state.userList.length == 0 ? '上次访问时间：' : '上次访问时间：' + this.timestampToTime(this.state.userList.base.lastLoginTime)} />
           < Meta title={this.state.userList.length == 0 ? '上次访问IP：' : '上次访问IP：' + this.state.userList.base.lastLoginIP} />
           < Meta title={this.state.userList.length == 0 ? '地理位置：' : '地理位置：' + this.state.userList.base.location} />
 
@@ -128,7 +129,7 @@ class CustomerUserInfo extends Component {
 
 
   hasChangeAll = () => {
-
+    
   }
   hasChange = (status) => {
     console.log('yyx', status.target.checked)
@@ -144,10 +145,8 @@ class CustomerUserInfo extends Component {
     const year = dateObj.getFullYear() // 获取年，
     const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
     const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
-    const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
-    const minutes = this.pad(dateObj.getMinutes()) // 获取分
-    const seconds = this.pad(dateObj.getSeconds()) // 获取秒
-    return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
+   
+    return year + '-' + month + '-' + date 
   };
   requestListData = () => {
     var self = this;//props.match.params.id
