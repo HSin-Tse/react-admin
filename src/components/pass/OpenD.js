@@ -276,7 +276,66 @@ class PassOpenD extends Component {
         this.mIXTradingExperience = this.state.IXTradingExperience.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXTradingObjectives = this.state.IXTradingObjectives.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXRisk_Tolerance = this.state.IXRisk_Tolerance.map(d => <Option key={d.name}>{d.name}</Option>);
+        const uploadProps = {
+            action: '/upload/first',
+            multiple: false,
+            data: { a: 1, b: 2 },
+            headers: {
+                Authorization: '$prefix $token',
+            },
+            onStart(file) {
+                console.log('onStart', file, file.name);
+            },
+            onSuccess(ret, file) {
+                console.log('onSuccess', ret, file.name);
+            },
+            onError(err) {
+                console.log('onError', err);
+            },
+            onProgress({ percent }, file) {
+                console.log('onProgress', `${percent}%`, file.name);
+            },
+            customRequest({
+                              action,
+                              data,
+                              file,
+                              filename,
+                              headers,
+                              onError,
+                              onProgress,
+                              onSuccess,
+                              withCredentials,
+                          }) {
+                // EXAMPLE: post form-data with 'axios'
+                const formData = new FormData();
+                if (data) {
+                    Object.keys(data).map(key => {
+                        formData.append(key, data[key]);
+                    });
+                }
+                formData.append(filename, file);
 
+                window.Axios
+                    .post(action, formData, {
+                        withCredentials,
+                        headers,
+                        onUploadProgress: ({ total, loaded }) => {
+                            onProgress({ percent: Math.round(loaded / total * 100).toFixed(2) }, file);
+                        },
+                    })
+                    .then(({ data: response }) => {
+                        onSuccess(response, file);
+                    })
+                    .catch(onError);
+
+                return {
+                    abort() {
+                        message.error('upload progress is aborted.')
+                        console.log('upload progress is aborted.');
+                    },
+                };
+            },
+        };
         const props = {
             name: 'file',
             multiple: false,
@@ -661,7 +720,7 @@ class PassOpenD extends Component {
                                               rel="noopener noreferrer">身份证反面照片</a></small>
                                 </div>
                                 <div>
-                                    <Dragger {...props}>
+                                    <Dragger {...uploadProps}>
                                         <p className="ant-upload-text">Click or drag file to this area to upload</p>
                                         <p className="ant-upload-hint">Support for a single or bulk upload. Strictly
                                             prohibit from uploading company data or other band files</p>
