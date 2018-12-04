@@ -70,14 +70,33 @@ export default class CustomerSummary extends Component {
 
 		});
 	}
-	showModal = () => {
+	showModal = (record) => {
+		let belongUserId = record.belongUserId
 		this.setState({
+			theBelongUserId: belongUserId,
 			visible: true,
 			modal2Visible: false,
 		});
 	}
-	handleOk = (e) => {
-		console.log(e);
+	handleAddComment =(e) =>{
+		let self = this;
+		window.Axios.post('auth/addUserComment', {
+			content: self.state.theComment,
+			belongUserId: self.state.theBelongUserId,
+		}).then((response) => {
+
+
+			console.log('yyx handleAddComment success', response.data.data)
+		}).catch(function (error) {
+			console.log(error);
+		});
+
+		this.setState({
+			visible: false,
+			modal2Visible: false,
+		});
+	}
+	handleOk = () => {
 		this.setState({
 			visible: false,
 			modal2Visible: false,
@@ -356,7 +375,6 @@ requestUserCommentList = () =>{
 	}
 	addComment = (e) =>{
 		let comment = e.target.value;
-		console.log('tttt',comment)
 		this.setState({
 			theComment: comment
 
@@ -370,9 +388,6 @@ requestUserCommentList = () =>{
 
 	}
 	forzenAccount = (record) =>{
-		console.log('CustomerSummary record data',record);
-
-
 		let self = this
 		window.Axios.post('star/blockStarLiveAccount', {
 			"starClientAccount":record.accountNo,
@@ -380,7 +395,7 @@ requestUserCommentList = () =>{
 		
 		}).then((response) => {
 
-			console.log('CustomerSummary Axios sucessful', response);
+			console.log('forzenAccount Axios sucessful', response);
 			alert(record.accountNo + '帳號凍結成功')
 		}).catch(function (error) {
 			console.log(error);
@@ -458,7 +473,7 @@ requestUserCommentList = () =>{
 				<Modal
 					title="添加備註"
 					visible={this.state.visible}
-					onOk={this.handleOk}
+					onOk={this.handleAddComment}
 					onCancel={this.handleCancel}
 					okText="確認"
 					cancelText="取消"
