@@ -2,22 +2,68 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, Input} from 'antd';
-
-
+import {Button, Table, message, Select, Modal} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
+
+const Option = Select.Option;
 
 export default class Basic extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            date: new Date()
-            , userList: []
-            , loading: false
-            , searchPhone: ''
-            , totalPage: 1
-            , pgsize: 10
+            visible: false,
+            visibleOpM: false,
+            date: new Date(),
+            userList: [],
+            nodeList: [],
+            loading: false,
+            searchPhone: '',
+            totalPage: 1,
+            pgsize: 10,
+            suspend_reason_type: [{
+                "name": "无效的邮箱",
+                "value": "1",
+                "key": null,
+                "parentCode": null,
+                "parentName": null,
+                "code": null
+            }, {
+                "name": "诈骗",
+                "value": "2",
+                "key": null,
+                "parentCode": null,
+                "parentName": null,
+                "code": null
+            }, {
+                "name": "拒绝付款",
+                "value": "3",
+                "key": null,
+                "parentCode": null,
+                "parentName": null,
+                "code": null
+            }, {
+                "name": "正在联系",
+                "value": "4",
+                "key": null,
+                "parentCode": null,
+                "parentName": null,
+                "code": null
+            }, {
+                "name": "驳回",
+                "value": "5",
+                "key": null,
+                "parentCode": null,
+                "parentName": null,
+                "code": null
+            }, {
+                "name": "等待处理文件",
+                "value": "6",
+                "key": null,
+                "parentCode": null,
+                "parentName": null,
+                "code": null
+            }, {"name": "不活跃", "value": "7", "key": null, "parentCode": null, "parentName": null, "code": null}]
 
         };
     }
@@ -33,6 +79,24 @@ export default class Basic extends Component {
     }
 
     componentDidMount() {
+
+        let self = this;
+        window.Axios.post('dict/openDict', {
+            'keys': 'suspend_reason_type',
+        }).then(function (response) {
+            console.log(response);
+
+            self.setState({
+
+                    // suspend_reason_type:response.data.data.suspend_reason_type
+                }
+            );
+
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+
         this.columns = [
             {
                 title: '客户姓名',
@@ -124,9 +188,19 @@ export default class Basic extends Component {
                 render: (text, record) => (
                     <span>{record.operator}</span>)
             }, {
+                title: '操作详情',
+                dataIndex: '操作详情',
+                fixed: 'right',
+
+                width: 120,
+                key: '操作详情',
+                render: (text, record) => (
+                    <Button className="ant-dropdown-link"
+                            onClick={() => this.seeDetail(record)}>详情</Button>)
+            }, {
                 title: '操作',
                 fixed: 'right',
-                width: 200,
+                width: 120,
                 key: 'action',
                 // fixed: 'right',
                 // width: 100,
@@ -134,19 +208,83 @@ export default class Basic extends Component {
                     <div>
                         <span className="ant-divider"/>
                         <Button className="ant-dropdown-link"
-                                onClick={() => this.handleEdit(record)}>{record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'}</Button>    <Button className="ant-dropdown-link"
-                                onClick={() => this.handleEdit(record)}>详情</Button>
-
-
+                                onClick={() => this.handleEdit(record)}>{record.accountStatus == 1 ? '正常' : (record.accountStatus == 2) ? '禁止登陆' : '禁止交易'}</Button>
                     </div>
                 ),
             }];
+        this.nodeColumns = [
+            {
+                title: '日期',
+                width: 140,
+                dataIndex: '日期',
+                key: '日期',
+                render: (text, record) => (
+                    <span>{this.timestampToTime(record.createDate)}</span>)
+            },
+            {
+                title: '备注',
+                dataIndex: '备注',
+                key: '备注',
+                width: 120,
+                render: (text, record) => (
+                    <span>{record.comment}</span>)
+            }, {
+                title: '操作人',
+                dataIndex: '操作人',
+                width: 120,
+                key: '操作人',
+                render: (text, record) => (
+                    <span>{record.bkUserName}</span>)
+            }];
         this.requestPage(1)
     }
-
-    handleEdit = (record) => {
-        this.props.history.push('/app/pass/passopen/detail' + record.id)
+    timestampToTime = (timestamp) => {
+        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
+        const year = dateObj.getFullYear() // 获取年，
+        const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
+        const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
+        const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
+        const minutes = this.pad(dateObj.getMinutes()) // 获取分
+        const seconds = this.pad(dateObj.getSeconds()) // 获取秒
+        return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
     };
+    pad = (str) => {
+        return +str >= 10 ? str : '0' + str
+    };
+    seeDetail = (record) => {
+        console.log('hcia record', record)
+
+        //
+        let self = this
+        window.Axios.post('star/getStarLiveAccountCommentList', {
+            'pageSize': 100,
+            'id': record.id,
+        }).then(function (response) {
+            console.log(response);
+
+            self.setState({
+                    nodeList: response.data.data.list
+                }, () => {
+                    self.showModal()
+                }
+            );
+
+
+        }).catch(function (error) {
+            console.log(error);
+            // message.warn(error);
+        });
+        // this.props.history.push('/app/pass/passopen/detail' + record.id)
+    };
+    handleEdit = (record) => {
+        let self = this
+
+        self.showModalOP()
+
+        // this.props.history.push('/app/pass/passopen/detail' + record.id)
+    };
+
+
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
         const year = dateObj.getFullYear() // 获取年，
@@ -202,6 +340,36 @@ export default class Basic extends Component {
         })
     }
 
+    showModal = () => {
+        this.setState({
+            visible: true,
+        });
+    }
+
+    showModalOP = () => {
+        this.setState({
+            visibleOpM: true,
+        });
+    }
+
+    handleOk = () => {
+
+        console.log('hcia handleOk' )
+        this.setState({
+            visibleOpM: false,
+        });
+
+        message.success('操作成功');
+    }
+
+    handleCancel = (e) => {
+        console.log(e);
+        this.setState({
+            visible: false,
+            visibleOpM: false,
+        });
+    }
+
 
     render() {
         return (
@@ -209,6 +377,38 @@ export default class Basic extends Component {
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
 
+                <Modal
+                    title="备注详情"
+                    onCancel={this.handleCancel}
+                    visible={this.state.visibleOpM}
+                    footer={[
+                        <Button key="back" onClick={this.handleCancel}>取消操作</Button>,
+                        <Button key="submit" type="primary"  onClick={()=>this.handleOk()}>
+                            提交
+                        </Button>,
+                    ]}
+                >
+                    <Table rowKey="id"
+                           columns={this.nodeColumns}
+                           dataSource={this.state.nodeList}// nodeList
+                    />
+
+
+                </Modal>
+
+                <Modal
+                    title="备注详情"
+                    onCancel={this.handleCancel}
+                    visible={this.state.visible}
+                    footer=''
+                >
+                    <Table rowKey="id"
+                           columns={this.nodeColumns}
+                           dataSource={this.state.nodeList}// nodeList
+                    />
+
+
+                </Modal>
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
 
                 <Table rowKey="id"

@@ -17,6 +17,7 @@ import PhotoswipeUIDefault from "photoswipe/dist/photoswipe-ui-default";
 import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
 import moment from 'moment';
+// import QRCode from 'qrcode.react'
 
 const Search = Input.Search;
 const CheckboxGroup = Checkbox.Group;
@@ -605,6 +606,8 @@ class PassOpenD extends Component {
                                     <h3>身份证正面照片</h3>
                                     <small><a href={this.state.recordData.idcard_0} target="_blank"
                                               rel="noopener noreferrer">身份证正面照片</a></small>
+                                    {/*<QRCode value={this.state.recordData.idcard_1==null?'':this.state.recordData.idcard_1} />*/}
+
                                 </div>
                             </Card>
                         </Col>
