@@ -42,7 +42,7 @@ class CustomerUserInfo extends Component {
 
 
     console.log('xxx',this.props.match.params.id)
-    this.requestListData("4")
+    this.requestListData()
 
   }
   render() {
@@ -136,18 +136,18 @@ class CustomerUserInfo extends Component {
     console.log(dateString, 'yyx', date);
   }
 
-  requestListData = (listType) => {
-    var aa = this;
-    axios.post('http://mobile.nooko.cn:8090/ixuser/getUserList', {
-      'listType': listType,
-      'loginName': 'admin',
-      'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmVUaW1lIjoxNTQ1NTI4ODM0MTk5LCJsb2dpbk5hbWUiOiJhZG1pbiJ9.F7moE4DsMUiajkKB1S_wemwsozlUW5VMxQKsg4KsSUQ'
+  requestListData = () => {
+    var self = this;//props.match.params.id
+    window.Axios.post('ixuser/userOverView', {
+      'belongUserId': self.props.match.params.id,
+      
 
     }).then(function (response) {
-      var bb = response.data.data.list;
-      aa.setState({ anyThing: 'wwwww' });
-      aa.setState({ anyThing: response.data.code });
-      aa.setState({ userList: response.data.data.list });
+      var bb = response.data.data;
+      self.setState({ anyThing: 'wwwww' });
+      self.setState({ anyThing: response.data.code });
+      self.setState({ userList: response.data.data });
+      console.log('ooooo',bb)
 
     }).catch(function (error) {
       console.log(error);
