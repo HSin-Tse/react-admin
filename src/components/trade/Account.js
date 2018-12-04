@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, message, Select, Modal} from 'antd';
+import {Button, Table, message, Select, Modal, Card, Col} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 
 const Option = Select.Option;
@@ -23,49 +23,7 @@ export default class Basic extends Component {
             modeState: 1,
             current: 0,
             pgsize: 10,
-            suspend_reason_type: [{
-                "name": "无效的邮箱",
-                "value": "1",
-                "key": null,
-                "parentCode": null,
-                "parentName": null,
-                "code": null
-            }, {
-                "name": "诈骗",
-                "value": "2",
-                "key": null,
-                "parentCode": null,
-                "parentName": null,
-                "code": null
-            }, {
-                "name": "拒绝付款",
-                "value": "3",
-                "key": null,
-                "parentCode": null,
-                "parentName": null,
-                "code": null
-            }, {
-                "name": "正在联系",
-                "value": "4",
-                "key": null,
-                "parentCode": null,
-                "parentName": null,
-                "code": null
-            }, {
-                "name": "驳回",
-                "value": "5",
-                "key": null,
-                "parentCode": null,
-                "parentName": null,
-                "code": null
-            }, {
-                "name": "等待处理文件",
-                "value": "6",
-                "key": null,
-                "parentCode": null,
-                "parentName": null,
-                "code": null
-            }, {"name": "不活跃", "value": "7", "key": null, "parentCode": null, "parentName": null, "code": null}]
+            suspend_reason_type: []
 
         };
     }
@@ -90,7 +48,7 @@ export default class Basic extends Component {
 
             self.setState({
 
-                    // suspend_reason_type:response.data.data.suspend_reason_type
+                    suspend_reason_type:response.data.data.suspend_reason_type
                 }
             );
 
@@ -221,7 +179,7 @@ export default class Basic extends Component {
                     </div>
                 ),
             }];
-        //1:正常 2:禁止登陆 3:禁止交易
+
         this.nodeColumns = [
             {
                 title: '日期',
@@ -354,7 +312,7 @@ export default class Basic extends Component {
     changePage = (page) => {
         console.log('hcia page', page)
         this.setState({
-            current: page-1,
+            current: page - 1,
         }, () => {
             this.requestPage()
         })
@@ -384,7 +342,7 @@ export default class Basic extends Component {
             console.log(response);
             self.setState({
                 visibleOpM: false,
-            },()=>{
+            }, () => {
                 self.requestPage()
             });
             message.success('操作成功');
@@ -392,7 +350,6 @@ export default class Basic extends Component {
         }).catch(function (error) {
             console.log(error);
         });
-
 
 
     }
@@ -423,10 +380,22 @@ export default class Basic extends Component {
                         </Button>,
                     ]}
                 >
-                    <Table rowKey="id"
-                           columns={this.nodeColumns}
-                           dataSource={this.state.nodeList}// nodeList
-                    />
+                    <div>
+                        {this.state.modeState == '正常' ? <span>确认当前用户账户恢复正常</span> : null}
+                        {this.state.modeState == '禁止登陆' ? <span >请选择禁止登录原因</span> : null}
+                        {this.state.modeState == '禁止交易' ? <span>禁止交易</span> : null}
+                    </div>
+                    <div>
+
+                        {this.state.modeState == '禁止登陆' ?
+                            <Select style={{width: 200,marginTop:20}}>
+                                {this.state.suspend_reason_type.map(ccty => <Option
+                                    key={ccty.value}>{ccty.name}</Option>)}
+                            </Select> : null}
+                    </div>
+                    {/*<Card className="gutter-box"  bodyStyle={{padding: 0}}>*/}
+
+                    {/*</Card>*/}
 
 
                 </Modal>
