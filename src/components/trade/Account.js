@@ -21,6 +21,7 @@ export default class Basic extends Component {
             searchPhone: '',
             totalPage: 1,
             modeState: 1,
+            forbiddenValue: 0,
             current: 0,
             pgsize: 10,
             suspend_reason_type: []
@@ -48,7 +49,7 @@ export default class Basic extends Component {
 
             self.setState({
 
-                    suspend_reason_type:response.data.data.suspend_reason_type
+                    suspend_reason_type: response.data.data.suspend_reason_type
                 }
             );
 
@@ -172,8 +173,6 @@ export default class Basic extends Component {
                             <Option key="2" value="禁止登陆">禁止登陆</Option>
                             <Option key="3" value="禁止交易">禁止交易</Option>
 
-                            {/*{this.state.suspend_reason_type.map(ccty => <Option*/}
-                            {/*key={ccty.value}>{ccty.name}</Option>)}*/}
                         </Select>
                         <span className="ant-divider"/>
                     </div>
@@ -261,6 +260,13 @@ export default class Basic extends Component {
         console.log('hcia value', value)
         console.log('hcia record', record)
     };
+    forbitChange = (value) => {
+        let self = this
+        self.setState({
+                forbiddenValue: value,
+            }
+        );
+    };
     handleEdit = (record) => {
         let self = this
         self.showModalOP()
@@ -337,12 +343,13 @@ export default class Basic extends Component {
         window.Axios.post('star/updateStarLiveAccount', {
             'id': self.state.opRecord.id,
             'status': mStatus,
-            // 'reasonType': 'suspend_reason_type',
+            'reasonType': self.state.forbiddenValue,
         }).then(function (response) {
             console.log(response);
             self.setState({
                 visibleOpM: false,
             }, () => {
+                self.state.forbiddenValue = 0
                 self.requestPage()
             });
             message.success('操作成功');
@@ -382,20 +389,17 @@ export default class Basic extends Component {
                 >
                     <div>
                         {this.state.modeState == '正常' ? <span>确认当前用户账户恢复正常</span> : null}
-                        {this.state.modeState == '禁止登陆' ? <span >请选择禁止登录原因</span> : null}
+                        {this.state.modeState == '禁止登陆' ? <span>请选择禁止登录原因</span> : null}
                         {this.state.modeState == '禁止交易' ? <span>禁止交易</span> : null}
                     </div>
                     <div>
 
                         {this.state.modeState == '禁止登陆' ?
-                            <Select style={{width: 200,marginTop:20}}>
+                            <Select style={{width: 200, marginTop: 20}}  defaultValue='无效的邮箱' onChange={(value) => this.forbitChange(value)}>
                                 {this.state.suspend_reason_type.map(ccty => <Option
-                                    key={ccty.value}>{ccty.name}</Option>)}
+                                    value={ccty.value} key={ccty.value}>{ccty.name}</Option>)}
                             </Select> : null}
                     </div>
-                    {/*<Card className="gutter-box"  bodyStyle={{padding: 0}}>*/}
-
-                    {/*</Card>*/}
 
 
                 </Modal>
