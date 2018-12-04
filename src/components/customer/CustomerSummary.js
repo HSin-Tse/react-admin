@@ -476,6 +476,10 @@ export default class CustomerSummary extends Component {
 				>
 					批量移除
                             </Button>
+				<Card title="用戶總表"
+					extra={<Button type="default" onClick={() => this.refleshNowpage()}
+					>刷新当前页面</Button>}
+				>	
 				<Table rowKey="id"
 					bordered
 					rowSelection={rowSelection}
@@ -489,6 +493,7 @@ export default class CustomerSummary extends Component {
 						onChange: this.changePageA,
 					}}
 				/>
+			</Card>
 				<Modal
 					title="添加備註"
 					visible={this.state.visible}
