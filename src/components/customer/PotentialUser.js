@@ -277,9 +277,6 @@ class PotentialUser extends Component {
             var bb = response.data.data.list;
             for (var i = bb.length - 1; i >= 0; i--) {
             	let userInfo = bb[i]
-            	if (userInfo.name == null || " ") {
-            		userInfo.name = '沒資料'
-            	}
             }
             aa.setState({anyThing: 'wwwww'});
             aa.setState({anyThing: response.data.code});

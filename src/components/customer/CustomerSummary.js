@@ -70,14 +70,33 @@ export default class CustomerSummary extends Component {
 
 		});
 	}
-	showModal = () => {
+	showModal = (record) => {
+		let belongUserId = record.belongUserId
 		this.setState({
+			theBelongUserId: belongUserId,
 			visible: true,
 			modal2Visible: false,
 		});
 	}
-	handleOk = (e) => {
-		console.log(e);
+	handleAddComment =(e) =>{
+		let self = this;
+		window.Axios.post('auth/addUserComment', {
+			content: self.state.theComment,
+			belongUserId: self.state.theBelongUserId,
+		}).then((response) => {
+
+
+			console.log('yyx handleAddComment success', response.data.data)
+		}).catch(function (error) {
+			console.log(error);
+		});
+
+		this.setState({
+			visible: false,
+			modal2Visible: false,
+		});
+	}
+	handleOk = () => {
 		this.setState({
 			visible: false,
 			modal2Visible: false,
@@ -90,6 +109,19 @@ export default class CustomerSummary extends Component {
 			visible: false,
 			modal2Visible: false,
 		});
+	}
+	requestUnbindAccount = (record) =>{
+		window.Axios.post('star/unBindStarLiveAccount', {
+			"starClientAccount": record.accountNo,
+			"belongUserId": record.belongUserId,
+		}).then((response) => {
+
+
+			console.log('yyx handleAddComment success', response.data.data)
+		}).catch(function (error) {
+			console.log(error);
+		});
+
 	}
 	requestData = () => {
 		let self = this
@@ -118,7 +150,7 @@ export default class CustomerSummary extends Component {
 			console.log(error);
 		});
 	}
-requestUserCommentList = () =>{
+	requestUserCommentList = () =>{
 			// must request data:
 			//belongUserId
 			//loginName
@@ -296,8 +328,8 @@ requestUserCommentList = () =>{
 				width: 300,
 				render: (text, record) => (
 					<div>
-						<Button className="ant-dropdown-link">凍結</Button>
-						<Button className="ant-dropdown-link">手機號解綁</Button>
+						<Button className="ant-dropdown-link" onClick={ () => this.forzenAccount(record)}>凍結</Button>
+						<Button className="ant-dropdown-link" onClick={() => this.requestUnbindAccount(record)} >手機號解綁</Button>
 					</div>
 					),
 			},{
@@ -310,7 +342,7 @@ requestUserCommentList = () =>{
 					<div>
 						{/* <span className="ant-divider" />
 						<Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>移除</Button> */}
-						<Button className="ant-dropdown-link" onClick={() => this.showModal()}>添加備註</Button>
+						<Button className="ant-dropdown-link" onClick={() => this.showModal(record)}>添加備註</Button>
 						<Button className="ant-dropdown-link" onClick={() => this.showModal2()}>操作日誌</Button>
 
 					</div>
@@ -353,6 +385,33 @@ requestUserCommentList = () =>{
 	}
 	goToUserAccountInfo = () => {
 		console.log('goToUserAccountInfo')
+	}
+	addComment = (e) =>{
+		let comment = e.target.value;
+		this.setState({
+			theComment: comment
+
+		});
+		
+		// this.setState({
+		// 	modal2Visible: true,
+		// 	visible: false,
+
+		// });
+
+	}
+	forzenAccount = (record) =>{
+		window.Axios.post('star/blockStarLiveAccount', {
+			"starClientAccount":record.accountNo,
+			"belongUserId":record.belongUserId,
+		
+		}).then((response) => {
+
+			console.log('forzenAccount Axios sucessful', response);
+			alert(record.accountNo + '帳號凍結成功')
+		}).catch(function (error) {
+			console.log(error);
+		});
 	}
 
 	render() {
@@ -426,12 +485,14 @@ requestUserCommentList = () =>{
 				<Modal
 					title="添加備註"
 					visible={this.state.visible}
-					onOk={this.handleOk}
+					onOk={this.handleAddComment}
 					onCancel={this.handleCancel}
 					okText="確認"
 					cancelText="取消"
-				>
-					<p><Input placeholder="填写回访次数以及结果" /></p>
+					
+			>
+					<p><Input onChange={this.addComment} placeholder="填写回访次数以及结果" /></p>
+					
 				</Modal>
 				<Modal
 					title="操作日誌"
