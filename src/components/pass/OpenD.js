@@ -279,9 +279,10 @@ class PassOpenD extends Component {
         const uploadProps = {
             action: '/upload/first',
             multiple: false,
-            data: { a: 1, b: 2 },
+            data: {a: 1, b: 2},
             headers: {
                 Authorization: '$prefix $token',
+                'aaaa': 'bbbb',
             },
             onStart(file) {
                 console.log('onStart', file, file.name);
@@ -292,7 +293,7 @@ class PassOpenD extends Component {
             onError(err) {
                 console.log('onError', err);
             },
-            onProgress({ percent }, file) {
+            onProgress({percent}, file) {
                 console.log('onProgress', `${percent}%`, file.name);
             },
             customRequest({
@@ -315,15 +316,42 @@ class PassOpenD extends Component {
                 }
                 formData.append(filename, file);
 
+
+                window.Axios.post('dict/openDict', {
+                    'keys': 'div_type',
+                    'division': 'province',
+                    'code': '1',
+                },{
+                    method: 'post',
+                        headers: {
+                        'Content-Type': 'multipart/form-data',
+                        'asdasd': 'sssss'
+                    },
+                    transformRequest: [function(data) {
+                        return data
+                    }],
+                        onUploadProgress: function(e) {
+                        var percentage = Math.round((e.loaded * 100) / e.total) || 0;
+                        if (percentage < 100) {
+                            console.log(percentage + '%');  // 上传进度
+                        }
+                    }
+                }).then(function (response) {
+                    console.log('hcia response', response)
+                }).catch(function (error) {
+                    console.log(error);
+                });
+
+
                 window.Axios
                     .post(action, formData, {
                         withCredentials,
                         headers,
-                        onUploadProgress: ({ total, loaded }) => {
-                            onProgress({ percent: Math.round(loaded / total * 100).toFixed(2) }, file);
+                        onUploadProgress: ({total, loaded}) => {
+                            onProgress({percent: Math.round(loaded / total * 100).toFixed(2)}, file);
                         },
                     })
-                    .then(({ data: response }) => {
+                    .then(({data: response}) => {
                         onSuccess(response, file);
                     })
                     .catch(onError);
@@ -725,6 +753,11 @@ class PassOpenD extends Component {
                                         <p className="ant-upload-hint">Support for a single or bulk upload. Strictly
                                             prohibit from uploading company data or other band files</p>
                                     </Dragger>
+                                    <Upload {...props}>
+                                        <Button>
+                                            <Icon type="upload"/> Click to Upload
+                                        </Button>
+                                    </Upload>
                                 </div>
                             </Card>
                         </Col>
@@ -1072,7 +1105,6 @@ class PassOpenD extends Component {
             });
         }
 
-
     };
     saveData = () => {
         this.showModal()
@@ -1125,7 +1157,6 @@ class PassOpenD extends Component {
             iconcanLoading: true,
         });
         var me = this;
-
         window.Axios.post('/open/cancelOpenApply', {
             'content': me.state.changeNoteV,
             'id': me.state.recordData.id
@@ -1395,6 +1426,7 @@ class PassOpenD extends Component {
             isNeedSave: true,
         });
     };
+
     addBlackRequest(key) {
         let me = this
         if (!me.state.changeNoteV) {
@@ -1414,6 +1446,7 @@ class PassOpenD extends Component {
             console.log(error);
         });
     }
+
     openTipBlack() {
 
         const key = `open${Date.now()}`;
