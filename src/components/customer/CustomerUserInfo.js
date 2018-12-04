@@ -44,6 +44,8 @@ class CustomerUserInfo extends Component {
 
     console.log('xxx',this.props.match.params.id)
     this.requestListData()
+    this.ediftModalColumn()
+    this.requestUserCommentList()
 
   }
   render() {
@@ -100,14 +102,22 @@ class CustomerUserInfo extends Component {
           type="inner"
           title="行為信息"
         >
-          Inner Card content
+          < Meta title={this.state.userList.length == 0 ? 'APP版本:' : 'APP版本:' + this.state.userList.base.versionInfo} />
+          < Meta title={this.state.userList.length == 0 ? '手机型号:' : '手机型号:' + this.state.userList.base.clientInfo} />
+          < Meta title={this.state.userList.length == 0 ? '操作系统型号:' : '操作系统型号:' + this.state.userList.base.systemInfo} />
+          < Meta title={this.state.userList.length == 0 ? '下载平台:' : '下载平台:' + this.state.userList.base.channelInfo} />
+
     </Card>
         <Card
           style={{ marginTop: 16 }}
           type="inner"
           title="其他"
+          
         >
-          Inner Card content
+          <Table rowKey="id"
+            columns={this.modalColumns} dataSource={this.state.operationDiaryHistory}
+            scroll={{ x: 1300 }}
+          />
     </Card>
 
 
@@ -130,6 +140,59 @@ class CustomerUserInfo extends Component {
 
   hasChangeAll = () => {
     
+  }
+  requestUserCommentList = () => {
+    // must request data:
+    //belongUserId
+    //loginName
+    //token
+
+    //refernce request data:
+    //pageNo
+    //pageSize
+    //language
+    const url = 'http://mobile.nooko.cn:8090/auth/getUserCommentList'
+
+    var tmp = this;
+
+    window.Axios.post(url, {
+      'belongUserId': '4028b2a4631f770f01631f7770df0000',
+      'loginName': 'admin',
+      'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmVUaW1lIjoxNTQ1NTI4ODM0MTk5LCJsb2dpbk5hbWUiOiJhZG1pbiJ9.F7moE4DsMUiajkKB1S_wemwsozlUW5VMxQKsg4KsSUQ'
+
+    }).then(function (response) {
+
+      tmp.setState({ operationDiaryHistory: response.data.data.list });
+
+    }).catch(function (error) {
+      console.log(error);
+      // message.warn(error);
+    });
+  }
+
+  ediftModalColumn = () => {
+    this.modalColumns = [{
+      title: '時間',
+      dataIndex: 'createDate',
+      key: 'operationDiary_Date',
+
+      render: (text, record) => (
+        <Button>{record.createDate}</Button>),
+    }, {
+      title: '狀態',
+      dataIndex: 'comment',
+      key: 'operationDiary_Status',
+
+      render: (text, record) => (
+        <Button>{record.comment}</Button>),
+    }, {
+      title: '操作人',
+      dataIndex: 'bkUserName',
+      key: 'operationDiary_User',
+
+      render: (text, record) => (
+        <Button>{record.bkUserName}</Button>),
+    }]
   }
   hasChange = (status) => {
     console.log('yyx', status.target.checked)
