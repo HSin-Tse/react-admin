@@ -5,10 +5,23 @@
  *
  */
 import React, {Component} from 'react';
-import {Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, Popconfirm, notification} from 'antd';
+import {
+    Icon,
+    Upload,
+    Col,
+    Card,
+    Row,
+    Button,
+    Modal,
+    Select,
+    Input,
+    Checkbox,
+    DatePicker,
+    Popconfirm,
+    notification
+} from 'antd';
 import {Radio} from 'antd';
 import {message} from 'antd';
-// import {html2canvas} from 'html2canvas';
 import html2canvas from 'html2canvas';
 import * as jsPDF from 'jspdf'
 import BreadcrumbCustom from '../BreadcrumbCustom';
@@ -18,6 +31,8 @@ import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
 import moment from 'moment';
 // import QRCode from 'qrcode.react'
+
+const Dragger = Upload.Dragger;
 
 const Search = Input.Search;
 const CheckboxGroup = Checkbox.Group;
@@ -100,6 +115,11 @@ class PassOpenD extends Component {
         this.setState({
             mCity: value,
         });
+    }
+
+    uploadC = (value) => {
+
+        console.log('hcia value', value)
     }
 
     constructor(props) {
@@ -256,8 +276,83 @@ class PassOpenD extends Component {
         this.mIXTradingExperience = this.state.IXTradingExperience.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXTradingObjectives = this.state.IXTradingObjectives.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXRisk_Tolerance = this.state.IXRisk_Tolerance.map(d => <Option key={d.name}>{d.name}</Option>);
+        const uploadProps = {
+            action: '/upload/first',
+            multiple: false,
+            data: { a: 1, b: 2 },
+            headers: {
+                Authorization: '$prefix $token',
+            },
+            onStart(file) {
+                console.log('onStart', file, file.name);
+            },
+            onSuccess(ret, file) {
+                console.log('onSuccess', ret, file.name);
+            },
+            onError(err) {
+                console.log('onError', err);
+            },
+            onProgress({ percent }, file) {
+                console.log('onProgress', `${percent}%`, file.name);
+            },
+            customRequest({
+                              action,
+                              data,
+                              file,
+                              filename,
+                              headers,
+                              onError,
+                              onProgress,
+                              onSuccess,
+                              withCredentials,
+                          }) {
+                // EXAMPLE: post form-data with 'axios'
+                const formData = new FormData();
+                if (data) {
+                    Object.keys(data).map(key => {
+                        formData.append(key, data[key]);
+                    });
+                }
+                formData.append(filename, file);
 
+                window.Axios
+                    .post(action, formData, {
+                        withCredentials,
+                        headers,
+                        onUploadProgress: ({ total, loaded }) => {
+                            onProgress({ percent: Math.round(loaded / total * 100).toFixed(2) }, file);
+                        },
+                    })
+                    .then(({ data: response }) => {
+                        onSuccess(response, file);
+                    })
+                    .catch(onError);
 
+                return {
+                    abort() {
+                        message.error('upload progress is aborted.')
+                        console.log('upload progress is aborted.');
+                    },
+                };
+            },
+        };
+        const props = {
+            name: 'file',
+            multiple: false,
+            action: '/api/uploadFile',
+            onChange(info) {
+                console.log('hcia info', info)
+                const status = info.file.status;
+                if (status !== 'uploading') {
+                    console.log('hcia info', info.file, info.fileList);
+                }
+                if (status === 'done') {
+                    message.success(`${info.file.name} file uploaded successfully.`);
+                } else if (status === 'error') {
+                    message.error(`${info.file.name} file upload failed.`);
+                }
+            },
+        };
         return (
             <div id="openD">
 
@@ -596,7 +691,7 @@ class PassOpenD extends Component {
 
                         <Col md={8}>
                             <Card className="gutter-box" bordered={true} bodyStyle={{padding: 0}}>
-                                <div >
+                                <div>
                                     <img
                                         onClick={() => this.openGallery(this.state.recordData.idcard_0)}
                                         alt="example" width="100%"
@@ -624,15 +719,22 @@ class PassOpenD extends Component {
                                     <small><a href={this.state.recordData.idcard_1} target="_blank"
                                               rel="noopener noreferrer">身份证反面照片</a></small>
                                 </div>
+                                <div>
+                                    <Dragger {...uploadProps}>
+                                        <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                                        <p className="ant-upload-hint">Support for a single or bulk upload. Strictly
+                                            prohibit from uploading company data or other band files</p>
+                                    </Dragger>
+                                </div>
                             </Card>
                         </Col>
                         <Col md={8}>
                             <Card className="gutter-box" bordered={true} bodyStyle={{padding: 0}}>
                                 <div>
                                     <img id="idcard_2"
-                                        onClick={() => this.openGallery(this.state.recordData.idcard_2)}
-                                        alt="example" width="100%"
-                                        src={this.state.recordData.idcard_2}/>
+                                         onClick={() => this.openGallery(this.state.recordData.idcard_2)}
+                                         alt="example" width="100%"
+                                         src={this.state.recordData.idcard_2}/>
                                 </div>
                                 <div className="pa-m">
                                     <h3>手持身份证照片</h3>
@@ -701,10 +803,7 @@ class PassOpenD extends Component {
                                 <TextArea value={this.state.changeNoteV} rows={4} onChange={this.changeNote}/>
                             </div>
                         </Col>
-                        {/*<Input defaultValue={this.state.recordData.lastNameCn}*/}
-                        {/*onChange={this.onChangelastNameCn}*/}
-                        {/*style={{width: 120}} placeholder="Basic usage" tagkey="lastNameCn"*/}
-                        {/*sdsd={'dd'}/>*/}
+
 
                     </Row>
                     <Row gutter={12}>
@@ -881,7 +980,6 @@ class PassOpenD extends Component {
 
     };
     searchFromLocalDB = () => {
-
         this.setState({
             icondbALoading: true,
         });
@@ -930,8 +1028,6 @@ class PassOpenD extends Component {
 
     };
     searchFromOtherDB = () => {
-
-
         this.setState({
             icondbALoadingA: true,
         });
@@ -981,32 +1077,10 @@ class PassOpenD extends Component {
     saveData = () => {
         this.showModal()
     };
-
     saveNote = () => {
-
-        console.log('hcia saveNote')
         this.printDocument()
-
     };
     printDocument = () => {
-
-        // html2canvas(document.getElementById('openD'), { letterRendering: 1, allowTaint : true, onrendered : function (canvas) { } });
-
-        const imgArr = [];
-
-        // const el = document.querySelector('#test')
-        // el.scrollIntoView()
-        // setTimeout(function () {
-        //     html2canvas(el, {
-        //         onrendered: function (canvas) {
-        //             document.body.appendChild(canvas)
-        //         },
-        //         useCORS: true
-        //     })
-        // }, 10)
-        ///
-        // var img = document.getElementById('idcard_2');
-        // img.crossOrigin = "http://mobile.nooko.cn:9080";
         const input = document.getElementById('openD');
         console.log('hcia input', input)
         html2canvas(input,
@@ -1015,9 +1089,7 @@ class PassOpenD extends Component {
                 logging: false,
                 imageTimeout: 60000,
                 useCORS: true
-
             })
-
             .then((canvas) => {
                 var contentWidth = canvas.width;
                 var contentHeight = canvas.height;
@@ -1026,16 +1098,12 @@ class PassOpenD extends Component {
                 //页面偏移
                 var position = 0;
                 //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
-                var imgWidth = 595.28;
+                var imgWidth = 555.28;
                 var imgHeight = 595.28 / contentWidth * contentHeight;
 
                 var pageData = canvas.toDataURL('image/jpeg', 1.0);
                 var pdf = new jsPDF('', 'pt', 'a4');
-
-                //放大会清晰一点
-                pdf.internal.scaleFactor = 1.33;
-                //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
-                //当内容未超过pdf一页显示的范围，无需分页
+                pdf.internal.scaleFactor = 2.00;
                 if (leftHeight < pageHeight) {
                     pdf.addImage(pageData, 'JPEG', 20, 40, imgWidth, imgHeight);
                 } else {
@@ -1043,7 +1111,6 @@ class PassOpenD extends Component {
                         pdf.addImage(pageData, 'JPEG', 20, position + 40, imgWidth, imgHeight)
                         leftHeight -= pageHeight;
                         position -= 841.89;
-                        //避免添加空白页
                         if (leftHeight > 0) {
                             pdf.addPage();
                         }
@@ -1053,17 +1120,13 @@ class PassOpenD extends Component {
             })
         ;
     }
-
-
     saveReject = () => {
-
         this.setState({
             iconcanLoading: true,
         });
         var me = this;
 
         window.Axios.post('/open/cancelOpenApply', {
-            // "language":"zh-CN","userId":"#############################"
             'content': me.state.changeNoteV,
             'id': me.state.recordData.id
         }).then(function (response) {
@@ -1123,13 +1186,10 @@ class PassOpenD extends Component {
         console.log('hcia value', value)
     };
     checkfromdbType = (value) => {
-        console.log('hcia value', value)
-
         this.setState({
             checkfromdbName: (value == 0 ? this.state.recordData.phoneNumber : value == 1 ? this.state.recordData.nationalID : this.state.recordData.email),
             checkfromdbTypeV: value
         });
-
     };
     onChangetradeType = (e) => {
         console.log('radio3 checked', e.target.value);
@@ -1138,19 +1198,16 @@ class PassOpenD extends Component {
         });
     }
     checkSaveData = () => {
-
         let self = this
         this.setState({
             visible: false,
         });
-
         window.Axios.post('open/prestore',
             {
                 id: self.state.recordData.id,
                 ...self.state.waitUpdate
             }
         ).then(function (response) {
-
             console.log('hcia response', response)
             if (response.data.code === 1) {
                 message.success('save ok!')
@@ -1158,12 +1215,9 @@ class PassOpenD extends Component {
                     isNeedSave: false,
                 });
             }
-
-
         }).catch(function (error) {
             console.log(error);
         });
-
     }
     changeNote = (e) => {
         this.state.changeNoteV = e.target.value
@@ -1171,10 +1225,7 @@ class PassOpenD extends Component {
         this.setState({
             changeNoteB: true,
         });
-        console.log('hcia this.state.changeNoteV', this.state.changeNoteV)
     }
-
-
     onChangelastNameCn = (e) => {
         this.state.waitUpdate.lastNameCn = e.target.value
         this.setState({
@@ -1199,7 +1250,6 @@ class PassOpenD extends Component {
             isNeedSave: true,
         });
     }
-
     onChangefirstName = (e) => {
         this.state.waitUpdate.firstName = e.target.value
         this.setState({
@@ -1225,200 +1275,136 @@ class PassOpenD extends Component {
         });
     }
     onChangeBirth = (value, dateString) => {
-        console.log('hcia dateString', dateString)
         var date = new Date(dateString + ' 00:00:00:000');
-        // 有三种方式获取
         var time1 = date.getTime();
-        var time2 = date.valueOf();
-        var time3 = Date.parse(date);
-        console.log('hcia', time3);//1398250549000
-
         this.state.waitUpdate.dateOfBirth = time1;
-
         this.setState({
             testeee: dateString,
             isNeedSave: true,
-
         });
-
     }
     onChangegender = (value) => {
-
         console.log('hcia value', value)
         this.state.waitUpdate.gender = (value === 'Male' ? 1 : 0);
-
         this.setState({
             mGender: value,//1:male 0:female
             isNeedSave: true,
         });
-
     }
-
     onChangeannualIncome = (value) => {
-
-
         var tmpv = ''
         this.state.IXIncomeList.forEach(function (element) {
             if (element.name == value) {
                 tmpv = element.value
             }
         });
-
         this.state.waitUpdate.ix_Income = tmpv;
         this.state.ix_IncomeNAME = value;
-        //
         this.setState({
             mAnnualIncome: value,//1:male 0:female
             isNeedSave: true,
         });
-
     }
     onChangemInitialDepositToYourNetLiquidAssets = (value) => {
-
-
         var tmpv = ''
         this.state.IXPercentage.forEach(function (element) {
             if (element.name == value) {
                 tmpv = element.value
             }
         });
-
         this.state.waitUpdate.ix_Percentage = tmpv;
         this.state.ix_PercentageNAME = value;
-        //
         this.setState({
             mInitialDepositToYourNetLiquidAssets: value,
             isNeedSave: true,
         });
-
     }
     onChangemfundsSource = (value) => {
-
-
         var tmpv = ''
         this.state.IXFundsSource.forEach(function (element) {
             if (element.name == value) {
                 tmpv = element.value
             }
         });
-
         this.state.waitUpdate.ix_FundsSource = tmpv;
         this.state.ix_FundsSourceNAME = value;
-        //
         this.setState({
             mfundsSource: value,
             isNeedSave: true,
         });
-
     }
     onChangemusCitizenOrResidentForTaxPurpposes = (value) => {
-
-
         var tmpv = ''
         this.state.IXUStax.forEach(function (element) {
             if (element.name == value) {
                 tmpv = element.value
             }
         });
-
         this.state.waitUpdate.ix_UStax = tmpv;
         this.state.ix_UStaxNAME = value;
-        //
         this.setState({
             musCitizenOrResidentForTaxPurpposes: value,
             isNeedSave: true,
         });
-
     }
     onChangemyearsTrading = (value) => {
-
-
         var tmpv = ''
         this.state.IXTradingExperience.forEach(function (element) {
             if (element.name == value) {
                 tmpv = element.value
             }
         });
-
         this.state.waitUpdate.ix_Trading_Experience = tmpv;
         this.state.ix_Trading_ExperienceNAME = value;
-        //
         this.setState({
             myearsTrading: value,
             isNeedSave: true,
         });
-
     }
     onChangemtradingObjectives = (value) => {
-
-
         var tmpv = ''
         this.state.IXTradingObjectives.forEach(function (element) {
             if (element.name == value) {
                 tmpv = element.value
             }
         });
-
         this.state.waitUpdate.ix_Trading_Objectives = tmpv;
         this.state.ix_Trading_ObjectivesNAME = value;
-        //
         this.setState({
             mtradingObjectives: value,
             isNeedSave: true,
         });
-
-    }
+    };
     onChangemriskTolerance = (value) => {
-
-
         var tmpv = ''
         this.state.IXRisk_Tolerance.forEach(function (element) {
             if (element.name == value) {
                 tmpv = element.value
             }
         });
-
         this.state.waitUpdate.ix_Risk_Tolerance = tmpv;
         this.state.ix_Risk_ToleranceNAME = value;
-        //
         this.setState({
             mriskTolerance: value,
             isNeedSave: true,
         });
-
     }
-
-
     onChangeSSS = (e) => {
-        console.log('hcia', e.target.getAttribute('tagkey'));
-        console.log('hcia', 'radio3 checked', e.target.value);
-
-
         this.state.waitUpdate.lastNameCn = e.target.value
         this.setState({
             isNeedSave: true,
         });
     };
-
     addBlackRequest(key) {
         let me = this
-
-        // var content =  ?
-        //     if{}
-
         if (!me.state.changeNoteV) {
             message.error('備註必填')
             return
-
         }
-
         window.Axios.post('auth/addBlackUser', {
-
             'content': me.state.changeNoteV,
-            // 'belongUserId': me.state.recordData.belongUserId,
             'id': me.state.recordData.id,
             'listType': 2,//1:合规 2:开户 3:交易
-
         }).then(function (response) {
             if (response.data.code === 1) {
                 notification.close(key)
@@ -1426,10 +1412,8 @@ class PassOpenD extends Component {
             }
         }).catch(function (error) {
             console.log(error);
-
         });
     }
-
     openTipBlack() {
 
         const key = `open${Date.now()}`;

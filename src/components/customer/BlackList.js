@@ -48,16 +48,15 @@ export default class BlackList extends Component {
                 width: 150,
                 fixed: 'left',
                 render: (text, record) => (
-
                     <span>{record.mobile}</span>
-
                 ),
             }, {
                 title: '姓名',
                 dataIndex: 'name',
                 key: 'name',
                 render: (text, record) => (
-                    <span>{record.name}</span>),
+                    <span>{record.name}</span>
+                ),
             }, {
                 title: '活跃度',
                 dataIndex: '活跃度',
@@ -145,7 +144,6 @@ export default class BlackList extends Component {
 
     handleremoveSelect = () => {
 
-
         let self = this
         this.setState({
             selectMail: '',
@@ -158,10 +156,9 @@ export default class BlackList extends Component {
             self.searchSelect()
         })
 
-
     };
     requestPageA = () => {
-        let self = this
+        let self = this;
         self.setState({
             loadingA: true
         })
@@ -212,7 +209,6 @@ export default class BlackList extends Component {
             self.setState({
                 totalpageB: response.data.data.totalPage,
                 bklistB: response.data.data.list,
-
                 loadingB: false
             });
 
@@ -335,18 +331,8 @@ export default class BlackList extends Component {
 
     onOk = (value) => {
         console.log('hcia', 'onOk: ', value);
-
-
         var selectTimeStart = value[0].unix()+'000'
-        //1545275083
-        //26582400000
-        //27187200000
         var selectTimeEnd = value[1].unix()+'000'
-
-        console.log('hcia selectTimeStart' , selectTimeStart)
-        console.log('hcia selectTimeEnd' , selectTimeEnd)
-
-
         this.setState({
             selectTimeStart: selectTimeStart,
             selectTimeEnd: selectTimeEnd,
@@ -413,6 +399,9 @@ export default class BlackList extends Component {
                         type="card">
                         <TabPane tab="合规黑名单" key="1">
                             <Button
+
+
+                                style={{marginBottom: 10}}
                                 type="primary"
                                 onClick={() => this.handleremoveList()}
                                 disabled={!hasSelected}
