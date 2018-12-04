@@ -44,11 +44,15 @@ export default class Basic extends Component {
                     <span>{record.name}</span>),
             }, {
                 title: '账号',
+                width: 150,
+
                 dataIndex: '申请序号',
                 key: '申请序号',
                 render: (text, record) => (<span>{record.accountNo}</span>),
             }, {
                 title: '账号类型',
+                width: 150,
+
                 dataIndex: '账号类型',
                 key: '账号类型',
                 render: (text, record) => (
@@ -57,30 +61,40 @@ export default class Basic extends Component {
                 title: '开户时间',
                 dataIndex: '开户时间',
                 key: '开户时间',
+                width: 240,
+
                 render: (text, record) => (
                     <span>{record.date}</span>),
             }, {
                 title: '保证金占比',
                 dataIndex: '保证金占比',
                 key: '保证金占比',
+                width: 120,
+
                 render: (text, record) => (
                     <span>{record.marginLevel}</span>)
             }, {
                 title: '浮动余额',
                 dataIndex: '浮动余额',
                 key: '浮动余额',
+                width: 120,
+
                 render: (text, record) => (
                     <span>{record.cashBalance}</span>),
             }, {
                 title: '账户净值',
                 dataIndex: '账户净值',
                 key: '账户净值',
+                width: 120,
+
                 render: (text, record) => (
                     <span>{record.netEquity}</span>),
             }, {
                 title: '当前状态',
                 dataIndex: '当前状态',
                 key: '当前状态',
+                width: 120,
+
                 render: (text, record) => (
                     <span>{record.accountStatus == 1 ? '正常' : (record.accountStatus == 2) ? '禁止登陆' : '禁止交易'}</span>
                 )
@@ -89,10 +103,14 @@ export default class Basic extends Component {
                 title: '备注',
                 dataIndex: '备注',
                 key: '备注',
+                width: 120,
+
                 render: (text, record) => (
                     <span>{record.comment}</span>)
             }, {
                 title: '刷新时间',
+                width: 140,
+
                 dataIndex: '刷新时间',
                 key: '刷新时间',
                 render: (text, record) => (
@@ -100,6 +118,8 @@ export default class Basic extends Component {
             }, {
                 title: '操作人',
                 dataIndex: '操作人',
+                width: 120,
+
                 key: '操作人',
                 render: (text, record) => (
                     <span>{record.operator}</span>)
@@ -194,7 +214,7 @@ export default class Basic extends Component {
                 <Table rowKey="id"
                        columns={this.columns}
                        dataSource={this.state.userList}
-                       scroll={{x: 1300}}
+                       scroll={{x: 1600}}
                        bordered
                        loading={this.state.loading}
                        pagination={{  // 分页
