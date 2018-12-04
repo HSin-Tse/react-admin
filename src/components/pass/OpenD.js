@@ -8,6 +8,9 @@ import React, {Component} from 'react';
 import {Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, Popconfirm, notification} from 'antd';
 import {Radio} from 'antd';
 import {message} from 'antd';
+// import {html2canvas} from 'html2canvas';
+import html2canvas from 'html2canvas';
+import * as jsPDF from 'jspdf'
 import BreadcrumbCustom from '../BreadcrumbCustom';
 import PhotoSwipe from "photoswipe";
 import PhotoswipeUIDefault from "photoswipe/dist/photoswipe-ui-default";
@@ -255,12 +258,12 @@ class PassOpenD extends Component {
 
 
         return (
-            <div>
+            <div id="openD">
 
-                <div>id: {this.state.recordData.id}</div>
-                <div>status: {this.state.recordData.status}</div>
-                <div>isNeedSave :{this.state.isNeedSave.toString()}</div>
-                <div>waitUpdate :{JSON.stringify(this.state.waitUpdate)}</div>
+                {/*<div>id: {this.state.recordData.id}</div>*/}
+                {/*<div>status: {this.state.recordData.status}</div>*/}
+                {/*<div>isNeedSave :{this.state.isNeedSave.toString()}</div>*/}
+                {/*<div>waitUpdate :{JSON.stringify(this.state.waitUpdate)}</div>*/}
                 {/*<div>recordDictirys :{JSON.stringify(this.state.recordDictirys)}</div>*/}
 
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
@@ -592,7 +595,7 @@ class PassOpenD extends Component {
 
                         <Col md={8}>
                             <Card className="gutter-box" bordered={true} bodyStyle={{padding: 0}}>
-                                <div>
+                                <div >
                                     <img
                                         onClick={() => this.openGallery(this.state.recordData.idcard_0)}
                                         alt="example" width="100%"
@@ -623,7 +626,7 @@ class PassOpenD extends Component {
                         <Col md={8}>
                             <Card className="gutter-box" bordered={true} bodyStyle={{padding: 0}}>
                                 <div>
-                                    <img
+                                    <img id="idcard_2"
                                         onClick={() => this.openGallery(this.state.recordData.idcard_2)}
                                         alt="example" width="100%"
                                         src={this.state.recordData.idcard_2}/>
@@ -979,9 +982,74 @@ class PassOpenD extends Component {
     saveNote = () => {
 
         console.log('hcia saveNote')
-
+        this.printDocument()
 
     };
+    printDocument = () => {
+
+        // html2canvas(document.getElementById('openD'), { letterRendering: 1, allowTaint : true, onrendered : function (canvas) { } });
+
+        const imgArr = [];
+
+        // const el = document.querySelector('#test')
+        // el.scrollIntoView()
+        // setTimeout(function () {
+        //     html2canvas(el, {
+        //         onrendered: function (canvas) {
+        //             document.body.appendChild(canvas)
+        //         },
+        //         useCORS: true
+        //     })
+        // }, 10)
+        ///
+        // var img = document.getElementById('idcard_2');
+        // img.crossOrigin = "http://mobile.nooko.cn:9080";
+        const input = document.getElementById('openD');
+        console.log('hcia input', input)
+        html2canvas(input,
+            {
+                scale: 4,
+                logging: false,
+                imageTimeout: 60000,
+                useCORS: true
+
+            })
+
+            .then((canvas) => {
+                var contentWidth = canvas.width;
+                var contentHeight = canvas.height;
+                var pageHeight = contentWidth / 592.28 * 841.89;
+                var leftHeight = contentHeight;
+                //页面偏移
+                var position = 0;
+                //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
+                var imgWidth = 595.28;
+                var imgHeight = 595.28 / contentWidth * contentHeight;
+
+                var pageData = canvas.toDataURL('image/jpeg', 1.0);
+                var pdf = new jsPDF('', 'pt', 'a4');
+
+                //放大会清晰一点
+                pdf.internal.scaleFactor = 1.33;
+                //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+                //当内容未超过pdf一页显示的范围，无需分页
+                if (leftHeight < pageHeight) {
+                    pdf.addImage(pageData, 'JPEG', 20, 40, imgWidth, imgHeight);
+                } else {
+                    while (leftHeight > 0) {
+                        pdf.addImage(pageData, 'JPEG', 20, position + 40, imgWidth, imgHeight)
+                        leftHeight -= pageHeight;
+                        position -= 841.89;
+                        //避免添加空白页
+                        if (leftHeight > 0) {
+                            pdf.addPage();
+                        }
+                    }
+                }
+                pdf.save(this.state.recordData.cnName + `user.pdf`);
+            })
+        ;
+    }
 
 
     saveReject = () => {
