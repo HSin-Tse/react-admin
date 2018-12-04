@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, message, Select, Modal} from 'antd';
+import {Button, Table, message, Select, Modal, Card, Col} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 
 const Option = Select.Option;
@@ -12,6 +12,8 @@ export default class Basic extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            selectedRowKeys: [],
+
             visible: false,
             visibleOpM: false,
             date: new Date(),
@@ -21,50 +23,11 @@ export default class Basic extends Component {
             searchPhone: '',
             totalPage: 1,
             modeState: 1,
+            forbiddenValue: 0,
+            current: 0,
             pgsize: 10,
-            suspend_reason_type: [{
-                "name": "无效的邮箱",
-                "value": "1",
-                "key": null,
-                "parentCode": null,
-                "parentName": null,
-                "code": null
-            }, {
-                "name": "诈骗",
-                "value": "2",
-                "key": null,
-                "parentCode": null,
-                "parentName": null,
-                "code": null
-            }, {
-                "name": "拒绝付款",
-                "value": "3",
-                "key": null,
-                "parentCode": null,
-                "parentName": null,
-                "code": null
-            }, {
-                "name": "正在联系",
-                "value": "4",
-                "key": null,
-                "parentCode": null,
-                "parentName": null,
-                "code": null
-            }, {
-                "name": "驳回",
-                "value": "5",
-                "key": null,
-                "parentCode": null,
-                "parentName": null,
-                "code": null
-            }, {
-                "name": "等待处理文件",
-                "value": "6",
-                "key": null,
-                "parentCode": null,
-                "parentName": null,
-                "code": null
-            }, {"name": "不活跃", "value": "7", "key": null, "parentCode": null, "parentName": null, "code": null}]
+            loadFor: false,
+            suspend_reason_type: []
 
         };
     }
@@ -89,7 +52,7 @@ export default class Basic extends Component {
 
             self.setState({
 
-                    // suspend_reason_type:response.data.data.suspend_reason_type
+                    suspend_reason_type: response.data.data.suspend_reason_type
                 }
             );
 
@@ -207,21 +170,18 @@ export default class Basic extends Component {
                 // width: 100,
                 render: (text, record) => (
                     <div>
-                        <Select value={record.displayStatus} style={{width: 100}} onChange={(value) => this.handleChange(value,record)}>
-                            <Option key ="1"  value="正常">正常</Option>
-                            <Option key ="2"  value="禁止登陆">禁止登陆</Option>
-                            <Option key ="3"  value="禁止交易">禁止交易</Option>
+                        <Select value={record.displayStatus} style={{width: 100}}
+                                onChange={(value) => this.handleChange(value, record)}>
+                            <Option key="1" value="正常">正常</Option>
+                            <Option key="2" value="禁止登陆">禁止登陆</Option>
+                            <Option key="3" value="禁止交易">禁止交易</Option>
 
-                            {/*{this.state.suspend_reason_type.map(ccty => <Option*/}
-                                {/*key={ccty.value}>{ccty.name}</Option>)}*/}
                         </Select>
                         <span className="ant-divider"/>
-                        <Button className="ant-dropdown-link"
-                                onClick={() => this.handleEdit(record)}>{record.accountStatus == 1 ? '正常' : (record.accountStatus == 2) ? '禁止登陆' : '禁止交易'}</Button>
                     </div>
                 ),
             }];
-        //1:正常 2:禁止登陆 3:禁止交易
+
         this.nodeColumns = [
             {
                 title: '日期',
@@ -246,7 +206,7 @@ export default class Basic extends Component {
                 render: (text, record) => (
                     <span>{record.bkUserName}</span>)
             }];
-        this.requestPage(1)
+        this.requestPage()
     }
 
     timestampToTime = (timestamp) => {
@@ -283,28 +243,27 @@ export default class Basic extends Component {
 
         }).catch(function (error) {
             console.log(error);
-            // message.warn(error);
         });
-        // this.props.history.push('/app/pass/passopen/detail' + record.id)
     };
-    handleChange = (value,record) => {
+    handleChange = (value, record) => {
         let self = this
-
-        // self.showModalOP()
-
         self.setState({
-            modeState: value
+                modeState: value,
+                opRecord: record
             }, () => {
                 self.showModalOP()
             }
         );
 
-        console.log('hcia value' , value)
-        console.log('hcia record' , record)
+        console.log('hcia value', value)
+        console.log('hcia record', record)
     };
-    handleEdit = (record) => {
+    forbitChange = (value) => {
         let self = this
-        self.showModalOP()
+        self.setState({
+                forbiddenValue: value,
+            }
+        );
     };
 
 
@@ -322,19 +281,16 @@ export default class Basic extends Component {
         return +str >= 10 ? str : '0' + str
     };
 
-    requestPage = (pg) => {
+    requestPage = () => {
 
-
-        pg = pg - 1
         let self = this
         self.setState({
                 loading: true,
             }
         );
-        console.log('hcia pg', pg)
         window.Axios.post('star/getStarLiveAccountList', {
             'pageSize': self.state.pgsize,
-            'pageNo': pg,
+            'pageNo': self.state.current,
         }).then(function (response) {
             console.log(response);
 
@@ -348,19 +304,40 @@ export default class Basic extends Component {
 
         }).catch(function (error) {
             console.log(error);
-            // message.warn(error);
         });
     }
 
     changePage = (page) => {
         console.log('hcia page', page)
         this.setState({
-            current: page,
+            current: page - 1,
         }, () => {
-
-            this.requestPage(page)
-
+            this.requestPage()
         })
+    }
+    refleshNowpage = () => {
+
+
+        let self = this ;
+        var result=self.state.selectedRowKeys.map(Number);
+
+        window.Axios.post('star/refreshStarLiveAccount', {
+            idList: result,
+        }).then(function (response) {
+            console.log(response);
+            self.setState({
+                visibleOpM: false,
+                loadFor: false,
+            }, () => {
+                self.requestPage()
+            });
+            message.success('操作成功');
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+
     }
 
     showModal = () => {
@@ -368,33 +345,38 @@ export default class Basic extends Component {
             visible: true,
         });
     }
-
     showModalOP = () => {
         this.setState({
             visibleOpM: true,
         });
     }
-
     handleOk = () => {
-
+        var mStatus = this.state.modeState == '正常' ? 1 : this.state.modeState == '禁止登陆' ? 2 : 3;
+        // var reasonType = mStatus ==2?
         let self = this;
+        self.setState({
+            loadFor:true
+        })
         window.Axios.post('star/updateStarLiveAccount', {
-            'id': 'suspend_reason_type',
-            'status': 'suspend_reason_type',
-            'reasonType': 'suspend_reason_type',
+            'id': self.state.opRecord.id,
+            'status': mStatus,
+            'reasonType': self.state.forbiddenValue,
         }).then(function (response) {
             console.log(response);
-
+            self.setState({
+                visibleOpM: false,
+                loadFor: false,
+            }, () => {
+                self.state.forbiddenValue = 0
+                self.requestPage()
+            });
+            message.success('操作成功');
 
         }).catch(function (error) {
             console.log(error);
         });
 
-        // self.setState({
-        //     visibleOpM: false,
-        // });
 
-        message.success('操作成功');
     }
 
     handleCancel = (e) => {
@@ -403,30 +385,52 @@ export default class Basic extends Component {
             visible: false,
             visibleOpM: false,
         });
+    };
+    onSelectChange = (selectedRowKeys) => {
+        console.log('hcia', 'selectedRowKeys changed: ', selectedRowKeys);
+
+
+        this.setState({selectedRowKeys});
     }
-
-
     render() {
+        const { selectedRowKeys} = this.state;
+
+
+
+        const rowSelection = {
+            selectedRowKeys,
+            onChange: this.onSelectChange,
+        };
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
 
                 <Modal
-                    title={this.state.modeState}
+                    title={this.state.modeState == '正常' ? '恢复正常' : this.state.modeState}
                     onCancel={this.handleCancel}
                     visible={this.state.visibleOpM}
                     footer={[
                         <Button key="back" onClick={this.handleCancel}>取消操作</Button>,
-                        <Button key="submit" type="primary" onClick={() => this.handleOk()}>
+                        <Button  loading={this.state.loadFor} key="submit" type="primary" onClick={() => this.handleOk()}>
                             提交
                         </Button>,
                     ]}
                 >
-                    <Table rowKey="id"
-                           columns={this.nodeColumns}
-                           dataSource={this.state.nodeList}// nodeList
-                    />
+                    <div>
+                        {this.state.modeState == '正常' ? <span>确认当前用户账户恢复正常</span> : null}
+                        {this.state.modeState == '禁止登陆' ? <span>请选择禁止登录原因</span> : null}
+                        {this.state.modeState == '禁止交易' ? <span>禁止交易</span> : null}
+                    </div>
+                    <div>
+
+                        {this.state.modeState == '禁止登陆' ?
+                            <Select style={{width: 200, marginTop: 20}} defaultValue='无效的邮箱'
+                                    onChange={(value) => this.forbitChange(value)}>
+                                {this.state.suspend_reason_type.map(ccty => <Option
+                                    value={ccty.value} key={ccty.value}>{ccty.name}</Option>)}
+                            </Select> : null}
+                    </div>
 
 
                 </Modal>
@@ -446,18 +450,27 @@ export default class Basic extends Component {
                 </Modal>
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
 
-                <Table rowKey="id"
-                       columns={this.columns}
-                       dataSource={this.state.userList}
-                       scroll={{x: 1600}}
-                       bordered
-                       loading={this.state.loading}
-                       pagination={{  // 分页
-                           total: this.state.pgsize * this.state.totalPage,
-                           pageSize: this.state.pgsize,
-                           onChange: this.changePage,
-                       }}
-                />
+                <Card title="交易账户管理"
+                      extra={<Button type="default" onClick={() => this.refleshNowpage()}
+                      >刷新当前页面</Button>}
+                >
+
+                    <Table rowKey="id"
+                           rowSelection={rowSelection}
+
+                           columns={this.columns}
+                           dataSource={this.state.userList}
+                           scroll={{x: 1600}}
+                           bordered
+                           loading={this.state.loading}
+                           pagination={{  // 分页
+                               total: this.state.pgsize * this.state.totalPage,
+                               pageSize: this.state.pgsize,
+                               onChange: this.changePage,
+                           }}
+                    />
+                </Card>,
+
             </div>
 
         )
