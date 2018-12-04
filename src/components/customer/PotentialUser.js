@@ -18,9 +18,9 @@ export default class BlackList extends Component {
 			bklistA: [],
 			bklistB: [],
 			bklistC: [],
-			currentA: 0,
-			currentB: 0,
-			currentC: 0,
+			currentA: 0,//PotentialUser
+			currentB: 0,//SimulatorUser
+			currentC: 0,//IntendingUser
 			totalpageA: 0,
 			totalpageB: 0,
 			totalpageC: 0,
@@ -320,13 +320,13 @@ export default class BlackList extends Component {
 		let self = this
 		console.log('hcia self.state.nowKey', self.state.nowKey)
 		if (self.state.nowKey == 1) {
-			this.requestPageA()//1:合规 2:开户 3:交易
+			this.requestPageA()//1:Potential 2:simulator 3:intend
 		}
 		if (self.state.nowKey == 2) {
-			this.requestPageB()//1:合规 2:开户 3:交易
+			this.requestPageB()
 		}
 		if (self.state.nowKey == 3) {
-			this.requestPageC()//1:合规 2:开户 3:交易
+			this.requestPageC()
 		}
 	}
 
