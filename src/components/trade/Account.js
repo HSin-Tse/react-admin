@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, Input, Select, Modal} from 'antd';
+import {Button, Table, message, Select, Modal} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 
 const Option = Select.Option;
@@ -13,6 +13,7 @@ export default class Basic extends Component {
         super(props);
         this.state = {
             visible: false,
+            visibleOpM: false,
             date: new Date(),
             userList: [],
             nodeList: [],
@@ -276,7 +277,10 @@ export default class Basic extends Component {
         // this.props.history.push('/app/pass/passopen/detail' + record.id)
     };
     handleEdit = (record) => {
-        console.log('hcia record', record)
+        let self = this
+
+        self.showModalOP()
+
         // this.props.history.push('/app/pass/passopen/detail' + record.id)
     };
 
@@ -342,17 +346,27 @@ export default class Basic extends Component {
         });
     }
 
-    handleOk = (e) => {
-        console.log(e);
+    showModalOP = () => {
         this.setState({
-            visible: false,
+            visibleOpM: true,
         });
+    }
+
+    handleOk = () => {
+
+        console.log('hcia handleOk' )
+        this.setState({
+            visibleOpM: false,
+        });
+
+        message.success('操作成功');
     }
 
     handleCancel = (e) => {
         console.log(e);
         this.setState({
             visible: false,
+            visibleOpM: false,
         });
     }
 
@@ -362,6 +376,26 @@ export default class Basic extends Component {
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
+
+                <Modal
+                    title="备注详情"
+                    onCancel={this.handleCancel}
+                    visible={this.state.visibleOpM}
+                    footer={[
+                        <Button key="back" onClick={this.handleCancel}>取消操作</Button>,
+                        <Button key="submit" type="primary"  onClick={()=>this.handleOk()}>
+                            提交
+                        </Button>,
+                    ]}
+                >
+                    <Table rowKey="id"
+                           columns={this.nodeColumns}
+                           dataSource={this.state.nodeList}// nodeList
+                    />
+
+
+                </Modal>
+
                 <Modal
                     title="备注详情"
                     onCancel={this.handleCancel}
