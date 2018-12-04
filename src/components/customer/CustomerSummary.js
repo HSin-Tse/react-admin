@@ -401,7 +401,6 @@ export default class CustomerSummary extends Component {
 
 	}
 	forzenAccount = (record) =>{
-		let self = this
 		window.Axios.post('star/blockStarLiveAccount', {
 			"starClientAccount":record.accountNo,
 			"belongUserId":record.belongUserId,
