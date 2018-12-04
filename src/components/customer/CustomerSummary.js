@@ -240,7 +240,7 @@ export default class CustomerSummary extends Component {
 				dataIndex: '手机号',
 				key: '手机号',
 				width: 150,
-				fixed: 'left',
+				align: 'center',
 				render: (text, record) => (
 
 					<span>{record.mobile}</span>
@@ -258,41 +258,45 @@ export default class CustomerSummary extends Component {
 				title: '开户状态',
 				dataIndex: '开户状态',
 				key: '开户状态',
-				width: 100,
-
+				width: 80,
+				align: 'center',
 				render: (text, record) => (<span>已开户</span>),
 			},
 			{
 				title: '账户类型',
 				dataIndex: '账户类型',
 				key: '账户类型',
-				width: 100,
-
+				width: 80,
+				align: 'center',
 				render: (text, record) => (<span>{record.accountType}</span>),
 			}, {
 				title: '交易账号',
 				dataIndex: '交易账号',
 				key: '交易账号',
-				width: 300,
+				width: 150,
+				align: 'center',
 				render: (text, record) => (
 					<span>{record.accountNo}</span>),
 			}, {
 				title: '最近登录时间',
 				dataIndex: '最近登录时间',
 				key: '最近登录时间',
-				width: 300,
+				width: 150,
+				align: 'center',
 				render: (text, record) => (<span>{record.date}</span>),
 			}, {
 				title: '客诉次数',
 				dataIndex: '客诉次数',
 				key: '客诉次数',
-				width: 100,
+				width: 50,
+				align: 'center',
 				render: (text, record) => (<span>{record.complaintNum}</span>),
 			}, {
 				title: '回访次数',
 				dataIndex: '回访次数',
 				key: '回访次数',
-				width: 100,
+				width: 50,
+				align: 'center',
 				render: (text, record) => (
 					<span>{record.commentNum}</span>),
 			}, {
@@ -300,13 +304,22 @@ export default class CustomerSummary extends Component {
 				dataIndex: '备注信息',
 				key: '备注信息',
 				width: 100,
+				align: 'center',
 				render: (text, record) => (
 					<span>{record.comment}</span>),
+			}, {
+				title: '操作人',
+				dataIndex: '操作人',
+				key: '操作人',
+				width: 100,
+				align: 'center',
+				render: (text, record) => (
+					<span>{record.operator}</span>),
 			}, {
 				title: '查看',
 				dataIndex: '查看',
 				key: '查看',
-				width: 300,
+				width: 200,
 				align: 'center',
 				render: (text, record) => (
 					<div>
@@ -314,18 +327,12 @@ export default class CustomerSummary extends Component {
 						<Button className="ant-dropdown-link" onClick={() => this.goToUserInfo(record.belongUserId)}>行為信息</Button>
 					</div>
 					)
-			}, {
-				title: '操作人',
-				dataIndex: '操作人',
-				key: '操作人',
-				width: 100,
-				render: (text, record) => (
-					<span>{record.operator}</span>),
-			}, {
+			},{
 				title: '业务操作',
 				dataIndex: '业务操作',
 				key: '业务操作',
-				width: 300,
+				width: 200,
+				align: 'center',
 				render: (text, record) => (
 					<div>
 						<Button className="ant-dropdown-link" onClick={ () => this.forzenAccount(record)}>凍結</Button>
@@ -336,7 +343,7 @@ export default class CustomerSummary extends Component {
 				title: '其他',
 				key: '其他',
 				fixed: '其他',
-				width: 300,
+				width: 200,
 				align:'center',
 				render: (text, record) => (
 					<div>
@@ -474,7 +481,7 @@ export default class CustomerSummary extends Component {
 					rowSelection={rowSelection}
 					columns={this.columns}
 					dataSource={this.state.bklistA}
-					scroll={{ x: 2500 }}
+					scroll={{ x: 2000 }}
 					loading={this.state.loading}
 					pagination={{ // 分页
 						total: this.state.totalpageA * this.state.pgsize,
