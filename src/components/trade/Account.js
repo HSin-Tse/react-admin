@@ -20,6 +20,7 @@ export default class Basic extends Component {
             loading: false,
             searchPhone: '',
             totalPage: 1,
+            modeState: 1,
             pgsize: 10,
             suspend_reason_type: [{
                 "name": "无效的邮箱",
@@ -206,12 +207,21 @@ export default class Basic extends Component {
                 // width: 100,
                 render: (text, record) => (
                     <div>
+                        <Select value={record.displayStatus} style={{width: 100}} onChange={(value) => this.handleChange(value,record)}>
+                            <Option key ="1"  value="正常">正常</Option>
+                            <Option key ="2"  value="禁止登陆">禁止登陆</Option>
+                            <Option key ="3"  value="禁止交易">禁止交易</Option>
+
+                            {/*{this.state.suspend_reason_type.map(ccty => <Option*/}
+                                {/*key={ccty.value}>{ccty.name}</Option>)}*/}
+                        </Select>
                         <span className="ant-divider"/>
                         <Button className="ant-dropdown-link"
                                 onClick={() => this.handleEdit(record)}>{record.accountStatus == 1 ? '正常' : (record.accountStatus == 2) ? '禁止登陆' : '禁止交易'}</Button>
                     </div>
                 ),
             }];
+        //1:正常 2:禁止登陆 3:禁止交易
         this.nodeColumns = [
             {
                 title: '日期',
@@ -238,6 +248,7 @@ export default class Basic extends Component {
             }];
         this.requestPage(1)
     }
+
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
         const year = dateObj.getFullYear() // 获取年，
@@ -276,12 +287,24 @@ export default class Basic extends Component {
         });
         // this.props.history.push('/app/pass/passopen/detail' + record.id)
     };
-    handleEdit = (record) => {
+    handleChange = (value,record) => {
         let self = this
 
-        self.showModalOP()
+        // self.showModalOP()
 
-        // this.props.history.push('/app/pass/passopen/detail' + record.id)
+        self.setState({
+            modeState: value
+            }, () => {
+                self.showModalOP()
+            }
+        );
+
+        console.log('hcia value' , value)
+        console.log('hcia record' , record)
+    };
+    handleEdit = (record) => {
+        let self = this
+        self.showModalOP()
     };
 
 
@@ -310,7 +333,7 @@ export default class Basic extends Component {
         );
         console.log('hcia pg', pg)
         window.Axios.post('star/getStarLiveAccountList', {
-            'pageSize': this.state.pgsize,
+            'pageSize': self.state.pgsize,
             'pageNo': pg,
         }).then(function (response) {
             console.log(response);
@@ -354,10 +377,22 @@ export default class Basic extends Component {
 
     handleOk = () => {
 
-        console.log('hcia handleOk' )
-        this.setState({
-            visibleOpM: false,
+        let self = this;
+        window.Axios.post('star/updateStarLiveAccount', {
+            'id': 'suspend_reason_type',
+            'status': 'suspend_reason_type',
+            'reasonType': 'suspend_reason_type',
+        }).then(function (response) {
+            console.log(response);
+
+
+        }).catch(function (error) {
+            console.log(error);
         });
+
+        // self.setState({
+        //     visibleOpM: false,
+        // });
 
         message.success('操作成功');
     }
@@ -378,12 +413,12 @@ export default class Basic extends Component {
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
 
                 <Modal
-                    title="备注详情"
+                    title={this.state.modeState}
                     onCancel={this.handleCancel}
                     visible={this.state.visibleOpM}
                     footer={[
                         <Button key="back" onClick={this.handleCancel}>取消操作</Button>,
-                        <Button key="submit" type="primary"  onClick={()=>this.handleOk()}>
+                        <Button key="submit" type="primary" onClick={() => this.handleOk()}>
                             提交
                         </Button>,
                     ]}
