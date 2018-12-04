@@ -41,7 +41,7 @@ class CustomerUserInfo extends Component {
   componentDidMount() {
 
 
-
+    console.log('xxx',this.props.match.params.id)
     this.requestListData("4")
 
   }
