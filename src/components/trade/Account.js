@@ -208,7 +208,6 @@ export default class Basic extends Component {
             }];
         this.requestPage()
     }
-
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
         const year = dateObj.getFullYear() // 获取年，
@@ -223,9 +222,6 @@ export default class Basic extends Component {
         return +str >= 10 ? str : '0' + str
     };
     seeDetail = (record) => {
-        console.log('hcia record', record)
-
-        //
         let self = this
         window.Axios.post('star/getStarLiveAccountCommentList', {
             'pageSize': 100,
@@ -255,8 +251,6 @@ export default class Basic extends Component {
             }
         );
 
-        console.log('hcia value', value)
-        console.log('hcia record', record)
     };
     forbitChange = (value) => {
         let self = this
@@ -265,8 +259,6 @@ export default class Basic extends Component {
             }
         );
     };
-
-
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
         const year = dateObj.getFullYear() // 获取年，
@@ -280,7 +272,6 @@ export default class Basic extends Component {
     pad = (str) => {
         return +str >= 10 ? str : '0' + str
     };
-
     requestPage = () => {
 
         let self = this
@@ -306,7 +297,6 @@ export default class Basic extends Component {
             console.log(error);
         });
     }
-
     changePage = (page) => {
         console.log('hcia page', page)
         this.setState({
@@ -316,7 +306,6 @@ export default class Basic extends Component {
         })
     }
     refleshNowpage = () => {
-
 
         let self = this ;
         var result=self.state.selectedRowKeys.map(Number);
@@ -339,7 +328,6 @@ export default class Basic extends Component {
 
 
     }
-
     showModal = () => {
         this.setState({
             visible: true,
@@ -375,10 +363,7 @@ export default class Basic extends Component {
         }).catch(function (error) {
             console.log(error);
         });
-
-
-    }
-
+    };
     handleCancel = (e) => {
         console.log(e);
         this.setState({
@@ -388,15 +373,10 @@ export default class Basic extends Component {
     };
     onSelectChange = (selectedRowKeys) => {
         console.log('hcia', 'selectedRowKeys changed: ', selectedRowKeys);
-
-
         this.setState({selectedRowKeys});
     }
     render() {
         const { selectedRowKeys} = this.state;
-
-
-
         const rowSelection = {
             selectedRowKeys,
             onChange: this.onSelectChange,
