@@ -403,14 +403,14 @@ export default class BlackList extends Component {
 
 					</div>
 				</div>
-				<BreadcrumbCustom first="用戶管理" second="黑名單" />
+				<BreadcrumbCustom first="用户管理" second="Leads管理" />
 
 				<Card>
 
 					<Tabs
 						onChange={this.callback}
 						type="card">
-						<TabPane tab="合规黑名单" key="1">
+						<TabPane tab="潛在用戶" key="1">
 							<Button
 								type="primary"
 								onClick={() => this.handleremoveList()}
@@ -433,7 +433,7 @@ export default class BlackList extends Component {
 								}}
 							/>
 						</TabPane>
-						<TabPane tab="开户黑名单" key="2">
+						<TabPane tab="模擬用戶" key="2">
 							<Table rowKey="id"
 								columns={this.columns}
 								dataSource={this.state.bklistB}
@@ -446,7 +446,7 @@ export default class BlackList extends Component {
 								}}
 							/>
 						</TabPane>
-						<TabPane tab="交易黑名单" key="3">
+						<TabPane tab="意向用戶" key="3">
 							<Table rowKey="id"
 								columns={this.columns}
 								dataSource={this.state.bklistC}
