@@ -110,6 +110,19 @@ export default class CustomerSummary extends Component {
 			modal2Visible: false,
 		});
 	}
+	requestUnbindAccount = (record) =>{
+		window.Axios.post('star/unBindStarLiveAccount', {
+			"starClientAccount": record.accountNo,
+			"belongUserId": record.belongUserId,
+		}).then((response) => {
+
+
+			console.log('yyx handleAddComment success', response.data.data)
+		}).catch(function (error) {
+			console.log(error);
+		});
+
+	}
 	requestData = () => {
 		let self = this
 	
@@ -137,7 +150,7 @@ export default class CustomerSummary extends Component {
 			console.log(error);
 		});
 	}
-requestUserCommentList = () =>{
+	requestUserCommentList = () =>{
 			// must request data:
 			//belongUserId
 			//loginName
@@ -316,7 +329,7 @@ requestUserCommentList = () =>{
 				render: (text, record) => (
 					<div>
 						<Button className="ant-dropdown-link" onClick={ () => this.forzenAccount(record)}>凍結</Button>
-						<Button className="ant-dropdown-link">手機號解綁</Button>
+						<Button className="ant-dropdown-link" onClick={() => this.requestUnbindAccount(record)} >手機號解綁</Button>
 					</div>
 					),
 			},{
