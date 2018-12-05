@@ -24,7 +24,7 @@ export default class BlackList extends Component {
             totalpageB: 0,
             totalpageC: 0,
             nowKey: "1",
-            pgsize: 40,
+            pgsize: 10,
             loadingA: false,
             loadingB: false,
             loadingC: false,
@@ -160,7 +160,7 @@ export default class BlackList extends Component {
             loadingA: true
         })
         window.Axios.post('auth/getBlackList', {
-            pageNo: this.state.current,
+            pageNo: this.state.currentA,
             'listType': 1,//1:合规 2:开户 3:交易
             'email': this.state.selectMail,
             'nationalId': this.state.selectID,
@@ -190,8 +190,9 @@ export default class BlackList extends Component {
             loadingB: true
         })
         window.Axios.post('auth/getBlackList', {
-            pageNo: this.state.current,
+            pageNo: this.state.currentB,
             'listType': 2,//1:合规 2:开户 3:交易
+
             'email': this.state.selectMail,
             'nationalId': this.state.selectID,
             'startTime': this.state.selectTimeStart,
@@ -216,7 +217,7 @@ export default class BlackList extends Component {
             loadingC: true
         })
         window.Axios.post('auth/getBlackList', {
-            pageNo: this.state.current,
+            pageNo: this.state.currentC,
             'listType': 3,//1:合规 2:开户 3:交易
             'email': this.state.selectMail,
             'nationalId': this.state.selectID,
@@ -238,6 +239,7 @@ export default class BlackList extends Component {
 
 
     changePageA = (page) => {
+        page=page-1
         this.setState({
             currentA: page,
         }, () => {
@@ -245,6 +247,8 @@ export default class BlackList extends Component {
         })
     }
     changePageB = (page) => {
+        page=page-1
+
         this.setState({
             currentb: page,
         }, () => {
@@ -252,6 +256,8 @@ export default class BlackList extends Component {
         })
     }
     changePageC = (page) => {
+        page=page-1
+
         this.setState({
             currentC: page,
         }, () => {
@@ -398,7 +404,7 @@ export default class BlackList extends Component {
                                    columns={this.columns}
                                    dataSource={this.state.bklistA}
                                    scroll={{x: 1300}}
-                                   loading={this.state.loading}
+                                   loading={this.state.loadingA}
                                    pagination={{  // 分页
                                        total: this.state.totalpageA * this.state.pgsize,
                                        pageSize: this.state.pgsize,
@@ -411,7 +417,7 @@ export default class BlackList extends Component {
                                    columns={this.columns}
                                    dataSource={this.state.bklistB}
                                    scroll={{x: 1300}}
-                                   loading={this.state.loading}
+                                   loading={this.state.loadingB}
                                    pagination={{  // 分页
                                        total: this.state.totalpageB * this.state.pgsize,
                                        pageSize: this.state.pgsize,
@@ -424,7 +430,7 @@ export default class BlackList extends Component {
                                    columns={this.columns}
                                    dataSource={this.state.bklistC}
                                    scroll={{x: 1300}}
-                                   loading={this.state.loading}
+                                   loading={this.state.loadingC}
                                    pagination={{  // 分页
                                        total: this.state.totalpageC * this.state.pgsize,
                                        pageSize: this.state.pgsize,

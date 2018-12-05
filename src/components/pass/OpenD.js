@@ -3,19 +3,7 @@
  */
 import React, {Component} from 'react';
 import {
-    Popconfirm,
-    Icon,
-    Upload,
-    Col,
-    Card,
-    Row,
-    Button,
-    Modal,
-    Select,
-    Input,
-    Checkbox,
-    DatePicker,
-    notification
+    Popconfirm, Icon, Upload, Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, notification
 } from 'antd';
 import {Radio} from 'antd';
 import {message} from 'antd';
@@ -27,7 +15,6 @@ import PhotoswipeUIDefault from "photoswipe/dist/photoswipe-ui-default";
 import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
 import moment from 'moment';
-
 
 const Search = Input.Search;
 const {TextArea} = Input;
@@ -69,8 +56,6 @@ class PassOpenD extends Component {
                     })
                 });
             });
-        }).catch(function (error) {
-            console.log(error);
         });
     };
 
@@ -144,8 +129,6 @@ class PassOpenD extends Component {
                 IXRisk_Tolerance: response.data.data.IX_Risk_Tolerance,
 
             });
-        }).catch(function (error) {
-            console.log(error);
         });
 
 
@@ -198,14 +181,10 @@ class PassOpenD extends Component {
                     });
 
 
-                }).catch(function (error) {
-                    console.log(error);
                 });
 
 
             });
-        }).catch(function (error) {
-            console.log(error);
         });
 
 
@@ -286,8 +265,6 @@ class PassOpenD extends Component {
                     }
                 }).then(function (response) {
                     console.log('hcia response', response)
-                }).catch(function (error) {
-                    console.log(error);
                 });
 
 
@@ -939,8 +916,6 @@ class PassOpenD extends Component {
 
             }
 
-        }).catch(function (error) {
-            console.log(error);
         });
 
 
@@ -1090,8 +1065,6 @@ class PassOpenD extends Component {
                 me.openTipBlack()
             }
 
-        }).catch(function (error) {
-            console.log(error);
         });
 
 
@@ -1165,8 +1138,6 @@ class PassOpenD extends Component {
                     isNeedSave: false,
                 });
             }
-        }).catch(function (error) {
-            console.log(error);
         });
     }
     changeNote = (e) => {
@@ -1361,8 +1332,6 @@ class PassOpenD extends Component {
                 notification.close(key)
                 message.success('added  open  black ')
             }
-        }).catch(function (error) {
-            console.log(error);
         });
     }
 
@@ -1387,13 +1356,7 @@ class PassOpenD extends Component {
             onClose: close,
         });
 
-        // const args = {
-        //     message: 'Notification Title',
-        //     description: 'I will never close automatically. I will be close automatically. I will never close automatically.',
-        //     duration: 0,
-        //     placement: 'bottomRight',
-        // };
-        // notification.open(args);
+
     }
 }
 
