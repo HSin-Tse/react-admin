@@ -653,60 +653,61 @@ class PassOpenD extends Component {
                 <Card title="IX账户身份信息" bordered={true} style={{marginTop: 15}}>
                     <Row gutter={16}>
 
-                        <Col md={12}>
-                            <Card className="gutter-box" bordered={true} bodyStyle={{padding: 0}}>
-                                <div>
-                                    <img
-                                        onClick={() => this.openGallery(this.state.recordData.idcard_0)}
-                                        alt="example" width="100%"
-                                        src={this.state.recordData.idcard_0}/>
-                                </div>
-                                <div className="pa-m">
-                                    <h3>身份证正面照片</h3>
-                                    <small><a href={this.state.recordData.idcard_0} target="_blank"
-                                              rel="noopener noreferrer">身份证正面照片</a></small>
-                                    {/*<QRCode value={this.state.recordData.idcard_1==null?'':this.state.recordData.idcard_1} />*/}
-
-                                </div>
-                            </Card>
-                        </Col>
-                        <Col md={12}>
-                            <Card bordered={true} bodyStyle={{padding: 0}}
-
-                                  actions={[<h3 className="pa-m">
-                                      <a href={this.state.recordData.idcard_1}
-                                         target="_blank"
-                                         rel="noopener noreferrer">身份证反面照片</a>
-                                  </h3>,
+                        <Col md={8}>
+                            <Card bordered={true} bodyStyle={{padding: 10}}
+                                  actions={[
+                                      <h3 className="pa-m">
+                                          <a href={this.state.recordData.idcard_0}
+                                             target="_blank"
+                                             rel="noopener noreferrer">身份证反面照片</a>
+                                      </h3>,
                                       <Upload  {...uploadProps} >
                                           <h3 className="pa-m">
                                               点击上传可修改照片<Icon type="upload"/>
                                           </h3>
-                                      </Upload>]}
-                            >
-                                <div className="gutter-box">
-                                    <img
-                                        onClick={() => this.openGallery(this.state.recordData.idcard_1)}
-                                        alt="example" width="100%"
-                                        src={this.state.recordData.idcard_1}/>
-                                </div>
-
-
+                                      </Upload>]}>
+                                <img
+                                    onClick={() => this.openGallery(this.state.recordData.idcard_0)}
+                                    alt="example" width="100%"
+                                    src={this.state.recordData.idcard_0}/>
                             </Card>
                         </Col>
-                        <Col md={12}>
-                            <Card bordered={true} bodyStyle={{padding: 0}}>
-                                <div>
-                                    <img id="idcard_2"
-                                         onClick={() => this.openGallery(this.state.recordData.idcard_2)}
-                                         alt="example" width="100%"
-                                         src={this.state.recordData.idcard_2}/>
-                                </div>
-                                <div className="pa-m">
-                                    <h3>手持身份证照片</h3>
-                                    <small><a href={this.state.recordData.idcard_2} target="_blank"
-                                              rel="noopener noreferrer">手持身份证照片</a></small>
-                                </div>
+                        <Col md={8}>
+                            <Card bordered={true} bodyStyle={{padding: 10}}
+                                  actions={[
+                                      <h3 className="pa-m">
+                                          <a href={this.state.recordData.idcard_1}
+                                             target="_blank"
+                                             rel="noopener noreferrer">身份证反面照片</a>
+                                      </h3>,
+                                      <Upload  {...uploadProps} >
+                                          <h3 className="pa-m">
+                                              点击上传可修改照片<Icon type="upload"/>
+                                          </h3>
+                                      </Upload>]}>
+                                <img
+                                    onClick={() => this.openGallery(this.state.recordData.idcard_1)}
+                                    alt="example" width="100%"
+                                    src={this.state.recordData.idcard_1}/>
+                            </Card>
+                        </Col>
+                        <Col md={8}>
+                            <Card bordered={true} bodyStyle={{padding: 10}}
+                                  actions={[
+                                      <h3 className="pa-m">
+                                          <a href={this.state.recordData.idcard_2}
+                                             target="_blank"
+                                             rel="noopener noreferrer">身份证反面照片</a>
+                                      </h3>,
+                                      <Upload  {...uploadProps} >
+                                          <h3 className="pa-m">
+                                              点击上传可修改照片<Icon type="upload"/>
+                                          </h3>
+                                      </Upload>]}>
+                                <img
+                                    onClick={() => this.openGallery(this.state.recordData.idcard_2)}
+                                    alt="example" width="100%"
+                                    src={this.state.recordData.idcard_2}/>
                             </Card>
                         </Col>
                     </Row>
