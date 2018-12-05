@@ -25,9 +25,11 @@ export default class PotentialUser extends Component {
 			currentA: 0,//PotentialUser
 			currentB: 0,//SimulatorUser
 			currentC: 0,//IntendingUser
+			currentComment: 0,
 			totalpageA: 0,
 			totalpageB: 0,
 			totalpageC: 0,
+			totalpageComments: 0,
 			nowKey: "1",
 			pgsize: 40,
 			loadingA: false,
@@ -421,10 +423,27 @@ export default class PotentialUser extends Component {
 		window.Axios.post(url, {
 			'belongUserId': record,
 			
-		}).then(function (response) {
+			pageNo: this.state.current,
+			'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
 
-			self.setState({ operationDiaryHistory: response.data.data.list });
+			
+			
+		}).then(function (response) {
+			
 			console.log('ggg', self.state.operationDiaryHistory)
+
+			self.setState({
+				totalpageComments: response.data.data.totalPage,
+				operationDiaryHistory: response.data.data.list,
+			}, () => {
+				console.log('hcia self.state.operationDiaryHistory', self.state.operationDiaryHistory)
+				// var tags = Object.keys(self.state.bklistA[0])
+				// console.log('hcia tags', tags)
+				// self.setState({
+				//     mTags: tags
+				// })
+
+			});
 		}).catch(function (error) {
 			console.log(error);
 			// message.warn(error);
@@ -536,6 +555,13 @@ export default class PotentialUser extends Component {
 			currentC: page,
 		}, () => {
 			this.requestPageC()
+		})
+	}
+	changePageComment = (page) =>{
+		this.setState({
+			currentComment: page,
+		}, () => {
+			this.requestUserCommentList()
 		})
 	}
 
@@ -755,6 +781,11 @@ export default class PotentialUser extends Component {
 						<Table rowKey="id"
 							columns={this.modalColums()} dataSource={this.state.operationDiaryHistory}
 							scroll={{ x: 1300 }}
+							pagination={{  // 分页
+								total: this.state.totalpageComments * this.state.pgsize,
+								pageSize: this.state.pgsize,
+								onChange: this.changePageComment,
+							}}
 						/>
 
 					</p>
