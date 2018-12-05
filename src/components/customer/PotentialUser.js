@@ -7,8 +7,12 @@ import classNames from "classnames";
 const TabPane = Tabs.TabPane;
 const { CheckableTag } = Tag;
 const { RangePicker } = DatePicker;
-
-export default class BlackList extends Component {
+/* 
+pageA = PotentialUser
+pageB = SimulatorUser
+pageC = IntendingUser
+*/
+export default class PotentialUser extends Component {
 
 	constructor(props) {
 		super(props);
@@ -91,11 +95,19 @@ export default class BlackList extends Component {
 					</div>
 				),
 			}];
-		this.requestPageA()//1:合规 2:开户 3:交易
+		this.requestPageA()
 		this.requestPageB()
 		this.requestPageC()
 	}
+	editPageAColumns = () => {
 
+	}
+	editPageBColumns = () => {
+
+	}
+	editPageCColumns = () => {
+
+	}
 	handleremove = (record) => {
 
 		let self = this
@@ -105,7 +117,7 @@ export default class BlackList extends Component {
 
 			message.success('操作成功')
 			if (self.state.nowKey == 1) {
-				this.requestPageA()//1:合规 2:开户 3:交易
+				this.requestPageA()
 			}
 			if (self.state.nowKey == 2) {
 				this.requestPageB()//1:合规 2:开户 3:交易
