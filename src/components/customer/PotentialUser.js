@@ -62,6 +62,7 @@ export default class PotentialUser extends Component {
 				key: 'phoneNumber',
 				width: 200,
 				fixed: 'left',
+				align: 'center',
 				render: (text, record) => (
 
 					<span>{record.mobile}</span>
@@ -71,51 +72,60 @@ export default class PotentialUser extends Component {
 				title: 'APP版本',
 				dataIndex: 'APP版本',
 				key: 'APP版本',
+				align: 'center',
 				render: (text, record) => (
 					<span>{record.versionInfo}</span>),
 			}, {
 				title: '手机型号',
 				dataIndex: '手机型号',
 				key: '手机型号',
+				align: 'center',
 				render: (text, record) => (<span>{record.clientInfo}</span>),
 			}, {
 				title: '操作系统型号',
 				dataIndex: '操作系统型号',
 				key: '操作系统型号',
+				align: 'center',
 				render: (text, record) => (<span>{record.systemInfo}</span>),
 			}, {
 				title: '注册时间',
 				dataIndex: '注册时间',
 				key: '注册时间',
+				align: 'center',
 				render: (text, record) => (<span>{record.date}</span>),
 			}, {
 				title: '下载平台',
 				dataIndex: '下载平台',
 				key: '下载平台',
+				align: 'center',
 				render: (text, record) => (
 					<span>{record.channelInfo}</span>),
 			}, {
 				title: '地理位置',
 				dataIndex: '地理位置',
 				key: '地理位置',
+				align: 'center',
 				render: (text, record) => (
 					<span>{record.location}</span>),
 			}, {
 				title: '回访状态',
 				dataIndex: '回访状态',
 				key: '回访状态',
+				align: 'center',
 				render: (text, record) => (
 					<span>{record.comment}</span>),
 			}, {
 				title: '备注',
 				dataIndex: '备注',
 				key: '备注',
+				align: 'center',
 				render: (text, record) => (
 					<span>{record.comment}</span>),
 			}, {
 				title: '操作人',
 				dataIndex: '操作人',
 				key: '操作人',
+				align: 'center',
 				render: (text, record) => (
 					<span>{record.operator}</span>),
 			}, {
