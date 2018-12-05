@@ -176,6 +176,102 @@ class PassOpenD extends Component {
         this.mIXTradingExperience = this.state.IXTradingExperience.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXTradingObjectives = this.state.IXTradingObjectives.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXRisk_Tolerance = this.state.IXRisk_Tolerance.map(d => <Option key={d.name}>{d.name}</Option>);
+        const uploadProps1 = {
+            action: 'open/leadDetailAttachs',
+            multiple: false,
+            data: {'id': this.state.recordData.id, 'key': 'idcard_1'},
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+            onStart(file) {
+                console.log('onStart', file, file.name);
+            },
+            onSuccess(ret, file) {
+                console.log('onSuccess', ret, file.name);
+            },
+            onError(err) {
+                console.log('onError', err);
+            },
+            onProgress({percent}, file) {
+                console.log('onProgress', `${percent}%`, file.name);
+            },
+            customRequest({
+                              data,
+                              file,
+                          }) {
+
+                const formData = new FormData();
+                if (data) {
+                    Object.keys(data).map(key => {
+                        formData.append(key, data[key]);
+                    });
+                }
+                formData.append('file', file);
+                formData.append('loginName', localStorage.getItem('loginName'))
+                formData.append('token', localStorage.getItem('too'))
+
+                aaxios.post('open/leadDetailAttachs', formData, {})
+                    .then(function (response) {
+                        console.log('hcia response', response.data.data)
+                        self.setState({
+                            recordData : {...self.state.recordData,idcard_1:response.data.data}
+                        })
+                    })
+                    .catch(error => {
+                        console.log('hcia error', error)
+                    });
+
+
+            },
+        };
+        const uploadProps0 = {
+            action: 'open/leadDetailAttachs',
+            multiple: false,
+            data: {'id': this.state.recordData.id, 'key': 'idcard_0'},
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+            onStart(file) {
+                console.log('onStart', file, file.name);
+            },
+            onSuccess(ret, file) {
+                console.log('onSuccess', ret, file.name);
+            },
+            onError(err) {
+                console.log('onError', err);
+            },
+            onProgress({percent}, file) {
+                console.log('onProgress', `${percent}%`, file.name);
+            },
+            customRequest({
+                              data,
+                              file,
+                          }) {
+
+                const formData = new FormData();
+                if (data) {
+                    Object.keys(data).map(key => {
+                        formData.append(key, data[key]);
+                    });
+                }
+                formData.append('file', file);
+                formData.append('loginName', localStorage.getItem('loginName'))
+                formData.append('token', localStorage.getItem('too'))
+
+                aaxios.post('open/leadDetailAttachs', formData, {})
+                    .then(function (response) {
+                        console.log('hcia response', response.data.data)
+                        self.setState({
+                            recordData : {...self.state.recordData,idcard_0:response.data.data}
+                        })
+                    })
+                    .catch(error => {
+                        console.log('hcia error', error)
+                    });
+
+
+            },
+        };
         const uploadProps = {
             action: 'open/leadDetailAttachs',
             multiple: false,
@@ -216,7 +312,6 @@ class PassOpenD extends Component {
                         self.setState({
                             recordData : {...self.state.recordData,idcard_2:response.data.data}
                         })
-
                     })
                     .catch(error => {
                         console.log('hcia error', error)
@@ -225,23 +320,7 @@ class PassOpenD extends Component {
 
             },
         };
-        const props = {
-            name: 'file',
-            multiple: false,
-            action: '/api/uploadFile',
-            onChange(info) {
-                console.log('hcia info', info)
-                const status = info.file.status;
-                if (status !== 'uploading') {
-                    console.log('hcia info', info.file, info.fileList);
-                }
-                if (status === 'done') {
-                    message.success(`${info.file.name} file uploaded successfully.`);
-                } else if (status === 'error') {
-                    message.error(`${info.file.name} file upload failed.`);
-                }
-            },
-        };
+
         return (
             <div id="openD">
 
@@ -562,7 +641,7 @@ class PassOpenD extends Component {
                                              target="_blank"
                                              rel="noopener noreferrer">身份证反面照片</a>
                                       </h3>,
-                                      <Upload  {...uploadProps} >
+                                      <Upload  {...uploadProps0} >
                                           <h3 className="pa-m">
                                               点击上传可修改照片<Icon type="upload"/>
                                           </h3>
@@ -581,7 +660,7 @@ class PassOpenD extends Component {
                                              target="_blank"
                                              rel="noopener noreferrer">身份证反面照片</a>
                                       </h3>,
-                                      <Upload  {...uploadProps} >
+                                      <Upload  {...uploadProps1} >
                                           <h3 className="pa-m">
                                               点击上传可修改照片<Icon type="upload"/>
                                           </h3>
