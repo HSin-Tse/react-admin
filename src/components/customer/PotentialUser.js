@@ -19,9 +19,9 @@ export default class PotentialUser extends Component {
 		this.state = {
 			selectedRowKeys: [],
 			// mTags: [],
-			bklistA: [],
-			bklistB: [],
-			bklistC: [],
+			leadListA: [],
+			leadListB: [],
+			leadListC: [],
 			currentA: 0,//PotentialUser
 			currentB: 0,//SimulatorUser
 			currentC: 0,//IntendingUser
@@ -498,24 +498,23 @@ export default class PotentialUser extends Component {
 	}
 	requestPageB = () => {
 		let self = this
-
+		
 		self.setState({
 			loadingB: true
 		})
-		window.Axios.post('auth/getBlackList', {
-			pageNo: this.state.current,
-			'listType': 2,//1:合规 2:开户 3:交易
-			'email': this.state.selectMail,
+		window.Axios.post('ixuser / getUserList', {
+			pageNo: this.state.currentA,
+			'listType': 2,
 			'nationalId': this.state.selectID,
 			'startTime': this.state.selectTimeStart,
 			'endTime': this.state.selectTimeEnd,
-			'mobile': this.state.selectPhone,
-			'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
+			'pageSize': this.state.pgsize,
+
 		}).then((response) => {
+			console.log('kkk', response.data.data);
 			self.setState({
 				totalpageB: response.data.data.totalPage,
 				bklistB: response.data.data.list,
-
 				loadingB: false
 			});
 
@@ -526,25 +525,27 @@ export default class PotentialUser extends Component {
 	}
 	requestPageC = () => {
 		let self = this
+
 		self.setState({
-			loadingC: true
+			loadingB: true
 		})
-		window.Axios.post('auth/getBlackList', {
-			pageNo: this.state.current,
-			'listType': 3,//1:合规 2:开户 3:交易
-			'email': this.state.selectMail,
+		window.Axios.post('ixuser / getUserList', {
+			pageNo: this.state.currentA,
+			'listType': 3,
 			'nationalId': this.state.selectID,
 			'startTime': this.state.selectTimeStart,
 			'endTime': this.state.selectTimeEnd,
-			'mobile': this.state.selectPhone,
-			'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
-		}).then((response) => {
+			'pageSize': this.state.pgsize,
 
+		}).then((response) => {
+			console.log('iii', response.data.data);
 			self.setState({
-				totalpageC: response.data.data.totalPage,
-				bklistC: response.data.data.list,
-				loadingC: false
+				totalpageB: response.data.data.totalPage,
+				bklistB: response.data.data.list,
+				loadingB: false
 			});
+
+
 		}).catch(function (error) {
 			console.log(error);
 		});
