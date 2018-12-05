@@ -44,9 +44,16 @@ export default class PotentialUser extends Component {
 	}
 
 	componentDidMount() {
-		this.columns = [
+		console.log('xxxxx', this.pageCColumns())
+		
+		this.requestPageA()
+		this.requestPageB()
+		this.requestPageC()
+	}
+	pageAColumns = () => {
+		return this.columns = [
 			{
-				title: '手机号',
+				title: 'aaaa手机号',
 				dataIndex: 'phoneNumber',
 				key: 'phoneNumber',
 				width: 150,
@@ -95,19 +102,114 @@ export default class PotentialUser extends Component {
 					</div>
 				),
 			}];
-		this.requestPageA()
-		this.requestPageB()
-		this.requestPageC()
 	}
-	editPageAColumns = () => {
+	pageBColumns = () => {
+		return this.columns = [
+			{
+				title: 'bbbbb手机号',
+				dataIndex: 'phoneNumber',
+				key: 'phoneNumber',
+				width: 150,
+				fixed: 'left',
+				render: (text, record) => (
 
-	}
-	editPageBColumns = () => {
+					<span>{record.mobile}</span>
 
+				),
+			}, {
+				title: '姓名',
+				dataIndex: 'name',
+				key: 'name',
+				render: (text, record) => (
+					<span>{record.name}</span>),
+			}, {
+				title: '活跃度',
+				dataIndex: '活跃度',
+				key: '活跃度',
+				render: (text, record) => (<span>{record.activeFlag}</span>),
+			}, {
+				title: 'APP注册时间',
+				dataIndex: 'APP注册时间',
+				key: 'APP注册时间',
+				render: (text, record) => (<span>{record.date}</span>),
+			}, {
+				title: '操作人',
+				dataIndex: '操作人',
+				key: '操作人',
+				render: (text, record) => (<span>{record.operator}</span>),
+			}, {
+				title: '处理备注',
+				dataIndex: '处理备注',
+				key: '处理备注',
+				render: (text, record) => (
+					<span>{record.comment}</span>),
+			}, {
+				title: '操作',
+				key: 'action',
+				fixed: 'right',
+				width: 100,
+				render: (text, record) => (
+					<div>
+						<span className="ant-divider" />
+						<Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>移除</Button>
+					</div>
+				),
+			}];
 	}
-	editPageCColumns = () => {
+	pageCColumns = () => {
+		return this.columns = [
+			{
+				title: 'cccccc手机号',
+				dataIndex: 'phoneNumber',
+				key: 'phoneNumber',
+				width: 150,
+				fixed: 'left',
+				render: (text, record) => (
 
+					<span>{record.mobile}</span>
+
+				),
+			}, {
+				title: '姓名',
+				dataIndex: 'name',
+				key: 'name',
+				render: (text, record) => (
+					<span>{record.name}</span>),
+			}, {
+				title: '活跃度',
+				dataIndex: '活跃度',
+				key: '活跃度',
+				render: (text, record) => (<span>{record.activeFlag}</span>),
+			}, {
+				title: 'APP注册时间',
+				dataIndex: 'APP注册时间',
+				key: 'APP注册时间',
+				render: (text, record) => (<span>{record.date}</span>),
+			}, {
+				title: '操作人',
+				dataIndex: '操作人',
+				key: '操作人',
+				render: (text, record) => (<span>{record.operator}</span>),
+			}, {
+				title: '处理备注',
+				dataIndex: '处理备注',
+				key: '处理备注',
+				render: (text, record) => (
+					<span>{record.comment}</span>),
+			}, {
+				title: '操作',
+				key: 'action',
+				fixed: 'right',
+				width: 100,
+				render: (text, record) => (
+					<div>
+						<span className="ant-divider" />
+						<Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>移除</Button>
+					</div>
+				),
+			}];
 	}
+	
 	handleremove = (record) => {
 
 		let self = this
@@ -434,7 +536,7 @@ export default class PotentialUser extends Component {
 							<Table rowKey="id"
 								bordered
 								rowSelection={rowSelection}
-								columns={this.columns}
+								columns={this.pageAColumns()}
 								dataSource={this.state.bklistA}
 								scroll={{ x: 1300 }}
 								loading={this.state.loading}
@@ -447,7 +549,7 @@ export default class PotentialUser extends Component {
 						</TabPane>
 						<TabPane tab="模擬用戶" key="2">
 							<Table rowKey="id"
-								columns={this.columns}
+								columns={this.pageBColumns()}
 								dataSource={this.state.bklistB}
 								scroll={{ x: 1300 }}
 								loading={this.state.loading}
@@ -460,7 +562,7 @@ export default class PotentialUser extends Component {
 						</TabPane>
 						<TabPane tab="意向用戶" key="3">
 							<Table rowKey="id"
-								columns={this.columns}
+								columns={this.pageCColumns()}
 								dataSource={this.state.bklistC}
 								scroll={{ x: 1300 }}
 								loading={this.state.loading}
