@@ -346,9 +346,6 @@ export default class PotentialUser extends Component {
 	}
 	handleAddComment = (e) => {
 		let self = this;
-		console.log("zzz", self.state.theBelongUserId)
-		console.log("zzz", self.state.theComment)
-
 		window.Axios.post('auth/addUserComment', {
 			content: "self.state.theComment",
 			belongUserId: self.state.theBelongUserId,
@@ -480,7 +477,6 @@ export default class PotentialUser extends Component {
 		window.Axios.post('ixuser/getUserList', {
 			pageNo: this.state.currentA,
 			'listType': 1,
-			
 			'nationalId': this.state.selectID,
 			'startTime': this.state.selectTimeStart,
 			'endTime': this.state.selectTimeEnd,
@@ -494,7 +490,7 @@ export default class PotentialUser extends Component {
 				loadingA: false
 				
 			}, () => {
-				console.log('hcia self.state.bklistA', self.state.bklistA)
+				console.log('yyx requestPageA state.bklistA', self.state.bklistA)
 				// var tags = Object.keys(self.state.bklistA[0])
 				// console.log('hcia tags', tags)
 				// self.setState({
@@ -745,7 +741,7 @@ export default class PotentialUser extends Component {
 								disabled={!hasSelected}
 								loading={loading}
 							>
-								{this.state.pgsize}
+								{this.state.totalpageA}
                             </Button>
 							<Table rowKey="id"
 								bordered
