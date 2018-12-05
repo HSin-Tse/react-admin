@@ -19,9 +19,9 @@ export default class PotentialUser extends Component {
 		this.state = {
 			selectedRowKeys: [],
 			// mTags: [],
-			leadListA: [],
-			leadListB: [],
-			leadListC: [],
+			bklistA: [],
+			bklistB: [],
+			bklistC: [],
 			currentA: 0,//PotentialUser
 			currentB: 0,//SimulatorUser
 			currentC: 0,//IntendingUser
@@ -266,7 +266,7 @@ export default class PotentialUser extends Component {
 				title: 'cccccc手机号',
 				dataIndex: 'phoneNumber',
 				key: 'phoneNumber',
-				width: 150,
+				width: 200,
 				fixed: 'left',
 				align: 'center',
 				render: (text, record) => (
@@ -336,7 +336,7 @@ export default class PotentialUser extends Component {
 				title: '操作',
 				key: 'action',
 				fixed: 'right',
-				width: 200,
+				width: 250,
 				align: 'center',
 				render: (text, record) => (
 					<div>
@@ -566,9 +566,9 @@ export default class PotentialUser extends Component {
 		}).then((response) => {
 			console.log('iii', response.data.data);
 			self.setState({
-				totalpageB: response.data.data.totalPage,
-				bklistB: response.data.data.list,
-				loadingB: false
+				totalpageC: response.data.data.totalPage,
+				bklistC: response.data.data.list,
+				loadingC: false
 			});
 
 
