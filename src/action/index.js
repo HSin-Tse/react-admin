@@ -1,13 +1,23 @@
 /**
  * Created by 叶子 on 2017/7/30.
  */
+
 import * as type from './type';
 import * as http from '../axios/index';
+let nextTodoId = 0
+
+export const addTodo = text => ({
+    type: 'ADD_TODO',
+    id: nextTodoId++,
+    text
+})
 
 const requestData = category => ({
     type: type.REQUEST_DATA,
     category
 });
+
+
 export const receiveData = (data, category) => ({
     type: type.RECEIVE_DATA,
     data,

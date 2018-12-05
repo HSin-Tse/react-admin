@@ -2,50 +2,54 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Row, Col, Card} from 'antd';
+import {Row, Col, Button} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import AuthWidget from '@/components/widget/AuthWidget';
 import beauty from '@/style/imgs/beauty.jpg';
+import {bindActionCreators} from "redux";
+import {receiveData} from "../../action";
+import {addTodo} from "../../action";
+import connect from "react-redux/es/connect/connect";
 
 class Basic extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+
+            count: 0,
+            user: '',
+
+
+        };
+    }
+
+    seeDetail = () => {
+        const { addTodo } = this.props;
+        console.log('hcia seeDetail')
+        addTodo('a')
+
+    }
+
     render() {
         return (
             <div>
+                {JSON.stringify(this.props.todps)}
                 <BreadcrumbCustom first="权限管理" second="基础演示"/>
-                {/*<AuthWidget*/}
-                {/*children={auth => (*/}
-
-                {/*<Row>*/}
-                {/*{auth}*/}
-
-                {/*<Col span={24}>*/}
-                {/*<Card bordered={false} bodyStyle={{minHeight: 600}}>*/}
-                {/*{!auth.uid && <h2 style={{height: 500}} className="center">登录之后你将看到一张美女图</h2>}*/}
-                {/*{*/}
-                {/*auth.permissions && auth.permissions.includes('auth/authPage/visit') &&*/}
-                {/*<div style={{textAlign: 'center'}}>*/}
-                {/*<img src={beauty} alt="" style={{height: 400}} />*/}
-                {/*{(auth.permissions.includes('auth/authPage/edit') &&*/}
-                {/*<div>*/}
-                {/*<p>看啥子美女，看点美景就行啦~<span role="img" aria-label="" aria-labelledby="">😄😄</span></p>*/}
-                {/*<p>管理员身份登录才能看到这两段话</p>*/}
-                {/*</div>) ||*/}
-                {/*<div>*/}
-                {/*<p>管理员登录将看到不一样的效果</p>*/}
-                {/*</div>*/}
-                {/*}*/}
-                {/*</div>*/}
-
-                {/*}*/}
-                {/*</Card>*/}
-                {/*</Col>*/}
-                {/*</Row>*/}
-                {/*)}*/}
-                {/*/>*/}
+                <Button onClick={() => this.seeDetail()}
+                >详情:{this.state.count}</Button>
+                <Button
+                    onClick={() => this.seeDetail()}
+                >详情: </Button>
             </div>
-
         )
     }
 }
 
-export default Basic;
+const mapStateToProps = state => {
+    const todps= state.todos;
+    return { todps};
+};
+const mapDispatchToProps = dispatch => ({
+    addTodo: bindActionCreators(addTodo, dispatch)
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Basic);

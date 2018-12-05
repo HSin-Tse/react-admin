@@ -6,8 +6,11 @@ import {Button, Table, Icon, Input} from 'antd';
 
 
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
+import {bindActionCreators} from "redux";
+import {addTodo, receiveData} from "../../action";
+import connect from "react-redux/es/connect/connect";
 
-export default class Basic extends Component {
+class Basic extends Component {
 
     constructor(props) {
         super(props);
@@ -186,7 +189,8 @@ export default class Basic extends Component {
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
-                <div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>
+                {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
+                {/*{JSON.stringify(this.props.todps)}*/}
 
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
 
@@ -208,3 +212,9 @@ export default class Basic extends Component {
     }
 }
 
+
+const mapStateToProps = state => {
+    const todps= state.todos;
+    return {todps};
+};
+export default connect(mapStateToProps, )(Basic);

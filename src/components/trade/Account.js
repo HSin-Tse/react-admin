@@ -4,10 +4,13 @@
 import React, {Component} from 'react';
 import {Button, Table, message, Select, Modal, Card, Col} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
+import connect from "react-redux/es/connect/connect";
+import {bindActionCreators} from "redux";
+import {receiveData} from "../../action";
 
 const Option = Select.Option;
 
-export default class Basic extends Component {
+ class Basic extends Component {
 
     constructor(props) {
         super(props);
@@ -452,4 +455,11 @@ export default class Basic extends Component {
         )
     }
 }
-
+const mapStateToProps = state => {
+    const { auth = {data: {}}, responsive = {data: {}} } = state.httpData;
+    return {auth, responsive};
+};
+const mapDispatchToProps = dispatch => ({
+    receiveData: bindActionCreators(receiveData, dispatch)
+});
+export default connect(mapStateToProps, mapDispatchToProps)(Basic);

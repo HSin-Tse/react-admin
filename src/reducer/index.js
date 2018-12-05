@@ -1,7 +1,7 @@
 /**
  * Created by 叶子 on 2017/7/30.
  */
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 import * as type from '../action/type';
 
 const handleData = (state = {isFetching: true, data: {}}, action) => {
@@ -27,6 +27,28 @@ const httpData = (state = {}, action) => {
     }
 };
 
+const todos = (state = [{"id": -1, "text": "a", "completed": false}], action) => {
+    switch (action.type) {
+        case 'ADD_TODO':
+            return [
+                ...state,
+                {
+                    id: action.id,
+                    text: action.text,
+                    completed: false
+                }
+            ]
+        case 'TOGGLE_TODO':
+            return state.map(
+                todo => (todo.id === action.id) ? {...todo, completed: !todo.completed} : todo
+            )
+        default:
+            return state
+    }
+}
+
+
 export default combineReducers({
     httpData
+    , todos
 });

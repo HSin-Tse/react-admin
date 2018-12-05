@@ -15,6 +15,7 @@ import PhotoswipeUIDefault from "photoswipe/dist/photoswipe-ui-default";
 import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
 import moment from 'moment';
+import axios from "axios";
 
 const Search = Input.Search;
 const {TextArea} = Input;
@@ -27,6 +28,9 @@ const tradeType = [
     {label: 'CFD_3', value: 'CFD_3'},
 ];
 const dateFormat = 'YYYY-MM-DD';
+var aaxios = axios.create({
+    baseURL: 'http://mobile.nooko.cn:8090/'
+});
 
 class PassOpenD extends Component {
 
@@ -40,6 +44,7 @@ class PassOpenD extends Component {
             , recordDictirys: {}
             , waitUpdate: {}
             , changeNoteV: ''
+            , cardid2: ''
             , changeNoteB: false
             , waitSearchDb: {}
             , iconLoading: false
@@ -162,6 +167,8 @@ class PassOpenD extends Component {
     }
 
     render() {
+        var self = this;
+
         this.mIncomesOPS = this.state.IXIncomeList.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXPercentage = this.state.IXPercentage.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXFundsSource = this.state.IXFundsSource.map(d => <Option key={d.name}>{d.name}</Option>);
@@ -170,12 +177,11 @@ class PassOpenD extends Component {
         this.mIXTradingObjectives = this.state.IXTradingObjectives.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXRisk_Tolerance = this.state.IXRisk_Tolerance.map(d => <Option key={d.name}>{d.name}</Option>);
         const uploadProps = {
-            action: '/upload/first',
+            action: 'open/leadDetailAttachs',
             multiple: false,
-            data: {a: 1, b: 2},
+            data: {'id': this.state.recordData.id, 'key': 'idcard_2'},
             headers: {
-                Authorization: '$prefix $token',
-                'aaaa': 'bbbb',
+                'Content-Type': 'multipart/form-data',
             },
             onStart(file) {
                 console.log('onStart', file, file.name);
@@ -190,67 +196,33 @@ class PassOpenD extends Component {
                 console.log('onProgress', `${percent}%`, file.name);
             },
             customRequest({
-                              action,
                               data,
                               file,
-                              filename,
-                              headers,
-                              onError,
-                              onProgress,
-                              onSuccess,
-                              withCredentials,
                           }) {
+
                 const formData = new FormData();
                 if (data) {
                     Object.keys(data).map(key => {
                         formData.append(key, data[key]);
                     });
                 }
-                formData.append(filename, file);
+                formData.append('file', file);
+                formData.append('loginName', localStorage.getItem('loginName'))
+                formData.append('token', localStorage.getItem('too'))
 
+                aaxios.post('open/leadDetailAttachs', formData, {})
+                    .then(function (response) {
+                        console.log('hcia response', response.data.data)
+                        self.setState({
+                            recordData : {...self.state.recordData,idcard_2:response.data.data}
+                        })
 
-                window.Axios.post('dict/openDict', {
-                    'keys': 'div_type',
-                    'division': 'province',
-                    'code': '1',
-                }, {
-                    method: 'post',
-                    headers: {
-                        'Content-Type': 'multipart/form-data',
-                        'asdasd': 'sssss'
-                    },
-                    transformRequest: [function (data) {
-                        return data
-                    }],
-                    onUploadProgress: function (e) {
-                        var percentage = Math.round((e.loaded * 100) / e.total) || 0;
-                        if (percentage < 100) {
-                            console.log(percentage + '%');  // 上传进度
-                        }
-                    }
-                }).then(function (response) {
-                    console.log('hcia response', response)
-                });
-
-
-                window.Axios
-                    .post(action, formData, {
-                        withCredentials,
-                        headers,
-                        onUploadProgress: ({total, loaded}) => {
-                            onProgress({percent: Math.round(loaded / total * 100).toFixed(2)}, file);
-                        },
                     })
-                    .then(({data: response}) => {
-                        onSuccess(response, file);
-                    })
-                    .catch(onError);
+                    .catch(error => {
+                        console.log('hcia error', error)
+                    });
 
-                return {
-                    abort() {
-                        message.error('upload progress is aborted.')
-                    },
-                };
+
             },
         };
         const props = {
@@ -717,7 +689,7 @@ class PassOpenD extends Component {
 
 
                                 <Button
-                                    disabled = {!this.state.isNeedSave}
+                                    disabled={!this.state.isNeedSave}
                                     onClick={() => this.saveData()}>保存客戶信息</Button>
 
 
@@ -1163,7 +1135,6 @@ class PassOpenD extends Component {
         });
     }
     handleProvinceChange = (value) => {
-
 
 
         this.state.waitUpdate.state = value
