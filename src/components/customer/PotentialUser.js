@@ -141,32 +141,51 @@ export default class PotentialUser extends Component {
 
 				),
 			}, {
-				title: '姓名',
-				dataIndex: 'name',
-				key: 'name',
+				title: '模拟账号',
+				dataIndex: '模拟账号',
+				key: '模拟账号',
 				render: (text, record) => (
 					<span>{record.name}</span>),
 			}, {
-				title: '活跃度',
-				dataIndex: '活跃度',
-				key: '活跃度',
+				title: '绑定时间',
+				dataIndex: '绑定时间',
+				key: '绑定时间',
 				render: (text, record) => (<span>{record.activeFlag}</span>),
 			}, {
-				title: 'APP注册时间',
-				dataIndex: 'APP注册时间',
-				key: 'APP注册时间',
+				title: '剩余天数',
+				dataIndex: '剩余天数',
+				key: '剩余天数',
+				render: (text, record) => (<span>{record.date}</span>),
+			}, {
+				title: '模拟账户状态',
+				dataIndex: '模拟账户状态',
+				key: '模拟账户状态',
+				render: (text, record) => (<span>{record.date}</span>),
+			}, {
+				title: '延期次数',
+				dataIndex: '延期次数',
+				key: '延期次数',
+				render: (text, record) => (<span>{record.date}</span>),
+			}, {
+				title: '回访状态',
+				dataIndex: '回访状态',
+				key: '回访状态',
+				render: (text, record) => (<span>{record.date}</span>),
+			}, {
+				title: '备注',
+				dataIndex: '备注',
+				key: '备注',
+				render: (text, record) => (<span>{record.date}</span>),
+			}, {
+				title: '活跃程度',
+				dataIndex: '活跃程度',
+				key: '活跃程度',
 				render: (text, record) => (<span>{record.date}</span>),
 			}, {
 				title: '操作人',
 				dataIndex: '操作人',
 				key: '操作人',
 				render: (text, record) => (<span>{record.operator}</span>),
-			}, {
-				title: '处理备注',
-				dataIndex: '处理备注',
-				key: '处理备注',
-				render: (text, record) => (
-					<span>{record.comment}</span>),
 			}, {
 				title: '操作',
 				key: 'action',
