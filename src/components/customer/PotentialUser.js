@@ -40,6 +40,7 @@ export default class PotentialUser extends Component {
 			selectTimeEnd: "",
 			modal2Visible: false,
 			visible: false,
+			operationDiaryHistory: [],
 
 
 		};
@@ -47,7 +48,7 @@ export default class PotentialUser extends Component {
 
 	componentDidMount() {
 		console.log('xxxxx', this.pageCColumns())
-		
+		this.requestUserCommentList()
 		this.requestPageA()
 		this.requestPageB()
 		this.requestPageC()
@@ -148,6 +149,33 @@ export default class PotentialUser extends Component {
 			visible: true,
 			modal2Visible: false,
 		});
+	}
+	modalColums = () =>{
+		return  [{
+			title: '時間',
+			dataIndex: 'createDate',
+			key: 'operationDiary_Date',
+			// fixed: 'left',
+			// width: 100,
+			render: (text, record) => (
+				<Button>{record.createDate}</Button>),
+		}, {
+			title: '狀態',
+			dataIndex: 'comment',
+			key: 'operationDiary_Status',
+			// fixed: 'left',
+			// width: 100,
+			render: (text, record) => (
+				<Button>{record.comment}</Button>),
+		}, {
+			title: '操作人',
+			dataIndex: 'bkUserName',
+			key: 'operationDiary_User',
+			// fixed: 'left',
+			// width: 100,
+			render: (text, record) => (
+				<Button>{record.bkUserName}</Button>),
+		}]
 	}
 	pageBColumns = () => {
 		return this.columns = [
@@ -376,6 +404,32 @@ export default class PotentialUser extends Component {
 
 
 	};
+	requestUserCommentList = () => {
+		// must request data:
+		//belongUserId
+		//loginName
+		//token
+
+		//refernce request data:
+		//pageNo
+		//pageSize
+		//language
+		const url = 'http://mobile.nooko.cn:8090/auth/getUserCommentList'
+
+		var tmp = this;
+
+		window.Axios.post(url, {
+			'belongUserId': '4028b2a4631f770f01631f7770df0000',
+			
+		}).then(function (response) {
+
+			tmp.setState({ operationDiaryHistory: response.data.data.list });
+
+		}).catch(function (error) {
+			console.log(error);
+			// message.warn(error);
+		});
+	}
 	requestPageA = () => {
 		let self = this
 		self.setState({
@@ -699,7 +753,10 @@ export default class PotentialUser extends Component {
 					cancelText="取消"
 				>
 					<p>
-
+						<Table rowKey="id"
+							columns={this.modalColums()} dataSource={this.state.operationDiaryHistory}
+							scroll={{ x: 1300 }}
+						/>
 
 					</p>
 				</Modal>
