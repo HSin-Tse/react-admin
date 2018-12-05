@@ -29,41 +29,6 @@ const tradeType = [
 const dateFormat = 'YYYY-MM-DD';
 
 class PassOpenD extends Component {
-    handleProvinceChange = (value) => {
-        this.setState({
-            mState: value,
-            mCity: '',
-        });
-        let self = this
-        window.Axios.post('dict/openDict', {
-            'keys': 'div_type',
-            'division': 'province',
-            'code': '1',
-        }).then(function (response) {
-            self.setState({
-                provinceDatAarra: response.data.data.div_type,
-            }, () => {
-                var nowCity = self.state.provinceDatAarra.filter(function (item, index, array) {
-                    return item.value == self.state.mState;
-                });
-                window.Axios.post('dict/openDict', {
-                    'keys': 'div_type',
-                    'division': 'city',
-                    'code': nowCity[0].code
-                }).then((ress) => {
-                    self.setState({
-                        cityDatAarra: ress.data.data.div_type
-                    })
-                });
-            });
-        });
-    };
-
-    onSecondCityChange = (value) => {
-        this.setState({
-            mCity: value,
-        });
-    }
 
     constructor(props) {
         super(props);
@@ -752,6 +717,7 @@ class PassOpenD extends Component {
 
 
                                 <Button
+                                    disabled = {!this.state.isNeedSave}
                                     onClick={() => this.saveData()}>保存客戶信息</Button>
 
 
@@ -853,7 +819,8 @@ class PassOpenD extends Component {
                         :{this.timestampToTime(this.state.recordData.dateOfBirth)}-->{this.timestampToTime(this.state.waitUpdate.dateOfBirth)}</p>
                     <p>性别 :{this.state.recordData.gender}-->{this.state.waitUpdate.gender == 0 ? 'Female' : 'Male'}</p>
                     <p>身份证号码 :{this.state.recordData.nationalID}-->{this.state.waitUpdate.nationalId}</p>
-                    <p>城市 :{this.state.recordData.nationalID}-->{this.state.waitUpdate.nationalId}</p>
+                    <p>城市 省:{this.state.recordData.state}-->{this.state.waitUpdate.state}</p>
+                    <p>城市 市:{this.state.recordData.city}-->{this.state.waitUpdate.city}</p>
                     <p>详细地址 :{this.state.recordData.street}-->{this.state.waitUpdate.street}</p>
                     <p>邮箱地址 :{this.state.recordData.email}-->{this.state.waitUpdate.email}</p>
                     <p>*邮编 :{this.state.recordData.postalCode}-->{this.state.waitUpdate.postalCode}</p>
@@ -1195,6 +1162,52 @@ class PassOpenD extends Component {
             isNeedSave: true,
         });
     }
+    handleProvinceChange = (value) => {
+
+
+
+        this.state.waitUpdate.state = value
+
+        this.setState({
+            mState: value,
+            mCity: '',
+            isNeedSave: true,
+        });
+        let self = this
+        window.Axios.post('dict/openDict', {
+            'keys': 'div_type',
+            'division': 'province',
+            'code': '1',
+        }).then(function (response) {
+            self.setState({
+                provinceDatAarra: response.data.data.div_type,
+            }, () => {
+                var nowCity = self.state.provinceDatAarra.filter(function (item, index, array) {
+                    return item.value == self.state.mState;
+                });
+                window.Axios.post('dict/openDict', {
+                    'keys': 'div_type',
+                    'division': 'city',
+                    'code': nowCity[0].code
+                }).then((ress) => {
+                    self.setState({
+                        cityDatAarra: ress.data.data.div_type
+                    })
+                });
+            });
+        });
+    };
+
+    onSecondCityChange = (value) => {
+        this.state.waitUpdate.city = value
+
+        this.setState({
+            mCity: value,
+            isNeedSave: true,
+
+        });
+    }
+
     onChangeBirth = (value, dateString) => {
         var date = new Date(dateString + ' 00:00:00:000');
         var time1 = date.getTime();
