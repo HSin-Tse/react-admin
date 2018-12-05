@@ -60,8 +60,9 @@ export default class PotentialUser extends Component {
 				title: 'aaaa手机号',
 				dataIndex: 'phoneNumber',
 				key: 'phoneNumber',
-				width: 150,
+				width: 200,
 				fixed: 'left',
+				align: 'center',
 				render: (text, record) => (
 
 					<span>{record.mobile}</span>
@@ -71,51 +72,60 @@ export default class PotentialUser extends Component {
 				title: 'APP版本',
 				dataIndex: 'APP版本',
 				key: 'APP版本',
+				align: 'center',
 				render: (text, record) => (
 					<span>{record.versionInfo}</span>),
 			}, {
 				title: '手机型号',
 				dataIndex: '手机型号',
 				key: '手机型号',
+				align: 'center',
 				render: (text, record) => (<span>{record.clientInfo}</span>),
 			}, {
 				title: '操作系统型号',
 				dataIndex: '操作系统型号',
 				key: '操作系统型号',
+				align: 'center',
 				render: (text, record) => (<span>{record.systemInfo}</span>),
 			}, {
 				title: '注册时间',
 				dataIndex: '注册时间',
 				key: '注册时间',
+				align: 'center',
 				render: (text, record) => (<span>{record.date}</span>),
 			}, {
 				title: '下载平台',
 				dataIndex: '下载平台',
 				key: '下载平台',
+				align: 'center',
 				render: (text, record) => (
 					<span>{record.channelInfo}</span>),
 			}, {
 				title: '地理位置',
 				dataIndex: '地理位置',
 				key: '地理位置',
+				align: 'center',
 				render: (text, record) => (
 					<span>{record.location}</span>),
 			}, {
 				title: '回访状态',
 				dataIndex: '回访状态',
 				key: '回访状态',
+				align: 'center',
 				render: (text, record) => (
 					<span>{record.comment}</span>),
 			}, {
 				title: '备注',
 				dataIndex: '备注',
 				key: '备注',
+				align: 'center',
 				render: (text, record) => (
 					<span>{record.comment}</span>),
 			}, {
 				title: '操作人',
 				dataIndex: '操作人',
 				key: '操作人',
+				align: 'center',
 				render: (text, record) => (
 					<span>{record.operator}</span>),
 			}, {
@@ -139,7 +149,6 @@ export default class PotentialUser extends Component {
 		
 	}
 	showModal2 = (belongUserId) => {
-		console.log('yyy',belongUserId)
 		this.requestUserCommentList(belongUserId)
 		this.setState({
 			modal2Visible: true,
@@ -160,24 +169,18 @@ export default class PotentialUser extends Component {
 			title: '時間',
 			dataIndex: 'createDate',
 			key: 'operationDiary_Date',
-			// fixed: 'left',
-			// width: 100,
 			render: (text, record) => (
 				<Button>{record.createDate}</Button>),
 		}, {
 			title: '狀態',
 			dataIndex: 'comment',
 			key: 'operationDiary_Status',
-			// fixed: 'left',
-			// width: 100,
 			render: (text, record) => (
 				<Button>{record.comment}</Button>),
 		}, {
 			title: '操作人',
 			dataIndex: 'bkUserName',
 			key: 'operationDiary_User',
-			// fixed: 'left',
-			// width: 100,
 			render: (text, record) => (
 				<Button>{record.bkUserName}</Button>),
 		}]
@@ -190,6 +193,7 @@ export default class PotentialUser extends Component {
 				key: 'phoneNumber',
 				width: 150,
 				fixed: 'left',
+				align: 'center',
 				render: (text, record) => (
 
 					<span>{record.mobile}</span>
@@ -200,42 +204,42 @@ export default class PotentialUser extends Component {
 				dataIndex: '模拟账号',
 				key: '模拟账号',
 				render: (text, record) => (
-					<span>{record.name}</span>),
+					<span>{record.accountNo}</span>),
 			}, {
 				title: '绑定时间',
 				dataIndex: '绑定时间',
 				key: '绑定时间',
-				render: (text, record) => (<span>{record.activeFlag}</span>),
+				render: (text, record) => (<span>{record.date}</span>),
 			}, {
 				title: '剩余天数',
 				dataIndex: '剩余天数',
 				key: '剩余天数',
-				render: (text, record) => (<span>{record.date}</span>),
+				render: (text, record) => (<span>{record.remainDay}</span>),
 			}, {
 				title: '模拟账户状态',
 				dataIndex: '模拟账户状态',
 				key: '模拟账户状态',
-				render: (text, record) => (<span>{record.date}</span>),
+				render: (text, record) => (<span>{'sssssss'}</span>),
 			}, {
 				title: '延期次数',
 				dataIndex: '延期次数',
 				key: '延期次数',
-				render: (text, record) => (<span>{record.date}</span>),
+				render: (text, record) => (<span>{record.delayNum}</span>),
 			}, {
 				title: '回访状态',
 				dataIndex: '回访状态',
 				key: '回访状态',
-				render: (text, record) => (<span>{record.date}</span>),
+				render: (text, record) => (<span>{'xxxssas'}</span>),
 			}, {
 				title: '备注',
 				dataIndex: '备注',
 				key: '备注',
-				render: (text, record) => (<span>{record.date}</span>),
+				render: (text, record) => (<span>{record.comment}</span>),
 			}, {
 				title: '活跃程度',
 				dataIndex: '活跃程度',
 				key: '活跃程度',
-				render: (text, record) => (<span>{record.date}</span>),
+				render: (text, record) => (<span>{'ssssss'}</span>),
 			}, {
 				title: '操作人',
 				dataIndex: '操作人',
@@ -245,11 +249,13 @@ export default class PotentialUser extends Component {
 				title: '操作',
 				key: 'action',
 				fixed: 'right',
-				width: 100,
+				width: 300,
+				align:	'center',
 				render: (text, record) => (
 					<div>
-						<span className="ant-divider" />
-						<Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>移除</Button>
+						<Button className="ant-dropdown-link">延期</Button>
+						<Button className="ant-dropdown-link">添加备注</Button>
+						<Button className="ant-dropdown-link">操作日誌</Button>
 					</div>
 				),
 			}];
@@ -260,8 +266,9 @@ export default class PotentialUser extends Component {
 				title: 'cccccc手机号',
 				dataIndex: 'phoneNumber',
 				key: 'phoneNumber',
-				width: 150,
+				width: 200,
 				fixed: 'left',
+				align: 'center',
 				render: (text, record) => (
 
 					<span>{record.mobile}</span>
@@ -271,64 +278,76 @@ export default class PotentialUser extends Component {
 				title: '姓名',
 				dataIndex: 'name',
 				key: 'name',
+				align: 'center',
 				render: (text, record) => (
 					<span>{record.name}</span>),
 			}, {
 				title: '当前账户',
 				dataIndex: '当前账户',
 				key: '当前账户',
-				render: (text, record) => (<span>{record.activeFlag}</span>),
+				align: 'center',
+				render: (text, record) => (<span>{record.accountType}</span>),
 			}, {
 				title: '模拟帐号',
 				dataIndex: '模拟帐号',
 				key: '模拟帐号',
-				render: (text, record) => (<span>{record.activeFlag}</span>),
+				align: 'center',
+				render: (text, record) => (<span>{record.accountNo}</span>),
 			},{
 				title: '录入信息时间',
 				dataIndex: '录入信息时间',
 				key: '录入信息时间',
-				render: (text, record) => (<span>{record.activeFlag}</span>),
+				align: 'center',
+				render: (text, record) => (<span>{record.date}</span>),
 			}, {
 				title: '活跃度',
 				dataIndex: '活跃度',
 				key: '活跃度',
+				align: 'center',
 				render: (text, record) => (<span>{record.activeFlag}</span>),
 			}, {
 				title: '回访状态',
 				dataIndex: '回访状态',
 				key: '回访状态',
-				render: (text, record) => (<span>{record.date}</span>),
+				align: 'center',
+				render: (text, record) => (<span>{'xxxxxx'}</span>),
 			}, {
 				title: '备注',
 				dataIndex: '备注',
 				key: '备注',
+				align: 'center',
 				render: (text, record) => (
 					<span>{record.comment}</span>),
 			}, {
 				title: '操作人',
 				dataIndex: '操作人',
 				key: '操作人',
+				align: 'center',
 				render: (text, record) => (
-					<span>{record.comment}</span>),
+					<span>{record.operator}</span>),
 			}, {
 				title: '查看',
 				dataIndex: '查看',
 				key: '查看',
+				align: 'center',
 				render: (text, record) => (
-					<span>{record.comment}</span>),
+					<span><Button className="ant-dropdown-link">查看信息</Button></span>),
 			}, {
 				title: '操作',
 				key: 'action',
 				fixed: 'right',
-				width: 100,
+				width: 250,
+				align: 'center',
 				render: (text, record) => (
 					<div>
-						<span className="ant-divider" />
-						<Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>移除</Button>
+						<Button className="ant-dropdown-link">添加备注</Button>
+						<Button className="ant-dropdown-link">操作日誌</Button>
+
 					</div>
 				),
 			}];
 	}
+	
 	handleOk = (e) => {
 		console.log(e);
 		this.setState({
@@ -346,9 +365,6 @@ export default class PotentialUser extends Component {
 	}
 	handleAddComment = (e) => {
 		let self = this;
-		console.log("zzz", self.state.theBelongUserId)
-		console.log("zzz", self.state.theComment)
-
 		window.Axios.post('auth/addUserComment', {
 			content: "self.state.theComment",
 			belongUserId: self.state.theBelongUserId,
@@ -480,7 +496,6 @@ export default class PotentialUser extends Component {
 		window.Axios.post('ixuser/getUserList', {
 			pageNo: this.state.currentA,
 			'listType': 1,
-			
 			'nationalId': this.state.selectID,
 			'startTime': this.state.selectTimeStart,
 			'endTime': this.state.selectTimeEnd,
@@ -494,7 +509,7 @@ export default class PotentialUser extends Component {
 				loadingA: false
 				
 			}, () => {
-				console.log('hcia self.state.bklistA', self.state.bklistA)
+				console.log('yyx requestPageA state.bklistA', self.state.bklistA)
 				// var tags = Object.keys(self.state.bklistA[0])
 				// console.log('hcia tags', tags)
 				// self.setState({
@@ -509,24 +524,23 @@ export default class PotentialUser extends Component {
 	}
 	requestPageB = () => {
 		let self = this
-
+		
 		self.setState({
 			loadingB: true
 		})
-		window.Axios.post('auth/getBlackList', {
-			pageNo: this.state.current,
-			'listType': 2,//1:合规 2:开户 3:交易
-			'email': this.state.selectMail,
+		window.Axios.post('ixuser / getUserList', {
+			pageNo: this.state.currentA,
+			'listType': 2,
 			'nationalId': this.state.selectID,
 			'startTime': this.state.selectTimeStart,
 			'endTime': this.state.selectTimeEnd,
-			'mobile': this.state.selectPhone,
-			'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
+			'pageSize': this.state.pgsize,
+
 		}).then((response) => {
+			console.log('kkk', response.data.data);
 			self.setState({
 				totalpageB: response.data.data.totalPage,
 				bklistB: response.data.data.list,
-
 				loadingB: false
 			});
 
@@ -537,25 +551,27 @@ export default class PotentialUser extends Component {
 	}
 	requestPageC = () => {
 		let self = this
+
 		self.setState({
-			loadingC: true
+			loadingB: true
 		})
-		window.Axios.post('auth/getBlackList', {
-			pageNo: this.state.current,
-			'listType': 3,//1:合规 2:开户 3:交易
-			'email': this.state.selectMail,
+		window.Axios.post('ixuser / getUserList', {
+			pageNo: this.state.currentA,
+			'listType': 3,
 			'nationalId': this.state.selectID,
 			'startTime': this.state.selectTimeStart,
 			'endTime': this.state.selectTimeEnd,
-			'mobile': this.state.selectPhone,
-			'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
-		}).then((response) => {
+			'pageSize': this.state.pgsize,
 
+		}).then((response) => {
+			console.log('iii', response.data.data);
 			self.setState({
 				totalpageC: response.data.data.totalPage,
 				bklistC: response.data.data.list,
 				loadingC: false
 			});
+
+
 		}).catch(function (error) {
 			console.log(error);
 		});
@@ -745,7 +761,7 @@ export default class PotentialUser extends Component {
 								disabled={!hasSelected}
 								loading={loading}
 							>
-								{this.state.pgsize}
+								批量移除
                             </Button>
 							<Table rowKey="id"
 								bordered
