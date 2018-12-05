@@ -64,30 +64,54 @@ export default class PotentialUser extends Component {
 
 				),
 			}, {
-				title: '姓名',
-				dataIndex: 'name',
-				key: 'name',
+				title: 'APP版本',
+				dataIndex: 'APP版本',
+				key: 'APP版本',
 				render: (text, record) => (
 					<span>{record.name}</span>),
 			}, {
-				title: '活跃度',
-				dataIndex: '活跃度',
-				key: '活跃度',
+				title: '手机型号',
+				dataIndex: '手机型号',
+				key: '手机型号',
 				render: (text, record) => (<span>{record.activeFlag}</span>),
 			}, {
-				title: 'APP注册时间',
-				dataIndex: 'APP注册时间',
-				key: 'APP注册时间',
+				title: '操作系统型号',
+				dataIndex: '操作系统型号',
+				key: '操作系统型号',
 				render: (text, record) => (<span>{record.date}</span>),
+			}, {
+				title: '注册时间',
+				dataIndex: '注册时间',
+				key: '注册时间',
+				render: (text, record) => (<span>{record.operator}</span>),
+			}, {
+				title: '下载平台',
+				dataIndex: '下载平台',
+				key: '下载平台',
+				render: (text, record) => (
+					<span>{record.comment}</span>),
+			}, {
+				title: '地理位置',
+				dataIndex: '地理位置',
+				key: '地理位置',
+				render: (text, record) => (
+					<span>{record.comment}</span>),
+			}, {
+				title: '回访状态',
+				dataIndex: '回访状态',
+				key: '回访状态',
+				render: (text, record) => (
+					<span>{record.comment}</span>),
+			}, {
+				title: '备注',
+				dataIndex: '备注',
+				key: '备注',
+				render: (text, record) => (
+					<span>{record.comment}</span>),
 			}, {
 				title: '操作人',
 				dataIndex: '操作人',
 				key: '操作人',
-				render: (text, record) => (<span>{record.operator}</span>),
-			}, {
-				title: '处理备注',
-				dataIndex: '处理备注',
-				key: '处理备注',
 				render: (text, record) => (
 					<span>{record.comment}</span>),
 			}, {
