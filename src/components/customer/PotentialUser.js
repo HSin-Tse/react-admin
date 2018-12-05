@@ -60,7 +60,7 @@ export default class PotentialUser extends Component {
 				title: 'aaaa手机号',
 				dataIndex: 'phoneNumber',
 				key: 'phoneNumber',
-				width: 150,
+				width: 200,
 				fixed: 'left',
 				render: (text, record) => (
 
@@ -183,6 +183,7 @@ export default class PotentialUser extends Component {
 				key: 'phoneNumber',
 				width: 150,
 				fixed: 'left',
+				align: 'center',
 				render: (text, record) => (
 
 					<span>{record.mobile}</span>
@@ -238,11 +239,13 @@ export default class PotentialUser extends Component {
 				title: '操作',
 				key: 'action',
 				fixed: 'right',
-				width: 100,
+				width: 300,
+				align:	'center',
 				render: (text, record) => (
 					<div>
-						<span className="ant-divider" />
-						<Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>移除</Button>
+						<Button className="ant-dropdown-link">延期</Button>
+						<Button className="ant-dropdown-link">添加备注</Button>
+						<Button className="ant-dropdown-link">操作日誌</Button>
 					</div>
 				),
 			}];
@@ -270,17 +273,17 @@ export default class PotentialUser extends Component {
 				title: '当前账户',
 				dataIndex: '当前账户',
 				key: '当前账户',
-				render: (text, record) => (<span>{record.activeFlag}</span>),
+				render: (text, record) => (<span>{record.accountType}</span>),
 			}, {
 				title: '模拟帐号',
 				dataIndex: '模拟帐号',
 				key: '模拟帐号',
-				render: (text, record) => (<span>{record.activeFlag}</span>),
+				render: (text, record) => (<span>{record.accountNo}</span>),
 			},{
 				title: '录入信息时间',
 				dataIndex: '录入信息时间',
 				key: '录入信息时间',
-				render: (text, record) => (<span>{record.activeFlag}</span>),
+				render: (text, record) => (<span>{record.date}</span>),
 			}, {
 				title: '活跃度',
 				dataIndex: '活跃度',
@@ -290,7 +293,7 @@ export default class PotentialUser extends Component {
 				title: '回访状态',
 				dataIndex: '回访状态',
 				key: '回访状态',
-				render: (text, record) => (<span>{record.date}</span>),
+				render: (text, record) => (<span>{'xxxxxx'}</span>),
 			}, {
 				title: '备注',
 				dataIndex: '备注',
@@ -302,13 +305,13 @@ export default class PotentialUser extends Component {
 				dataIndex: '操作人',
 				key: '操作人',
 				render: (text, record) => (
-					<span>{record.comment}</span>),
+					<span>{record.operator}</span>),
 			}, {
 				title: '查看',
 				dataIndex: '查看',
 				key: '查看',
 				render: (text, record) => (
-					<span>{record.comment}</span>),
+					<span>{"this is btn"}</span>),
 			}, {
 				title: '操作',
 				key: 'action',
@@ -322,6 +325,7 @@ export default class PotentialUser extends Component {
 				),
 			}];
 	}
+	
 	handleOk = (e) => {
 		console.log(e);
 		this.setState({
