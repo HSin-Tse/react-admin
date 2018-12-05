@@ -614,6 +614,7 @@ export default class PotentialUser extends Component {
 						</TabPane>
 						<TabPane tab="模擬用戶" key="2">
 							<Table rowKey="id"
+								rowSelection={rowSelection}
 								columns={this.pageBColumns()}
 								dataSource={this.state.bklistB}
 								scroll={{ x: 1300 }}
@@ -627,6 +628,7 @@ export default class PotentialUser extends Component {
 						</TabPane>
 						<TabPane tab="意向用戶" key="3">
 							<Table rowKey="id"
+								rowSelection={rowSelection}
 								columns={this.pageCColumns()}
 								dataSource={this.state.bklistC}
 								scroll={{ x: 1300 }}
