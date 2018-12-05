@@ -38,6 +38,8 @@ export default class PotentialUser extends Component {
 			selectID: "",
 			selectTimeStart: "",
 			selectTimeEnd: "",
+			modal2Visible: false,
+			visible: false,
 
 
 		};
@@ -117,15 +119,35 @@ export default class PotentialUser extends Component {
 			}, {
 				title: '操作',
 				key: 'action',
-				fixed: 'right',
-				width: 100,
+				fixed:	'right',
+				align:	'center',
+				width: 250,
 				render: (text, record) => (
 					<div>
-						<span className="ant-divider" />
-						<Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>移除</Button>
+						<Button className="ant-dropdown-link" onClick={() => this.showModal()}>添加備註</Button>
+						<Button className="ant-dropdown-link" onClick={() => this.showModal2()}>操作日誌</Button>
+
+						
 					</div>
 				),
 			}];
+
+			
+
+		
+	}
+	showModal2 = () => {
+		this.setState({
+			modal2Visible: true,
+			visible: false,
+
+		});
+	}
+	showModal = () => {
+		this.setState({
+			visible: true,
+			modal2Visible: false,
+		});
 	}
 	pageBColumns = () => {
 		return this.columns = [
@@ -273,6 +295,21 @@ export default class PotentialUser extends Component {
 					</div>
 				),
 			}];
+	}
+	handleOk = (e) => {
+		console.log(e);
+		this.setState({
+			visible: false,
+			modal2Visible: false,
+		});
+	}
+
+	handleCancel = (e) => {
+		console.log(e);
+		this.setState({
+			visible: false,
+			modal2Visible: false,
+		});
 	}
 	
 	handleremove = (record) => {
@@ -643,7 +680,29 @@ export default class PotentialUser extends Component {
 					</Tabs>
 				</Card>
 
+				<Modal
+					title="添加備註"
+					visible={this.state.visible}
+					onOk={this.handleOk}
+					onCancel={this.handleCancel}
+					okText="確認"
+					cancelText="取消"
+				>
+					<p><Input placeholder="填写回访次数以及结果" /></p>
+				</Modal>
+				<Modal
+					title="操作日誌"
+					visible={this.state.modal2Visible}
+					onOk={this.handleOk}
+					onCancel={this.handleCancel}
+					okText="確認"
+					cancelText="取消"
+				>
+					<p>
 
+
+					</p>
+				</Modal>
 			</div>
 
 		)
