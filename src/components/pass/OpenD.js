@@ -46,7 +46,6 @@ const cityData = {
     Jiangsu: ['Nanjing', 'Suzhou', 'Zhenjiang'],
 };
 
-
 const tradeType = [
     {label: 'CFD', value: 'CFD'},
     {label: 'CFD_2', value: 'CFD_2'},
@@ -56,70 +55,41 @@ const dateFormat = 'YYYY-MM-DD';
 
 class PassOpenD extends Component {
     handleProvinceChange = (value) => {
-
-        console.log('hcia value', value)
         this.setState({
             mState: value,
             mCity: '',
         });
-////
-
         let self = this
-
         window.Axios.post('dict/openDict', {
             'keys': 'div_type',
             'division': 'province',
             'code': '1',
         }).then(function (response) {
-            console.log('hcia response', response)
-
             self.setState({
                 provinceDatAarra: response.data.data.div_type,
             }, () => {
-
                 var nowCity = self.state.provinceDatAarra.filter(function (item, index, array) {
                     return item.value == self.state.mState;
                 });
-
-                console.log('hcia nowCity', nowCity[0].value)
-                console.log('hcia nowCity', nowCity[0].code)
-                console.log('hcia self.setState.state', self.state.mState)
-
-
                 window.Axios.post('dict/openDict', {
                     'keys': 'div_type',
                     'division': 'city',
                     'code': nowCity[0].code
                 }).then((ress) => {
-
-                    console.log('hcia ress', ress)
                     self.setState({
                         cityDatAarra: ress.data.data.div_type
                     })
                 });
             });
-
-
         }).catch(function (error) {
             console.log(error);
         });
-
-
-        ////
     };
 
     onSecondCityChange = (value) => {
-
-        console.log('hcia value', value)
-
         this.setState({
             mCity: value,
         });
-    }
-
-    uploadC = (value) => {
-
-        console.log('hcia value', value)
     }
 
     constructor(props) {
@@ -163,10 +133,8 @@ class PassOpenD extends Component {
         };
     }
 
-
     componentDidMount() {
         var self = this;
-
 
         window.Axios.post('dict/leverageList', {
             'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
@@ -214,7 +182,6 @@ class PassOpenD extends Component {
                 changeNoteV: response.data.data.comment,
                 checkfromdbName: response.data.data.phoneNumber,
             }, () => {
-
                 window.Axios.post('dict/openDict', {
                     'keys': 'div_type',
                     'division': 'province',
@@ -229,11 +196,6 @@ class PassOpenD extends Component {
                         var nowCity = self.state.provinceDatAarra.filter(function (item, index, array) {
                             return item.value == self.state.mState;
                         });
-
-                        console.log('hcia nowCity', nowCity[0].value)
-                        console.log('hcia nowCity', nowCity[0].code)
-                        console.log('hcia self.setState.state', self.state.mState)
-
 
                         window.Axios.post('dict/openDict', {
                             'keys': 'div_type',
@@ -307,7 +269,6 @@ class PassOpenD extends Component {
                               onSuccess,
                               withCredentials,
                           }) {
-                // EXAMPLE: post form-data with 'axios'
                 const formData = new FormData();
                 if (data) {
                     Object.keys(data).map(key => {
@@ -321,16 +282,16 @@ class PassOpenD extends Component {
                     'keys': 'div_type',
                     'division': 'province',
                     'code': '1',
-                },{
+                }, {
                     method: 'post',
-                        headers: {
+                    headers: {
                         'Content-Type': 'multipart/form-data',
                         'asdasd': 'sssss'
                     },
-                    transformRequest: [function(data) {
+                    transformRequest: [function (data) {
                         return data
                     }],
-                        onUploadProgress: function(e) {
+                    onUploadProgress: function (e) {
                         var percentage = Math.round((e.loaded * 100) / e.total) || 0;
                         if (percentage < 100) {
                             console.log(percentage + '%');  // 上传进度
@@ -359,7 +320,6 @@ class PassOpenD extends Component {
                 return {
                     abort() {
                         message.error('upload progress is aborted.')
-                        console.log('upload progress is aborted.');
                     },
                 };
             },
@@ -393,47 +353,23 @@ class PassOpenD extends Component {
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
                 <Card disabled={true} title="IX账户审核 " bordered={true}>
 
-                    <Row gutter={16}>
-                        <Col md={8}>
-                            <Card bordered={true}>
-                                <div>
-
-                                    <p>客户姓名:{this.state.recordData.cnName}</p>
-
-                                </div>
-                            </Card>
+                    <Row gutter={1}>
+                        <Col md={6}>
+                            <p>客户姓名:{this.state.recordData.cnName}</p>
                         </Col>
-                        <Col md={8}>
-                            <Card bordered={true}>
-                                <div>
-
-                                    <p>客户邮箱：{this.state.recordData.email}</p>
-
-                                </div>
-                            </Card>
+                        <Col md={6}>
+                            <p>客户邮箱：{this.state.recordData.email}</p>
                         </Col>
-                        <Col md={8}>
-                            <Card bordered={true}>
-                                <div>
-
-                                    <p>手机号码：{this.state.recordData.phoneNumber} </p>
-
-                                </div>
-                            </Card>
+                        <Col md={6}>
+                            <p>手机号码：{this.state.recordData.phoneNumber} </p>
                         </Col>
-
-
                     </Row>
                 </Card>
-                <Card title="IX账户设置" bordered={true} style={{marginTop: 30}}>
-
+                <Card title="IX账户设置" bordered={true} style={{marginTop: 15}}>
                     <Row>
                         <Col>
                             <Card bordered={false}>
-
                                 <div>
-
-
                                     账户类型:
                                     <Checkbox style={{marginLeft: 20}} checked={this.state.recordData.applyMT4}
                                               disabled={true}>MT4</Checkbox>
@@ -524,7 +460,7 @@ class PassOpenD extends Component {
                         </Col>
                     </Row>
                 </Card>
-                <Card title="IX账户申请表单" bordered={true} style={{marginTop: 30}}>
+                <Card title="IX账户申请表单" bordered={true} style={{marginTop: 15}}>
 
                     <Row gutter={8}>
                         <Col md={12}>
@@ -714,10 +650,10 @@ class PassOpenD extends Component {
                         </Col>
                     </Row>
                 </Card>
-                <Card title="IX账户身份信息" bordered={true} style={{marginTop: 30}}>
+                <Card title="IX账户身份信息" bordered={true} style={{marginTop: 15}}>
                     <Row gutter={16}>
 
-                        <Col md={8}>
+                        <Col md={12}>
                             <Card className="gutter-box" bordered={true} bodyStyle={{padding: 0}}>
                                 <div>
                                     <img
@@ -734,35 +670,32 @@ class PassOpenD extends Component {
                                 </div>
                             </Card>
                         </Col>
-                        <Col md={8}>
-                            <Card className="gutter-box" bordered={true} bodyStyle={{padding: 0}}>
-                                <div>
+                        <Col md={12}>
+                            <Card bordered={true} bodyStyle={{padding: 0}}
+
+                                  actions={[<h3 className="pa-m">
+                                      <a href={this.state.recordData.idcard_1}
+                                         target="_blank"
+                                         rel="noopener noreferrer">身份证反面照片</a>
+                                  </h3>,
+                                      <Upload  {...uploadProps} >
+                                          <h3 className="pa-m">
+                                              点击上传可修改照片<Icon type="upload"/>
+                                          </h3>
+                                      </Upload>]}
+                            >
+                                <div className="gutter-box">
                                     <img
                                         onClick={() => this.openGallery(this.state.recordData.idcard_1)}
                                         alt="example" width="100%"
                                         src={this.state.recordData.idcard_1}/>
                                 </div>
-                                <div className="pa-m">
-                                    <h3>身份证反面照片</h3>
-                                    <small><a href={this.state.recordData.idcard_1} target="_blank"
-                                              rel="noopener noreferrer">身份证反面照片</a></small>
-                                </div>
-                                <div>
-                                    <Dragger {...uploadProps}>
-                                        <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                                        <p className="ant-upload-hint">Support for a single or bulk upload. Strictly
-                                            prohibit from uploading company data or other band files</p>
-                                    </Dragger>
-                                    <Upload {...props}>
-                                        <Button>
-                                            <Icon type="upload"/> Click to Upload
-                                        </Button>
-                                    </Upload>
-                                </div>
+
+
                             </Card>
                         </Col>
-                        <Col md={8}>
-                            <Card className="gutter-box" bordered={true} bodyStyle={{padding: 0}}>
+                        <Col md={12}>
+                            <Card bordered={true} bodyStyle={{padding: 0}}>
                                 <div>
                                     <img id="idcard_2"
                                          onClick={() => this.openGallery(this.state.recordData.idcard_2)}
@@ -779,7 +712,8 @@ class PassOpenD extends Component {
                     </Row>
 
                 </Card>
-                <Card title="IX账户身份查重" bordered={true} style={{marginTop: 30}}>
+
+                <Card title="IX账户身份查重" bordered={true} style={{marginTop: 15}}>
 
                     <Row gutter={12}>
                         <Col md={4}>
@@ -828,7 +762,7 @@ class PassOpenD extends Component {
                         </Col>
                     </Row>
                 </Card>
-                <Card title="IX账户审核备注" bordered={true} style={{marginTop: 30}}>
+                <Card title="IX账户审核备注" bordered={true} style={{marginTop: 15}}>
                     <Row gutter={12}>
 
                         <Col md={24}>

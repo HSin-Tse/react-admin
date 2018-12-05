@@ -14,7 +14,6 @@ export default class BlackList extends Component {
         super(props);
         this.state = {
             selectedRowKeys: [],
-            // mTags: [],
             bklistA: [],
             bklistB: [],
             bklistC: [],
@@ -34,8 +33,6 @@ export default class BlackList extends Component {
             selectID: "",
             selectTimeStart: "",
             selectTimeEnd: "",
-
-
         };
     }
 
@@ -178,11 +175,7 @@ export default class BlackList extends Component {
                 loadingA: false
             }, () => {
                 console.log('hcia self.state.bklistA', self.state.bklistA)
-                // var tags = Object.keys(self.state.bklistA[0])
-                // console.log('hcia tags', tags)
-                // self.setState({
-                //     mTags: tags
-                // })
+
 
             });
 
@@ -288,14 +281,7 @@ export default class BlackList extends Component {
             switcherOn: !this.state.switcherOn
         })
     };
-    _handleChangeComplete = color => {
-        console.log(color);
-        this.setState({background: color.hex});
-        localStorage.setItem('@primary-color', color.hex);
-        window.less.modifyVars({
-            '@primary-color': color.hex,
-        })
-    };
+
 
     onChangeMail = (e) => {
         this.setState({
@@ -331,8 +317,8 @@ export default class BlackList extends Component {
 
     onOk = (value) => {
         console.log('hcia', 'onOk: ', value);
-        var selectTimeStart = value[0].unix()+'000'
-        var selectTimeEnd = value[1].unix()+'000'
+        var selectTimeStart = value[0].unix() + '000'
+        var selectTimeEnd = value[1].unix() + '000'
         this.setState({
             selectTimeStart: selectTimeStart,
             selectTimeEnd: selectTimeEnd,
@@ -355,10 +341,6 @@ export default class BlackList extends Component {
 
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
-                <div>nowKey :{this.state.nowKey}</div>
-                <div>selectMail :{this.state.selectMail}</div>
-                <div>selectPhone :{this.state.selectPhone}</div>
-                {/*<ThemePicker />*/}
                 <div className={classNames('switcher dark-white', {active: switcherOn})}>
                 <span className="sw-btn dark-white" onClick={this._switcherOn}>
                     <Icon type="setting" className="text-dark"/>
@@ -370,7 +352,8 @@ export default class BlackList extends Component {
                               >清除條件</Button>}
                         >
                             <Input onChange={this.onChangeMail} style={{marginBottom: 5}} placeholder="邮箱"/>
-                            <Input value={this.state.selectPhone} onChange={this.onChangePhone} style={{marginBottom: 5}} placeholder="手机号"/>
+                            <Input value={this.state.selectPhone} onChange={this.onChangePhone}
+                                   style={{marginBottom: 5}} placeholder="手机号"/>
                             <Input onChange={this.onChangeID} style={{marginBottom: 5}} placeholder="身份证号"/>
                             <Input onChange={this.onChangeAccount} style={{marginBottom: 5}} placeholder="账户"/>
                             <Input onChange={this.onChangeKeyWord} style={{marginBottom: 5}} placeholder="关键词"/>
@@ -392,7 +375,7 @@ export default class BlackList extends Component {
                 </div>
                 <BreadcrumbCustom first="用戶管理" second="黑名單"/>
 
-                <Card>
+                <Card >
 
                     <Tabs
                         onChange={this.callback}
