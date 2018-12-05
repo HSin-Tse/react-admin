@@ -268,6 +268,7 @@ export default class PotentialUser extends Component {
 				key: 'phoneNumber',
 				width: 150,
 				fixed: 'left',
+				align: 'center',
 				render: (text, record) => (
 
 					<span>{record.mobile}</span>
@@ -277,60 +278,71 @@ export default class PotentialUser extends Component {
 				title: '姓名',
 				dataIndex: 'name',
 				key: 'name',
+				align: 'center',
 				render: (text, record) => (
 					<span>{record.name}</span>),
 			}, {
 				title: '当前账户',
 				dataIndex: '当前账户',
 				key: '当前账户',
+				align: 'center',
 				render: (text, record) => (<span>{record.accountType}</span>),
 			}, {
 				title: '模拟帐号',
 				dataIndex: '模拟帐号',
 				key: '模拟帐号',
+				align: 'center',
 				render: (text, record) => (<span>{record.accountNo}</span>),
 			},{
 				title: '录入信息时间',
 				dataIndex: '录入信息时间',
 				key: '录入信息时间',
+				align: 'center',
 				render: (text, record) => (<span>{record.date}</span>),
 			}, {
 				title: '活跃度',
 				dataIndex: '活跃度',
 				key: '活跃度',
+				align: 'center',
 				render: (text, record) => (<span>{record.activeFlag}</span>),
 			}, {
 				title: '回访状态',
 				dataIndex: '回访状态',
 				key: '回访状态',
+				align: 'center',
 				render: (text, record) => (<span>{'xxxxxx'}</span>),
 			}, {
 				title: '备注',
 				dataIndex: '备注',
 				key: '备注',
+				align: 'center',
 				render: (text, record) => (
 					<span>{record.comment}</span>),
 			}, {
 				title: '操作人',
 				dataIndex: '操作人',
 				key: '操作人',
+				align: 'center',
 				render: (text, record) => (
 					<span>{record.operator}</span>),
 			}, {
 				title: '查看',
 				dataIndex: '查看',
 				key: '查看',
+				align: 'center',
 				render: (text, record) => (
-					<span>{"this is btn"}</span>),
+					<span><Button className="ant-dropdown-link">查看信息</Button></span>),
 			}, {
 				title: '操作',
 				key: 'action',
 				fixed: 'right',
-				width: 100,
+				width: 200,
+				align: 'center',
 				render: (text, record) => (
 					<div>
-						<span className="ant-divider" />
-						<Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>移除</Button>
+						<Button className="ant-dropdown-link">添加备注</Button>
+						<Button className="ant-dropdown-link">操作日誌</Button>
+
 					</div>
 				),
 			}];
