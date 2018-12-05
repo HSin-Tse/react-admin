@@ -47,8 +47,6 @@ export default class PotentialUser extends Component {
 	}
 
 	componentDidMount() {
-		console.log('xxxxx', this.pageCColumns())
-		this.requestUserCommentList()
 		this.requestPageA()
 		this.requestPageB()
 		this.requestPageC()
@@ -124,11 +122,11 @@ export default class PotentialUser extends Component {
 				align:	'center',
 				width: 250,
 				render: (text, record) => (
-					<div>
-						<Button className="ant-dropdown-link" onClick={() => this.showModal()}>添加備註</Button>
-						<Button className="ant-dropdown-link" onClick={() => this.showModal2()}>操作日誌</Button>
+					
+					<div>						
 
-						
+						<Button className="ant-dropdown-link" onClick={() => this.showModal()}>添加備註</Button>
+						<Button className="ant-dropdown-link" onClick={() => this.showModal2(record.belongUserId)}>操作日誌</Button>
 					</div>
 				),
 			}];
@@ -137,7 +135,9 @@ export default class PotentialUser extends Component {
 
 		
 	}
-	showModal2 = () => {
+	showModal2 = (belongUserId) => {
+		console.log('yyy',belongUserId)
+		this.requestUserCommentList(belongUserId)
 		this.setState({
 			modal2Visible: true,
 			visible: false,
@@ -404,27 +404,27 @@ export default class PotentialUser extends Component {
 
 
 	};
-	requestUserCommentList = () => {
+	requestUserCommentList = (record) => {
 		// must request data:
 		//belongUserId
 		//loginName
 		//token
-
+		console.log('www',record)
 		//refernce request data:
 		//pageNo
 		//pageSize
 		//language
 		const url = 'http://mobile.nooko.cn:8090/auth/getUserCommentList'
 
-		var tmp = this;
+		var self = this;
 
 		window.Axios.post(url, {
-			'belongUserId': '4028b2a4631f770f01631f7770df0000',
+			'belongUserId': record,
 			
 		}).then(function (response) {
 
-			tmp.setState({ operationDiaryHistory: response.data.data.list });
-
+			self.setState({ operationDiaryHistory: response.data.data.list });
+			console.log('ggg', self.state.operationDiaryHistory)
 		}).catch(function (error) {
 			console.log(error);
 			// message.warn(error);
@@ -435,14 +435,13 @@ export default class PotentialUser extends Component {
 		self.setState({
 			loadingA: true
 		})
-		window.Axios.post('auth/getBlackList', {
+		window.Axios.post('ixuser/getUserList', {
 			pageNo: this.state.current,
-			'listType': 1,//1:合规 2:开户 3:交易
-			'email': this.state.selectMail,
+			'listType': 1,
+			
 			'nationalId': this.state.selectID,
 			'startTime': this.state.selectTimeStart,
 			'endTime': this.state.selectTimeEnd,
-			'mobile': this.state.selectPhone,
 			'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
 		}).then((response) => {
 			self.setState({
