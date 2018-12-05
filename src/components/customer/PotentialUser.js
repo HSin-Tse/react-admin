@@ -128,7 +128,7 @@ export default class PotentialUser extends Component {
 					
 					<div>						
 
-						<Button className="ant-dropdown-link" onClick={() => this.showModal()}>添加備註</Button>
+						<Button className="ant-dropdown-link" onClick={() => this.showModal(record)}>添加備註</Button>
 						<Button className="ant-dropdown-link" onClick={() => this.showModal2(record.belongUserId)}>操作日誌</Button>
 					</div>
 				),
@@ -147,8 +147,10 @@ export default class PotentialUser extends Component {
 
 		});
 	}
-	showModal = () => {
+	showModal = (record) => {
+		let belongUserId = record.belongUserId
 		this.setState({
+			theBelongUserId: belongUserId,
 			visible: true,
 			modal2Visible: false,
 		});
@@ -342,7 +344,27 @@ export default class PotentialUser extends Component {
 			modal2Visible: false,
 		});
 	}
-	
+	handleAddComment = (e) => {
+		let self = this;
+		console.log("zzz", self.state.theBelongUserId)
+		console.log("zzz", self.state.theComment)
+
+		window.Axios.post('auth/addUserComment', {
+			content: "self.state.theComment",
+			belongUserId: self.state.theBelongUserId,
+		}).then((response) => {
+
+
+			console.log('yyx handleAddComment success', response)
+		}).catch(function (error) {
+			console.log(error);
+		});
+
+		this.setState({
+			visible: false,
+			modal2Visible: false,
+		});
+	}
 	handleremove = (record) => {
 
 		let self = this
@@ -574,7 +596,13 @@ export default class PotentialUser extends Component {
 		})
 
 	}
+	addComment = (e) => {
+		let comment = e.target.value;
+		this.setState({
+			theComment: comment
 
+		});
+	}
 	onSelectChange = (selectedRowKeys) => {
 		console.log('hcia', 'selectedRowKeys changed: ', selectedRowKeys);
 		this.setState({ selectedRowKeys });
@@ -764,12 +792,12 @@ export default class PotentialUser extends Component {
 				<Modal
 					title="添加備註"
 					visible={this.state.visible}
-					onOk={this.handleOk}
+					onOk={this.handleAddComment}
 					onCancel={this.handleCancel}
 					okText="確認"
 					cancelText="取消"
 				>
-					<p><Input placeholder="填写回访次数以及结果" /></p>
+					<p><Input onChange={this.addComment} placeholder="填写回访次数以及结果" /></p>
 				</Modal>
 				<Modal
 					title="操作日誌"
