@@ -14,7 +14,6 @@ export default class BlackList extends Component {
         super(props);
         this.state = {
             selectedRowKeys: [],
-            // mTags: [],
             bklistA: [],
             bklistB: [],
             bklistC: [],
@@ -25,7 +24,7 @@ export default class BlackList extends Component {
             totalpageB: 0,
             totalpageC: 0,
             nowKey: "1",
-            pgsize: 40,
+            pgsize: 10,
             loadingA: false,
             loadingB: false,
             loadingC: false,
@@ -34,8 +33,6 @@ export default class BlackList extends Component {
             selectID: "",
             selectTimeStart: "",
             selectTimeEnd: "",
-
-
         };
     }
 
@@ -163,7 +160,7 @@ export default class BlackList extends Component {
             loadingA: true
         })
         window.Axios.post('auth/getBlackList', {
-            pageNo: this.state.current,
+            pageNo: this.state.currentA,
             'listType': 1,//1:合规 2:开户 3:交易
             'email': this.state.selectMail,
             'nationalId': this.state.selectID,
@@ -178,11 +175,7 @@ export default class BlackList extends Component {
                 loadingA: false
             }, () => {
                 console.log('hcia self.state.bklistA', self.state.bklistA)
-                // var tags = Object.keys(self.state.bklistA[0])
-                // console.log('hcia tags', tags)
-                // self.setState({
-                //     mTags: tags
-                // })
+
 
             });
 
@@ -197,8 +190,9 @@ export default class BlackList extends Component {
             loadingB: true
         })
         window.Axios.post('auth/getBlackList', {
-            pageNo: this.state.current,
+            pageNo: this.state.currentB,
             'listType': 2,//1:合规 2:开户 3:交易
+
             'email': this.state.selectMail,
             'nationalId': this.state.selectID,
             'startTime': this.state.selectTimeStart,
@@ -223,7 +217,7 @@ export default class BlackList extends Component {
             loadingC: true
         })
         window.Axios.post('auth/getBlackList', {
-            pageNo: this.state.current,
+            pageNo: this.state.currentC,
             'listType': 3,//1:合规 2:开户 3:交易
             'email': this.state.selectMail,
             'nationalId': this.state.selectID,
@@ -245,6 +239,7 @@ export default class BlackList extends Component {
 
 
     changePageA = (page) => {
+        page=page-1
         this.setState({
             currentA: page,
         }, () => {
@@ -252,6 +247,8 @@ export default class BlackList extends Component {
         })
     }
     changePageB = (page) => {
+        page=page-1
+
         this.setState({
             currentb: page,
         }, () => {
@@ -259,6 +256,8 @@ export default class BlackList extends Component {
         })
     }
     changePageC = (page) => {
+        page=page-1
+
         this.setState({
             currentC: page,
         }, () => {
@@ -288,14 +287,7 @@ export default class BlackList extends Component {
             switcherOn: !this.state.switcherOn
         })
     };
-    _handleChangeComplete = color => {
-        console.log(color);
-        this.setState({background: color.hex});
-        localStorage.setItem('@primary-color', color.hex);
-        window.less.modifyVars({
-            '@primary-color': color.hex,
-        })
-    };
+
 
     onChangeMail = (e) => {
         this.setState({
@@ -331,8 +323,8 @@ export default class BlackList extends Component {
 
     onOk = (value) => {
         console.log('hcia', 'onOk: ', value);
-        var selectTimeStart = value[0].unix()+'000'
-        var selectTimeEnd = value[1].unix()+'000'
+        var selectTimeStart = value[0].unix() + '000'
+        var selectTimeEnd = value[1].unix() + '000'
         this.setState({
             selectTimeStart: selectTimeStart,
             selectTimeEnd: selectTimeEnd,
@@ -355,10 +347,6 @@ export default class BlackList extends Component {
 
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
-                <div>nowKey :{this.state.nowKey}</div>
-                <div>selectMail :{this.state.selectMail}</div>
-                <div>selectPhone :{this.state.selectPhone}</div>
-                {/*<ThemePicker />*/}
                 <div className={classNames('switcher dark-white', {active: switcherOn})}>
                 <span className="sw-btn dark-white" onClick={this._switcherOn}>
                     <Icon type="setting" className="text-dark"/>
@@ -370,7 +358,8 @@ export default class BlackList extends Component {
                               >清除條件</Button>}
                         >
                             <Input onChange={this.onChangeMail} style={{marginBottom: 5}} placeholder="邮箱"/>
-                            <Input value={this.state.selectPhone} onChange={this.onChangePhone} style={{marginBottom: 5}} placeholder="手机号"/>
+                            <Input value={this.state.selectPhone} onChange={this.onChangePhone}
+                                   style={{marginBottom: 5}} placeholder="手机号"/>
                             <Input onChange={this.onChangeID} style={{marginBottom: 5}} placeholder="身份证号"/>
                             <Input onChange={this.onChangeAccount} style={{marginBottom: 5}} placeholder="账户"/>
                             <Input onChange={this.onChangeKeyWord} style={{marginBottom: 5}} placeholder="关键词"/>
@@ -392,7 +381,7 @@ export default class BlackList extends Component {
                 </div>
                 <BreadcrumbCustom first="用戶管理" second="黑名單"/>
 
-                <Card>
+                <Card >
 
                     <Tabs
                         onChange={this.callback}
@@ -415,7 +404,7 @@ export default class BlackList extends Component {
                                    columns={this.columns}
                                    dataSource={this.state.bklistA}
                                    scroll={{x: 1300}}
-                                   loading={this.state.loading}
+                                   loading={this.state.loadingA}
                                    pagination={{  // 分页
                                        total: this.state.totalpageA * this.state.pgsize,
                                        pageSize: this.state.pgsize,
@@ -428,7 +417,7 @@ export default class BlackList extends Component {
                                    columns={this.columns}
                                    dataSource={this.state.bklistB}
                                    scroll={{x: 1300}}
-                                   loading={this.state.loading}
+                                   loading={this.state.loadingB}
                                    pagination={{  // 分页
                                        total: this.state.totalpageB * this.state.pgsize,
                                        pageSize: this.state.pgsize,
@@ -441,7 +430,7 @@ export default class BlackList extends Component {
                                    columns={this.columns}
                                    dataSource={this.state.bklistC}
                                    scroll={{x: 1300}}
-                                   loading={this.state.loading}
+                                   loading={this.state.loadingC}
                                    pagination={{  // 分页
                                        total: this.state.totalpageC * this.state.pgsize,
                                        pageSize: this.state.pgsize,

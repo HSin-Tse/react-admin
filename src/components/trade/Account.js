@@ -428,7 +428,7 @@ export default class Basic extends Component {
 
 
                 </Modal>
-                <BreadcrumbCustom first="审核管理" second="开户审核"/>
+                <BreadcrumbCustom first="审核管理" second="交易账户管理"/>
 
                 <Card title="交易账户管理"
                       extra={<Button type="default" onClick={() => this.refleshNowpage()}

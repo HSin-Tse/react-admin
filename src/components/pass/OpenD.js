@@ -1,24 +1,9 @@
 /**
- *
- * 添加注释
  * Created by tse on 2018/1/12
- *
  */
 import React, {Component} from 'react';
 import {
-    Icon,
-    Upload,
-    Col,
-    Card,
-    Row,
-    Button,
-    Modal,
-    Select,
-    Input,
-    Checkbox,
-    DatePicker,
-    Popconfirm,
-    notification
+    Popconfirm, Icon, Upload, Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, notification
 } from 'antd';
 import {Radio} from 'antd';
 import {message} from 'antd';
@@ -30,22 +15,11 @@ import PhotoswipeUIDefault from "photoswipe/dist/photoswipe-ui-default";
 import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
 import moment from 'moment';
-// import QRCode from 'qrcode.react'
-
-const Dragger = Upload.Dragger;
 
 const Search = Input.Search;
-const CheckboxGroup = Checkbox.Group;
 const {TextArea} = Input;
 const RadioGroup = Radio.Group;
 const Option = Select.Option;
-
-const provinceData = ['Zhejiang', 'Jiangsu'];
-const cityData = {
-    Zhejiang: ['Hangzhou', 'Ningbo', 'Wenzhou'],
-    Jiangsu: ['Nanjing', 'Suzhou', 'Zhenjiang'],
-};
-
 
 const tradeType = [
     {label: 'CFD', value: 'CFD'},
@@ -56,77 +30,44 @@ const dateFormat = 'YYYY-MM-DD';
 
 class PassOpenD extends Component {
     handleProvinceChange = (value) => {
-
-        console.log('hcia value', value)
         this.setState({
             mState: value,
             mCity: '',
         });
-////
-
         let self = this
-
         window.Axios.post('dict/openDict', {
             'keys': 'div_type',
             'division': 'province',
             'code': '1',
         }).then(function (response) {
-            console.log('hcia response', response)
-
             self.setState({
                 provinceDatAarra: response.data.data.div_type,
             }, () => {
-
                 var nowCity = self.state.provinceDatAarra.filter(function (item, index, array) {
                     return item.value == self.state.mState;
                 });
-
-                console.log('hcia nowCity', nowCity[0].value)
-                console.log('hcia nowCity', nowCity[0].code)
-                console.log('hcia self.setState.state', self.state.mState)
-
-
                 window.Axios.post('dict/openDict', {
                     'keys': 'div_type',
                     'division': 'city',
                     'code': nowCity[0].code
                 }).then((ress) => {
-
-                    console.log('hcia ress', ress)
                     self.setState({
                         cityDatAarra: ress.data.data.div_type
                     })
                 });
             });
-
-
-        }).catch(function (error) {
-            console.log(error);
         });
-
-
-        ////
     };
 
     onSecondCityChange = (value) => {
-
-        console.log('hcia value', value)
-
         this.setState({
             mCity: value,
         });
     }
 
-    uploadC = (value) => {
-
-        console.log('hcia value', value)
-    }
-
     constructor(props) {
         super(props);
         this.state = {
-            cities: cityData[provinceData[0]],
-            secondCity: cityData[provinceData[0]][0],
             isNeedSave: false
             , provinceDatAarra: []
             , cityDatAarra: []
@@ -142,6 +83,7 @@ class PassOpenD extends Component {
             , icondbALoading: false
             , iconcanLoading: false
             , visible: false
+            , secondCheckOpen: false
             , tradrType: 'CFD'
             , testeee: '1976-11-23'
             , mGender: ''
@@ -163,10 +105,8 @@ class PassOpenD extends Component {
         };
     }
 
-
     componentDidMount() {
         var self = this;
-
 
         window.Axios.post('dict/leverageList', {
             'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
@@ -189,8 +129,6 @@ class PassOpenD extends Component {
                 IXRisk_Tolerance: response.data.data.IX_Risk_Tolerance,
 
             });
-        }).catch(function (error) {
-            console.log(error);
         });
 
 
@@ -214,7 +152,6 @@ class PassOpenD extends Component {
                 changeNoteV: response.data.data.comment,
                 checkfromdbName: response.data.data.phoneNumber,
             }, () => {
-
                 window.Axios.post('dict/openDict', {
                     'keys': 'div_type',
                     'division': 'province',
@@ -230,11 +167,6 @@ class PassOpenD extends Component {
                             return item.value == self.state.mState;
                         });
 
-                        console.log('hcia nowCity', nowCity[0].value)
-                        console.log('hcia nowCity', nowCity[0].code)
-                        console.log('hcia self.setState.state', self.state.mState)
-
-
                         window.Axios.post('dict/openDict', {
                             'keys': 'div_type',
                             'division': 'city',
@@ -249,14 +181,10 @@ class PassOpenD extends Component {
                     });
 
 
-                }).catch(function (error) {
-                    console.log(error);
                 });
 
 
             });
-        }).catch(function (error) {
-            console.log(error);
         });
 
 
@@ -307,7 +235,6 @@ class PassOpenD extends Component {
                               onSuccess,
                               withCredentials,
                           }) {
-                // EXAMPLE: post form-data with 'axios'
                 const formData = new FormData();
                 if (data) {
                     Object.keys(data).map(key => {
@@ -321,16 +248,16 @@ class PassOpenD extends Component {
                     'keys': 'div_type',
                     'division': 'province',
                     'code': '1',
-                },{
+                }, {
                     method: 'post',
-                        headers: {
+                    headers: {
                         'Content-Type': 'multipart/form-data',
                         'asdasd': 'sssss'
                     },
-                    transformRequest: [function(data) {
+                    transformRequest: [function (data) {
                         return data
                     }],
-                        onUploadProgress: function(e) {
+                    onUploadProgress: function (e) {
                         var percentage = Math.round((e.loaded * 100) / e.total) || 0;
                         if (percentage < 100) {
                             console.log(percentage + '%');  // 上传进度
@@ -338,8 +265,6 @@ class PassOpenD extends Component {
                     }
                 }).then(function (response) {
                     console.log('hcia response', response)
-                }).catch(function (error) {
-                    console.log(error);
                 });
 
 
@@ -359,7 +284,6 @@ class PassOpenD extends Component {
                 return {
                     abort() {
                         message.error('upload progress is aborted.')
-                        console.log('upload progress is aborted.');
                     },
                 };
             },
@@ -393,47 +317,23 @@ class PassOpenD extends Component {
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
                 <Card disabled={true} title="IX账户审核 " bordered={true}>
 
-                    <Row gutter={16}>
-                        <Col md={8}>
-                            <Card bordered={true}>
-                                <div>
-
-                                    <p>客户姓名:{this.state.recordData.cnName}</p>
-
-                                </div>
-                            </Card>
+                    <Row gutter={1}>
+                        <Col md={6}>
+                            <p>客户姓名:{this.state.recordData.cnName}</p>
                         </Col>
-                        <Col md={8}>
-                            <Card bordered={true}>
-                                <div>
-
-                                    <p>客户邮箱：{this.state.recordData.email}</p>
-
-                                </div>
-                            </Card>
+                        <Col md={6}>
+                            <p>客户邮箱：{this.state.recordData.email}</p>
                         </Col>
-                        <Col md={8}>
-                            <Card bordered={true}>
-                                <div>
-
-                                    <p>手机号码：{this.state.recordData.phoneNumber} </p>
-
-                                </div>
-                            </Card>
+                        <Col md={6}>
+                            <p>手机号码：{this.state.recordData.phoneNumber} </p>
                         </Col>
-
-
                     </Row>
                 </Card>
-                <Card title="IX账户设置" bordered={true} style={{marginTop: 30}}>
-
+                <Card title="IX账户设置" bordered={true} style={{marginTop: 15}}>
                     <Row>
                         <Col>
                             <Card bordered={false}>
-
                                 <div>
-
-
                                     账户类型:
                                     <Checkbox style={{marginLeft: 20}} checked={this.state.recordData.applyMT4}
                                               disabled={true}>MT4</Checkbox>
@@ -524,7 +424,7 @@ class PassOpenD extends Component {
                         </Col>
                     </Row>
                 </Card>
-                <Card title="IX账户申请表单" bordered={true} style={{marginTop: 30}}>
+                <Card title="IX账户申请表单" bordered={true} style={{marginTop: 15}}>
 
                     <Row gutter={8}>
                         <Col md={12}>
@@ -714,72 +614,71 @@ class PassOpenD extends Component {
                         </Col>
                     </Row>
                 </Card>
-                <Card title="IX账户身份信息" bordered={true} style={{marginTop: 30}}>
+                <Card title="IX账户身份信息" bordered={true} style={{marginTop: 15}}>
                     <Row gutter={16}>
 
                         <Col md={8}>
-                            <Card className="gutter-box" bordered={true} bodyStyle={{padding: 0}}>
-                                <div>
-                                    <img
-                                        onClick={() => this.openGallery(this.state.recordData.idcard_0)}
-                                        alt="example" width="100%"
-                                        src={this.state.recordData.idcard_0}/>
-                                </div>
-                                <div className="pa-m">
-                                    <h3>身份证正面照片</h3>
-                                    <small><a href={this.state.recordData.idcard_0} target="_blank"
-                                              rel="noopener noreferrer">身份证正面照片</a></small>
-                                    {/*<QRCode value={this.state.recordData.idcard_1==null?'':this.state.recordData.idcard_1} />*/}
-
-                                </div>
+                            <Card bordered={true} bodyStyle={{padding: 10}}
+                                  actions={[
+                                      <h3 className="pa-m">
+                                          <a href={this.state.recordData.idcard_0}
+                                             target="_blank"
+                                             rel="noopener noreferrer">身份证反面照片</a>
+                                      </h3>,
+                                      <Upload  {...uploadProps} >
+                                          <h3 className="pa-m">
+                                              点击上传可修改照片<Icon type="upload"/>
+                                          </h3>
+                                      </Upload>]}>
+                                <img
+                                    onClick={() => this.openGallery(this.state.recordData.idcard_0)}
+                                    alt="example" width="100%"
+                                    src={this.state.recordData.idcard_0}/>
                             </Card>
                         </Col>
                         <Col md={8}>
-                            <Card className="gutter-box" bordered={true} bodyStyle={{padding: 0}}>
-                                <div>
-                                    <img
-                                        onClick={() => this.openGallery(this.state.recordData.idcard_1)}
-                                        alt="example" width="100%"
-                                        src={this.state.recordData.idcard_1}/>
-                                </div>
-                                <div className="pa-m">
-                                    <h3>身份证反面照片</h3>
-                                    <small><a href={this.state.recordData.idcard_1} target="_blank"
-                                              rel="noopener noreferrer">身份证反面照片</a></small>
-                                </div>
-                                <div>
-                                    <Dragger {...uploadProps}>
-                                        <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                                        <p className="ant-upload-hint">Support for a single or bulk upload. Strictly
-                                            prohibit from uploading company data or other band files</p>
-                                    </Dragger>
-                                    <Upload {...props}>
-                                        <Button>
-                                            <Icon type="upload"/> Click to Upload
-                                        </Button>
-                                    </Upload>
-                                </div>
+                            <Card bordered={true} bodyStyle={{padding: 10}}
+                                  actions={[
+                                      <h3 className="pa-m">
+                                          <a href={this.state.recordData.idcard_1}
+                                             target="_blank"
+                                             rel="noopener noreferrer">身份证反面照片</a>
+                                      </h3>,
+                                      <Upload  {...uploadProps} >
+                                          <h3 className="pa-m">
+                                              点击上传可修改照片<Icon type="upload"/>
+                                          </h3>
+                                      </Upload>]}>
+                                <img
+                                    onClick={() => this.openGallery(this.state.recordData.idcard_1)}
+                                    alt="example" width="100%"
+                                    src={this.state.recordData.idcard_1}/>
                             </Card>
                         </Col>
                         <Col md={8}>
-                            <Card className="gutter-box" bordered={true} bodyStyle={{padding: 0}}>
-                                <div>
-                                    <img id="idcard_2"
-                                         onClick={() => this.openGallery(this.state.recordData.idcard_2)}
-                                         alt="example" width="100%"
-                                         src={this.state.recordData.idcard_2}/>
-                                </div>
-                                <div className="pa-m">
-                                    <h3>手持身份证照片</h3>
-                                    <small><a href={this.state.recordData.idcard_2} target="_blank"
-                                              rel="noopener noreferrer">手持身份证照片</a></small>
-                                </div>
+                            <Card bordered={true} bodyStyle={{padding: 10}}
+                                  actions={[
+                                      <h3 className="pa-m">
+                                          <a href={this.state.recordData.idcard_2}
+                                             target="_blank"
+                                             rel="noopener noreferrer">身份证反面照片</a>
+                                      </h3>,
+                                      <Upload  {...uploadProps} >
+                                          <h3 className="pa-m">
+                                              点击上传可修改照片<Icon type="upload"/>
+                                          </h3>
+                                      </Upload>]}>
+                                <img
+                                    onClick={() => this.openGallery(this.state.recordData.idcard_2)}
+                                    alt="example" width="100%"
+                                    src={this.state.recordData.idcard_2}/>
                             </Card>
                         </Col>
                     </Row>
 
                 </Card>
-                <Card title="IX账户身份查重" bordered={true} style={{marginTop: 30}}>
+
+                <Card title="IX账户身份查重" bordered={true} style={{marginTop: 15}}>
 
                     <Row gutter={12}>
                         <Col md={4}>
@@ -796,7 +695,7 @@ class PassOpenD extends Component {
 
                         </Col>
                         <Col md={8}>
-                            <div style={{display: 'flex', minHeight: 40}}>
+                            <div style={{display: 'flex', maxHeight: 40}}>
                                 <Search
                                     value={this.state.checkfromdbName}
                                     onChange={e => this.onTodoChange(e.target.value)}
@@ -822,13 +721,11 @@ class PassOpenD extends Component {
                                     <h3 style={{margin: 'auto'}}>本库查询结果：{this.state.checkderesb ? '有' : '無'}重合</h3>}
                                 {this.state.checkderesa == null ? null :
                                     <h3 style={{margin: 'auto'}}>异库查询结果：{this.state.checkderesa ? '有' : '無'}重合</h3>}
-
-
                             </div>
                         </Col>
                     </Row>
                 </Card>
-                <Card title="IX账户审核备注" bordered={true} style={{marginTop: 30}}>
+                <Card title="IX账户审核备注" bordered={true} style={{marginTop: 15}}>
                     <Row gutter={12}>
 
                         <Col md={24}>
@@ -843,20 +740,34 @@ class PassOpenD extends Component {
                         <Card style={{marginTop: 10}}>
 
                             <div>
-                                <Button disabled={this.state.isNeedSave || this.state.recordData.status != 0}
+                                <Popconfirm title="确认当前用户开户申请通过" onConfirm={this.confirmOpen} okText="Yes"
+                                            cancelText="No">
+
+                                    <Button
+                                        // disabled={this.state.isNeedSave || this.state.recordData.status != 0 }
                                         loading={this.state.iconLoading}
-                                        onClick={() => this.openOK()}>开户通过</Button>
-                                <Button disabled={!this.state.isNeedSave}
-                                        onClick={() => this.saveData() || this.state.recordData.status != 0}>保存客戶信息</Button>
+                                    >开户通过</Button>
+
+                                </Popconfirm>
+
+
+                                <Button
+                                    onClick={() => this.saveData()}>保存客戶信息</Button>
+
 
                                 <Button onClick={() => this.saveNote()}>下载资料</Button>
 
-                                <Button disabled={this.state.isNeedSave || this.state.recordData.status != 0}
+                                <Popconfirm title="是否确认拒绝当前用户的开户申请？" onConfirm={this.saveReject} okText="Yes"
+                                            cancelText="No">
+                                    <Button
                                         loading={this.state.iconcanLoading}
-                                        onClick={() => this.saveReject()}>拒绝</Button>
+                                    >拒绝</Button>
+
+                                </Popconfirm>
+
                             </div>
                         </Card>
-
+                        {/*disabled={!this.state.isNeedSave || this.state.recordData.status != 0}*/}
                     </Row>
 
                 </Card>
@@ -924,7 +835,7 @@ class PassOpenD extends Component {
                 `}</style>
                 </div>
                 <Modal
-                    title="Modal"
+                    title="已对用户资料进行修改，是否保存？"
                     visible={this.state.visible}
                     onOk={this.checkSaveData}
                     onCancel={this.hideModal}
@@ -964,17 +875,16 @@ class PassOpenD extends Component {
         )
     }
 
-    confirm = () => {
-        message.info('Clicked on Yes.');
+    confirmOpen = () => {
+        this.openOK()
     };
+
+
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
         const year = dateObj.getFullYear() // 获取年，
         const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
         const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
-        const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
-        const minutes = this.pad(dateObj.getMinutes()) // 获取分
-        const seconds = this.pad(dateObj.getSeconds()) // 获取秒
         return year + '-' + month + '-' + date
     };
     pad = (str) => {
@@ -1006,8 +916,6 @@ class PassOpenD extends Component {
 
             }
 
-        }).catch(function (error) {
-            console.log(error);
         });
 
 
@@ -1028,33 +936,25 @@ class PassOpenD extends Component {
                     checkderesb: response.data.data.isExist
 
                 });
-            }).catch(function (error) {
-                console.log(error);
             });
         } else if (this.state.checkfromdbTypeV == 1) {
             window.Axios.post('open/localExistOpenAccount', {
                 'nationalId': me.state.checkfromdbName,
             }).then(function (response) {
-                console.log('hcia response', response)
                 me.setState({
                     icondbALoading: false,
                     checkderesb: response.data.data.isExist
                 });
-            }).catch(function (error) {
-                console.log(error);
             });
         } else if (this.state.checkfromdbTypeV == 2) {
             window.Axios.post('open/localExistOpenAccount', {
                 'email': me.state.checkfromdbName,
             }).then(function (response) {
-                console.log('hcia response', response.data.data.isExist)
                 me.setState({
                     icondbALoading: false,
                     checkderesb: response.data.data.isExist
 
                 });
-            }).catch(function (error) {
-                console.log(error);
             });
         }
 
@@ -1076,8 +976,6 @@ class PassOpenD extends Component {
                     checkderesa: response.data.data.isExist
 
                 });
-            }).catch(function (error) {
-                console.log(error);
             });
         } else if (this.state.checkfromdbTypeV == 1) {
             window.Axios.post('open/remoteExistOpenAccount', {
@@ -1088,8 +986,6 @@ class PassOpenD extends Component {
                     icondbALoadingA: false,
                     checkderesa: response.data.data.isExist
                 });
-            }).catch(function (error) {
-                console.log(error);
             });
         } else if (this.state.checkfromdbTypeV == 2) {
             window.Axios.post('open/remoteExistOpenAccount', {
@@ -1100,8 +996,6 @@ class PassOpenD extends Component {
                     checkderesa: response.data.data.isExist,
                     icondbALoadingA: false,
                 });
-            }).catch(function (error) {
-                console.log(error);
             });
         }
 
@@ -1171,8 +1065,6 @@ class PassOpenD extends Component {
                 me.openTipBlack()
             }
 
-        }).catch(function (error) {
-            console.log(error);
         });
 
 
@@ -1246,8 +1138,6 @@ class PassOpenD extends Component {
                     isNeedSave: false,
                 });
             }
-        }).catch(function (error) {
-            console.log(error);
         });
     }
     changeNote = (e) => {
@@ -1442,8 +1332,6 @@ class PassOpenD extends Component {
                 notification.close(key)
                 message.success('added  open  black ')
             }
-        }).catch(function (error) {
-            console.log(error);
         });
     }
 
@@ -1468,13 +1356,7 @@ class PassOpenD extends Component {
             onClose: close,
         });
 
-        // const args = {
-        //     message: 'Notification Title',
-        //     description: 'I will never close automatically. I will be close automatically. I will never close automatically.',
-        //     duration: 0,
-        //     placement: 'bottomRight',
-        // };
-        // notification.open(args);
+
     }
 }
 
