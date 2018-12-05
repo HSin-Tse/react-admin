@@ -16,8 +16,9 @@ class App extends Component {
     };
     componentWillMount() {
         const { receiveData } = this.props;
-        const user = JSON.parse(localStorage.getItem('user'));
-        user && receiveData(user, 'auth');
+        // const user = JSON.parse(localStorage.getItem('user'));
+
+        // user && receiveData(user, 'auth');
 
         // console.log(user)
         // console.log('hcia user' , user)

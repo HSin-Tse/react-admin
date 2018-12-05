@@ -13,7 +13,6 @@ export default class Basic extends Component {
         super(props);
         this.state = {
             selectedRowKeys: [],
-
             visible: false,
             visibleOpM: false,
             date: new Date(),
@@ -51,7 +50,6 @@ export default class Basic extends Component {
             console.log(response);
 
             self.setState({
-
                     suspend_reason_type: response.data.data.suspend_reason_type
                 }
             );
@@ -98,7 +96,6 @@ export default class Basic extends Component {
                 dataIndex: '保证金占比',
                 key: '保证金占比',
                 width: 120,
-
                 render: (text, record) => (
                     <span>{record.marginLevel}</span>)
             }, {
@@ -106,7 +103,6 @@ export default class Basic extends Component {
                 dataIndex: '浮动余额',
                 key: '浮动余额',
                 width: 120,
-
                 render: (text, record) => (
                     <span>{record.cashBalance}</span>),
             }, {
@@ -122,7 +118,6 @@ export default class Basic extends Component {
                 dataIndex: '当前状态',
                 key: '当前状态',
                 width: 120,
-
                 render: (text, record) => (
                     <span>{record.accountStatus == 1 ? '正常' : (record.accountStatus == 2) ? '禁止登陆' : '禁止交易'}</span>
                 )
@@ -132,13 +127,11 @@ export default class Basic extends Component {
                 dataIndex: '备注',
                 key: '备注',
                 width: 120,
-
                 render: (text, record) => (
                     <span>{record.comment}</span>)
             }, {
                 title: '刷新时间',
                 width: 140,
-
                 dataIndex: '刷新时间',
                 key: '刷新时间',
                 render: (text, record) => (
@@ -155,7 +148,6 @@ export default class Basic extends Component {
                 title: '操作详情',
                 dataIndex: '操作详情',
                 fixed: 'right',
-
                 width: 120,
                 key: '操作详情',
                 render: (text, record) => (
@@ -166,8 +158,6 @@ export default class Basic extends Component {
                 fixed: 'right',
                 width: 120,
                 key: 'action',
-                // fixed: 'right',
-                // width: 100,
                 render: (text, record) => (
                     <div>
                         <Select value={record.displayStatus} style={{width: 100}}
@@ -208,6 +198,7 @@ export default class Basic extends Component {
             }];
         this.requestPage()
     }
+
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
         const year = dateObj.getFullYear() // 获取年，
@@ -307,8 +298,8 @@ export default class Basic extends Component {
     }
     refleshNowpage = () => {
 
-        let self = this ;
-        var result=self.state.selectedRowKeys.map(Number);
+        let self = this;
+        var result = self.state.selectedRowKeys.map(Number);
 
         window.Axios.post('star/refreshStarLiveAccount', {
             idList: result,
@@ -343,7 +334,7 @@ export default class Basic extends Component {
         // var reasonType = mStatus ==2?
         let self = this;
         self.setState({
-            loadFor:true
+            loadFor: true
         })
         window.Axios.post('star/updateStarLiveAccount', {
             'id': self.state.opRecord.id,
@@ -375,8 +366,10 @@ export default class Basic extends Component {
         console.log('hcia', 'selectedRowKeys changed: ', selectedRowKeys);
         this.setState({selectedRowKeys});
     }
+
     render() {
-        const { selectedRowKeys} = this.state;
+        const {selectedRowKeys} = this.state;
+        const hasSelected = selectedRowKeys.length > 0;
         const rowSelection = {
             selectedRowKeys,
             onChange: this.onSelectChange,
@@ -385,6 +378,7 @@ export default class Basic extends Component {
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
+                {/*this.state.selectedRowKeys.length > 0*/}
 
                 <Modal
                     title={this.state.modeState == '正常' ? '恢复正常' : this.state.modeState}
@@ -392,7 +386,8 @@ export default class Basic extends Component {
                     visible={this.state.visibleOpM}
                     footer={[
                         <Button key="back" onClick={this.handleCancel}>取消操作</Button>,
-                        <Button  loading={this.state.loadFor} key="submit" type="primary" onClick={() => this.handleOk()}>
+                        <Button loading={this.state.loadFor} key="submit" type="primary"
+                                onClick={() => this.handleOk()}>
                             提交
                         </Button>,
                     ]}
@@ -431,7 +426,8 @@ export default class Basic extends Component {
                 <BreadcrumbCustom first="审核管理" second="交易账户管理"/>
 
                 <Card title="交易账户管理"
-                      extra={<Button type="default" onClick={() => this.refleshNowpage()}
+                      extra={<Button type="default" disabled={!hasSelected}
+                                     onClick={() => this.refleshNowpage()}
                       >刷新当前页面</Button>}
                 >
 
