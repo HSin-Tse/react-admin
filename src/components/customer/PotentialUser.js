@@ -31,7 +31,7 @@ export default class PotentialUser extends Component {
 			totalpageC: 0,
 			totalpageComments: 0,
 			nowKey: "1",
-			pgsize: 40,
+			pgsize: 10,
 			loadingA: false,
 			loadingB: false,
 			loadingC: false,
@@ -55,7 +55,7 @@ export default class PotentialUser extends Component {
 		this.requestPageC()
 	}
 	pageAColumns = () => {
-		return this.columns = [
+		return  [
 			{
 				title: 'aaaa手机号',
 				dataIndex: 'phoneNumber',
@@ -478,18 +478,21 @@ export default class PotentialUser extends Component {
 			loadingA: true
 		})
 		window.Axios.post('ixuser/getUserList', {
-			pageNo: this.state.current,
+			pageNo: this.state.currentA,
 			'listType': 1,
 			
 			'nationalId': this.state.selectID,
 			'startTime': this.state.selectTimeStart,
 			'endTime': this.state.selectTimeEnd,
 			'pageSize': this.state.pgsize,
+			
 		}).then((response) => {
+			console.log("ggggg", response.data.data)
 			self.setState({
 				totalpageA: response.data.data.totalPage,
 				bklistA: response.data.data.list,
 				loadingA: false
+				
 			}, () => {
 				console.log('hcia self.state.bklistA', self.state.bklistA)
 				// var tags = Object.keys(self.state.bklistA[0])
@@ -742,7 +745,7 @@ export default class PotentialUser extends Component {
 								disabled={!hasSelected}
 								loading={loading}
 							>
-								批量移除
+								{this.state.pgsize}
                             </Button>
 							<Table rowKey="id"
 								bordered
@@ -750,7 +753,7 @@ export default class PotentialUser extends Component {
 								columns={this.pageAColumns()}
 								dataSource={this.state.bklistA}
 								scroll={{ x: 1300 }}
-								loading={this.state.loading}
+								loading={this.state.loadingA}
 								pagination={{  // 分页
 									total: this.state.totalpageA * this.state.pgsize,
 									pageSize: this.state.pgsize,
