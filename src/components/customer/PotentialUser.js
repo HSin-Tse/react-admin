@@ -35,6 +35,7 @@ export default class PotentialUser extends Component {
 			loadingA: false,
 			loadingB: false,
 			loadingC: false,
+			loadingComment: false,
 			selectMail: "",
 			selectPhone: "",
 			selectID: "",
@@ -423,7 +424,7 @@ export default class PotentialUser extends Component {
 		window.Axios.post(url, {
 			'belongUserId': record,
 			
-			pageNo: this.state.current,
+			pageNo: this.state.currentComment,
 			'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
 
 			
@@ -558,6 +559,7 @@ export default class PotentialUser extends Component {
 		})
 	}
 	changePageComment = (page) =>{
+		page = page - 1
 		this.setState({
 			currentComment: page,
 		}, () => {
@@ -781,6 +783,7 @@ export default class PotentialUser extends Component {
 						<Table rowKey="id"
 							columns={this.modalColums()} dataSource={this.state.operationDiaryHistory}
 							scroll={{ x: 1300 }}
+							loading = {this.state.loadingComment}
 							pagination={{  // 分页
 								total: this.state.totalpageComments * this.state.pgsize,
 								pageSize: this.state.pgsize,
