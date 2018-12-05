@@ -7,8 +7,12 @@ import classNames from "classnames";
 const TabPane = Tabs.TabPane;
 const { CheckableTag } = Tag;
 const { RangePicker } = DatePicker;
-
-export default class BlackList extends Component {
+/* 
+pageA = PotentialUser
+pageB = SimulatorUser
+pageC = IntendingUser
+*/
+export default class PotentialUser extends Component {
 
 	constructor(props) {
 		super(props);
@@ -21,28 +25,239 @@ export default class BlackList extends Component {
 			currentA: 0,//PotentialUser
 			currentB: 0,//SimulatorUser
 			currentC: 0,//IntendingUser
+			currentComment: 0,
 			totalpageA: 0,
 			totalpageB: 0,
 			totalpageC: 0,
+			totalpageComments: 0,
 			nowKey: "1",
-			pgsize: 40,
+			pgsize: 10,
 			loadingA: false,
 			loadingB: false,
 			loadingC: false,
+			loadingComment: false,
 			selectMail: "",
 			selectPhone: "",
 			selectID: "",
 			selectTimeStart: "",
 			selectTimeEnd: "",
+			modal2Visible: false,
+			visible: false,
+			operationDiaryHistory: [],
 
 
 		};
 	}
 
 	componentDidMount() {
-		this.columns = [
+		this.requestPageA()
+		this.requestPageB()
+		this.requestPageC()
+	}
+	pageAColumns = () => {
+		return  [
 			{
-				title: '手机号',
+				title: 'aaaa手机号',
+				dataIndex: 'phoneNumber',
+				key: 'phoneNumber',
+				width: 150,
+				fixed: 'left',
+				render: (text, record) => (
+
+					<span>{record.mobile}</span>
+
+				),
+			}, {
+				title: 'APP版本',
+				dataIndex: 'APP版本',
+				key: 'APP版本',
+				render: (text, record) => (
+					<span>{record.versionInfo}</span>),
+			}, {
+				title: '手机型号',
+				dataIndex: '手机型号',
+				key: '手机型号',
+				render: (text, record) => (<span>{record.clientInfo}</span>),
+			}, {
+				title: '操作系统型号',
+				dataIndex: '操作系统型号',
+				key: '操作系统型号',
+				render: (text, record) => (<span>{record.systemInfo}</span>),
+			}, {
+				title: '注册时间',
+				dataIndex: '注册时间',
+				key: '注册时间',
+				render: (text, record) => (<span>{record.date}</span>),
+			}, {
+				title: '下载平台',
+				dataIndex: '下载平台',
+				key: '下载平台',
+				render: (text, record) => (
+					<span>{record.channelInfo}</span>),
+			}, {
+				title: '地理位置',
+				dataIndex: '地理位置',
+				key: '地理位置',
+				render: (text, record) => (
+					<span>{record.location}</span>),
+			}, {
+				title: '回访状态',
+				dataIndex: '回访状态',
+				key: '回访状态',
+				render: (text, record) => (
+					<span>{record.comment}</span>),
+			}, {
+				title: '备注',
+				dataIndex: '备注',
+				key: '备注',
+				render: (text, record) => (
+					<span>{record.comment}</span>),
+			}, {
+				title: '操作人',
+				dataIndex: '操作人',
+				key: '操作人',
+				render: (text, record) => (
+					<span>{record.operator}</span>),
+			}, {
+				title: '操作',
+				key: 'action',
+				fixed:	'right',
+				align:	'center',
+				width: 250,
+				render: (text, record) => (
+					
+					<div>						
+
+						<Button className="ant-dropdown-link" onClick={() => this.showModal(record)}>添加備註</Button>
+						<Button className="ant-dropdown-link" onClick={() => this.showModal2(record.belongUserId)}>操作日誌</Button>
+					</div>
+				),
+			}];
+
+			
+
+		
+	}
+	showModal2 = (belongUserId) => {
+		console.log('yyy',belongUserId)
+		this.requestUserCommentList(belongUserId)
+		this.setState({
+			modal2Visible: true,
+			visible: false,
+
+		});
+	}
+	showModal = (record) => {
+		let belongUserId = record.belongUserId
+		this.setState({
+			theBelongUserId: belongUserId,
+			visible: true,
+			modal2Visible: false,
+		});
+	}
+	modalColums = () =>{
+		return  [{
+			title: '時間',
+			dataIndex: 'createDate',
+			key: 'operationDiary_Date',
+			// fixed: 'left',
+			// width: 100,
+			render: (text, record) => (
+				<Button>{record.createDate}</Button>),
+		}, {
+			title: '狀態',
+			dataIndex: 'comment',
+			key: 'operationDiary_Status',
+			// fixed: 'left',
+			// width: 100,
+			render: (text, record) => (
+				<Button>{record.comment}</Button>),
+		}, {
+			title: '操作人',
+			dataIndex: 'bkUserName',
+			key: 'operationDiary_User',
+			// fixed: 'left',
+			// width: 100,
+			render: (text, record) => (
+				<Button>{record.bkUserName}</Button>),
+		}]
+	}
+	pageBColumns = () => {
+		return this.columns = [
+			{
+				title: 'bbbbb手机号',
+				dataIndex: 'phoneNumber',
+				key: 'phoneNumber',
+				width: 150,
+				fixed: 'left',
+				render: (text, record) => (
+
+					<span>{record.mobile}</span>
+
+				),
+			}, {
+				title: '模拟账号',
+				dataIndex: '模拟账号',
+				key: '模拟账号',
+				render: (text, record) => (
+					<span>{record.name}</span>),
+			}, {
+				title: '绑定时间',
+				dataIndex: '绑定时间',
+				key: '绑定时间',
+				render: (text, record) => (<span>{record.activeFlag}</span>),
+			}, {
+				title: '剩余天数',
+				dataIndex: '剩余天数',
+				key: '剩余天数',
+				render: (text, record) => (<span>{record.date}</span>),
+			}, {
+				title: '模拟账户状态',
+				dataIndex: '模拟账户状态',
+				key: '模拟账户状态',
+				render: (text, record) => (<span>{record.date}</span>),
+			}, {
+				title: '延期次数',
+				dataIndex: '延期次数',
+				key: '延期次数',
+				render: (text, record) => (<span>{record.date}</span>),
+			}, {
+				title: '回访状态',
+				dataIndex: '回访状态',
+				key: '回访状态',
+				render: (text, record) => (<span>{record.date}</span>),
+			}, {
+				title: '备注',
+				dataIndex: '备注',
+				key: '备注',
+				render: (text, record) => (<span>{record.date}</span>),
+			}, {
+				title: '活跃程度',
+				dataIndex: '活跃程度',
+				key: '活跃程度',
+				render: (text, record) => (<span>{record.date}</span>),
+			}, {
+				title: '操作人',
+				dataIndex: '操作人',
+				key: '操作人',
+				render: (text, record) => (<span>{record.operator}</span>),
+			}, {
+				title: '操作',
+				key: 'action',
+				fixed: 'right',
+				width: 100,
+				render: (text, record) => (
+					<div>
+						<span className="ant-divider" />
+						<Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>移除</Button>
+					</div>
+				),
+			}];
+	}
+	pageCColumns = () => {
+		return this.columns = [
+			{
+				title: 'cccccc手机号',
 				dataIndex: 'phoneNumber',
 				key: 'phoneNumber',
 				width: 150,
@@ -59,24 +274,46 @@ export default class BlackList extends Component {
 				render: (text, record) => (
 					<span>{record.name}</span>),
 			}, {
+				title: '当前账户',
+				dataIndex: '当前账户',
+				key: '当前账户',
+				render: (text, record) => (<span>{record.activeFlag}</span>),
+			}, {
+				title: '模拟帐号',
+				dataIndex: '模拟帐号',
+				key: '模拟帐号',
+				render: (text, record) => (<span>{record.activeFlag}</span>),
+			},{
+				title: '录入信息时间',
+				dataIndex: '录入信息时间',
+				key: '录入信息时间',
+				render: (text, record) => (<span>{record.activeFlag}</span>),
+			}, {
 				title: '活跃度',
 				dataIndex: '活跃度',
 				key: '活跃度',
 				render: (text, record) => (<span>{record.activeFlag}</span>),
 			}, {
-				title: 'APP注册时间',
-				dataIndex: 'APP注册时间',
-				key: 'APP注册时间',
+				title: '回访状态',
+				dataIndex: '回访状态',
+				key: '回访状态',
 				render: (text, record) => (<span>{record.date}</span>),
+			}, {
+				title: '备注',
+				dataIndex: '备注',
+				key: '备注',
+				render: (text, record) => (
+					<span>{record.comment}</span>),
 			}, {
 				title: '操作人',
 				dataIndex: '操作人',
 				key: '操作人',
-				render: (text, record) => (<span>{record.operator}</span>),
+				render: (text, record) => (
+					<span>{record.comment}</span>),
 			}, {
-				title: '处理备注',
-				dataIndex: '处理备注',
-				key: '处理备注',
+				title: '查看',
+				dataIndex: '查看',
+				key: '查看',
 				render: (text, record) => (
 					<span>{record.comment}</span>),
 			}, {
@@ -91,11 +328,43 @@ export default class BlackList extends Component {
 					</div>
 				),
 			}];
-		this.requestPageA()//1:合规 2:开户 3:交易
-		this.requestPageB()
-		this.requestPageC()
+	}
+	handleOk = (e) => {
+		console.log(e);
+		this.setState({
+			visible: false,
+			modal2Visible: false,
+		});
 	}
 
+	handleCancel = (e) => {
+		console.log(e);
+		this.setState({
+			visible: false,
+			modal2Visible: false,
+		});
+	}
+	handleAddComment = (e) => {
+		let self = this;
+		console.log("zzz", self.state.theBelongUserId)
+		console.log("zzz", self.state.theComment)
+
+		window.Axios.post('auth/addUserComment', {
+			content: "self.state.theComment",
+			belongUserId: self.state.theBelongUserId,
+		}).then((response) => {
+
+
+			console.log('yyx handleAddComment success', response)
+		}).catch(function (error) {
+			console.log(error);
+		});
+
+		this.setState({
+			visible: false,
+			modal2Visible: false,
+		});
+	}
 	handleremove = (record) => {
 
 		let self = this
@@ -105,7 +374,7 @@ export default class BlackList extends Component {
 
 			message.success('操作成功')
 			if (self.state.nowKey == 1) {
-				this.requestPageA()//1:合规 2:开户 3:交易
+				this.requestPageA()
 			}
 			if (self.state.nowKey == 2) {
 				this.requestPageB()//1:合规 2:开户 3:交易
@@ -160,25 +429,70 @@ export default class BlackList extends Component {
 
 
 	};
+	requestUserCommentList = (record) => {
+		// must request data:
+		//belongUserId
+		//loginName
+		//token
+		console.log('www',record)
+		//refernce request data:
+		//pageNo
+		//pageSize
+		//language
+		const url = 'http://mobile.nooko.cn:8090/auth/getUserCommentList'
+
+		var self = this;
+
+		window.Axios.post(url, {
+			'belongUserId': record,
+			
+			pageNo: this.state.currentComment,
+			'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
+
+			
+			
+		}).then(function (response) {
+			
+			console.log('ggg', self.state.operationDiaryHistory)
+
+			self.setState({
+				totalpageComments: response.data.data.totalPage,
+				operationDiaryHistory: response.data.data.list,
+			}, () => {
+				console.log('hcia self.state.operationDiaryHistory', self.state.operationDiaryHistory)
+				// var tags = Object.keys(self.state.bklistA[0])
+				// console.log('hcia tags', tags)
+				// self.setState({
+				//     mTags: tags
+				// })
+
+			});
+		}).catch(function (error) {
+			console.log(error);
+			// message.warn(error);
+		});
+	}
 	requestPageA = () => {
 		let self = this
 		self.setState({
 			loadingA: true
 		})
-		window.Axios.post('auth/getBlackList', {
-			pageNo: this.state.current,
-			'listType': 1,//1:合规 2:开户 3:交易
-			'email': this.state.selectMail,
+		window.Axios.post('ixuser/getUserList', {
+			pageNo: this.state.currentA,
+			'listType': 1,
+			
 			'nationalId': this.state.selectID,
 			'startTime': this.state.selectTimeStart,
 			'endTime': this.state.selectTimeEnd,
-			'mobile': this.state.selectPhone,
-			'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
+			'pageSize': this.state.pgsize,
+			
 		}).then((response) => {
+			console.log("ggggg", response.data.data)
 			self.setState({
 				totalpageA: response.data.data.totalPage,
 				bklistA: response.data.data.list,
 				loadingA: false
+				
 			}, () => {
 				console.log('hcia self.state.bklistA', self.state.bklistA)
 				// var tags = Object.keys(self.state.bklistA[0])
@@ -269,6 +583,14 @@ export default class BlackList extends Component {
 			this.requestPageC()
 		})
 	}
+	changePageComment = (page) =>{
+		page = page - 1
+		this.setState({
+			currentComment: page,
+		}, () => {
+			this.requestUserCommentList()
+		})
+	}
 
 	callback = (key) => {
 
@@ -277,7 +599,13 @@ export default class BlackList extends Component {
 		})
 
 	}
+	addComment = (e) => {
+		let comment = e.target.value;
+		this.setState({
+			theComment: comment
 
+		});
+	}
 	onSelectChange = (selectedRowKeys) => {
 		console.log('hcia', 'selectedRowKeys changed: ', selectedRowKeys);
 		this.setState({ selectedRowKeys });
@@ -417,15 +745,15 @@ export default class BlackList extends Component {
 								disabled={!hasSelected}
 								loading={loading}
 							>
-								批量移除
+								{this.state.pgsize}
                             </Button>
 							<Table rowKey="id"
 								bordered
 								rowSelection={rowSelection}
-								columns={this.columns}
+								columns={this.pageAColumns()}
 								dataSource={this.state.bklistA}
 								scroll={{ x: 1300 }}
-								loading={this.state.loading}
+								loading={this.state.loadingA}
 								pagination={{  // 分页
 									total: this.state.totalpageA * this.state.pgsize,
 									pageSize: this.state.pgsize,
@@ -435,7 +763,8 @@ export default class BlackList extends Component {
 						</TabPane>
 						<TabPane tab="模擬用戶" key="2">
 							<Table rowKey="id"
-								columns={this.columns}
+								rowSelection={rowSelection}
+								columns={this.pageBColumns()}
 								dataSource={this.state.bklistB}
 								scroll={{ x: 1300 }}
 								loading={this.state.loading}
@@ -448,7 +777,8 @@ export default class BlackList extends Component {
 						</TabPane>
 						<TabPane tab="意向用戶" key="3">
 							<Table rowKey="id"
-								columns={this.columns}
+								rowSelection={rowSelection}
+								columns={this.pageCColumns()}
 								dataSource={this.state.bklistC}
 								scroll={{ x: 1300 }}
 								loading={this.state.loading}
@@ -462,7 +792,38 @@ export default class BlackList extends Component {
 					</Tabs>
 				</Card>
 
+				<Modal
+					title="添加備註"
+					visible={this.state.visible}
+					onOk={this.handleAddComment}
+					onCancel={this.handleCancel}
+					okText="確認"
+					cancelText="取消"
+				>
+					<p><Input onChange={this.addComment} placeholder="填写回访次数以及结果" /></p>
+				</Modal>
+				<Modal
+					title="操作日誌"
+					visible={this.state.modal2Visible}
+					onOk={this.handleOk}
+					onCancel={this.handleCancel}
+					okText="確認"
+					cancelText="取消"
+				>
+					<p>
+						<Table rowKey="id"
+							columns={this.modalColums()} dataSource={this.state.operationDiaryHistory}
+							scroll={{ x: 1300 }}
+							loading = {this.state.loadingComment}
+							pagination={{  // 分页
+								total: this.state.totalpageComments * this.state.pgsize,
+								pageSize: this.state.pgsize,
+								onChange: this.changePageComment,
+							}}
+						/>
 
+					</p>
+				</Modal>
 			</div>
 
 		)
