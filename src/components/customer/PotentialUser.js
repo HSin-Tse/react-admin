@@ -72,34 +72,34 @@ export default class PotentialUser extends Component {
 				dataIndex: 'APP版本',
 				key: 'APP版本',
 				render: (text, record) => (
-					<span>{record.name}</span>),
+					<span>{record.versionInfo}</span>),
 			}, {
 				title: '手机型号',
 				dataIndex: '手机型号',
 				key: '手机型号',
-				render: (text, record) => (<span>{record.activeFlag}</span>),
+				render: (text, record) => (<span>{record.clientInfo}</span>),
 			}, {
 				title: '操作系统型号',
 				dataIndex: '操作系统型号',
 				key: '操作系统型号',
-				render: (text, record) => (<span>{record.date}</span>),
+				render: (text, record) => (<span>{record.systemInfo}</span>),
 			}, {
 				title: '注册时间',
 				dataIndex: '注册时间',
 				key: '注册时间',
-				render: (text, record) => (<span>{record.operator}</span>),
+				render: (text, record) => (<span>{record.date}</span>),
 			}, {
 				title: '下载平台',
 				dataIndex: '下载平台',
 				key: '下载平台',
 				render: (text, record) => (
-					<span>{record.comment}</span>),
+					<span>{record.channelInfo}</span>),
 			}, {
 				title: '地理位置',
 				dataIndex: '地理位置',
 				key: '地理位置',
 				render: (text, record) => (
-					<span>{record.comment}</span>),
+					<span>{record.location}</span>),
 			}, {
 				title: '回访状态',
 				dataIndex: '回访状态',
@@ -117,7 +117,7 @@ export default class PotentialUser extends Component {
 				dataIndex: '操作人',
 				key: '操作人',
 				render: (text, record) => (
-					<span>{record.comment}</span>),
+					<span>{record.operator}</span>),
 			}, {
 				title: '操作',
 				key: 'action',
@@ -484,7 +484,7 @@ export default class PotentialUser extends Component {
 			'nationalId': this.state.selectID,
 			'startTime': this.state.selectTimeStart,
 			'endTime': this.state.selectTimeEnd,
-			'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
+			'pageSize': this.state.pgsize,
 		}).then((response) => {
 			self.setState({
 				totalpageA: response.data.data.totalPage,
