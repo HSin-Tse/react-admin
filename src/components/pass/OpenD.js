@@ -1,11 +1,9 @@
 /**
- *
- * 添加注释
  * Created by tse on 2018/1/12
- *
  */
 import React, {Component} from 'react';
 import {
+    Popconfirm,
     Icon,
     Upload,
     Col,
@@ -17,7 +15,6 @@ import {
     Input,
     Checkbox,
     DatePicker,
-    Popconfirm,
     notification
 } from 'antd';
 import {Radio} from 'antd';
@@ -30,21 +27,12 @@ import PhotoswipeUIDefault from "photoswipe/dist/photoswipe-ui-default";
 import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
 import moment from 'moment';
-// import QRCode from 'qrcode.react'
 
-const Dragger = Upload.Dragger;
 
 const Search = Input.Search;
-const CheckboxGroup = Checkbox.Group;
 const {TextArea} = Input;
 const RadioGroup = Radio.Group;
 const Option = Select.Option;
-
-const provinceData = ['Zhejiang', 'Jiangsu'];
-const cityData = {
-    Zhejiang: ['Hangzhou', 'Ningbo', 'Wenzhou'],
-    Jiangsu: ['Nanjing', 'Suzhou', 'Zhenjiang'],
-};
 
 const tradeType = [
     {label: 'CFD', value: 'CFD'},
@@ -95,8 +83,6 @@ class PassOpenD extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            cities: cityData[provinceData[0]],
-            secondCity: cityData[provinceData[0]][0],
             isNeedSave: false
             , provinceDatAarra: []
             , cityDatAarra: []
@@ -112,6 +98,7 @@ class PassOpenD extends Component {
             , icondbALoading: false
             , iconcanLoading: false
             , visible: false
+            , secondCheckOpen: false
             , tradrType: 'CFD'
             , testeee: '1976-11-23'
             , mGender: ''
@@ -776,20 +763,34 @@ class PassOpenD extends Component {
                         <Card style={{marginTop: 10}}>
 
                             <div>
-                                <Button disabled={this.state.isNeedSave || this.state.recordData.status != 0}
+                                <Popconfirm title="确认当前用户开户申请通过" onConfirm={this.confirmOpen} okText="Yes"
+                                            cancelText="No">
+
+                                    <Button
+                                        // disabled={this.state.isNeedSave || this.state.recordData.status != 0 }
                                         loading={this.state.iconLoading}
-                                        onClick={() => this.openOK()}>开户通过</Button>
-                                <Button disabled={!this.state.isNeedSave}
-                                        onClick={() => this.saveData() || this.state.recordData.status != 0}>保存客戶信息</Button>
+                                    >开户通过</Button>
+
+                                </Popconfirm>
+
+
+                                <Button
+                                    onClick={() => this.saveData()}>保存客戶信息</Button>
+
 
                                 <Button onClick={() => this.saveNote()}>下载资料</Button>
 
-                                <Button disabled={this.state.isNeedSave || this.state.recordData.status != 0}
+                                <Popconfirm title="是否确认拒绝当前用户的开户申请？" onConfirm={this.saveReject} okText="Yes"
+                                            cancelText="No">
+                                    <Button
                                         loading={this.state.iconcanLoading}
-                                        onClick={() => this.saveReject()}>拒绝</Button>
+                                    >拒绝</Button>
+
+                                </Popconfirm>
+
                             </div>
                         </Card>
-
+                        {/*disabled={!this.state.isNeedSave || this.state.recordData.status != 0}*/}
                     </Row>
 
                 </Card>
@@ -857,7 +858,7 @@ class PassOpenD extends Component {
                 `}</style>
                 </div>
                 <Modal
-                    title="Modal"
+                    title="已对用户资料进行修改，是否保存？"
                     visible={this.state.visible}
                     onOk={this.checkSaveData}
                     onCancel={this.hideModal}
@@ -897,17 +898,16 @@ class PassOpenD extends Component {
         )
     }
 
-    confirm = () => {
-        message.info('Clicked on Yes.');
+    confirmOpen = () => {
+        this.openOK()
     };
+
+
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
         const year = dateObj.getFullYear() // 获取年，
         const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
         const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
-        const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
-        const minutes = this.pad(dateObj.getMinutes()) // 获取分
-        const seconds = this.pad(dateObj.getSeconds()) // 获取秒
         return year + '-' + month + '-' + date
     };
     pad = (str) => {
@@ -961,33 +961,25 @@ class PassOpenD extends Component {
                     checkderesb: response.data.data.isExist
 
                 });
-            }).catch(function (error) {
-                console.log(error);
             });
         } else if (this.state.checkfromdbTypeV == 1) {
             window.Axios.post('open/localExistOpenAccount', {
                 'nationalId': me.state.checkfromdbName,
             }).then(function (response) {
-                console.log('hcia response', response)
                 me.setState({
                     icondbALoading: false,
                     checkderesb: response.data.data.isExist
                 });
-            }).catch(function (error) {
-                console.log(error);
             });
         } else if (this.state.checkfromdbTypeV == 2) {
             window.Axios.post('open/localExistOpenAccount', {
                 'email': me.state.checkfromdbName,
             }).then(function (response) {
-                console.log('hcia response', response.data.data.isExist)
                 me.setState({
                     icondbALoading: false,
                     checkderesb: response.data.data.isExist
 
                 });
-            }).catch(function (error) {
-                console.log(error);
             });
         }
 
@@ -1009,8 +1001,6 @@ class PassOpenD extends Component {
                     checkderesa: response.data.data.isExist
 
                 });
-            }).catch(function (error) {
-                console.log(error);
             });
         } else if (this.state.checkfromdbTypeV == 1) {
             window.Axios.post('open/remoteExistOpenAccount', {
@@ -1021,8 +1011,6 @@ class PassOpenD extends Component {
                     icondbALoadingA: false,
                     checkderesa: response.data.data.isExist
                 });
-            }).catch(function (error) {
-                console.log(error);
             });
         } else if (this.state.checkfromdbTypeV == 2) {
             window.Axios.post('open/remoteExistOpenAccount', {
@@ -1033,8 +1021,6 @@ class PassOpenD extends Component {
                     checkderesa: response.data.data.isExist,
                     icondbALoadingA: false,
                 });
-            }).catch(function (error) {
-                console.log(error);
             });
         }
 
