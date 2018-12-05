@@ -139,7 +139,6 @@ export default class PotentialUser extends Component {
 		
 	}
 	showModal2 = (belongUserId) => {
-		console.log('yyy',belongUserId)
 		this.requestUserCommentList(belongUserId)
 		this.setState({
 			modal2Visible: true,
@@ -160,24 +159,18 @@ export default class PotentialUser extends Component {
 			title: '時間',
 			dataIndex: 'createDate',
 			key: 'operationDiary_Date',
-			// fixed: 'left',
-			// width: 100,
 			render: (text, record) => (
 				<Button>{record.createDate}</Button>),
 		}, {
 			title: '狀態',
 			dataIndex: 'comment',
 			key: 'operationDiary_Status',
-			// fixed: 'left',
-			// width: 100,
 			render: (text, record) => (
 				<Button>{record.comment}</Button>),
 		}, {
 			title: '操作人',
 			dataIndex: 'bkUserName',
 			key: 'operationDiary_User',
-			// fixed: 'left',
-			// width: 100,
 			render: (text, record) => (
 				<Button>{record.bkUserName}</Button>),
 		}]
@@ -741,7 +734,7 @@ export default class PotentialUser extends Component {
 								disabled={!hasSelected}
 								loading={loading}
 							>
-								{this.state.totalpageA}
+								批量移除
                             </Button>
 							<Table rowKey="id"
 								bordered
