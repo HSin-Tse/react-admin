@@ -731,7 +731,7 @@ class PassOpenD extends Component {
 
                         </Col>
                         <Col md={8}>
-                            <div style={{display: 'flex', minHeight: 40}}>
+                            <div style={{display: 'flex', maxHeight: 40}}>
                                 <Search
                                     value={this.state.checkfromdbName}
                                     onChange={e => this.onTodoChange(e.target.value)}
@@ -757,8 +757,6 @@ class PassOpenD extends Component {
                                     <h3 style={{margin: 'auto'}}>本库查询结果：{this.state.checkderesb ? '有' : '無'}重合</h3>}
                                 {this.state.checkderesa == null ? null :
                                     <h3 style={{margin: 'auto'}}>异库查询结果：{this.state.checkderesa ? '有' : '無'}重合</h3>}
-
-
                             </div>
                         </Col>
                     </Row>
