@@ -2,13 +2,14 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Row, Col, Button, Card, Table, Select} from 'antd';
+import {Row, Input, Button, Card, Table, Select, Modal} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import beauty from '@/style/imgs/beauty.jpg';
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import {addTodo} from "../../action";
 import connect from "react-redux/es/connect/connect";
+const { TextArea } = Input;
 const Option = Select.Option;
 
 class Basic extends Component {
@@ -18,9 +19,11 @@ class Basic extends Component {
             count: 0,
             current: 0,
             pgsize: 10,
+            visibleA: false,
+            visibleB: false,
             user: '',
             userList: [],
-            loading:false
+            loading: false
 
         };
     }
@@ -59,12 +62,13 @@ class Basic extends Component {
             this.requestPage()
         })
     }
-    componentDidMount(){
+
+    componentDidMount() {
         this.columns = [
             {
                 title: '手机号',
                 fixed: 'left',
-                width: 140,
+                width: 150,
                 dataIndex: '手机号',
                 key: '手机号',
                 render: (text, record) => (
@@ -141,30 +145,113 @@ class Basic extends Component {
             }, {
                 title: '操作',
                 key: 'action',
-                fixed:	'right',
-                align:	'center',
+                fixed: 'right',
+                align: 'center',
                 width: 200,
                 render: (text, record) => (
                     <div>
-                        <Button  onClick={() => this.showModal(record)}>审核</Button>
-                        <Button  onClick={() => this.showModal2(record.belongUserId)}>查看</Button>
+                        <Button onClick={() => this.showModalA(record)}>审核</Button>
+                        <Button onClick={() => this.showModalB(record.belongUserId)}>查看</Button>
                     </div>
                 ),
             }];
         this.requestPage()
 
     }
+
     seeDetail = () => {
-        const { addTodo } = this.props;
+        const {addTodo} = this.props;
         console.log('hcia seeDetail')
         addTodo('a')
 
     }
+    showModalA = () => {
+        this.setState({
+            visibleA: true,
+        });
+    }
+    showModalB = () => {
+        this.setState({
+            visibleB: true,
+        });
+    }
+
+    handleOk = () => {
+        this.setState({
+            visibleB: false,
+        });
+    }
+
+    handleCancel = (e) => {
+        console.log(e);
+        this.setState({
+            visibleA: false,
+            visibleB: false,
+        });
+    };
 
     render() {
         return (
             <div>
                 {JSON.stringify(this.props.todps)}
+                <Modal
+                    title={this.state.modeState == '正常' ? '恢复正常' : this.state.modeState}
+                    onCancel={this.handleCancel}
+                    visible={this.state.visibleA}
+                    footer={[
+                        <Button key="back" onClick={this.handleCancel}>取消操作</Button>,
+                        <Button loading={this.state.loadFor} key="submit" type="primary"
+                                onClick={() => this.handleOk()}>
+                            提交
+                        </Button>,
+                    ]}
+                >
+                    <div>
+                        {this.state.modeState == '正常' ? <span>确认当前用户账户恢复正常</span> : null}
+                        {this.state.modeState == '禁止登陆' ? <span>请选择禁止登录原因</span> : null}
+                        {this.state.modeState == '禁止交易' ? <span>禁止交易</span> : null}
+                    </div>
+                    <div>
+
+                        {this.state.modeState == '禁止登陆' ?
+                            <Select style={{width: 200, marginTop: 20}} defaultValue='无效的邮箱'
+                                    onChange={(value) => this.forbitChange(value)}>
+                                {this.state.suspend_reason_type.map(ccty => <Option
+                                    value={ccty.value} key={ccty.value}>{ccty.name}</Option>)}
+                            </Select> : null}
+                    </div>
+
+
+                </Modal>
+
+                <Modal
+                    title="详情查看"
+                    onCancel={this.handleCancel}
+                    visible={this.state.visibleB}
+                    footer=''
+                >
+
+                    <Card bordered={false}>
+                        <h3>当前杠杆</h3>
+                        <h3>当前杠杆</h3>
+                        <h3>当前杠杆</h3>
+                        <h3>当前杠杆</h3>
+                        <div>
+                            <h3>处理备注：</h3>
+
+                            <TextArea value = {'ssss'}  rows={4}>
+                            客户已爆仓，拒绝申请
+
+                        </TextArea>
+                        </div>
+
+
+
+                    </Card>
+
+
+                </Modal>
+
                 <BreadcrumbCustom first="权限管理" second="杠杆审核"/>
                 <Button onClick={() => this.seeDetail()}
                 >详情:{this.state.count}</Button>
@@ -197,8 +284,8 @@ class Basic extends Component {
 }
 
 const mapStateToProps = state => {
-    const todps= state.todos;
-    return { todps};
+    const todps = state.todos;
+    return {todps};
 };
 const mapDispatchToProps = dispatch => ({
     addTodo: bindActionCreators(addTodo, dispatch)

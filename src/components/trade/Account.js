@@ -34,15 +34,6 @@ class Basic extends Component {
         };
     }
 
-    handleSearch = (selectedKeys, confirm) => () => {
-        confirm();
-        this.setState({searchPhone: selectedKeys[0]});
-    }
-
-    handleReset = clearFilters => () => {
-        clearFilters();
-        this.setState({searchPhone: ''});
-    }
 
     componentDidMount() {
 
