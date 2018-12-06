@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {message, Input, Button, Card, Table, Select, Modal, Upload, Icon} from 'antd';
+import {message, Input, Button, Card, Table, Select, Modal, Popconfirm, Icon} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import beauty from '@/style/imgs/beauty.jpg';
 import {bindActionCreators} from "redux";
@@ -46,6 +46,7 @@ class Basic extends Component {
 
         };
     }
+
     requestPage = () => {
 
         let self = this
@@ -80,6 +81,7 @@ class Basic extends Component {
             this.requestPage()
         })
     }
+
     componentDidMount() {
         this.columns = [
             {
@@ -127,7 +129,7 @@ class Basic extends Component {
                 key: '审核状态',
                 width: 120,
                 render: (text, record) => (
-                    <span>{record.accountStatus == 1 ? '正常' : (record.accountStatus == 2) ? '禁止登陆' : '禁止交易'}</span>
+                    <span>{record.displayStatus}</span>
                 )
 
             }, {
@@ -175,6 +177,7 @@ class Basic extends Component {
         this.requestPage()
 
     }
+
     seeDetail = () => {
         const {addTodo} = this.props;
         console.log('hcia seeDetail')
@@ -206,8 +209,6 @@ class Basic extends Component {
     }
     showModalB = (id) => {
 
-        console.log('hcia record', id)
-
         let self = this
         self.setState({
             loading: true,
@@ -232,9 +233,7 @@ class Basic extends Component {
 
 
     handleOk = () => {
-
         let self = this
-
         window.Axios.post('finance/passLeverageApply', {
             'id': this.state.detail.id,
             'content': this.state.detail.comment,
@@ -248,16 +247,10 @@ class Basic extends Component {
             self.setState({
                 visibleB: false,
             });
-            // self.setState({
-            //     detail: response.data.data,
-            //     visibleB: true,
-            // });
-
         });
     }
 
     handleCancel = (e) => {
-        console.log(e);
         this.setState({
             visibleA: false,
             visibleB: false,
@@ -286,8 +279,6 @@ class Basic extends Component {
     };
 
     changeNote = (e) => {
-        // this.state.changeNoteV = e.target.value
-        // this.state.changeNoteB = true
         this.setState({
             detail: {...this.state.detail, comment: e.target.value},
         });
@@ -296,18 +287,26 @@ class Basic extends Component {
     render() {
         return (
             <div>
-                {JSON.stringify(this.props.todps)}
+                {/*{JSON.stringify(this.props.todps)}*/}
                 <Modal
                     title={this.state.modeState == '正常' ? '恢复正常' : this.state.modeState}
                     onCancel={this.handleCancel}
                     visible={this.state.visibleB}
 
                     footer={[
-                        <Button type="normal" key="back" onClick={this.handleReject}>拒絕</Button>,
-                        <Button type="normal" loading={this.state.loadFor} key="submit"
-                                onClick={() => this.handleOk()}>
-                            確認
-                        </Button>,
+                        <Popconfirm title="拒绝？" onConfirm={this.handleReject} okText="Yes"
+                                    cancelText="No">
+                            <Button type="normal" key="back">拒絕</Button>
+
+                        </Popconfirm>,
+
+                        <Popconfirm title="确认？" onConfirm={this.handleOk} okText="Yes"
+                                    cancelText="No">
+                            <Button type="normal" key="submit">
+                                確認
+                            </Button>
+
+                        </Popconfirm>
                     ]}
                 >
                     <Card bordered={false}
@@ -331,7 +330,6 @@ class Basic extends Component {
 
 
                 </Modal>
-
                 <Modal
                     title="详情查看"
                     onCancel={this.handleCancel}
@@ -346,24 +344,17 @@ class Basic extends Component {
                         <h3>保证金占比:{this.state.detail.marginLevel}</h3>
                         <div>
                             <h3>处理备注：</h3>
-
-                            <TextArea value={this.state.detail.comment} rows={4}>
-
-                        </TextArea>
+                            <TextArea value={this.state.detail.comment} rows={4}></TextArea>
                         </div>
-
-
                     </Card>
-
-
                 </Modal>
 
                 <BreadcrumbCustom first="权限管理" second="杠杆审核"/>
-                <Button onClick={() => this.seeDetail()}
-                >详情:{this.state.count}</Button>
-                <Button
-                    onClick={() => this.seeDetail()}
-                >详情: </Button>
+                {/*<Button onClick={() => this.seeDetail()}*/}
+                {/*>详情:{this.state.count}</Button>*/}
+                {/*<Button*/}
+                {/*onClick={() => this.seeDetail()}*/}
+                {/*>详情: </Button>*/}
 
 
                 <Card title="杠杆审核"
