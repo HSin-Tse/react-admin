@@ -169,8 +169,8 @@ class Basic extends Component {
                 width: 200,
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.showModalA(record.id)}>审核</Button>
-                        <Button onClick={() => this.showModalB(record.belongUserId)}>查看</Button>
+                        <Button onClick={() => this.showModalA(record.id)}>查看</Button>
+                        <Button onClick={() => this.showModalB(record.id)}>审核</Button>
                     </div>
                 ),
             }];
@@ -205,11 +205,28 @@ class Basic extends Component {
 
 
     }
-    showModalB = () => {
-        this.setState({
-            visibleB: true,
+    showModalB = (id) => {
+
+        console.log('hcia record', id)
+
+        let self = this
+
+
+        window.Axios.post('finance/getLeverageApplyDetail', {
+            'id': id,
+        }).then(function (response) {
+            console.log('hcia response', response)
+
+            self.setState({
+                detail: response.data.data,
+                visibleB: true,
+            });
+
         });
+
+
     }
+
 
     handleOk = () => {
         this.setState({
@@ -234,27 +251,28 @@ class Basic extends Component {
                     onCancel={this.handleCancel}
                     visible={this.state.visibleB}
                     footer={[
-                        <Button key="back" onClick={this.handleCancel}>取消操作</Button>,
+                        <Button key="back" onClick={this.handleCancel}>取消</Button>,
                         <Button loading={this.state.loadFor} key="submit" type="primary"
                                 onClick={() => this.handleOk()}>
-                            提交
+                            確認
                         </Button>,
                     ]}
                 >
-                    <div>
-                        {this.state.modeState == '正常' ? <span>确认当前用户账户恢复正常</span> : null}
-                        {this.state.modeState == '禁止登陆' ? <span>请选择禁止登录原因</span> : null}
-                        {this.state.modeState == '禁止交易' ? <span>禁止交易</span> : null}
-                    </div>
-                    <div>
+                    <Card bordered={false}>
+                        <h3>当前杠杆 :{this.state.detail.currentLeverage}</h3>
+                        <h3>余额 :{this.state.detail.cashBalance}</h3>
+                        <h3>杠杆修改 :{this.state.detail.targetLeverage}</h3>
+                        <h3>保证金占比:{this.state.detail.marginLevel}</h3>
+                        <div>
+                            <h3>处理备注：</h3>
 
-                        {this.state.modeState == '禁止登陆' ?
-                            <Select style={{width: 200, marginTop: 20}} defaultValue='无效的邮箱'
-                                    onChange={(value) => this.forbitChange(value)}>
-                                {this.state.suspend_reason_type.map(ccty => <Option
-                                    value={ccty.value} key={ccty.value}>{ccty.name}</Option>)}
-                            </Select> : null}
-                    </div>
+                            <TextArea value={this.state.detail.comment} rows={4}>
+
+                        </TextArea>
+                        </div>
+
+
+                    </Card>
 
 
                 </Modal>
