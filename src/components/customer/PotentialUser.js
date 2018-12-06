@@ -357,9 +357,8 @@ export default class PotentialUser extends Component {
 				align: 'center',
 				render: (text, record) => (
 					<div>
-						<Button className="ant-dropdown-link">添加备注</Button>
-						<Button className="ant-dropdown-link">操作日誌</Button>
-
+						<Button className="ant-dropdown-link" onClick={() => this.showModal(record)}>添加備註</Button>
+						<Button className="ant-dropdown-link" onClick={() => this.showModal2(record.belongUserId)}>操作日誌</Button>
 					</div>
 				),
 			}];
