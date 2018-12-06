@@ -242,6 +242,14 @@ class Basic extends Component {
         });
     };
 
+    changeNote = (e) => {
+        // this.state.changeNoteV = e.target.value
+        // this.state.changeNoteB = true
+        this.setState({
+            detail: {...this.state.detail,comment:e.target.value},
+        });
+    }
+
     render() {
         return (
             <div>
@@ -266,7 +274,7 @@ class Basic extends Component {
                         <div>
                             <h3>处理备注：</h3>
 
-                            <TextArea value={this.state.detail.comment} rows={4}>
+                            <TextArea value={this.state.detail.comment} onChange={this.changeNote} rows={4}>
 
                         </TextArea>
                         </div>
