@@ -58,7 +58,7 @@ export default class PotentialUser extends Component {
 	pageAColumns = () => {
 		return  [
 			{
-				title: 'aaaa手机号',
+				title: '手机号',
 				dataIndex: 'phoneNumber',
 				key: 'phoneNumber',
 				width: 200,
@@ -189,7 +189,7 @@ export default class PotentialUser extends Component {
 	pageBColumns = () => {
 		return this.columns = [
 			{
-				title: 'bbbbb手机号',
+				title: '手机号',
 				dataIndex: 'phoneNumber',
 				key: 'phoneNumber',
 				width: 150,
@@ -280,7 +280,7 @@ export default class PotentialUser extends Component {
 	pageCColumns = () => {
 		return this.columns = [
 			{
-				title: 'cccccc手机号',
+				title: '手机号',
 				dataIndex: 'phoneNumber',
 				key: 'phoneNumber',
 				width: 200,
