@@ -350,8 +350,26 @@ class Basic extends Component {
         this.setState({
             detail: {...this.state.detail, comment: e.target.value},
         });
-    }
 
+    }
+    onChangeLe = (value) => {
+        // updateLeverageApply
+        let self = this
+
+        console.log('hcia value' , value)
+        window.Axios.post('finance/updateLeverageApply', {
+            id:this.state.detail.id,
+            leverageId:value,
+        }).then((response) => {
+            console.log('hcia response', response)
+            // self.setState({
+            //     leavgeList: response.data.data,
+            // })
+        });
+
+
+
+    }
     render() {
         const gridStyle = {
             width: '50%',
@@ -396,12 +414,15 @@ class Basic extends Component {
 
                             <Row style={{marginTop: 20}}>
                                 <Col style={{textAlign: 'right'}} span={10}>杠杆修改:</Col>
-                                <Col style={{textAlign: 'center'}} span={14}><Select
-                                    defaultValue={this.state.detail.targetLeverage}
-                                    style={{marginLeft: 0}}>
-                                    {this.state.leavgeList.map(ccty => <Option
-                                        key={ccty.leverage}>1:{ccty.leverage}</Option>)}
-                                </Select></Col>
+                                <Col style={{textAlign: 'center'}} span={14}>
+                                    <Select
+                                        onChange={this.onChangeLe}
+                                        defaultValue={this.state.detail.targetLeverage}
+                                        style={{marginLeft: 0}}>
+                                        {this.state.leavgeList.map(ccty => <Option
+                                          value={ccty.id}  key={ccty.leverage}>1:{ccty.leverage}</Option>)}
+                                    </Select>
+                                </Col>
                             </Row>
                             <Row style={{marginTop: 20}}>
                                 <Col style={{textAlign: 'right'}} span={10}>保证金占比:</Col>
