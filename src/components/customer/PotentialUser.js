@@ -773,7 +773,30 @@ export default class PotentialUser extends Component {
 					<Tabs
 						onChange={this.callback}
 						type="card">
-						
+						<TabPane tab="潛在用戶" key="1">
+							<Button
+								type="primary"
+								onClick={() => this.handleremoveList()}
+								disabled={!hasSelected}
+								loading={loading}
+							>
+								批量移除
+                            </Button>
+							<Table rowKey="id"
+								bordered
+								rowSelection={rowSelection}
+								columns={this.pageAColumns()}
+								dataSource={this.state.bklistA}
+								scroll={{ x: 1300 }}
+								loading={this.state.loadingA}
+								pagination={{  // 分页
+									total: this.state.totalpageA * this.state.pgsize,
+									pageSize: this.state.pgsize,
+									onChange: this.changePageA,
+								}}
+							/>
+						</TabPane>
+
 						<TabPane tab="模擬用戶" key="2">
 							<Table rowKey="id"
 								rowSelection={rowSelection}
