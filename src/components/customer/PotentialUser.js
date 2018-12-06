@@ -3,6 +3,7 @@ import { DatePicker, Input, Modal, Button, Table, Tabs, message, Card, Tag, Layo
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import { ThemePicker } from '@/components/widget';
 import classNames from "classnames";
+import yyx from '../utility/Utility';
 
 const TabPane = Tabs.TabPane;
 const { CheckableTag } = Tag;
@@ -253,12 +254,28 @@ export default class PotentialUser extends Component {
 				align:	'center',
 				render: (text, record) => (
 					<div>
-						<Button className="ant-dropdown-link">延期</Button>
+						<Button className="ant-dropdown-link" onClick = {() =>this.delay(record)}>延期</Button>
 						<Button className="ant-dropdown-link">添加备注</Button>
 						<Button className="ant-dropdown-link">操作日誌</Button>
 					</div>
 				),
 			}];
+	}
+	delay = (record) =>{
+		let belongUserId = record.belongUserId
+		let accountNo = record.accountNo
+		console.log('yyx',record);
+		let self = this;
+		window.Axios.post('ixuser/delayDemoAccount', {
+			"accountNo": accountNo,
+			"belongUserId": belongUserId,
+		}).then((response) => {
+
+			yyx.checkResponseCode(response)
+		}).catch(function (error) {
+			console.log(error);
+		});
+		
 	}
 	pageCColumns = () => {
 		return this.columns = [
