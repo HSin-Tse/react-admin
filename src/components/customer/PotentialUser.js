@@ -463,13 +463,16 @@ export default class PotentialUser extends Component {
 			'belongUserId': record,
 			
 			pageNo: this.state.currentComment,
-			'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
+			'pageSize': this.state.pgsize,
 
 			
 			
 		}).then(function (response) {
 			
-			console.log('uuuug', response.data)
+			if (response.data.code != 1){
+				message.warn('request User CommentList error')
+				console.log('yyx requestUserCommentList error');
+			}
 
 			self.setState({
 				totalpageComments: response.data.data.totalPage,
