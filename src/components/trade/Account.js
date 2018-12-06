@@ -10,7 +10,7 @@ import {receiveData} from "../../action";
 
 const Option = Select.Option;
 
- class Basic extends Component {
+class Basic extends Component {
 
     constructor(props) {
         super(props);
@@ -429,10 +429,11 @@ const Option = Select.Option;
                 <BreadcrumbCustom first="审核管理" second="交易账户管理"/>
 
                 <Card title="交易账户管理"
-                      extra={<Button type="default" disabled={!hasSelected}
-                                     onClick={() => this.refleshNowpage()}
-                      >刷新当前页面</Button>}
-                >
+                      extra={
+                          <Button type="default" disabled={!hasSelected}
+                                  onClick={() => this.refleshNowpage()}>刷新当前页面
+                          </Button>
+                      }>
 
                     <Table rowKey="id"
                            rowSelection={rowSelection}
@@ -448,15 +449,16 @@ const Option = Select.Option;
                                onChange: this.changePage,
                            }}
                     />
-                </Card>,
+                </Card>
 
             </div>
 
         )
     }
 }
+
 const mapStateToProps = state => {
-    const { auth = {data: {}}, responsive = {data: {}} } = state.httpData;
+    const {auth = {data: {}}, responsive = {data: {}}} = state.httpData;
     return {auth, responsive};
 };
 const mapDispatchToProps = dispatch => ({
