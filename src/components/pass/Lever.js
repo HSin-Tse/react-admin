@@ -24,6 +24,24 @@ class Basic extends Component {
             visibleB: false,
             user: '',
             userList: [],
+            detail: {
+                "name": null,
+                "id": "27",
+                "date": "",
+                "comment": null,
+                "status": 0,
+                "currentLeverage": "1 : 100",
+                "targetLeverage": "1 : 200",
+                "operator": null,
+                "email": null,
+                "mobile": null,
+                "nationalId": null,
+                "accountNo": "live545491475",
+                "marginLevel": "N/A",
+                "displayStatus": "审核中",
+                "broker": null,
+                "cashBalance": "0.0"
+            },
             loading: false
 
         };
@@ -177,7 +195,9 @@ class Basic extends Component {
             'id': id,
         }).then(function (response) {
             console.log('hcia response', response)
+
             self.setState({
+                detail: response.data.data,
                 visibleA: true,
             });
 
@@ -212,7 +232,7 @@ class Basic extends Component {
                 <Modal
                     title={this.state.modeState == '正常' ? '恢复正常' : this.state.modeState}
                     onCancel={this.handleCancel}
-                    visible={this.state.visibleA}
+                    visible={this.state.visibleB}
                     footer={[
                         <Button key="back" onClick={this.handleCancel}>取消操作</Button>,
                         <Button loading={this.state.loadFor} key="submit" type="primary"
@@ -242,20 +262,19 @@ class Basic extends Component {
                 <Modal
                     title="详情查看"
                     onCancel={this.handleCancel}
-                    visible={this.state.visibleB}
+                    visible={this.state.visibleA}
                     footer=''
                 >
 
                     <Card bordered={false}>
-                        <h3>当前杠杆</h3>
-                        <h3>当前杠杆</h3>
-                        <h3>当前杠杆</h3>
-                        <h3>当前杠杆</h3>
+                        <h3>当前杠杆 :{this.state.detail.currentLeverage}</h3>
+                        <h3>余额 :{this.state.detail.cashBalance}</h3>
+                        <h3>杠杆修改 :{this.state.detail.targetLeverage}</h3>
+                        <h3>保证金占比:{this.state.detail.marginLevel}</h3>
                         <div>
                             <h3>处理备注：</h3>
 
-                            <TextArea value={'ssss'} rows={4}>
-                            客户已爆仓，拒绝申请
+                            <TextArea value={this.state.detail.comment} rows={4}>
 
                         </TextArea>
                         </div>
