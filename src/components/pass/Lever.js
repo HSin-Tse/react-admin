@@ -9,7 +9,8 @@ import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import {addTodo} from "../../action";
 import connect from "react-redux/es/connect/connect";
-const { TextArea } = Input;
+
+const {TextArea} = Input;
 const Option = Select.Option;
 
 class Basic extends Component {
@@ -150,7 +151,7 @@ class Basic extends Component {
                 width: 200,
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.showModalA(record)}>审核</Button>
+                        <Button onClick={() => this.showModalA(record.id)}>审核</Button>
                         <Button onClick={() => this.showModalB(record.belongUserId)}>查看</Button>
                     </div>
                 ),
@@ -165,10 +166,24 @@ class Basic extends Component {
         addTodo('a')
 
     }
-    showModalA = () => {
-        this.setState({
-            visibleA: true,
+    showModalA = (id) => {
+
+        console.log('hcia record', id)
+
+        let self = this
+
+
+        window.Axios.post('finance/getLeverageApplyDetail', {
+            'id': id,
+        }).then(function (response) {
+            console.log('hcia response', response)
+            self.setState({
+                visibleA: true,
+            });
+
         });
+
+
     }
     showModalB = () => {
         this.setState({
@@ -239,12 +254,11 @@ class Basic extends Component {
                         <div>
                             <h3>处理备注：</h3>
 
-                            <TextArea value = {'ssss'}  rows={4}>
+                            <TextArea value={'ssss'} rows={4}>
                             客户已爆仓，拒绝申请
 
                         </TextArea>
                         </div>
-
 
 
                     </Card>
