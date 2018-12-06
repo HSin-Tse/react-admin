@@ -46,7 +46,6 @@ class Basic extends Component {
 
         };
     }
-
     requestPage = () => {
 
         let self = this
@@ -81,7 +80,6 @@ class Basic extends Component {
             this.requestPage()
         })
     }
-
     componentDidMount() {
         this.columns = [
             {
@@ -177,7 +175,6 @@ class Basic extends Component {
         this.requestPage()
 
     }
-
     seeDetail = () => {
         const {addTodo} = this.props;
         console.log('hcia seeDetail')
@@ -186,10 +183,11 @@ class Basic extends Component {
     }
     showModalA = (id) => {
 
-        console.log('hcia record', id)
-
         let self = this
 
+        self.setState({
+            loading: true,
+        });
 
         window.Axios.post('finance/getLeverageApplyDetail', {
             'id': id,
@@ -199,6 +197,7 @@ class Basic extends Component {
             self.setState({
                 detail: response.data.data,
                 visibleA: true,
+                loading: false,
             });
 
         });
@@ -210,7 +209,9 @@ class Basic extends Component {
         console.log('hcia record', id)
 
         let self = this
-
+        self.setState({
+            loading: true,
+        });
 
         window.Axios.post('finance/getLeverageApplyDetail', {
             'id': id,
@@ -220,6 +221,8 @@ class Basic extends Component {
             self.setState({
                 detail: response.data.data,
                 visibleB: true,
+                loading: false,
+
             });
 
         });
