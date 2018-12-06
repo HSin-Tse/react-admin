@@ -255,8 +255,8 @@ export default class PotentialUser extends Component {
 				render: (text, record) => (
 					<div>
 						<Button className="ant-dropdown-link" onClick = {() =>this.delay(record)}>延期</Button>
-						<Button className="ant-dropdown-link">添加备注</Button>
-						<Button className="ant-dropdown-link">操作日誌</Button>
+						<Button className="ant-dropdown-link" onClick={() => this.showModal(record)}>添加備註</Button>
+						<Button className="ant-dropdown-link" onClick={() => this.showModal2(record.belongUserId)}>操作日誌</Button>
 					</div>
 				),
 			}];
@@ -386,9 +386,9 @@ export default class PotentialUser extends Component {
 			content: "self.state.theComment",
 			belongUserId: self.state.theBelongUserId,
 		}).then((response) => {
-
-
-			console.log('yyx handleAddComment success', response)
+			if (yyx.checkResponseCode(response)){
+				message.success('提交成功')
+			}
 		}).catch(function (error) {
 			console.log(error);
 		});

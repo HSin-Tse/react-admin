@@ -4,7 +4,9 @@ export default class yyx {
         if (response.data.code != 1) {
             message.error("error")
             console.log('yyx error', response)
+            return false
         }
+        return true
     }
 
 }
