@@ -469,13 +469,13 @@ export default class PotentialUser extends Component {
 			
 		}).then(function (response) {
 			
-			console.log('ggg', self.state.operationDiaryHistory)
+			console.log('uuuug', response.data)
 
 			self.setState({
 				totalpageComments: response.data.data.totalPage,
 				operationDiaryHistory: response.data.data.list,
 			}, () => {
-				console.log('hcia self.state.operationDiaryHistory', self.state.operationDiaryHistory)
+				console.log('yyx self.state.operationDiaryHistory', self.state.operationDiaryHistory)
 				// var tags = Object.keys(self.state.bklistA[0])
 				// console.log('hcia tags', tags)
 				// self.setState({
