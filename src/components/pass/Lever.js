@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {message, Input, Button, Card, Table, Select, Modal} from 'antd';
+import {message, Input, Button, Card, Table, Select, Modal, Upload, Icon} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import beauty from '@/style/imgs/beauty.jpg';
 import {bindActionCreators} from "redux";
@@ -231,22 +231,20 @@ class Basic extends Component {
     handleOk = () => {
 
         let self = this
-        this.setState({
-            visibleB: false,
-        });
-
 
         window.Axios.post('finance/passLeverageApply', {
-            'id':this.state.detail.id ,
-            'content':this.state.detail.comment ,
+            'id': this.state.detail.id,
+            'content': this.state.detail.comment,
         }).then(function (response) {
 
 
-            if(response.data.code ==1){
+            if (response.data.code == 1) {
                 message.success('操作成功')
                 self.requestPage()
             }
-
+            self.setState({
+                visibleB: false,
+            });
             // self.setState({
             //     detail: response.data.data,
             //     visibleB: true,
@@ -260,6 +258,27 @@ class Basic extends Component {
         this.setState({
             visibleA: false,
             visibleB: false,
+        });
+    };
+
+    handleReject = (e) => {
+        let self = this
+
+        window.Axios.post('finance/cancelLeverageApply', {
+            'id': this.state.detail.id,
+            'content': this.state.detail.comment,
+        }).then(function (response) {
+
+
+            if (response.data.code == 1) {
+                message.success('操作成功')
+                self.requestPage()
+            }
+            self.setState({
+                visibleB: false,
+            });
+
+
         });
     };
 
@@ -279,15 +298,19 @@ class Basic extends Component {
                     title={this.state.modeState == '正常' ? '恢复正常' : this.state.modeState}
                     onCancel={this.handleCancel}
                     visible={this.state.visibleB}
+
                     footer={[
-                        <Button key="back" onClick={this.handleCancel}>取消</Button>,
-                        <Button loading={this.state.loadFor} key="submit" type="primary"
+                        <Button type="normal" key="back" onClick={this.handleReject}>拒絕</Button>,
+                        <Button type="normal" loading={this.state.loadFor} key="submit"
                                 onClick={() => this.handleOk()}>
                             確認
                         </Button>,
                     ]}
                 >
-                    <Card bordered={false}>
+                    <Card bordered={false}
+
+                    >
+
                         <h3>当前杠杆 :{this.state.detail.currentLeverage}</h3>
                         <h3>余额 :{this.state.detail.cashBalance}</h3>
                         <h3>杠杆修改 :{this.state.detail.targetLeverage}</h3>
