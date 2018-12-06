@@ -122,25 +122,6 @@ export default class WhiteList extends Component {
 
 
     };
-    // addWhite = () => {
-    //
-    //
-    //     let self = this
-    //     window.Axios.post('auth/addWhiteUser', {
-    //         name: this.state.NameCn,
-    //         mobile: this.state.phoneCn,
-    //         content: this.state.changeNoteV,
-    //     }).then((response) => {
-    //         console.log('hcia response', response)
-    //         self.searchSelect()
-    //
-    //
-    //     }).catch(function (error) {
-    //         console.log(error);
-    //     });
-    //
-    //
-    // };
 
 
     requestPageA = () => {
@@ -162,14 +143,6 @@ export default class WhiteList extends Component {
                 totalpageA: response.data.data.totalPage,
                 bklistA: response.data.data.list,
                 loadingA: false
-            }, () => {
-                console.log('hcia self.state.bklistA', self.state.bklistA)
-                // var tags = Object.keys(self.state.bklistA[0])
-                // console.log('hcia tags', tags)
-                // self.setState({
-                //     mTags: tags
-                // })
-
             });
 
         }).catch(function (error) {
@@ -235,7 +208,7 @@ export default class WhiteList extends Component {
     onChangeDate = (value, dateString) => {
     }
     changeNote = (e) => {
-        console.log('hcia e' , e)
+        console.log('hcia e', e)
 
 
         this.setState({
@@ -248,9 +221,6 @@ export default class WhiteList extends Component {
 
 
         var selectTimeStart = value[0].unix() + '000'
-        //1545275083
-        //26582400000
-        //27187200000
         var selectTimeEnd = value[1].unix() + '000'
 
         console.log('hcia selectTimeStart', selectTimeStart)
@@ -298,7 +268,7 @@ export default class WhiteList extends Component {
         }).then((response) => {
 
             message.success('操作成功')
-                this.requestPageA()//1:合规 2:开户 3:交易
+            this.requestPageA()//1:合规 2:开户 3:交易
 
 
         }).catch(function (error) {
@@ -365,10 +335,10 @@ export default class WhiteList extends Component {
                     </Card>
                 </Modal>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
-                <div>nowKey :{this.state.nowKey}</div>
-                <div>selectMail :{this.state.selectMail}</div>
-                <div>selectPhone :{this.state.selectPhone}</div>
-                <div>changeNoteV :{this.state.changeNoteV}</div>
+                {/*<div>nowKey :{this.state.nowKey}</div>*/}
+                {/*<div>selectMail :{this.state.selectMail}</div>*/}
+                {/*<div>selectPhone :{this.state.selectPhone}</div>*/}
+                {/*<div>changeNoteV :{this.state.changeNoteV}</div>*/}
                 {/*<ThemePicker />*/}
                 <div className={classNames('switcher dark-white', {active: switcherOn})}>
                 <span className="sw-btn dark-white" onClick={this._switcherOn}>
