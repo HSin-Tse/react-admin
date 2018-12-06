@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Row, Input, Button, Card, Table, Select, Modal} from 'antd';
+import {message, Input, Button, Card, Table, Select, Modal} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import beauty from '@/style/imgs/beauty.jpg';
 import {bindActionCreators} from "redux";
@@ -229,8 +229,29 @@ class Basic extends Component {
 
 
     handleOk = () => {
+
+        let self = this
         this.setState({
             visibleB: false,
+        });
+
+
+        window.Axios.post('finance/passLeverageApply', {
+            'id':this.state.detail.id ,
+            'content':this.state.detail.comment ,
+        }).then(function (response) {
+
+
+            if(response.data.code ==1){
+                message.success('操作成功')
+                self.requestPage()
+            }
+
+            // self.setState({
+            //     detail: response.data.data,
+            //     visibleB: true,
+            // });
+
         });
     }
 
@@ -246,7 +267,7 @@ class Basic extends Component {
         // this.state.changeNoteV = e.target.value
         // this.state.changeNoteB = true
         this.setState({
-            detail: {...this.state.detail,comment:e.target.value},
+            detail: {...this.state.detail, comment: e.target.value},
         });
     }
 
