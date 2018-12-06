@@ -367,29 +367,27 @@ class Basic extends Component {
                     visible={this.state.visibleB}
 
                     footer={[
-                        <Popconfirm title="拒绝？" onConfirm={this.handleReject} okText="Yes"
+                        <Popconfirm title="确认？" onConfirm={this.handleOk}
+                                    okText="Yes"
+                                    cancelText="No">
+                            <Button type="normal" key="submit">通過</Button>
+                        </Popconfirm>,
+                        <Popconfirm title="拒绝？"
+                                    onConfirm={this.handleReject}
+                                    okText="Yes"
                                     cancelText="No">
                             <Button type="normal" key="back">拒絕</Button>
-
-                        </Popconfirm>,
-
-                        <Popconfirm title="确认？" onConfirm={this.handleOk} okText="Yes"
-                                    cancelText="No">
-                            <Button type="normal" key="submit">
-                                確認
-                            </Button>
-
                         </Popconfirm>
                     ]}
                 >
                     <Card
-                        title={'账户：'+this.state.detail.accountNo}
+                        title={'账户：' + this.state.detail.accountNo}
                         bordered={true}>
 
                         <div>
                             <Row style={{marginTop: 20}}>
                                 <Col style={{textAlign: 'right'}} span={10}>当前杠杆:</Col>
-                                <Col style={{textAlign: 'center'}} span={14}>{this.state.detail.currentLeverage}</Col>
+                                <Col style={{textAlign: 'center'}} span={14}>{this.state.detail.targetLeverage}</Col>
                             </Row>
                             <Row style={{marginTop: 20}}>
                                 <Col style={{textAlign: 'right'}} span={10}>余额:</Col>
@@ -410,13 +408,13 @@ class Basic extends Component {
                                 <Col style={{textAlign: 'center'}} span={14}>{this.state.detail.marginLevel}</Col>
                             </Row>
                             <Row style={{marginTop: 20}}>
-                            <Col span={24}>处理备注：</Col>
-                            <Col style={{marginTop: 20}} span={24}>
+                                <Col span={24}>处理备注：</Col>
+                                <Col style={{marginTop: 20}} span={24}>
                                 <TextArea value={this.state.detail.comment}
                                           onChange={this.changeNote}
                                           rows={4}></TextArea>
-                            </Col>
-                        </Row>
+                                </Col>
+                            </Row>
                         </div>
                     </Card>
 
@@ -450,7 +448,6 @@ class Basic extends Component {
 
 
                 <Card title="杠杆审核"
-
                 >
 
                     <Table rowKey="id"
