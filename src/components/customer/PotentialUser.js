@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
-import {DatePicker, Input, Modal, Button, Table, Tabs, message, Card, Tag, Layout, Icon} from 'antd';
+import {DatePicker, Input, Modal, Button, Table, Tabs, message, Card, Tag, Layout, Icon, Col} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {ThemePicker} from '@/components/widget';
 import classNames from "classnames";
 import yyx from '../utility/Utility';
 
 const TabPane = Tabs.TabPane;
-const {CheckableTag} = Tag;
 const {RangePicker} = DatePicker;
+const {TextArea} = Input;
+
 export default class PotentialUser extends Component {
 
     constructor(props) {
@@ -116,8 +117,8 @@ export default class PotentialUser extends Component {
                 dataIndex: '回访状态',
                 key: '回访状态',
                 align: 'center',
-                render: (text, record) => (
-                    <span>{record.comment}</span>),
+                render: (text, record) => (<span>{record.feebackStatus}</span>),
+
             }, {
                 title: '备注',
                 width: 120,
@@ -159,6 +160,7 @@ export default class PotentialUser extends Component {
     showModal2 = (belongUserId) => {
         this.requestUserCommentList(belongUserId)
         this.setState({
+            // theComment: comment
             modal2Visible: true,
             visible: false,
 
@@ -170,8 +172,12 @@ export default class PotentialUser extends Component {
             theBelongUserId: belongUserId,
             visible: true,
             modal2Visible: false,
+            theComment: record.comment,
         });
+
     }
+
+
     modalColums = () => {
         return [{
             title: '時間',
@@ -237,7 +243,7 @@ export default class PotentialUser extends Component {
                 title: '回访状态',
                 dataIndex: '回访状态',
                 key: '回访状态',
-                render: (text, record) => (<span>{'xxxssas'}</span>),
+                render: (text, record) => (<span>{record.feebackStatus}</span>),
             }, {
                 title: '备注',
                 dataIndex: '备注',
@@ -335,7 +341,7 @@ export default class PotentialUser extends Component {
                 dataIndex: '回访状态',
                 key: '回访状态',
                 align: 'center',
-                render: (text, record) => (<span>{'xxxxxx'}</span>),
+                render: (text, record) => (<span>{record.feebackStatus}</span>),
             }, {
                 title: '备注',
                 dataIndex: '备注',
@@ -391,15 +397,23 @@ export default class PotentialUser extends Component {
     handleAddComment = (e) => {
         let self = this;
         window.Axios.post('auth/addUserComment', {
-            content: "self.state.theComment",
+            content: self.state.theComment,
             belongUserId: self.state.theBelongUserId,
         }).then((response) => {
             if (yyx.checkResponseCode(response)) {
                 message.success('提交成功')
+                self.state.theComment=''
+                if (self.state.nowKey == 1) {
+                    this.requestPageA()//1:合规 2:开户 3:交易
+                }
+                if (self.state.nowKey == 2) {
+                    this.requestPageB()//1:合规 2:开户 3:交易
+                }
+                if (self.state.nowKey == 3) {
+                    this.requestPageC()//1:合规 2:开户 3:交易
+                }
             }
-        }).catch(function (error) {
-            console.log(error);
-        });
+        })
 
         this.setState({
             visible: false,
@@ -471,15 +485,6 @@ export default class PotentialUser extends Component {
 
     };
     requestUserCommentList = (record) => {
-        // must request data:
-        //belongUserId
-        //loginName
-        //token
-        console.log('www', record)
-        //refernce request data:
-        //pageNo
-        //pageSize
-        //language
         const url = 'http://mobile.nooko.cn:8090/auth/getUserCommentList'
 
         var self = this;
@@ -501,18 +506,7 @@ export default class PotentialUser extends Component {
             self.setState({
                 totalpageComments: response.data.data.totalPage,
                 operationDiaryHistory: response.data.data.list,
-            }, () => {
-                console.log('yyx self.state.operationDiaryHistory', self.state.operationDiaryHistory)
-                // var tags = Object.keys(self.state.bklistA[0])
-                // console.log('hcia tags', tags)
-                // self.setState({
-                //     mTags: tags
-                // })
-
             });
-        }).catch(function (error) {
-            console.log(error);
-            // message.warn(error);
         });
     }
     requestPageA = () => {
@@ -607,21 +601,21 @@ export default class PotentialUser extends Component {
 
     changePageA = (page) => {
         this.setState({
-            currentA: page-1,
+            currentA: page - 1,
         }, () => {
             this.requestPageA()
         })
     }
     changePageB = (page) => {
         this.setState({
-            currentb: page-1,
+            currentb: page - 1,
         }, () => {
             this.requestPageB()
         })
     }
     changePageC = (page) => {
         this.setState({
-            currentC: page-1,
+            currentC: page - 1,
         }, () => {
             this.requestPageC()
         })
@@ -646,7 +640,6 @@ export default class PotentialUser extends Component {
         let comment = e.target.value;
         this.setState({
             theComment: comment
-
         });
     }
     onSelectChange = (selectedRowKeys) => {
@@ -656,21 +649,13 @@ export default class PotentialUser extends Component {
 
     state = {
         switcherOn: true,
-        background: localStorage.getItem('@primary-color') || '#313653',
     }
     _switcherOn = () => {
         this.setState({
             switcherOn: !this.state.switcherOn
         })
     };
-    _handleChangeComplete = color => {
-        console.log(color);
-        this.setState({background: color.hex});
-        localStorage.setItem('@primary-color', color.hex);
-        window.less.modifyVars({
-            '@primary-color': color.hex,
-        })
-    };
+
 
     onChangeMail = (e) => {
         this.setState({
@@ -836,7 +821,13 @@ export default class PotentialUser extends Component {
                     okText="確認"
                     cancelText="取消"
                 >
-                    <p><Input onChange={this.addComment} placeholder="填写回访次数以及结果"/></p>
+                    {/*<p><Input onChange={this.addComment} placeholder="填写回访次数以及结果"/></p>*/}
+
+                    <TextArea
+                        value={this.state.theComment}
+                        placeholder="填写回访次数以及结果"
+                        onChange={this.addComment}
+                        rows={4}></TextArea>
                 </Modal>
                 <Modal
                     title="操作日誌"
