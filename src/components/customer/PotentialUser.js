@@ -402,7 +402,7 @@ export default class PotentialUser extends Component {
         }).then((response) => {
             if (yyx.checkResponseCode(response)) {
                 message.success('提交成功')
-                self.state.theComment=''
+                self.state.theComment = ''
                 if (self.state.nowKey == 1) {
                     this.requestPageA()//1:合规 2:开户 3:交易
                 }
@@ -756,15 +756,6 @@ export default class PotentialUser extends Component {
                         type="card">
                         <TabPane tab="潛在用戶" key="1">
                             <Card title={'潜在用户信息表'}>
-
-                                {/*<Button*/}
-                                {/*type="primary"*/}
-                                {/*onClick={() => this.handleremoveList()}*/}
-                                {/*disabled={!hasSelected}*/}
-                                {/*loading={loading}*/}
-                                {/*>*/}
-                                {/*批量移除*/}
-                                {/*</Button>*/}
                                 <Table rowKey="id"
                                        bordered
                                        rowSelection={rowSelection}
@@ -783,32 +774,39 @@ export default class PotentialUser extends Component {
                         </TabPane>
 
                         <TabPane tab="模擬用戶" key="2">
-                            <Table rowKey="id"
-                                   rowSelection={rowSelection}
-                                   columns={this.pageBColumns()}
-                                   dataSource={this.state.bklistB}
-                                   scroll={{x: 1300}}
-                                   loading={this.state.loading}
-                                   pagination={{  // 分页
-                                       total: this.state.totalpageB * this.state.pgsize,
-                                       pageSize: this.state.pgsize,
-                                       onChange: this.changePageB,
-                                   }}
-                            />
+                            <Card title={'模拟用户信息表'}>
+
+                                <Table rowKey="id"
+                                       rowSelection={rowSelection}
+                                       columns={this.pageBColumns()}
+                                       dataSource={this.state.bklistB}
+                                       scroll={{x: 1300}}
+                                       loading={this.state.loading}
+                                       pagination={{  // 分页
+                                           total: this.state.totalpageB * this.state.pgsize,
+                                           pageSize: this.state.pgsize,
+                                           onChange: this.changePageB,
+                                       }}
+                                />
+                            </Card>
+
                         </TabPane>
                         <TabPane tab="意向用戶" key="3">
-                            <Table rowKey="id"
-                                   rowSelection={rowSelection}
-                                   columns={this.pageCColumns()}
-                                   dataSource={this.state.bklistC}
-                                   scroll={{x: 1300}}
-                                   loading={this.state.loading}
-                                   pagination={{  // 分页
-                                       total: this.state.totalpageC * this.state.pgsize,
-                                       pageSize: this.state.pgsize,
-                                       onChange: this.changePageC,
-                                   }}
-                            />
+                            <Card title={'意向用户信息表'}>
+                                <Table rowKey="id"
+                                       rowSelection={rowSelection}
+                                       columns={this.pageCColumns()}
+                                       dataSource={this.state.bklistC}
+                                       scroll={{x: 1300}}
+                                       loading={this.state.loading}
+                                       pagination={{  // 分页
+                                           total: this.state.totalpageC * this.state.pgsize,
+                                           pageSize: this.state.pgsize,
+                                           onChange: this.changePageC,
+                                       }}
+                                />
+                            </Card>
+
                         </TabPane>
                     </Tabs>
                 </Card>

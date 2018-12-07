@@ -119,7 +119,7 @@ class SiderCustom extends Component {
             return back;
         });
 
-        console.log('hcia nowRouter', nowRouter)
+        // console.log('hcia nowRouter', nowRouter)
 
         var setrr = {...routes,menus:nowRouter}
         // console.log('hcia routes', routes)

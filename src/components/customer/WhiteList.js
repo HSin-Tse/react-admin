@@ -208,7 +208,6 @@ export default class WhiteList extends Component {
     onChangeDate = (value, dateString) => {
     }
     changeNote = (e) => {
-        console.log('hcia e', e)
 
 
         this.setState({

@@ -53,7 +53,7 @@ export default class CustomerSummary extends Component {
 	};
 
 	handleremoveList = () => {
-		console.log('hcia selectedRowKeys', this.state.selectedRowKeys)
+		// console.log('hcia selectedRowKeys', this.state.selectedRowKeys)
 		// window.Axios.post('auth/removeBlackUser', {
 		//     'id': record.id//1:合规 2:开户 3:交易
 		// }).then((response) => {

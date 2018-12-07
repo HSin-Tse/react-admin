@@ -29,7 +29,7 @@ export default class CRouter extends Component {
     }
 
     componentWillMount() {
-        console.log('hcia componentWillMount')
+        // console.log('hcia componentWillMount')
 
 
         var nowRouter = routes.menus.filter((key, index, array) => {
