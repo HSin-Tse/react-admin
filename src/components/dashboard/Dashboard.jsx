@@ -26,7 +26,7 @@ class Dashboard extends React.Component {
             <div className="gutter-example button-demo">
                 {/*{JSON.stringify(this.props.todps)}*/}
                 {/*{JSON.stringify(this.props.infor)}*/}
-                {JSON.stringify(localStorage.getItem('infor'))}
+                {/*{JSON.stringify(localStorage.getItem('infor'))}*/}
 
                 <BreadcrumbCustom/>
                 <Row gutter={10}>

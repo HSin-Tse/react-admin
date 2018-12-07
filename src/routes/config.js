@@ -2,7 +2,7 @@ export default {
     menus: [ // 菜单相关路由
         {key: '/app/dashboard/index', title: '歡迎', icon: 'mobile', component: 'Dashboard'},
         {
-            key: '/app/customer', title: '用戶管理', icon: 'safety',
+            key: '/app/customer', title: '用户管理', icon: 'safety',
             subs: [
                 {key: '/app/customer/PotentialUser', title: 'Lead管理', component: 'PotentialUser'},
                 {key: '/app/customer/CustomerSummary', title: '用戶總表', component: 'CustomerSummary'},
@@ -37,7 +37,12 @@ export default {
             {route: '/app/customer/SimulatorUser', title: 'SimulatorUser', icon: 'star', component: 'SimulatorUser'},
             {route: '/app/pass/IntendingUser', title: 'IntendingUser', icon: 'star', component: 'IntendingUser'},
             {route: '/app/customer/PotentialUser', title: 'PotentialUser', icon: 'star', component: 'PotentialUser'},
-            { route: '/app/customer/CustomerUserInfo:id', title: 'CustomerUserInfo', icon: 'star', component: 'CustomerUserInfo' }
+            {
+                route: '/app/customer/CustomerUserInfo:id',
+                title: 'CustomerUserInfo',
+                icon: 'star',
+                component: 'CustomerUserInfo'
+            }
 
         ] // 非菜单相关路] // 非菜单相关路由
 }

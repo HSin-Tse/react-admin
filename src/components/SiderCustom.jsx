@@ -17,16 +17,12 @@ class SiderCustom extends Component {
         super(props);
 
         this.state = {
-            config: []
-            , visible: false
-            , gallery: null
-            , infor: localStorage.getItem('infor')
-
-        };
-
-
+            config: [],
+            visible: false,
+            gallery: null,
+            infor: JSON.parse(localStorage.getItem('infor')),
+        }
     }
-
     // componentWillMount() {
     //     console.log('hcia SiderCustom componentWillMount' )
     //     // this.setState({config: routesConfigadmin});
@@ -71,21 +67,70 @@ class SiderCustom extends Component {
         selectedKey: '',
         firstHide: false, // 点击收缩菜单，第一次隐藏展开子菜单，openMenu时恢复
     };
-
+    componentWillMount(){
+        console.log('hcia componentWillMount' )
+        this.setState({
+            displayName: localStorage.getItem('displayName'),
+            infor: JSON.parse(localStorage.getItem('infor'))
+        });
+    }
     componentDidMount() {
-        // this.setMenuOpen(this.props);
-        
-        console.log('hcia infor' , this.state.infor)
-        const state = SiderCustom.setMenuOpen(this.props);
-        this.setState(state);
 
-        if ('超级管理员' == localStorage.getItem('displayName')) {
-            this.setState({config: routes});
-        } else {
-            // this.setState({config: routesConfigadmin});
-            this.setState({config: routesConfigadmin});
-        }
-        this.setState({displayName: localStorage.getItem('displayName')});
+        this.setState({
+            infor: JSON.parse(localStorage.getItem('infor'))
+        });
+        console.log('hcia componentDidMount' )
+
+
+        const state = SiderCustom.setMenuOpen(this.props);
+        console.log('hcia state' , state)
+        // this.setState(state);
+
+        console.log('hcia infor' , this.state.infor)
+        console.log('hcia routes' , routes)
+
+        // if ('超级管理员' == localStorage.getItem('displayName')) {
+        //     this.setState({config: routes});
+        // } else {
+        //     this.setState({config: routes});
+        // }
+
+        ///===========///
+        var nowRouter = routes.menus.filter((key, index, array) => {
+            var back = false
+            this.state.infor.menuList.forEach(function (item, index, array) {
+
+
+                // console.log('hcia key.title' , key.title,item.name,(key.title==item.name))
+
+
+                if (key.title == item.name) {
+                    back = true
+                } else if (key.title == '歡迎') {
+                    back = true
+                }
+
+            });
+            // if (index % 2 !== 0) {
+            //     return false;
+            // }
+
+
+            return back;
+        });
+
+        console.log('hcia nowRouter', nowRouter)
+
+        var setrr = {...routes,menus:nowRouter}
+        // console.log('hcia routes', routes)
+        this.setState({config: setrr});
+
+
+        // if ('超级管理员' == localStorage.getItem('displayName')) {
+        // } else {
+        //     // this.setState({config: routesConfigadmin});
+        //     this.setState({config: setrr});
+        // }
 
     }
 

@@ -22,12 +22,8 @@ class Login extends React.Component {
         const {auth: nextAuth = {}, history} = this.props;
 
         var ssss = localStorage.getItem('too');
-        // console.log('hcia ssss', ssss);
+        // var ssss = localStorage.getItem('infor');
 
-        // console.log('hcia nextAuth', nextAuth)
-        if (nextAuth.data && nextAuth.data.uid) { // 判断是否登陆
-            localStorage.setItem('user', JSON.stringify(nextAuth.data));
-        }
         if (ssss) {
             history.push('/');
         } else {
@@ -63,12 +59,12 @@ class Login extends React.Component {
 
                         const {fetchData} = self.props;
                         fetchData({funcName: 'admin', stateName: 'auth'});
-                        localStorage.setItem('too', response.data.data.token);
+                        localStorage.setItem('infor', JSON.stringify(response.data.data));
                         localStorage.setItem('displayName', response.data.data.displayName);
                         localStorage.setItem('loginName', response.data.data.loginName);
+                        localStorage.setItem('too', response.data.data.token);
 
-                        self.props.setUSER(response.data.data)
-                        localStorage.setItem('infor', JSON.stringify(response.data.data));
+                        // self.props.setUSER(response.data.data)
 
 
                     }
@@ -106,7 +102,8 @@ class Login extends React.Component {
                             {getFieldDecorator('password', {
                                 rules: [{required: true, message: '请输入密码!'}],
                             })(
-                                <Input prefix={<Icon type="lock" style={{fontSize: 13}}/>} type="password"
+                                <Input prefix={<Icon type="lock" style={{fontSize: 13}}/>}
+                                       type="password"
                                        placeholder="-- 123456 --"/>
                             )}
                         </FormItem>
