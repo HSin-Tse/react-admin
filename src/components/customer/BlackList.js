@@ -239,7 +239,7 @@ export default class BlackList extends Component {
 
 
     changePageA = (page) => {
-        page=page-1
+        page = page - 1
         this.setState({
             currentA: page,
         }, () => {
@@ -247,7 +247,7 @@ export default class BlackList extends Component {
         })
     }
     changePageB = (page) => {
-        page=page-1
+        page = page - 1
 
         this.setState({
             currentb: page,
@@ -256,7 +256,7 @@ export default class BlackList extends Component {
         })
     }
     changePageC = (page) => {
-        page=page-1
+        page = page - 1
 
         this.setState({
             currentC: page,
@@ -381,7 +381,7 @@ export default class BlackList extends Component {
                 </div>
                 <BreadcrumbCustom first="用戶管理" second="黑名單"/>
 
-                <Card >
+                <Card>
 
                     <Tabs
                         onChange={this.callback}
@@ -406,6 +406,7 @@ export default class BlackList extends Component {
                                    scroll={{x: 1300}}
                                    loading={this.state.loadingA}
                                    pagination={{  // 分页
+                                       // showQuickJumper:true,
                                        total: this.state.totalpageA * this.state.pgsize,
                                        pageSize: this.state.pgsize,
                                        onChange: this.changePageA,

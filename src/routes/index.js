@@ -52,10 +52,9 @@ export default class CRouter extends Component {
             return back;
         });
 
-        console.log('hcia nowRouter', nowRouter)
-
+        // console.log('hcia nowRouter', nowRouter)
         // routes.menus = nowRouter
-        console.log('hcia routes', routes)
+        // console.log('hcia routes', routes)
         var setrr = {...routes,menus:nowRouter}
         // console.log('hcia routes', routes)
         this.setState({config: setrr});
