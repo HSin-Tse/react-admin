@@ -54,6 +54,16 @@ export default class PotentialUser extends Component {
     pageAColumns = () => {
         return [
             {
+                title: '序号',
+                dataIndex: 'phoneNumber',
+                key: 'phoneNumber',
+                width: 70,
+                fixed: 'left',
+                align: 'center',
+                render: (text, record, index) => (
+                    <span>{ this.state.currentA*this.state.pgsize +  index+1}</span>
+                ),
+            },{
                 title: '手机号',
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
@@ -751,7 +761,7 @@ export default class PotentialUser extends Component {
                             <Card title={'潜在用户信息表'}>
                                 <Table rowKey="id"
                                        bordered
-                                       rowSelection={rowSelection}
+                                       // rowSelection={rowSelection}
                                        columns={this.pageAColumns()}
                                        dataSource={this.state.bklistA}
                                        scroll={{x: 1500}}
@@ -770,7 +780,7 @@ export default class PotentialUser extends Component {
                             <Card title={'模拟用户信息表'}>
 
                                 <Table rowKey="id"
-                                       rowSelection={rowSelection}
+                                       // rowSelection={rowSelection}
                                        columns={this.pageBColumns()}
                                        dataSource={this.state.bklistB}
                                        scroll={{x: 1300}}
@@ -787,7 +797,7 @@ export default class PotentialUser extends Component {
                         <TabPane tab="意向用戶" key="3">
                             <Card title={'意向用户信息表'}>
                                 <Table rowKey="id"
-                                       rowSelection={rowSelection}
+                                       // rowSelection={rowSelection}
                                        columns={this.pageCColumns()}
                                        dataSource={this.state.bklistC}
                                        scroll={{x: 1300}}
