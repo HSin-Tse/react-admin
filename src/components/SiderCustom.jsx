@@ -96,35 +96,66 @@ class SiderCustom extends Component {
         // }
 
         ///===========///
-        var nowRouter = routes.menus.filter((key, index, array) => {
-            var back = false
-            this.state.infor.menuList.forEach(function (item, index, array) {
+        // var nowRouter = routes.menus.filter((key, index, array) => {
+        //     var back = false
+        //     this.state.infor.menuList.forEach(function (item, index, array) {
+        //
+        //
+        //         // console.log('hcia key.title' , key.title,item.name,(key.title==item.name))
+        //
+        //
+        //         if (key.title == item.name) {
+        //             back = true
+        //         } else if (key.title == '歡迎') {
+        //             back = true
+        //         }
+        //
+        //     });
+        //     // if (index % 2 !== 0) {
+        //     //     return false;
+        //     // }
+        //
+        //
+        //     return back;
+        // });
+        //
+        // // console.log('hcia nowRouter', nowRouter)
+        //
+        // var setrr = {...routes,menus:nowRouter}
+        // // console.log('hcia routes', routes)
+        // this.setState({config: setrr});
 
 
-                // console.log('hcia key.title' , key.title,item.name,(key.title==item.name))
+        if (this.state.infor!= null) {
+            var nowRouter = routes.menus.filter((key, index, array) => {
+                var back = false
+                this.state.infor.menuList.forEach(function (item, index, array) {
 
 
-                if (key.title == item.name) {
-                    back = true
-                } else if (key.title == '歡迎') {
-                    back = true
-                }
+                    // console.log('hcia key.title' , key.title,item.name,(key.title==item.name))
 
+                    if (key.title == item.name) {
+                        back = true
+                    } else if (key.title == '歡迎') {
+                        back = true
+                    }
+
+                });
+                // if (index % 2 !== 0) {
+                //     return false;
+                // }
+                return back;
             });
-            // if (index % 2 !== 0) {
-            //     return false;
-            // }
+            // console.log('hcia nowRouter', nowRouter)
+            // routes.menus = nowRouter
+            // console.log('hcia routes', routes)
+            var setrr = {...routes, menus: nowRouter}
+            // console.log('hcia routes', routes)
+            this.setState({config: setrr});
+        } else {
+            this.setState({config: routes});
 
-
-            return back;
-        });
-
-        // console.log('hcia nowRouter', nowRouter)
-
-        var setrr = {...routes,menus:nowRouter}
-        // console.log('hcia routes', routes)
-        this.setState({config: setrr});
-
+        }
 
         // if ('超级管理员' == localStorage.getItem('displayName')) {
         // } else {

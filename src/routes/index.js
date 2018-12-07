@@ -31,33 +31,38 @@ export default class CRouter extends Component {
     componentWillMount() {
         // console.log('hcia componentWillMount')
 
+        console.log('hcia this.state.infor', this.state.infor)
+        if (this.state.infor!= null) {
+            var nowRouter = routes.menus.filter((key, index, array) => {
+                var back = false
+                this.state.infor.menuList.forEach(function (item, index, array) {
 
-        var nowRouter = routes.menus.filter((key, index, array) => {
-            var back = false
-            this.state.infor.menuList.forEach(function (item, index, array) {
 
+                    // console.log('hcia key.title' , key.title,item.name,(key.title==item.name))
 
-                // console.log('hcia key.title' , key.title,item.name,(key.title==item.name))
+                    if (key.title == item.name) {
+                        back = true
+                    } else if (key.title == '歡迎') {
+                        back = true
+                    }
 
-                if (key.title == item.name) {
-                    back = true
-                } else if (key.title == '歡迎') {
-                    back = true
-                }
-
+                });
+                // if (index % 2 !== 0) {
+                //     return false;
+                // }
+                return back;
             });
-            // if (index % 2 !== 0) {
-            //     return false;
-            // }
-            return back;
-        });
+            // console.log('hcia nowRouter', nowRouter)
+            // routes.menus = nowRouter
+            // console.log('hcia routes', routes)
+            var setrr = {...routes, menus: nowRouter}
+            // console.log('hcia routes', routes)
+            this.setState({config: setrr});
+        } else {
+            this.setState({config: routes});
 
-        // console.log('hcia nowRouter', nowRouter)
-        // routes.menus = nowRouter
-        // console.log('hcia routes', routes)
-        var setrr = {...routes,menus:nowRouter}
-        // console.log('hcia routes', routes)
-        this.setState({config: setrr});
+        }
+
 
         // if ('超级管理员' == localStorage.getItem('displayName')) {
         //     this.setState({config: routes});

@@ -50,7 +50,7 @@ class Login extends React.Component {
             localStorage.removeItem('too')
 
             if (!err) {
-                axios.post('http://mobile.nooko.cn:8090/auth/login', {
+                window.Axios.post('auth/login', {
                     'loginName': values.userName,
                     'password': values.password,
                     'language': "zh-CN"
@@ -86,6 +86,7 @@ class Login extends React.Component {
 
 
                 }).catch(function (error) {
+                    console.log('hcia error' , error)
                     console.log(error);
                 });
 
