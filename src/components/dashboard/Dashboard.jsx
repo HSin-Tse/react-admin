@@ -8,7 +8,7 @@ import EchartsViews from './EchartsViews';
 import EchartsProjects from './EchartsProjects';
 import b1 from '../../style/imgs/b1.jpg';
 import {bindActionCreators} from "redux";
-import {addTodo,setINFOR} from "../../action";
+import {addTodo, setINFOR} from "../../action";
 import connect from "react-redux/es/connect/connect";
 
 
@@ -20,11 +20,13 @@ class Dashboard extends React.Component {
         // this.props.setUSER('a')
 
     }
+
     render() {
         return (
             <div className="gutter-example button-demo">
                 {/*{JSON.stringify(this.props.todps)}*/}
-                {JSON.stringify(this.props.infor)}
+                {/*{JSON.stringify(this.props.infor)}*/}
+                {JSON.stringify(localStorage.getItem('infor'))}
 
                 <BreadcrumbCustom/>
                 <Row gutter={10}>
@@ -174,7 +176,7 @@ class Dashboard extends React.Component {
 const mapStateToProps = state => {
     const todps = state.todos;
     const infor = state.infor;
-    return {todps,infor};
+    return {todps, infor};
 };
 const mapDispatchToProps = dispatch => ({
     addTodo: bindActionCreators(addTodo, dispatch),

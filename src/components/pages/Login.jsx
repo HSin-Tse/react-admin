@@ -8,6 +8,7 @@ import {bindActionCreators} from 'redux';
 import {fetchData, receiveData} from '@/action';
 import {message} from 'antd';
 import axios from "axios";
+import {addTodo, setINFOR} from "../../action";
 
 const FormItem = Form.Item;
 
@@ -35,7 +36,6 @@ class Login extends React.Component {
         }
 
 
-
     }
 
     handleSubmit = (e) => {
@@ -46,29 +46,14 @@ class Login extends React.Component {
         this.props.form.validateFields((err, values) => {
 
 
-            console.log('hcia err', err)
-
-            console.log('hcia', values.userName)
-            console.log('hcia', values.password)
             localStorage.removeItem('too')
 
             if (!err) {
                 axios.post('http://mobile.nooko.cn:8090/auth/login', {
                     'loginName': values.userName,
                     'password': values.password,
-                    // 'loginName': this.props.match.params.id,
-                    // 'token': this.props.match.params.id,
                     'language': "zh-CN"
                 }).then(function (response) {
-                    console.log('hcia', response.data.code);
-                    console.log('hcia response.data.data.token', response.data.data.token)
-                    // self.setState({
-                    //     recordData: response.data.data,
-                    // });
-
-
-                    console.log('hcia', response.data);
-                    // self.prop.history.push('/');
 
                     if ((response.data.code == 1) && response.data.data.token) {
                         // 判断是否登陆
@@ -82,14 +67,8 @@ class Login extends React.Component {
                         localStorage.setItem('displayName', response.data.data.displayName);
                         localStorage.setItem('loginName', response.data.data.loginName);
 
-                        // localStorage.setItem('user', JSON.stringify(nextAuth.data));
-                        // self.prop.history.push('/');
-
-
-                        //
-                        // if (values.userName === 'admin' && values.password === 'admin')
-                        // if (values.userName === 'guest' && values.password === 'guest')
-                        //     fetchData({funcName: 'guest', stateName: 'auth'});
+                        self.props.setUSER(response.data.data)
+                        localStorage.setItem('infor', JSON.stringify(response.data.data));
 
 
                     }
@@ -102,14 +81,11 @@ class Login extends React.Component {
 
             }
 
-
         });
 
 
     };
-    // gitHub = () => {
-    //     window.location.href = 'https://github.com/login/oauth/authorize?client_id=792cdcd244e98dcd2dee&redirect_uri=http://localhost:3006/&scope=user&state=reactAdmin';
-    // };
+
     render() {
         const {getFieldDecorator} = this.props.form;
         return (
@@ -157,12 +133,16 @@ class Login extends React.Component {
 
 const mapStateToPorps = state => {
     const {auth} = state.httpData;
-    return {auth};
+    const infor = state.infor;
+    return {auth, infor};
 };
 const mapDispatchToProps = dispatch => ({
     fetchData: bindActionCreators(fetchData, dispatch),
-    receiveData: bindActionCreators(receiveData, dispatch)
+    receiveData: bindActionCreators(receiveData, dispatch),
+    setUSER: bindActionCreators(setINFOR, dispatch),
+
 });
 
 
 export default connect(mapStateToPorps, mapDispatchToProps)(Form.create()(Login));
+

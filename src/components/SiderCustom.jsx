@@ -1,15 +1,15 @@
 /**
  * Created by hao.cheng on 2017/4/13.
  */
-import React, { Component } from 'react';
-import { Layout } from 'antd';
-import { withRouter } from 'react-router-dom';
+import React, {Component} from 'react';
+import {Layout} from 'antd';
+import {withRouter} from 'react-router-dom';
 import routes from '../routes/config';
 import routesConfigadmin from '../routes/configadmin';
 import SiderMenu from './SiderMenu';
 import avater from "../style/imgs/ixlogo.png";
 
-const { Sider } = Layout;
+const {Sider} = Layout;
 
 class SiderCustom extends Component {
 
@@ -20,8 +20,13 @@ class SiderCustom extends Component {
             config: []
             , visible: false
             , gallery: null
+            , infor: localStorage.getItem('infor')
+
         };
+
+
     }
+
     // componentWillMount() {
     //     console.log('hcia SiderCustom componentWillMount' )
     //     // this.setState({config: routesConfigadmin});
@@ -29,8 +34,7 @@ class SiderCustom extends Component {
     // }
 
 
-
-    static getDerivedStateFromProps (props, state) { 
+    static getDerivedStateFromProps(props, state) {
         if (props.collapsed !== state.collapsed) {
             const state1 = SiderCustom.setMenuOpen(props);
             const state2 = SiderCustom.onCollapse(props.collapsed);
@@ -43,8 +47,9 @@ class SiderCustom extends Component {
         }
         return null;
     }
+
     static setMenuOpen = props => {
-        const { pathname } = props.location;
+        const {pathname} = props.location;
         return {
             openKey: pathname.substr(0, pathname.lastIndexOf('/')),
             selectedKey: pathname
@@ -66,26 +71,30 @@ class SiderCustom extends Component {
         selectedKey: '',
         firstHide: false, // 点击收缩菜单，第一次隐藏展开子菜单，openMenu时恢复
     };
+
     componentDidMount() {
         // this.setMenuOpen(this.props);
+        
+        console.log('hcia infor' , this.state.infor)
         const state = SiderCustom.setMenuOpen(this.props);
         this.setState(state);
 
-        if( '超级管理员' == localStorage.getItem('displayName')){
+        if ('超级管理员' == localStorage.getItem('displayName')) {
             this.setState({config: routes});
-        }else{
+        } else {
             // this.setState({config: routesConfigadmin});
-            this.setState({config: routes});
+            this.setState({config: routesConfigadmin});
         }
         this.setState({displayName: localStorage.getItem('displayName')});
 
     }
+
     menuClick = e => {
         this.setState({
             selectedKey: e.key
         });
         console.log(this.state);
-        const { popoverHide } = this.props; // 响应式布局控制小屏幕点击菜单时隐藏菜单操作
+        const {popoverHide} = this.props; // 响应式布局控制小屏幕点击菜单时隐藏菜单操作
         popoverHide && popoverHide();
     };
     openMenu = v => {
@@ -103,12 +112,12 @@ class SiderCustom extends Component {
                 trigger={null}
                 breakpoint="lg"
                 collapsed={this.props.collapsed}
-                style={{ overflowY: 'auto' }}
+                style={{overflowY: 'auto'}}
             >
 
                 <div className="logo">
-                    <img  style={{height : 50,width:50}} src={avater} alt="头像" />
-                   CRM操作系统v1.0
+                    <img style={{height: 50, width: 50}} src={avater} alt="头像"/>
+                    CRM操作系统v1.0
 
                 </div>
                 <SiderMenu
