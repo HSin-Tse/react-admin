@@ -19,17 +19,22 @@ class Login extends React.Component {
     }
 
     componentDidUpdate(prevProps) { // React 16.3+弃用componentWillReceiveProps
-        const {auth: nextAuth = {}, history} = this.props;
+        // const {auth: nextAuth = {}, history} = this.props;
 
-        var ssss = localStorage.getItem('too');
         // var ssss = localStorage.getItem('infor');
-
-        if (ssss) {
-            history.push('/');
-        } else {
-            // message.error('等待跳轉~'+ssss )
-
-        }
+        // if (nextAuth.data && nextAuth.data.uid) { // 判断是否登陆
+        //     localStorage.setItem('user', JSON.stringify(nextAuth.data));
+        // }
+        // console.log('hcia ssss' , ssss)
+        // var ssss = localStorage.getItem('too');
+        //
+        // if (ssss) {
+        //     console.log('hcia ssss' , ssss)
+        //     history.push('/app/dashboard/index');
+        // } else {
+        //     // message.error('等待跳轉~'+ssss )
+        //
+        // }
 
 
     }
@@ -57,13 +62,23 @@ class Login extends React.Component {
                         // message.success(response.data.data.token)
 
 
-                        const {fetchData} = self.props;
-                        fetchData({funcName: 'admin', stateName: 'auth'});
+                        // const {fetchData} = self.props;
+                        // fetchData({funcName: 'admin', stateName: 'auth'});
                         localStorage.setItem('infor', JSON.stringify(response.data.data));
                         localStorage.setItem('displayName', response.data.data.displayName);
                         localStorage.setItem('loginName', response.data.data.loginName);
                         localStorage.setItem('too', response.data.data.token);
 
+
+                        var ssss = localStorage.getItem('too');
+
+                        if (ssss) {
+                            console.log('hcia ssss' , ssss)
+                            self.props.history.push('/app/dashboard/index');
+                        } else {
+                            // message.error('等待跳轉~'+ssss )
+
+                        }
                         // self.props.setUSER(response.data.data)
 
 
