@@ -137,7 +137,7 @@ class SiderCustom extends Component {
                     if (key.title == item.name) {
                         back = true
                     } else if (key.title == '歡迎') {
-                        key.title='歡迎 '+localStorage.getItem('displayName')
+                        key.title='歡迎-'+localStorage.getItem('displayName')
                         back = true
                     }
 
