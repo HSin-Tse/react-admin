@@ -61,9 +61,9 @@ export default class PotentialUser extends Component {
                 fixed: 'left',
                 align: 'center',
                 render: (text, record, index) => (
-                    <span>{ this.state.currentA*this.state.pgsize +  index+1}</span>
+                    <span>{this.state.currentA * this.state.pgsize + index + 1}</span>
                 ),
-            },{
+            }, {
                 title: '手机号',
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
@@ -139,8 +139,7 @@ export default class PotentialUser extends Component {
                 render: (text, record) => (
                     <span>{record.comment}</span>),
             }, {
-                width: 120,
-
+                width: 130,
                 title: '操作人',
                 dataIndex: '操作人',
                 key: '操作人',
@@ -203,6 +202,8 @@ export default class PotentialUser extends Component {
                 <span>{record.comment}</span>),
         }, {
             title: '操作人',
+            width: 130,
+
             dataIndex: 'bkUserName',
             key: 'operationDiary_User',
             render: (text, record) => (
@@ -264,6 +265,8 @@ export default class PotentialUser extends Component {
                 render: (text, record) => (<span>{'ssssss'}</span>),
             }, {
                 title: '操作人',
+                width: 130,
+
                 dataIndex: '操作人',
                 key: '操作人',
                 render: (text, record) => (<span>{record.operator}</span>),
@@ -275,7 +278,7 @@ export default class PotentialUser extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button className="ant-dropdown-link" onClick={() => this.delay(record)}>延期</Button>
+                        <Button className="ant-dropdown-link" onClick={() => this.handleDelay(record)}>延期</Button>
                         <Button className="ant-dropdown-link" onClick={() => this.showModal(record)}>添加備註</Button>
                         <Button className="ant-dropdown-link"
                                 onClick={() => this.showModal2(record.belongUserId)}>操作日誌</Button>
@@ -283,7 +286,7 @@ export default class PotentialUser extends Component {
                 ),
             }];
     }
-    delay = (record) => {
+    handleDelay = (record) => {
         let belongUserId = record.belongUserId
         let accountNo = record.accountNo
         console.log('yyx', record);
@@ -292,8 +295,7 @@ export default class PotentialUser extends Component {
             "accountNo": accountNo,
             "belongUserId": belongUserId,
         }).then((response) => {
-
-            yyx.checkResponseCode(response)
+            message.success('操作成功')
         }).catch(function (error) {
             console.log(error);
         });
@@ -761,7 +763,7 @@ export default class PotentialUser extends Component {
                             <Card title={'潜在用户信息表'}>
                                 <Table rowKey="id"
                                        bordered
-                                       // rowSelection={rowSelection}
+                                    // rowSelection={rowSelection}
                                        columns={this.pageAColumns()}
                                        dataSource={this.state.bklistA}
                                        scroll={{x: 1500}}
@@ -780,7 +782,7 @@ export default class PotentialUser extends Component {
                             <Card title={'模拟用户信息表'}>
 
                                 <Table rowKey="id"
-                                       // rowSelection={rowSelection}
+                                    // rowSelection={rowSelection}
                                        columns={this.pageBColumns()}
                                        dataSource={this.state.bklistB}
                                        scroll={{x: 1300}}
@@ -797,7 +799,7 @@ export default class PotentialUser extends Component {
                         <TabPane tab="意向用戶" key="3">
                             <Card title={'意向用户信息表'}>
                                 <Table rowKey="id"
-                                       // rowSelection={rowSelection}
+                                    // rowSelection={rowSelection}
                                        columns={this.pageCColumns()}
                                        dataSource={this.state.bklistC}
                                        scroll={{x: 1300}}
