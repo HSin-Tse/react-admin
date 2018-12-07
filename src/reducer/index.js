@@ -48,7 +48,19 @@ const todos = (state = [{"id": -1, "text": "a", "completed": false}], action) =>
 }
 
 
+const infor = (state = {}, action) => {
+    switch (action.type) {
+        case type.SET_INFOR:
+            return action.user
+
+        default:
+            return state
+    }
+}
+
+
 export default combineReducers({
-    httpData
-    , todos
+    httpData,
+    todos,
+    infor,
 });

@@ -6,8 +6,13 @@ import * as type from './type';
 import * as http from '../axios/index';
 let nextTodoId = 0
 
+export const setINFOR = user => ({
+    type: type.SET_INFOR,
+    user
+})
+
 export const addTodo = text => ({
-    type: 'ADD_TODO',
+    type: type.ADD_TODO,
     id: nextTodoId++,
     text
 })
@@ -23,11 +28,13 @@ export const receiveData = (data, category) => ({
     data,
     category
 });
+
 /**
  * 请求数据调用方法
  * @param funcName      请求接口的函数名
  * @param params        请求接口的参数
  */
+
 export const fetchData = ({funcName, params, stateName}) => dispatch => {
     !stateName && (stateName = funcName);
     dispatch(requestData(stateName));

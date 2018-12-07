@@ -4,9 +4,7 @@
 import React, {Component} from 'react';
 import {message, Input, Button, Card, Table, Select, Modal, Popconfirm, Row, Col} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
-import beauty from '@/style/imgs/beauty.jpg';
 import {bindActionCreators} from "redux";
-import {receiveData} from "../../action";
 import {addTodo} from "../../action";
 import connect from "react-redux/es/connect/connect";
 

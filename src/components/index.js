@@ -10,7 +10,7 @@ import AdvancedTable from './tables/AdvancedTables';
 import AsynchronousTable from './tables/AsynchronousTable';
 import Echarts from './charts/Echarts';
 import Recharts from './charts/Recharts';
-import Icons from './ui/Icons';
+// import Icons from './ui/Icons';
 import Buttons from './ui/Buttons';
 import Spins from './ui/Spins';
 import Modals from './ui/Modals';
@@ -49,7 +49,7 @@ const WysiwygBundle = Loadable({ // 按需加载富文本配置
 
 export default {
     BasicForm, BasicTable, AdvancedTable, AsynchronousTable,
-    Echarts, Recharts, Icons, Buttons, Spins, Modals, Notifications,
+    Echarts, Recharts, Buttons, Spins, Modals, Notifications,
     Tabs, Banners, Drags,PassOpen,PassLever, Dashboard, Gallery, BasicAnimations,BlackList,WhiteList,
     ExampleAnimations, AuthBasic, RouterEnter, WysiwygBundle,PassOpenD,PotentialUser,SimulatorUser,IntendingUser,CustomerSummary
     ,CustomerUserInfo,TradeAccount,TradeDepart
