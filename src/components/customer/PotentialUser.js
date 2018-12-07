@@ -184,19 +184,19 @@ export default class PotentialUser extends Component {
             dataIndex: 'createDate',
             key: 'operationDiary_Date',
             render: (text, record) => (
-                <Button>{record.createDate}</Button>),
+                <span>{record.createDate}</span>),
         }, {
             title: '狀態',
             dataIndex: 'comment',
             key: 'operationDiary_Status',
             render: (text, record) => (
-                <Button>{record.comment}</Button>),
+                <span>{record.comment}</span>),
         }, {
             title: '操作人',
             dataIndex: 'bkUserName',
             key: 'operationDiary_User',
             render: (text, record) => (
-                <Button>{record.bkUserName}</Button>),
+                <span>{record.bkUserName}</span>),
         }]
     }
     pageBColumns = () => {
@@ -209,9 +209,7 @@ export default class PotentialUser extends Component {
                 fixed: 'left',
                 align: 'center',
                 render: (text, record) => (
-
                     <span>{record.mobile}</span>
-
                 ),
             }, {
                 title: '模拟账号',
@@ -485,16 +483,11 @@ export default class PotentialUser extends Component {
 
     };
     requestUserCommentList = (record) => {
-        const url = 'http://mobile.nooko.cn:8090/auth/getUserCommentList'
-
         var self = this;
-
-        window.Axios.post(url, {
-            'belongUserId': record,
-
+        window.Axios.post('/auth/getUserCommentList', {
+            belongUserId: record,
             pageNo: this.state.currentComment,
-            'pageSize': this.state.pgsize,
-
+            pageSize: this.state.pgsize,
 
         }).then(function (response) {
 
@@ -830,15 +823,16 @@ export default class PotentialUser extends Component {
                 <Modal
                     title="操作日誌"
                     visible={this.state.modal2Visible}
-                    onOk={this.handleOk}
+                    // onOk={this.handleOk}
                     onCancel={this.handleCancel}
-                    okText="確認"
-                    cancelText="取消"
+                    // okText="確認"
+                    width={600}
+                    // cancelText="取消"
+                    footer={null}
                 >
                     <p>
                         <Table rowKey="id"
                                columns={this.modalColums()} dataSource={this.state.operationDiaryHistory}
-                               scroll={{x: 1300}}
                                loading={this.state.loadingComment}
                                pagination={{  // 分页
                                    total: this.state.totalpageComments * this.state.pgsize,
