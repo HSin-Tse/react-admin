@@ -85,13 +85,13 @@ class Basic extends Component {
                 dataIndex: '账号类型',
                 key: '账号类型',
                 render: (text, record) => (
-                    <span>{record.accountType}</span>),
+                    <span>{record.displayApplyType}</span>),
             }, {
                 title: '申请时间',
                 dataIndex: '申请时间',
                 key: '申请时间',
                 render: (text, record) => (
-                    <span>{this.timestampToTime(record.updateDate)}</span>),
+                    <span>{record.date}</span>),
             }, {
                 title: '审核状态',
                 dataIndex: '审核状态',

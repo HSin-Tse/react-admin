@@ -125,9 +125,7 @@ export default class CustomerSummary extends Component {
 
         window.Axios.post('ixuser/getUserList', {
             pageNo: this.state.current,
-            'loginName': 'admin',
             'listType': 4,//1: 2: 3:,4:分頁查詢用戶總表
-            'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmVUaW1lIjoxNTQ1NTI4ODM0MTk5LCJsb2dpbk5hbWUiOiJhZG1pbiJ9.F7moE4DsMUiajkKB1S_wemwsozlUW5VMxQKsg4KsSUQ'
         }).then((response) => {
             self.setState({
                 totalpageA: response.data.data.totalPage,
@@ -163,8 +161,6 @@ export default class CustomerSummary extends Component {
 
         window.Axios.post(url, {
             'belongUserId': '4028b2a4631f770f01631f7770df0000',
-            'loginName': 'admin',
-            'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmVUaW1lIjoxNTQ1NTI4ODM0MTk5LCJsb2dpbk5hbWUiOiJhZG1pbiJ9.F7moE4DsMUiajkKB1S_wemwsozlUW5VMxQKsg4KsSUQ'
 
         }).then(function (response) {
 
