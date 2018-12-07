@@ -28,10 +28,7 @@ class Login extends React.Component {
             localStorage.setItem('user', JSON.stringify(nextAuth.data));
         }
         if (ssss) {
-            message.info('ok go  等待跳轉~')
             history.push('/');
-
-
         } else {
             // message.error('等待跳轉~'+ssss )
 
