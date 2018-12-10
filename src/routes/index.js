@@ -5,9 +5,6 @@ import React, {Component} from 'react';
 import {Route, Redirect, Switch} from 'react-router-dom';
 import AllComponents from '../components';
 import routes from './config';
-import routesConfigadmin from "./configadmin";
-// import routesConfigadmin from './configadmin';
-//
 export default class CRouter extends Component {
 
 
@@ -29,23 +26,24 @@ export default class CRouter extends Component {
     }
 
     componentWillMount() {
-        // console.log('hcia componentWillMount')
+        console.log('hcia componentWillMount')
 
         // console.log('hcia this.state.infor', this.state.infor)
         if (this.state.infor.menuList.length == 0) {
+            console.log('hcia','aaaaa')
+
             this.setState({config: routes});
 
         } else if (this.state.infor != null) {
+            console.log('hcia','bbbbb')
 
 
-            console.log('hcia this.state.infor', this.state.infor)
 
             var nowRouter = routes.menus.filter((key, index, array) => {
                 var back = false
                 this.state.infor.menuList.forEach(function (item, index, array) {
 
 
-                    // console.log('hcia key.title' , key.title,item.name,(key.title==item.name))
 
                     if (key.title == item.name) {
                         back = true
@@ -54,21 +52,20 @@ export default class CRouter extends Component {
                     }
 
                 });
-                // if (index % 2 !== 0) {
-                //     return false;
-                // }
                 return back;
             });
-            // console.log('hcia nowRouter', nowRouter)
             // routes.menus = nowRouter
-            // console.log('hcia routes', routes)
             var setrr = {...routes, menus: nowRouter}
-            // console.log('hcia routes', routes)
-            this.setState({config: setrr});
+            this.setState({config: routes});
+
         } else {
+            console.log('hcia','cccc')
+
             this.setState({config: routes});
 
         }
+
+
 
 
         // if ('超级管理员' == localStorage.getItem('displayName')) {
@@ -81,22 +78,26 @@ export default class CRouter extends Component {
     }
 
 
-    requireAuth = (permission, component) => {
-        const {auth} = this.props;
-        const {permissions} = auth.data;
-        console.log('hcia permissions', permissions)
-        // const { auth } = store.getState().httpData;
-        // if (!permissions || !permissions.includes(permission)) return <Redirect to={'404'} />;
-        return component;
-    };
+    // requireAuth = (permission, component) => {
+    //     const {auth} = this.props;
+    //     const {permissions} = auth.data;
+    //     console.log('hcia permissions', permissions)
+    //     // const { auth } = store.getState().httpData;
+    //     // if (!permissions || !permissions.includes(permission)) return <Redirect to={'404'} />;
+    //     return component;
+    // };
     requireLogin = (component) => {
         // const { auth } = this.props;
         // const { permissions } = auth.data;
 
 
         if (!localStorage.getItem('too')) { // 线上环境判断是否登录
+            
+            console.log('hcia localStorage.getItem too' , localStorage.getItem('too'))
             return <Redirect to={'/login'}/>;
         } else {
+            console.log('hcia component' , component)
+            
             return component
         }
         // return permission ? this.requireAuth(permission, component) : component;
