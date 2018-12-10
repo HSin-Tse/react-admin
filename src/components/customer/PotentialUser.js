@@ -51,6 +51,51 @@ export default class PotentialUser extends Component {
         this.requestPageC()
     }
 
+
+    showModal2 = (belongUserId) => {
+        this.requestUserCommentList(belongUserId)
+        this.setState({
+            // theComment: comment
+            modal2Visible: true,
+            visible: false,
+
+        });
+    }
+    showModal = (record) => {
+        let belongUserId = record.belongUserId
+        this.setState({
+            theBelongUserId: belongUserId,
+            visible: true,
+            modal2Visible: false,
+            theComment: record.comment,
+        });
+
+    }
+
+
+    modalColums = () => {
+        return [{
+            title: '時間',
+            dataIndex: 'createDate',
+            key: 'operationDiary_Date',
+            render: (text, record) => (
+                <span>{record.createDate}</span>),
+        }, {
+            title: '狀態',
+            dataIndex: 'comment',
+            key: 'operationDiary_Status',
+            render: (text, record) => (
+                <span>{record.comment}</span>),
+        }, {
+            title: '操作人',
+            width: 130,
+
+            dataIndex: 'bkUserName',
+            key: 'operationDiary_User',
+            render: (text, record) => (
+                <span>{record.bkUserName}</span>),
+        }]
+    }
     pageAColumns = () => {
         return [
             {
@@ -163,52 +208,6 @@ export default class PotentialUser extends Component {
                     </div>
                 ),
             }];
-
-
-    }
-    showModal2 = (belongUserId) => {
-        this.requestUserCommentList(belongUserId)
-        this.setState({
-            // theComment: comment
-            modal2Visible: true,
-            visible: false,
-
-        });
-    }
-    showModal = (record) => {
-        let belongUserId = record.belongUserId
-        this.setState({
-            theBelongUserId: belongUserId,
-            visible: true,
-            modal2Visible: false,
-            theComment: record.comment,
-        });
-
-    }
-
-
-    modalColums = () => {
-        return [{
-            title: '時間',
-            dataIndex: 'createDate',
-            key: 'operationDiary_Date',
-            render: (text, record) => (
-                <span>{record.createDate}</span>),
-        }, {
-            title: '狀態',
-            dataIndex: 'comment',
-            key: 'operationDiary_Status',
-            render: (text, record) => (
-                <span>{record.comment}</span>),
-        }, {
-            title: '操作人',
-            width: 130,
-
-            dataIndex: 'bkUserName',
-            key: 'operationDiary_User',
-            render: (text, record) => (
-                <span>{record.bkUserName}</span>),
-        }]
     }
     pageBColumns = () => {
         return this.columns = [
@@ -246,14 +245,14 @@ export default class PotentialUser extends Component {
                 render: (text, record) => (<span>{record.remainDay}</span>),
             }, {
                 title: '模拟账户状态',
-                width: 120,
+                width: 150,
 
                 dataIndex: '模拟账户状态',
                 key: '模拟账户状态',
                 render: (text, record) => (<span>{record.expireStatus}</span>),
             }, {
                 title: '延期次数',
-                width: 120,
+                width: 100,
 
                 dataIndex: '延期次数',
                 key: '延期次数',
@@ -302,6 +301,114 @@ export default class PotentialUser extends Component {
                 ),
             }];
     }
+
+
+    pageCColumns = () => {
+        return this.columns = [
+            {
+                title: '手机号',
+                dataIndex: 'phoneNumber',
+                key: 'phoneNumber',
+                width: 160,
+                fixed: 'left',
+                align: 'center',
+                render: (text, record) => (
+
+                    <span>{record.mobile}</span>
+
+                ),
+            }, {
+                title: '姓名',
+                dataIndex: 'name',
+                key: 'name',
+                width: 120,
+
+                align: 'center',
+                render: (text, record) => (
+                    <span>{record.name}</span>),
+            }, {
+                title: '当前账户',
+                dataIndex: '当前账户',
+                key: '当前账户',
+                width: 120,
+
+                align: 'center',
+                render: (text, record) => (<span>{record.accountType}</span>),
+            }, {
+                title: '模拟帐号',
+                dataIndex: '模拟帐号',
+                key: '模拟帐号',
+                width: 120,
+
+                align: 'center',
+                render: (text, record) => (<span>{record.accountNo}</span>),
+            }, {
+                title: '录入信息时间',
+                dataIndex: '录入信息时间',
+                width: 160,
+
+                key: '录入信息时间',
+                align: 'center',
+                render: (text, record) => (<span>{record.date}</span>),
+            }, {
+                title: '活跃度',
+                dataIndex: '活跃度',
+                key: '活跃度',
+                width: 110,
+
+                align: 'center',
+                render: (text, record) => (<span>{record.activeFlag}</span>),
+            }, {
+                title: '回访状态',
+                dataIndex: '回访状态',
+                key: '回访状态',
+                width: 120,
+
+                align: 'center',
+                render: (text, record) => (<span>{record.feebackStatus}</span>),
+            }, {
+                title: '备注',
+                dataIndex: '备注',
+                key: '备注',
+                width: 160,
+
+                align: 'center',
+                render: (text, record) => (
+                    <span>{record.comment}</span>),
+            }, {
+                title: '操作人',
+                dataIndex: '操作人',
+                key: '操作人',
+                width: 120,
+
+                align: 'center',
+                render: (text, record) => (
+                    <span>{record.operator}</span>),
+            }, {
+                title: '查看',
+                dataIndex: '查看',
+                key: '查看',
+                fixed: 'right',
+                width: 120,
+
+                align: 'center',
+                render: (text, record) => (
+                    <span><Button className="ant-dropdown-link">查看信息</Button></span>),
+            }, {
+                title: '操作',
+                key: 'action',
+                fixed: 'right',
+                width: 250,
+                align: 'center',
+                render: (text, record) => (
+                    <div>
+                        <Button className="ant-dropdown-link" onClick={() => this.showModal(record)}>添加備註</Button>
+                        <Button className="ant-dropdown-link"
+                                onClick={() => this.showModal2(record.belongUserId)}>操作日誌</Button>
+                    </div>
+                ),
+            }];
+    }
     handleDelay = (record) => {
         let belongUserId = record.belongUserId
         let accountNo = record.accountNo
@@ -327,93 +434,6 @@ export default class PotentialUser extends Component {
             console.log(error);
         });
 
-    }
-    pageCColumns = () => {
-        return this.columns = [
-            {
-                title: '手机号',
-                dataIndex: 'phoneNumber',
-                key: 'phoneNumber',
-                width: 200,
-                fixed: 'left',
-                align: 'center',
-                render: (text, record) => (
-
-                    <span>{record.mobile}</span>
-
-                ),
-            }, {
-                title: '姓名',
-                dataIndex: 'name',
-                key: 'name',
-                align: 'center',
-                render: (text, record) => (
-                    <span>{record.name}</span>),
-            }, {
-                title: '当前账户',
-                dataIndex: '当前账户',
-                key: '当前账户',
-                align: 'center',
-                render: (text, record) => (<span>{record.accountType}</span>),
-            }, {
-                title: '模拟帐号',
-                dataIndex: '模拟帐号',
-                key: '模拟帐号',
-                align: 'center',
-                render: (text, record) => (<span>{record.accountNo}</span>),
-            }, {
-                title: '录入信息时间',
-                dataIndex: '录入信息时间',
-                key: '录入信息时间',
-                align: 'center',
-                render: (text, record) => (<span>{record.date}</span>),
-            }, {
-                title: '活跃度',
-                dataIndex: '活跃度',
-                key: '活跃度',
-                align: 'center',
-                render: (text, record) => (<span>{record.activeFlag}</span>),
-            }, {
-                title: '回访状态',
-                dataIndex: '回访状态',
-                key: '回访状态',
-                align: 'center',
-                render: (text, record) => (<span>{record.feebackStatus}</span>),
-            }, {
-                title: '备注',
-                dataIndex: '备注',
-                key: '备注',
-                align: 'center',
-                render: (text, record) => (
-                    <span>{record.comment}</span>),
-            }, {
-                title: '操作人',
-                dataIndex: '操作人',
-                key: '操作人',
-                align: 'center',
-                render: (text, record) => (
-                    <span>{record.operator}</span>),
-            }, {
-                title: '查看',
-                dataIndex: '查看',
-                key: '查看',
-                align: 'center',
-                render: (text, record) => (
-                    <span><Button className="ant-dropdown-link">查看信息</Button></span>),
-            }, {
-                title: '操作',
-                key: 'action',
-                fixed: 'right',
-                width: 250,
-                align: 'center',
-                render: (text, record) => (
-                    <div>
-                        <Button className="ant-dropdown-link" onClick={() => this.showModal(record)}>添加備註</Button>
-                        <Button className="ant-dropdown-link"
-                                onClick={() => this.showModal2(record.belongUserId)}>操作日誌</Button>
-                    </div>
-                ),
-            }];
     }
 
     handleOk = (e) => {
@@ -811,7 +831,7 @@ export default class PotentialUser extends Component {
                                     // rowSelection={rowSelection}
                                        columns={this.pageBColumns()}
                                        dataSource={this.state.bklistB}
-                                       scroll={{x: 1300}}
+                                       scroll={{x: 1500}}
                                        loading={this.state.loading}
                                        pagination={{  // 分页
                                            total: this.state.totalpageB * this.state.pgsize,
@@ -828,7 +848,7 @@ export default class PotentialUser extends Component {
                                     // rowSelection={rowSelection}
                                        columns={this.pageCColumns()}
                                        dataSource={this.state.bklistC}
-                                       scroll={{x: 1300}}
+                                       scroll={{x: 1500}}
                                        loading={this.state.loading}
                                        pagination={{  // 分页
                                            total: this.state.totalpageC * this.state.pgsize,
