@@ -10,7 +10,6 @@ import AdvancedTable from './tables/AdvancedTables';
 import AsynchronousTable from './tables/AsynchronousTable';
 import Echarts from './charts/Echarts';
 import Recharts from './charts/Recharts';
-// import Icons from './ui/Icons';
 import Buttons from './ui/Buttons';
 import Spins from './ui/Spins';
 import Modals from './ui/Modals';
@@ -20,11 +19,11 @@ import Drags from './ui/Draggable';
 import Dashboard from './dashboard/Dashboard';
 import Gallery from './ui/Gallery';
 import BasicAnimations from './animation/BasicAnimations';
-import ExampleAnimations from './animation/ExampleAnimations';
 import AuthBasic from './auth/Basic';
 import RouterEnter from './auth/RouterEnter';
 import PassOpen from './pass/Open';
 import PassOpenD from './pass/OpenD';
+import PassOpenS from './pass/OpenS';
 import PassLever from './pass/Lever';
 
 import SimulatorUser from './customer/SimulatorUser';
@@ -37,9 +36,6 @@ import CustomerUserInfo from './customer/CustomerUserInfo'
 import TradeAccount from './trade/Account'
 import TradeDepart from './trade/Depart'
 
-//CustomerUserInfo
-import Cssmodule from './cssmodule';
-import MapUi from './ui/map';
 
 const WysiwygBundle = Loadable({ // 按需加载富文本配置
     loader: () => import('./ui/Wysiwyg'),
@@ -47,9 +43,35 @@ const WysiwygBundle = Loadable({ // 按需加载富文本配置
 });
 
 export default {
-    BasicForm, BasicTable, AdvancedTable, AsynchronousTable,
-    Echarts, Recharts, Buttons, Spins, Modals, Notifications,
-     Banners, Drags,PassOpen,PassLever, Dashboard, Gallery, BasicAnimations,BlackList,WhiteList,
-    ExampleAnimations, AuthBasic, RouterEnter, WysiwygBundle,PassOpenD,PotentialUser,SimulatorUser,IntendingUser,CustomerSummary
-    ,CustomerUserInfo,TradeAccount,TradeDepart
+    BasicForm,
+    BasicTable,
+    AdvancedTable,
+    AsynchronousTable,
+    Echarts,
+    Recharts,
+    Buttons,
+    Spins,
+    Modals,
+    Notifications,
+    Banners,
+    Drags,
+    PassOpen,
+    PassLever,
+    Dashboard,
+    Gallery,
+    BasicAnimations,
+    BlackList,
+    WhiteList,
+    AuthBasic,
+    RouterEnter,
+    WysiwygBundle,
+    PassOpenD,
+    PassOpenS,
+    PotentialUser,
+    SimulatorUser,
+    IntendingUser,
+    CustomerSummary,
+    CustomerUserInfo,
+    TradeAccount,
+    TradeDepart
 }

@@ -15,9 +15,7 @@ import PhotoswipeUIDefault from "photoswipe/dist/photoswipe-ui-default";
 import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
 import moment from 'moment';
-import axios from "axios";
 
-const Search = Input.Search;
 const {TextArea} = Input;
 const RadioGroup = Radio.Group;
 const Option = Select.Option;
@@ -28,9 +26,6 @@ const tradeType = [
     {label: 'CFD_3', value: 'CFD_3'},
 ];
 const dateFormat = 'YYYY-MM-DD';
-var aaxios = axios.create({
-    baseURL: 'http://mobile.nooko.cn:8090/'
-});
 
 class PassOpenD extends Component {
 
@@ -76,7 +71,10 @@ class PassOpenD extends Component {
     }
 
     componentDidMount() {
+
+
         var self = this;
+        console.log('hcia me.props.history', self.props.history)
 
         window.Axios.post('dict/leverageList', {
             'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
@@ -106,8 +104,7 @@ class PassOpenD extends Component {
             'id': self.props.match.params.id,
         }).then(function (response) {
 
-            if(!response.data.data.state){
-
+            if (!response.data.data.state) {
                 return
             }
 
@@ -127,9 +124,6 @@ class PassOpenD extends Component {
                 changeNoteV: response.data.data.comment,
                 checkfromdbName: response.data.data.phoneNumber,
             }, () => {
-
-
-
                 window.Axios.post('dict/openDict', {
                     'keys': 'div_type',
                     'division': 'province',
@@ -184,150 +178,7 @@ class PassOpenD extends Component {
         this.mIXTradingExperience = this.state.IXTradingExperience.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXTradingObjectives = this.state.IXTradingObjectives.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXRisk_Tolerance = this.state.IXRisk_Tolerance.map(d => <Option key={d.name}>{d.name}</Option>);
-        const uploadProps1 = {
-            action: 'open/leadDetailAttachs',
-            multiple: false,
-            data: {'id': this.state.recordData.id, 'key': 'idcard_1'},
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-            onStart(file) {
-                console.log('onStart', file, file.name);
-            },
-            onSuccess(ret, file) {
-                console.log('onSuccess', ret, file.name);
-            },
-            onError(err) {
-                console.log('onError', err);
-            },
-            onProgress({percent}, file) {
-                console.log('onProgress', `${percent}%`, file.name);
-            },
-            customRequest({
-                              data,
-                              file,
-                          }) {
 
-                const formData = new FormData();
-                if (data) {
-                    Object.keys(data).map(key => {
-                        formData.append(key, data[key]);
-                    });
-                }
-                formData.append('file', file);
-                formData.append('loginName', localStorage.getItem('loginName'))
-                formData.append('token', localStorage.getItem('too'))
-
-                aaxios.post('open/leadDetailAttachs', formData, {})
-                    .then(function (response) {
-                        console.log('hcia response', response.data.data)
-                        self.setState({
-                            recordData : {...self.state.recordData,idcard_1:response.data.data}
-                        })
-                    })
-                    .catch(error => {
-                        console.log('hcia error', error)
-                    });
-
-
-            },
-        };
-        const uploadProps0 = {
-            action: 'open/leadDetailAttachs',
-            multiple: false,
-            data: {'id': this.state.recordData.id, 'key': 'idcard_0'},
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-            onStart(file) {
-                console.log('onStart', file, file.name);
-            },
-            onSuccess(ret, file) {
-                console.log('onSuccess', ret, file.name);
-            },
-            onError(err) {
-                console.log('onError', err);
-            },
-            onProgress({percent}, file) {
-                console.log('onProgress', `${percent}%`, file.name);
-            },
-            customRequest({
-                              data,
-                              file,
-                          }) {
-
-                const formData = new FormData();
-                if (data) {
-                    Object.keys(data).map(key => {
-                        formData.append(key, data[key]);
-                    });
-                }
-                formData.append('file', file);
-                formData.append('loginName', localStorage.getItem('loginName'))
-                formData.append('token', localStorage.getItem('too'))
-
-                aaxios.post('open/leadDetailAttachs', formData, {})
-                    .then(function (response) {
-                        console.log('hcia response', response.data.data)
-                        self.setState({
-                            recordData : {...self.state.recordData,idcard_0:response.data.data}
-                        })
-                    })
-                    .catch(error => {
-                        console.log('hcia error', error)
-                    });
-
-
-            },
-        };
-        const uploadProps = {
-            action: 'open/leadDetailAttachs',
-            multiple: false,
-            data: {'id': this.state.recordData.id, 'key': 'idcard_2'},
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-            onStart(file) {
-                console.log('onStart', file, file.name);
-            },
-            onSuccess(ret, file) {
-                console.log('onSuccess', ret, file.name);
-            },
-            onError(err) {
-                console.log('onError', err);
-            },
-            onProgress({percent}, file) {
-                console.log('onProgress', `${percent}%`, file.name);
-            },
-            customRequest({
-                              data,
-                              file,
-                          }) {
-
-                const formData = new FormData();
-                if (data) {
-                    Object.keys(data).map(key => {
-                        formData.append(key, data[key]);
-                    });
-                }
-                formData.append('file', file);
-                formData.append('loginName', localStorage.getItem('loginName'))
-                formData.append('token', localStorage.getItem('too'))
-
-                aaxios.post('open/leadDetailAttachs', formData, {})
-                    .then(function (response) {
-                        console.log('hcia response', response.data.data)
-                        self.setState({
-                            recordData : {...self.state.recordData,idcard_2:response.data.data}
-                        })
-                    })
-                    .catch(error => {
-                        console.log('hcia error', error)
-                    });
-
-
-            },
-        };
 
         return (
             <div id="openD">
@@ -648,12 +499,8 @@ class PassOpenD extends Component {
                                           <a href={this.state.recordData.idcard_0}
                                              target="_blank"
                                              rel="noopener noreferrer">身份证反面照片</a>
-                                      </h3>,
-                                      <Upload  {...uploadProps0} >
-                                          <h3 className="pa-m">
-                                              点击上传可修改照片<Icon type="upload"/>
-                                          </h3>
-                                      </Upload>]}>
+                                      </h3>]
+                                  }>
                                 <img
                                     onClick={() => this.openGallery(this.state.recordData.idcard_0)}
                                     alt="example" width="100%"
@@ -667,12 +514,8 @@ class PassOpenD extends Component {
                                           <a href={this.state.recordData.idcard_1}
                                              target="_blank"
                                              rel="noopener noreferrer">身份证反面照片</a>
-                                      </h3>,
-                                      <Upload  {...uploadProps1} >
-                                          <h3 className="pa-m">
-                                              点击上传可修改照片<Icon type="upload"/>
-                                          </h3>
-                                      </Upload>]}>
+                                      </h3>]
+                                  }>
                                 <img
                                     onClick={() => this.openGallery(this.state.recordData.idcard_1)}
                                     alt="example" width="100%"
@@ -686,12 +529,8 @@ class PassOpenD extends Component {
                                           <a href={this.state.recordData.idcard_2}
                                              target="_blank"
                                              rel="noopener noreferrer">身份证反面照片</a>
-                                      </h3>,
-                                      <Upload  {...uploadProps} >
-                                          <h3 className="pa-m">
-                                              点击上传可修改照片<Icon type="upload"/>
-                                          </h3>
-                                      </Upload>]}>
+                                      </h3>]
+                                  }>
                                 <img
                                     onClick={() => this.openGallery(this.state.recordData.idcard_2)}
                                     alt="example" width="100%"
@@ -702,53 +541,6 @@ class PassOpenD extends Component {
 
                 </Card>
 
-                <Card title="IX账户身份查重" bordered={true} style={{marginTop: 15}}>
-
-                    <Row gutter={12}>
-                        <Col md={4}>
-                            <div style={{display: 'flex', minHeight: 40}}>
-                                <Select
-                                    onChange={this.checkfromdbType}
-                                    defaultValue="0"
-                                    style={{width: 120}}>
-                                    <Option value="0">手机号</Option>
-                                    <Option value="1">身份证</Option>
-                                    <Option value="2">邮箱</Option>
-                                </Select>
-                            </div>
-
-                        </Col>
-                        <Col md={8}>
-                            <div style={{display: 'flex', maxHeight: 40}}>
-                                <Search
-                                    value={this.state.checkfromdbName}
-                                    onChange={e => this.onTodoChange(e.target.value)}
-                                    style={{width: 220}} placeholder="输入要查询的内容"/>
-                            </div>
-                        </Col>
-                        <Col md={4}>
-                            <div style={{display: 'flex', minHeight: 40}}>
-                                <Button loading={this.state.icondbALoading}
-                                        onClick={() => this.searchFromLocalDB()}>本库查询</Button>
-                            </div>
-                        </Col>
-                        <Col md={4}>
-                            <div style={{display: 'flex', minHeight: 40}}>
-                                <Button loading={this.state.icondbALoadingA}
-                                        onClick={() => this.searchFromOtherDB()}>异库查询</Button>
-
-                            </div>
-                        </Col>
-                        <Col md={24}>
-                            <div style={{display: 'flex', minHeight: 40}}>
-                                {this.state.checkderesb == null ? null :
-                                    <h3 style={{margin: 'auto'}}>本库查询结果：{this.state.checkderesb ? '有' : '無'}重合</h3>}
-                                {this.state.checkderesa == null ? null :
-                                    <h3 style={{margin: 'auto'}}>异库查询结果：{this.state.checkderesa ? '有' : '無'}重合</h3>}
-                            </div>
-                        </Col>
-                    </Row>
-                </Card>
                 <Card title="IX账户审核备注" bordered={true} style={{marginTop: 15}}>
                     <Row gutter={12}>
 
@@ -760,40 +552,7 @@ class PassOpenD extends Component {
 
 
                     </Row>
-                    <Row gutter={12}>
-                        <Card style={{marginTop: 10}}>
 
-                            <div>
-                                <Popconfirm title="确认当前用户开户申请通过" onConfirm={this.confirmOpen} okText="Yes"
-                                            cancelText="No">
-
-                                    <Button
-                                        // disabled={this.state.isNeedSave || this.state.recordData.status != 0 }
-                                        loading={this.state.iconLoading}
-                                    >开户通过</Button>
-
-                                </Popconfirm>
-
-
-                                <Button
-                                    disabled={!this.state.isNeedSave}
-                                    onClick={() => this.saveData()}>保存客戶信息</Button>
-
-
-                                <Button onClick={() => this.saveNote()}>下载资料</Button>
-
-                                <Popconfirm title="是否确认拒绝当前用户的开户申请？" onConfirm={this.saveReject} okText="Yes"
-                                            cancelText="No">
-                                    <Button
-                                        loading={this.state.iconcanLoading}
-                                    >拒绝</Button>
-
-                                </Popconfirm>
-
-                            </div>
-                        </Card>
-                        {/*disabled={!this.state.isNeedSave || this.state.recordData.status != 0}*/}
-                    </Row>
 
                 </Card>
 

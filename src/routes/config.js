@@ -34,15 +34,11 @@ export default {
     others:
         [
             {route: '/app/pass/passopen/detail:id', title: 'PassOpenD', icon: 'star', component: 'PassOpenD'},
+            {route: '/app/pass/passopen/user:id', title: 'PassOpenS', icon: 'star', component: 'PassOpenS'},
             {route: '/app/customer/SimulatorUser', title: 'SimulatorUser', icon: 'star', component: 'SimulatorUser'},
             {route: '/app/pass/IntendingUser', title: 'IntendingUser', icon: 'star', component: 'IntendingUser'},
             {route: '/app/customer/PotentialUser', title: 'PotentialUser', icon: 'star', component: 'PotentialUser'},
-            {
-                route: '/app/customer/CustomerUserInfo:id',
-                title: 'CustomerUserInfo',
-                icon: 'star',
-                component: 'CustomerUserInfo'
-            }
+            {route: '/app/customer/CustomerUserInfo:id', title: 'CustomerUserInfo', icon: 'star', component: 'CustomerUserInfo'}
 
         ] // 非菜单相关路] // 非菜单相关路由
 }

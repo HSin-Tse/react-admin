@@ -393,7 +393,8 @@ export default class PotentialUser extends Component {
 
                 align: 'center',
                 render: (text, record) => (
-                    <span><Button className="ant-dropdown-link">查看信息</Button></span>),
+                    <span><Button onClick={() => this.seeUSer(record)}
+                                  className="ant-dropdown-link">查看信息 </Button></span>),
             }, {
                 title: '操作',
                 key: 'action',
@@ -418,7 +419,7 @@ export default class PotentialUser extends Component {
             "accountNo": accountNo,
             "belongUserId": belongUserId,
         }).then((response) => {
-            if(response.data.code ===1){
+            if (response.data.code === 1) {
                 message.success('操作成功')
                 if (self.state.nowKey == 1) {
                     this.requestPageA()//1:合规 2:开户 3:交易
@@ -436,12 +437,14 @@ export default class PotentialUser extends Component {
 
     }
 
-    handleOk = (e) => {
-        console.log(e);
-        this.setState({
-            visible: false,
-            modal2Visible: false,
-        });
+    seeUSer = (record) => {
+
+        console.log('hcia record.id', record.id)
+        console.log('hcia record.id', record.id)
+        console.log('hcia record.id', record.leadId)
+
+        this.props.history.push('/app/pass/passopen/user' + record.leadId)
+
     }
 
     handleCancel = (e) => {
@@ -628,7 +631,7 @@ export default class PotentialUser extends Component {
         self.setState({
             loadingB: true
         })
-        window.Axios.post('ixuser / getUserList', {
+        window.Axios.post('ixuser/getUserList', {
             pageNo: this.state.currentA,
             'listType': 3,
             'nationalId': this.state.selectID,
@@ -802,64 +805,64 @@ export default class PotentialUser extends Component {
                 <BreadcrumbCustom first="用户管理" second="Leads管理"/>
 
 
-                    <Tabs
-                        onChange={this.callback}
-                        type="card">
-                        <TabPane tab="潛在用戶" key="1">
-                            <Card title={'潜在用户信息表'}>
-                                <Table rowKey="id"
-                                       bordered
-                                    // rowSelection={rowSelection}
-                                       columns={this.pageAColumns()}
-                                       dataSource={this.state.bklistA}
-                                       scroll={{x: 1500}}
-                                       loading={this.state.loadingA}
-                                       pagination={{  // 分页
-                                           total: this.state.totalpageA * this.state.pgsize,
-                                           pageSize: this.state.pgsize,
-                                           onChange: this.changePageA,
-                                       }}
-                                />
-                            </Card>
+                <Tabs
+                    onChange={this.callback}
+                    type="card">
+                    <TabPane tab="潛在用戶" key="1">
+                        <Card title={'潜在用户信息表'}>
+                            <Table rowKey="id"
+                                   bordered
+                                // rowSelection={rowSelection}
+                                   columns={this.pageAColumns()}
+                                   dataSource={this.state.bklistA}
+                                   scroll={{x: 1500}}
+                                   loading={this.state.loadingA}
+                                   pagination={{  // 分页
+                                       total: this.state.totalpageA * this.state.pgsize,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePageA,
+                                   }}
+                            />
+                        </Card>
 
-                        </TabPane>
+                    </TabPane>
 
-                        <TabPane tab="模擬用戶" key="2">
-                            <Card title={'模拟用户信息表'}>
+                    <TabPane tab="模擬用戶" key="2">
+                        <Card title={'模拟用户信息表'}>
 
-                                <Table rowKey="id"
-                                    // rowSelection={rowSelection}
-                                       columns={this.pageBColumns()}
-                                       dataSource={this.state.bklistB}
-                                       scroll={{x: 1500}}
-                                       loading={this.state.loading}
-                                       pagination={{  // 分页
-                                           total: this.state.totalpageB * this.state.pgsize,
-                                           pageSize: this.state.pgsize,
-                                           onChange: this.changePageB,
-                                       }}
-                                />
-                            </Card>
+                            <Table rowKey="id"
+                                // rowSelection={rowSelection}
+                                   columns={this.pageBColumns()}
+                                   dataSource={this.state.bklistB}
+                                   scroll={{x: 1500}}
+                                   loading={this.state.loading}
+                                   pagination={{  // 分页
+                                       total: this.state.totalpageB * this.state.pgsize,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePageB,
+                                   }}
+                            />
+                        </Card>
 
-                        </TabPane>
-                        <TabPane tab="意向用戶" key="3">
-                            <Card title={'意向用户信息表'}>
-                                <Table rowKey="id"
-                                    // rowSelection={rowSelection}
-                                       columns={this.pageCColumns()}
-                                       dataSource={this.state.bklistC}
-                                       scroll={{x: 1500}}
-                                       loading={this.state.loading}
-                                       pagination={{  // 分页
-                                           total: this.state.totalpageC * this.state.pgsize,
-                                           pageSize: this.state.pgsize,
-                                           onChange: this.changePageC,
-                                       }}
-                                />
-                            </Card>
+                    </TabPane>
+                    <TabPane tab="意向用戶" key="3">
+                        <Card title={'意向用户信息表'}>
+                            <Table rowKey="id"
+                                // rowSelection={rowSelection}
+                                   columns={this.pageCColumns()}
+                                   dataSource={this.state.bklistC}
+                                   scroll={{x: 1500}}
+                                   loading={this.state.loading}
+                                   pagination={{  // 分页
+                                       total: this.state.totalpageC * this.state.pgsize,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePageC,
+                                   }}
+                            />
+                        </Card>
 
-                        </TabPane>
-                    </Tabs>
+                    </TabPane>
+                </Tabs>
 
                 <Modal
                     title="添加備註"
