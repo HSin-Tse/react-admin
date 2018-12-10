@@ -23,6 +23,7 @@ class SiderCustom extends Component {
             infor: JSON.parse(localStorage.getItem('infor')),
         }
     }
+
     // componentWillMount() {
     //     console.log('hcia SiderCustom componentWillMount' )
     //     // this.setState({config: routesConfigadmin});
@@ -67,37 +68,38 @@ class SiderCustom extends Component {
         selectedKey: '',
         firstHide: false, // 点击收缩菜单，第一次隐藏展开子菜单，openMenu时恢复
     };
-    componentWillMount(){
-        console.log('hcia componentWillMount' )
-        this.setState({
-            displayName: localStorage.getItem('displayName'),
-            infor: JSON.parse(localStorage.getItem('infor'))
-        });
+
+    componentWillMount() {
+        // console.log('hcia componentWillMount' )
+        // this.setState({
+        //     displayName: localStorage.getItem('displayName'),
+        //     infor: JSON.parse(localStorage.getItem('infor'))
+        // });
     }
+
     componentDidMount() {
 
         this.setState({
             infor: JSON.parse(localStorage.getItem('infor'))
         });
-        console.log('hcia componentDidMount' )
+        console.log('hcia componentDidMount')
 
 
         const state = SiderCustom.setMenuOpen(this.props);
-        console.log('hcia state' , state)
+        console.log('hcia state', state)
         // this.setState(state);
 
-        console.log('hcia infor' , this.state.infor)
-        console.log('hcia routes' , routes)
+        console.log('hcia infor', this.state.infor)
+        console.log('hcia routes', routes)
 
 
-
-        if (this.state.infor.menuList.length ==0){
-            console.log('hcia routes' , 'cccc')
+        if (this.state.infor.menuList.length == 0) {
+            console.log('hcia routes', 'cccc')
 
             this.setState({config: routes});
         }
-       else if (this.state.infor!= null) {
-            console.log('hcia routes' , 'aaaaaaa')
+        else if (this.state.infor != null) {
+            console.log('hcia routes', 'aaaaaaa')
 
             var nowRouter = routes.menus.filter((key, index, array) => {
                 var back = false
@@ -109,34 +111,23 @@ class SiderCustom extends Component {
                     if (key.title == item.name) {
                         back = true
                     } else if (key.title == '歡迎') {
-                        key.title='歡迎-'+localStorage.getItem('displayName')
+                        key.title = '歡迎-' + localStorage.getItem('displayName')
                         back = true
                     }
 
                 });
-                // if (index % 2 !== 0) {
-                //     return false;
-                // }
                 return back;
             });
-            // console.log('hcia nowRouter', nowRouter)
-            // routes.menus = nowRouter
-            // console.log('hcia routes', routes)
             var setrr = {...routes, menus: nowRouter}
             console.log('hcia routes setrr', setrr)
             this.setState({config: setrr});
         } else {
-            console.log('hcia routes' , 'bbbbbb')
+            console.log('hcia routes', 'bbbbbb')
 
             this.setState({config: routes});
 
         }
 
-        // if ('超级管理员' == localStorage.getItem('displayName')) {
-        // } else {
-        //     // this.setState({config: routesConfigadmin});
-        //     this.setState({config: setrr});
-        // }
 
     }
 
@@ -170,7 +161,7 @@ class SiderCustom extends Component {
                     <img style={{height: 50, width: 50}} src={avater} alt="头像"/>
 
 
-                    {this.props.collapsed?'':'CRM操作系统v1.0'}
+                    {this.props.collapsed ? '' : 'CRM操作系统v1.0'}
 
                 </div>
                 <SiderMenu
