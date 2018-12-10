@@ -29,6 +29,15 @@ export default {
             ],
         },
 
+        {
+            key: '/app/pms', title: '权限管理', icon: 'safety',
+            subs: [
+                {key: '/app/pms/innerman', title: '内部成员配置', component: 'InnerMan'},
+                {key: '/app/pms/roleset', title: '角色配置', component: 'RoleSet'},
+
+            ],
+        },
+
     ],
 
     others:

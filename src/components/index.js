@@ -35,6 +35,8 @@ import WhiteList from './customer/WhiteList'
 import CustomerUserInfo from './customer/CustomerUserInfo'
 import TradeAccount from './trade/Account'
 import TradeDepart from './trade/Depart'
+import RoleSet from './pms/RoleSet'
+import InnerMan from './pms/InnerMan'
 
 
 const WysiwygBundle = Loadable({ // 按需加载富文本配置
@@ -44,7 +46,8 @@ const WysiwygBundle = Loadable({ // 按需加载富文本配置
 
 export default {
     BasicForm,
-    BasicTable,
+    InnerMan,
+    RoleSet,
     AdvancedTable,
     AsynchronousTable,
     Echarts,
