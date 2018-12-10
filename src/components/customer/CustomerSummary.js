@@ -280,14 +280,14 @@ export default class CustomerSummary extends Component {
                 title: '客诉次数',
                 dataIndex: '客诉次数',
                 key: '客诉次数',
-                width: 50,
+                width: 150,
                 align: 'center',
                 render: (text, record) => (<span>{record.complaintNum}</span>),
             }, {
                 title: '回访次数',
                 dataIndex: '回访次数',
                 key: '回访次数',
-                width: 50,
+                width: 150,
                 align: 'center',
                 render: (text, record) => (
                     <span>{record.commentNum}</span>),
@@ -295,7 +295,7 @@ export default class CustomerSummary extends Component {
                 title: '备注信息',
                 dataIndex: '备注信息',
                 key: '备注信息',
-                width: 100,
+                width: 150,
                 align: 'center',
                 render: (text, record) => (
                     <span>{record.comment}</span>),
@@ -303,7 +303,7 @@ export default class CustomerSummary extends Component {
                 title: '操作人',
                 dataIndex: '操作人',
                 key: '操作人',
-                width: 100,
+                width: 150,
                 align: 'center',
                 render: (text, record) => (
                     <span>{record.operator}</span>),
@@ -477,7 +477,7 @@ export default class CustomerSummary extends Component {
                            bordered
                            columns={this.columns}
                            dataSource={this.state.bklistA}
-                           scroll={{x: 1700}}
+                           scroll={{x: 2000}}
                            loading={this.state.loading}
                            pagination={{ // 分页
                                total: this.state.totalpageA * this.state.pgsize,
