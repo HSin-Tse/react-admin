@@ -212,6 +212,17 @@ export default class PotentialUser extends Component {
     pageBColumns = () => {
         return this.columns = [
             {
+                title: '序号',
+                dataIndex: 'phoneNumber',
+                key: 'phoneNumber',
+                width: 70,
+                fixed: 'left',
+                align: 'center',
+                render: (text, record, index) => (
+                    <span>{this.state.currentB * this.state.pgsize + index + 1}</span>
+                ),
+            },
+            {
                 title: '手机号',
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
@@ -224,7 +235,7 @@ export default class PotentialUser extends Component {
             }, {
                 title: '模拟账号',
                 dataIndex: '模拟账号',
-                width: 120,
+                width: 150,
 
                 key: '模拟账号',
                 render: (text, record) => (
@@ -306,10 +317,19 @@ export default class PotentialUser extends Component {
                 ),
             }];
     }
-
-
     pageCColumns = () => {
         return this.columns = [
+            {
+                title: '序号',
+                dataIndex: 'phoneNumber',
+                key: 'phoneNumber',
+                width: 70,
+                fixed: 'left',
+                align: 'center',
+                render: (text, record, index) => (
+                    <span>{this.state.currentC * this.state.pgsize + index + 1}</span>
+                ),
+            },
             {
                 title: '手机号',
                 dataIndex: 'phoneNumber',
@@ -610,7 +630,7 @@ export default class PotentialUser extends Component {
             loadingB: true
         })
         window.Axios.post('ixuser / getUserList', {
-            pageNo: this.state.currentA,
+            pageNo: this.state.currentB,
             'listType': 2,
             'nationalId': this.state.selectID,
             'startTime': this.state.selectTimeStart,
@@ -634,10 +654,10 @@ export default class PotentialUser extends Component {
         let self = this
 
         self.setState({
-            loadingB: true
+            loadingC: true
         })
         window.Axios.post('ixuser/getUserList', {
-            pageNo: this.state.currentA,
+            pageNo: this.state.currentC,
             'listType': 3,
             'nationalId': this.state.selectID,
             'startTime': this.state.selectTimeStart,
@@ -668,7 +688,7 @@ export default class PotentialUser extends Component {
     }
     changePageB = (page) => {
         this.setState({
-            currentb: page - 1,
+            currentB: page - 1,
         }, () => {
             this.requestPageB()
         })
@@ -836,6 +856,8 @@ export default class PotentialUser extends Component {
                         <Card title={'模拟用户信息表'}>
 
                             <Table rowKey="id"
+                                   bordered
+
                                 // rowSelection={rowSelection}
                                    columns={this.pageBColumns()}
                                    dataSource={this.state.bklistB}
@@ -853,6 +875,8 @@ export default class PotentialUser extends Component {
                     <TabPane tab="意向用戶" key="3">
                         <Card title={'意向用户信息表'}>
                             <Table rowKey="id"
+                                   bordered
+
                                 // rowSelection={rowSelection}
                                    columns={this.pageCColumns()}
                                    dataSource={this.state.bklistC}

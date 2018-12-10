@@ -94,12 +94,12 @@ class SiderCustom extends Component {
 
 
         if (this.state.infor.menuList.length == 0) {
-            console.log('hcia routes', 'cccc')
+            // console.log('hcia routes', 'cccc')
 
             this.setState({config: routes});
         }
         else if (this.state.infor != null) {
-            console.log('hcia routes', 'aaaaaaa')
+            // console.log('hcia routes', 'aaaaaaa')
 
             var nowRouter = routes.menus.filter((key, index, array) => {
                 var back = false
@@ -122,7 +122,7 @@ class SiderCustom extends Component {
             console.log('hcia routes setrr', setrr)
             this.setState({config: setrr});
         } else {
-            console.log('hcia routes', 'bbbbbb')
+            // console.log('hcia routes', 'bbbbbb')
 
             this.setState({config: routes});
 

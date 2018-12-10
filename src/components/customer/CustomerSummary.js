@@ -15,8 +15,7 @@ export default class CustomerSummary extends Component {
             operationDiaryHistory: [],
             currentA: 0,
             totalpageA: 0,
-            nowKey: "1",
-            pgsize: 40,
+            pgsize: 20,
             visible: false,
             modal2Visible: false,
 
@@ -27,7 +26,7 @@ export default class CustomerSummary extends Component {
         this.ediftModalColumn()
         this.editTableColumn()
         this.requestData()
-        this.requestUserCommentList()
+        // this.requestUserCommentList()
 
     }
 
@@ -39,9 +38,7 @@ export default class CustomerSummary extends Component {
         }).then((response) => {
 
             message.success('操作成功')
-            if (self.state.nowKey == 1) {
                 this.requestData()
-            }
 
         }).catch(function (error) {
             console.log(error);
@@ -121,29 +118,37 @@ export default class CustomerSummary extends Component {
 
     }
     requestData = () => {
+        
+        console.log('hcia requestData' )
         let self = this
 
+
         window.Axios.post('ixuser/getUserList', {
-            pageNo: this.state.current,
-            'listType': 4,//1: 2: 3:,4:分頁查詢用戶總表
+            pageNo: this.state.currentA,
+            'listType': 4,
+            // 'nationalId': this.state.selectID,
+            // 'startTime': this.state.selectTimeStart,
+            // 'endTime': this.state.selectTimeEnd,
+            'pageSize': this.state.pgsize,
+
         }).then((response) => {
+            console.log("ggggg", response.data.data)
+
+            console.log('hcia response' , response)
             self.setState({
                 totalpageA: response.data.data.totalPage,
                 bklistA: response.data.data.list,
-
-            }, () => {
-                console.log('hcia self.state.bklistA', self.state.bklistA)
-                // var tags = Object.keys(self.state.bklistA[0])
-                // console.log('hcia tags', tags)
-                // self.setState({
-                //     mTags: tags
-                // })
+                loadingA: false
 
             });
 
         }).catch(function (error) {
             console.log(error);
         });
+
+
+
+
     }
     requestUserCommentList = () => {
         // must request data:
@@ -155,11 +160,10 @@ export default class CustomerSummary extends Component {
         //pageNo
         //pageSize
         //language
-        const url = 'http://mobile.nooko.cn:8090/auth/getUserCommentList'
 
         var tmp = this;
 
-        window.Axios.post(url, {
+        window.Axios.post('auth/getUserCommentList', {
             'belongUserId': '4028b2a4631f770f01631f7770df0000',
 
         }).then(function (response) {
@@ -181,13 +185,7 @@ export default class CustomerSummary extends Component {
         })
     }
 
-    callback = (key) => {
 
-        this.setState({
-            nowKey: key,
-        })
-
-    }
 
     onSelectChange = (selectedRowKeys) => {
         console.log('hcia', 'selectedRowKeys changed: ', selectedRowKeys);
@@ -213,7 +211,6 @@ export default class CustomerSummary extends Component {
     };
 
     onChangeMail = (e) => {
-        // this.state.selectMail = e.target.value
 
         this.setState({
             selectMail: e.target.value,
@@ -378,10 +375,7 @@ export default class CustomerSummary extends Component {
     }
     searchSelect = () => {
         let self = this
-        console.log('hcia self.state.nowKey', self.state.nowKey)
-        if (self.state.nowKey == 1) {
             this.requestData()
-        }
     }
     goToUserInfo = (belongUserId) => {
         this.props.history.push('/app/customer/CustomerUserInfo' + belongUserId)
@@ -436,9 +430,7 @@ export default class CustomerSummary extends Component {
 
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
-                <div>nowKey :{this.state.nowKey}</div>
                 <div>selectMail :{this.state.selectMail}</div>
-                <div>log::CustomerSummary</div>
                 {/*<ThemePicker />*/}
                 <div className={classNames('switcher dark-white', {active: switcherOn})}>
 					<span className="sw-btn dark-white" onClick={this._switcherOn}>
@@ -474,8 +466,10 @@ export default class CustomerSummary extends Component {
                     批量移除
                 </Button>
                 <Card title="用戶總表"
-                      extra={<Button type="default" onClick={() => this.refleshNowpage()}
-                      >刷新当前页面</Button>}
+                      // extra={
+                      //     <Button type="default" onClick={() => this.refleshNowpage()}
+                      // >刷新当前页面</Button>
+                      // }
                 >
                     <Table rowKey="id"
                            bordered
