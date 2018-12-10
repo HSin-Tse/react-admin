@@ -38,7 +38,7 @@ export default class CustomerSummary extends Component {
         }).then((response) => {
 
             message.success('操作成功')
-                this.requestData()
+            this.requestData()
 
         }).catch(function (error) {
             console.log(error);
@@ -118,8 +118,8 @@ export default class CustomerSummary extends Component {
 
     }
     requestData = () => {
-        
-        console.log('hcia requestData' )
+
+        console.log('hcia requestData')
         let self = this
 
 
@@ -134,7 +134,7 @@ export default class CustomerSummary extends Component {
         }).then((response) => {
             console.log("ggggg", response.data.data)
 
-            console.log('hcia response' , response)
+            console.log('hcia response', response)
             self.setState({
                 totalpageA: response.data.data.totalPage,
                 bklistA: response.data.data.list,
@@ -145,8 +145,6 @@ export default class CustomerSummary extends Component {
         }).catch(function (error) {
             console.log(error);
         });
-
-
 
 
     }
@@ -186,7 +184,6 @@ export default class CustomerSummary extends Component {
     }
 
 
-
     onSelectChange = (selectedRowKeys) => {
         console.log('hcia', 'selectedRowKeys changed: ', selectedRowKeys);
         this.setState({selectedRowKeys});
@@ -194,21 +191,13 @@ export default class CustomerSummary extends Component {
 
     state = {
         switcherOn: true,
-        background: localStorage.getItem('@primary-color') || '#313653',
     }
     _switcherOn = () => {
         this.setState({
             switcherOn: !this.state.switcherOn
         })
     };
-    _handleChangeComplete = color => {
-        console.log(color);
-        this.setState({background: color.hex});
-        localStorage.setItem('@primary-color', color.hex);
-        window.less.modifyVars({
-            '@primary-color': color.hex,
-        })
-    };
+
 
     onChangeMail = (e) => {
 
@@ -226,6 +215,18 @@ export default class CustomerSummary extends Component {
     }
     editTableColumn = () => {
         this.columns = [
+
+            {
+                title: '序号',
+                dataIndex: 'phoneNumber',
+                key: 'phoneNumber',
+                width: 70,
+                fixed: 'left',
+                align: 'center',
+                render: (text, record, index) => (
+                    <span>{this.state.currentA * this.state.pgsize + index + 1}</span>
+                ),
+            },
             {
                 title: '手机号',
                 dataIndex: '手机号',
@@ -310,7 +311,9 @@ export default class CustomerSummary extends Component {
                 title: '查看',
                 dataIndex: '查看',
                 key: '查看',
-                width: 200,
+                fixed: 'right',
+
+                width: 220,
                 align: 'center',
                 render: (text, record) => (
                     <div>
@@ -323,7 +326,9 @@ export default class CustomerSummary extends Component {
                 title: '业务操作',
                 dataIndex: '业务操作',
                 key: '业务操作',
-                width: 200,
+                width: 220,
+                fixed: 'right',
+
                 align: 'center',
                 render: (text, record) => (
                     <div>
@@ -335,8 +340,9 @@ export default class CustomerSummary extends Component {
             }, {
                 title: '其他',
                 key: '其他',
-                fixed: '其他',
-                width: 200,
+                fixed: 'right',
+
+                width: 220,
                 align: 'center',
                 render: (text, record) => (
                     <div>
@@ -375,7 +381,7 @@ export default class CustomerSummary extends Component {
     }
     searchSelect = () => {
         let self = this
-            this.requestData()
+        this.requestData()
     }
     goToUserInfo = (belongUserId) => {
         this.props.history.push('/app/customer/CustomerUserInfo' + belongUserId)
@@ -416,11 +422,7 @@ export default class CustomerSummary extends Component {
 
         const {loading, selectedRowKeys} = this.state;
         const hasSelected = selectedRowKeys.length > 0;
-        const rowSelection = {
-            selectedRowKeys,
-            onChange: this.onSelectChange,
-        };
-        const {switcherOn, background} = this.state;
+        const {switcherOn} = this.state;
 
         const hideStyle = {
             visibility: "hidden"
@@ -466,17 +468,16 @@ export default class CustomerSummary extends Component {
                     批量移除
                 </Button>
                 <Card title="用戶總表"
-                      // extra={
-                      //     <Button type="default" onClick={() => this.refleshNowpage()}
-                      // >刷新当前页面</Button>
-                      // }
+                    // extra={
+                    //     <Button type="default" onClick={() => this.refleshNowpage()}
+                    // >刷新当前页面</Button>
+                    // }
                 >
                     <Table rowKey="id"
                            bordered
-                           rowSelection={rowSelection}
                            columns={this.columns}
                            dataSource={this.state.bklistA}
-                           scroll={{x: 2000}}
+                           scroll={{x: 1700}}
                            loading={this.state.loading}
                            pagination={{ // 分页
                                total: this.state.totalpageA * this.state.pgsize,
