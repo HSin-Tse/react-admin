@@ -225,36 +225,50 @@ export default class PotentialUser extends Component {
             }, {
                 title: '模拟账号',
                 dataIndex: '模拟账号',
+                width: 120,
+
                 key: '模拟账号',
                 render: (text, record) => (
                     <span>{record.accountNo}</span>),
             }, {
                 title: '绑定时间',
                 dataIndex: '绑定时间',
+                width: 120,
+
                 key: '绑定时间',
                 render: (text, record) => (<span>{record.date}</span>),
             }, {
                 title: '剩余天数',
                 dataIndex: '剩余天数',
                 key: '剩余天数',
+                width: 120,
+
                 render: (text, record) => (<span>{record.remainDay}</span>),
             }, {
                 title: '模拟账户状态',
+                width: 120,
+
                 dataIndex: '模拟账户状态',
                 key: '模拟账户状态',
-                render: (text, record) => (<span>{'sssssss'}</span>),
+                render: (text, record) => (<span>{record.expireStatus}</span>),
             }, {
                 title: '延期次数',
+                width: 120,
+
                 dataIndex: '延期次数',
                 key: '延期次数',
                 render: (text, record) => (<span>{record.delayNum}</span>),
             }, {
                 title: '回访状态',
                 dataIndex: '回访状态',
+                width: 120,
+
                 key: '回访状态',
                 render: (text, record) => (<span>{record.feebackStatus}</span>),
             }, {
                 title: '备注',
+                width: 120,
+
                 dataIndex: '备注',
                 key: '备注',
                 render: (text, record) => (<span>{record.comment}</span>),
@@ -262,6 +276,8 @@ export default class PotentialUser extends Component {
                 title: '活跃程度',
                 dataIndex: '活跃程度',
                 key: '活跃程度',
+                width: 120,
+
                 render: (text, record) => (<span>{'ssssss'}</span>),
             }, {
                 title: '操作人',
@@ -295,7 +311,18 @@ export default class PotentialUser extends Component {
             "accountNo": accountNo,
             "belongUserId": belongUserId,
         }).then((response) => {
-            message.success('操作成功')
+            if(response.data.code ===1){
+                message.success('操作成功')
+                if (self.state.nowKey == 1) {
+                    this.requestPageA()//1:合规 2:开户 3:交易
+                }
+                if (self.state.nowKey == 2) {
+                    this.requestPageB()//1:合规 2:开户 3:交易
+                }
+                if (self.state.nowKey == 3) {
+                    this.requestPageC()//1:合规 2:开户 3:交易
+                }
+            }
         }).catch(function (error) {
             console.log(error);
         });
@@ -754,7 +781,6 @@ export default class PotentialUser extends Component {
                 </div>
                 <BreadcrumbCustom first="用户管理" second="Leads管理"/>
 
-                <Card>
 
                     <Tabs
                         onChange={this.callback}
@@ -814,7 +840,6 @@ export default class PotentialUser extends Component {
 
                         </TabPane>
                     </Tabs>
-                </Card>
 
                 <Modal
                     title="添加備註"
