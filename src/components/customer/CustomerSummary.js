@@ -250,7 +250,7 @@ export default class CustomerSummary extends Component {
                 title: '开户状态',
                 dataIndex: '开户状态',
                 key: '开户状态',
-                width: 80,
+                width: 150,
                 align: 'center',
                 render: (text, record) => (<span>已开户</span>),
             },
@@ -258,7 +258,7 @@ export default class CustomerSummary extends Component {
                 title: '账户类型',
                 dataIndex: '账户类型',
                 key: '账户类型',
-                width: 80,
+                width: 150,
                 align: 'center',
                 render: (text, record) => (<span>{record.accountType}</span>),
             }, {
@@ -477,7 +477,7 @@ export default class CustomerSummary extends Component {
                            bordered
                            columns={this.columns}
                            dataSource={this.state.bklistA}
-                           scroll={{x: 2000}}
+                           scroll={{x: 2100}}
                            loading={this.state.loading}
                            pagination={{ // 分页
                                total: this.state.totalpageA * this.state.pgsize,
