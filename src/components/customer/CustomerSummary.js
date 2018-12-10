@@ -30,21 +30,6 @@ export default class CustomerSummary extends Component {
 
     }
 
-    handleremove = (record) => {
-
-        let self = this
-        window.Axios.post('auth/removeBlackUser', {
-            'id': record.id
-        }).then((response) => {
-
-            message.success('操作成功')
-            this.requestData()
-
-        }).catch(function (error) {
-            console.log(error);
-        });
-
-    };
 
     handleremoveList = () => {
         // console.log('hcia selectedRowKeys', this.state.selectedRowKeys)
