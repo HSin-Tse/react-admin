@@ -73,7 +73,6 @@ class Login extends React.Component {
                         var ssss = localStorage.getItem('too');
 
                         if (ssss) {
-                            console.log('hcia ssss' , ssss)
                             self.props.history.push('/app/dashboard/index');
                         } else {
                             // message.error('等待跳轉~'+ssss )

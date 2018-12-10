@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {DatePicker, Input, Modal, Button, Table, Tabs, message, Card, Tag, Layout, Icon, Col} from 'antd';
+import {DatePicker, Input, Modal, Button, Table, Tabs, message, Card, Tag, Layout, Icon, Col, Popconfirm} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {ThemePicker} from '@/components/widget';
 import classNames from "classnames";
@@ -293,7 +293,12 @@ export default class PotentialUser extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button className="ant-dropdown-link" onClick={() => this.handleDelay(record)}>延期</Button>
+                        <Popconfirm title="延期申请？" onConfirm={() => this.handleDelay(record)} okText="Yes"
+                                    cancelText="No">
+                            <Button className="ant-dropdown-link" >延期</Button>
+
+                        </Popconfirm>
+
                         <Button className="ant-dropdown-link" onClick={() => this.showModal(record)}>添加備註</Button>
                         <Button className="ant-dropdown-link"
                                 onClick={() => this.showModal2(record.belongUserId)}>操作日誌</Button>
