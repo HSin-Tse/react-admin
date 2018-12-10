@@ -89,44 +89,16 @@ class SiderCustom extends Component {
         console.log('hcia infor' , this.state.infor)
         console.log('hcia routes' , routes)
 
-        // if ('超级管理员' == localStorage.getItem('displayName')) {
-        //     this.setState({config: routes});
-        // } else {
-        //     this.setState({config: routes});
-        // }
-
-        ///===========///
-        // var nowRouter = routes.menus.filter((key, index, array) => {
-        //     var back = false
-        //     this.state.infor.menuList.forEach(function (item, index, array) {
-        //
-        //
-        //         // console.log('hcia key.title' , key.title,item.name,(key.title==item.name))
-        //
-        //
-        //         if (key.title == item.name) {
-        //             back = true
-        //         } else if (key.title == '歡迎') {
-        //             back = true
-        //         }
-        //
-        //     });
-        //     // if (index % 2 !== 0) {
-        //     //     return false;
-        //     // }
-        //
-        //
-        //     return back;
-        // });
-        //
-        // // console.log('hcia nowRouter', nowRouter)
-        //
-        // var setrr = {...routes,menus:nowRouter}
-        // // console.log('hcia routes', routes)
-        // this.setState({config: setrr});
 
 
-        if (this.state.infor!= null) {
+        if (this.state.infor.menuList.length ==0){
+            console.log('hcia routes' , 'cccc')
+
+            this.setState({config: routes});
+        }
+       else if (this.state.infor!= null) {
+            console.log('hcia routes' , 'aaaaaaa')
+
             var nowRouter = routes.menus.filter((key, index, array) => {
                 var back = false
                 this.state.infor.menuList.forEach(function (item, index, array) {
@@ -151,9 +123,11 @@ class SiderCustom extends Component {
             // routes.menus = nowRouter
             // console.log('hcia routes', routes)
             var setrr = {...routes, menus: nowRouter}
-            // console.log('hcia routes', routes)
+            console.log('hcia routes setrr', setrr)
             this.setState({config: setrr});
         } else {
+            console.log('hcia routes' , 'bbbbbb')
+
             this.setState({config: routes});
 
         }

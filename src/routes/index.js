@@ -31,8 +31,15 @@ export default class CRouter extends Component {
     componentWillMount() {
         // console.log('hcia componentWillMount')
 
-        console.log('hcia this.state.infor', this.state.infor)
-        if (this.state.infor!= null) {
+        // console.log('hcia this.state.infor', this.state.infor)
+        if (this.state.infor.menuList.length == 0) {
+            this.setState({config: routes});
+
+        } else if (this.state.infor != null) {
+
+
+            console.log('hcia this.state.infor', this.state.infor)
+
             var nowRouter = routes.menus.filter((key, index, array) => {
                 var back = false
                 this.state.infor.menuList.forEach(function (item, index, array) {
