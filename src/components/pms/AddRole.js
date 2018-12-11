@@ -76,24 +76,39 @@ class AddRole extends Component {
                     内部用户权限设置
                 </h2>
 
+                {/*<Card disabled={true} title="IX账户审核 " bordered={true}>*/}
+
+                    {/*<Row gutter={1}>*/}
+                        {/*<Col md={8}>*/}
+                            {/*<p>客户姓名:</p>*/}
+                        {/*</Col>*/}
+                        {/*<Col md={8}>*/}
+                            {/*<p>客户邮箱</p>*/}
+                        {/*</Col>*/}
+                        {/*<Col md={8}>*/}
+                            {/*<p>手机号码：</p>*/}
+                        {/*</Col>*/}
+                    {/*</Row>*/}
+                {/*</Card>*/}
+
                 <div><BreadcrumbCustom first="内部成员列表" second="内部人员配置"/></div>
                 <Row>
 
                 </Row>
 
-                <Card title={<h2> 基本信息 </h2>} bordered={true} style={{marginTop: 15}}>
+                <Card title={<span style={{fontSize: 20}}> 基本信息 </span>} bordered={true} style={{marginTop: 15}}>
 
                     <Row gutter={8}>
                         <Col md={12}>
 
-                            <div style={{display: 'flex', minHeight: 50}}>
-                                <h3 style={{width: 100}}>角色名称:</h3>
+                            <div style={{fontWeight:'bold',fontSize: 18,display: 'flex', minHeight: 50}}>
+                                <span style={{width: 100}}>角色名称:</span>
 
                                 <Input defaultValue={this.state.name}
                                        style={{width: 180}}/>
                             </div>
-                            <div style={{display: 'flex', minHeight: 50}}>
-                                <h3 style={{width: 100}}>角色备注:</h3>
+                            <div style={{fontWeight:'bold',fontSize: 18,display: 'flex', minHeight: 50}}>
+                                <span style={{width: 100}}>角色备注:</span>
 
                                 {/*<Input defaultValue={this.state.name}*/}
                                 {/*style={{width: 180}}/>*/}
