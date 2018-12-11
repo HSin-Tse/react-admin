@@ -24,8 +24,6 @@ const Option = Select.Option;
 
 const tradeType = [
     {label: 'CFD', value: 'CFD'},
-    {label: 'CFD_2', value: 'CFD_2'},
-    {label: 'CFD_3', value: 'CFD_3'},
 ];
 const dateFormat = 'YYYY-MM-DD';
 var aaxios = axios.create({
@@ -106,7 +104,7 @@ class PassOpenD extends Component {
             'id': self.props.match.params.id,
         }).then(function (response) {
 
-            if(!response.data.data.state){
+            if (!response.data.data.state) {
 
                 return
             }
@@ -127,7 +125,6 @@ class PassOpenD extends Component {
                 changeNoteV: response.data.data.comment,
                 checkfromdbName: response.data.data.phoneNumber,
             }, () => {
-
 
 
                 window.Axios.post('dict/openDict', {
@@ -222,7 +219,7 @@ class PassOpenD extends Component {
                     .then(function (response) {
                         console.log('hcia response', response.data.data)
                         self.setState({
-                            recordData : {...self.state.recordData,idcard_1:response.data.data}
+                            recordData: {...self.state.recordData, idcard_1: response.data.data}
                         })
                     })
                     .catch(error => {
@@ -270,7 +267,7 @@ class PassOpenD extends Component {
                     .then(function (response) {
                         console.log('hcia response', response.data.data)
                         self.setState({
-                            recordData : {...self.state.recordData,idcard_0:response.data.data}
+                            recordData: {...self.state.recordData, idcard_0: response.data.data}
                         })
                     })
                     .catch(error => {
@@ -318,7 +315,7 @@ class PassOpenD extends Component {
                     .then(function (response) {
                         console.log('hcia response', response.data.data)
                         self.setState({
-                            recordData : {...self.state.recordData,idcard_2:response.data.data}
+                            recordData: {...self.state.recordData, idcard_2: response.data.data}
                         })
                     })
                     .catch(error => {
@@ -363,7 +360,7 @@ class PassOpenD extends Component {
                                               disabled={true}>MT4</Checkbox>
                                     <Checkbox checked={this.state.recordData.applyMT5} disabled={true}>MT5</Checkbox>
                                     <Checkbox checked={this.state.recordData.applySTAR}
-                                              disabled={true}>TRADER</Checkbox>
+                                              disabled={true}>IX-TRADER</Checkbox>
 
                                 </div>
                             </Card>
@@ -371,8 +368,12 @@ class PassOpenD extends Component {
 
                                 <div>
                                     交易类型:
-                                    <RadioGroup onChange={this.onChangetradeType} options={tradeType}
-                                                value={this.state.tradrType} style={{marginLeft: 20, width: 520}}
+                                    <RadioGroup
+                                        disabled={true}
+                                        onChange={this.onChangetradeType}
+                                        options={tradeType}
+                                        value={this.state.tradrType}
+                                        style={{marginLeft: 20, width: 520}}
                                     />
                                 </div>
                             </Card>
@@ -382,9 +383,11 @@ class PassOpenD extends Component {
                                 <div>
 
                                     服务器 :
-                                    <Select labelInValue defaultValue={{key: 'jack'}}
-                                            style={{marginLeft: 20, width: 120}}
-                                            onChange={this.handleChange}
+                                    <Select
+                                        disabled={true}
+                                        labelInValue defaultValue={{key: 'jack'}}
+                                        style={{marginLeft: 20, width: 120}}
+                                        onChange={this.handleChange}
                                     >
                                         <Option value="jack">服务器地址</Option>
                                         <Option value="lucy">Lucy (101)</Option>
@@ -422,30 +425,7 @@ class PassOpenD extends Component {
                                 </div>
                             </Card>
                         </Col>
-                        <Col md={8}>
-                            <Card bordered={false}>
-                                <div>
-                                    <Select labelInValue defaultValue={{key: 'lucy'}}
-                                            style={{marginLeft: 20}}
-                                            onChange={this.handleChange}>
-                                        <Option value="jack">Jack (100)</Option>
-                                        <Option value="lucy">Lucy (101)</Option>
-                                    </Select>
-                                </div>
-                            </Card>
-                        </Col>
-                        <Col md={8}>
-                            <Card bordered={false}>
-                                <div>
-                                    <Select labelInValue defaultValue={{key: 'lucy'}}
-                                            style={{marginLeft: 20}}
-                                            onChange={this.handleChange}>
-                                        <Option value="jack">Jack (100)</Option>
-                                        <Option value="lucy">Lucy (101)</Option>
-                                    </Select>
-                                </div>
-                            </Card>
-                        </Col>
+
                     </Row>
                 </Card>
                 <Card title="IX账户申请表单" bordered={true} style={{marginTop: 15}}>
@@ -633,7 +613,7 @@ class PassOpenD extends Component {
                                     <span style={{minWidth: 120}}>*交易密码</span>
                                     <Input defaultValue={this.state.recordData.accountPassword}
                                            disabled={true}
-                                           // onChange={this.onChangeSSS}
+                                        // onChange={this.onChangeSSS}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                             </Card>
