@@ -29,43 +29,46 @@ export default class CRouter extends Component {
         console.log('hcia componentWillMount')
 
         // console.log('hcia this.state.infor', this.state.infor)
-        if (this.state.infor.menuList.length == 0) {
-            console.log('hcia','aaaaa')
+        // if (this.state.infor.menuList.length == 0) {
+        //     console.log('hcia','aaaaa')
+        //
+        //     this.setState({config: routes});
+        //
+        // } else if (this.state.infor != null) {
+        //     console.log('hcia','bbbbb')
+        //
+        //
+        //
+        //     var nowRouter = routes.menus.filter((key, index, array) => {
+        //         var back = false
+        //         this.state.infor.menuList.forEach(function (item, index, array) {
+        //
+        //
+        //
+        //             if (key.title == item.name) {
+        //                 back = true
+        //             } else if (key.title == '歡迎') {
+        //                 back = true
+        //             }
+        //
+        //         });
+        //         return back;
+        //     });
+        //     // routes.menus = nowRouter
+        //     var setrr = {...routes, menus: nowRouter}
+        //     this.setState({config: routes});
+        //
+        // } else {
+        //     console.log('hcia','cccc')
+        //
+        //     this.setState({config: routes});
+        //
+        // }
 
-            this.setState({config: routes});
-
-        } else if (this.state.infor != null) {
-            console.log('hcia','bbbbb')
 
 
 
-            var nowRouter = routes.menus.filter((key, index, array) => {
-                var back = false
-                this.state.infor.menuList.forEach(function (item, index, array) {
-
-
-
-                    if (key.title == item.name) {
-                        back = true
-                    } else if (key.title == '歡迎') {
-                        back = true
-                    }
-
-                });
-                return back;
-            });
-            // routes.menus = nowRouter
-            var setrr = {...routes, menus: nowRouter}
-            this.setState({config: routes});
-
-        } else {
-            console.log('hcia','cccc')
-
-            this.setState({config: routes});
-
-        }
-
-
+        this.setState({config: routes});
 
 
         // if ('超级管理员' == localStorage.getItem('displayName')) {
