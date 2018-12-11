@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import {Route, Redirect, Switch} from 'react-router-dom';
 import AllComponents from '../components';
 import routes from './config';
+
 export default class CRouter extends Component {
 
 
@@ -28,47 +29,44 @@ export default class CRouter extends Component {
     componentWillMount() {
         console.log('hcia componentWillMount')
 
-        // console.log('hcia this.state.infor', this.state.infor)
-        // if (this.state.infor.menuList.length == 0) {
-        //     console.log('hcia','aaaaa')
-        //
-        //     this.setState({config: routes});
-        //
-        // } else if (this.state.infor != null) {
-        //     console.log('hcia','bbbbb')
-        //
-        //
-        //
-        //     var nowRouter = routes.menus.filter((key, index, array) => {
-        //         var back = false
-        //         this.state.infor.menuList.forEach(function (item, index, array) {
-        //
-        //
-        //
-        //             if (key.title == item.name) {
-        //                 back = true
-        //             } else if (key.title == '歡迎') {
-        //                 back = true
-        //             }
-        //
-        //         });
-        //         return back;
-        //     });
-        //     // routes.menus = nowRouter
-        //     var setrr = {...routes, menus: nowRouter}
-        //     this.setState({config: routes});
-        //
-        // } else {
-        //     console.log('hcia','cccc')
-        //
-        //     this.setState({config: routes});
-        //
-        // }
+        console.log('hcia this.state.infor', this.state.infor)
+        if (this.state.infor == null) {
+            this.setState({config: routes});
+
+        } else if (this.state.infor.menuList.length == 0) {
+            console.log('hcia', 'aaaaa')
+
+            var setrr = {
+                ...routes,
+                menus: [{key: "/app/dashboard/index", title: "歡迎", icon: "user", component: "Dashboard"}]
+            }
+
+            console.log('hcia setrr', setrr)
+            this.setState({config: setrr});
+
+        } else if (this.state.infor != null) {
+            console.log('hcia', 'bbbbb')
 
 
+            var nowRouter = routes.menus.filter((key, index, array) => {
+                var back = false
+                this.state.infor.menuList.forEach(function (item, index, array) {
 
 
-        this.setState({config: routes});
+                    if (key.title == item.name) {
+                        back = true
+                    } else if (key.title == '歡迎') {
+                        back = true
+                    }
+
+                });
+                return back;
+            });
+            // routes.menus = nowRouter
+            var setrr = {...routes, menus: nowRouter}
+            this.setState({config: setrr});
+
+        }
 
 
         // if ('超级管理员' == localStorage.getItem('displayName')) {
@@ -90,17 +88,18 @@ export default class CRouter extends Component {
     //     return component;
     // };
     requireLogin = (component) => {
+        console.log('hcia component', component)
         // const { auth } = this.props;
         // const { permissions } = auth.data;
 
 
         if (!localStorage.getItem('too')) { // 线上环境判断是否登录
-            
-            console.log('hcia localStorage.getItem too' , localStorage.getItem('too'))
+
+            console.log('hcia localStorage.getItem too', localStorage.getItem('too'))
             return <Redirect to={'/login'}/>;
         } else {
-            console.log('hcia component' , component)
-            
+            console.log('hcia component', component)
+
             return component
         }
         // return permission ? this.requireAuth(permission, component) : component;

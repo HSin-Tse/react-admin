@@ -54,6 +54,10 @@ class HeaderCustom extends Component {
         e.key === 'logout' && this.logout();
     };
     logout = () => {
+        // localStorage.setItem('infor', JSON.stringify(response.data.data));
+        // localStorage.setItem('displayName', response.data.data.displayName);
+        // localStorage.setItem('loginName', response.data.data.loginName);
+        // localStorage.setItem('too', response.data.data.token);
         localStorage.removeItem('infor');
         localStorage.removeItem('user');
         localStorage.removeItem('too');

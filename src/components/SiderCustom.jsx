@@ -86,49 +86,49 @@ class SiderCustom extends Component {
 
 
         const state = SiderCustom.setMenuOpen(this.props);
-        console.log('hcia state', state)
-        // this.setState(state);
-
-        console.log('hcia infor', this.state.infor)
-        console.log('hcia routes', routes)
+        // console.log('hcia state', state)
+        // console.log('hcia infor', this.state.infor)
+        // console.log('hcia routes', routes)
 
 
-        // if (this.state.infor.menuList.length == 0) {
-        //     // console.log('hcia routes', 'cccc')
-        //
-        //     this.setState({config: routes});
-        // }
-        // else if (this.state.infor != null) {
-        //     // console.log('hcia routes', 'aaaaaaa')
-        //
-        //     var nowRouter = routes.menus.filter((key, index, array) => {
-        //         var back = false
-        //         this.state.infor.menuList.forEach(function (item, index, array) {
-        //
-        //
-        //             // console.log('hcia key.title' , key.title,item.name,(key.title==item.name))
-        //
-        //             if (key.title == item.name) {
-        //                 back = true
-        //             } else if (key.title == '歡迎') {
-        //                 key.title = '歡迎-' + localStorage.getItem('displayName')
-        //                 back = true
-        //             }
-        //
-        //         });
-        //         return back;
-        //     });
-        //     var setrr = {...routes, menus: nowRouter}
-        //     console.log('hcia routes setrr', setrr)
-        //     this.setState({config: setrr});
-        // } else {
-        //     // console.log('hcia routes', 'bbbbbb')
-        //
-        //     this.setState({config: routes});
-        //
-        // }
+        if (this.state.infor == null) {
+            this.setState({config: routes});
 
-        this.setState({config: routes});
+        } else if (this.state.infor.menuList.length == 0) {
+            console.log('hcia', 'aaaaa')
+
+
+            var setrr = {
+                ...routes,
+                menus: [{key: "/app/dashboard/index", title: "歡迎", icon: "user", component: "Dashboard"}]
+            }
+
+            console.log('hcia setrr', setrr)
+            this.setState({config: setrr});
+
+        } else if (this.state.infor != null) {
+            console.log('hcia', 'bbbbb')
+
+
+            var nowRouter = routes.menus.filter((key, index, array) => {
+                var back = false
+                this.state.infor.menuList.forEach(function (item, index, array) {
+
+
+                    if (key.title == item.name) {
+                        back = true
+                    } else if (key.title == '歡迎') {
+                        back = true
+                    }
+
+                });
+                return back;
+            });
+            // routes.menus = nowRouter
+            var setrr = {...routes, menus: nowRouter}
+            this.setState({config: setrr});
+
+        }
 
 
     }

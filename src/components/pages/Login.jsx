@@ -62,8 +62,6 @@ class Login extends React.Component {
                         // message.success(response.data.data.token)
 
 
-                        // const {fetchData} = self.props;
-                        // fetchData({funcName: 'admin', stateName: 'auth'});
                         localStorage.setItem('infor', JSON.stringify(response.data.data));
                         localStorage.setItem('displayName', response.data.data.displayName);
                         localStorage.setItem('loginName', response.data.data.loginName);
