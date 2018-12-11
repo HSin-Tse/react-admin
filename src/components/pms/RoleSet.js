@@ -15,7 +15,6 @@ class Basic extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedRowKeys: [],
             visible: false,
             visibleOpM: false,
             date: new Date(),
@@ -52,116 +51,63 @@ class Basic extends Component {
         }).catch(function (error) {
             console.log(error);
         });
-
+        // comment: null
+        // createBackUserName: null
+        // createDate: ""
+        // operator: null
+        // roleComment: null
         this.columns = [
             {
-                title: '客户姓名',
-                fixed: 'left',
-                width: 100,
-                dataIndex: 'name',
-                key: 'name',
+                title: '编号',
+                width: 70,
+                align: 'center',
+                dataIndex: '编号',
+                key: '编号',
+                render: (text, record) => (
+                    <span>{record.idNo}</span>),
+            },
+
+            {
+                title: '角色名称',
+                width: 120,
+                dataIndex: '角色名称',
+                key: '角色名称',
                 render: (text, record) => (
                     <span>{record.name}</span>),
             }, {
-                title: '账号',
-                width: 150,
-
-                dataIndex: '申请序号',
-                key: '申请序号',
-                render: (text, record) => (<span>{record.accountNo}</span>),
-            }, {
-                title: '账号类型',
-                width: 150,
-
-                dataIndex: '账号类型',
-                key: '账号类型',
-                render: (text, record) => (
-                    <span>{record.broker}</span>),
-            }, {
-                title: '开户时间',
-                dataIndex: '开户时间',
-                key: '开户时间',
+                title: '创建时间',
+                dataIndex: '创建时间',
+                key: '创建时间',
                 width: 240,
-
                 render: (text, record) => (
-                    <span>{record.date}</span>),
+                    <span>{record.createDate}</span>),
             }, {
-                title: '保证金占比',
-                dataIndex: '保证金占比',
-                key: '保证金占比',
+                title: '创建人',
+                dataIndex: '创建人',
                 width: 120,
-                render: (text, record) => (
-                    <span>{record.marginLevel}</span>)
-            }, {
-                title: '浮动余额',
-                dataIndex: '浮动余额',
-                key: '浮动余额',
-                width: 120,
-                render: (text, record) => (
-                    <span>{record.cashBalance}</span>),
-            }, {
-                title: '账户净值',
-                dataIndex: '账户净值',
-                key: '账户净值',
-                width: 120,
-
-                render: (text, record) => (
-                    <span>{record.netEquity}</span>),
-            }, {
-                title: '当前状态',
-                dataIndex: '当前状态',
-                key: '当前状态',
-                width: 120,
-                render: (text, record) => (
-                    <span>{record.accountStatus == 1 ? '正常' : (record.accountStatus == 2) ? '禁止登陆' : '禁止交易'}</span>
-                )
-
-            }, {
-                title: '备注',
-                dataIndex: '备注',
-                key: '备注',
-                width: 120,
-                render: (text, record) => (
-                    <span>{record.comment}</span>)
-            }, {
-                title: '刷新时间',
-                width: 140,
-                dataIndex: '刷新时间',
-                key: '刷新时间',
-                render: (text, record) => (
-                    <span>{record.lastUpdateDate}</span>)
-            }, {
-                title: '操作人',
-                dataIndex: '操作人',
-                width: 120,
-
-                key: '操作人',
+                key: '创建人',
                 render: (text, record) => (
                     <span>{record.operator}</span>)
             }, {
-                title: '操作详情',
-                dataIndex: '操作详情',
-                fixed: 'right',
-                width: 120,
-                key: '操作详情',
+                title: '操作日志',
+                dataIndex: '操作日志',
+                width: 200,
+                align:'center',
+                key: '操作日志',
                 render: (text, record) => (
                     <Button className="ant-dropdown-link"
                             onClick={() => this.seeDetail(record)}>详情</Button>)
             }, {
                 title: '操作',
-                fixed: 'right',
-                width: 120,
+                width: 240,
+                align:'center',
                 key: 'action',
                 render: (text, record) => (
                     <div>
-                        <Select value={record.displayStatus} style={{width: 100}}
-                                onChange={(value) => this.handleChange(value, record)}>
-                            <Option key="1" value="正常">正常</Option>
-                            <Option key="2" value="禁止登陆">禁止登陆</Option>
-                            <Option key="3" value="禁止交易">禁止交易</Option>
-
-                        </Select>
-                        <span className="ant-divider"/>
+                        <Button className="ant-dropdown-link"
+                                onClick={() => this.seeDetail(record)}>详情</Button>
+                        <Button className="ant-dropdown-link"
+                                onClick={() => this.seeDetail(record)}>详情</Button>
                     </div>
                 ),
             }];
@@ -258,17 +204,19 @@ class Basic extends Component {
         return +str >= 10 ? str : '0' + str
     };
     requestPage = () => {
+        let self = this;
 
-        let self = this
         self.setState({
                 loading: true,
             }
         );
-        window.Axios.post('star/getStarLiveAccountList', {
+
+
+        window.Axios.post('back/getRoleList', {
             'pageSize': self.state.pgsize,
             'pageNo': self.state.current,
         }).then(function (response) {
-            console.log(response);
+            // console.log(response);
 
             self.setState({
                     totalPage: response.data.data.totalPage,
@@ -281,6 +229,7 @@ class Basic extends Component {
         }).catch(function (error) {
             console.log(error);
         });
+
     }
     changePage = (page) => {
         console.log('hcia page', page)
@@ -290,26 +239,8 @@ class Basic extends Component {
             this.requestPage()
         })
     }
-    refleshNowpage = () => {
-
-        let self = this;
-        var result = self.state.selectedRowKeys.map(Number);
-
-        window.Axios.post('star/refreshStarLiveAccount', {
-            idList: result,
-        }).then(function (response) {
-            console.log(response);
-            self.setState({
-                visibleOpM: false,
-                loadFor: false,
-            }, () => {
-                self.requestPage()
-            });
-            message.success('操作成功');
-
-        }).catch(function (error) {
-            console.log(error);
-        });
+    addRole = () => {
+        this.props.history.push('/app/pms/addrole' + 0)
 
 
     }
@@ -356,18 +287,8 @@ class Basic extends Component {
             visibleOpM: false,
         });
     };
-    onSelectChange = (selectedRowKeys) => {
-        console.log('hcia', 'selectedRowKeys changed: ', selectedRowKeys);
-        this.setState({selectedRowKeys});
-    }
 
     render() {
-        const {selectedRowKeys} = this.state;
-        const hasSelected = selectedRowKeys.length > 0;
-        const rowSelection = {
-            selectedRowKeys,
-            onChange: this.onSelectChange,
-        };
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
@@ -417,21 +338,24 @@ class Basic extends Component {
 
 
                 </Modal>
-                <BreadcrumbCustom first="审核管理" second="交易账户管理"/>
+                <h2>
+                    角色配置
+                </h2>
 
-                <Card title="交易账户管理"
+                <BreadcrumbCustom first="权限管理" second="角色配置"/>
+
+                <Card title="角色配置表"
                       extra={
-                          <Button type="default" disabled={!hasSelected}
-                                  onClick={() => this.refleshNowpage()}>刷新当前页面
+                          <Button type="default"
+                                  onClick={() => this.addRole()}>新增
                           </Button>
                       }>
 
                     <Table rowKey="id"
-                           rowSelection={rowSelection}
 
                            columns={this.columns}
                            dataSource={this.state.userList}
-                           scroll={{x: 1600}}
+                           scroll={{x: (1000)}}
                            bordered
                            loading={this.state.loading}
                            pagination={{  // 分页

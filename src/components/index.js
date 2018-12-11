@@ -37,6 +37,7 @@ import RoleAddUser from './pms/RoleAddUser'
 import TradeAccount from './trade/Account'
 import TradeDepart from './trade/Depart'
 import RoleSet from './pms/RoleSet'
+import AddRole from './pms/AddRole'
 import InnerMan from './pms/InnerMan'
 
 
@@ -77,6 +78,7 @@ export default {
     CustomerSummary,
     CustomerUserInfo,
     RoleAddUser,
+    AddRole,
     TradeAccount,
     TradeDepart
 }

@@ -76,9 +76,9 @@ class RoleAddUser extends Component {
 
             <div>
 
-                <h1>
+                <h2>
                     权限管理表
-                </h1>
+                </h2>
 
                 <div><BreadcrumbCustom first="内部成员列表" second="编辑资料"/></div>
                 <Row>

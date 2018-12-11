@@ -323,25 +323,6 @@ class Basic extends Component {
 
         this.props.history.push('/app/pms/adduser' + 0)
 
-        // let self = this;
-        // var result = self.state.selectedRowKeys.map(Number);
-        //
-        // window.Axios.post('star/refreshStarLiveAccount', {
-        //     idList: result,
-        // }).then(function (response) {
-        //     console.log(response);
-        //     self.setState({
-        //         visibleOpM: false,
-        //         loadFor: false,
-        //     }, () => {
-        //         self.requestPage()
-        //     });
-        //     message.success('操作成功');
-        //
-        // }).catch(function (error) {
-        //     console.log(error);
-        // });
-
 
     }
     showModal = () => {

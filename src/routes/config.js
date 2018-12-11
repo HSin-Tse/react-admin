@@ -60,5 +60,11 @@ export default {
                 icon: 'star',
                 component: 'RoleAddUser'
             },
+            {
+                route: '/app/pms/addrole:id',
+                title: 'AddRole',
+                icon: 'star',
+                component: 'AddRole'
+            },
         ]
 }

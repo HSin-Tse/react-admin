@@ -620,7 +620,7 @@ class PassOpenD extends Component {
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{width: 120}}>账户类型</span>
+                                    <span style={{width: 120}}>交易类型</span>
                                     <Input defaultValue={this.state.recordData.accountType} disabled={true}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
@@ -631,7 +631,9 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*交易密码</span>
-                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
+                                    <Input defaultValue={this.state.recordData.accountPassword}
+                                           disabled={true}
+                                           // onChange={this.onChangeSSS}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                             </Card>
