@@ -1,10 +1,12 @@
 /* eslint-disable react/sort-comp */
 
 import React, {Component} from 'react';
-import {Col, Card, Row, DatePicker, Input, Modal, Button, Table, Icon, Checkbox, Select} from 'antd';
+import {Col, Card, Row, Radio, Input, Modal, Button, Table, Icon, Checkbox, Select} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import axios from 'axios';
 import {parse} from 'querystring';
+
+const RadioGroup = Radio.Group;
 
 class RoleAddUser extends Component {
     // state = {visible: false, modal2Visible: false}
@@ -60,13 +62,15 @@ class RoleAddUser extends Component {
 
     }
 
+    onChange = (e) => {
+        console.log('radio checked', e.target.value);
+        this.setState({
+            gender: e.target.value,
+        });
+    }
+
     render() {
-        const style1 = {
-            padding: '8px',
-        };
-        const {
-            Meta
-        } = Card;
+
 
         return (
 
@@ -75,54 +79,84 @@ class RoleAddUser extends Component {
                 <h1>
                     权限管理表
                 </h1>
+
                 <div><BreadcrumbCustom first="内部成员列表" second="编辑资料"/></div>
+                <Row>
 
+                </Row>
 
-                <Card title={<h2> 基本信息 </h2>} bordered={true} style={{marginTop: 15}}
-                      bodyStyle={{padding: 0, margin: 0}}>
-
-                    <Row gutter={8}>
-                        <Col md={12}>
-
-
-                            <div style={{display: 'flex', height: 50,justifyContent: 'flex-start', alignItems:'center', background: 'red'}}>
-                                <h3 style={{  height: 50, background: 'blue',width: 70}}>国家:</h3>
-
-                                <Input defaultValue={this.state.name} disabled={true}
-                                       style={{width: 120}} placeholder="Basic usage"/>
-                            </div>
-                            <div style={{display: 'flex', minHeight: 50}}>
-                                <h3 style={{width: 70}}>国家:</h3>
-
-                                <Input defaultValue={this.state.name} disabled={true}
-                                       style={{width: 120}} placeholder="Basic usage"/>
-                            </div>
-
-
-                        </Col>
-                    </Row>
-                </Card>
                 <Card title={<h2> 基本信息 </h2>} bordered={true} style={{marginTop: 15}}>
 
                     <Row gutter={8}>
                         <Col md={12}>
-                            <Card bordered={false}>
+
+                            <div style={{display: 'flex', minHeight: 50}}>
+                                <h3 style={{width: 60}}>姓名:</h3>
+
+                                <Input defaultValue={this.state.name}
+                                       style={{width: 180}}/>
+                            </div>
+                            <div style={{display: 'flex', minHeight: 50}}>
+                                <h3 style={{width: 60}}>邮箱:</h3>
+
+                                <Input defaultValue={this.state.name}
+                                       style={{width: 180}}/>
+                            </div>
+                            <div style={{display: 'flex', minHeight: 50}}>
+                                <h3 style={{width: 60}}>手机:</h3>
+
+                                <Input defaultValue={this.state.name}
+                                       style={{width: 180}}/>
+                            </div>
+                            <div style={{display: 'flex', minHeight: 50}}>
+                                <h3 style={{width: 60}}>性别:</h3>
+
+                                <RadioGroup onChange={this.onChange} value={this.state.gender}>
+                                    <Radio value={1}>男</Radio>
+                                    <Radio value={2}>女</Radio>
+                                </RadioGroup>
+                            </div>
+
+                        </Col>
+                    </Row>
+                </Card>
 
 
-                                <div style={{display: 'flex', minHeight: 50}}>
-                                    <h3 style={{width: 100}}>国家:</h3>
+                <Card title={<h2> 账号信息 </h2>} bordered={true} style={{marginTop: 15}}>
 
-                                    <Input defaultValue={this.state.name} disabled={true}
-                                           style={{width: 120}} placeholder="Basic usage"/>
-                                </div>
-                                <div style={{display: 'flex', minHeight: 50}}>
-                                    <h3 style={{width: 100}}>国家:</h3>
+                    <Row gutter={8}>
+                        <Col md={24}>
 
-                                    <Input defaultValue={this.state.name} disabled={true}
-                                           style={{width: 120}} placeholder="Basic usage"/>
-                                </div>
-                            </Card>
+                            <div style={{display: 'flex', minHeight: 50}}>
+                                <h3 style={{width: 60}}>登录名:</h3>
 
+                                <Input defaultValue={this.state.name}
+                                       style={{width: 180}}/>
+                            </div>
+                            <div style={{display: 'flex', minHeight: 50}}>
+                                <h3 style={{width: 60}}>密码:</h3>
+
+                                <Input defaultValue={this.state.name}
+                                       style={{width: 180}}/>
+                                <h3 style={{marginLeft:80,width: 120}}>请重复密码:</h3>
+
+                                <Input defaultValue={this.state.name}
+                                       style={{width: 180}}/>
+                            </div>
+                            <div style={{display: 'flex', minHeight: 50}}>
+                                <h3 style={{width: 60}}>角色:</h3>
+
+                                <Input defaultValue={this.state.name}
+                                       style={{width: 180}}/>
+                            </div>
+                            <div style={{display: 'flex', minHeight: 50}}>
+                                <h3 style={{width: 60}}>权限:</h3>
+
+                                <RadioGroup onChange={this.onChange} value={this.state.gender}>
+                                    <Radio value={1}>男</Radio>
+                                    <Radio value={2}>女</Radio>
+                                </RadioGroup>
+                            </div>
 
                         </Col>
                     </Row>

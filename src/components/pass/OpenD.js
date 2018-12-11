@@ -342,13 +342,13 @@ class PassOpenD extends Component {
                 <Card disabled={true} title="IX账户审核 " bordered={true}>
 
                     <Row gutter={1}>
-                        <Col md={6}>
+                        <Col md={8}>
                             <p>客户姓名:{this.state.recordData.cnName}</p>
                         </Col>
-                        <Col md={6}>
+                        <Col md={8}>
                             <p>客户邮箱：{this.state.recordData.email}</p>
                         </Col>
-                        <Col md={6}>
+                        <Col md={8}>
                             <p>手机号码：{this.state.recordData.phoneNumber} </p>
                         </Col>
                     </Row>
