@@ -5,7 +5,6 @@ import React, {Component} from 'react';
 import {Layout} from 'antd';
 import {withRouter} from 'react-router-dom';
 import routes from '../routes/config';
-import routesConfigadmin from '../routes/configadmin';
 import SiderMenu from './SiderMenu';
 import avater from "../style/imgs/ixlogo.png";
 
@@ -24,11 +23,7 @@ class SiderCustom extends Component {
         }
     }
 
-    // componentWillMount() {
-    //     console.log('hcia SiderCustom componentWillMount' )
-    //     // this.setState({config: routesConfigadmin});
-    //
-    // }
+
 
 
     static getDerivedStateFromProps(props, state) {
@@ -70,6 +65,9 @@ class SiderCustom extends Component {
     };
 
     componentWillMount() {
+
+        console.log('hcia  SiderCustom componentWillMount')
+
         // console.log('hcia componentWillMount' )
         // this.setState({
         //     displayName: localStorage.getItem('displayName'),
@@ -79,14 +77,11 @@ class SiderCustom extends Component {
 
     componentDidMount() {
 
-        this.setState({
-            infor: JSON.parse(localStorage.getItem('infor'))
-        });
-        console.log('hcia componentDidMount')
+        console.log('hcia  SiderCustom componentDidMount')
 
 
-        const state = SiderCustom.setMenuOpen(this.props);
-        // console.log('hcia state', state)
+        // const state = SiderCustom.setMenuOpen(this.props);
+        // console.log('hcia SiderCustom state', state)
         // console.log('hcia infor', this.state.infor)
         // console.log('hcia routes', routes)
 
@@ -95,7 +90,7 @@ class SiderCustom extends Component {
             this.setState({config: routes});
 
         } else if (this.state.infor.menuList.length == 0) {
-            console.log('hcia', 'aaaaa')
+            // console.log('hcia', 'aaaaa')
 
 
             var setrr = {
@@ -107,11 +102,13 @@ class SiderCustom extends Component {
             this.setState({config: setrr});
 
         } else if (this.state.infor != null) {
-            console.log('hcia', 'bbbbb')
+            // console.log('hcia', 'bbbbb')
 
 
             var nowRouter = routes.menus.filter((key, index, array) => {
                 var back = false
+
+
                 this.state.infor.menuList.forEach(function (item, index, array) {
 
 
@@ -122,8 +119,18 @@ class SiderCustom extends Component {
                     }
 
                 });
+
                 return back;
             });
+
+            // routes.menus.forEach(function (key, index, array) {
+            //
+            //     if (key.title == '歡迎') {
+            //         key.title = '歡迎-' + localStorage.getItem('displayName')
+            //     }
+            //
+            // });
+
             // routes.menus = nowRouter
             var setrr = {...routes, menus: nowRouter}
             this.setState({config: setrr});

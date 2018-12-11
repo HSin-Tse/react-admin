@@ -42,7 +42,6 @@ class CustomerUserInfo extends Component {
   componentDidMount() {
 
 
-    console.log('xxx',this.props.match.params.id)
     this.requestListData()
     this.ediftModalColumn()
     this.requestUserCommentList()
@@ -222,7 +221,6 @@ class CustomerUserInfo extends Component {
       self.setState({ anyThing: 'wwwww' });
       self.setState({ anyThing: response.data.code });
       self.setState({ userList: response.data.data });
-      console.log('ooooo',bb)
 
     }).catch(function (error) {
       console.log(error);

@@ -33,6 +33,7 @@ import CustomerSummary from './customer/CustomerSummary'
 import BlackList from './customer/BlackList'
 import WhiteList from './customer/WhiteList'
 import CustomerUserInfo from './customer/CustomerUserInfo'
+import RoleAddUser from './pms/RoleAddUser'
 import TradeAccount from './trade/Account'
 import TradeDepart from './trade/Depart'
 import RoleSet from './pms/RoleSet'
@@ -75,6 +76,7 @@ export default {
     IntendingUser,
     CustomerSummary,
     CustomerUserInfo,
+    RoleAddUser,
     TradeAccount,
     TradeDepart
 }

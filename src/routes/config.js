@@ -34,6 +34,7 @@ export default {
             subs: [
                 {key: '/app/pms/innerman', title: '内部成员配置', component: 'InnerMan'},
                 {key: '/app/pms/roleset', title: '角色配置', component: 'RoleSet'},
+                // {key: '/app/pms/rolelog', title: '操作日志', component: 'RoleLog'},
 
             ],
         },
@@ -52,7 +53,12 @@ export default {
                 title: 'CustomerUserInfo',
                 icon: 'star',
                 component: 'CustomerUserInfo'
-            }
-
-        ] // 非菜单相关路] // 非菜单相关路由
+            },
+            {
+                route: '/app/pms/adduser:id',
+                title: 'RoleAddUser',
+                icon: 'star',
+                component: 'RoleAddUser'
+            },
+        ]
 }

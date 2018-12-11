@@ -23,29 +23,30 @@ export default class CRouter extends Component {
 
 
     componentDidMount() {
+        console.log('hcia  router componentDidMount')
 
     }
 
     componentWillMount() {
-        console.log('hcia componentWillMount')
+        console.log('hcia  router componentWillMount')
 
-        console.log('hcia this.state.infor', this.state.infor)
+        // console.log('hcia  router this.state.infor', this.state.infor)
         if (this.state.infor == null) {
             this.setState({config: routes});
 
         } else if (this.state.infor.menuList.length == 0) {
-            console.log('hcia', 'aaaaa')
+            // console.log('hcia', 'aaaaa')
 
             var setrr = {
                 ...routes,
                 menus: [{key: "/app/dashboard/index", title: "歡迎", icon: "user", component: "Dashboard"}]
             }
 
-            console.log('hcia setrr', setrr)
+            // console.log('hcia setrr', setrr)
             this.setState({config: setrr});
 
         } else if (this.state.infor != null) {
-            console.log('hcia', 'bbbbb')
+            // console.log('hcia', 'bbbbb')
 
 
             var nowRouter = routes.menus.filter((key, index, array) => {
@@ -68,37 +69,22 @@ export default class CRouter extends Component {
 
         }
 
-
-        // if ('超级管理员' == localStorage.getItem('displayName')) {
-        //     this.setState({config: routes});
-        // } else {
-        //     // this.setState({config: routesConfigadmin});
-        //     this.setState({config: routes});
-        // }
-
     }
 
 
-    // requireAuth = (permission, component) => {
-    //     const {auth} = this.props;
-    //     const {permissions} = auth.data;
-    //     console.log('hcia permissions', permissions)
-    //     // const { auth } = store.getState().httpData;
-    //     // if (!permissions || !permissions.includes(permission)) return <Redirect to={'404'} />;
-    //     return component;
-    // };
     requireLogin = (component) => {
-        console.log('hcia component', component)
+
+        // console.log('hcia component', component)
         // const { auth } = this.props;
         // const { permissions } = auth.data;
 
 
         if (!localStorage.getItem('too')) { // 线上环境判断是否登录
 
-            console.log('hcia localStorage.getItem too', localStorage.getItem('too'))
+            // console.log('hcia requireLogin localStorage.getItem too', localStorage.getItem('too'))
             return <Redirect to={'/login'}/>;
         } else {
-            console.log('hcia component', component)
+            // console.log('hcia requireLogin component', component)
 
             return component
         }
@@ -109,8 +95,6 @@ export default class CRouter extends Component {
         return (
             <Switch>
                 {
-
-
                     Object.keys(this.state.config).map(key =>
                         this.state.config[key].map(r => {
                             const route = r => {

@@ -15,7 +15,6 @@ class Basic extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedRowKeys: [],
             visible: false,
             visibleOpM: false,
             date: new Date(),
@@ -33,8 +32,9 @@ class Basic extends Component {
 
         };
     }
+
     handleDelay = (record) => {
-        console.log('hcia record' , record)
+        console.log('hcia record', record)
         let self = this;
         window.Axios.post('back/saveOrUpdateBackUser', {
             // ...record,
@@ -76,7 +76,6 @@ class Basic extends Component {
         });
 
         this.columns = [
-
             {
                 title: '编号',
                 fixed: 'left',
@@ -189,7 +188,7 @@ class Basic extends Component {
 
                         <Popconfirm title="延期申请？" onConfirm={() => this.handleDelay(record)} okText="Yes"
                                     cancelText="No">
-                            <Button  onClick={() => this.handleDelay(record)} className="ant-dropdown-link">冻结</Button>
+                            <Button onClick={() => this.handleDelay(record)} className="ant-dropdown-link">冻结</Button>
 
                         </Popconfirm>
                     </div>
@@ -236,6 +235,7 @@ class Basic extends Component {
     pad = (str) => {
         return +str >= 10 ? str : '0' + str
     };
+
     seeDetail = (record) => {
         ///
         let self = this
@@ -318,26 +318,29 @@ class Basic extends Component {
             this.requestPage()
         })
     }
-    refleshNowpage = () => {
+    newUSer = (record) => {
 
-        let self = this;
-        var result = self.state.selectedRowKeys.map(Number);
 
-        window.Axios.post('star/refreshStarLiveAccount', {
-            idList: result,
-        }).then(function (response) {
-            console.log(response);
-            self.setState({
-                visibleOpM: false,
-                loadFor: false,
-            }, () => {
-                self.requestPage()
-            });
-            message.success('操作成功');
+        this.props.history.push('/app/pms/adduser' + 0)
 
-        }).catch(function (error) {
-            console.log(error);
-        });
+        // let self = this;
+        // var result = self.state.selectedRowKeys.map(Number);
+        //
+        // window.Axios.post('star/refreshStarLiveAccount', {
+        //     idList: result,
+        // }).then(function (response) {
+        //     console.log(response);
+        //     self.setState({
+        //         visibleOpM: false,
+        //         loadFor: false,
+        //     }, () => {
+        //         self.requestPage()
+        //     });
+        //     message.success('操作成功');
+        //
+        // }).catch(function (error) {
+        //     console.log(error);
+        // });
 
 
     }
@@ -389,13 +392,10 @@ class Basic extends Component {
 
 
     render() {
-        const {selectedRowKeys} = this.state;
-        const hasSelected = selectedRowKeys.length > 0;
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
-                {/*this.state.selectedRowKeys.length > 0*/}
 
                 <Modal
                     title={this.state.modeState == '正常' ? '恢复正常' : this.state.modeState}
@@ -444,8 +444,8 @@ class Basic extends Component {
 
                 <Card title="内部成员列表"
                       extra={
-                          <Button type="default" disabled={!hasSelected}
-                                  onClick={() => this.refleshNowpage()}>刷新当前页面
+                          <Button type="default"
+                                  onClick={() => this.newUSer()}>新增
                           </Button>
                       }>
 

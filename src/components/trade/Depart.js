@@ -149,12 +149,10 @@ export default class Basic extends Component {
                 loading: true,
             }
         );
-        console.log('hcia pg', pg)
         window.Axios.post('open/getOpenApplyList', {
             'pageSize': this.state.pgsize,
             'pageNo': pg,
         }).then(function (response) {
-            console.log(response);
 
             self.setState({
                     totalPage: response.data.data.totalPage,
@@ -165,13 +163,11 @@ export default class Basic extends Component {
 
 
         }).catch(function (error) {
-            console.log(error);
             // message.warn(error);
         });
     }
 
     changePage = (page) => {
-        console.log('hcia page', page)
         this.setState({
             current: page,
         }, () => {
