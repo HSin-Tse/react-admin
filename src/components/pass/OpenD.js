@@ -540,7 +540,7 @@ class PassOpenD extends Component {
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*联系电话</span>
                                     <Input defaultValue={this.state.recordData.phoneNumber} disabled={true}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                           style={{width: 130}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*邮箱地址</span>
@@ -621,12 +621,12 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>账户类型</span>
-                                    <Input defaultValue={this.state.recordData.country} disabled={true}
+                                    <Input defaultValue={this.state.recordData.accountType} disabled={true}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>交易货币</span>
-                                    <Input defaultValue={this.state.recordData.country} disabled={true}
+                                    <Input defaultValue={this.state.recordData.currency} disabled={true}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>

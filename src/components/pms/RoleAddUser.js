@@ -1,7 +1,7 @@
 /* eslint-disable react/sort-comp */
 
 import React, {Component} from 'react';
-import {Col, Card, Row, DatePicker, Input, Modal, Button, Table, Icon, Checkbox} from 'antd';
+import {Col, Card, Row, DatePicker, Input, Modal, Button, Table, Icon, Checkbox, Select} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import axios from 'axios';
 import {parse} from 'querystring';
@@ -54,9 +54,9 @@ class RoleAddUser extends Component {
     componentDidMount() {
 
 
-        this.requestListData()
-        this.ediftModalColumn()
-        this.requestUserCommentList()
+        // this.requestListData()
+        // this.ediftModalColumn()
+        // this.requestUserCommentList()
 
     }
 
@@ -72,74 +72,61 @@ class RoleAddUser extends Component {
 
             <div>
 
-                <p
-                    style={{
-                        fontSize: 14,
-                        color: 'rgba(0, 0, 0, 0.85)',
-                        marginBottom: 16,
-                        fontWeight: 500,
-                    }}>
-                    用戶管理
-                </p>
-                <div><BreadcrumbCustom first="用户總表" second="行為信息"/></div>
-                <Card
-                    type="inner"
-                    title="基本信息"
-                >
-                    <Card
-
-                    >
-                        < Meta title={'姓名'}/>
-                        {/*< Meta*/}
-                            {/*title={this.state.userList.length == 0 ? '手机：' : '手机：' + this.state.userList.base.cellphone}/>*/}
-                        {/*< Meta*/}
-                            {/*title={this.state.userList.length == 0 ? '邮箱：' : '邮箱：' + this.state.userList.base.email}/>*/}
+                <h1>
+                    权限管理表
+                </h1>
+                <div><BreadcrumbCustom first="内部成员列表" second="编辑资料"/></div>
 
 
-                    </Card>
+                <Card title={<h2> 基本信息 </h2>} bordered={true} style={{marginTop: 15}}
+                      bodyStyle={{padding: 0, margin: 0}}>
+
+                    <Row gutter={8}>
+                        <Col md={12}>
+
+
+                            <div style={{display: 'flex', height: 50,justifyContent: 'flex-start', alignItems:'center', background: 'red'}}>
+                                <h3 style={{  height: 50, background: 'blue',width: 70}}>国家:</h3>
+
+                                <Input defaultValue={this.state.name} disabled={true}
+                                       style={{width: 120}} placeholder="Basic usage"/>
+                            </div>
+                            <div style={{display: 'flex', minHeight: 50}}>
+                                <h3 style={{width: 70}}>国家:</h3>
+
+                                <Input defaultValue={this.state.name} disabled={true}
+                                       style={{width: 120}} placeholder="Basic usage"/>
+                            </div>
+
+
+                        </Col>
+                    </Row>
                 </Card>
-                {/*<Card*/}
-                    {/*style={{marginTop: 16}}*/}
-                    {/*type="inner"*/}
-                    {/*title="數據信息"*/}
-                {/*>*/}
-                    {/*< Meta*/}
-                        {/*title={this.state.userList.length == 0 ? '注册时间：' : '注册时间：' + this.timestampToTime(this.state.userList.base.regDate)}/>*/}
-                    {/*< Meta*/}
-                        {/*title={this.state.userList.length == 0 ? '上次访问时间：' : '上次访问时间：' + this.timestampToTime(this.state.userList.base.lastLoginTime)}/>*/}
-                    {/*< Meta*/}
-                        {/*title={this.state.userList.length == 0 ? '上次访问IP：' : '上次访问IP：' + this.state.userList.base.lastLoginIP}/>*/}
-                    {/*< Meta*/}
-                        {/*title={this.state.userList.length == 0 ? '地理位置：' : '地理位置：' + this.state.userList.base.location}/>*/}
+                <Card title={<h2> 基本信息 </h2>} bordered={true} style={{marginTop: 15}}>
 
-                {/*</Card>*/}
-                {/*<Card*/}
-                    {/*style={{marginTop: 16}}*/}
-                    {/*type="inner"*/}
-                    {/*title="行為信息"*/}
-                {/*>*/}
-                    {/*< Meta*/}
-                        {/*title={this.state.userList.length == 0 ? 'APP版本:' : 'APP版本:' + this.state.userList.base.versionInfo}/>*/}
-                    {/*< Meta*/}
-                        {/*title={this.state.userList.length == 0 ? '手机型号:' : '手机型号:' + this.state.userList.base.clientInfo}/>*/}
-                    {/*< Meta*/}
-                        {/*title={this.state.userList.length == 0 ? '操作系统型号:' : '操作系统型号:' + this.state.userList.base.systemInfo}/>*/}
-                    {/*< Meta*/}
-                        {/*title={this.state.userList.length == 0 ? '下载平台:' : '下载平台:' + this.state.userList.base.channelInfo}/>*/}
+                    <Row gutter={8}>
+                        <Col md={12}>
+                            <Card bordered={false}>
 
-                {/*</Card>*/}
-                {/*<Card*/}
-                    {/*style={{marginTop: 16}}*/}
-                    {/*type="inner"*/}
-                    {/*title="其他"*/}
 
-                {/*>*/}
-                    {/*<Table rowKey="id"*/}
-                           {/*columns={this.modalColumns} dataSource={this.state.operationDiaryHistory}*/}
-                           {/*scroll={{x: 1300}}*/}
-                    {/*/>*/}
-                {/*</Card>*/}
+                                <div style={{display: 'flex', minHeight: 50}}>
+                                    <h3 style={{width: 100}}>国家:</h3>
 
+                                    <Input defaultValue={this.state.name} disabled={true}
+                                           style={{width: 120}} placeholder="Basic usage"/>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 50}}>
+                                    <h3 style={{width: 100}}>国家:</h3>
+
+                                    <Input defaultValue={this.state.name} disabled={true}
+                                           style={{width: 120}} placeholder="Basic usage"/>
+                                </div>
+                            </Card>
+
+
+                        </Col>
+                    </Row>
+                </Card>
 
             </div>
         )
