@@ -1,10 +1,28 @@
 /* eslint-disable react/sort-comp */
 
 import React, {Component} from 'react';
-import {Col, Card, Row, Radio, Input, Modal, Button, Table, Icon, Checkbox, Select, Popconfirm, message} from 'antd';
+import {
+    Col,
+    Card,
+    Row,
+    Radio,
+    Input,
+    Modal,
+    Button,
+    Table,
+    Icon,
+    Checkbox,
+    Select,
+    Popconfirm,
+    message,
+    Form
+} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import axios from 'axios';
 import {parse} from 'querystring';
+import {bindActionCreators} from "redux";
+import {setINFOR} from "../../action";
+import connect from "react-redux/es/connect/connect";
 
 const RadioGroup = Radio.Group;
 const {TextArea} = Input;
@@ -23,7 +41,8 @@ class AddRole extends Component {
             anyThing: 'asdasd',
             changeNoteV: '',
             name: '123',
-            seret: ''
+            seret: '',
+            realp: ''
         };
     }
 
@@ -83,7 +102,7 @@ class AddRole extends Component {
             name: self.state.name,
             content: self.state.changeNoteV,
             idList: self.state.powerList,
-            password: self.state.seret,
+            password: self.state.realp,
         }).then(function (response) {
             console.log('hcia response', response)
 
@@ -101,11 +120,23 @@ class AddRole extends Component {
 
     changeScret = (e) => {
 
+
+        //
+        // var see =''
+        // for(var i =0;i<e.target.value.length;i++){
+        //     see = see+'*'
+        // }
+
         this.setState({
-            seret: e.target.value,
+            // seret: see,
+            realp: e.target.value,
         });
 
     }
+
+
+
+
     changeName = (e) => {
 
         this.setState({
@@ -130,7 +161,7 @@ class AddRole extends Component {
 
     render() {
 
-
+        const { getFieldDecorator } = this.props.form;
         const ss = this.state.menuList.map(function (item, index) {
                 return (
 
@@ -165,7 +196,7 @@ class AddRole extends Component {
                 <div>changeNoteV :{JSON.stringify(this.state.changeNoteV)}</div>
                 <div>name :{JSON.stringify(this.state.name)}</div>
                 <div>powerList :{JSON.stringify(this.state.powerList)}</div>
-                <div>seret :{JSON.stringify(this.state.seret)}</div>
+                <div>realp :{JSON.stringify(this.state.realp)}</div>
 
 
                 <div><BreadcrumbCustom first="内部成员列表" second="内部人员配置"/></div>
@@ -245,15 +276,25 @@ class AddRole extends Component {
                         <Col md={24}>
 
                             <div style={{fontWeight: 'bold', fontSize: 16, display: 'flex', minHeight: 50}}>
-                                <span style={{width: 300}}>請輸入你的密碼:</span>
+                                <span style={{width: 200}}>請輸入你的密碼:</span>
 
-                                <Input
-                                    placeholder="請輸入你的密碼加以驗證:"
-                                    onChange={this.changeScret}
-                                    defaultValue={this.state.seret}
-                                    style={{width: 800}}
-                                    addonAfter={<Icon type="star" theme="twoTone"/>}
-                                />
+
+                                {getFieldDecorator('password', {
+                                    rules: [{
+                                        required: true, message: 'Please input your password!',
+                                    }, {
+                                        validator: this.validateToNextPassword,
+                                    }],
+                                })(
+                                    <Input style={{width: 800}} addonAfter={<Icon type="star" theme="twoTone"/>}  onChange={this.changeScret} placeholder="請輸入你的密碼加以驗證:" type="password" />
+                                )}
+                                {/*<Input*/}
+                                    {/*placeholder="請輸入你的密碼加以驗證:"*/}
+                                    {/*value={this.state.seret}*/}
+                                    {/*onChange={this.changeScret}*/}
+                                    {/*style={{width: 800}}*/}
+                                    {/*addonAfter={<Icon type="star" theme="twoTone"/>}*/}
+                                {/*/>*/}
 
                             </div>
 
@@ -289,4 +330,19 @@ class AddRole extends Component {
 
 }
 
-export default AddRole;
+// export default AddRole;
+
+const mapStateToPorps = state => {
+    const {auth} = state.httpData;
+    const infor = state.infor;
+    return {auth, infor};
+};
+const mapDispatchToProps = dispatch => ({
+    // fetchData: bindActionCreators(fetchData, dispatch),
+    // receiveData: bindActionCreators(receiveData, dispatch),
+    setUSER: bindActionCreators(setINFOR, dispatch),
+
+});
+
+
+export default connect(mapStateToPorps, mapDispatchToProps)(Form.create()(AddRole));
