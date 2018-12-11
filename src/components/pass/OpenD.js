@@ -877,7 +877,7 @@ class PassOpenD extends Component {
                     <p>*外汇杠杆ID(操作人員必填寫)
                         :{this.state.leverageName}{this.state.leverageId}</p>
                     <p>*账户类型
-                        :{this.state.recordData.riskTolerance}-->{this.state.ix_Risk_ToleranceNAME}:{this.state.waitUpdate.ix_Risk_Tolerance}</p>
+                        :{this.state.recordData.accountType}</p>
                 </Modal>
             </div>
 
@@ -1120,7 +1120,7 @@ class PassOpenD extends Component {
     handleACType = (value, label) => {
 
         console.log('hcia value', value)
-        console.log('hcia label', label.props.children)
+        console.log('hcia label', label.props)
 
         var self = this
         //
@@ -1179,6 +1179,7 @@ class PassOpenD extends Component {
             {
                 id: self.state.recordData.id,
                 leverageId: this.state.leverageId,
+                accountType: this.state.recordData.accountType,
                 ...self.state.waitUpdate
             }
         ).then(function (response) {
