@@ -62,6 +62,7 @@ class PassOpenD extends Component {
             , mAnnualIncome: ''
             , sss: 'aa'
             , IXIncomeList: []
+            , leverageList: []
             , IXPercentage: []
             , IXFundsSource: []
             , IXUStax: []
@@ -79,7 +80,12 @@ class PassOpenD extends Component {
         window.Axios.post('dict/leverageList', {
             'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
         }).then((response) => {
+            console.log('hcia response.data', response.data.data)
 
+            self.setState({
+                leverageList: response.data.data,
+
+            });
 
         });
 
@@ -364,24 +370,12 @@ class PassOpenD extends Component {
 
                                 </div>
                             </Card>
-                            <Card bordered={false}>
 
-                                <div>
-                                    交易类型:
-                                    <RadioGroup
-                                        disabled={true}
-                                        onChange={this.onChangetradeType}
-                                        options={tradeType}
-                                        value={this.state.tradrType}
-                                        style={{marginLeft: 20, width: 520}}
-                                    />
-                                </div>
-                            </Card>
+
                         </Col>
                         <Col md={8}>
                             <Card bordered={false}>
                                 <div>
-
                                     服务器 :
                                     <Select
                                         disabled={true}
@@ -416,11 +410,12 @@ class PassOpenD extends Component {
                             <Card bordered={false}>
                                 <div>
                                     杠杆组 :
-                                    <Select labelInValue defaultValue={{key: 'lucy'}}
+                                    <Select labelInValue
                                             style={{marginLeft: 20, width: 120}}
                                             onChange={this.handleChange}>
-                                        <Option value="jack">Jack (100)</Option>
-                                        <Option value="lucy">Lucy (101)</Option>
+                                        {this.state.leverageList.map(leaf => <Option
+                                            key={leaf.id}>{leaf.clientGroupName}</Option>)}
+
                                     </Select>
                                 </div>
                             </Card>
@@ -875,6 +870,10 @@ class PassOpenD extends Component {
                     <p>*交易目的
                         :{this.state.recordData.tradingObjectives}-->{this.state.ix_Trading_ObjectivesNAME}:{this.state.waitUpdate.ix_Trading_Objectives}</p>
                     <p>*风险承受力
+                        :{this.state.recordData.riskTolerance}-->{this.state.ix_Risk_ToleranceNAME}:{this.state.waitUpdate.ix_Risk_Tolerance}</p>
+                    <p>*外汇杠杆ID(操作人員必填寫)
+                        :{this.state.recordData.leverageId}-->{this.state.ix_Risk_ToleranceNAME}:{this.state.waitUpdate.ix_Risk_Tolerance}</p>
+                    <p>*账户类型
                         :{this.state.recordData.riskTolerance}-->{this.state.ix_Risk_ToleranceNAME}:{this.state.waitUpdate.ix_Risk_Tolerance}</p>
                 </Modal>
             </div>
