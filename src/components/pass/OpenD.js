@@ -43,6 +43,8 @@ class PassOpenD extends Component {
             , waitUpdate: {}
             , changeNoteV: ''
             , cardid2: ''
+            , leverageId: ''
+            , leverageName: ''
             , changeNoteB: false
             , waitSearchDb: {}
             , iconLoading: false
@@ -128,6 +130,7 @@ class PassOpenD extends Component {
                 mriskTolerance: response.data.data.riskTolerance,
                 mState: response.data.data.state,
                 mCity: response.data.data.city,
+               leverageId: response.data.data.leverage,
                 changeNoteV: response.data.data.comment,
                 checkfromdbName: response.data.data.phoneNumber,
             }, () => {
@@ -381,7 +384,6 @@ class PassOpenD extends Component {
                                         disabled={true}
                                         labelInValue defaultValue={{key: 'jack'}}
                                         style={{marginLeft: 20, width: 120}}
-                                        onChange={this.handleChange}
                                     >
                                         <Option value="jack">服务器地址</Option>
                                         <Option value="lucy">Lucy (101)</Option>
@@ -410,11 +412,12 @@ class PassOpenD extends Component {
                             <Card bordered={false}>
                                 <div>
                                     杠杆组 :
-                                    <Select labelInValue
-                                            style={{marginLeft: 20, width: 120}}
-                                            onChange={this.handleChange}>
+                                    <Select
+                                        value={this.state.leverageId}
+                                        style={{marginLeft: 20, width: 120}}
+                                        onChange={(v,key)=>this.handleChangeLeavage(v,key)}>
                                         {this.state.leverageList.map(leaf => <Option
-                                            key={leaf.id}>{leaf.clientGroupName}</Option>)}
+                                             key={leaf.id}>{leaf.clientGroupName}</Option>)}
 
                                     </Select>
                                 </div>
@@ -872,7 +875,7 @@ class PassOpenD extends Component {
                     <p>*风险承受力
                         :{this.state.recordData.riskTolerance}-->{this.state.ix_Risk_ToleranceNAME}:{this.state.waitUpdate.ix_Risk_Tolerance}</p>
                     <p>*外汇杠杆ID(操作人員必填寫)
-                        :{this.state.recordData.leverageId}-->{this.state.ix_Risk_ToleranceNAME}:{this.state.waitUpdate.ix_Risk_Tolerance}</p>
+                        :{this.state.leverageName}{this.state.leverageId}</p>
                     <p>*账户类型
                         :{this.state.recordData.riskTolerance}-->{this.state.ix_Risk_ToleranceNAME}:{this.state.waitUpdate.ix_Risk_Tolerance}</p>
                 </Modal>
@@ -1112,6 +1115,26 @@ class PassOpenD extends Component {
         });
         this.gallery.init();
     };
+
+    handleChangeLeavage = (value,label) => {
+
+        console.log('hcia value' , value)
+        console.log('hcia label' , label.props.children)
+
+        var self = this
+
+        // this.state.leverageId = value.key
+        // this.state.recordData.leverage = value.key
+        this.state.leverageName = value.label
+
+
+        self.setState({
+            leverageId: value,
+            leverageName:label.props.children
+        })
+
+
+    };
     handleChange = (value) => {
         console.log('hcia value', value)
     };
@@ -1135,6 +1158,7 @@ class PassOpenD extends Component {
         window.Axios.post('open/prestore',
             {
                 id: self.state.recordData.id,
+                leverageId: this.state.leverageId,
                 ...self.state.waitUpdate
             }
         ).then(function (response) {
