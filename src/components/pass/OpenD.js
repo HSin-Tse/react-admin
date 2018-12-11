@@ -68,6 +68,7 @@ class PassOpenD extends Component {
             , IXTradingExperience: []
             , IXTradingObjectives: []
             , IXRisk_Tolerance: []
+            , accountType: []
             , gallery: null
 
         };
@@ -100,6 +101,7 @@ class PassOpenD extends Component {
                 IXTradingExperience: response.data.data.IX_Trading_Experience,
                 IXTradingObjectives: response.data.data.IX_Trading_Objectives,
                 IXRisk_Tolerance: response.data.data.IX_Risk_Tolerance,
+                accountType: response.data.data.account_type,
 
             });
         });
@@ -127,7 +129,7 @@ class PassOpenD extends Component {
                 mriskTolerance: response.data.data.riskTolerance,
                 mState: response.data.data.state,
                 mCity: response.data.data.city,
-               leverageId: response.data.data.leverage,
+                leverageId: response.data.data.leverage,
                 changeNoteV: response.data.data.comment,
                 checkfromdbName: response.data.data.phoneNumber,
             }, () => {
@@ -393,12 +395,13 @@ class PassOpenD extends Component {
                             <Card bordered={false}>
                                 <div>
                                     交易组 :
-                                    <Select labelInValue defaultValue={{key: 'lucy'}}
+                                    <Select value={this.state.recordData.accountType}
                                             style={{marginLeft: 20, width: 120}}
-                                            onChange={this.handleChange}>
-                                        <Option value="jack">Jack (100)</Option>
-                                        <Option value="lucy">S-STP</Option>
+                                            onChange={(v, key) => this.handleACType(v, key)}>
+                                        {this.state.accountType.map(acType => <Option
+                                            key={acType.name} kk={acType.id}>{acType.name}</Option>)}
                                     </Select>
+
                                 </div>
                             </Card>
                         </Col>
@@ -412,9 +415,9 @@ class PassOpenD extends Component {
                                     <Select
                                         value={this.state.leverageId}
                                         style={{marginLeft: 20, width: 120}}
-                                        onChange={(v,key)=>this.handleChangeLeavage(v,key)}>
+                                        onChange={(v, key) => this.handleChangeLeavage(v, key)}>
                                         {this.state.leverageList.map(leaf => <Option
-                                             key={leaf.id}>{leaf.clientGroupName}</Option>)}
+                                            key={leaf.id}>{leaf.clientGroupName}</Option>)}
 
                                     </Select>
                                 </div>
@@ -1113,10 +1116,30 @@ class PassOpenD extends Component {
         this.gallery.init();
     };
 
-    handleChangeLeavage = (value,label) => {
 
-        console.log('hcia value' , value)
-        console.log('hcia label' , label.props.children)
+    handleACType = (value, label) => {
+
+        console.log('hcia value', value)
+        console.log('hcia label', label.props.children)
+
+        var self = this
+        //
+        // // this.state.leverageId = value.key
+        // // this.state.recordData.leverage = value.key
+        // this.state.leverageName = value.label
+        //
+        //
+
+        self.setState({
+            recordData: {...self.state.recordData, accountType: value}
+        })
+
+    };
+
+    handleChangeLeavage = (value, label) => {
+
+        console.log('hcia value', value)
+        console.log('hcia label', label.props.children)
 
         var self = this
 
@@ -1127,7 +1150,7 @@ class PassOpenD extends Component {
 
         self.setState({
             leverageId: value,
-            leverageName:label.props.children
+            leverageName: label.props.children
         })
 
 
