@@ -193,10 +193,10 @@ class AddRole extends Component {
                     内部用户权限设置
                 </h2>
 
-                <div>changeNoteV :{JSON.stringify(this.state.changeNoteV)}</div>
-                <div>name :{JSON.stringify(this.state.name)}</div>
-                <div>powerList :{JSON.stringify(this.state.powerList)}</div>
-                <div>realp :{JSON.stringify(this.state.realp)}</div>
+                {/*<div>changeNoteV :{JSON.stringify(this.state.changeNoteV)}</div>*/}
+                {/*<div>name :{JSON.stringify(this.state.name)}</div>*/}
+                {/*<div>powerList :{JSON.stringify(this.state.powerList)}</div>*/}
+                {/*<div>realp :{JSON.stringify(this.state.realp)}</div>*/}
 
 
                 <div><BreadcrumbCustom first="内部成员列表" second="内部人员配置"/></div>
