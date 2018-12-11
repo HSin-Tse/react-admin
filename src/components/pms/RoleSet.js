@@ -40,7 +40,6 @@ class Basic extends Component {
         window.Axios.post('dict/openDict', {
             'keys': 'suspend_reason_type',
         }).then(function (response) {
-            console.log(response);
 
             self.setState({
                     suspend_reason_type: response.data.data.suspend_reason_type
@@ -92,7 +91,7 @@ class Basic extends Component {
                 title: '操作日志',
                 dataIndex: '操作日志',
                 width: 200,
-                align:'center',
+                align: 'center',
                 key: '操作日志',
                 render: (text, record) => (
                     <Button className="ant-dropdown-link"
@@ -100,7 +99,7 @@ class Basic extends Component {
             }, {
                 title: '操作',
                 width: 240,
-                align:'center',
+                align: 'center',
                 key: 'action',
                 render: (text, record) => (
                     <div>

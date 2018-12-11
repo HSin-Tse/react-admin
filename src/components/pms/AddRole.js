@@ -20,16 +20,12 @@ class AddRole extends Component {
             , modal2Visible: false
             , operationDiaryHistory: []
             , anyThing: 'asdasd'
+            , changeNoteV: ''
+            , name: '123'
         };
     }
 
-    showModal2 = () => {
-        this.setState({
-            modal2Visible: true,
-            visible: false,
 
-        });
-    }
     showModal = () => {
         this.setState({
             visible: true,
@@ -64,6 +60,20 @@ class AddRole extends Component {
             gender: e.target.value,
         });
     }
+    changeName = (e) => {
+
+        this.setState({
+            name: e.target.value,
+        });
+
+    }
+    changeNote = (e) => {
+
+        this.setState({
+            changeNoteV: e.target.value,
+        });
+
+    }
 
     render() {
 
@@ -76,46 +86,36 @@ class AddRole extends Component {
                     内部用户权限设置
                 </h2>
 
-                {/*<Card disabled={true} title="IX账户审核 " bordered={true}>*/}
+                <div>changeNoteV :{JSON.stringify(this.state.changeNoteV)}</div>
+                <div>name :{JSON.stringify(this.state.name)}</div>
 
-                    {/*<Row gutter={1}>*/}
-                        {/*<Col md={8}>*/}
-                            {/*<p>客户姓名:</p>*/}
-                        {/*</Col>*/}
-                        {/*<Col md={8}>*/}
-                            {/*<p>客户邮箱</p>*/}
-                        {/*</Col>*/}
-                        {/*<Col md={8}>*/}
-                            {/*<p>手机号码：</p>*/}
-                        {/*</Col>*/}
-                    {/*</Row>*/}
-                {/*</Card>*/}
 
                 <div><BreadcrumbCustom first="内部成员列表" second="内部人员配置"/></div>
-                <Row>
 
-                </Row>
 
-                <Card title={<span style={{fontSize: 20}}> 基本信息 </span>} bordered={true} style={{marginTop: 15}}>
+                <Card bodyStyle={{marginLeft: 10}} title={<span style={{fontSize: 20}}> 基本信息 </span>} bordered={true}
+                      style={{marginTop: 15}}>
 
                     <Row gutter={8}>
                         <Col md={12}>
 
-                            <div style={{fontWeight:'bold',fontSize: 18,display: 'flex', minHeight: 50}}>
+                            <div style={{fontWeight: 'bold', fontSize: 18, display: 'flex', minHeight: 50}}>
                                 <span style={{width: 100}}>角色名称:</span>
 
-                                <Input defaultValue={this.state.name}
-                                       style={{width: 180}}/>
+                                <Input
+                                    onChange={this.changeName}
+                                    defaultValue={this.state.name}
+                                    style={{width: 180}}/>
                             </div>
-                            <div style={{fontWeight:'bold',fontSize: 18,display: 'flex', minHeight: 50}}>
+                            <div style={{fontWeight: 'bold', fontSize: 18, display: 'flex', minHeight: 50}}>
                                 <span style={{width: 100}}>角色备注:</span>
 
                                 {/*<Input defaultValue={this.state.name}*/}
                                 {/*style={{width: 180}}/>*/}
                                 <TextArea
                                     style={{width: 180}}
-                                    value={this.state.theComment}
-                                    onChange={this.addComment}
+                                    value={this.state.changeNoteV}
+                                    onChange={this.changeNote}
                                     rows={4}></TextArea>
                             </div>
 
