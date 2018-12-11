@@ -73,8 +73,9 @@ class Basic extends Component {
                 title: '姓名',
                 dataIndex: 'name',
                 key: 'name',
+                align:'center',
                 render: (text, record) => (
-                    <span>{record.cnName + record.lastName + record.firstName}</span>),
+                    <span>{record.cnName }</span>),
             }, {
                 title: '申请序号',
                 dataIndex: '申请序号',
@@ -87,6 +88,7 @@ class Basic extends Component {
                 render: (text, record) => (
                     <span>{record.displayApplyType}</span>),
             }, {
+                align:'center',
                 title: '申请时间',
                 dataIndex: '申请时间',
                 key: '申请时间',
