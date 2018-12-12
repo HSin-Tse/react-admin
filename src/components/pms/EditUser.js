@@ -18,10 +18,7 @@ import {
     message
 } from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
-import axios from 'axios';
 import {parse} from 'querystring';
-import {bindActionCreators} from "redux";
-import {setINFOR} from "../../action";
 import connect from "react-redux/es/connect/connect";
 
 const FormItem = Form.Item;
@@ -41,18 +38,21 @@ class EditUser extends Component {
             , modal2Visible: false
             , operationDiaryHistory: []
             , idList: []
-            , menuList: []
+            , mRoleList: []
             , anyThing: 'asdasd'
-            , name: '123'
+            , name: ''
             , email: 'aaa@'
             , newPassword: '11111'
             , secondPassword: '11111'
             , password: '22222'
+            , allRole: {}
         };
     }
 
 
     confirmSave = () => {
+
+        // id: this.props.match.params.id,
 
         var self = this;
 
@@ -103,6 +103,31 @@ class EditUser extends Component {
 
         var self = this;//props.match.params.id
 
+
+        window.Axios.post('back/getBackUserDetail', {
+            id: this.props.match.params.id
+        }).then((response) => {
+
+            console.log('hcia response', response)
+            self.setState({
+                name: response.data.data.displayName,
+                email: response.data.data.email,
+                mobile: response.data.data.mobile,
+                gender: response.data.data.gender == '女' ? 2 : 1,
+                newLoginName: response.data.data.loginName,
+                // changeNoteV: response.data.data.roleComment,
+                allRole: response.data.data.allRole,
+            });
+
+
+        });
+
+        // window.Axios.post('back/getMenuList', {}).then(function (response) {
+        //     self.setState({
+        //         mMenuList: response.data.data
+        //     });
+        // });
+
         window.Axios.post('back/getRoleList', {
             'pageSize': 100,
             'pageNo': 0,
@@ -110,7 +135,7 @@ class EditUser extends Component {
             console.log('hcia response', response)
 
             self.setState({
-                    menuList: response.data.data.list
+                    mRoleList: response.data.data.list
                 }
             );
 
@@ -173,10 +198,14 @@ class EditUser extends Component {
             name: e.target.value,
         });
     }
+
     handleChangeIDList = (value) => {
         console.log('hcia value', value)
+
+        var aa = []
+        aa.push(value)
         this.setState({
-            idList: value,
+            idList: aa,
         });
     }
 
@@ -184,34 +213,29 @@ class EditUser extends Component {
         const {getFieldDecorator} = this.props.form;
 
         const children = [];
-        for (let i = 0; i < this.state.menuList.length; i++) {
-            children.push(<Option key={this.state.menuList[i].id}>{this.state.menuList[i].name}</Option>);
+        for (let i = 0; i < this.state.mRoleList.length; i++) {
+            children.push(<Option value={this.state.mRoleList[i].id}
+                                  key={this.state.mRoleList[i].id}>{this.state.mRoleList[i].name}</Option>);
         }
 
-        const ss = this.state.menuList.filter(
+        const ss = this.state.mRoleList.filter(
             (item) => {
 
                 return this.state.idList.some((itemS) => {
                     return itemS == item.id
                 })
-            }).map(function (item, index) {
+            }).map(function (item) {
                 return (
                     <div style={{display: 'flex', minHeight: 50}}>
                         <h3 style={{minWidth: 80}}>{item.name}:</h3>
                         {
                             Object.keys(item.allMenu).map((item1, number) => {
-                                console.log('hcia item1', item1)
-                                console.log('hcia item.allMenu', item.allMenu)
-                                console.log('hcia item.allMenu', item.allMenu[item1])
-
                                 return (
                                     <Tag key={number} value={item1}>{item.allMenu[item1]}</Tag>
                                 );
                             })
                         }
                     </div>
-
-
                 );
             }
         )
@@ -228,7 +252,8 @@ class EditUser extends Component {
                 <div>角色 idList:{JSON.stringify(this.state.idList)}</div>
                 <div>内部人员备注 content:{JSON.stringify(this.state.content)}</div>
                 <div>当前操作人员的密码 password:{JSON.stringify(this.state.password)}</div>
-                {/*<div> menuList:{JSON.stringify(this.state.menuList)}</div>*/}
+                <div> allRole:{JSON.stringify(this.state.allRole)}</div>
+                {/*<div> mRoleList:{JSON.stringify(this.state.mRoleList)}</div>*/}
 
                 <h2 style={{marginTop: 15}}>权限管理表</h2>
                 <div><BreadcrumbCustom first="内部成员列表" second="编辑资料"/></div>
@@ -242,6 +267,7 @@ class EditUser extends Component {
                                 <Input
                                     onChange={this.changeName}
                                     defaultValue={this.state.name}/>
+
                             </div>
 
 
@@ -263,7 +289,7 @@ class EditUser extends Component {
                                         mobile: e.target.value,
                                     })}
 
-                                    defaultValue={this.state.name}
+                                    defaultValue={this.state.mobile}
                                     style={{width: 180}}/>
                             </div>
                             <div style={{display: 'flex', minHeight: 50}}>
@@ -335,10 +361,18 @@ class EditUser extends Component {
                             <div style={{display: 'flex', minHeight: 50}}>
                                 <h3 style={{width: 60}}>角色:</h3>
                                 <Select
-                                    mode="multiple"
+                                    // mode="multiple"
                                     style={{width: 180}}
                                     placeholder="角色"
-                                    // defaultValue={}
+                                    value={
+
+                                        Object.keys(this.state.allRole).map(Number).map((item1, number) => {
+                                        return (
+                                            item1
+                                        );
+                                    })
+
+                                    }
                                     onChange={this.handleChangeIDList}
                                 >
                                     {children}

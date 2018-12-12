@@ -198,7 +198,7 @@ class InnerUserList extends Component {
 
                     <div>
 
-                        <Button className="ant-dropdown-link" onClick={() => this.showModal(record.id)}>
+                        <Button className="ant-dropdown-link" onClick={() => this.newUSer(record)}>
                             编辑</Button>
 
                         <Popconfirm title="延期申请？" onConfirm={() => this.handleDelay(record)} okText="Yes"
@@ -336,8 +336,16 @@ class InnerUserList extends Component {
     newUSer = (record) => {
 
 
-        this.props.history.push('/app/pms/adduser' + 0)
+        // this.props.history.push('/app/pms/adduser' + 0)
+        if (record) {
+            console.log('hcia record', record)
+            console.log('hcia record.id', record.id)
+            this.props.history.push('/app/pms/edituser' + record.id)
 
+        } else {
+            this.props.history.push('/app/pms/adduser' + 0)
+
+        }
 
     }
     showModal = () => {

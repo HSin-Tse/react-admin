@@ -176,7 +176,7 @@ class AddUser extends Component {
     handleChangeIDList = (value) => {
         console.log('hcia value', value)
 
-        var aa =[]
+        var aa = []
         aa.push(value)
         this.setState({
             idList: aa,
