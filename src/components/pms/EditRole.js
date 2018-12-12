@@ -98,14 +98,9 @@ class EditRole extends Component {
         });
 
         window.Axios.post('back/getMenuList', {}).then(function (response) {
-            // console.log('hcia response', response)
-
-
             self.setState({
                 menuList: response.data.data
             });
-
-
         });
 
 
@@ -132,23 +127,10 @@ class EditRole extends Component {
 
     }
 
-    changeScret = (e) => {
-
-
-        this.setState({
-            // seret: see,
-            realp: e.target.value,
-        });
-
-    }
-
-
     changeName = (e) => {
-
         this.setState({
             name: e.target.value,
         });
-
     }
 
     changeNote = (e) => {
@@ -164,6 +146,24 @@ class EditRole extends Component {
         });
     }
 
+    compareToFirstPassword = (rule, value, callback) => {
+        const form = this.props.form;
+        if (value && value !== form.getFieldValue('password')) {
+            callback('Two passwords that you enter is inconsistent!');
+        } else {
+            callback();
+        }
+    }
+
+
+    validateToNextPassword = (rule, value, callback) => {
+        const form = this.props.form;
+        if (value && this.state.confirmDirty) {
+            form.validateFields(['confirm'], {force: true});
+        }
+        callback();
+    }
+
 
     render() {
         const {allMenu} = this.state
@@ -171,38 +171,23 @@ class EditRole extends Component {
         const {getFieldDecorator} = this.props.form;
         const ss = this.state.menuList.map(function (item, index) {
                 return (
-
-
                     <Card bodyStyle={{marginLeft: 10}} style={{marginTop: 15}} key={index} title={item.name}
                           bordered={true}>
                         {
                             item.childrenMenu.map((item1, number) => {
                                 return (
-
-                                    <Checkbox
-                                        // checked={ Object.keys(allMenu).find((item, index, array) => {
-                                        //     console.log('hcia item' , item)
-                                        //
-                                        //     return true
-                                        // })}
-                                        key={number} value={item1.id}>{item1.name}</Checkbox>
+                                    <Checkbox key={number} value={item1.id}>{item1.name}</Checkbox>
                                 );
                             })
                         }
-
                     </Card>
-
-
                 );
             }
         )
 
 
         return (
-
             <div>
-
-
                 <h2 style={{marginTop: 15}}>
                     内部用户权限设置
                 </h2>
@@ -285,6 +270,7 @@ class EditRole extends Component {
                         </Col>
                     </Row>
                 </Card>
+
                 <Card bodyStyle={{marginLeft: 10}} title={<span style={{fontSize: 18}}> 安全验证 </span>} bordered={true}
                       style={{marginTop: 15}}>
 
@@ -295,11 +281,11 @@ class EditRole extends Component {
                                 <span style={{width: 200}}>請輸入你的密碼:</span>
 
 
-                                {getFieldDecorator('password', {
+                                {getFieldDecorator('confirm', {
                                     rules: [{
                                         required: true, message: 'Please input your password!',
                                     }, {
-                                        validator: this.validateToNextPassword,
+                                        validator: this.compareToFirstPassword,
                                     }],
                                 })(
                                     <Input style={{width: 800}} addonAfter={<Icon type="star" theme="twoTone"/>}

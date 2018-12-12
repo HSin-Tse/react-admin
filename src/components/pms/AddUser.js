@@ -1,13 +1,30 @@
 /* eslint-disable react/sort-comp */
 
 import React, {Component} from 'react';
-import {Col, Card, Row, Radio, Input, Modal, Button, Table, Icon, Checkbox, Select, Popconfirm, Form} from 'antd';
+import {
+    Col,
+    Card,
+    Row,
+    Radio,
+    Input,
+    Tag,
+    Button,
+    Table,
+    Icon,
+    Checkbox,
+    Select,
+    Popconfirm,
+    Form,
+    message
+} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import axios from 'axios';
 import {parse} from 'querystring';
 import {bindActionCreators} from "redux";
 import {setINFOR} from "../../action";
 import connect from "react-redux/es/connect/connect";
+
+const FormItem = Form.Item;
 
 const RadioGroup = Radio.Group;
 const Option = Select.Option;
@@ -28,16 +45,38 @@ class AddUser extends Component {
             , anyThing: 'asdasd'
             , name: '123'
             , email: 'aaa@'
+            , newPassword: '11111'
+            , secondPassword: '11111'
+            , password: '22222'
         };
     }
 
-    showModal2 = () => {
-        this.setState({
-            modal2Visible: true,
-            visible: false,
 
+    confirmSave = () => {
+
+
+        var self = this;
+
+        window.Axios.post('back/saveOrUpdateBackUser', {
+            name: self.state.name,
+            email: self.state.email,
+            mobile: self.state.mobile,
+            gender: self.state.gender == 1 ? '男' : '女',
+            newLoginName: self.state.newLoginName,
+            newPassword: self.state.newPassword,
+            idList: self.state.idList,
+            password: self.state.password,
+        }).then((response) => {
+            console.log('hcia response', response)
+
+            if (response.data.code == 1) {
+                message.success('操作成功')
+
+            }
         });
+
     }
+
     showModal = () => {
         this.setState({
             visible: true,
@@ -83,26 +122,63 @@ class AddUser extends Component {
 
     }
 
+    newScret = (e) => {
+        console.log('hcia e.target.value', e.target.value)
+        this.setState({
+            newPassword: e.target.value,
+        });
+
+    }
+
+    secondScret = (e) => {
+        console.log(' secondScret hcia e.target.value', e.target.value)
+        this.setState({
+            secondPassword: e.target.value,
+        });
+
+    }
+
+    checkScret = (e) => {
+        this.setState({
+            password: e.target.value,
+        });
+
+    }
     onChange = (e) => {
         console.log('radio checked', e.target.value);
         this.setState({
             gender: e.target.value,
         });
     }
+    compareToFirstPassword = (rule, value, callback) => {
+        const form = this.props.form;
+        if (value && value !== form.getFieldValue('1')) {
 
+            callback('Two passwords that you enter is inconsistent!');
+        } else {
+
+            callback();
+        }
+    }
+
+
+    validateToNextPassword = (rule, value, callback) => {
+        const form = this.props.form;
+        if (value && this.state.confirmDirty) {
+            form.validateFields(['confirm'], {force: true});
+        }
+        callback();
+    }
     changeName = (e) => {
         this.setState({
             name: e.target.value,
         });
     }
-    handleChange = (value) => {
-        console.log('hcia value' , value)
+    handleChangeIDList = (value) => {
+        console.log('hcia value', value)
         this.setState({
             idList: value,
         });
-
-
-        // console.log(`selected ${value}`);
     }
 
     render() {
@@ -112,6 +188,35 @@ class AddUser extends Component {
         for (let i = 0; i < this.state.menuList.length; i++) {
             children.push(<Option key={this.state.menuList[i].id}>{this.state.menuList[i].name}</Option>);
         }
+
+        const ss = this.state.menuList.filter(
+            (item) => {
+
+                return this.state.idList.some((itemS) => {
+                    return itemS == item.id
+                })
+            }).map(function (item, index) {
+                return (
+                    <div style={{display: 'flex', minHeight: 50}}>
+                        <h3 style={{minWidth: 80}}>{item.name}:</h3>
+                        {
+                            Object.keys(item.allMenu).map((item1, number) => {
+                                console.log('hcia item1', item1)
+                                console.log('hcia item.allMenu', item.allMenu)
+                                console.log('hcia item.allMenu', item.allMenu[item1])
+
+                                return (
+                                    <Tag key={number} value={item1}>{item.allMenu[item1]}</Tag>
+                                );
+                            })
+                        }
+                    </div>
+
+
+                );
+            }
+        )
+
         return (
             <div>
                 <div>姓名 name:{JSON.stringify(this.state.name)}</div>
@@ -120,9 +225,11 @@ class AddUser extends Component {
                 <div>性别 gender:{JSON.stringify(this.state.gender)}</div>
                 <div>新的登陆名 newLoginName:{JSON.stringify(this.state.newLoginName)}</div>
                 <div>新的密码 newPassword:{JSON.stringify(this.state.newPassword)}</div>
-                <div>角色 idList:{JSON.stringify(this.state.idList )}</div>
+                <div>驗證密码 secondPassword:{JSON.stringify(this.state.secondPassword)}</div>
+                <div>角色 idList:{JSON.stringify(this.state.idList)}</div>
                 <div>内部人员备注 content:{JSON.stringify(this.state.content)}</div>
                 <div>当前操作人员的密码 password:{JSON.stringify(this.state.password)}</div>
+                {/*<div> menuList:{JSON.stringify(this.state.menuList)}</div>*/}
 
                 <h2 style={{marginTop: 15}}>权限管理表</h2>
                 <div><BreadcrumbCustom first="内部成员列表" second="编辑资料"/></div>
@@ -192,37 +299,65 @@ class AddUser extends Component {
                             <div style={{display: 'flex', minHeight: 50}}>
                                 <h3 style={{width: 60}}>密码:</h3>
 
-                                <Input defaultValue={this.state.newPassword}
-                                       onChange={(e) => this.setState({
-                                           newPassword: e.target.value,
-                                       })}
-                                       style={{width: 180}}/>
+
+                                {getFieldDecorator('1', {
+                                    rules: [{
+                                        required: true, message: 'Please input your password!',
+                                    }, {
+                                        validator: this.validateToNextPassword,
+                                    }],
+                                })(
+                                    <Input style={{width: 180}}
+                                           onChange={this.newScret}
+                                           placeholder="密码"
+                                           type="password"/>
+                                )}
+
                                 <h3 style={{marginLeft: 80, width: 120}}>请重复密码:</h3>
 
-                                <Input defaultValue={this.state.name}
-                                       style={{width: 180}}/>
+                                <FormItem
+                                >
+                                    {getFieldDecorator('2', {
+                                        rules: [{
+                                            required: true, message: 'Please input your password!',
+                                        }, {
+                                            validator: this.compareToFirstPassword,
+                                        }],
+                                    })(
+                                        <Input style={{width: 180}}
+                                               onChange={this.secondScret}
+                                               placeholder="请重复密码:"
+                                               type="password"/>
+                                    )}
+                                </FormItem>
+
+
                             </div>
                             <div style={{display: 'flex', minHeight: 50}}>
                                 <h3 style={{width: 60}}>角色:</h3>
                                 <Select
-                                    maxTagCount={1}
                                     mode="multiple"
                                     style={{width: 180}}
                                     placeholder="角色"
                                     // defaultValue={}
-                                    onChange={this.handleChange}
+                                    onChange={this.handleChangeIDList}
                                 >
                                     {children}
                                 </Select>
 
                             </div>
-                            <div style={{display: 'flex', minHeight: 50}}>
+                            <div style={{marginTop: 20, display: 'flex', minHeight: 50}}>
                                 <h3 style={{width: 60}}>权限:</h3>
+                                <Row gutter={0}>
+                                    <Checkbox.Group style={{width: '100%'}} value={[]}
+                                        // onChange={this.onChange}
+                                    >
+                                        <Col md={24}>
+                                            {ss}
+                                        </Col>
+                                    </Checkbox.Group>
+                                </Row>
 
-                                <RadioGroup onChange={this.onChange} value={this.state.gender}>
-                                    <Radio value={1}>男</Radio>
-                                    <Radio value={2}>女</Radio>
-                                </RadioGroup>
                             </div>
 
                         </Col>
@@ -247,7 +382,6 @@ class AddUser extends Component {
                                    }}
                             />
 
-
                         </Col>
                     </Row>
                 </Card>
@@ -259,8 +393,6 @@ class AddUser extends Component {
 
                             <div style={{fontWeight: 'bold', fontSize: 16, display: 'flex', minHeight: 50}}>
                                 <span style={{width: 200}}>請輸入你的密碼:</span>
-
-
                                 {getFieldDecorator('password', {
                                     rules: [{
                                         required: true, message: 'Please input your password!',
@@ -268,14 +400,11 @@ class AddUser extends Component {
                                         validator: this.validateToNextPassword,
                                     }],
                                 })(
-                                    <Input style={{width: 800}} addonAfter={<Icon type="star" theme="twoTone"/>}
-                                           onChange={this.changeScret} placeholder="請輸入你的密碼加以驗證:" type="password"/>
+                                    <Input style={{width: 800}}
+                                           addonAfter={<Icon type="star" theme="twoTone"/>}
+                                           onChange={this.checkScret} placeholder="請輸入你的密碼加以驗證:" type="password"/>
                                 )}
-
-
                             </div>
-
-
                         </Col>
                     </Row>
                 </Card>
@@ -302,94 +431,6 @@ class AddUser extends Component {
     }
 
 
-    hasChangeAll = () => {
-
-    }
-    requestUserCommentList = () => {
-        // must request data:
-        //belongUserId
-        //loginName
-        //token
-
-        //refernce request data:
-        //pageNo
-        //pageSize
-        //language
-        const url = 'http://mobile.nooko.cn:8090/auth/getUserCommentList'
-
-        var tmp = this;
-
-        window.Axios.post(url, {
-            'belongUserId': '4028b2a4631f770f01631f7770df0000',
-            'loginName': 'admin',
-            'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmVUaW1lIjoxNTQ1NTI4ODM0MTk5LCJsb2dpbk5hbWUiOiJhZG1pbiJ9.F7moE4DsMUiajkKB1S_wemwsozlUW5VMxQKsg4KsSUQ'
-
-        }).then(function (response) {
-
-            tmp.setState({operationDiaryHistory: response.data.data.list});
-
-        }).catch(function (error) {
-            console.log(error);
-            // message.warn(error);
-        });
-    }
-
-    ediftModalColumn = () => {
-        this.modalColumns = [{
-            title: '時間',
-            dataIndex: 'createDate',
-            key: 'operationDiary_Date',
-
-            render: (text, record) => (
-                <Button>{record.createDate}</Button>),
-        }, {
-            title: '狀態',
-            dataIndex: 'comment',
-            key: 'operationDiary_Status',
-
-            render: (text, record) => (
-                <Button>{record.comment}</Button>),
-        }, {
-            title: '操作人',
-            dataIndex: 'bkUserName',
-            key: 'operationDiary_User',
-
-            render: (text, record) => (
-                <Button>{record.bkUserName}</Button>),
-        }]
-    }
-    hasChange = (status) => {
-        console.log('yyx', status.target.checked)
-    }
-    checkDiary = () => {
-
-    }
-    selectDate = (date, dateString) => {
-        console.log(dateString, 'yyx', date);
-    }
-    timestampToTime = (timestamp) => {
-        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
-        const year = dateObj.getFullYear() // 获取年，
-        const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
-        const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
-
-        return year + '-' + month + '-' + date
-    };
-    requestListData = () => {
-        var self = this;//props.match.params.id
-        window.Axios.post('ixuser/userOverView', {
-            'belongUserId': self.props.match.params.id,
-
-
-        }).then(function (response) {
-            self.setState({anyThing: 'wwwww'});
-            self.setState({anyThing: response.data.code});
-            self.setState({userList: response.data.data});
-
-        }).catch(function (error) {
-            console.log(error);
-        });
-    };
 }
 
 
