@@ -111,7 +111,7 @@ class Login extends React.Component {
                             {getFieldDecorator('userName', {
                                 rules: [{required: true, message: '请输入用户名!'}],
                             })(
-                                <Input prefix={<Icon type="user" style={{fontSize: 13}}/>} placeholder="--admin--"/>
+                                <Input prefix={<Icon type="user" style={{fontSize: 13}}/>} placeholder="--ad--"/>
                             )}
                         </FormItem>
                         <FormItem>
