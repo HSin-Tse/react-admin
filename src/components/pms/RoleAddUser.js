@@ -23,6 +23,7 @@ class RoleAddUser extends Component {
             , visible: false
             , modal2Visible: false
             , operationDiaryHistory: []
+            , idList: []
             , menuList: []
             , anyThing: 'asdasd'
             , name: '123'
@@ -94,12 +95,22 @@ class RoleAddUser extends Component {
             name: e.target.value,
         });
     }
+    handleChange = (value) => {
+        console.log('hcia value' , value)
+        this.setState({
+            idList: value,
+        });
+
+
+        // console.log(`selected ${value}`);
+    }
 
     render() {
         const {getFieldDecorator} = this.props.form;
+
         const children = [];
-        for (let i = 10; i < 36; i++) {
-            children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
+        for (let i = 0; i < this.state.menuList.length; i++) {
+            children.push(<Option key={this.state.menuList[i].id}>{this.state.menuList[i].name}</Option>);
         }
         return (
             <div>
@@ -109,7 +120,7 @@ class RoleAddUser extends Component {
                 <div>性别 gender:{JSON.stringify(this.state.gender)}</div>
                 <div>新的登陆名 newLoginName:{JSON.stringify(this.state.newLoginName)}</div>
                 <div>新的密码 newPassword:{JSON.stringify(this.state.newPassword)}</div>
-                <div>角色 idList:{JSON.stringify(this.state.idList)}</div>
+                <div>角色 idList:{JSON.stringify(this.state.idList )}</div>
                 <div>内部人员备注 content:{JSON.stringify(this.state.content)}</div>
                 <div>当前操作人员的密码 password:{JSON.stringify(this.state.password)}</div>
 
@@ -194,11 +205,12 @@ class RoleAddUser extends Component {
                             <div style={{display: 'flex', minHeight: 50}}>
                                 <h3 style={{width: 60}}>角色:</h3>
                                 <Select
+                                    maxTagCount={1}
                                     mode="multiple"
-                                    style={{width: '100%'}}
-                                    placeholder="Please select"
+                                    style={{width: 180}}
+                                    placeholder="角色"
                                     // defaultValue={}
-                                    // onChange={handleChange}
+                                    onChange={this.handleChange}
                                 >
                                     {children}
                                 </Select>
