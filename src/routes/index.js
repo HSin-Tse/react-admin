@@ -32,38 +32,64 @@ export default class CRouter extends Component {
 
         // console.log('hcia  router this.state.infor', this.state.infor)
         if (this.state.infor == null) {
+            console.log('hcia', 'Side ccc')
+
             this.setState({config: routes});
 
         } else if (this.state.infor.menuList.length == 0) {
-            // console.log('hcia', 'aaaaa')
+
+            console.log('hcia', 'Side aaaa')
 
             var setrr = {
                 ...routes,
                 menus: [{key: "/app/dashboard/index", title: "歡迎", icon: "user", component: "Dashboard"}]
             }
 
-            // console.log('hcia setrr', setrr)
+            console.log('hcia setrr', setrr)
             this.setState({config: setrr});
 
         } else if (this.state.infor != null) {
-            // console.log('hcia', 'bbbbb')
-
-
+            console.log('hcia', 'Side bbbbb')
             var nowRouter = routes.menus.filter((key, index, array) => {
-                var back = false
-                this.state.infor.menuList.forEach(function (item, index, array) {
+
+                // console.log('hcia key', key)
+
+                if (key.subs) {
 
 
-                    if (key.title == item.name) {
-                        back = true
-                    } else if (key.title == '歡迎') {
-                        back = true
-                    }
+                    var ssb = key.subs.filter((key, index, array) => {
 
-                });
-                return back;
+
+                        var back = false
+
+
+                        this.state.infor.menuList.forEach(function (item, index, array) {
+
+                            console.log('hcia key.title', key.title, item.name, (key.title == item.name))
+
+                            if (key.title == item.name) {
+                                back = true
+                            }
+
+                        });
+                        return back
+
+                    })
+
+
+                    key.subs = ssb
+
+
+                    console.log('hcia key.subs', key.subs.length)
+
+                }
+                if (key.title == '歡迎') {
+                    return true
+                }
+
+
+                return key.subs.length > 0;
             });
-            // routes.menus = nowRouter
             var setrr = {...routes, menus: nowRouter}
             this.setState({config: setrr});
 

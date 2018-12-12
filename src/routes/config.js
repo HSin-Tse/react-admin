@@ -1,12 +1,14 @@
 export default {
     menus: [ // 菜单相关路由
-        {key: '/app/dashboard/index', title: '歡迎', icon: 'user', component: 'Dashboard'},
+        {
+            key: '/app/dashboard/index',
+            title: '歡迎', icon: 'user', component: 'Dashboard'
+        },
         {
             key: '/app/customer', title: '用户管理', icon: 'team',
             subs: [
                 {key: '/app/customer/PotentialUser', title: 'Lead管理', component: 'PotentialUser'},
                 {key: '/app/customer/CustomerSummary', title: '用戶總表', component: 'CustomerSummary'},
-
                 {key: '/app/customer/blacklist', title: '黑名單', component: 'BlackList'},
                 {key: '/app/customer/whitelist', title: '白名單', component: 'WhiteList'},
             ],

@@ -11,10 +11,8 @@ import avater from "../style/imgs/ixlogo.png";
 const {Sider} = Layout;
 
 class SiderCustom extends Component {
-
     constructor(props) {
         super(props);
-
         this.state = {
             config: [],
             visible: false,
@@ -22,9 +20,6 @@ class SiderCustom extends Component {
             infor: JSON.parse(localStorage.getItem('infor')),
         }
     }
-
-
-
 
     static getDerivedStateFromProps(props, state) {
         if (props.collapsed !== state.collapsed) {
@@ -65,33 +60,20 @@ class SiderCustom extends Component {
     };
 
     componentWillMount() {
-
         console.log('hcia  SiderCustom componentWillMount')
-
-        // console.log('hcia componentWillMount' )
-        // this.setState({
-        //     displayName: localStorage.getItem('displayName'),
-        //     infor: JSON.parse(localStorage.getItem('infor'))
-        // });
     }
 
     componentDidMount() {
-
         console.log('hcia  SiderCustom componentDidMount')
 
-
-        // const state = SiderCustom.setMenuOpen(this.props);
-        // console.log('hcia SiderCustom state', state)
-        // console.log('hcia infor', this.state.infor)
-        // console.log('hcia routes', routes)
-
-
         if (this.state.infor == null) {
+            console.log('hcia', 'Side ccc')
+
             this.setState({config: routes});
 
         } else if (this.state.infor.menuList.length == 0) {
-            // console.log('hcia', 'aaaaa')
 
+            console.log('hcia', 'Side aaaa')
 
             var setrr = {
                 ...routes,
@@ -102,36 +84,47 @@ class SiderCustom extends Component {
             this.setState({config: setrr});
 
         } else if (this.state.infor != null) {
-            // console.log('hcia', 'bbbbb')
-
-
+            console.log('hcia', 'Side bbbbb')
             var nowRouter = routes.menus.filter((key, index, array) => {
-                var back = false
+
+                // console.log('hcia key', key)
+
+                if (key.subs) {
 
 
-                this.state.infor.menuList.forEach(function (item, index, array) {
+                    var ssb = key.subs.filter((key, index, array) => {
 
 
-                    if (key.title == item.name) {
-                        back = true
-                    } else if (key.title == '歡迎') {
-                        back = true
-                    }
+                        var back = false
 
-                });
 
-                return back;
+                        this.state.infor.menuList.forEach(function (item, index, array) {
+
+                            console.log('hcia key.title', key.title, item.name, (key.title == item.name))
+
+                            if (key.title == item.name) {
+                                back = true
+                            }
+
+                        });
+                        return back
+
+                    })
+
+
+                    key.subs = ssb
+
+
+                    console.log('hcia key.subs', key.subs.length)
+
+                }
+                if (key.title == '歡迎') {
+                    return true
+                }
+
+
+                return key.subs.length > 0;
             });
-
-            // routes.menus.forEach(function (key, index, array) {
-            //
-            //     if (key.title == '歡迎') {
-            //         key.title = '歡迎-' + localStorage.getItem('displayName')
-            //     }
-            //
-            // });
-
-            // routes.menus = nowRouter
             var setrr = {...routes, menus: nowRouter}
             this.setState({config: setrr});
 

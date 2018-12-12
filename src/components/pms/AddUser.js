@@ -203,9 +203,9 @@ class AddUser extends Component {
                         <h3 style={{minWidth: 80}}>{item.name}:</h3>
                         {
                             Object.keys(item.allMenu).map((item1, number) => {
-                                console.log('hcia item1', item1)
-                                console.log('hcia item.allMenu', item.allMenu)
-                                console.log('hcia item.allMenu', item.allMenu[item1])
+                                // console.log('hcia item1', item1)
+                                // console.log('hcia item.allMenu', item.allMenu)
+                                // console.log('hcia item.allMenu', item.allMenu[item1])
 
                                 return (
                                     <Tag key={number} value={item1}>{item.allMenu[item1]}</Tag>
