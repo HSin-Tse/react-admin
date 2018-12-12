@@ -309,13 +309,7 @@ class AddRole extends Component {
                                     <Input style={{width: 800}} addonAfter={<Icon type="star" theme="twoTone"/>}
                                            onChange={this.changeScret} placeholder="請輸入你的密碼加以驗證:" type="password"/>
                                 )}
-                                {/*<Input*/}
-                                {/*placeholder="請輸入你的密碼加以驗證:"*/}
-                                {/*value={this.state.seret}*/}
-                                {/*onChange={this.changeScret}*/}
-                                {/*style={{width: 800}}*/}
-                                {/*addonAfter={<Icon type="star" theme="twoTone"/>}*/}
-                                {/*/>*/}
+
 
                             </div>
 
@@ -334,13 +328,9 @@ class AddRole extends Component {
                                         cancelText="No">
                                 <Button type={"primary"} loading={this.state.iconLoading}>保存</Button>
                             </Popconfirm>
-                            <Popconfirm
-                                title="是否确认拒绝当前用户的开户申请？"
-                                onConfirm={this.saveReject}
-                                okText="Yes"
-                                cancelText="No">
-                                <Button loading={this.state.iconcanLoading}>返回</Button>
-                            </Popconfirm>
+
+                            <Button onClick={this.props.history.goBack}
+                                    loading={this.state.iconcanLoading}>返回</Button>
                         </div>
                     </Card>
                 </Row>

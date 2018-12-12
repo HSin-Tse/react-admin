@@ -51,11 +51,6 @@ class EditRole extends Component {
     componentDidMount() {
 
 
-        console.log('hcia self.props.match.params.id', this.props.match.params.id)
-        console.log('hcia this.props.match.params.id', this.props.match.params.id)
-        console.log('hcia this.props.match.params.id', this.props.match.params.id)
-        console.log('hcia this.props.match.params.id', this.props.match.params.id)
-
         this.columns = [
             {
                 align: 'center',
@@ -67,7 +62,6 @@ class EditRole extends Component {
             }, {
                 title: 'ip',
                 align: 'center',
-
                 dataIndex: 'ip',
                 key: 'ip',
                 render: (text, record) => (
@@ -75,7 +69,6 @@ class EditRole extends Component {
             }, {
                 title: '操作',
                 align: 'center',
-
                 dataIndex: '操作',
                 key: '操作',
                 render: (text, record) => (
@@ -90,20 +83,16 @@ class EditRole extends Component {
             id: this.props.match.params.id
         }).then(function (response) {
             console.log('hcia response', response)
-
-
             self.setState({
                 name: response.data.data.name,
                 changeNoteV: response.data.data.roleComment,
                 allMenu: response.data.data.allMenu,
-            },()=>{
+            }, () => {
 
                 self.setState({
                     powerList: Object.keys(self.state.allMenu).map(Number)
                 });
             });
-
-
 
 
         });
@@ -139,22 +128,12 @@ class EditRole extends Component {
                 message.success('操作成功')
 
             }
-
-            // self.setState();
-
-
         });
 
     }
 
     changeScret = (e) => {
 
-
-        //
-        // var see =''
-        // for(var i =0;i<e.target.value.length;i++){
-        //     see = see+'*'
-        // }
 
         this.setState({
             // seret: see,
@@ -187,7 +166,7 @@ class EditRole extends Component {
 
 
     render() {
-        const {allMenu} =this.state
+        const {allMenu} = this.state
 
         const {getFieldDecorator} = this.props.form;
         const ss = this.state.menuList.map(function (item, index) {
@@ -199,14 +178,14 @@ class EditRole extends Component {
                         {
                             item.childrenMenu.map((item1, number) => {
                                 return (
-                                    
+
                                     <Checkbox
                                         // checked={ Object.keys(allMenu).find((item, index, array) => {
                                         //     console.log('hcia item' , item)
                                         //
                                         //     return true
                                         // })}
-                                        key={number} value={item1.id} >{item1.name}</Checkbox>
+                                        key={number} value={item1.id}>{item1.name}</Checkbox>
                                 );
                             })
                         }
@@ -233,6 +212,7 @@ class EditRole extends Component {
                 {/*<div>powerList :{JSON.stringify(this.state.powerList)}</div>*/}
                 {/*<div>realp :{JSON.stringify(this.state.realp)}</div>*/}
                 <div>allMenu :{JSON.stringify(this.state.allMenu)}</div>
+                <div>powerList :{JSON.stringify(this.state.powerList)}</div>
                 <div>allMenu :{JSON.stringify(Object.keys(allMenu))}</div>
                 <div>allMenu :{JSON.stringify(Object.keys(allMenu).map(Number))}</div>
 
@@ -257,8 +237,6 @@ class EditRole extends Component {
                             <div style={{fontWeight: 'bold', fontSize: 16, display: 'flex', minHeight: 50}}>
                                 <span style={{width: 100}}>角色备注:</span>
 
-                                {/*<Input defaultValue={this.state.name}*/}
-                                {/*style={{width: 180}}/>*/}
                                 <TextArea
                                     style={{width: 180}}
                                     value={this.state.changeNoteV}
@@ -275,7 +253,7 @@ class EditRole extends Component {
                       style={{marginTop: 15}}>
 
                     <Row gutter={8}>
-                        <Checkbox.Group style={{width: '100%'}}  value={this.state.powerList} onChange={this.onChange}>
+                        <Checkbox.Group style={{width: '100%'}} value={this.state.powerList} onChange={this.onChange}>
                             <Col md={24}>
                                 {ss}
                             </Col>
@@ -327,13 +305,7 @@ class EditRole extends Component {
                                     <Input style={{width: 800}} addonAfter={<Icon type="star" theme="twoTone"/>}
                                            onChange={this.changeScret} placeholder="請輸入你的密碼加以驗證:" type="password"/>
                                 )}
-                                {/*<Input*/}
-                                {/*placeholder="請輸入你的密碼加以驗證:"*/}
-                                {/*value={this.state.seret}*/}
-                                {/*onChange={this.changeScret}*/}
-                                {/*style={{width: 800}}*/}
-                                {/*addonAfter={<Icon type="star" theme="twoTone"/>}*/}
-                                {/*/>*/}
+
 
                             </div>
 
@@ -352,13 +324,10 @@ class EditRole extends Component {
                                         cancelText="No">
                                 <Button type={"primary"} loading={this.state.iconLoading}>保存</Button>
                             </Popconfirm>
-                            <Popconfirm
-                                title="是否确认拒绝当前用户的开户申请？"
-                                onConfirm={this.saveReject}
-                                okText="Yes"
-                                cancelText="No">
-                                <Button loading={this.state.iconcanLoading}>返回</Button>
-                            </Popconfirm>
+
+
+                            <Button onClick={this.props.history.goBack}
+                                    loading={this.state.iconcanLoading}>返回</Button>
                         </div>
                     </Card>
                 </Row>

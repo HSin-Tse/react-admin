@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, message, Select, Modal, Card, Col} from 'antd';
+import {Button, Table, message, Select, Modal, Card, Col, Popconfirm} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
@@ -94,21 +94,29 @@ class Basic extends Component {
                 align: 'center',
                 key: '操作日志',
                 render: (text, record) => (
-                    <Button className="ant-dropdown-link"
-                            onClick={() => this.seeDetail(record)}>详情</Button>)
+                    <Button
+                        // style={{ width: 200}}
+                        className="ant-dropdown-link"
+                        onClick={() => this.seeDetail(record)}>详情</Button>)
             }, {
                 title: '操作',
                 width: 240,
-                fixed:'right',
-
                 align: 'center',
                 key: 'action',
                 render: (text, record) => (
-                    <div>
+                    <div
+                        // style={{ width: 240}}
+                    >
                         <Button className="ant-dropdown-link"
                                 onClick={() => this.addRole(record)}>编辑</Button>
-                        <Button className="ant-dropdown-link"
-                                onClick={() => this.seeDetail(record)}>删除</Button>
+
+
+                        <Popconfirm title="删除"
+                                    onConfirm={() => this.deleteRole(record)} okText="Yes"
+                                    cancelText="No">
+                            <Button className="ant-dropdown-link"
+                            >删除</Button>
+                        </Popconfirm>
                     </div>
                 ),
             }];
@@ -242,17 +250,36 @@ class Basic extends Component {
     }
     addRole = (record) => {
 
-        if(record){
-            console.log('hcia record' , record)
-            console.log('hcia record.id' , record.id)
+        if (record) {
+            console.log('hcia record', record)
+            console.log('hcia record.id', record.id)
             this.props.history.push('/app/pms/editrole' + record.id)
 
-        }else{
+        } else {
             this.props.history.push('/app/pms/addrole' + 0)
 
         }
 
-        
+
+    }
+    deleteRole = (record) => {
+        console.log('hcia record', record)
+        let self = this;
+
+        window.Axios.post('back/removeRole', {
+            'idList': [record.id],
+        }).then(function (response) {
+            console.log(response);
+
+            if (response.data.code == 1) {
+                message.success('操作成功');
+                self.requestPage()
+
+            }
+
+        }).catch(function (error) {
+            console.log(error);
+        });
 
 
     }
@@ -363,18 +390,22 @@ class Basic extends Component {
                           </Button>
                       }>
 
-                    <Table rowKey="id"
+                    <Table
 
-                           columns={this.columns}
-                           dataSource={this.state.userList}
-                           scroll={{x: (1000)}}
-                           bordered
-                           loading={this.state.loading}
-                           pagination={{  // 分页
-                               total: this.state.pgsize * this.state.totalPage,
-                               pageSize: this.state.pgsize,
-                               onChange: this.changePage,
-                           }}
+                        // style={{width:1000}}
+                        rowKey="id"
+
+                        columns={this.columns}
+                        dataSource={this.state.userList}
+                        scroll={{x: (800)}}
+
+                        bordered
+                        loading={this.state.loading}
+                        pagination={{  // 分页
+                            total: this.state.pgsize * this.state.totalPage,
+                            pageSize: this.state.pgsize,
+                            onChange: this.changePage,
+                        }}
                     />
                 </Card>
 
