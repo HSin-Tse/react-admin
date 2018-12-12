@@ -51,10 +51,10 @@ class AddRole extends Component {
     componentDidMount() {
 
 
-        console.log('hcia self.props.match.params.id' , this.props.match.params.id)
-        console.log('hcia this.props.match.params.id' , this.props.match.params.id)
-        console.log('hcia this.props.match.params.id' , this.props.match.params.id)
-        console.log('hcia this.props.match.params.id' , this.props.match.params.id)
+        console.log('hcia self.props.match.params.id', this.props.match.params.id)
+        console.log('hcia this.props.match.params.id', this.props.match.params.id)
+        console.log('hcia this.props.match.params.id', this.props.match.params.id)
+        console.log('hcia this.props.match.params.id', this.props.match.params.id)
 
         this.columns = [
             {
@@ -86,33 +86,11 @@ class AddRole extends Component {
         var self = this;
 
 
-        // window.Axios.post('back/getRoleDetail', {
-        //     id:this.props.match.params.id
-        // }).then(function (response) {
-        //     console.log('hcia response', response)
-        //
-        //
-        //     self.setState({
-        //         name: response.data.data.name,
-        //         changeNoteV: response.data.data.comment,
-        //         allMenu: response.data.data.allMenu,
-        //     });
-        //
-        //
-        // });
-
         window.Axios.post('back/getMenuList', {}).then(function (response) {
-            // console.log('hcia response', response)
-
-
             self.setState({
                 menuList: response.data.data
             });
-
-
         });
-
-
     }
 
     confirmSave = () => {
@@ -131,37 +109,22 @@ class AddRole extends Component {
                 message.success('操作成功')
 
             }
-
-            // self.setState();
-
-
         });
 
     }
 
     changeScret = (e) => {
-
-
-        //
-        // var see =''
-        // for(var i =0;i<e.target.value.length;i++){
-        //     see = see+'*'
-        // }
-
         this.setState({
             // seret: see,
             realp: e.target.value,
         });
-
     }
 
 
     changeName = (e) => {
-
         this.setState({
             name: e.target.value,
         });
-
     }
 
     changeNote = (e) => {
@@ -183,8 +146,6 @@ class AddRole extends Component {
         const {getFieldDecorator} = this.props.form;
         const ss = this.state.menuList.map(function (item, index) {
                 return (
-
-
                     <Card bodyStyle={{marginLeft: 10}} style={{marginTop: 15}} key={index} title={item.name}
                           bordered={true}>
                         {
@@ -194,29 +155,15 @@ class AddRole extends Component {
                                 );
                             })
                         }
-
                     </Card>
-
-
                 );
             }
         )
-
-
         return (
-
             <div>
-
-
                 <h2 style={{marginTop: 15}}>
                     内部用户权限设置
                 </h2>
-
-                {/*<div>changeNoteV :{JSON.stringify(this.state.changeNoteV)}</div>*/}
-                {/*<div>name :{JSON.stringify(this.state.name)}</div>*/}
-                {/*<div>powerList :{JSON.stringify(this.state.powerList)}</div>*/}
-                {/*<div>realp :{JSON.stringify(this.state.realp)}</div>*/}
-                {/*<div>allMenu :{JSON.stringify(this.state.allMenu)}</div>*/}
 
 
                 <div><BreadcrumbCustom first="内部成员列表" second="内部人员配置"/></div>
@@ -349,8 +296,6 @@ const mapStateToPorps = state => {
     return {auth, infor};
 };
 const mapDispatchToProps = dispatch => ({
-    // fetchData: bindActionCreators(fetchData, dispatch),
-    // receiveData: bindActionCreators(receiveData, dispatch),
     setUSER: bindActionCreators(setINFOR, dispatch),
 
 });

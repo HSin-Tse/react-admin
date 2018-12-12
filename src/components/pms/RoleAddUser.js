@@ -1,10 +1,13 @@
 /* eslint-disable react/sort-comp */
 
 import React, {Component} from 'react';
-import {Col, Card, Row, Radio, Input, Modal, Button, Table, Icon, Checkbox, Select} from 'antd';
+import {Col, Card, Row, Radio, Input, Modal, Button, Table, Icon, Checkbox, Select, Popconfirm, Form} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import axios from 'axios';
 import {parse} from 'querystring';
+import {bindActionCreators} from "redux";
+import {setINFOR} from "../../action";
+import connect from "react-redux/es/connect/connect";
 
 const RadioGroup = Radio.Group;
 
@@ -20,6 +23,8 @@ class RoleAddUser extends Component {
             , modal2Visible: false
             , operationDiaryHistory: []
             , anyThing: 'asdasd'
+            , name: '123'
+            , email: 'aaa@'
         };
     }
 
@@ -69,49 +74,65 @@ class RoleAddUser extends Component {
         });
     }
 
-    render() {
+    changeName = (e) => {
+        this.setState({
+            name: e.target.value,
+        });
+    }
 
+    render() {
+        const {getFieldDecorator} = this.props.form;
 
         return (
-
             <div>
+                <div>姓名 name:{JSON.stringify(this.state.name)}</div>
+                <div>邮箱 email:{JSON.stringify(this.state.email)}</div>
+                <div>手机 mobile:{JSON.stringify(this.state.mobile)}</div>
+                <div>性别 gender:{JSON.stringify(this.state.gender)}</div>
+                <div>新的登陆名 newLoginName:{JSON.stringify(this.state.newLoginName)}</div>
+                <div>新的密码 newPassword:{JSON.stringify(this.state.newPassword)}</div>
+                <div>角色 idList:{JSON.stringify(this.state.idList)}</div>
+                <div>内部人员备注 content:{JSON.stringify(this.state.content)}</div>
+                <div>当前操作人员的密码 password:{JSON.stringify(this.state.password)}</div>
 
-                <h2>
-                    权限管理表
-                </h2>
-
+                <h2 style={{marginTop: 15}}>权限管理表</h2>
                 <div><BreadcrumbCustom first="内部成员列表" second="编辑资料"/></div>
-                <Row>
 
-                </Row>
-
-                <Card title={<h2> 基本信息 </h2>} bordered={true} style={{marginTop: 15}}>
-
+                <Card title={<span style={{fontSize: 18}}> 基本信息 </span>} bordered={true} style={{marginTop: 15}}>
                     <Row gutter={8}>
                         <Col md={12}>
 
                             <div style={{display: 'flex', minHeight: 50}}>
                                 <h3 style={{width: 60}}>姓名:</h3>
-
-                                <Input defaultValue={this.state.name}
-                                       style={{width: 180}}/>
+                                <Input
+                                    onChange={this.changeName}
+                                    defaultValue={this.state.name}/>
                             </div>
+
+
                             <div style={{display: 'flex', minHeight: 50}}>
                                 <h3 style={{width: 60}}>邮箱:</h3>
 
-                                <Input defaultValue={this.state.name}
+                                <Input defaultValue={this.state.email}
+                                       onChange={(e)=>this.setState({
+                                           email: e.target.value,
+                                       })}
+
                                        style={{width: 180}}/>
                             </div>
                             <div style={{display: 'flex', minHeight: 50}}>
                                 <h3 style={{width: 60}}>手机:</h3>
-
+                                onChange={(e)=>this.setState({
+                                mobile: e.target.value,
+                            })}
                                 <Input defaultValue={this.state.name}
                                        style={{width: 180}}/>
                             </div>
                             <div style={{display: 'flex', minHeight: 50}}>
                                 <h3 style={{width: 60}}>性别:</h3>
 
-                                <RadioGroup onChange={this.onChange} value={this.state.gender}>
+                                <RadioGroup onChange={this.onChange}
+                                            value={this.state.gender}>
                                     <Radio value={1}>男</Radio>
                                     <Radio value={2}>女</Radio>
                                 </RadioGroup>
@@ -122,7 +143,7 @@ class RoleAddUser extends Component {
                 </Card>
 
 
-                <Card title={<h2> 账号信息 </h2>} bordered={true} style={{marginTop: 15}}>
+                <Card title={<span style={{fontSize: 18}}> 账号信息 </span>} bordered={true} style={{marginTop: 15}}>
 
                     <Row gutter={8}>
                         <Col md={24}>
@@ -138,7 +159,7 @@ class RoleAddUser extends Component {
 
                                 <Input defaultValue={this.state.name}
                                        style={{width: 180}}/>
-                                <h3 style={{marginLeft:80,width: 120}}>请重复密码:</h3>
+                                <h3 style={{marginLeft: 80, width: 120}}>请重复密码:</h3>
 
                                 <Input defaultValue={this.state.name}
                                        style={{width: 180}}/>
@@ -161,6 +182,74 @@ class RoleAddUser extends Component {
                         </Col>
                     </Row>
                 </Card>
+                <Card bodyStyle={{marginLeft: 10}} title={<span style={{fontSize: 18}}> 操作日志 </span>}
+                      bordered={true}
+                      style={{marginTop: 15}}>
+
+                    <Row gutter={8}>
+                        <Col md={24}>
+
+                            <Table rowKey="id"
+                                   columns={this.columns}
+                                   dataSource={this.state.userList}
+                                   bordered
+                                   loading={this.state.loading}
+                                   pagination={{  // 分页
+                                       total: this.state.pgsize * this.state.totalPage,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePage,
+                                   }}
+                            />
+
+
+                        </Col>
+                    </Row>
+                </Card>
+                <Card bodyStyle={{marginLeft: 10}} title={<span style={{fontSize: 18}}> 安全验证 </span>} bordered={true}
+                      style={{marginTop: 15}}>
+
+                    <Row gutter={8}>
+                        <Col md={24}>
+
+                            <div style={{fontWeight: 'bold', fontSize: 16, display: 'flex', minHeight: 50}}>
+                                <span style={{width: 200}}>請輸入你的密碼:</span>
+
+
+                                {getFieldDecorator('password', {
+                                    rules: [{
+                                        required: true, message: 'Please input your password!',
+                                    }, {
+                                        validator: this.validateToNextPassword,
+                                    }],
+                                })(
+                                    <Input style={{width: 800}} addonAfter={<Icon type="star" theme="twoTone"/>}
+                                           onChange={this.changeScret} placeholder="請輸入你的密碼加以驗證:" type="password"/>
+                                )}
+
+
+                            </div>
+
+
+                        </Col>
+                    </Row>
+                </Card>
+
+
+                <Row gutter={12}>
+                    <Card style={{marginTop: 10}}>
+
+                        <div>
+                            <Popconfirm title="确认保存"
+                                        onConfirm={this.confirmSave} okText="Yes"
+                                        cancelText="No">
+                                <Button type={"primary"} loading={this.state.iconLoading}>保存</Button>
+                            </Popconfirm>
+
+                            <Button onClick={this.props.history.goBack}
+                                    loading={this.state.iconcanLoading}>返回</Button>
+                        </div>
+                    </Card>
+                </Row>
 
             </div>
         )
@@ -258,4 +347,5 @@ class RoleAddUser extends Component {
     };
 }
 
-export default RoleAddUser;
+
+export default connect()(Form.create()(RoleAddUser));
