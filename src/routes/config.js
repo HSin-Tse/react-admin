@@ -65,6 +65,11 @@ export default {
                 title: 'AddRole',
                 icon: 'star',
                 component: 'AddRole'
+            }, {
+                route: '/app/pms/editrole:id',
+                title: 'EditRole',
+                icon: 'star',
+                component: 'EditRole'
             },
         ]
 }

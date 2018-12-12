@@ -99,14 +99,16 @@ class Basic extends Component {
             }, {
                 title: '操作',
                 width: 240,
+                fixed:'right',
+
                 align: 'center',
                 key: 'action',
                 render: (text, record) => (
                     <div>
                         <Button className="ant-dropdown-link"
-                                onClick={() => this.seeDetail(record)}>详情</Button>
+                                onClick={() => this.addRole(record)}>编辑</Button>
                         <Button className="ant-dropdown-link"
-                                onClick={() => this.seeDetail(record)}>详情</Button>
+                                onClick={() => this.seeDetail(record)}>删除</Button>
                     </div>
                 ),
             }];
@@ -238,8 +240,19 @@ class Basic extends Component {
             this.requestPage()
         })
     }
-    addRole = () => {
-        this.props.history.push('/app/pms/addrole' + 0)
+    addRole = (record) => {
+
+        if(record){
+            console.log('hcia record' , record)
+            console.log('hcia record.id' , record.id)
+            this.props.history.push('/app/pms/editrole' + record.id)
+
+        }else{
+            this.props.history.push('/app/pms/addrole' + 0)
+
+        }
+
+        
 
 
     }

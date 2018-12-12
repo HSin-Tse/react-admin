@@ -28,7 +28,7 @@ const RadioGroup = Radio.Group;
 const {TextArea} = Input;
 const CheckboxGroup = Checkbox.Group;
 
-class AddRole extends Component {
+class EditRole extends Component {
 
     constructor(props) {
         super(props);
@@ -51,10 +51,10 @@ class AddRole extends Component {
     componentDidMount() {
 
 
-        console.log('hcia self.props.match.params.id' , this.props.match.params.id)
-        console.log('hcia this.props.match.params.id' , this.props.match.params.id)
-        console.log('hcia this.props.match.params.id' , this.props.match.params.id)
-        console.log('hcia this.props.match.params.id' , this.props.match.params.id)
+        console.log('hcia self.props.match.params.id', this.props.match.params.id)
+        console.log('hcia this.props.match.params.id', this.props.match.params.id)
+        console.log('hcia this.props.match.params.id', this.props.match.params.id)
+        console.log('hcia this.props.match.params.id', this.props.match.params.id)
 
         this.columns = [
             {
@@ -86,20 +86,27 @@ class AddRole extends Component {
         var self = this;
 
 
-        // window.Axios.post('back/getRoleDetail', {
-        //     id:this.props.match.params.id
-        // }).then(function (response) {
-        //     console.log('hcia response', response)
-        //
-        //
-        //     self.setState({
-        //         name: response.data.data.name,
-        //         changeNoteV: response.data.data.comment,
-        //         allMenu: response.data.data.allMenu,
-        //     });
-        //
-        //
-        // });
+        window.Axios.post('back/getRoleDetail', {
+            id: this.props.match.params.id
+        }).then(function (response) {
+            console.log('hcia response', response)
+
+
+            self.setState({
+                name: response.data.data.name,
+                changeNoteV: response.data.data.roleComment,
+                allMenu: response.data.data.allMenu,
+            },()=>{
+
+                self.setState({
+                    powerList: Object.keys(self.state.allMenu).map(Number)
+                });
+            });
+
+
+
+
+        });
 
         window.Axios.post('back/getMenuList', {}).then(function (response) {
             // console.log('hcia response', response)
@@ -120,6 +127,7 @@ class AddRole extends Component {
         var self = this;
 
         window.Axios.post('back/saveOrUpdateRole', {
+            id: this.props.match.params.id,
             name: self.state.name,
             content: self.state.changeNoteV,
             idList: self.state.powerList,
@@ -179,6 +187,7 @@ class AddRole extends Component {
 
 
     render() {
+        const {allMenu} =this.state
 
         const {getFieldDecorator} = this.props.form;
         const ss = this.state.menuList.map(function (item, index) {
@@ -188,9 +197,16 @@ class AddRole extends Component {
                     <Card bodyStyle={{marginLeft: 10}} style={{marginTop: 15}} key={index} title={item.name}
                           bordered={true}>
                         {
-                            item.childrenMenu.map(function (item1, number) {
+                            item.childrenMenu.map((item1, number) => {
                                 return (
-                                    <Checkbox key={number} value={item1.id} id={number}>{item1.name}</Checkbox>
+                                    
+                                    <Checkbox
+                                        // checked={ Object.keys(allMenu).find((item, index, array) => {
+                                        //     console.log('hcia item' , item)
+                                        //
+                                        //     return true
+                                        // })}
+                                        key={number} value={item1.id} >{item1.name}</Checkbox>
                                 );
                             })
                         }
@@ -216,7 +232,9 @@ class AddRole extends Component {
                 {/*<div>name :{JSON.stringify(this.state.name)}</div>*/}
                 {/*<div>powerList :{JSON.stringify(this.state.powerList)}</div>*/}
                 {/*<div>realp :{JSON.stringify(this.state.realp)}</div>*/}
-                {/*<div>allMenu :{JSON.stringify(this.state.allMenu)}</div>*/}
+                <div>allMenu :{JSON.stringify(this.state.allMenu)}</div>
+                <div>allMenu :{JSON.stringify(Object.keys(allMenu))}</div>
+                <div>allMenu :{JSON.stringify(Object.keys(allMenu).map(Number))}</div>
 
 
                 <div><BreadcrumbCustom first="内部成员列表" second="内部人员配置"/></div>
@@ -257,7 +275,7 @@ class AddRole extends Component {
                       style={{marginTop: 15}}>
 
                     <Row gutter={8}>
-                        <Checkbox.Group style={{width: '100%'}} onChange={this.onChange}>
+                        <Checkbox.Group style={{width: '100%'}}  value={this.state.powerList} onChange={this.onChange}>
                             <Col md={24}>
                                 {ss}
                             </Col>
@@ -351,7 +369,6 @@ class AddRole extends Component {
 
 }
 
-// export default AddRole;
 
 const mapStateToPorps = state => {
     const {auth} = state.httpData;
@@ -366,4 +383,4 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-export default connect(mapStateToPorps, mapDispatchToProps)(Form.create()(AddRole));
+export default connect(mapStateToPorps, mapDispatchToProps)(Form.create()(EditRole));
