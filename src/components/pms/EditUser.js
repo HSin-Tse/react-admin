@@ -41,6 +41,7 @@ class EditUser extends Component {
             , mRoleList: []
             , anyThing: 'asdasd'
             , name: ''
+            , allRoleV: 0
             , email: 'aaa@'
             , newPassword: '11111'
             , secondPassword: '11111'
@@ -57,6 +58,7 @@ class EditUser extends Component {
         var self = this;
 
         window.Axios.post('back/saveOrUpdateBackUser', {
+            id: this.props.match.params.id,
             name: self.state.name,
             email: self.state.email,
             mobile: self.state.mobile,
@@ -117,6 +119,22 @@ class EditUser extends Component {
                 newLoginName: response.data.data.loginName,
                 // changeNoteV: response.data.data.roleComment,
                 allRole: response.data.data.allRole,
+            }, () => {
+
+
+                var value = Object.keys(this.state.allRole).map(Number).map((item1, number) => {
+                    return (
+                        item1
+                    );
+                })
+                var aa = []
+                aa.push(value)
+                this.setState({
+                    idList: aa,
+                    allRoleV: value,
+                });
+
+
             });
 
 
@@ -202,10 +220,12 @@ class EditUser extends Component {
     handleChangeIDList = (value) => {
         console.log('hcia value', value)
 
+
         var aa = []
         aa.push(value)
         this.setState({
             idList: aa,
+            allRoleV: value,
         });
     }
 
@@ -366,11 +386,8 @@ class EditUser extends Component {
                                     placeholder="角色"
                                     value={
 
-                                        Object.keys(this.state.allRole).map(Number).map((item1, number) => {
-                                        return (
-                                            item1
-                                        );
-                                    })
+                                        this.state.allRoleV
+
 
                                     }
                                     onChange={this.handleChangeIDList}
