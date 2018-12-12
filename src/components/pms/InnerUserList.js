@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, message, Select, Modal, Card, Col, Popconfirm} from 'antd';
+import {Button, Table, message, Select, Modal, Card, Col, Popconfirm, Tag} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
@@ -10,7 +10,7 @@ import {receiveData} from "../../action";
 
 const Option = Select.Option;
 
-class Basic extends Component {
+class InnerUserList extends Component {
 
     constructor(props) {
         super(props);
@@ -108,7 +108,22 @@ class Basic extends Component {
                 dataIndex: '角色',
                 key: '角色',
                 render: (text, record) => (
-                    <span>{record.mobile}</span>),
+                    <span>
+                        {/*{record.allRole}*/}
+
+                        {
+                            record.allRole ?
+
+                            Object.keys(record.allRole).map((item1, number) => {
+                                return (
+                                    <Tag key={number} value={item1}>{record.allRole[item1]}</Tag>
+                                );
+                            }):''
+                        }
+
+
+
+                    </span>),
             },
             {
                 title: '邮箱',
@@ -458,4 +473,4 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
     receiveData: bindActionCreators(receiveData, dispatch)
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Basic);
+export default connect(mapStateToProps, mapDispatchToProps)(InnerUserList);

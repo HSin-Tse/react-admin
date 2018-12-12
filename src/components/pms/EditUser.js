@@ -29,7 +29,7 @@ const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 const Option = Select.Option;
 
-class AddUser extends Component {
+class EditUser extends Component {
     // state = {visible: false, modal2Visible: false}
 
     constructor(props) {
@@ -175,11 +175,8 @@ class AddUser extends Component {
     }
     handleChangeIDList = (value) => {
         console.log('hcia value', value)
-
-        var aa =[]
-        aa.push(value)
         this.setState({
-            idList: aa,
+            idList: value,
         });
     }
 
@@ -338,7 +335,7 @@ class AddUser extends Component {
                             <div style={{display: 'flex', minHeight: 50}}>
                                 <h3 style={{width: 60}}>角色:</h3>
                                 <Select
-                                    // mode="multiple"
+                                    mode="multiple"
                                     style={{width: 180}}
                                     placeholder="角色"
                                     // defaultValue={}
@@ -436,4 +433,4 @@ class AddUser extends Component {
 }
 
 
-export default connect()(Form.create()(AddUser));
+export default connect()(Form.create()(EditUser));

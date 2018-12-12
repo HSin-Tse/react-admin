@@ -5,7 +5,6 @@
 import Loadable from 'react-loadable';
 import Loading from './widget/Loading';
 import BasicForm from './forms/BasicForm';
-import BasicTable from './tables/BasicTables';
 import AdvancedTable from './tables/AdvancedTables';
 import AsynchronousTable from './tables/AsynchronousTable';
 import Echarts from './charts/Echarts';
@@ -33,13 +32,14 @@ import CustomerSummary from './customer/CustomerSummary'
 import BlackList from './customer/BlackList'
 import WhiteList from './customer/WhiteList'
 import CustomerUserInfo from './customer/CustomerUserInfo'
-import RoleAddUser from './pms/AddUser'
+import AddUser from './pms/AddUser'
+import EditUser from './pms/EditUser'
 import TradeAccount from './trade/Account'
 import TradeDepart from './trade/Depart'
 import RoleSet from './pms/RoleSet'
 import AddRole from './pms/AddRole'
 import EditRole from './pms/EditRole'
-import InnerMan from './pms/InnerMan'
+import InnerUserList from './pms/InnerUserList'
 
 
 const WysiwygBundle = Loadable({ // 按需加载富文本配置
@@ -49,7 +49,7 @@ const WysiwygBundle = Loadable({ // 按需加载富文本配置
 
 export default {
     BasicForm,
-    InnerMan,
+    InnerUserList,
     RoleSet,
     AdvancedTable,
     AsynchronousTable,
@@ -78,7 +78,8 @@ export default {
     IntendingUser,
     CustomerSummary,
     CustomerUserInfo,
-    RoleAddUser,
+    AddUser,
+    EditUser,
     AddRole,
     EditRole,
     TradeAccount,

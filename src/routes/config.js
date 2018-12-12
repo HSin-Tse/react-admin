@@ -32,7 +32,7 @@ export default {
         {
             key: '/app/pms', title: '权限管理', icon: 'safety',
             subs: [
-                {key: '/app/pms/innerman', title: '内部成员配置', component: 'InnerMan'},
+                {key: '/app/pms/inneruserlist', title: '内部成员配置', component: 'InnerUserList'},
                 {key: '/app/pms/roleset', title: '角色配置', component: 'RoleSet'},
                 // {key: '/app/pms/rolelog', title: '操作日志', component: 'RoleLog'},
 
@@ -56,20 +56,25 @@ export default {
             },
             {
                 route: '/app/pms/adduser:id',
-                title: 'RoleAddUser',
+                title: 'AddUser',
                 icon: 'star',
-                component: 'RoleAddUser'
-            },
+                component: 'AddUser'
+            }, {
+            route: '/app/pms/edituser:id',
+            title: 'EditUser',
+            icon: 'star',
+            component: 'EditUser'
+        },
             {
                 route: '/app/pms/addrole:id',
                 title: 'AddRole',
                 icon: 'star',
                 component: 'AddRole'
             }, {
-                route: '/app/pms/editrole:id',
-                title: 'EditRole',
-                icon: 'star',
-                component: 'EditRole'
-            },
+            route: '/app/pms/editrole:id',
+            title: 'EditRole',
+            icon: 'star',
+            component: 'EditRole'
+        },
         ]
 }
