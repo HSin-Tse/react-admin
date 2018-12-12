@@ -10,6 +10,7 @@ import {setINFOR} from "../../action";
 import connect from "react-redux/es/connect/connect";
 
 const RadioGroup = Radio.Group;
+const Option = Select.Option;
 
 class RoleAddUser extends Component {
     // state = {visible: false, modal2Visible: false}
@@ -22,6 +23,7 @@ class RoleAddUser extends Component {
             , visible: false
             , modal2Visible: false
             , operationDiaryHistory: []
+            , menuList: []
             , anyThing: 'asdasd'
             , name: '123'
             , email: 'aaa@'
@@ -60,10 +62,23 @@ class RoleAddUser extends Component {
 
     componentDidMount() {
 
+        var self = this;//props.match.params.id
 
-        // this.requestListData()
-        // this.ediftModalColumn()
-        // this.requestUserCommentList()
+        window.Axios.post('back/getRoleList', {
+            'pageSize': 100,
+            'pageNo': 0,
+        }).then(function (response) {
+            console.log('hcia response', response)
+
+            self.setState({
+                    menuList: response.data.data.list
+                }
+            );
+
+        }).catch(function (error) {
+            console.log(error);
+        });
+
 
     }
 
@@ -82,7 +97,10 @@ class RoleAddUser extends Component {
 
     render() {
         const {getFieldDecorator} = this.props.form;
-
+        const children = [];
+        for (let i = 10; i < 36; i++) {
+            children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
+        }
         return (
             <div>
                 <div>姓名 name:{JSON.stringify(this.state.name)}</div>
@@ -114,7 +132,7 @@ class RoleAddUser extends Component {
                                 <h3 style={{width: 60}}>邮箱:</h3>
 
                                 <Input defaultValue={this.state.email}
-                                       onChange={(e)=>this.setState({
+                                       onChange={(e) => this.setState({
                                            email: e.target.value,
                                        })}
 
@@ -122,11 +140,14 @@ class RoleAddUser extends Component {
                             </div>
                             <div style={{display: 'flex', minHeight: 50}}>
                                 <h3 style={{width: 60}}>手机:</h3>
-                                onChange={(e)=>this.setState({
-                                mobile: e.target.value,
-                            })}
-                                <Input defaultValue={this.state.name}
-                                       style={{width: 180}}/>
+
+                                <Input
+                                    onChange={(e) => this.setState({
+                                        mobile: e.target.value,
+                                    })}
+
+                                    defaultValue={this.state.name}
+                                    style={{width: 180}}/>
                             </div>
                             <div style={{display: 'flex', minHeight: 50}}>
                                 <h3 style={{width: 60}}>性别:</h3>
@@ -151,13 +172,19 @@ class RoleAddUser extends Component {
                             <div style={{display: 'flex', minHeight: 50}}>
                                 <h3 style={{width: 60}}>登录名:</h3>
 
-                                <Input defaultValue={this.state.name}
+                                <Input defaultValue={this.state.newLoginName}
+                                       onChange={(e) => this.setState({
+                                           newLoginName: e.target.value,
+                                       })}
                                        style={{width: 180}}/>
                             </div>
                             <div style={{display: 'flex', minHeight: 50}}>
                                 <h3 style={{width: 60}}>密码:</h3>
 
-                                <Input defaultValue={this.state.name}
+                                <Input defaultValue={this.state.newPassword}
+                                       onChange={(e) => this.setState({
+                                           newPassword: e.target.value,
+                                       })}
                                        style={{width: 180}}/>
                                 <h3 style={{marginLeft: 80, width: 120}}>请重复密码:</h3>
 
@@ -166,9 +193,16 @@ class RoleAddUser extends Component {
                             </div>
                             <div style={{display: 'flex', minHeight: 50}}>
                                 <h3 style={{width: 60}}>角色:</h3>
+                                <Select
+                                    mode="multiple"
+                                    style={{width: '100%'}}
+                                    placeholder="Please select"
+                                    // defaultValue={}
+                                    // onChange={handleChange}
+                                >
+                                    {children}
+                                </Select>
 
-                                <Input defaultValue={this.state.name}
-                                       style={{width: 180}}/>
                             </div>
                             <div style={{display: 'flex', minHeight: 50}}>
                                 <h3 style={{width: 60}}>权限:</h3>
@@ -336,7 +370,6 @@ class RoleAddUser extends Component {
 
 
         }).then(function (response) {
-            var bb = response.data.data;
             self.setState({anyThing: 'wwwww'});
             self.setState({anyThing: response.data.code});
             self.setState({userList: response.data.data});
