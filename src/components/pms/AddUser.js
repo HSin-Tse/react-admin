@@ -12,7 +12,7 @@ import connect from "react-redux/es/connect/connect";
 const RadioGroup = Radio.Group;
 const Option = Select.Option;
 
-class RoleAddUser extends Component {
+class AddUser extends Component {
     // state = {visible: false, modal2Visible: false}
 
     constructor(props) {
@@ -393,4 +393,4 @@ class RoleAddUser extends Component {
 }
 
 
-export default connect()(Form.create()(RoleAddUser));
+export default connect()(Form.create()(AddUser));
