@@ -7,10 +7,10 @@ export default {
         {
             key: '/app/customer', title: '用户管理', icon: 'team',
             subs: [
-                {key: '/app/customer/PotentialUser', title: 'Lead管理', component: 'PotentialUser'},
-                {key: '/app/customer/CustomerSummary', title: '用戶總表', component: 'CustomerSummary'},
-                {key: '/app/customer/blacklist', title: '黑名單', component: 'BlackList'},
-                {key: '/app/customer/whitelist', title: '白名單', component: 'WhiteList'},
+                {key: '/app/customer/PotentialUser', title: 'Leads管理', component: 'PotentialUser'},
+                {key: '/app/customer/CustomerSummary', title: '用户总表', component: 'CustomerSummary'},
+                {key: '/app/customer/blacklist', title: '黑名单', component: 'BlackList'},
+                {key: '/app/customer/whitelist', title: '白名单', component: 'WhiteList'},
             ],
         },
         {
@@ -27,15 +27,14 @@ export default {
             subs: [
                 {key: '/app/trade/account', title: '交易账户管理', component: 'TradeAccount'},
                 {key: '/app/trade/depart', title: '組管理', component: 'TradeDepart'},
-
             ],
         },
 
         {
             key: '/app/pms', title: '权限管理', icon: 'safety',
             subs: [
-                {key: '/app/pms/inneruserlist', title: '内部成员配置', component: 'InnerUserList'},
-                {key: '/app/pms/roleset', title: '角色配置', component: 'RoleSet'},
+                {key: '/app/pms/inneruserlist', title: '客服组管理', component: 'InnerUserList'},
+                {key: '/app/pms/roleset', title: '内部角色配置', component: 'RoleSet'},
                 // {key: '/app/pms/rolelog', title: '操作日志', component: 'RoleLog'},
 
             ],

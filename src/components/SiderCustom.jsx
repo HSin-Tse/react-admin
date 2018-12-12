@@ -4,8 +4,9 @@
 import React, {Component} from 'react';
 import {Layout} from 'antd';
 import {withRouter} from 'react-router-dom';
-import routes from '../routes/config';
+import routes from '@/routes/config';
 import SiderMenu from './SiderMenu';
+import * as Immutable from 'immutable';
 import avater from "../style/imgs/ixlogo.png";
 
 const {Sider} = Layout;
@@ -14,7 +15,7 @@ class SiderCustom extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            config: [],
+            cconfig: [],
             visible: false,
             gallery: null,
             infor: JSON.parse(localStorage.getItem('infor')),
@@ -66,33 +67,45 @@ class SiderCustom extends Component {
     componentDidMount() {
         console.log('hcia  SiderCustom componentDidMount')
 
+
+        var bbRouter = {...routes}
+        // var bbRouter = Immutable.fromJS(routes);
+
         if (this.state.infor == null) {
             console.log('hcia', 'Side ccc')
 
-            this.setState({config: routes});
+            this.setState({cconfig: bbRouter});
 
         } else if (this.state.infor.menuList.length == 0) {
 
             console.log('hcia', 'Side aaaa')
 
             var setrr = {
-                ...routes,
+                ...bbRouter,
                 menus: [{key: "/app/dashboard/index", title: "歡迎", icon: "user", component: "Dashboard"}]
             }
 
             console.log('hcia setrr', setrr)
-            this.setState({config: setrr});
+            this.setState({cconfig: setrr});
 
         } else if (this.state.infor != null) {
-            console.log('hcia', 'Side bbbbb')
-            var nowRouter = routes.menus.filter((key, index, array) => {
 
-                // console.log('hcia key', key)
+
+            // this.setState({cconfig: bbRouter});
+
+            console.log('hcia routes' , routes)
+            console.log('hcia bbRouter' , bbRouter)
+
+            console.log('hcia', 'Side bbbbb',this.state.infor)
+            var nowRouter = bbRouter.menus.filter((key, index, array) => {
+
 
                 if (key.subs) {
+                    console.log('hcia key A', key.title)
 
 
-                    var ssb = key.subs.filter((key, index, array) => {
+                    var ssb = key.subs.filter((sbkey, index, array) => {
+                        console.log('hcia sbkey' , sbkey.title)
 
 
                         var back = false
@@ -100,9 +113,9 @@ class SiderCustom extends Component {
 
                         this.state.infor.menuList.forEach(function (item, index, array) {
 
-                            console.log('hcia key.title', key.title, item.name, (key.title == item.name))
+                            console.log('hcia sbkey.title', sbkey.title, item.name, (sbkey.title == item.name))
 
-                            if (key.title == item.name) {
+                            if (sbkey.title == item.name) {
                                 back = true
                             }
 
@@ -115,7 +128,10 @@ class SiderCustom extends Component {
                     key.subs = ssb
 
 
-                    console.log('hcia key.subs', key.subs.length)
+                    // console.log('hcia key.subs', key.subs.length)
+
+                }else{
+                    console.log('hcia key B', key.title)
 
                 }
                 if (key.title == '歡迎') {
@@ -125,10 +141,14 @@ class SiderCustom extends Component {
 
                 return key.subs.length > 0;
             });
-            var setrr = {...routes, menus: nowRouter}
-            this.setState({config: setrr});
+
+
+            var setrr = {...bbRouter, menus: nowRouter}
+            this.setState({cconfig: setrr});
+
 
         }
+        // this.setState({cconfig: bbRouter});
 
 
     }
@@ -167,7 +187,7 @@ class SiderCustom extends Component {
 
                 </div>
                 <SiderMenu
-                    menus={this.state.config.menus}
+                    menus={this.state.cconfig.menus}
                     onClick={this.menuClick}
                     mode="inline"
                     selectedKeys={[this.state.selectedKey]}

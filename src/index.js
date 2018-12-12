@@ -26,6 +26,9 @@ window.Axios.interceptors.request.use(
     config => {
         var xtoken = localStorage.getItem('too')
         var loginName = localStorage.getItem('loginName')
+        
+        console.log('hcia loginName' , loginName)
+        console.log('hcia xtoken' , xtoken)
 
         if (xtoken != null) {
             config.headers['X-Token'] = xtoken
