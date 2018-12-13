@@ -68,7 +68,7 @@ class EditUser extends Component {
             idList: self.state.idList,
             password: self.state.password,
         }).then((response) => {
-            console.log('hcia response', response)
+            // console.log('hcia response', response)
 
             if (response.data.code == 1) {
                 message.success('操作成功')
@@ -110,7 +110,7 @@ class EditUser extends Component {
             id: this.props.match.params.id
         }).then((response) => {
 
-            console.log('hcia response', response)
+            // console.log('hcia response', response)
             self.setState({
                 name: response.data.data.displayName,
                 email: response.data.data.email,
@@ -146,20 +146,21 @@ class EditUser extends Component {
         //     });
         // });
 
-        // window.Axios.post('back/getRoleList', {
-        //     'pageSize': 100,
-        //     'pageNo': 0,
-        // }).then(function (response) {
-        //     console.log('hcia response', response)
-        //
-        //     self.setState({
-        //             mRoleList: response.data.data.list
-        //         }
-        //     );
-        //
-        // }).catch(function (error) {
-        //     console.log(error);
-        // });
+        window.Axios.post('back/getRoleList', {
+            'pageSize': 100,
+            'pageNo': 0,
+        }).then(function (response) {
+            // console.log('hcia response', response)
+
+            // console.log('hcia response.data.data.list', response.data.data.list)
+            self.setState({
+                    mRoleList: response.data.data.list
+                }
+            );
+
+        }).catch(function (error) {
+            console.log(error);
+        });
 
 
     }
@@ -173,7 +174,7 @@ class EditUser extends Component {
     }
 
     secondScret = (e) => {
-        console.log(' secondScret hcia e.target.value', e.target.value)
+        // console.log(' secondScret hcia e.target.value', e.target.value)
         this.setState({
             secondPassword: e.target.value,
         });
@@ -238,20 +239,30 @@ class EditUser extends Component {
                                   key={this.state.mRoleList[i].id}>{this.state.mRoleList[i].name}</Option>);
         }
 
-        const ss = this.state.mRoleList.filter(
+        const ssss = this.state.mRoleList.filter(
             (item) => {
 
                 return this.state.idList.some((itemS) => {
                     return itemS == item.id
                 })
-            }).map(function (item) {
+            }).map((item) => {
+
+                console.log('hcia item', item)
+                console.log('hcia  Object.keys(item.allMenu)', Object.keys(item.allMenu))
+
                 return (
                     <div style={{display: 'flex', minHeight: 50}}>
                         <h3 style={{minWidth: 80}}>{item.name}:</h3>
                         {
+
                             Object.keys(item.allMenu).map((item1, number) => {
+
+                                var isCanOP = item.allMenu[item1].availableFlag == 1
+
+                                console.log('hcia isCanOP', isCanOP)
                                 return (
-                                    <Tag key={number} value={item1}>{item.allMenu[item1]}</Tag>
+                                    <Tag color={isCanOP ? "magenta" : "green"} key={number}
+                                         value={item1}>{item.allMenu[item1].name}</Tag>
                                 );
                             })
                         }
@@ -403,7 +414,7 @@ class EditUser extends Component {
                                         // onChange={this.onChange}
                                     >
                                         <Col md={24}>
-                                            {ss}
+                                            {ssss}
                                         </Col>
                                     </Checkbox.Group>
                                 </Row>
