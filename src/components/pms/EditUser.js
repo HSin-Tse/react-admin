@@ -9,6 +9,7 @@ import {
     Input,
     Tag,
     Button,
+    Tooltip,
     Table,
     Icon,
     Checkbox,
@@ -261,8 +262,12 @@ class EditUser extends Component {
 
                                 console.log('hcia isCanOP', isCanOP)
                                 return (
-                                    <Tag color={isCanOP ? "magenta" : "green"} key={number}
-                                         value={item1}>{item.allMenu[item1].name}</Tag>
+
+                                    <Tooltip placement="top" title={isCanOP ? "可操作" : "只讀"}>
+                                        <Tag color={isCanOP ? "magenta" : "green"} key={number}
+                                             value={item1}>{item.allMenu[item1].name}</Tag>
+                                    </Tooltip>
+
                                 );
                             })
                         }
