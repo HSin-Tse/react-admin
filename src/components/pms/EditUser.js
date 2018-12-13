@@ -28,7 +28,6 @@ const RadioGroup = Radio.Group;
 const Option = Select.Option;
 
 class EditUser extends Component {
-    // state = {visible: false, modal2Visible: false}
 
     constructor(props) {
         super(props);
@@ -40,13 +39,13 @@ class EditUser extends Component {
             , operationDiaryHistory: []
             , idList: []
             , mRoleList: []
-            , anyThing: 'asdasd'
+            , anyThing: ''
             , name: ''
             , allRoleV: 0
-            , email: 'aaa@'
-            , newPassword: '11111'
-            , secondPassword: '11111'
-            , password: '22222'
+            , email: '@'
+            , newPassword: ''
+            , secondPassword: ''
+            , password: ''
             , allRole: {}
         };
     }
@@ -141,19 +140,11 @@ class EditUser extends Component {
 
         });
 
-        // window.Axios.post('back/getMenuList', {}).then(function (response) {
-        //     self.setState({
-        //         mMenuList: response.data.data
-        //     });
-        // });
 
         window.Axios.post('back/getRoleList', {
             'pageSize': 100,
             'pageNo': 0,
-        }).then(function (response) {
-            // console.log('hcia response', response)
-
-            // console.log('hcia response.data.data.list', response.data.data.list)
+        }).then((response) => {
             self.setState({
                     mRoleList: response.data.data.list
                 }
@@ -278,17 +269,17 @@ class EditUser extends Component {
 
         return (
             <div>
-                <div>姓名 name:{JSON.stringify(this.state.name)}</div>
-                <div>邮箱 email:{JSON.stringify(this.state.email)}</div>
-                <div>手机 mobile:{JSON.stringify(this.state.mobile)}</div>
-                <div>性别 gender:{JSON.stringify(this.state.gender)}</div>
-                <div>新的登陆名 newLoginName:{JSON.stringify(this.state.newLoginName)}</div>
-                <div>新的密码 newPassword:{JSON.stringify(this.state.newPassword)}</div>
-                <div>驗證密码 secondPassword:{JSON.stringify(this.state.secondPassword)}</div>
-                <div>角色 idList:{JSON.stringify(this.state.idList)}</div>
-                <div>内部人员备注 content:{JSON.stringify(this.state.content)}</div>
-                <div>当前操作人员的密码 password:{JSON.stringify(this.state.password)}</div>
-                <div> allRole:{JSON.stringify(this.state.allRole)}</div>
+                {/*<div>姓名 name:{JSON.stringify(this.state.name)}</div>*/}
+                {/*<div>邮箱 email:{JSON.stringify(this.state.email)}</div>*/}
+                {/*<div>手机 mobile:{JSON.stringify(this.state.mobile)}</div>*/}
+                {/*<div>性别 gender:{JSON.stringify(this.state.gender)}</div>*/}
+                {/*<div>新的登陆名 newLoginName:{JSON.stringify(this.state.newLoginName)}</div>*/}
+                {/*<div>新的密码 newPassword:{JSON.stringify(this.state.newPassword)}</div>*/}
+                {/*<div>驗證密码 secondPassword:{JSON.stringify(this.state.secondPassword)}</div>*/}
+                {/*<div>角色 idList:{JSON.stringify(this.state.idList)}</div>*/}
+                {/*<div>内部人员备注 content:{JSON.stringify(this.state.content)}</div>*/}
+                {/*<div>当前操作人员的密码 password:{JSON.stringify(this.state.password)}</div>*/}
+                {/*<div> allRole:{JSON.stringify(this.state.allRole)}</div>*/}
                 {/*<div> mRoleList:{JSON.stringify(this.state.mRoleList)}</div>*/}
 
                 <h2 style={{marginTop: 15}}>权限管理表</h2>

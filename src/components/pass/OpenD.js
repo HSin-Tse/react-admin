@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import {
-    Popconfirm, Icon, Upload, Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, notification
+    Tooltip, Popconfirm, Icon, Upload, Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, notification
 } from 'antd';
 import {Radio} from 'antd';
 import {message} from 'antd';
@@ -78,6 +78,15 @@ class PassOpenD extends Component {
     componentDidMount() {
         var self = this;
 
+
+        var menuInfor = JSON.parse(localStorage.getItem('infor'))
+
+
+        console.log('hcia menuInfor', menuInfor.menuList)
+
+
+        // availableFlag
+
         window.Axios.post('dict/leverageList', {
             'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
         }).then((response) => {
@@ -141,7 +150,7 @@ class PassOpenD extends Component {
                     'division': 'province',
                     'code': '1',
                 }).then(function (response) {
-                    console.log('hcia response', response)
+                    // console.log('hcia response', response)
 
                     self.setState({
                         provinceDatAarra: response.data.data.div_type,
@@ -157,7 +166,7 @@ class PassOpenD extends Component {
                             'code': nowCity[0].code
                         }).then((ress) => {
 
-                            console.log('hcia ress', ress)
+                            // console.log('hcia ress', ress)
                             self.setState({
                                 cityDatAarra: ress.data.data.div_type
                             })
@@ -182,7 +191,10 @@ class PassOpenD extends Component {
 
     render() {
 
-        var isSetL = this.state.leverageName.length > 0
+        var isSetL = this.state.leverageId ? this.state.leverageId.length > 0 : false
+
+
+        console.log('hcia isSetL', isSetL)
         var self = this;
 
         this.mIncomesOPS = this.state.IXIncomeList.map(d => <Option key={d.name}>{d.name}</Option>);
@@ -228,13 +240,13 @@ class PassOpenD extends Component {
 
                 aaxios.post('open/leadDetailAttachs', formData, {})
                     .then(function (response) {
-                        console.log('hcia response', response.data.data)
+                        // console.log('hcia response', response.data.data)
                         self.setState({
                             recordData: {...self.state.recordData, idcard_1: response.data.data}
                         })
                     })
                     .catch(error => {
-                        console.log('hcia error', error)
+                        // console.log('hcia error', error)
                     });
 
 
@@ -276,13 +288,13 @@ class PassOpenD extends Component {
 
                 aaxios.post('open/leadDetailAttachs', formData, {})
                     .then(function (response) {
-                        console.log('hcia response', response.data.data)
+                        // console.log('hcia response', response.data.data)
                         self.setState({
                             recordData: {...self.state.recordData, idcard_0: response.data.data}
                         })
                     })
                     .catch(error => {
-                        console.log('hcia error', error)
+                        // console.log('hcia error', error)
                     });
 
 
@@ -324,13 +336,13 @@ class PassOpenD extends Component {
 
                 aaxios.post('open/leadDetailAttachs', formData, {})
                     .then(function (response) {
-                        console.log('hcia response', response.data.data)
+                        // console.log('hcia response', response.data.data)
                         self.setState({
                             recordData: {...self.state.recordData, idcard_2: response.data.data}
                         })
                     })
                     .catch(error => {
-                        console.log('hcia error', error)
+                        // console.log('hcia error', error)
                     });
 
 
@@ -344,7 +356,7 @@ class PassOpenD extends Component {
                 {/*<div>status: {this.state.recordData.status}</div>*/}
                 {/*<div>isNeedSave :{this.state.isNeedSave.toString()}</div>*/}
                 {/*<div>waitUpdate :{JSON.stringify(this.state.waitUpdate)}</div>*/}
-                {/*<div>recordDictirys :{JSON.stringify(this.state.recordDictirys)}</div>*/}
+                <div>this.state.leverageId :{JSON.stringify(this.state.leverageId)}</div>
 
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
                 <Card disabled={true} title="IX账户审核 " bordered={true}>
@@ -614,7 +626,6 @@ class PassOpenD extends Component {
                                     <span style={{minWidth: 120}}>*交易密码</span>
                                     <Input defaultValue={this.state.recordData.accountPassword}
                                            disabled={true}
-                                        // onChange={this.onChangeSSS}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                             </Card>
@@ -747,26 +758,29 @@ class PassOpenD extends Component {
                         <Card style={{marginTop: 10}}>
 
                             <div>
-                                <Popconfirm title="确认当前用户开户申请通过" onConfirm={this.confirmOpen} okText="Yes"
-                                            cancelText="No">
+                                <Tooltip placement="top"
+                                         title={!isSetL ? '需要添加杠杆组' : this.state.isNeedSave ? '保存信息' : ''}>
 
-                                    <Button
-                                        // disabled={!isSetL }
+                                    <Popconfirm disabled={this.state.isNeedSave || !isSetL} title="确认当前用户开户申请通过"
+                                                onConfirm={this.confirmOpen} okText="Yes"
+                                                cancelText="No">
 
-                                        disabled={this.state.isNeedSave   ||  !isSetL }
 
-                                        loading={this.state.iconLoading}
-                                    >开户通过</Button>
-
-                                </Popconfirm>
+                                        <Button
+                                            disabled={this.state.isNeedSave || !isSetL}
+                                            loading={this.state.iconLoading}>
+                                            开户通过
+                                        </Button>
+                                    </Popconfirm>
+                                </Tooltip>
 
 
                                 <Button
-                                    disabled={!this.state.isNeedSave  }
+                                    disabled={!this.state.isNeedSave}
                                     onClick={() => this.saveData()}>保存客戶信息</Button>
 
 
-                                <Button  onClick={() => this.saveNote()}>下载资料</Button>
+                                <Button onClick={() => this.saveNote()}>下载资料</Button>
 
                                 <Popconfirm title="是否确认拒绝当前用户的开户申请？" onConfirm={this.saveReject} okText="Yes"
                                             cancelText="No">
@@ -946,7 +960,7 @@ class PassOpenD extends Component {
             window.Axios.post('open/localExistOpenAccount', {
                 'phoneNumber': me.state.checkfromdbName,
             }).then(function (response) {
-                console.log('hcia response', response)
+                // console.log('hcia response', response)
                 me.setState({
                     icondbALoading: false,
                     checkderesb: response.data.data.isExist
@@ -986,7 +1000,7 @@ class PassOpenD extends Component {
             window.Axios.post('open/remoteExistOpenAccount', {
                 'phoneNumber': me.state.checkfromdbName,
             }).then(function (response) {
-                console.log('hcia response', response)
+                // console.log('hcia response', response)
                 me.setState({
                     icondbALoadingA: false,
                     checkderesa: response.data.data.isExist
@@ -997,7 +1011,7 @@ class PassOpenD extends Component {
             window.Axios.post('open/remoteExistOpenAccount', {
                 'nationalId': me.state.checkfromdbName,
             }).then(function (response) {
-                console.log('hcia response', response)
+                // console.log('hcia response', response)
                 me.setState({
                     icondbALoadingA: false,
                     checkderesa: response.data.data.isExist
@@ -1007,7 +1021,7 @@ class PassOpenD extends Component {
             window.Axios.post('open/remoteExistOpenAccount', {
                 'email': me.state.checkfromdbName,
             }).then(function (response) {
-                console.log('hcia response', response.data.data.isExist)
+                // console.log('hcia response', response.data.data.isExist)
                 me.setState({
                     checkderesa: response.data.data.isExist,
                     icondbALoadingA: false,
@@ -1024,7 +1038,7 @@ class PassOpenD extends Component {
     };
     printDocument = () => {
         const input = document.getElementById('openD');
-        console.log('hcia input', input)
+        // console.log('hcia input', input)
         html2canvas(input,
             {
                 scale: 4,
@@ -1125,8 +1139,8 @@ class PassOpenD extends Component {
 
     handleACType = (value, label) => {
 
-        console.log('hcia value', value)
-        console.log('hcia label', label.props)
+        // console.log('hcia value', value)
+        // console.log('hcia label', label.props)
 
         var self = this
         //
@@ -1144,8 +1158,8 @@ class PassOpenD extends Component {
 
     handleChangeLeavage = (value, label) => {
 
-        console.log('hcia value', value)
-        console.log('hcia label', label.props.children)
+        // console.log('hcia value', value)
+        // console.log('hcia label', label.props.children)
 
         var self = this
 
@@ -1163,7 +1177,7 @@ class PassOpenD extends Component {
 
     };
     handleChange = (value) => {
-        console.log('hcia value', value)
+        // console.log('hcia value', value)
     };
     checkfromdbType = (value) => {
         this.setState({
@@ -1190,7 +1204,7 @@ class PassOpenD extends Component {
                 ...self.state.waitUpdate
             }
         ).then(function (response) {
-            console.log('hcia response', response)
+            // console.log('hcia response', response)
             if (response.data.code === 1) {
                 message.success('save ok!')
                 self.setState({
@@ -1309,7 +1323,7 @@ class PassOpenD extends Component {
         });
     }
     onChangegender = (value) => {
-        console.log('hcia value', value)
+        // console.log('hcia value', value)
         this.state.waitUpdate.gender = (value === 'Male' ? 1 : 0);
         this.setState({
             mGender: value,//1:male 0:female
@@ -1414,12 +1428,6 @@ class PassOpenD extends Component {
             isNeedSave: true,
         });
     }
-    onChangeSSS = (e) => {
-        this.state.waitUpdate.lastNameCn = e.target.value
-        this.setState({
-            isNeedSave: true,
-        });
-    };
 
     addBlackRequest(key) {
         let me = this
@@ -1448,7 +1456,7 @@ class PassOpenD extends Component {
             </Button>
         );
         const close = (e) => {
-            console.log('hcia e', e)
+            // console.log('hcia e', e)
         };
 
         notification.open({
