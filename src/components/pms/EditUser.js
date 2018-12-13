@@ -146,20 +146,20 @@ class EditUser extends Component {
         //     });
         // });
 
-        window.Axios.post('back/getRoleList', {
-            'pageSize': 100,
-            'pageNo': 0,
-        }).then(function (response) {
-            console.log('hcia response', response)
-
-            self.setState({
-                    mRoleList: response.data.data.list
-                }
-            );
-
-        }).catch(function (error) {
-            console.log(error);
-        });
+        // window.Axios.post('back/getRoleList', {
+        //     'pageSize': 100,
+        //     'pageNo': 0,
+        // }).then(function (response) {
+        //     console.log('hcia response', response)
+        //
+        //     self.setState({
+        //             mRoleList: response.data.data.list
+        //         }
+        //     );
+        //
+        // }).catch(function (error) {
+        //     console.log(error);
+        // });
 
 
     }
