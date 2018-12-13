@@ -67,17 +67,18 @@ class SiderCustom extends Component {
         // console.log('hcia  SiderCustom componentDidMount')
 
 
-        var adminName = this.state.infor.displayName
 
-        console.log('hcia adminName', adminName)
 
 
         if(!this.state.infor){
             var bbRouter = {...routes}
             this.setState({cconfig: bbRouter});
-        }else
+            return 
+        }
+        var adminName = this.state.infor.displayName
 
-        if (adminName=='管理员') {
+        console.log('hcia adminName', adminName)
+        if (adminName == '管理员') {
             var bbRouter = {...routes}
             this.setState({cconfig: bbRouter});
 
@@ -86,11 +87,11 @@ class SiderCustom extends Component {
 
             if (this.state.infor == null) {
 
-                console.log('hcia this' , 'AAAA')
+                console.log('hcia this', 'AAAA')
 
                 this.setState({cconfig: bbRouter});
             } else if (this.state.infor.menuList.length == 0) {
-                console.log('hcia this' , 'BBBB')
+                console.log('hcia this', 'BBBB')
 
                 var setrr = {
                     ...bbRouter,
@@ -98,7 +99,7 @@ class SiderCustom extends Component {
                 }
                 this.setState({cconfig: setrr});
             } else if (this.state.infor != null) {
-                console.log('hcia this' , 'CCCC')
+                console.log('hcia this', 'CCCC')
 
                 var nowRouter = bbRouter.menus.filter((key, index, array) => {
                     if (key.subs) {
@@ -113,8 +114,8 @@ class SiderCustom extends Component {
 
                         })
                         var repk = {...key, subs: ssb}
-                        key=repk
-                    }else{
+                        key = repk
+                    } else {
                     }
                     if (key.title == '歡迎') {
                         return true
