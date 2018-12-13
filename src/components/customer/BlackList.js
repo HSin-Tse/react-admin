@@ -280,7 +280,6 @@ export default class BlackList extends Component {
 
     state = {
         switcherOn: true,
-        background: localStorage.getItem('@primary-color') || '#313653',
     }
     _switcherOn = () => {
         this.setState({

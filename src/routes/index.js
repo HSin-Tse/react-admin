@@ -22,9 +22,9 @@ export default class CRouter extends Component {
 
 
         // localStorage.setItem('@primary-color', '#0000ff');
-        window.less.modifyVars({
-            '@primary-color': '#000000',
-        })
+        // window.less.modifyVars({
+        //     '@primary-color': '#000000',
+        // })
     }
 
 

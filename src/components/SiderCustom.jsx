@@ -6,7 +6,6 @@ import {Layout} from 'antd';
 import {withRouter} from 'react-router-dom';
 import routes from '@/routes/config';
 import SiderMenu from './SiderMenu';
-import * as Immutable from 'immutable';
 import avater from "../style/imgs/ixlogo.png";
 
 const {Sider} = Layout;
