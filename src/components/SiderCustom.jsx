@@ -123,10 +123,13 @@ class SiderCustom extends Component {
                         return back
 
                     })
+                    var repk = {...key, subs: ssb}
 
 
-                    key.subs = ssb
 
+                    // key.subs = ssb
+
+                    key=repk
 
                     // console.log('hcia key.subs', key.subs.length)
 
