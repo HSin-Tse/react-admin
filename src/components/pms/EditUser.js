@@ -263,7 +263,7 @@ class EditUser extends Component {
                                 console.log('hcia isCanOP', isCanOP)
                                 return (
 
-                                    <Tooltip placement="top" title={isCanOP ? "可操作" : "只讀"}>
+                                    <Tooltip style={{maxWidth: '80%'}} placement="top" title={isCanOP ? "可操作" : "只讀"}>
                                         <Tag color={isCanOP ? "magenta" : "green"} key={number}
                                              value={item1}>{item.allMenu[item1].name}</Tag>
                                     </Tooltip>
@@ -413,9 +413,9 @@ class EditUser extends Component {
 
                             </div>
                             <div style={{marginTop: 20, display: 'flex', minHeight: 50}}>
-                                <h3 style={{width: 60}}>权限:</h3>
+                                <h3 style={{minWidth: 60}}>权限:</h3>
                                 <Row gutter={0}>
-                                    <Checkbox.Group style={{width: '100%'}} value={[]}
+                                    <Checkbox.Group style={{maxWidth: '80%'}} value={[]}
                                         // onChange={this.onChange}
                                     >
                                         <Col md={24}>
