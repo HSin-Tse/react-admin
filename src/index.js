@@ -41,10 +41,10 @@ window.Axios.interceptors.request.use(
 
                 }
 
-                config.headers = {
-                    'token': xtoken,
-                    'loginName': loginName,
-                }
+                // config.headers = {
+                //     'token': xtoken,
+                //     'loginName': loginName,
+                // }
 
             } else if (config.method == 'get') {
                 config.params = {
@@ -56,6 +56,8 @@ window.Axios.interceptors.request.use(
 
         return config
     }, function (error) {
+        
+        console.log('hcia error' , error)
         return Promise.reject(error)
     })
 
@@ -76,6 +78,10 @@ window.Axios.interceptors.response.use(function (response) {
     }
     return response
 }, function (error) {
+    
+    console.log('hcia error' , error)
+    
+    
     // Do something with response error
     return Promise.reject(error)
 
