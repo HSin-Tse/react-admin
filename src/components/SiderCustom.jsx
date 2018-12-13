@@ -124,18 +124,10 @@ class SiderCustom extends Component {
 
                     })
                     var repk = {...key, subs: ssb}
-
-
-
-                    // key.subs = ssb
-
                     key=repk
-
-                    // console.log('hcia key.subs', key.subs.length)
 
                 }else{
                     console.log('hcia key B', key.title)
-
                 }
                 if (key.title == '歡迎') {
                     return true
