@@ -51,6 +51,7 @@ class PassOpenD extends Component {
             , iconcanLoading: false
             , visible: false
             , secondCheckOpen: false
+            , selectedLeaf: false
             , tradrType: 'CFD'
             , testeee: '1976-11-23'
             , mGender: ''
@@ -180,6 +181,8 @@ class PassOpenD extends Component {
     }
 
     render() {
+
+        var isSetL = this.state.leverageName.length > 0
         var self = this;
 
         this.mIncomesOPS = this.state.IXIncomeList.map(d => <Option key={d.name}>{d.name}</Option>);
@@ -748,7 +751,10 @@ class PassOpenD extends Component {
                                             cancelText="No">
 
                                     <Button
-                                        // disabled={this.state.isNeedSave || this.state.recordData.status != 0 }
+                                        // disabled={!isSetL }
+
+                                        disabled={this.state.isNeedSave   ||  !isSetL }
+
                                         loading={this.state.iconLoading}
                                     >开户通过</Button>
 
@@ -756,11 +762,11 @@ class PassOpenD extends Component {
 
 
                                 <Button
-                                    disabled={!this.state.isNeedSave}
+                                    disabled={!this.state.isNeedSave  }
                                     onClick={() => this.saveData()}>保存客戶信息</Button>
 
 
-                                <Button onClick={() => this.saveNote()}>下载资料</Button>
+                                <Button  onClick={() => this.saveNote()}>下载资料</Button>
 
                                 <Popconfirm title="是否确认拒绝当前用户的开户申请？" onConfirm={this.saveReject} okText="Yes"
                                             cancelText="No">
@@ -1149,6 +1155,7 @@ class PassOpenD extends Component {
 
 
         self.setState({
+            isNeedSave: true,
             leverageId: value,
             leverageName: label.props.children
         })
