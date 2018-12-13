@@ -67,13 +67,10 @@ class SiderCustom extends Component {
         // console.log('hcia  SiderCustom componentDidMount')
 
 
-
-
-
-        if(!this.state.infor){
+        if (!this.state.infor) {
             var bbRouter = {...routes}
             this.setState({cconfig: bbRouter});
-            return 
+            return
         }
         var adminName = this.state.infor.displayName
 

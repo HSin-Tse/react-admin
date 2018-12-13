@@ -79,10 +79,10 @@ class PassOpenD extends Component {
         var self = this;
 
 
-        var menuInfor = JSON.parse(localStorage.getItem('infor'))
+        // var menuInfor = JSON.parse(localStorage.getItem('infor'))
 
 
-        console.log('hcia menuInfor', menuInfor.menuList)
+        // console.log('hcia menuInfor', menuInfor.menuList)
 
 
         // availableFlag
