@@ -109,7 +109,9 @@ class AddUser extends Component {
             console.log('hcia response', response)
 
             self.setState({
-                    menuList: response.data.data.list
+                    menuList: response.data.data.list,
+                    mRoleList: response.data.data.list
+
                 }
             );
 
@@ -117,6 +119,18 @@ class AddUser extends Component {
             console.log(error);
         });
 
+        // window.Axios.post('back/getRoleList', {
+        //     'pageSize': 100,
+        //     'pageNo': 0,
+        // }).then((response) => {
+        //     self.setState({
+        //             mRoleList: response.data.data.list
+        //         }
+        //     );
+        //
+        // }).catch(function (error) {
+        //     console.log(error);
+        // });
 
     }
 
@@ -179,6 +193,7 @@ class AddUser extends Component {
         aa.push(value)
         this.setState({
             idList: aa,
+
         });
     }
 
