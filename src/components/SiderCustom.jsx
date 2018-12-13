@@ -89,7 +89,9 @@ class SiderCustom extends Component {
         console.log('hcia  SiderCustom index componentWillMount')
 
 
-        var inforSuperFlag = this.state.infor.superFlag
+        // var inforSuperFlag = this.state.infor.superFlag
+        var inforSuperFlag = this.state.infor?0:this.state.infor.superFlag
+
         var inforMenuList = this.state.infor.menuList
 
         if (inforSuperFlag === 1) {

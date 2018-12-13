@@ -41,10 +41,10 @@ window.Axios.interceptors.request.use(
 
                 }
 
-                // config.headers = {
-                //     'token': xtoken,
-                //     'loginName': loginName,
-                // }
+                config.headers = {
+                    'token': xtoken,
+                    'loginName': loginName,
+                }
 
             } else if (config.method == 'get') {
                 config.params = {
