@@ -19,34 +19,40 @@ export default class CRouter extends Component {
             visible: false,
             gallery: null
         };
+
+
+        // localStorage.setItem('@primary-color', '#0000ff');
+        window.less.modifyVars({
+            '@primary-color': '#000000',
+        })
     }
 
 
     componentDidMount() {
-        console.log('hcia  router componentDidMount')
+        // console.log('hcia  router componentDidMount')
 
     }
 
     componentWillMount() {
-        console.log('hcia  router componentWillMount')
+        // console.log('hcia  router componentWillMount')
         var bbRouter = {...routes}
 
         // console.log('hcia  router this.state.infor', this.state.infor)
         if (this.state.infor == null) {
-            console.log('hcia', 'Side ccc')
+            // console.log('hcia', 'Side ccc')
 
             this.setState({config: routes});
 
         } else if (this.state.infor.menuList.length == 0) {
 
-            console.log('hcia', 'Side aaaa')
+            // console.log('hcia', 'Side aaaa')
 
             var setrr = {
                 ...routes,
                 menus: [{key: "/app/dashboard/index", title: "歡迎", icon: "user", component: "Dashboard"}]
             }
 
-            console.log('hcia setrr', setrr)
+            // console.log('hcia setrr', setrr)
             this.setState({config: setrr});
 
         } else if (this.state.infor != null) {
@@ -90,7 +96,7 @@ export default class CRouter extends Component {
             this.setState({config: setrr});
 
 
-            console.log('hcia routes' , routes)
+            // console.log('hcia routes' , routes)
         }
 
 

@@ -7,7 +7,7 @@ import {
     Row,
     Radio,
     Input,
-    Modal,
+    Switch,
     Button,
     Table,
     Icon,
@@ -51,10 +51,8 @@ class AddRole extends Component {
     componentDidMount() {
 
 
-        console.log('hcia self.props.match.params.id', this.props.match.params.id)
-        console.log('hcia this.props.match.params.id', this.props.match.params.id)
-        console.log('hcia this.props.match.params.id', this.props.match.params.id)
-        console.log('hcia this.props.match.params.id', this.props.match.params.id)
+
+
 
         this.columns = [
             {
@@ -95,12 +93,47 @@ class AddRole extends Component {
 
     confirmSave = () => {
 
+
         var self = this;
+
+
+        var multilevelList = []
+
+
+
+        let list = this.state.powerList;
+        // list.push(1)
+
+        var groupBy = (array, f) => {
+            let ansList = [];
+            var ids = array.filter((item, index, array) => {
+                return item > 0;
+            });
+            var flasg = array.filter((item, index, array) => {
+                return item < 0;
+            });
+
+            ids.forEach((item) => {
+                var select = flasg.some(function (flagItem, index, array) {
+                    return ((flagItem + item) === 0) // 當全部 age 大於 10 才能回傳 true
+                });
+                ansList.push([item, select ? 1 : 0])
+            });
+            return ansList
+        }
+
+
+        let sorted = groupBy(list, (item) => {
+            return [item.name];
+        });
+        // console.log(sorted);
+        console.log('hcia sorted', sorted)
+
 
         window.Axios.post('back/saveOrUpdateRole', {
             name: self.state.name,
             content: self.state.changeNoteV,
-            idList: self.state.powerList,
+            multilevelList: sorted,
             password: self.state.realp,
         }).then(function (response) {
             console.log('hcia response', response)
@@ -115,7 +148,6 @@ class AddRole extends Component {
 
     changeScret = (e) => {
         this.setState({
-            // seret: see,
             realp: e.target.value,
         });
     }
@@ -150,8 +182,19 @@ class AddRole extends Component {
                           bordered={true}>
                         {
                             item.childrenMenu.map(function (item1, number) {
+
+
+                                // console.log('hcia item1' , item1)
                                 return (
-                                    <Checkbox key={number} value={item1.id} id={number}>{item1.name}</Checkbox>
+
+
+                                    <Card.Grid style={{maxWidth: 250, textAlign: 'center', display: 'flex'}}>
+                                        <Checkbox key={number} value={item1.id} id={number}>{item1.name}</Checkbox>
+                                        <Checkbox key={number} value={-item1.id} id={number}>可操作</Checkbox>
+                                        {/*<Switch checkedChildren="可操作" unCheckedChildren="只讀" defaultChecked />*/}
+                                    </Card.Grid>
+
+
                                 );
                             })
                         }

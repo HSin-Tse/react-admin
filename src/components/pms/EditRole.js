@@ -23,6 +23,8 @@ import {parse} from 'querystring';
 import {bindActionCreators} from "redux";
 import {setINFOR} from "../../action";
 import connect from "react-redux/es/connect/connect";
+import AllComponents from "../index";
+import {Route} from "react-router-dom";
 
 const RadioGroup = Radio.Group;
 const {TextArea} = Input;
@@ -89,8 +91,31 @@ class EditRole extends Component {
                 allMenu: response.data.data.allMenu,
             }, () => {
 
+
+                var sss = Object.keys(self.state.allMenu);
+                var ss = Object.keys(self.state.allMenu).map(Number);
+
+                console.log('hcia ss', ss)
+
+
+                sss.forEach(entry => {
+
+                    console.log('hcia Bentry', entry)
+                    console.log('hcia this', self.state.allMenu[entry].availableFlag)
+
+
+                    if (self.state.allMenu[entry].availableFlag == 1) {
+
+                        ss.push(-entry)
+                    }
+
+                });
+
+                console.log('hcia ss', ss)
+
+
                 self.setState({
-                    powerList: Object.keys(self.state.allMenu).map(Number)
+                    powerList: ss
                 });
             });
 
@@ -108,13 +133,48 @@ class EditRole extends Component {
 
     confirmSave = () => {
 
+
         var self = this;
+
+
+        var multilevelList = []
+
+
+
+        let list = this.state.powerList;
+        // list.push(1)
+
+        var groupBy = (array, f) => {
+            let ansList = [];
+            var ids = array.filter((item, index, array) => {
+                return item > 0;
+            });
+            var flasg = array.filter((item, index, array) => {
+                return item < 0;
+            });
+
+            ids.forEach((item) => {
+                var select = flasg.some(function (flagItem, index, array) {
+                    return ((flagItem + item) === 0) // 當全部 age 大於 10 才能回傳 true
+                });
+                ansList.push([item, select ? 1 : 0])
+            });
+            return ansList
+        }
+
+
+        let sorted = groupBy(list, (item) => {
+            return [item.name];
+        });
+        // console.log(sorted);
+        console.log('hcia sorted', sorted)
+
 
         window.Axios.post('back/saveOrUpdateRole', {
             id: this.props.match.params.id,
             name: self.state.name,
             content: self.state.changeNoteV,
-            idList: self.state.powerList,
+            multilevelList: sorted,
             password: self.state.realp,
         }).then(function (response) {
             console.log('hcia response', response)
@@ -169,14 +229,40 @@ class EditRole extends Component {
         const {allMenu} = this.state
 
         const {getFieldDecorator} = this.props.form;
+        // const ss = this.state.menuList.map(function (item, index) {
+        //         return (
+        //             <Card bodyStyle={{marginLeft: 10}} style={{marginTop: 15}} key={index} title={item.name}
+        //                   bordered={true}>
+        //                 {
+        //                     item.childrenMenu.map((item1, number) => {
+        //                         return (
+        //                             <Checkbox key={number} value={item1.id}>{item1.name}</Checkbox>
+        //                         );
+        //                     })
+        //                 }
+        //             </Card>
+        //         );
+        //     }
+        // )
         const ss = this.state.menuList.map(function (item, index) {
                 return (
                     <Card bodyStyle={{marginLeft: 10}} style={{marginTop: 15}} key={index} title={item.name}
                           bordered={true}>
                         {
-                            item.childrenMenu.map((item1, number) => {
+                            item.childrenMenu.map(function (item1, number) {
+
+
+                                // console.log('hcia item1' , item1)
                                 return (
-                                    <Checkbox key={number} value={item1.id}>{item1.name}</Checkbox>
+
+
+                                    <Card.Grid style={{maxWidth: 250, textAlign: 'center', display: 'flex'}}>
+                                        <Checkbox key={number} value={item1.id} id={number}>{item1.name}</Checkbox>
+                                        <Checkbox key={number} value={-item1.id} id={number}>可操作</Checkbox>
+                                        {/*<Switch checkedChildren="可操作" unCheckedChildren="只讀" defaultChecked />*/}
+                                    </Card.Grid>
+
+
                                 );
                             })
                         }
@@ -184,7 +270,6 @@ class EditRole extends Component {
                 );
             }
         )
-
 
         return (
             <div>
