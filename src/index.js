@@ -26,7 +26,7 @@ window.Axios.interceptors.request.use(
     config => {
         var xtoken = localStorage.getItem('too')
         var loginName = localStorage.getItem('loginName')
-        
+
         // console.log('hcia loginName' , loginName)
         // console.log('hcia xtoken' , xtoken)
 
@@ -56,8 +56,8 @@ window.Axios.interceptors.request.use(
 
         return config
     }, function (error) {
-        
-        console.log('hcia error' , error)
+
+        console.log('hcia error', error)
         return Promise.reject(error)
     })
 
@@ -78,10 +78,10 @@ window.Axios.interceptors.response.use(function (response) {
     }
     return response
 }, function (error) {
-    
-    console.log('hcia error' , error)
-    
-    
+
+    console.log('hcia error', error)
+
+
     // Do something with response error
     return Promise.reject(error)
 

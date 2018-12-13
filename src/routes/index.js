@@ -11,10 +11,8 @@ export default class CRouter extends Component {
 
     constructor(props) {
         super(props);
-        // console.log('hcia constructor' )
-
         this.state = {
-            config: [],
+            cconfig: [],
             infor: JSON.parse(localStorage.getItem('infor')),
             visible: false,
             gallery: null
@@ -28,64 +26,14 @@ export default class CRouter extends Component {
     }
 
 
-    componentDidMount() {
-        // console.log('hcia  router componentDidMount')
-
-    }
 
     componentWillMount() {
-        // console.log('hcia  router componentWillMount')
         var bbRouter = {...routes}
-
-        // console.log('hcia  router this.state.infor', this.state.infor)
-        // if (this.state.infor == null) {
-        //     this.setState({config: routes});
-        // } else if (this.state.infor.menuList.length == 0) {
-        //     var setrr = {
-        //         ...routes,
-        //         menus: [{key: "/app/dashboard/index", title: "歡迎", icon: "user", component: "Dashboard"}]
-        //     }
-        //     this.setState({config: setrr});
-        // } else if (this.state.infor != null) {
-        //     var nowRouter = routes.menus.filter((key, index, array) => {
-        //         if (key.subs) {
-        //             var ssb = key.subs.filter((key, index, array) => {
-        //                 var back = false
-        //                 this.state.infor.menuList.forEach(function (item, index, array) {
-        //                     if (key.title == item.name) {
-        //                         back = true
-        //                     }
-        //                 });
-        //                 return back
-        //             })
-        //             key.subs = ssb
-        //         }
-        //         if (key.title == '歡迎') {
-        //             return true
-        //         }
-        //         return key.subs.length > 0;
-        //     });
-        //
-        //     var setrr = {...routes, menus: nowRouter}
-        //     this.setState({config: setrr});
-        //
-        //
-        //     // console.log('hcia routes' , routes)
-        // }
-
         this.setState({config: bbRouter});
-
-
-
     }
 
 
     requireLogin = (component) => {
-
-        // console.log('hcia component', component)
-        // const { auth } = this.props;
-        // const { permissions } = auth.data;
-
 
         if (!localStorage.getItem('too')) { // 线上环境判断是否登录
 

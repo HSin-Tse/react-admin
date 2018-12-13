@@ -47,9 +47,15 @@ class Login extends React.Component {
         this.props.form.validateFields((err, values) => {
 
 
-            localStorage.removeItem('too')
+
 
             if (!err) {
+
+                localStorage.removeItem('infor');
+                localStorage.removeItem('user');
+                localStorage.removeItem('too');
+                localStorage.removeItem('displayName');
+
                 window.Axios.post('auth/login', {
                     'loginName': values.userName,
                     'password': values.password,
@@ -68,10 +74,9 @@ class Login extends React.Component {
                         localStorage.setItem('too', response.data.data.token);
 
 
-                        var ssss = localStorage.getItem('too');
+                        const ssss = localStorage.getItem('too');
 
                         if (ssss) {
-                            console.log('hcia ssss' , ssss)
 
 
                             self.props.history.push('/app/dashboard/index');

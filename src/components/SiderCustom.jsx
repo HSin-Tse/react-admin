@@ -18,6 +18,12 @@ class SiderCustom extends Component {
             visible: false,
             gallery: null,
             infor: JSON.parse(localStorage.getItem('infor')),
+            collapsed: false,
+            mode: 'inline',
+            openKey: '',
+            displayName: '',
+            selectedKey: '',
+            firstHide: false, // 点击收缩菜单，第一次隐藏展开子菜单，openMenu时恢复
         }
     }
 
@@ -50,86 +56,50 @@ class SiderCustom extends Component {
             mode: collapsed ? 'vertical' : 'inline',
         };
     };
-    state = {
-        collapsed: false,
-        mode: 'inline',
-        openKey: '',
-        displayName: '',
-        selectedKey: '',
-        firstHide: false, // 点击收缩菜单，第一次隐藏展开子菜单，openMenu时恢复
-    };
 
-    componentWillMount() {
-        // console.log('hcia  SiderCustom componentWillMount')
-    }
 
     componentDidMount() {
         // console.log('hcia  SiderCustom componentDidMount')
+        // if (!this.state.infor) {return}
+        console.log('hcia  SiderCustom index componentWillMount')
 
 
-        if (!this.state.infor) {
+        var inforSuperFlag = this.state.infor.superFlag
+        var inforMenuList = this.state.infor.menuList
+
+        if (inforSuperFlag === 1) {
             var bbRouter = {...routes}
             this.setState({cconfig: bbRouter});
             return
         }
-        var adminName = this.state.infor.displayName
-
-        console.log('hcia adminName', adminName)
-        if (adminName == '管理员') {
-            var bbRouter = {...routes}
-            this.setState({cconfig: bbRouter});
-
-        } else {
-            var bbRouter = {...routes}
-
-            if (this.state.infor == null) {
-
-                console.log('hcia this', 'AAAA')
-
-                this.setState({cconfig: bbRouter});
-            } else if (this.state.infor.menuList.length == 0) {
-                console.log('hcia this', 'BBBB')
-
-                var setrr = {
-                    ...bbRouter,
-                    menus: [{key: "/app/dashboard/index", title: "歡迎", icon: "user", component: "Dashboard"}]
-                }
-                this.setState({cconfig: setrr});
-            } else if (this.state.infor != null) {
-                console.log('hcia this', 'CCCC')
-
-                var nowRouter = bbRouter.menus.filter((key, index, array) => {
-                    if (key.subs) {
-                        var ssb = key.subs.filter((sbkey, index, array) => {
-                            var back = false
-                            this.state.infor.menuList.forEach(function (item, index, array) {
-                                if (sbkey.title == item.name) {
-                                    back = true
-                                }
-                            });
-                            return back
-
-                        })
-                        var repk = {...key, subs: ssb}
-                        key = repk
-                    } else {
-                    }
-                    if (key.title == '歡迎') {
-                        return true
-                    }
-                    return key.subs.length > 0;
-                });
-                var setrr = {...bbRouter, menus: nowRouter}
-                this.setState({cconfig: setrr});
+        var bbRouter = {...routes}
+        var aaaaa = [...bbRouter.menus]
+        var nowRouter = aaaaa.filter((key, index, array) => {
+            if (key.title == '歡迎') {
+                return true
             }
+            if (key.subs) {
 
-        }
 
+                var ssb = key.subs.filter((sbkey, index, array) => {
+                    var back = false
+                    inforMenuList.forEach((item, index, array) => {
+                        if (sbkey.title == item.name) {
+                            console.log('hcia sbkey.title', sbkey.title, item.name, (sbkey.title == item.name))
+                            back = true
+                        }
+                    });
+                    return back
+                })
 
-        // var bbRouter = {...routes}
-        //
-        // this.setState({cconfig: bbRouter});
+                key.subs = ssb
 
+            }
+            return key.subs.length > 0;
+        });
+
+        var setrr = {...bbRouter, menus: nowRouter}
+        this.setState({cconfig: setrr});
 
     }
 
@@ -148,7 +118,6 @@ class SiderCustom extends Component {
             firstHide: false,
         })
     };
-
 
     render() {
         return (
