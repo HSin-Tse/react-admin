@@ -68,81 +68,40 @@ class SiderCustom extends Component {
 
 
         var bbRouter = {...routes}
-        // var bbRouter = Immutable.fromJS(routes);
-
-        if (this.state.infor == null) {
-            // console.log('hcia', 'Side ccc')
-
-            this.setState({cconfig: bbRouter});
-
-        } else if (this.state.infor.menuList.length == 0) {
-
-            // console.log('hcia', 'Side aaaa')
-
-            var setrr = {
-                ...bbRouter,
-                menus: [{key: "/app/dashboard/index", title: "歡迎", icon: "user", component: "Dashboard"}]
-            }
-
-            // console.log('hcia setrr', setrr)
-            this.setState({cconfig: setrr});
-
-        } else if (this.state.infor != null) {
-
-
-            // this.setState({cconfig: bbRouter});
-
-            // console.log('hcia routes' , routes)
-            // console.log('hcia bbRouter' , bbRouter)
-
-            // console.log('hcia', 'Side bbbbb',this.state.infor)
-            var nowRouter = bbRouter.menus.filter((key, index, array) => {
-
-
-                if (key.subs) {
-                    // console.log('hcia key A', key.title)
-
-
-                    var ssb = key.subs.filter((sbkey, index, array) => {
-                        // console.log('hcia sbkey' , sbkey.title)
-
-
-                        var back = false
-
-
-                        this.state.infor.menuList.forEach(function (item, index, array) {
-
-                            // console.log('hcia sbkey.title', sbkey.title, item.name, (sbkey.title == item.name))
-
-                            if (sbkey.title == item.name) {
-                                back = true
-                            }
-
-                        });
-                        return back
-
-                    })
-                    var repk = {...key, subs: ssb}
-                    key=repk
-
-                }else{
-                    // console.log('hcia key B', key.title)
-                }
-                if (key.title == '歡迎') {
-                    return true
-                }
-
-
-                return key.subs.length > 0;
-            });
-
-
-            var setrr = {...bbRouter, menus: nowRouter}
-            this.setState({cconfig: setrr});
-
-
-        }
-        // this.setState({cconfig: bbRouter});
+        // if (this.state.infor == null) {
+        //     this.setState({cconfig: bbRouter});
+        // } else if (this.state.infor.menuList.length == 0) {
+        //     var setrr = {
+        //         ...bbRouter,
+        //         menus: [{key: "/app/dashboard/index", title: "歡迎", icon: "user", component: "Dashboard"}]
+        //     }
+        //     this.setState({cconfig: setrr});
+        // } else if (this.state.infor != null) {
+        //     var nowRouter = bbRouter.menus.filter((key, index, array) => {
+        //         if (key.subs) {
+        //             var ssb = key.subs.filter((sbkey, index, array) => {
+        //                 var back = false
+        //                 this.state.infor.menuList.forEach(function (item, index, array) {
+        //                     if (sbkey.title == item.name) {
+        //                         back = true
+        //                     }
+        //                 });
+        //                 return back
+        //
+        //             })
+        //             var repk = {...key, subs: ssb}
+        //             key=repk
+        //         }else{
+        //         }
+        //         if (key.title == '歡迎') {
+        //             return true
+        //         }
+        //         return key.subs.length > 0;
+        //     });
+        //     var setrr = {...bbRouter, menus: nowRouter}
+        //     this.setState({cconfig: setrr});
+        // }
+        this.setState({cconfig: bbRouter});
 
 
     }
