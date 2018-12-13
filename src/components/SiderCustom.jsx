@@ -71,7 +71,7 @@ class SiderCustom extends Component {
 
         console.log('hcia adminName', adminName)
 
-        if (adminName) {
+        if (adminName=='管理员') {
             var bbRouter = {...routes}
             this.setState({cconfig: bbRouter});
 
@@ -79,14 +79,21 @@ class SiderCustom extends Component {
             var bbRouter = {...routes}
 
             if (this.state.infor == null) {
+
+                console.log('hcia this' , 'AAAA')
+
                 this.setState({cconfig: bbRouter});
             } else if (this.state.infor.menuList.length == 0) {
+                console.log('hcia this' , 'BBBB')
+
                 var setrr = {
                     ...bbRouter,
                     menus: [{key: "/app/dashboard/index", title: "歡迎", icon: "user", component: "Dashboard"}]
                 }
                 this.setState({cconfig: setrr});
             } else if (this.state.infor != null) {
+                console.log('hcia this' , 'CCCC')
+
                 var nowRouter = bbRouter.menus.filter((key, index, array) => {
                     if (key.subs) {
                         var ssb = key.subs.filter((sbkey, index, array) => {
