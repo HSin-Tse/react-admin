@@ -5,6 +5,7 @@ import React, {Component} from 'react';
 import {Layout} from 'antd';
 import {withRouter} from 'react-router-dom';
 import routes from '@/routes/config';
+import routesAD from '@/routes/configadmin';
 import SiderMenu from './SiderMenu';
 import avater from "../style/imgs/ixlogo.png";
 
@@ -57,7 +58,31 @@ class SiderCustom extends Component {
         };
     };
 
+    isObject = (obj) => {
+        return typeof obj === 'object';
+    }
 
+    isArray = (arr) => {
+        return Array.isArray(arr);
+    }
+    deepClone = (obj) => {
+        if (!this.isObject(obj)) return obj;
+        var cloneObj = this.isArray(obj) ? [] : {};
+
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                var value = obj[key];
+                var copy = value;
+
+                if (this.isObject(value)) {
+                    cloneObj[key] = this.deepClone(value);
+                } else {
+                    cloneObj[key] = value;
+                }
+            }
+        }
+        return cloneObj;
+    }
     componentDidMount() {
         // console.log('hcia  SiderCustom componentDidMount')
         // if (!this.state.infor) {return}
@@ -68,11 +93,14 @@ class SiderCustom extends Component {
         var inforMenuList = this.state.infor.menuList
 
         if (inforSuperFlag === 1) {
-            var bbRouter = {...routes}
-            this.setState({cconfig: bbRouter});
+            this.setState({cconfig: {...routesAD}});
             return
         }
-        var bbRouter = {...routes}
+        // var bbRouter = {...routes}
+
+        var bbRouter = this.deepClone(routesAD);
+
+
         var aaaaa = [...bbRouter.menus]
         var nowRouter = aaaaa.filter((key, index, array) => {
             if (key.title == '歡迎') {

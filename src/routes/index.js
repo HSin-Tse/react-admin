@@ -4,7 +4,9 @@
 import React, {Component} from 'react';
 import {Route, Redirect, Switch} from 'react-router-dom';
 import AllComponents from '../components';
+import * as Immutable from 'immutable';
 import routes from './config';
+import routesAD from '@/routes/configadmin';
 
 export default class CRouter extends Component {
 
@@ -26,10 +28,81 @@ export default class CRouter extends Component {
     }
 
 
+    isObject = (obj) => {
+        return typeof obj === 'object';
+    }
+
+    isArray = (arr) => {
+        return Array.isArray(arr);
+    }
+    deepClone = (obj) => {
+        if (!this.isObject(obj)) return obj;
+        var cloneObj = this.isArray(obj) ? [] : {};
+
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                var value = obj[key];
+                var copy = value;
+
+                if (this.isObject(value)) {
+                    cloneObj[key] = this.deepClone(value);
+                } else {
+                    cloneObj[key] = value;
+                }
+            }
+        }
+        return cloneObj;
+    }
 
     componentWillMount() {
-        var bbRouter = {...routes}
-        this.setState({config: bbRouter});
+
+
+
+        console.log('hcia  SiderCustom index componentWillMount')
+
+
+        var inforSuperFlag = this.state.infor.superFlag
+        var inforMenuList = this.state.infor.menuList
+
+        if (inforSuperFlag === 1) {
+            this.setState({cconfig: {...routesAD}});
+            return
+        }
+        // var bbRouter = {...routes}
+
+        var bbRouter = this.deepClone(routesAD);
+        
+        console.log('hcia bbRouter' , bbRouter)
+
+
+        var aaaaa = [...bbRouter.menus]
+        var nowRouter = aaaaa.filter((key, index, array) => {
+            if (key.title == '歡迎') {
+                return true
+            }
+            if (key.subs) {
+
+
+                var ssb = key.subs.filter((sbkey, index, array) => {
+                    var back = false
+                    inforMenuList.forEach((item, index, array) => {
+                        if (sbkey.title == item.name) {
+                            console.log('hcia sbkey.title', sbkey.title, item.name, (sbkey.title == item.name))
+                            back = true
+                        }
+                    });
+                    return back
+                })
+
+                key.subs = ssb
+
+            }
+            return key.subs.length > 0;
+        });
+
+        var setrr = {...bbRouter, menus: nowRouter}
+        this.setState({cconfig: setrr});
+
     }
 
 
@@ -51,8 +124,8 @@ export default class CRouter extends Component {
         return (
             <Switch>
                 {
-                    Object.keys(this.state.config).map(key =>
-                        this.state.config[key].map(r => {
+                    Object.keys(this.state.cconfig).map(key =>
+                        this.state.cconfig[key].map(r => {
                             const route = r => {
                                 const Component = AllComponents[r.component];
                                 return (
