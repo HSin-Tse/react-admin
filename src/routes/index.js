@@ -58,10 +58,23 @@ export default class CRouter extends Component {
 
 
 
-        console.log('hcia  SiderCustom index componentWillMount')
+        console.log('hcia  router index componentWillMount')
+        console.log('hcia  router index componentWillMount AAAAAa')
+
+        console.log('hcia this.state.infor' , this.state.infor)
 
 
-        var inforSuperFlag = this.state.infor?0:this.state.infor.superFlag
+        if(!this.state.infor){
+
+            var bbRouter = this.deepClone(routesAD);
+            this.setState({cconfig: bbRouter});
+
+            // this.props.history.push('/app')
+
+            return
+        }
+
+        var inforSuperFlag = this.state.infor.superFlag
         var inforMenuList = this.state.infor.menuList
 
         if (inforSuperFlag === 1) {

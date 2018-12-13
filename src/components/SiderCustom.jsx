@@ -86,11 +86,21 @@ class SiderCustom extends Component {
     componentDidMount() {
         // console.log('hcia  SiderCustom componentDidMount')
         // if (!this.state.infor) {return}
-        console.log('hcia  SiderCustom index componentWillMount')
+        console.log('hcia  SiderCustom index componentWillMount AAAAAa')
+        if(!this.state.infor) {
 
 
-        // var inforSuperFlag = this.state.infor.superFlag
-        var inforSuperFlag = this.state.infor?0:this.state.infor.superFlag
+            return
+        }
+
+
+
+
+        console.log('hcia this.state.infor' , this.state.infor)
+        console.log('hcia  SiderCustom index componentWillMount  BBBBB')
+
+        var inforSuperFlag = this.state.infor.superFlag
+        console.log('hcia  SiderCustom index componentWillMount  CCCCCCC')
 
         var inforMenuList = this.state.infor.menuList
 
