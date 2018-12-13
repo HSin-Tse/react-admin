@@ -67,41 +67,57 @@ class SiderCustom extends Component {
         // console.log('hcia  SiderCustom componentDidMount')
 
 
-        var bbRouter = {...routes}
-        // if (this.state.infor == null) {
-        //     this.setState({cconfig: bbRouter});
-        // } else if (this.state.infor.menuList.length == 0) {
-        //     var setrr = {
-        //         ...bbRouter,
-        //         menus: [{key: "/app/dashboard/index", title: "歡迎", icon: "user", component: "Dashboard"}]
-        //     }
-        //     this.setState({cconfig: setrr});
-        // } else if (this.state.infor != null) {
-        //     var nowRouter = bbRouter.menus.filter((key, index, array) => {
-        //         if (key.subs) {
-        //             var ssb = key.subs.filter((sbkey, index, array) => {
-        //                 var back = false
-        //                 this.state.infor.menuList.forEach(function (item, index, array) {
-        //                     if (sbkey.title == item.name) {
-        //                         back = true
-        //                     }
-        //                 });
-        //                 return back
+        var adminName = this.state.infor.displayName
+
+        console.log('hcia adminName', adminName)
+
+        if (adminName) {
+            var bbRouter = {...routes}
+            this.setState({cconfig: bbRouter});
+
+        } else {
+            var bbRouter = {...routes}
+
+            if (this.state.infor == null) {
+                this.setState({cconfig: bbRouter});
+            } else if (this.state.infor.menuList.length == 0) {
+                var setrr = {
+                    ...bbRouter,
+                    menus: [{key: "/app/dashboard/index", title: "歡迎", icon: "user", component: "Dashboard"}]
+                }
+                this.setState({cconfig: setrr});
+            } else if (this.state.infor != null) {
+                var nowRouter = bbRouter.menus.filter((key, index, array) => {
+                    if (key.subs) {
+                        var ssb = key.subs.filter((sbkey, index, array) => {
+                            var back = false
+                            this.state.infor.menuList.forEach(function (item, index, array) {
+                                if (sbkey.title == item.name) {
+                                    back = true
+                                }
+                            });
+                            return back
+
+                        })
+                        var repk = {...key, subs: ssb}
+                        key=repk
+                    }else{
+                    }
+                    if (key.title == '歡迎') {
+                        return true
+                    }
+                    return key.subs.length > 0;
+                });
+                var setrr = {...bbRouter, menus: nowRouter}
+                this.setState({cconfig: setrr});
+            }
+
+        }
+
+
+        // var bbRouter = {...routes}
         //
-        //             })
-        //             var repk = {...key, subs: ssb}
-        //             key=repk
-        //         }else{
-        //         }
-        //         if (key.title == '歡迎') {
-        //             return true
-        //         }
-        //         return key.subs.length > 0;
-        //     });
-        //     var setrr = {...bbRouter, menus: nowRouter}
-        //     this.setState({cconfig: setrr});
-        // }
-        this.setState({cconfig: bbRouter});
+        // this.setState({cconfig: bbRouter});
 
 
     }

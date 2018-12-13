@@ -15,7 +15,7 @@ import {
     Select,
     Popconfirm,
     Form,
-    message
+    message, Tooltip
 } from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {parse} from 'querystring';
@@ -39,8 +39,10 @@ class AddUser extends Component {
             , operationDiaryHistory: []
             , idList: []
             , menuList: []
+            , mRoleList: []
             , anyThing: ''
             , name: ''
+            , mobile: ''
             , email: '@'
             , newPassword: ''
             , secondPassword: ''
@@ -188,33 +190,69 @@ class AddUser extends Component {
             children.push(<Option key={this.state.menuList[i].id}>{this.state.menuList[i].name}</Option>);
         }
 
-        const ss = this.state.menuList.filter(
+        const ssss = this.state.mRoleList.filter(
             (item) => {
 
                 return this.state.idList.some((itemS) => {
                     return itemS == item.id
                 })
-            }).map(function (item, index) {
+            }).map((item) => {
+
+                console.log('hcia item', item)
+                console.log('hcia  Object.keys(item.allMenu)', Object.keys(item.allMenu))
+
                 return (
                     <div style={{display: 'flex', minHeight: 50}}>
                         <h3 style={{minWidth: 80}}>{item.name}:</h3>
                         {
-                            Object.keys(item.allMenu).map((item1, number) => {
-                                // console.log('hcia item1', item1)
-                                // console.log('hcia item.allMenu', item.allMenu)
-                                // console.log('hcia item.allMenu', item.allMenu[item1])
 
+                            Object.keys(item.allMenu).map((item1, number) => {
+
+                                var isCanOP = item.allMenu[item1].availableFlag == 1
+
+                                console.log('hcia isCanOP', isCanOP)
                                 return (
-                                    <Tag key={number} value={item1}>{item.allMenu[item1]}</Tag>
+
+                                    <Tooltip style={{maxWidth: '80%'}} placement="top" title={isCanOP ? "可操作" : "只讀"}>
+                                        <Tag color={isCanOP ? "magenta" : "green"} key={number}
+                                             value={item1}>{item.allMenu[item1].name}</Tag>
+                                    </Tooltip>
+
                                 );
                             })
                         }
                     </div>
-
-
                 );
             }
         )
+
+        // const ss = this.state.menuList.filter(
+        //     (item) => {
+        //
+        //         return this.state.idList.some((itemS) => {
+        //             return itemS == item.id
+        //         })
+        //     }).map(function (item, index) {
+        //         return (
+        //             <div style={{display: 'flex', minHeight: 50}}>
+        //                 <h3 style={{minWidth: 80}}>{item.name}:</h3>
+        //                 {
+        //                     Object.keys(item.allMenu).map((item1, number) => {
+        //                         // console.log('hcia item1', item1)
+        //                         // console.log('hcia item.allMenu', item.allMenu)
+        //                         // console.log('hcia item.allMenu', item.allMenu[item1])
+        //
+        //                         return (
+        //                             <Tag key={number} value={item1}>{item.allMenu[item1]}</Tag>
+        //                         );
+        //                     })
+        //                 }
+        //             </div>
+        //
+        //
+        //         );
+        //     }
+        // )
 
         return (
             <div>
@@ -263,7 +301,7 @@ class AddUser extends Component {
                                         mobile: e.target.value,
                                     })}
 
-                                    defaultValue={this.state.name}
+                                    defaultValue={this.state.mobile}
                                     style={{width: 180}}/>
                             </div>
                             <div style={{display: 'flex', minHeight: 50}}>
@@ -352,7 +390,7 @@ class AddUser extends Component {
                                         // onChange={this.onChange}
                                     >
                                         <Col md={24}>
-                                            {ss}
+                                            {ssss}
                                         </Col>
                                     </Checkbox.Group>
                                 </Row>
