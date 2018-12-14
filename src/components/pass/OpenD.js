@@ -16,7 +16,6 @@ import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
 import moment from 'moment';
 import axios from "axios";
-
 const Search = Input.Search;
 const {TextArea} = Input;
 const RadioGroup = Radio.Group;

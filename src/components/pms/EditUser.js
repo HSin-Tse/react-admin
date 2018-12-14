@@ -1,7 +1,23 @@
 /* eslint-disable react/sort-comp */
 
 import React, {PureComponent} from 'react';
-import {Col, Card, Row, Radio, Input, Tag, Button, Tooltip, Table, Icon, Checkbox, Select, Popconfirm, Form, message} from 'antd';
+import {
+    Col,
+    Card,
+    Row,
+    Radio,
+    Input,
+    Tag,
+    Button,
+    Tooltip,
+    Table,
+    Icon,
+    Checkbox,
+    Select,
+    Popconfirm,
+    Form,
+    message
+} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 
@@ -25,7 +41,7 @@ class EditUser extends PureComponent {
             , anyThing: ''
             , name: ''
             , allRoleV: 0
-            , email: '@'
+            , email: null
             , newPassword: ''
             , secondPassword: ''
             , password: ''
@@ -33,9 +49,55 @@ class EditUser extends PureComponent {
         };
     }
 
+    taskA = (value) => {
+        console.log('hcia', "Task A");
+        return value = value + 1;
+    }
+    taskB = (value) => {
+        console.log('hcia', "Tash B");
+
+        // var ss=this.state.allRole.aaa.ldd
+        return value = value * 9;
+    }
+    onRejected = (error) => {
+        console.log('hcia', "Catch Error：A or B", error);
+    }
+    finalTask = (value) => {
+        console.log('hcia', "Final Tash", value);
+    }
+
+    componentWillMount() {
+
+        Promise.resolve(1)
+            .then((value) => {
+                console.log('hcia', "Tash A");
+
+                return value = value * 2;
+            })
+            .then(this.taskB)
+            .catch(this.onRejected)
+            .then(this.finalTask);
+
+
+    }
 
     confirmSave = () => {
         var self = this;
+        if (this.state.newPassword.length == 0) {
+            message.error('密碼')
+            return
+        }
+        if ( this.state.newPassword !== this.state.secondPassword) {
+            message.error('密碼不一致')
+            return
+        }
+
+        Promise.resolve(1)
+            .then(this.taskA)
+            .then(this.taskB)
+            .catch(this.onRejected)
+            .then(this.finalTask);
+
 
         window.Axios.post('back/saveOrUpdateBackUser', {
             id: this.props.match.params.id,
@@ -108,10 +170,10 @@ class EditUser extends PureComponent {
                             item1
                         );
                     })
-                    var aa = []
-                    aa.push(value)
+                    // var aa = []
+                    // aa.push(value)
                     this.setState({
-                        idList: aa,
+                        idList: value,
                         allRoleV: value,
                     });
 
@@ -258,12 +320,12 @@ class EditUser extends PureComponent {
         return (
             <div>
                 {/*<div>姓名 name:{JSON.stringify(this.state.name)}</div>*/}
-                {/*<div>邮箱 email:{JSON.stringify(this.state.email)}</div>*/}
+                <div>邮箱 email:{JSON.stringify(this.state.email)}</div>
                 {/*<div>手机 mobile:{JSON.stringify(this.state.mobile)}</div>*/}
                 {/*<div>性别 gender:{JSON.stringify(this.state.gender)}</div>*/}
                 {/*<div>新的登陆名 newLoginName:{JSON.stringify(this.state.newLoginName)}</div>*/}
-                {/*<div>新的密码 newPassword:{JSON.stringify(this.state.newPassword)}</div>*/}
-                {/*<div>驗證密码 secondPassword:{JSON.stringify(this.state.secondPassword)}</div>*/}
+                <div>新的密码 newPassword:{JSON.stringify(this.state.newPassword)}</div>
+                <div>驗證密码 secondPassword:{JSON.stringify(this.state.secondPassword)}</div>
                 {/*<div>角色 idList:{JSON.stringify(this.state.idList)}</div>*/}
                 {/*<div>内部人员备注 content:{JSON.stringify(this.state.content)}</div>*/}
                 {/*<div>当前操作人员的密码 password:{JSON.stringify(this.state.password)}</div>*/}
