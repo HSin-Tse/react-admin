@@ -33,18 +33,17 @@ class InnerUserList extends Component {
         };
     }
 
-    handleDelay = (record) => {
+    handleFreeze = (record) => {
+
+        this.showModalFrezz()
+
         console.log('hcia record', record)
         let self = this;
         window.Axios.post('back/saveOrUpdateBackUser', {
             // ...record,
             "id": record.id,
             "status": 1,
-            "name": record.loginName,
-            "email": record.email,
-            "mobile": record.mobile,
-            "gender": "男",
-            "newLoginName": record.loginName,
+
         }).then((response) => {
             if (response.data.code === 1) {
                 message.success('操作成功')
@@ -89,6 +88,7 @@ class InnerUserList extends Component {
             {
                 title: '真实姓名',
                 width: 100,
+                align:'center',
                 dataIndex: '真实姓名',
                 key: '真实姓名',
                 render: (text, record) => (
@@ -97,6 +97,7 @@ class InnerUserList extends Component {
             {
                 title: '登录名',
                 width: 100,
+                align: 'center',
                 dataIndex: '登录名',
                 key: '登录名',
                 render: (text, record) => (
@@ -106,6 +107,7 @@ class InnerUserList extends Component {
                 title: '角色',
                 width: 100,
                 dataIndex: '角色',
+                align: 'center',
                 key: '角色',
                 render: (text, record) => (
                     <span>
@@ -114,11 +116,11 @@ class InnerUserList extends Component {
                         {
                             record.allRole ?
 
-                            Object.keys(record.allRole).map((item1, number) => {
-                                return (
-                                    <Tag key={number} value={item1}>{record.allRole[item1]}</Tag>
-                                );
-                            }):''
+                                Object.keys(record.allRole).map((item1, number) => {
+                                    return (
+                                        <span key={number} value={item1}>{record.allRole[item1]}</span>
+                                    );
+                                }) : 'admin'
                         }
 
 
@@ -127,22 +129,24 @@ class InnerUserList extends Component {
             },
             {
                 title: '邮箱',
-                width: 150,
+                width: 200,
                 dataIndex: '邮箱',
                 key: '邮箱',
                 render: (text, record) => (<span>{record.email}</span>),
             }, {
                 title: '性别',
-                width: 150,
+                width: 70,
+                align: 'center',
                 dataIndex: '性别',
                 key: '性别',
                 render: (text, record) => (
                     <span>{record.gender}</span>),
             }, {
+                align: 'center',
                 title: '手机号',
                 dataIndex: '手机号',
                 key: '手机号',
-                width: 240,
+                width: 120,
 
                 render: (text, record) => (
                     <span>{record.mobile}</span>),
@@ -150,29 +154,33 @@ class InnerUserList extends Component {
                 title: '微信号',
                 dataIndex: '微信号',
                 key: '微信号',
+                align: 'center',
                 width: 120,
                 render: (text, record) => (
-                    <span>{record.weChat}</span>)
+                    <span>{record.weChat?record.weChat:'fakeis1111'}</span>)
             }, {
                 title: '最后登录',
                 dataIndex: '最后登录',
                 key: '最后登录',
-                width: 120,
+                width: 220,
                 render: (text, record) => (
                     <span>{record.lastLoginTime}</span>),
             }, {
                 title: '访问次数',
                 dataIndex: '访问次数',
                 key: '访问次数',
-                width: 120,
+                align: 'center',
+
+                width: 100,
 
                 render: (text, record) => (
-                    <span>{record.totalLoginNum}</span>),
+                    <span>{record.totalLoginNum == "null" ? 0 : record.totalLoginNum}</span>),
             }, {
                 title: '状态',
                 dataIndex: '状态',
                 key: '状态',
-                width: 120,
+                width: 100,
+                align: 'center',
                 render: (text, record) => (
                     <span>{record.blockFlag}</span>
                 )
@@ -201,9 +209,9 @@ class InnerUserList extends Component {
                         <Button className="ant-dropdown-link" onClick={() => this.newUSer(record)}>
                             编辑</Button>
 
-                        <Popconfirm title="延期申请？" onConfirm={() => this.handleDelay(record)} okText="Yes"
+                        <Popconfirm title="冻结？" onConfirm={() => this.handleFreeze(record)} okText="Yes"
                                     cancelText="No">
-                            <Button onClick={() => this.handleDelay(record)} className="ant-dropdown-link">冻结</Button>
+                            <Button onClick={() => this.handleFreeze(record)} className="ant-dropdown-link">冻结</Button>
 
                         </Popconfirm>
                     </div>
@@ -355,7 +363,7 @@ class InnerUserList extends Component {
             visible: true,
         });
     }
-    showModalOP = () => {
+    showModalFrezz = () => {
         this.setState({
             visibleOpM: true,
         });

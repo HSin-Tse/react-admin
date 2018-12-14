@@ -55,6 +55,15 @@ class AddUser extends Component {
 
         var self = this;
 
+        if (this.state.newPassword.length == 0) {
+            message.error('密碼')
+            return
+        }
+        if ( this.state.newPassword !== this.state.secondPassword) {
+            message.error('密碼不一致')
+            return
+        }
+
         window.Axios.post('back/saveOrUpdateBackUser', {
             name: self.state.name,
             email: self.state.email,
