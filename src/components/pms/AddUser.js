@@ -43,6 +43,7 @@ class AddUser extends Component {
             , anyThing: ''
             , name: ''
             , mobile: ''
+            , wechat: ''
             , email: '@'
             , newPassword: ''
             , secondPassword: ''
@@ -68,6 +69,7 @@ class AddUser extends Component {
             name: self.state.name,
             email: self.state.email,
             mobile: self.state.mobile,
+            // weChat: self.state.wechat,
             gender: self.state.gender == 1 ? '男' : '女',
             newLoginName: self.state.newLoginName,
             newPassword: self.state.newPassword,
@@ -283,6 +285,7 @@ class AddUser extends Component {
                 {/*<div>姓名 name:{JSON.stringify(this.state.name)}</div>*/}
                 {/*<div>邮箱 email:{JSON.stringify(this.state.email)}</div>*/}
                 {/*<div>手机 mobile:{JSON.stringify(this.state.mobile)}</div>*/}
+                {/*<div>wechat wechat:{JSON.stringify(this.state.wechat)}</div>*/}
                 {/*<div>性别 gender:{JSON.stringify(this.state.gender)}</div>*/}
                 {/*<div>新的登陆名 newLoginName:{JSON.stringify(this.state.newLoginName)}</div>*/}
                 {/*<div>新的密码 newPassword:{JSON.stringify(this.state.newPassword)}</div>*/}
@@ -302,6 +305,8 @@ class AddUser extends Component {
                             <div style={{display: 'flex', minHeight: 50}}>
                                 <h3 style={{width: 60}}>姓名:</h3>
                                 <Input
+
+                                    style={{width: 180}}
                                     onChange={this.changeName}
                                     defaultValue={this.state.name}/>
                             </div>
@@ -326,6 +331,18 @@ class AddUser extends Component {
                                     })}
 
                                     defaultValue={this.state.mobile}
+                                    style={{width: 180}}/>
+                            </div>
+
+                            <div style={{display: 'flex', minHeight: 50}}>
+                                <h3 style={{width: 60}}>微信:</h3>
+
+                                <Input
+                                    onChange={(e) => this.setState({
+                                        wechat: e.target.value,
+                                    })}
+
+                                    defaultValue={this.state.wechat}
                                     style={{width: 180}}/>
                             </div>
                             <div style={{display: 'flex', minHeight: 50}}>

@@ -417,7 +417,7 @@ export default class CustomerSummary extends Component {
 
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
-                <div>selectMail :{this.state.selectMail}</div>
+                {/*<div>selectMail :{this.state.selectMail}</div>*/}
                 {/*<ThemePicker />*/}
                 <div className={classNames('switcher dark-white', {active: switcherOn})}>
 					<span className="sw-btn dark-white" onClick={this._switcherOn}>
