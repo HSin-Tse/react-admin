@@ -147,7 +147,7 @@ class InnerUserList extends Component {
                 title: '手机号',
                 dataIndex: '手机号',
                 key: '手机号',
-                width: 120,
+                width: 150,
 
                 render: (text, record) => (
                     <span>{record.mobile}</span>),
@@ -381,30 +381,30 @@ class InnerUserList extends Component {
         });
     }
     handleOk = () => {
-        var mStatus = this.state.modeState == '正常' ? 1 : this.state.modeState == '禁止登陆' ? 2 : 3;
-        // var reasonType = mStatus ==2?
-        let self = this;
-        self.setState({
-            loadFor: true
-        })
-        window.Axios.post('star/updateStarLiveAccount', {
-            'id': self.state.opRecord.id,
-            'status': mStatus,
-            'reasonType': self.state.forbiddenValue,
-        }).then(function (response) {
-            console.log(response);
-            self.setState({
-                visibleOpM: false,
-                loadFor: false,
-            }, () => {
-                self.state.forbiddenValue = 0
-                self.requestPage()
-            });
-            message.success('操作成功');
-
-        }).catch(function (error) {
-            console.log(error);
-        });
+        // var mStatus = this.state.modeState == '正常' ? 1 : this.state.modeState == '禁止登陆' ? 2 : 3;
+        // // var reasonType = mStatus ==2?
+        // let self = this;
+        // self.setState({
+        //     loadFor: true
+        // })
+        // window.Axios.post('star/updateStarLiveAccount', {
+        //     'id': self.state.opRecord.id,
+        //     'status': mStatus,
+        //     'reasonType': self.state.forbiddenValue,
+        // }).then(function (response) {
+        //     console.log(response);
+        //     self.setState({
+        //         visibleOpM: false,
+        //         loadFor: false,
+        //     }, () => {
+        //         self.state.forbiddenValue = 0
+        //         self.requestPage()
+        //     });
+        //     message.success('操作成功');
+        //
+        // }).catch(function (error) {
+        //     console.log(error);
+        // });
     };
     handleCancel = (e) => {
         console.log(e);
