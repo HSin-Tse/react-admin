@@ -301,9 +301,10 @@ class AddRole extends Component {
                                         validator: this.validateToNextPassword,
                                     }],
                                 })(
-                                    <Input style={{width: 800}} addonAfter={<Icon type="star" theme="twoTone"/>}
+                                    <Input style={{width: 800}} addonAfter={<Icon  style={{color: 'red'}}  type="star" />}
                                            onChange={this.changeScret} placeholder="請輸入你的密碼加以驗證:" type="password"/>
                                 )}
+
 
 
                             </div>
