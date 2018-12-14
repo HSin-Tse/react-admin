@@ -157,7 +157,7 @@ class InnerUserList extends Component {
                 align: 'center',
                 width: 120,
                 render: (text, record) => (
-                    <span>{record.weChat?record.weChat:'fakeis1111'}</span>)
+                    <span>{record.weChat?record.weChat:'testtest'}</span>)
             }, {
                 title: '最后登录',
                 dataIndex: '最后登录',
