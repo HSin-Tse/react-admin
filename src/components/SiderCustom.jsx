@@ -124,9 +124,11 @@ class SiderCustom extends Component {
 
                 var ssb = key.subs.filter((sbkey, index, array) => {
                     var back = false
+
                     inforMenuList.forEach((item, index, array) => {
+                        console.log('hcia sbkey.title','side', sbkey.title, item.name, item.key, (sbkey.title == item.name))
+
                         if (sbkey.title == item.name) {
-                            console.log('hcia sbkey.title','side', sbkey.title, item.name, (sbkey.title == item.name))
                             back = true
                         }
                     });
