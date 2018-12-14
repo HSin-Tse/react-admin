@@ -130,6 +130,11 @@ class AddRole extends Component {
         console.log('hcia sorted', sorted)
 
 
+
+        if(sorted.length==0){
+            message.error('权限沒有配置')
+            return
+        }
         window.Axios.post('back/saveOrUpdateRole', {
             name: self.state.name,
             content: self.state.changeNoteV,
