@@ -89,8 +89,6 @@ class SiderCustom extends Component {
         // if (!this.state.infor) {return}
         // console.log('hcia  SiderCustom index componentWillMount AAAAAa')
         if(!this.state.infor) {
-
-
             return
         }
 
@@ -128,7 +126,7 @@ class SiderCustom extends Component {
                     var back = false
                     inforMenuList.forEach((item, index, array) => {
                         if (sbkey.title == item.name) {
-                            // console.log('hcia sbkey.title', sbkey.title, item.name, (sbkey.title == item.name))
+                            console.log('hcia sbkey.title','side', sbkey.title, item.name, (sbkey.title == item.name))
                             back = true
                         }
                     });

@@ -33,7 +33,7 @@ export default {
         {
             key: '/app/pms', title: '权限管理', icon: 'safety',
             subs: [
-                {key: '/app/pms/inneruserlist', title: '客服组管理', component: 'InnerUserList'},
+                {key: '/app/pms/inneruserlist', title: '客服组管理', component: 'InnerUserList',tk:''},
                 {key: '/app/pms/roleset', title: '内部角色配置', component: 'RoleSet'},
                 // {key: '/app/pms/rolelog', title: '操作日志', component: 'RoleLog'},
 
