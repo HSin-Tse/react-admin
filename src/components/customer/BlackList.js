@@ -55,16 +55,6 @@ export default class BlackList extends Component {
                     <span>{record.name}</span>
                 ),
             }, {
-                title: '活跃度',
-                dataIndex: '活跃度',
-                key: '活跃度',
-                render: (text, record) => (<span>{record.activeFlag}</span>),
-            }, {
-                title: 'APP注册时间',
-                dataIndex: 'APP注册时间',
-                key: 'APP注册时间',
-                render: (text, record) => (<span>{record.date}</span>),
-            }, {
                 title: '操作人',
                 dataIndex: '操作人',
                 key: '操作人',
