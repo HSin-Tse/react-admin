@@ -24,6 +24,7 @@ class InnerUserList extends Component {
             searchPhone: '',
             totalPage: 1,
             modeState: 1,
+            blockFlag: '',
             forbiddenValue: 0,
             current: 0,
             pgsize: 10,
@@ -34,25 +35,17 @@ class InnerUserList extends Component {
     }
 
     handleFreeze = (record) => {
-
-        this.showModalFrezz()
-
-        console.log('hcia record', record)
         let self = this;
-        window.Axios.post('back/saveOrUpdateBackUser', {
-            // ...record,
-            "id": record.id,
-            "status": 1,
 
-        }).then((response) => {
-            if (response.data.code === 1) {
-                message.success('操作成功')
-                // self.requestPage()//1:合规 2:开户 3:交易
 
+        self.setState({
+                blockFlag: record.blockFlag
+            }, () => {
+                this.showModalFrezz()
+                console.log('hcia record', record)
             }
-        }).catch(function (error) {
-            console.log(error);
-        });
+        );
+
 
     }
 
@@ -88,7 +81,7 @@ class InnerUserList extends Component {
             {
                 title: '真实姓名',
                 width: 100,
-                align:'center',
+                align: 'center',
                 dataIndex: '真实姓名',
                 key: '真实姓名',
                 render: (text, record) => (
@@ -157,7 +150,7 @@ class InnerUserList extends Component {
                 align: 'center',
                 width: 120,
                 render: (text, record) => (
-                    <span>{record.weChat?record.weChat:'testtest'}</span>)
+                    <span>{record.weChat ? record.weChat : 'testtest'}</span>)
             }, {
                 title: '最后登录',
                 dataIndex: '最后登录',
@@ -170,9 +163,7 @@ class InnerUserList extends Component {
                 dataIndex: '访问次数',
                 key: '访问次数',
                 align: 'center',
-
                 width: 100,
-
                 render: (text, record) => (
                     <span>{record.totalLoginNum == "null" ? 0 : record.totalLoginNum}</span>),
             }, {
@@ -209,11 +200,8 @@ class InnerUserList extends Component {
                         <Button className="ant-dropdown-link" onClick={() => this.newUSer(record)}>
                             编辑</Button>
 
-                        <Popconfirm title="冻结？" onConfirm={() => this.handleFreeze(record)} okText="Yes"
-                                    cancelText="No">
-                            <Button onClick={() => this.handleFreeze(record)} className="ant-dropdown-link">冻结</Button>
+                        <Button onClick={() => this.handleFreeze(record)} className="ant-dropdown-link">冻结</Button>
 
-                        </Popconfirm>
                     </div>
                 ),
             }];
@@ -242,6 +230,33 @@ class InnerUserList extends Component {
                 render: (text, record) => (
                     <span>{record.bkUserName}</span>)
             }];
+
+        this.freezeColumns = [
+            {
+                title: '操作人',
+                width: 140,
+                dataIndex: '操作人',
+                key: '操作人',
+                render: (text, record) => (
+                    <span>{this.timestampToTime(record.bkUserName)}</span>)
+            },
+            {
+                title: '操作详情',
+                dataIndex: '操作详情',
+                key: '操作详情',
+                width: 120,
+                render: (text, record) => (
+                    <span>{record.comment}</span>)
+            }, {
+                title: '操作时间',
+                dataIndex: '操作时间',
+                width: 120,
+                key: '操作时间',
+                render: (text, record) => (
+                    <span>{record.createDate}</span>)
+            }];
+
+
         this.requestPage()
     }
 
@@ -288,13 +303,7 @@ class InnerUserList extends Component {
         ////
     };
 
-    forbitChange = (value) => {
-        let self = this
-        self.setState({
-                forbiddenValue: value,
-            }
-        );
-    };
+
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
         const year = dateObj.getFullYear() // 获取年，
@@ -334,7 +343,6 @@ class InnerUserList extends Component {
         });
     }
     changePage = (page) => {
-        console.log('hcia page', page)
         this.setState({
             current: page - 1,
         }, () => {
@@ -342,8 +350,6 @@ class InnerUserList extends Component {
         })
     }
     newUSer = (record) => {
-
-
         // this.props.history.push('/app/pms/adduser' + 0)
         if (record) {
             console.log('hcia record', record)
@@ -357,8 +363,6 @@ class InnerUserList extends Component {
 
     }
     showModal = () => {
-
-
         this.setState({
             visible: true,
         });
@@ -410,7 +414,7 @@ class InnerUserList extends Component {
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
 
                 <Modal
-                    title={this.state.modeState == '正常' ? '恢复正常' : this.state.modeState}
+                    title={this.state.blockFlag == '正常' ? '冻结' : '解除'}
                     onCancel={this.handleCancel}
                     visible={this.state.visibleOpM}
                     footer={[
@@ -426,15 +430,10 @@ class InnerUserList extends Component {
                         {this.state.modeState == '禁止登陆' ? <span>请选择禁止登录原因</span> : null}
                         {this.state.modeState == '禁止交易' ? <span>禁止交易</span> : null}
                     </div>
-                    <div>
-
-                        {this.state.modeState == '禁止登陆' ?
-                            <Select style={{width: 200, marginTop: 20}} defaultValue='无效的邮箱'
-                                    onChange={(value) => this.forbitChange(value)}>
-                                {this.state.suspend_reason_type.map(ccty => <Option
-                                    value={ccty.value} key={ccty.value}>{ccty.name}</Option>)}
-                            </Select> : null}
-                    </div>
+                    <Table rowKey="id"
+                           columns={this.freezeColumns}
+                           dataSource={this.state.nodeList}// nodeList
+                    />
 
 
                 </Modal>
