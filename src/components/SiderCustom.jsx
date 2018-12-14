@@ -86,7 +86,7 @@ class SiderCustom extends Component {
     componentDidMount() {
         // console.log('hcia  SiderCustom componentDidMount')
         // if (!this.state.infor) {return}
-        console.log('hcia  SiderCustom index componentWillMount AAAAAa')
+        // console.log('hcia  SiderCustom index componentWillMount AAAAAa')
         if(!this.state.infor) {
 
 
@@ -96,11 +96,11 @@ class SiderCustom extends Component {
 
 
 
-        console.log('hcia this.state.infor' , this.state.infor)
-        console.log('hcia  SiderCustom index componentWillMount  BBBBB')
+        // console.log('hcia this.state.infor' , this.state.infor)
+        // console.log('hcia  SiderCustom index componentWillMount  BBBBB')
 
         var inforSuperFlag = this.state.infor.superFlag
-        console.log('hcia  SiderCustom index componentWillMount  CCCCCCC')
+        // console.log('hcia  SiderCustom index componentWillMount  CCCCCCC')
 
         var inforMenuList = this.state.infor.menuList
 
@@ -125,7 +125,7 @@ class SiderCustom extends Component {
                     var back = false
                     inforMenuList.forEach((item, index, array) => {
                         if (sbkey.title == item.name) {
-                            console.log('hcia sbkey.title', sbkey.title, item.name, (sbkey.title == item.name))
+                            // console.log('hcia sbkey.title', sbkey.title, item.name, (sbkey.title == item.name))
                             back = true
                         }
                     });

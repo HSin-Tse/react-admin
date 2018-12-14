@@ -29,7 +29,7 @@ window.Axios.interceptors.request.use(
 
         loginName = encodeURI(loginName)
 
-        console.log('hcia loginName' , loginName)
+        // console.log('hcia loginName' , loginName)
         // console.log('hcia xtoken' , xtoken)
 
         if (xtoken != null) {

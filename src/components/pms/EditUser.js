@@ -110,32 +110,37 @@ class EditUser extends Component {
             id: this.props.match.params.id
         }).then((response) => {
 
-            // console.log('hcia response', response)
-            self.setState({
-                name: response.data.data.displayName,
-                email: response.data.data.email,
-                mobile: response.data.data.mobile,
-                gender: response.data.data.gender == '女' ? 2 : 1,
-                newLoginName: response.data.data.loginName,
-                // changeNoteV: response.data.data.roleComment,
-                allRole: response.data.data.allRole,
-            }, () => {
+            if (response.data.code === 1) {
+                console.log('hcia response', response)
+                self.setState({
+                    name: response.data.data.displayName,
+                    email: response.data.data.email,
+                    mobile: response.data.data.mobile,
+                    gender: response.data.data.gender == '女' ? 2 : 1,
+                    newLoginName: response.data.data.loginName,
+                    // changeNoteV: response.data.data.roleComment,
+                    allRole: response.data.data.allRole,
+                }, () => {
 
 
-                var value = Object.keys(this.state.allRole).map(Number).map((item1, number) => {
-                    return (
-                        item1
-                    );
-                })
-                var aa = []
-                aa.push(value)
-                this.setState({
-                    idList: aa,
-                    allRoleV: value,
+                    var value = Object.keys(this.state.allRole).map(Number).map((item1, number) => {
+                        return (
+                            item1
+                        );
+                    })
+                    var aa = []
+                    aa.push(value)
+                    this.setState({
+                        idList: aa,
+                        allRoleV: value,
+                    });
+
+
                 });
+            } else {
+                self.props.history.goBack()
 
-
-            });
+            }
 
 
         });

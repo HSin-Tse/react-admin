@@ -58,10 +58,10 @@ export default class CRouter extends Component {
 
 
 
-        console.log('hcia  router index componentWillMount')
-        console.log('hcia  router index componentWillMount AAAAAa')
+        // console.log('hcia  router index componentWillMount')
+        // console.log('hcia  router index componentWillMount AAAAAa')
 
-        console.log('hcia this.state.infor' , this.state.infor)
+        // console.log('hcia this.state.infor' , this.state.infor)
 
 
         if(!this.state.infor){
@@ -85,7 +85,7 @@ export default class CRouter extends Component {
 
         var bbRouter = this.deepClone(routesAD);
         
-        console.log('hcia bbRouter' , bbRouter)
+        // console.log('hcia bbRouter' , bbRouter)
 
 
         var aaaaa = [...bbRouter.menus]
@@ -100,7 +100,7 @@ export default class CRouter extends Component {
                     var back = false
                     inforMenuList.forEach((item, index, array) => {
                         if (sbkey.title == item.name) {
-                            console.log('hcia sbkey.title', sbkey.title, item.name, (sbkey.title == item.name))
+                            // console.log('hcia sbkey.title', sbkey.title, item.name, (sbkey.title == item.name))
                             back = true
                         }
                     });
