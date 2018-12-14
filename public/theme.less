@@ -1858,7 +1858,7 @@ this.tinycolor = tinycolor;
 @table-header-color: @heading-color;
 @table-header-sort-bg: @background-color-base;
 @table-body-sort-bg: rgba(0, 0, 0, .01);
-@table-row-hover-bg: @primary-1;
+@table-row-hover-bg: #00ff00;
 @table-selected-row-bg: #fafafa;
 @table-expanded-row-bg: #fbfbfb;
 @table-padding-vertical: 16px;
@@ -2595,9 +2595,9 @@ mark {
 .ant-btn-ghost > a:only-child:after {
   background: transparent;
 }
-.ant-btn-ghost:hover,
+.ant-btn-ghost:hover
 .ant-btn-ghost:focus {
-  color: color(~`colorPalette("@{primary-color}", 5)`);
+  color: color(~`colorPalette("#00ff00", 5)`);
   background-color: transparent;
   border-color: color(~`colorPalette("@{primary-color}", 5)`);
 }
@@ -6151,7 +6151,7 @@ form .ant-upload {
 .ant-table-tbody > tr.ant-table-row-hover > td,
 .ant-table-thead > tr:hover > td,
 .ant-table-tbody > tr:hover > td {
-  background: color(~`colorPalette("@{primary-color}", 1)`);
+  background: color(~`colorPalette("#00ff00", 1)`);
 }
 .ant-table-thead > tr:hover {
   background: none;
