@@ -76,6 +76,9 @@ window.Axios.interceptors.response.use(function (response) {
         //     query: {redirect: router.currentRoute.fullPath}
         // })
         message.error(response.data.msg)
+        return Promise.reject(response)
+        // this.props.history.goBack()
+
 
     }
     return response

@@ -143,6 +143,9 @@ class EditUser extends Component {
             }
 
 
+        }).catch((error) => {
+            console.log('hcia error', error)
+            this.props.history.goBack()
         });
 
 
