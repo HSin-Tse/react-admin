@@ -2,15 +2,21 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, message, Select, Modal, Card, Col, Popconfirm, Tag} from 'antd';
+import {Button, Table, message, Select, Modal, Card, Col, Popconfirm, Tag, Input, Form, Icon} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 
 const Option = Select.Option;
+const {TextArea} = Input;
 
 class InnerUserList extends Component {
+    changeScret = (e) => {
+        this.setState({
+            realp: e.target.value,
+        });
+    }
 
     constructor(props) {
         super(props);
@@ -22,6 +28,8 @@ class InnerUserList extends Component {
             nodeList: [],
             loading: false,
             searchPhone: '',
+            realp: '',
+            freezecomment: '',
             totalPage: 1,
             modeState: 1,
             blockFlag: '',
@@ -408,31 +416,54 @@ class InnerUserList extends Component {
 
 
     render() {
+        const {getFieldDecorator} = this.props.form;
+
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
 
                 <Modal
+                    width={600}
                     title={this.state.blockFlag == '正常' ? '冻结' : '解除'}
                     onCancel={this.handleCancel}
                     visible={this.state.visibleOpM}
                     footer={[
+
                         <Button key="back" onClick={this.handleCancel}>取消操作</Button>,
                         <Button loading={this.state.loadFor} key="submit" type="primary"
                                 onClick={() => this.handleOk()}>
-                            提交
+                            {this.state.blockFlag == '正常' ? '冻结' : '解除'}
                         </Button>,
                     ]}
                 >
                     <div>
-                        {this.state.modeState == '正常' ? <span>确认当前用户账户恢复正常</span> : null}
-                        {this.state.modeState == '禁止登陆' ? <span>请选择禁止登录原因</span> : null}
-                        {this.state.modeState == '禁止交易' ? <span>禁止交易</span> : null}
+                        <h3>请输入原因：</h3>
+                        <TextArea
+                            value={this.state.freezecomment}
+                            rows={4}></TextArea>
                     </div>
-                    <Table rowKey="id"
-                           columns={this.freezeColumns}
-                           dataSource={this.state.nodeList}// nodeList
+                    <div style={{marginTop: 15, display: 'flex'}}>
+                        <h3 style={{width: 150}}>操作人员密码：</h3>
+
+                        {getFieldDecorator('password', {
+                            rules: [{
+                                required: true, message: 'Please input your password!',
+                            }, {
+                                validator: this.validateToNextPassword,
+                            }],
+                        })(
+                            <Input
+                                onChange={this.changeScret} placeholder="請輸入你的密碼加以驗證:" type="password"/>
+                        )}
+                    </div>
+                    
+                    <Table
+
+                        style={{marginTop: 15}}
+                        rowKey="id"
+                        columns={this.freezeColumns}
+                        dataSource={this.state.nodeList}// nodeList
                     />
 
 
@@ -444,6 +475,10 @@ class InnerUserList extends Component {
                     visible={this.state.visible}
                     footer=''
                 >
+                    <div>
+                        <h3>处理备注：</h3>
+
+                    </div>
                     <Table rowKey="id"
                            columns={this.nodeColumns}
                            dataSource={this.state.nodeList}// nodeList
@@ -488,4 +523,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
     receiveData: bindActionCreators(receiveData, dispatch)
 });
-export default connect(mapStateToProps, mapDispatchToProps)(InnerUserList);
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(InnerUserList));
+
+
