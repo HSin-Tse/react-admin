@@ -1,25 +1,8 @@
 /* eslint-disable react/sort-comp */
 
-import React, {Component} from 'react';
-import {
-    Col,
-    Card,
-    Row,
-    Radio,
-    Input,
-    Tag,
-    Button,
-    Tooltip,
-    Table,
-    Icon,
-    Checkbox,
-    Select,
-    Popconfirm,
-    Form,
-    message
-} from 'antd';
+import React, {PureComponent} from 'react';
+import {Col, Card, Row, Radio, Input, Tag, Button, Tooltip, Table, Icon, Checkbox, Select, Popconfirm, Form, message} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
-import {parse} from 'querystring';
 import connect from "react-redux/es/connect/connect";
 
 const FormItem = Form.Item;
@@ -27,7 +10,7 @@ const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
 const Option = Select.Option;
 
-class EditUser extends Component {
+class EditUser extends PureComponent {
 
     constructor(props) {
         super(props);
@@ -52,9 +35,6 @@ class EditUser extends Component {
 
 
     confirmSave = () => {
-
-        // id: this.props.match.params.id,
-
         var self = this;
 
         window.Axios.post('back/saveOrUpdateBackUser', {

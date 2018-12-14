@@ -8,6 +8,7 @@ import routes from '@/routes/config';
 import routesAD from '@/routes/configadmin';
 import SiderMenu from './SiderMenu';
 import avater from "../style/imgs/ixlogo.png";
+import * as Immutable from 'immutable';
 
 const {Sider} = Layout;
 
@@ -105,7 +106,9 @@ class SiderCustom extends Component {
         var inforMenuList = this.state.infor.menuList
 
         if (inforSuperFlag === 1) {
-            this.setState({cconfig: {...routesAD}});
+            // this.setState({cconfig: {...routesAD}});
+            var imuRou=Immutable.Map(routesAD).toObject()
+            this.setState({cconfig: imuRou});
             return
         }
         // var bbRouter = {...routes}

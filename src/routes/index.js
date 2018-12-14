@@ -78,13 +78,24 @@ export default class CRouter extends Component {
         var inforMenuList = this.state.infor.menuList
 
         if (inforSuperFlag === 1) {
-            this.setState({cconfig: {...routesAD}});
+            // this.setState({cconfig: {...routesAD}});
+
+
+            var imuRou=Immutable.Map(routesAD).toObject()
+            this.setState({cconfig: imuRou});
+
+            console.log('hcia imuRou' , imuRou)
             return
         }
         // var bbRouter = {...routes}
 
+
+
+
         var bbRouter = this.deepClone(routesAD);
-        
+
+
+
         // console.log('hcia bbRouter' , bbRouter)
 
 
