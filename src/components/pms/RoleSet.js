@@ -68,9 +68,11 @@ class Basic extends Component {
 
             {
                 title: '角色名称',
-                width: 120,
                 dataIndex: '角色名称',
+                align: 'center',
                 key: '角色名称',
+                width: 240,
+
                 render: (text, record) => (
                     <span>{record.name}</span>),
             }, {
@@ -78,19 +80,29 @@ class Basic extends Component {
                 dataIndex: '创建时间',
                 key: '创建时间',
                 width: 240,
+                align: 'center',
                 render: (text, record) => (
                     <span>{record.createDate}</span>),
             }, {
                 title: '创建人',
                 dataIndex: '创建人',
                 width: 120,
+                align: 'center',
                 key: '创建人',
                 render: (text, record) => (
                     <span>{record.operator}</span>)
             }, {
+                title: '角色备注',
+                dataIndex: '角色备注',
+                width: 420,
+                align: 'center',
+                key: '角色备注',
+                render: (text, record) => (
+                    <span>{record.roleComment}</span>)
+            }, {
                 title: '操作日志',
                 dataIndex: '操作日志',
-                width: 200,
+                width: 120,
                 align: 'center',
                 key: '操作日志',
                 render: (text, record) => (
@@ -100,7 +112,7 @@ class Basic extends Component {
                         onClick={() => this.seeDetail(record)}>详情</Button>)
             }, {
                 title: '操作',
-                width: 240,
+                width: 200,
                 align: 'center',
                 key: 'action',
                 render: (text, record) => (
@@ -384,20 +396,13 @@ class Basic extends Component {
                 <BreadcrumbCustom first="权限管理" second="角色配置"/>
 
                 <Card title="角色配置表"
-                      extra={
-                          <Button type="default"
-                                  onClick={() => this.addRole()}>新增
-                          </Button>
-                      }>
-
+                      extra={<Button type="default" onClick={() => this.addRole()}>新增</Button>}>
                     <Table
 
-                        // style={{width:1000}}
                         rowKey="id"
 
                         columns={this.columns}
                         dataSource={this.state.userList}
-                        scroll={{x: (800)}}
 
                         bordered
                         loading={this.state.loading}
