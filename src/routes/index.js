@@ -64,7 +64,7 @@ export default class CRouter extends Component {
         // console.log('hcia this.state.infor' , this.state.infor)
 
 
-        if(!this.state.infor){
+        if (!this.state.infor) {
 
             var bbRouter = this.deepClone(routesAD);
             this.setState({cconfig: bbRouter});
@@ -81,19 +81,16 @@ export default class CRouter extends Component {
             // this.setState({cconfig: {...routesAD}});
 
 
-            var imuRou=Immutable.Map(routesAD).toObject()
+            var imuRou = Immutable.Map(routesAD).toObject()
             this.setState({cconfig: imuRou});
 
-            console.log('hcia imuRou' , imuRou)
+            console.log('hcia imuRou', imuRou)
             return
         }
         // var bbRouter = {...routes}
 
 
-
-
         var bbRouter = this.deepClone(routesAD);
-
 
 
         // console.log('hcia bbRouter' , bbRouter)
@@ -111,8 +108,10 @@ export default class CRouter extends Component {
                     var back = false
                     inforMenuList.forEach((item, index, array) => {
                         if (sbkey.title == item.name) {
-                            // console.log('hcia sbkey.title', sbkey.title, item.name, (sbkey.title == item.name))
+                            // console.log('hcia sbkey.title', sbkey.title, item.name, item.availableFlag, (sbkey.title == item.name))
                             back = true
+                            sbkey.op = item.availableFlag
+
                         }
                     });
                     return back
@@ -152,13 +151,17 @@ export default class CRouter extends Component {
                         this.state.cconfig[key].map(r => {
                             const route = r => {
                                 const Component = AllComponents[r.component];
+                                // console.log('hcia r', r)
+
                                 return (
                                     <Route
+
+
                                         key={r.route || r.key}
                                         exact path={r.route || r.key}
                                         render={props => r.login ?
                                             <Component {...props} />
-                                            : this.requireLogin(<Component {...props} />)}
+                                            : this.requireLogin(<Component opau={r.op} tk={r.tk} {...props} />)}
                                     />
                                 )
                             }

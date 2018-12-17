@@ -84,15 +84,14 @@ class SiderCustom extends Component {
         }
         return cloneObj;
     }
+
     componentDidMount() {
         // console.log('hcia  SiderCustom componentDidMount')
         // if (!this.state.infor) {return}
         // console.log('hcia  SiderCustom index componentWillMount AAAAAa')
-        if(!this.state.infor) {
+        if (!this.state.infor) {
             return
         }
-
-
 
 
         // console.log('hcia this.state.infor' , this.state.infor)
@@ -105,7 +104,7 @@ class SiderCustom extends Component {
 
         if (inforSuperFlag === 1) {
             // this.setState({cconfig: {...routesAD}});
-            var imuRou=Immutable.Map(routesAD).toObject()
+            var imuRou = Immutable.Map(routesAD).toObject()
             this.setState({cconfig: imuRou});
             return
         }
@@ -126,7 +125,7 @@ class SiderCustom extends Component {
                     var back = false
 
                     inforMenuList.forEach((item, index, array) => {
-                        console.log('hcia sbkey.title','side', sbkey.title, item.name, item.key, (sbkey.title == item.name))
+                        // console.log('hcia sbkey.title','side', sbkey.title, item.name, item.key, (sbkey.title == item.name))
 
                         if (sbkey.title == item.name) {
                             back = true

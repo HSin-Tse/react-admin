@@ -16,6 +16,9 @@ import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
 import moment from 'moment';
 import axios from "axios";
+import AllComponents from "../index";
+import {Route} from "react-router-dom";
+
 const Search = Input.Search;
 const {TextArea} = Input;
 const RadioGroup = Radio.Group;
@@ -42,6 +45,7 @@ class PassOpenD extends Component {
             , leverageId: ''
             , leverageName: ''
             , changeNoteB: false
+            , availableFlag: false
             , waitSearchDb: {}
             , iconLoading: false
             , checkderesb: null
@@ -78,7 +82,43 @@ class PassOpenD extends Component {
         var self = this;
 
 
-        // var menuInfor = JSON.parse(localStorage.getItem('infor'))
+        if (localStorage.getItem('infor')) {
+            var menuInfor = JSON.parse(localStorage.getItem('infor'))
+            // console.log('hcia menuInfor', menuInfor.menuList)
+            // console.log('hcia  this.props', this.props)
+
+            var findEmpty = menuInfor.menuList.find((item) => {
+                console.log('hcia  this.props', this.props)
+                return this.props.tk === item.key;
+            });
+
+            console.log('hcia findEmpty', findEmpty.availableFlag)
+            self.setState({
+                availableFlag: findEmpty.availableFlag===1,
+
+            });
+            // Object.keys(this.state.cconfig).map(key =>
+            //     this.state.cconfig[key].map(r => {
+            //         const route = r => {
+            //             const Component = AllComponents[r.component];
+            //             // console.log('hcia r', r)
+            //
+            //             return (
+            //                 <Route
+            //
+            //
+            //                     key={r.route || r.key}
+            //                     exact path={r.route || r.key}
+            //                     render={props => r.login ?
+            //                         <Component {...props} />
+            //                         : this.requireLogin(<Component opau={r.op} sss={'sag'} {...props} />)}
+            //                 />
+            //             )
+            //         }
+            //         return r.component ? route(r) : r.subs.map(r => route(r));
+            //     })
+            // )
+        }
 
 
         // console.log('hcia menuInfor', menuInfor.menuList)
@@ -89,7 +129,7 @@ class PassOpenD extends Component {
         window.Axios.post('dict/leverageList', {
             'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
         }).then((response) => {
-            console.log('hcia response.data', response.data.data)
+            // console.log('hcia response.data', response.data.data)
 
             self.setState({
                 leverageList: response.data.data,
@@ -193,7 +233,7 @@ class PassOpenD extends Component {
         var isSetL = this.state.leverageId ? this.state.leverageId.length > 0 : false
 
 
-        console.log('hcia isSetL', isSetL)
+        // console.log('hcia isSetL', isSetL)
         var self = this;
 
         this.mIncomesOPS = this.state.IXIncomeList.map(d => <Option key={d.name}>{d.name}</Option>);
@@ -355,7 +395,7 @@ class PassOpenD extends Component {
                 {/*<div>status: {this.state.recordData.status}</div>*/}
                 {/*<div>isNeedSave :{this.state.isNeedSave.toString()}</div>*/}
                 {/*<div>waitUpdate :{JSON.stringify(this.state.waitUpdate)}</div>*/}
-                <div>this.state.leverageId :{JSON.stringify(this.state.leverageId)}</div>
+                <div>this.state.availableFlag :{JSON.stringify(this.state.availableFlag)}</div>
 
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
                 <Card disabled={true} title="IX账户审核 " bordered={true}>

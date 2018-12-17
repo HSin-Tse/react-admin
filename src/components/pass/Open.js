@@ -2,12 +2,10 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, Icon, Input} from 'antd';
+import {Button, Table, Input} from 'antd';
 
 
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
-import {bindActionCreators} from "redux";
-import {addTodo, receiveData} from "../../action";
 import connect from "react-redux/es/connect/connect";
 
 class Basic extends Component {
@@ -18,11 +16,15 @@ class Basic extends Component {
             date: new Date()
             , userList: []
             , loading: false
+            , availableFlag: false
+            , isCanOP: 0
             , searchPhone: ''
             , totalPage: 1
             , pgsize: 10
 
         };
+        console.log('hcia  this.props', this.props)
+
     }
 
     handleSearch = (selectedKeys, confirm) => () => {
@@ -36,24 +38,40 @@ class Basic extends Component {
     }
 
     componentDidMount() {
+
+
+        var self = this;
+
+
+        if (localStorage.getItem('infor')) {
+            var menuInfor = JSON.parse(localStorage.getItem('infor'))
+            // console.log('hcia menuInfor', menuInfor.menuList)
+            // console.log('hcia  this.props', this.props)
+
+            var isCanOp = menuInfor.menuList.find((item) => {
+                console.log('hcia  this.props', this.props)
+                return this.props.tk === item.key;
+            });
+
+            console.log('hcia isCanOp', isCanOp.availableFlag)
+            console.log('hcia isCanOp', isCanOp.availableFlag)
+            self.setState({
+                availableFlag: isCanOp.availableFlag===1,
+                isCanOP:isCanOp.availableFlag
+            });
+
+        }
+
         this.columns = [
             {
                 title: '手机号',
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
                 fixed: 'left',
-                width:150,
+                width: 150,
                 onFilter: (value, record) => {
-                    // if (!record.phoneNumber)
-                    //     return false
-                    // return record.phoneNumber.includes(value)
-
-                    return true
-
-
-
+                    return record.phoneNumber.includes(value)
                 },
-
                 filterDropdown: ({setSelectedKeys, selectedKeys, confirm, clearFilters}) => (
                     <div className="custom-filter-dropdown">
                         <Input
@@ -73,9 +91,9 @@ class Basic extends Component {
                 title: '姓名',
                 dataIndex: 'name',
                 key: 'name',
-                align:'center',
+                align: 'center',
                 render: (text, record) => (
-                    <span>{record.cnName }</span>),
+                    <span>{record.cnName}</span>),
             }, {
                 title: '申请序号',
                 dataIndex: '申请序号',
@@ -88,7 +106,7 @@ class Basic extends Component {
                 render: (text, record) => (
                     <span>{record.displayApplyType}</span>),
             }, {
-                align:'center',
+                align: 'center',
                 title: '申请时间',
                 dataIndex: '申请时间',
                 key: '申请时间',
@@ -97,7 +115,9 @@ class Basic extends Component {
             }, {
                 title: '审核状态',
                 dataIndex: '审核状态',
-                width:100,
+                width: 120,
+                align: 'center',
+
                 filters: [
                     {text: '审核中', value: 0},
                     {text: '审核通过', value: 1},
@@ -118,10 +138,12 @@ class Basic extends Component {
                 key: 'action',
                 fixed: 'right',
                 width: 100,
+                align: 'center',
                 render: (text, record) => (
                     <div>
                         <span className="ant-divider"/>
-                        <Button className="ant-dropdown-link" onClick={() => this.handleEdit(record)}>{record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'}</Button>
+                        <Button className="ant-dropdown-link"
+                                onClick={() => this.handleEdit(record)}>{record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '拒絕'}</Button>
                     </div>
                 ),
             }];
@@ -129,21 +151,17 @@ class Basic extends Component {
     }
 
     handleEdit = (record) => {
-        this.props.history.push('/app/pass/passopen/detail' + record.id)
+        // message()
+
+        console.log('hcia record.status' , record.status)
+        //
+
+        var gogo = record.status === 0 ? 'detail' : (record.status === 1) ? 'user' : 'user'
+
+
+        this.props.history.push('/app/pass/passopen/'+gogo + record.id)
     };
-    timestampToTime = (timestamp) => {
-        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
-        const year = dateObj.getFullYear() // 获取年，
-        const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
-        const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
-        const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
-        const minutes = this.pad(dateObj.getMinutes()) // 获取分
-        const seconds = this.pad(dateObj.getSeconds()) // 获取秒
-        return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
-    };
-    pad = (str) => {
-        return +str >= 10 ? str : '0' + str
-    };
+
 
     requestPage = (pg) => {
 
@@ -154,7 +172,7 @@ class Basic extends Component {
                 loading: true,
             }
         );
-        console.log('hcia pg', pg)
+        // console.log('hcia pg', pg)
         window.Axios.post('open/getOpenApplyList', {
             'pageSize': this.state.pgsize,
             'pageNo': pg,
@@ -191,6 +209,8 @@ class Basic extends Component {
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
+                <div>this.state.availableFlag :{JSON.stringify(this.state.availableFlag)}</div>
+                {/*<div>isCanOP :{this.state.isCanOP}</div>*/}
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
                 {/*{JSON.stringify(this.props.todps)}*/}
 
@@ -216,7 +236,7 @@ class Basic extends Component {
 
 
 const mapStateToProps = state => {
-    const todps= state.todos;
+    const todps = state.todos;
     return {todps};
 };
-export default connect(mapStateToProps, )(Basic);
+export default connect(mapStateToProps,)(Basic);
