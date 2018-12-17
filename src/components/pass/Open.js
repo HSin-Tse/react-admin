@@ -43,22 +43,37 @@ class Basic extends Component {
         var self = this;
 
 
+
+
         if (localStorage.getItem('infor')) {
+
+
             var menuInfor = JSON.parse(localStorage.getItem('infor'))
+
+
+            if(menuInfor.superFlag===1){
+                self.setState({
+                    availableFlag: true,
+                    isCanOP: 1
+                });
+            }else{
+                var isCanOp = menuInfor.menuList.find((item) => {
+                    console.log('hcia  this.props', this.props)
+                    return this.props.tk === item.key;
+                });
+
+                console.log('hcia isCanOp', isCanOp.availableFlag)
+                console.log('hcia isCanOp', isCanOp.availableFlag)
+                self.setState({
+                    availableFlag: isCanOp.availableFlag === 1,
+                    isCanOP: isCanOp.availableFlag
+                });
+            }
+
             // console.log('hcia menuInfor', menuInfor.menuList)
             // console.log('hcia  this.props', this.props)
 
-            var isCanOp = menuInfor.menuList.find((item) => {
-                console.log('hcia  this.props', this.props)
-                return this.props.tk === item.key;
-            });
 
-            console.log('hcia isCanOp', isCanOp.availableFlag)
-            console.log('hcia isCanOp', isCanOp.availableFlag)
-            self.setState({
-                availableFlag: isCanOp.availableFlag === 1,
-                isCanOP: isCanOp.availableFlag
-            });
 
         }
 
