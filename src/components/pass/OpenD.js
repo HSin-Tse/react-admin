@@ -88,48 +88,22 @@ class PassOpenD extends Component {
             // console.log('hcia  this.props', this.props)
 
             var findEmpty = menuInfor.menuList.find((item) => {
-                console.log('hcia  this.props', this.props)
+                // console.log('hcia  this.props', this.props)
                 return this.props.tk === item.key;
             });
 
-            console.log('hcia findEmpty', findEmpty.availableFlag)
+            // console.log('hcia findEmpty', findEmpty.availableFlag)
             self.setState({
-                availableFlag: findEmpty.availableFlag===1,
+                availableFlag: findEmpty.availableFlag === 1,
 
             });
-            // Object.keys(this.state.cconfig).map(key =>
-            //     this.state.cconfig[key].map(r => {
-            //         const route = r => {
-            //             const Component = AllComponents[r.component];
-            //             // console.log('hcia r', r)
-            //
-            //             return (
-            //                 <Route
-            //
-            //
-            //                     key={r.route || r.key}
-            //                     exact path={r.route || r.key}
-            //                     render={props => r.login ?
-            //                         <Component {...props} />
-            //                         : this.requireLogin(<Component opau={r.op} sss={'sag'} {...props} />)}
-            //                 />
-            //             )
-            //         }
-            //         return r.component ? route(r) : r.subs.map(r => route(r));
-            //     })
-            // )
+
         }
 
-
-        // console.log('hcia menuInfor', menuInfor.menuList)
-
-
-        // availableFlag
 
         window.Axios.post('dict/leverageList', {
             'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
         }).then((response) => {
-            // console.log('hcia response.data', response.data.data)
 
             self.setState({
                 leverageList: response.data.data,
@@ -395,7 +369,7 @@ class PassOpenD extends Component {
                 {/*<div>status: {this.state.recordData.status}</div>*/}
                 {/*<div>isNeedSave :{this.state.isNeedSave.toString()}</div>*/}
                 {/*<div>waitUpdate :{JSON.stringify(this.state.waitUpdate)}</div>*/}
-                <div>this.state.availableFlag :{JSON.stringify(this.state.availableFlag)}</div>
+                {/*<div>this.state.availableFlag :{JSON.stringify(this.state.availableFlag)}</div>*/}
                 <h2 style={{marginTop: 15}}>
                     开户信息详情
                 </h2>

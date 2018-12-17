@@ -19,6 +19,21 @@ class Dashboard extends React.Component {
         this.props.addTodo('a')
     }
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            menuList: [],
+            displayName: '',
+
+        };
+    }
+
+    componentDidMount() {
+        this.setState({displayName: localStorage.getItem('loginName')});
+
+    }
+
+
     render() {
         return (
             <div className="gutter-example button-demo">
@@ -33,6 +48,14 @@ class Dashboard extends React.Component {
 
                 <Card disabled={true} title="登陆信息 " bordered={true}>
 
+                    <Row gutter={1}>
+                        <Col md={6}>
+                            <p>登录账户:</p>
+                        </Col>
+                        <Col md={6}>
+                            <p>{this.state.displayName}</p>
+                        </Col>
+                    </Row>
                     <Row gutter={1}>
                         <Col md={6}>
                             <p>手机:</p>
@@ -71,7 +94,7 @@ class Dashboard extends React.Component {
 
                     </Row>
                 </Card>
-                <Card style={{marginTop:15}} disabled={true} title="待办事项 " bordered={true}>
+                <Card style={{marginTop: 15}} disabled={true} title="待办事项 " bordered={true}>
 
 
                 </Card>

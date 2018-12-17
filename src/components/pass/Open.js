@@ -56,8 +56,8 @@ class Basic extends Component {
             console.log('hcia isCanOp', isCanOp.availableFlag)
             console.log('hcia isCanOp', isCanOp.availableFlag)
             self.setState({
-                availableFlag: isCanOp.availableFlag===1,
-                isCanOP:isCanOp.availableFlag
+                availableFlag: isCanOp.availableFlag === 1,
+                isCanOP: isCanOp.availableFlag
             });
 
         }
@@ -137,13 +137,17 @@ class Basic extends Component {
                 title: '操作',
                 key: 'action',
                 fixed: 'right',
-                width: 100,
+                width: 300,
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <span className="ant-divider"/>
+
+                        <Button className="ant-dropdown-link"
+                                onClick={() => this.handleEdit(record)}>操作日志</Button>
                         <Button className="ant-dropdown-link"
                                 onClick={() => this.handleEdit(record)}>{record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '拒絕'}</Button>
+                        <Button className="ant-dropdown-link"
+                                onClick={() => this.handleEdit(record)}>美股权限</Button>
                     </div>
                 ),
             }];
@@ -153,31 +157,35 @@ class Basic extends Component {
     handleEdit = (record) => {
         // message()
 
-        console.log('hcia record.status' , record.status)
+
+        if (this.state.availableFlag) {
+
+            this.props.history.push('/app/pass/passopen/detail' + record.id)
+            return
+
+        }
+
+        console.log('hcia record.status', record.status)
         //
 
         var gogo = record.status === 0 ? 'detail' : (record.status === 1) ? 'user' : 'user'
 
 
-        this.props.history.push('/app/pass/passopen/'+gogo + record.id)
+        this.props.history.push('/app/pass/passopen/' + gogo + record.id)
     };
 
 
     requestPage = (pg) => {
-
-
         pg = pg - 1
         let self = this
         self.setState({
                 loading: true,
             }
         );
-        // console.log('hcia pg', pg)
         window.Axios.post('open/getOpenApplyList', {
             'pageSize': this.state.pgsize,
             'pageNo': pg,
-        }).then(function (response) {
-            console.log(response);
+        }).then((response) => {
 
             self.setState({
                     totalPage: response.data.data.totalPage,
@@ -186,11 +194,7 @@ class Basic extends Component {
                 }
             );
 
-
-        }).catch(function (error) {
-            console.log(error);
-            // message.warn(error);
-        });
+        })
     }
 
     changePage = (page) => {
@@ -209,7 +213,7 @@ class Basic extends Component {
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
-                <div>this.state.availableFlag :{JSON.stringify(this.state.availableFlag)}</div>
+                {/*<div>this.state.availableFlag :{JSON.stringify(this.state.availableFlag)}</div>*/}
                 {/*<div>isCanOP :{this.state.isCanOP}</div>*/}
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
                 {/*{JSON.stringify(this.props.todps)}*/}
