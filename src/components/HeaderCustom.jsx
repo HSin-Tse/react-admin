@@ -40,7 +40,8 @@ class HeaderCustom extends Component {
         }
 
 
-        this.setState({displayName: localStorage.getItem('displayName')});
+        // this.setState({displayName: localStorage.getItem('displayName')});
+        this.setState({displayName: localStorage.getItem('loginName')});
 
     };
     screenFull = () => {
