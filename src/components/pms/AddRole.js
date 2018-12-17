@@ -210,11 +210,11 @@ class AddRole extends Component {
         return (
             <div>
                 <h2 style={{marginTop: 15}}>
-                    内部用户权限设置
+                    新增/编辑资料
                 </h2>
 
 
-                <div><BreadcrumbCustom first="内部成员列表" second="内部人员配置"/></div>
+                <div><BreadcrumbCustom first="内部成员列表" second="新增/编辑资料"/></div>
 
 
                 <Card bodyStyle={{marginLeft: 10}} title={<span style={{fontSize: 18}}> 基本信息 </span>} bordered={true}

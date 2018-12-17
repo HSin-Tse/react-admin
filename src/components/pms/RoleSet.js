@@ -390,10 +390,10 @@ class Basic extends Component {
 
                 </Modal>
                 <h2 style={{marginTop: 15}}>
-                    内部角色配置
+                    角色配置
                 </h2>
 
-                <BreadcrumbCustom first="权限管理" second="内部角色配置"/>
+                <BreadcrumbCustom first="权限管理" second="角色配置"/>
 
                 <Card title="角色配置表"
                       extra={<Button type="default" onClick={() => this.addRole()}>新增</Button>}>

@@ -486,7 +486,10 @@ class InnerUserList extends Component {
 
 
                 </Modal>
-                <BreadcrumbCustom first="权限管理" second="内部成员列表"/>
+                <h2 style={{marginTop: 15}}>
+                    内部成员配置
+                </h2>
+                <BreadcrumbCustom first="权限管理" second="内部成员配置"/>
 
                 <Card title="内部成员列表"
                       extra={

@@ -213,7 +213,9 @@ class Basic extends Component {
                 {/*<div>isCanOP :{this.state.isCanOP}</div>*/}
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
                 {/*{JSON.stringify(this.props.todps)}*/}
-
+                <h2 style={{marginTop: 15}}>
+                    开户审核
+                </h2>
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
 
                 <Table rowKey="id"

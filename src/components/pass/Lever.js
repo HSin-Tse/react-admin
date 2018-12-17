@@ -354,10 +354,10 @@ class Basic extends Component {
         // updateLeverageApply
         let self = this
 
-        console.log('hcia value' , value)
+        console.log('hcia value', value)
         window.Axios.post('finance/updateLeverageApply', {
-            id:this.state.detail.id,
-            leverageId:value,
+            id: this.state.detail.id,
+            leverageId: value,
         }).then((response) => {
             console.log('hcia response', response)
             // self.setState({
@@ -366,8 +366,8 @@ class Basic extends Component {
         });
 
 
-
     }
+
     render() {
         const gridStyle = {
             width: '50%',
@@ -418,7 +418,7 @@ class Basic extends Component {
                                         defaultValue={this.state.detail.targetLeverage}
                                         style={{marginLeft: 0}}>
                                         {this.state.leavgeList.map(ccty => <Option
-                                          value={ccty.id}  key={ccty.leverage}>1:{ccty.leverage}</Option>)}
+                                            value={ccty.id} key={ccty.leverage}>1:{ccty.leverage}</Option>)}
                                     </Select>
                                 </Col>
                             </Row>
@@ -457,7 +457,9 @@ class Basic extends Component {
                         </div>
                     </Card>
                 </Modal>
-
+                <h2 style={{marginTop: 15}}>
+                    杠杆审核
+                </h2>
                 <BreadcrumbCustom first="审核管理" second="杠杆审核"/>
                 {/*<Button onClick={() => this.seeDetail()}*/}
                 {/*>详情:{this.state.count}</Button>*/}

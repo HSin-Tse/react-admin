@@ -396,8 +396,10 @@ class PassOpenD extends Component {
                 {/*<div>isNeedSave :{this.state.isNeedSave.toString()}</div>*/}
                 {/*<div>waitUpdate :{JSON.stringify(this.state.waitUpdate)}</div>*/}
                 <div>this.state.availableFlag :{JSON.stringify(this.state.availableFlag)}</div>
-
-                <BreadcrumbCustom first="审核管理" second="开户审核"/>
+                <h2 style={{marginTop: 15}}>
+                    开户信息详情
+                </h2>
+                <BreadcrumbCustom first="审核管理" second="开户信息详情"/>
                 <Card disabled={true} title="IX账户审核 " bordered={true}>
 
                     <Row gutter={1}>
