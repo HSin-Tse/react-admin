@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import {DatePicker, Input, Modal, Button, Table, message, Card, Layout, Icon, Select, Col, Row} from 'antd';
+import {DatePicker, Input, Modal, Button, Table, message, Card, Icon} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
-import {ThemePicker} from '@/components/widget';
 import classNames from "classnames";
 
 const {RangePicker} = DatePicker;
@@ -27,6 +26,7 @@ export default class WhiteList extends Component {
             NameCn: "",
             phoneCn: "",
             changeNoteV: "",
+            switcherOn: true,
         };
     }
 
@@ -88,20 +88,12 @@ export default class WhiteList extends Component {
     }
 
     handleremove = (record) => {
-
-        let self = this
         window.Axios.post('auth/removeWhiteUser', {
             'id': record.id//
         }).then((response) => {
-
             message.success('操作成功')
             this.requestPageA()//1:合规 2:开户 3:交易
-
-
-        }).catch(function (error) {
-            console.log(error);
         });
-
     };
 
     handleremoveSelect = () => {
@@ -114,7 +106,7 @@ export default class WhiteList extends Component {
             selectTimeStart: '',
             selectTimeEnd: ''
         }, () => {
-            self.searchSelect()
+            self.requestPageA()
         })
     };
 
@@ -140,8 +132,6 @@ export default class WhiteList extends Component {
                 loadingA: false
             });
 
-        }).catch(function (error) {
-            console.log(error);
         });
     }
 
@@ -166,48 +156,25 @@ export default class WhiteList extends Component {
         this.setState({selectedRowKeys});
     }
 
-    state = {
-        switcherOn: true,
-        background: localStorage.getItem('@primary-color') || '#313653',
-    }
+
     _switcherOn = () => {
         this.setState({
             switcherOn: !this.state.switcherOn
         })
     };
-    _handleChangeComplete = color => {
-        console.log(color);
-        this.setState({background: color.hex});
-        localStorage.setItem('@primary-color', color.hex);
-        window.less.modifyVars({
-            '@primary-color': color.hex,
-        })
-    };
 
-    onChangeMail = (e) => {
-        this.setState({
-            selectMail: e.target.value,
-        });
-    }
 
     onChangeID = (e) => {
         this.setState({
             selectID: e.target.value,
         });
     }
-    searchSelect = () => {
-        this.requestPageA()//1:合规 2:开户 3:交易
-
-    }
 
     onChangeDate = (value, dateString) => {
     }
     changeNote = (e) => {
-
-
         this.setState({
             changeNoteV: e.target.value,
-
         });
     }
     onOk = (value) => {
@@ -236,57 +203,29 @@ export default class WhiteList extends Component {
     }
 
     handleOk = (e) => {
-        // this.addWhite()
         let self = this
         window.Axios.post('auth/addWhiteUser', {
             name: this.state.NameCn,
             mobile: this.state.phoneCn,
             content: this.state.changeNoteV,
         }).then((response) => {
-            console.log('hcia response', response)
-            self.searchSelect()
-
-
-        }).catch(function (error) {
-            console.log(error);
+            self.requestPageA()//1:合规 2:开户 3:交易
         });
-        // this.setState({
-        //     showModaladdWhite: false,
-        // });
     }
     handleremoveList = () => {
 
-        let self = this
         window.Axios.post('auth/removeWhiteUserBulk', {
             'idList': this.state.selectedRowKeys//1:合规 2:开户 3:交易
         }).then((response) => {
 
             message.success('操作成功')
-            this.requestPageA()//1:合规 2:开户 3:交易
-
-
-        }).catch(function (error) {
-            console.log(error);
+            this.requestPageA()
         });
 
     };
 
-    handleCancel = (e) => {
-        console.log(e);
-        this.setState({
-            showModaladdWhite: false,
-        });
-    }
 
     render() {
-
-        const {loading, selectedRowKeys} = this.state;
-        const hasSelected = selectedRowKeys.length > 0;
-        const rowSelection = {
-            selectedRowKeys,
-            onChange: this.onSelectChange,
-        };
-        const {switcherOn, background} = this.state;
 
         return (
 
@@ -296,11 +235,14 @@ export default class WhiteList extends Component {
                     title="新增白名单成员"
                     visible={this.state.showModaladdWhite}
                     onOk={this.handleOk}
-                    onCancel={this.handleCancel}
+                    onCancel={(e) => {
+                        this.setState({
+                            showModaladdWhite: false,
+                        });
+                    }}
                 >
 
                     <Card bordered={true}>
-
 
                         <div style={{display: 'flex', minHeight: 40}}>
                             <span style={{width: 120}}>*用户姓名：</span>
@@ -330,10 +272,10 @@ export default class WhiteList extends Component {
                 </Modal>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 {/*<div>nowKey :{this.state.nowKey}</div>*/}
-                {/*<div>selectMail :{this.state.selectMail}</div>*/}
+                <div>selectMail :{this.state.selectMail}</div>
                 {/*<div>selectPhone :{this.state.selectPhone}</div>*/}
                 {/*<div>changeNoteV :{this.state.changeNoteV}</div>*/}
-                <div className={classNames('switcher dark-white', {active: switcherOn})}>
+                <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
                 <span className="sw-btn dark-white" onClick={this._switcherOn}>
                     <Icon type="setting" className="text-dark"/>
                 </span>
@@ -343,7 +285,11 @@ export default class WhiteList extends Component {
                               extra={<Button type="primary" onClick={() => this.handleremoveSelect()}
                               >清除條件</Button>}
                         >
-                            <Input onChange={this.onChangeMail} style={{marginBottom: 5}} placeholder="邮箱"/>
+                            <Input onChange={(e) => {
+                                this.setState({
+                                    selectMail: e.target.value,
+                                });
+                            }} style={{marginBottom: 5}} placeholder="邮箱"/>
                             <Input value={this.state.selectPhone} onChange={this.onChangePhone}
                                    style={{marginBottom: 5}} placeholder="手机号"/>
                             <Input onChange={this.onChangeID} style={{marginBottom: 5}} placeholder="身份证号"/>
@@ -357,7 +303,7 @@ export default class WhiteList extends Component {
                                 onOk={this.onOk}
                             />
 
-                            <Button onClick={() => this.searchSelect()} style={{marginTop: 10}} type="primary"
+                            <Button onClick={() => this.requestPageA()} style={{marginTop: 10}} type="primary"
                                     icon="search">Search</Button>
 
                         </Card>
@@ -372,38 +318,24 @@ export default class WhiteList extends Component {
 
                 <Card
                     bodyStyle={{padding: 0, margin: 0}}
-
                     title={<div>白名单</div>}
                     extra={<Button onClick={() => this.showModal()}>新增白名单用户</Button>}
                 >
-                    {/*<Button*/}
-                    {/*type="primary"*/}
-                    {/*onClick={() => this.handleremoveList()}*/}
-                    {/*disabled={!hasSelected}*/}
-                    {/*loading={loading}*/}
-                    {/*>*/}
-                    {/*批量移除*/}
-                    {/*</Button>*/}
                     <Table rowKey="id"
                            bordered
                            columns={this.columns}
                            dataSource={this.state.bklistA}
                            scroll={{x: 1300}}
                            loading={this.state.loading}
-                           pagination={{  // 分页
+                           pagination={{
                                total: this.state.totalpageA * this.state.pgsize,
                                pageSize: this.state.pgsize,
                                onChange: this.changePageA,
                            }}
                     />
                 </Card>
-
-
             </div>
-
         )
     }
-
-
 }
 
