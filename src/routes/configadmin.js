@@ -36,7 +36,7 @@ export default {
             tk: 'SERVICE_GROUP_MGMT', key: '/app/trade', title: '交易管理', icon: 'safety',
             subs: [
                 {tk: 'SERVICE_GROUP_MGMT', key: '/app/trade/account', title: '交易账户管理', component: 'TradeAccount'},
-                {tk: 'SERVICE_GROUP_MGMT', key: '/app/trade/depart', title: '組管理', component: 'TradeDepart'},
+                // {tk: 'SERVICE_GROUP_MGMT', key: '/app/trade/depart', title: '組管理', component: 'TradeDepart'},
             ],
         },
 

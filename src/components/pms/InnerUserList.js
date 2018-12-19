@@ -38,22 +38,18 @@ class InnerUserList extends Component {
             pgsize: 10,
             loadFor: false,
             suspend_reason_type: []
-
         };
     }
 
     handleFreeze = (record) => {
         let self = this;
 
-
         self.setState({
                 blockFlag: record.blockFlag
             }, () => {
                 this.showModalFrezz()
-                console.log('hcia record', record)
             }
         );
-
 
     }
 
@@ -62,23 +58,18 @@ class InnerUserList extends Component {
         let self = this;
         window.Axios.post('dict/openDict', {
             'keys': 'suspend_reason_type',
-        }).then(function (response) {
+        }).then((response) => {
             console.log(response);
 
             self.setState({
                     suspend_reason_type: response.data.data.suspend_reason_type
                 }
             );
-
-
-        }).catch(function (error) {
-            console.log(error);
         });
 
         this.columns = [
             {
                 title: '编号',
-                fixed: 'left',
                 width: 70,
                 align: 'center',
                 dataIndex: '编号',
@@ -187,7 +178,6 @@ class InnerUserList extends Component {
             }, {
                 title: '日志',
                 dataIndex: '日志',
-                fixed: 'right',
                 align: 'center',
                 width: 120,
                 key: '日志',
@@ -198,7 +188,6 @@ class InnerUserList extends Component {
 
                 title: '操作',
                 key: 'action',
-                fixed: 'right',
                 align: 'center',
                 width: 200,
                 render: (text, record) => (
@@ -221,7 +210,10 @@ class InnerUserList extends Component {
                 dataIndex: '日期',
                 key: '日期',
                 render: (text, record) => (
-                    <span>{this.timestampToTime(record.createDate)}</span>)
+                    <span>{record.createDate}</span>
+                    // <span>{this.timestampToTime(record.createDate)}</span>
+                )
+
             },
             {
                 title: '备注',
@@ -417,11 +409,9 @@ class InnerUserList extends Component {
 
     render() {
         const {getFieldDecorator} = this.props.form;
-
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
-                {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
 
                 <Modal
                     width={600}
@@ -457,7 +447,7 @@ class InnerUserList extends Component {
                                 onChange={this.changeScret} placeholder="請輸入你的密碼加以驗證:" type="password"/>
                         )}
                     </div>
-                    
+
                     <Table
 
                         style={{marginTop: 15}}
@@ -466,15 +456,13 @@ class InnerUserList extends Component {
                         dataSource={this.state.nodeList}// nodeList
                     />
 
-
                 </Modal>
 
                 <Modal
                     title="备注详情"
                     onCancel={this.handleCancel}
                     visible={this.state.visible}
-                    footer=''
-                >
+                    footer=''>
                     <div>
                         <h3>处理备注：</h3>
 
@@ -492,9 +480,10 @@ class InnerUserList extends Component {
                 <BreadcrumbCustom first="权限管理" second="内部成员配置"/>
 
                 <Card title="内部成员列表"
+                      bodyStyle={{padding: 0, margin: 0}}
+
                       extra={
-                          <Button type="default"
-                                  onClick={() => this.newUSer()}>新增
+                          <Button type="default" onClick={() => this.newUSer()}>新增
                           </Button>
                       }>
 

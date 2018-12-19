@@ -396,6 +396,8 @@ class Basic extends Component {
                 <BreadcrumbCustom first="权限管理" second="角色配置"/>
 
                 <Card title="角色配置表"
+                      bodyStyle={{padding: 0, margin: 0}}
+
                       extra={<Button type="default" onClick={() => this.addRole()}>新增</Button>}>
                     <Table
 
@@ -403,6 +405,7 @@ class Basic extends Component {
 
                         columns={this.columns}
                         dataSource={this.state.userList}
+                        scroll={{x: 1300}}
 
                         bordered
                         loading={this.state.loading}

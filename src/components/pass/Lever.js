@@ -152,7 +152,6 @@ class Basic extends Component {
         this.columns = [
             {
                 title: '手机号',
-                fixed: 'left',
                 width: 150,
                 dataIndex: '手机号',
                 key: '手机号',
@@ -230,7 +229,6 @@ class Basic extends Component {
             }, {
                 title: '操作',
                 key: 'action',
-                fixed: 'right',
                 align: 'center',
                 width: 200,
                 render: (text, record) => (
@@ -469,6 +467,8 @@ class Basic extends Component {
 
 
                 <Card title="杠杆审核"
+                      bodyStyle={{padding: 0, margin: 0}}
+
                 >
 
                     <Table rowKey="id"

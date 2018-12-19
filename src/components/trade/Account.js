@@ -420,6 +420,8 @@ class Basic extends Component {
                 <BreadcrumbCustom first="审核管理" second="交易账户管理"/>
 
                 <Card title="交易账户管理"
+                      bodyStyle={{padding: 0, margin: 0}}
+
                       extra={
                           <Button type="default" disabled={!hasSelected}
                                   onClick={() => this.refleshNowpage()}>刷新当前页面
