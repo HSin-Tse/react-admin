@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {DatePicker, Input, Modal, Button, Table, Tabs, message, Card, Layout, Icon} from 'antd';
+import {DatePicker, Input, Modal, Button, Table, message, Card, Layout, Icon} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {ThemePicker} from '@/components/widget';
 import classNames from "classnames";
 
+const {RangePicker} = DatePicker;
 
 export default class CustomerSummary extends Component {
 
@@ -160,29 +161,71 @@ export default class CustomerSummary extends Component {
 
     render() {
 
-        const {switcherOn} = this.state;
 
         return (
 
             <div>
                 {/*<div>selectMail :{this.state.selectMail}</div>*/}
-                <div className={classNames('switcher dark-white', {active: switcherOn})}>
-					<span className="sw-btn dark-white" onClick={this._switcherOn}>
-						<Icon type="setting" className="text-dark"/>
-					</span>
-                    <div>
-                        <Card title="當前表搜索"
-                              extra={<Button type="primary" onClick={() => this.handleremoveList()}>清除條件</Button>}>
-                            <Input onChange={this.onChangeMail} style={{marginBottom: 5}} placeholder="邮箱"/>
-                            <Input onChange={this.onChangePhone} style={{marginBottom: 5}} placeholder="手机号"/>
-                            <Input onChange={this.onChangeID} style={{marginBottom: 5}} placeholder="身份证号"/>
-                            <Input onChange={this.onChangeAccount} style={{marginBottom: 5}} placeholder="账户"/>
-                            <Input onChange={this.onChangeKeyWord} style={{marginBottom: 5}} placeholder="关键词"/>
-                            <Button onClick={() => this.searchSelect()} style={{marginTop: 10}} type="primary"
-                                    icon="search"
-                            >Search</Button>
+                <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
+                    <span className="sw-btn dark-white" onClick={this._switcherOn}>
+                     <Icon type="setting" className="text-dark"/>
+                    </span>
+                    <div style={{width: 270}}>
+
+                        <Card
+                            title="當前表搜索"
+                            extra={<Button type="primary" onClick={() => {
+                                let self = this
+                                this.setState({
+                                    selectMail: '',
+                                    selectID: '',
+                                    startTime: '',
+                                    selectPhoneF: '',
+                                    selectTimeStart: '',
+                                    selectTimeEnd: ''
+                                }, () => {
+                                    self.requestData()
+                                })
+                            }}
+                            >清除條件</Button>}
+                        >
+                            <Input onChange={(e) => {
+                                this.setState({selectMail: e.target.value})
+                            }} style={{marginBottom: 5}} placeholder="邮箱"/>
+
+                            <Input onChange={(e) => {
+                                this.setState({
+                                    selectPhoneF: e.target.value,
+                                });
+                            }} style={{marginBottom: 5}} placeholder="手机号"/>
+
+
+                            <Input onChange={(e) => {
+                                this.setState({
+                                    selectID: e.target.value,
+                                });
+                            }} style={{marginBottom: 5}} placeholder="身份证号"/>
+
+                            <Input onChange={(e) => {
+                                this.setState({
+                                    starClientAccount: e.target.value,
+                                });
+                            }} style={{marginBottom: 5}} placeholder="账户"/>
+                            <RangePicker
+                                style={{width: '100%'}}
+                                showTime={{format: 'YYYY-MM-DD HH:mm:ss'}}
+                                format="YYYY-MM-DD HH:mm:ss fff"
+                                placeholder={['Start Time', 'End Time']}
+                                onChange={this.onChangeDate}
+                                onOk={this.onOk}
+                            />
+
+                            <Button onClick={() => this.requestData()} style={{marginTop: 10}} type="primary"
+                                    icon="search">Search</Button>
 
                         </Card>
+
+
                     </div>
                 </div>
                 <h2 style={{marginTop: 15}}>
@@ -299,13 +342,15 @@ export default class CustomerSummary extends Component {
         window.Axios.post('ixuser/getUserList', {
             pageNo: this.state.currentA,
             'listType': 4,
-            // 'nationalId': this.state.selectID,
-            // 'startTime': this.state.selectTimeStart,
-            // 'endTime': this.state.selectTimeEnd,
             'pageSize': this.state.pgsize,
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            starClientAccount: this.state.starClientAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
 
         }).then((response) => {
-            console.log("ggggg", response.data.data)
 
             console.log('hcia response', response)
             self.setState({

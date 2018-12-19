@@ -18,16 +18,16 @@ export default class WhiteList extends Component {
             pgsize: 10,
             loadingA: false,
             showModaladdWhite: false,
-            selectMail: "",
             selectPhone: "",
-            selectPhoneF: "",
-            selectID: "",
-            selectTimeStart: "",
-            selectTimeEnd: "",
+            // selectMail: "",
+            // selectPhoneF: "",
+            // selectID: "",
+            // selectTimeStart: "",
+            // selectTimeEnd: "",
             NameCn: "",
             phoneCn: "",
             changeNoteV: "",
-            switcherOn: true,
+            // switcherOn: true,
         };
     }
 
@@ -97,20 +97,6 @@ export default class WhiteList extends Component {
         });
     };
 
-    handleremoveSelect = () => {
-        let self = this
-        this.setState({
-            selectMail: '',
-            selectID: '',
-            startTime: '',
-            selectPhoneF: '',
-            selectTimeStart: '',
-            selectTimeEnd: ''
-        }, () => {
-            self.requestPageA()
-        })
-    };
-
 
     requestPageA = () => {
         let self = this
@@ -120,13 +106,14 @@ export default class WhiteList extends Component {
 
         var param = {}
         window.Axios.post('auth/getWhiteList', {
-            pageNo: this.state.current,
+            'pageNo': this.state.current,
             'pageSize': this.state.pgsize,
-            'email': this.state.selectMail,
-            'mobile': this.state.selectPhoneF,
-            'nationalId': this.state.selectID,
-            'startTime': this.state.selectTimeStart,
-            'endTime': this.state.selectTimeEnd,
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            starClientAccount: this.state.starClientAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
         }).then((response) => {
             self.setState({
                 totalpageA: response.data.data.totalPage,
@@ -173,27 +160,13 @@ export default class WhiteList extends Component {
     }
 
     onChangeDate = (value, dateString) => {
+        
+        console.log('hcia value' , value)
+        console.log('hcia dateString' , dateString)
     }
     changeNote = (e) => {
         this.setState({
             changeNoteV: e.target.value,
-        });
-    }
-    onOk = (value) => {
-        console.log('hcia', 'onOk: ', value);
-
-
-        var selectTimeStart = value[0].unix() + '000'
-        var selectTimeEnd = value[1].unix() + '000'
-
-        console.log('hcia selectTimeStart', selectTimeStart)
-        console.log('hcia selectTimeEnd', selectTimeEnd)
-
-
-        this.setState({
-            selectTimeStart: selectTimeStart,
-            selectTimeEnd: selectTimeEnd,
-
         });
     }
 
@@ -272,28 +245,43 @@ export default class WhiteList extends Component {
 
                     </Card>
                 </Modal>
-                <div>selectMail :{this.state.selectMail}</div>
-                <div>selectID :{this.state.selectID}</div>
-                <div>selectPhoneF :{this.state.selectPhoneF}</div>
-                <div>changeNoteV :{this.state.changeNoteV}</div>
-                <div>selectTimeStart :{this.state.selectTimeStart}</div>
-                <div>selectTimeEnd :{this.state.selectTimeEnd}</div>
-
+                {/*<div>selectMail :{this.state.selectMail}</div>*/}
+                {/*<div>selectID :{this.state.selectID}</div>*/}
+                {/*<div>starClientAccount :{this.state.starClientAccount}</div>*/}
+                {/*<div>selectPhoneF :{this.state.selectPhoneF}</div>*/}
+                {/*<div>changeNoteV :{this.state.changeNoteV}</div>*/}
+                {/*<div>selectTimeStart :{this.state.selectTimeStart}</div>*/}
+                {/*<div>selectTimeEnd :{this.state.selectTimeEnd}</div>*/}
 
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
-                <span className="sw-btn dark-white" onClick={this._switcherOn}>
-                    <Icon type="setting" className="text-dark"/>
-                </span>
-                    <div style={{width:270}}>
+                    <span className="sw-btn dark-white" onClick={this._switcherOn}>
+                     <Icon type="setting" className="text-dark"/>
+                    </span>
+                    <div style={{width: 270}}>
 
                         <Card
                             title="當前表搜索"
-                              extra={<Button type="primary" onClick={() => this.handleremoveSelect()}
-                              >清除條件</Button>}
+                            extra={<Button type="primary" onClick={() => {
+                                let self = this
+                                this.setState({
+                                    selectMail: '',
+                                    selectID: '',
+                                    startTime: '',
+                                    selectPhoneF: '',
+                                    starClientAccount: '',
+                                    selectTimeStart: '',
+                                    selectTimeEnd: '',
+                                    filterTimeFalue: null
+                                }, () => {
+                                    self.requestPageA()
+                                })
+                            }}
+                            >清除條件</Button>}
                         >
-                            <Input onChange={(e) => {
+                            <Input value={this.state.selectMail} onChange={(e) => {
                                 this.setState({selectMail: e.target.value})
                             }} style={{marginBottom: 5}} placeholder="邮箱"/>
+
                             <Input value={this.state.selectPhoneF} onChange={(e) => {
                                 this.setState({
                                     selectPhoneF: e.target.value,
@@ -301,20 +289,42 @@ export default class WhiteList extends Component {
                             }} style={{marginBottom: 5}} placeholder="手机号"/>
 
 
-                            <Input onChange={(e) => {
+                            <Input value={this.state.selectID} onChange={(e) => {
                                 this.setState({
                                     selectID: e.target.value,
                                 });
                             }} style={{marginBottom: 5}} placeholder="身份证号"/>
-                            <Input onChange={this.onChangeAccount} style={{marginBottom: 5}} placeholder="账户"/>
-                            <Input onChange={this.onChangeKeyWord} style={{marginBottom: 5}} placeholder="关键词"/>
+
+                            <Input value={this.state.starClientAccount} onChange={(e) => {
+                                this.setState({
+                                    starClientAccount: e.target.value,
+                                });
+                            }} style={{marginBottom: 5}} placeholder="账户"/>
                             <RangePicker
                                 style={{width: '100%'}}
                                 showTime={{format: 'YYYY-MM-DD HH:mm:ss'}}
                                 format="YYYY-MM-DD HH:mm:ss fff"
-                                placeholder={['Start Time', 'End Time']}
-                                onChange={this.onChangeDate}
-                                onOk={this.onOk}
+                                placeholder={['開始時間', '結束時間']}
+                                // onChange={this.onChangeDate}
+                                // value={this.state.filterTimeFalue}
+                                onOk={(value) => {
+                                    console.log('hcia', 'onOk: ', value);
+
+
+                                    var selectTimeStart = value[0].unix() + '000'
+                                    var selectTimeEnd = value[1].unix() + '000'
+
+                                    console.log('hcia selectTimeStart', selectTimeStart)
+                                    console.log('hcia selectTimeEnd', selectTimeEnd)
+
+
+                                    this.setState({
+                                        filterTimeFalue: value,
+                                        selectTimeStart: selectTimeStart,
+                                        selectTimeEnd: selectTimeEnd,
+
+                                    });
+                                }}
                             />
 
                             <Button onClick={() => this.requestPageA()} style={{marginTop: 10}} type="primary"
@@ -325,8 +335,6 @@ export default class WhiteList extends Component {
 
                     </div>
                 </div>
-
-
                 <h2 style={{marginTop: 15}}>
                     白名单
                 </h2>
