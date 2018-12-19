@@ -306,7 +306,7 @@ export default class PotentialUser extends Component {
                     <div>
                         <Popconfirm title="延期申请？" onConfirm={() => this.handleDelay(record)} okText="Yes"
                                     cancelText="No">
-                            <Button className="ant-dropdown-link" >延期</Button>
+                            <Button className="ant-dropdown-link">延期</Button>
 
                         </Popconfirm>
 
@@ -603,19 +603,10 @@ export default class PotentialUser extends Component {
             'pageSize': this.state.pgsize,
 
         }).then((response) => {
-            console.log("ggggg", response.data.data)
             self.setState({
                 totalpageA: response.data.data.totalPage,
                 bklistA: response.data.data.list,
                 loadingA: false
-
-            }, () => {
-                console.log('yyx requestPageA state.bklistA', self.state.bklistA)
-                // var tags = Object.keys(self.state.bklistA[0])
-                // console.log('hcia tags', tags)
-                // self.setState({
-                //     mTags: tags
-                // })
 
             });
 

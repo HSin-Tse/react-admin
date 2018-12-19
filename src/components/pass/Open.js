@@ -43,20 +43,18 @@ class Basic extends Component {
         var self = this;
 
 
-
-
         if (localStorage.getItem('infor')) {
 
 
             var menuInfor = JSON.parse(localStorage.getItem('infor'))
 
 
-            if(menuInfor.superFlag===1){
+            if (menuInfor.superFlag === 1) {
                 self.setState({
                     availableFlag: true,
                     isCanOP: 1
                 });
-            }else{
+            } else {
                 var isCanOp = menuInfor.menuList.find((item) => {
                     console.log('hcia  this.props', this.props)
                     return this.props.tk === item.key;
@@ -69,10 +67,6 @@ class Basic extends Component {
                     isCanOP: isCanOp.availableFlag
                 });
             }
-
-            // console.log('hcia menuInfor', menuInfor.menuList)
-            // console.log('hcia  this.props', this.props)
-
 
 
         }
@@ -150,7 +144,7 @@ class Basic extends Component {
                     <span>{record.comment}</span>),
             }, {
                 title: '操作',
-                key: 'action',
+                key: '操作',
                 fixed: 'right',
                 width: 300,
                 align: 'center',
@@ -170,22 +164,14 @@ class Basic extends Component {
     }
 
     handleEdit = (record) => {
-        // message()
-
 
         if (this.state.availableFlag) {
-
             this.props.history.push('/app/pass/passopen/detail' + record.id)
             return
-
         }
 
-        console.log('hcia record.status', record.status)
-        //
 
         var gogo = record.status === 0 ? 'detail' : (record.status === 1) ? 'user' : 'user'
-
-
         this.props.history.push('/app/pass/passopen/' + gogo + record.id)
     };
 

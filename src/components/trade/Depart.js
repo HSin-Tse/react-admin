@@ -182,7 +182,7 @@ export default class Basic extends Component {
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
-                <div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>
+                {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
 
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
 
