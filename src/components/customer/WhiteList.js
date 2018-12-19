@@ -20,6 +20,7 @@ export default class WhiteList extends Component {
             showModaladdWhite: false,
             selectMail: "",
             selectPhone: "",
+            selectPhoneF: "",
             selectID: "",
             selectTimeStart: "",
             selectTimeEnd: "",
@@ -102,7 +103,7 @@ export default class WhiteList extends Component {
             selectMail: '',
             selectID: '',
             startTime: '',
-            selectPhone: '',
+            selectPhoneF: '',
             selectTimeStart: '',
             selectTimeEnd: ''
         }, () => {
@@ -116,27 +117,28 @@ export default class WhiteList extends Component {
         self.setState({
             loadingA: true
         })
+
+        var param = {}
         window.Axios.post('auth/getWhiteList', {
             pageNo: this.state.current,
-            'listType': 1,//1:合规 2:开户 3:交易
+            'pageSize': this.state.pgsize,
             'email': this.state.selectMail,
+            'mobile': this.state.selectPhoneF,
             'nationalId': this.state.selectID,
             'startTime': this.state.selectTimeStart,
             'endTime': this.state.selectTimeEnd,
-            'mobile': this.state.selectPhone,
-            'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
         }).then((response) => {
             self.setState({
                 totalpageA: response.data.data.totalPage,
                 bklistA: response.data.data.list,
                 loadingA: false
             });
-
         });
     }
 
 
     changePageA = (page) => {
+        page = page - 1
         this.setState({
             currentA: page,
         }, () => {
@@ -270,32 +272,44 @@ export default class WhiteList extends Component {
 
                     </Card>
                 </Modal>
-                {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
-                {/*<div>nowKey :{this.state.nowKey}</div>*/}
                 <div>selectMail :{this.state.selectMail}</div>
-                {/*<div>selectPhone :{this.state.selectPhone}</div>*/}
-                {/*<div>changeNoteV :{this.state.changeNoteV}</div>*/}
+                <div>selectID :{this.state.selectID}</div>
+                <div>selectPhoneF :{this.state.selectPhoneF}</div>
+                <div>changeNoteV :{this.state.changeNoteV}</div>
+                <div>selectTimeStart :{this.state.selectTimeStart}</div>
+                <div>selectTimeEnd :{this.state.selectTimeEnd}</div>
+
+
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
                 <span className="sw-btn dark-white" onClick={this._switcherOn}>
                     <Icon type="setting" className="text-dark"/>
                 </span>
-                    <div>
+                    <div style={{width:270}}>
 
-                        <Card title="當前表搜索"
+                        <Card
+                            title="當前表搜索"
                               extra={<Button type="primary" onClick={() => this.handleremoveSelect()}
                               >清除條件</Button>}
                         >
                             <Input onChange={(e) => {
-                                this.setState({
-                                    selectMail: e.target.value,
-                                });
+                                this.setState({selectMail: e.target.value})
                             }} style={{marginBottom: 5}} placeholder="邮箱"/>
-                            <Input value={this.state.selectPhone} onChange={this.onChangePhone}
-                                   style={{marginBottom: 5}} placeholder="手机号"/>
-                            <Input onChange={this.onChangeID} style={{marginBottom: 5}} placeholder="身份证号"/>
+                            <Input value={this.state.selectPhoneF} onChange={(e) => {
+                                this.setState({
+                                    selectPhoneF: e.target.value,
+                                });
+                            }} style={{marginBottom: 5}} placeholder="手机号"/>
+
+
+                            <Input onChange={(e) => {
+                                this.setState({
+                                    selectID: e.target.value,
+                                });
+                            }} style={{marginBottom: 5}} placeholder="身份证号"/>
                             <Input onChange={this.onChangeAccount} style={{marginBottom: 5}} placeholder="账户"/>
                             <Input onChange={this.onChangeKeyWord} style={{marginBottom: 5}} placeholder="关键词"/>
                             <RangePicker
+                                style={{width: '100%'}}
                                 showTime={{format: 'YYYY-MM-DD HH:mm:ss'}}
                                 format="YYYY-MM-DD HH:mm:ss fff"
                                 placeholder={['Start Time', 'End Time']}
@@ -311,6 +325,8 @@ export default class WhiteList extends Component {
 
                     </div>
                 </div>
+
+
                 <h2 style={{marginTop: 15}}>
                     白名单
                 </h2>
