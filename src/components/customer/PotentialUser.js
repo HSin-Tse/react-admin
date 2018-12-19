@@ -102,8 +102,6 @@ export default class PotentialUser extends Component {
                 title: '序号',
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
-                width: 70,
-                fixed: 'left',
                 align: 'center',
                 render: (text, record, index) => (
                     <span>{this.state.currentA * this.state.pgsize + index + 1}</span>
@@ -112,8 +110,6 @@ export default class PotentialUser extends Component {
                 title: '手机号',
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
-                width: 160,
-                fixed: 'left',
                 align: 'center',
                 render: (text, record) => (
 
@@ -122,21 +118,18 @@ export default class PotentialUser extends Component {
                 ),
             }, {
                 title: 'APP版本',
-                width: 120,
                 dataIndex: 'APP版本',
                 key: 'APP版本',
                 align: 'center',
                 render: (text, record) => (
                     <span>{record.versionInfo}</span>),
             }, {
-                width: 120,
                 title: '手机型号',
                 dataIndex: '手机型号',
                 key: '手机型号',
                 align: 'center',
                 render: (text, record) => (<span>{record.clientInfo}</span>),
             }, {
-                width: 130,
 
                 title: '操作系统型号',
                 dataIndex: '操作系统型号',
@@ -144,14 +137,14 @@ export default class PotentialUser extends Component {
                 align: 'center',
                 render: (text, record) => (<span>{record.systemInfo}</span>),
             }, {
-                width: 160,
                 title: '注册时间',
                 dataIndex: '注册时间',
                 key: '注册时间',
                 align: 'center',
+                width: 150,
+
                 render: (text, record) => (<span>{record.date}</span>),
             }, {
-                width: 120,
                 title: '下载平台',
                 dataIndex: '下载平台',
                 key: '下载平台',
@@ -159,7 +152,6 @@ export default class PotentialUser extends Component {
                 render: (text, record) => (
                     <span>{record.channelInfo}</span>),
             }, {
-                width: 120,
                 title: '地理位置',
                 dataIndex: '地理位置',
                 key: '地理位置',
@@ -167,7 +159,6 @@ export default class PotentialUser extends Component {
                 render: (text, record) => (
                     <span>{record.location}</span>),
             }, {
-                width: 120,
                 title: '回访状态',
                 dataIndex: '回访状态',
                 key: '回访状态',
@@ -176,7 +167,6 @@ export default class PotentialUser extends Component {
 
             }, {
                 title: '备注',
-                width: 120,
 
                 dataIndex: '备注',
                 key: '备注',
@@ -184,7 +174,6 @@ export default class PotentialUser extends Component {
                 render: (text, record) => (
                     <span>{record.comment}</span>),
             }, {
-                width: 130,
                 title: '操作人',
                 dataIndex: '操作人',
                 key: '操作人',
@@ -195,9 +184,7 @@ export default class PotentialUser extends Component {
 
                 title: '操作',
                 key: 'action',
-                fixed: 'right',
                 align: 'center',
-                width: 250,
                 render: (text, record) => (
 
                     <div>
@@ -215,8 +202,6 @@ export default class PotentialUser extends Component {
                 title: '序号',
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
-                width: 70,
-                fixed: 'left',
                 align: 'center',
                 render: (text, record, index) => (
                     <span>{this.state.currentB * this.state.pgsize + index + 1}</span>
@@ -226,8 +211,6 @@ export default class PotentialUser extends Component {
                 title: '手机号',
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
-                width: 150,
-                fixed: 'left',
                 align: 'center',
                 render: (text, record) => (
                     <span>{record.mobile}</span>
@@ -235,7 +218,6 @@ export default class PotentialUser extends Component {
             }, {
                 title: '模拟账号',
                 dataIndex: '模拟账号',
-                width: 150,
 
                 key: '模拟账号',
                 render: (text, record) => (
@@ -243,7 +225,7 @@ export default class PotentialUser extends Component {
             }, {
                 title: '绑定时间',
                 dataIndex: '绑定时间',
-                width: 120,
+                width: 150,
 
                 key: '绑定时间',
                 render: (text, record) => (<span>{record.date}</span>),
@@ -251,19 +233,16 @@ export default class PotentialUser extends Component {
                 title: '剩余天数',
                 dataIndex: '剩余天数',
                 key: '剩余天数',
-                width: 120,
 
                 render: (text, record) => (<span>{record.remainDay}</span>),
             }, {
                 title: '模拟账户状态',
-                width: 150,
 
                 dataIndex: '模拟账户状态',
                 key: '模拟账户状态',
                 render: (text, record) => (<span>{record.expireStatus}</span>),
             }, {
                 title: '延期次数',
-                width: 100,
 
                 dataIndex: '延期次数',
                 key: '延期次数',
@@ -271,13 +250,11 @@ export default class PotentialUser extends Component {
             }, {
                 title: '回访状态',
                 dataIndex: '回访状态',
-                width: 120,
 
                 key: '回访状态',
                 render: (text, record) => (<span>{record.feebackStatus}</span>),
             }, {
                 title: '备注',
-                width: 120,
 
                 dataIndex: '备注',
                 key: '备注',
@@ -286,12 +263,10 @@ export default class PotentialUser extends Component {
                 title: '活跃程度',
                 dataIndex: '活跃程度',
                 key: '活跃程度',
-                width: 120,
 
                 render: (text, record) => (<span>{'ssssss'}</span>),
             }, {
                 title: '操作人',
-                width: 130,
 
                 dataIndex: '操作人',
                 key: '操作人',
@@ -299,8 +274,6 @@ export default class PotentialUser extends Component {
             }, {
                 title: '操作',
                 key: 'action',
-                fixed: 'right',
-                width: 300,
                 align: 'center',
                 render: (text, record) => (
                     <div>
@@ -323,8 +296,6 @@ export default class PotentialUser extends Component {
                 title: '序号',
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
-                width: 70,
-                fixed: 'left',
                 align: 'center',
                 render: (text, record, index) => (
                     <span>{this.state.currentC * this.state.pgsize + index + 1}</span>
@@ -334,8 +305,6 @@ export default class PotentialUser extends Component {
                 title: '手机号',
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
-                width: 160,
-                fixed: 'left',
                 align: 'center',
                 render: (text, record) => (
 
@@ -346,7 +315,6 @@ export default class PotentialUser extends Component {
                 title: '姓名',
                 dataIndex: 'name',
                 key: 'name',
-                width: 120,
 
                 align: 'center',
                 render: (text, record) => (
@@ -355,7 +323,6 @@ export default class PotentialUser extends Component {
                 title: '当前账户',
                 dataIndex: '当前账户',
                 key: '当前账户',
-                width: 120,
 
                 align: 'center',
                 render: (text, record) => (<span>{record.accountType}</span>),
@@ -363,14 +330,13 @@ export default class PotentialUser extends Component {
                 title: '模拟帐号',
                 dataIndex: '模拟帐号',
                 key: '模拟帐号',
-                width: 120,
 
                 align: 'center',
                 render: (text, record) => (<span>{record.accountNo}</span>),
             }, {
                 title: '录入信息时间',
                 dataIndex: '录入信息时间',
-                width: 160,
+                width: 150,
 
                 key: '录入信息时间',
                 align: 'center',
@@ -379,7 +345,6 @@ export default class PotentialUser extends Component {
                 title: '活跃度',
                 dataIndex: '活跃度',
                 key: '活跃度',
-                width: 110,
 
                 align: 'center',
                 render: (text, record) => (<span>{record.activeFlag}</span>),
@@ -387,7 +352,6 @@ export default class PotentialUser extends Component {
                 title: '回访状态',
                 dataIndex: '回访状态',
                 key: '回访状态',
-                width: 120,
 
                 align: 'center',
                 render: (text, record) => (<span>{record.feebackStatus}</span>),
@@ -395,7 +359,6 @@ export default class PotentialUser extends Component {
                 title: '备注',
                 dataIndex: '备注',
                 key: '备注',
-                width: 160,
 
                 align: 'center',
                 render: (text, record) => (
@@ -404,7 +367,6 @@ export default class PotentialUser extends Component {
                 title: '操作人',
                 dataIndex: '操作人',
                 key: '操作人',
-                width: 120,
 
                 align: 'center',
                 render: (text, record) => (
@@ -413,8 +375,6 @@ export default class PotentialUser extends Component {
                 title: '查看',
                 dataIndex: '查看',
                 key: '查看',
-                fixed: 'right',
-                width: 120,
 
                 align: 'center',
                 render: (text, record) => (
@@ -423,8 +383,6 @@ export default class PotentialUser extends Component {
             }, {
                 title: '操作',
                 key: 'action',
-                fixed: 'right',
-                width: 250,
                 align: 'center',
                 render: (text, record) => (
                     <div>
@@ -771,7 +729,7 @@ export default class PotentialUser extends Component {
             selectedRowKeys,
             onChange: this.onSelectChange,
         };
-        const {switcherOn, background} = this.state;
+        const {switcherOn} = this.state;
 
         return (
 
@@ -779,7 +737,6 @@ export default class PotentialUser extends Component {
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 {/*<div>PotentialUser</div>*/}
-                {/*<ThemePicker />*/}
                 <div className={classNames('switcher dark-white', {active: switcherOn})}>
 					<span className="sw-btn dark-white" onClick={this._switcherOn}>
 						<Icon type="setting" className="text-dark"/>
@@ -812,6 +769,9 @@ export default class PotentialUser extends Component {
 
                     </div>
                 </div>
+                <h2 style={{marginTop: 15}}>
+                    Leads管理
+                </h2>
                 <BreadcrumbCustom first="用户管理" second="Leads管理"/>
 
 
