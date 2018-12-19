@@ -375,7 +375,7 @@ export default class WhiteList extends Component {
 
                 <Card
                     bodyStyle={{padding: 0, margin: 0}}
-                    title={<div>白名单</div>}
+                    title={'白名单'}
                     extra={<Button onClick={() => this.showModal()}>新增白名单用户</Button>}
                 >
                     <Table rowKey="id"

@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, Input} from 'antd';
+import {Button, Table, Input, Card} from 'antd';
 
 
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
@@ -76,7 +76,6 @@ class Basic extends Component {
                 title: '手机号',
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
-                fixed: 'left',
                 width: 150,
                 onFilter: (value, record) => {
                     return record.phoneNumber.includes(value)
@@ -145,7 +144,6 @@ class Basic extends Component {
             }, {
                 title: '操作',
                 key: '操作',
-                fixed: 'right',
                 width: 300,
                 align: 'center',
                 render: (text, record) => (
@@ -222,7 +220,8 @@ class Basic extends Component {
                     开户审核
                 </h2>
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
-
+                <Card bodyStyle={{padding: 0, margin: 0}}
+                      title={'开户审核'}>
                 <Table rowKey="id"
                        columns={this.columns}
                        dataSource={this.state.userList}
@@ -235,6 +234,8 @@ class Basic extends Component {
                            onChange: this.changePage,
                        }}
                 />
+            </Card>
+
             </div>
 
         )
