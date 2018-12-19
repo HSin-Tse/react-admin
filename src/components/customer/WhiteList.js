@@ -161,8 +161,21 @@ export default class WhiteList extends Component {
 
     onChangeDate = (value, dateString) => {
         
-        console.log('hcia value' , value)
-        console.log('hcia dateString' , dateString)
+
+
+        var selectTimeStart = value[0].unix() + '000'
+        var selectTimeEnd = value[1].unix() + '000'
+
+        console.log('hcia selectTimeStart', selectTimeStart)
+        console.log('hcia selectTimeEnd', selectTimeEnd)
+
+
+        this.setState({
+            filterTimeFalue: value,
+            selectTimeStart: selectTimeStart,
+            selectTimeEnd: selectTimeEnd,
+
+        });
     }
     changeNote = (e) => {
         this.setState({
@@ -301,12 +314,15 @@ export default class WhiteList extends Component {
                                 });
                             }} style={{marginBottom: 5}} placeholder="账户"/>
                             <RangePicker
+
+                                showToday
                                 style={{width: '100%'}}
                                 showTime={{format: 'YYYY-MM-DD HH:mm:ss'}}
                                 format="YYYY-MM-DD HH:mm:ss fff"
                                 placeholder={['開始時間', '結束時間']}
-                                // onChange={this.onChangeDate}
-                                // value={this.state.filterTimeFalue}
+
+                                onChange={this.onChangeDate}
+                                value={this.state.filterTimeFalue}
                                 onOk={(value) => {
                                     console.log('hcia', 'onOk: ', value);
 
