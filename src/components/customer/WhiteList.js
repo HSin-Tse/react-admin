@@ -160,7 +160,6 @@ export default class WhiteList extends Component {
     }
 
     onChangeDate = (value, dateString) => {
-        
 
 
         var selectTimeStart = value[0].unix() + '000'
@@ -293,26 +292,26 @@ export default class WhiteList extends Component {
                         >
                             <Input value={this.state.selectMail} onChange={(e) => {
                                 this.setState({selectMail: e.target.value})
-                            }} style={{marginBottom: 5}} placeholder="邮箱"/>
+                            }} style={{marginBottom: 10}} placeholder="邮箱"/>
 
                             <Input value={this.state.selectPhoneF} onChange={(e) => {
                                 this.setState({
                                     selectPhoneF: e.target.value,
                                 });
-                            }} style={{marginBottom: 5}} placeholder="手机号"/>
+                            }} style={{marginBottom: 10}} placeholder="手机号"/>
 
 
                             <Input value={this.state.selectID} onChange={(e) => {
                                 this.setState({
                                     selectID: e.target.value,
                                 });
-                            }} style={{marginBottom: 5}} placeholder="身份证号"/>
+                            }} style={{marginBottom: 10}} placeholder="身份证号"/>
 
                             <Input value={this.state.starClientAccount} onChange={(e) => {
                                 this.setState({
                                     starClientAccount: e.target.value,
                                 });
-                            }} style={{marginBottom: 5}} placeholder="账户"/>
+                            }} style={{marginBottom: 10}} placeholder="账户"/>
                             <RangePicker
 
                                 showToday
@@ -320,8 +319,23 @@ export default class WhiteList extends Component {
                                 showTime={{format: 'YYYY-MM-DD HH:mm:ss'}}
                                 format="YYYY-MM-DD HH:mm:ss fff"
                                 placeholder={['開始時間', '結束時間']}
+                                onChange={(value, dateString) => {
 
-                                onChange={this.onChangeDate}
+
+                                    var selectTimeStart = value[0].unix() + '000'
+                                    var selectTimeEnd = value[1].unix() + '000'
+
+                                    console.log('hcia selectTimeStart', selectTimeStart)
+                                    console.log('hcia selectTimeEnd', selectTimeEnd)
+
+
+                                    this.setState({
+                                        filterTimeFalue: value,
+                                        selectTimeStart: selectTimeStart,
+                                        selectTimeEnd: selectTimeEnd,
+
+                                    });
+                                }}
                                 value={this.state.filterTimeFalue}
                                 onOk={(value) => {
                                     console.log('hcia', 'onOk: ', value);
@@ -343,7 +357,7 @@ export default class WhiteList extends Component {
                                 }}
                             />
 
-                            <Button onClick={() => this.requestPageA()} style={{marginTop: 10}} type="primary"
+                            <Button onClick={() => this.requestPageA()} style={{marginTop: 15}} type="primary"
                                     icon="search">Search</Button>
 
                         </Card>
@@ -351,6 +365,9 @@ export default class WhiteList extends Component {
 
                     </div>
                 </div>
+
+
+
                 <h2 style={{marginTop: 15}}>
                     白名单
                 </h2>
