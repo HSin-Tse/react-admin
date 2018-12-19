@@ -5,7 +5,6 @@ import {ThemePicker} from '@/components/widget';
 import classNames from "classnames";
 
 const TabPane = Tabs.TabPane;
-const {CheckableTag} = Tag;
 const {RangePicker} = DatePicker;
 
 export default class BlackList extends Component {
@@ -40,15 +39,17 @@ export default class BlackList extends Component {
         this.columns = [
             {
                 title: '手机号',
+                align: 'center',
+
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
-                width: 150,
-                fixed: 'left',
                 render: (text, record) => (
                     <span>{record.mobile}</span>
                 ),
             }, {
                 title: '姓名',
+                align: 'center',
+
                 dataIndex: 'name',
                 key: 'name',
                 render: (text, record) => (
@@ -56,20 +57,24 @@ export default class BlackList extends Component {
                 ),
             }, {
                 title: '操作人',
+                align: 'center',
+
                 dataIndex: '操作人',
                 key: '操作人',
                 render: (text, record) => (<span>{record.operator}</span>),
             }, {
                 title: '处理备注',
+                align: 'center',
+
                 dataIndex: '处理备注',
                 key: '处理备注',
                 render: (text, record) => (
                     <span>{record.comment}</span>),
             }, {
                 title: '操作',
+
+                align: 'center',
                 key: 'action',
-                fixed: 'right',
-                width: 100,
                 render: (text, record) => (
                     <div>
                         <span className="ant-divider"/>
@@ -100,8 +105,6 @@ export default class BlackList extends Component {
                 this.requestPageC()//1:合规 2:开户 3:交易
             }
 
-        }).catch(function (error) {
-            console.log(error);
         });
 
     };
@@ -123,8 +126,6 @@ export default class BlackList extends Component {
                 this.requestPageC()//1:合规 2:开户 3:交易
             }
 
-        }).catch(function (error) {
-            console.log(error);
         });
 
     };
@@ -163,14 +164,8 @@ export default class BlackList extends Component {
                 totalpageA: response.data.data.totalPage,
                 bklistA: response.data.data.list,
                 loadingA: false
-            }, () => {
-                console.log('hcia self.state.bklistA', self.state.bklistA)
-
-
             });
 
-        }).catch(function (error) {
-            console.log(error);
         });
     }
     requestPageB = () => {
@@ -182,7 +177,6 @@ export default class BlackList extends Component {
         window.Axios.post('auth/getBlackList', {
             pageNo: this.state.currentB,
             'listType': 2,//1:合规 2:开户 3:交易
-
             'email': this.state.selectMail,
             'nationalId': this.state.selectID,
             'startTime': this.state.selectTimeStart,
@@ -197,8 +191,6 @@ export default class BlackList extends Component {
             });
 
 
-        }).catch(function (error) {
-            console.log(error);
         });
     }
     requestPageC = () => {
@@ -222,8 +214,6 @@ export default class BlackList extends Component {
                 bklistC: response.data.data.list,
                 loadingC: false
             });
-        }).catch(function (error) {
-            console.log(error);
         });
     }
 
@@ -317,7 +307,6 @@ export default class BlackList extends Component {
         this.setState({
             selectTimeStart: selectTimeStart,
             selectTimeEnd: selectTimeEnd,
-
         });
     }
 
@@ -368,6 +357,9 @@ export default class BlackList extends Component {
 
                     </div>
                 </div>
+                <h2 style={{marginTop: 15}}>
+                    黑名單
+                </h2>
                 <BreadcrumbCustom first="用戶管理" second="黑名單"/>
 
                 <Card
@@ -378,20 +370,20 @@ export default class BlackList extends Component {
                         onChange={this.callback}
                         type="card">
                         <TabPane tab="合规黑名单" key="1">
-                            <Button
+                            {/*<Button*/}
 
 
-                                style={{marginBottom: 10}}
-                                type="primary"
-                                onClick={() => this.handleremoveList()}
-                                disabled={!hasSelected}
-                                loading={loading}
-                            >
-                                批量移除
-                            </Button>
+                            {/*style={{marginBottom: 10}}*/}
+                            {/*type="primary"*/}
+                            {/*onClick={() => this.handleremoveList()}*/}
+                            {/*disabled={!hasSelected}*/}
+                            {/*loading={loading}*/}
+                            {/*>*/}
+                            {/*批量移除*/}
+                            {/*</Button>*/}
                             <Table rowKey="id"
                                    bordered
-                                   rowSelection={rowSelection}
+                                // rowSelection={rowSelection}
                                    columns={this.columns}
                                    dataSource={this.state.bklistA}
                                    scroll={{x: 1300}}

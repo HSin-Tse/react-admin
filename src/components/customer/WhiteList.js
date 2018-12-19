@@ -13,11 +13,10 @@ export default class WhiteList extends Component {
         super(props);
         this.state = {
             selectedRowKeys: [],
-            // mTags: [],
             bklistA: [],
             currentA: 0,
             totalpageA: 0,
-            pgsize: 40,
+            pgsize: 10,
             loadingA: false,
             showModaladdWhite: false,
             selectMail: "",
@@ -28,56 +27,56 @@ export default class WhiteList extends Component {
             NameCn: "",
             phoneCn: "",
             changeNoteV: "",
-
-
         };
     }
 
     componentDidMount() {
         this.columns = [
             {
+                align: 'center',
                 title: '手机号',
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
-                width: 150,
-                fixed: 'left',
                 render: (text, record) => (
-
                     <span>{record.mobile}</span>
-
                 ),
             }, {
+                align: 'center',
                 title: '姓名',
                 dataIndex: 'name',
                 key: 'name',
                 render: (text, record) => (
                     <span>{record.name}</span>),
             }, {
+                align: 'center',
                 title: '活跃度',
                 dataIndex: '活跃度',
                 key: '活跃度',
                 render: (text, record) => (<span>{record.activeFlag}</span>),
             }, {
+                width: 150,
+                align: 'center',
                 title: 'APP注册时间',
                 dataIndex: 'APP注册时间',
                 key: 'APP注册时间',
                 render: (text, record) => (<span>{record.date}</span>),
             }, {
+                align: 'center',
                 title: '操作人',
                 dataIndex: '操作人',
                 key: '操作人',
                 render: (text, record) => (<span>{record.operator}</span>),
             }, {
+                align: 'center',
                 title: '处理备注',
                 dataIndex: '处理备注',
                 key: '处理备注',
                 render: (text, record) => (
                     <span>{record.comment}</span>),
             }, {
+                align: 'center',
                 title: '操作',
                 key: 'action',
-                fixed: 'right',
-                width: 100,
                 render: (text, record) => (
                     <div>
                         <span className="ant-divider"/>
@@ -106,8 +105,6 @@ export default class WhiteList extends Component {
     };
 
     handleremoveSelect = () => {
-
-
         let self = this
         this.setState({
             selectMail: '',
@@ -119,8 +116,6 @@ export default class WhiteList extends Component {
         }, () => {
             self.searchSelect()
         })
-
-
     };
 
 
@@ -338,7 +333,6 @@ export default class WhiteList extends Component {
                 {/*<div>selectMail :{this.state.selectMail}</div>*/}
                 {/*<div>selectPhone :{this.state.selectPhone}</div>*/}
                 {/*<div>changeNoteV :{this.state.changeNoteV}</div>*/}
-                {/*<ThemePicker />*/}
                 <div className={classNames('switcher dark-white', {active: switcherOn})}>
                 <span className="sw-btn dark-white" onClick={this._switcherOn}>
                     <Icon type="setting" className="text-dark"/>
@@ -371,23 +365,27 @@ export default class WhiteList extends Component {
 
                     </div>
                 </div>
+                <h2 style={{marginTop: 15}}>
+                    白名单
+                </h2>
                 <BreadcrumbCustom first="用戶管理" second="白名單"/>
 
                 <Card
-                    title={<div>白名单表</div>}
+                    bodyStyle={{padding: 0, margin: 0}}
+
+                    title={<div>白名单</div>}
                     extra={<Button onClick={() => this.showModal()}>新增白名单用户</Button>}
                 >
-                    <Button
-                        type="primary"
-                        onClick={() => this.handleremoveList()}
-                        disabled={!hasSelected}
-                        loading={loading}
-                    >
-                        批量移除
-                    </Button>
+                    {/*<Button*/}
+                    {/*type="primary"*/}
+                    {/*onClick={() => this.handleremoveList()}*/}
+                    {/*disabled={!hasSelected}*/}
+                    {/*loading={loading}*/}
+                    {/*>*/}
+                    {/*批量移除*/}
+                    {/*</Button>*/}
                     <Table rowKey="id"
                            bordered
-                           rowSelection={rowSelection}
                            columns={this.columns}
                            dataSource={this.state.bklistA}
                            scroll={{x: 1300}}

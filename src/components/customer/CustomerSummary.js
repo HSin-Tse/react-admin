@@ -93,11 +93,10 @@ export default class CustomerSummary extends Component {
                     <span>{record.accountNo}</span>),
             }, {
                 width: 150,
-
+                align: 'center',
                 title: '最近登录时间',
                 dataIndex: '最近登录时间',
                 key: '最近登录时间',
-                align: 'center',
                 render: (text, record) => (<span>{record.date}</span>),
             }, {
                 title: '回访次数',
@@ -107,15 +106,6 @@ export default class CustomerSummary extends Component {
                 render: (text, record) => (
                     <span>{record.commentNum}</span>),
             },
-            // {
-            //     title: '备注信息',
-            //     dataIndex: '备注信息',
-            //     key: '备注信息',
-            //     align: 'center',
-            //     render: (text, record) => (
-            //         <span>{record.comment}</span>),
-            // }
-            // ,
             {
                 title: '操作人',
                 dataIndex: '操作人',
