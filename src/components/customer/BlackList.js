@@ -370,7 +370,9 @@ export default class BlackList extends Component {
                 </div>
                 <BreadcrumbCustom first="用戶管理" second="黑名單"/>
 
-                <Card>
+                <Card
+                    bodyStyle={{padding: 0, margin: 0}}
+                >
 
                     <Tabs
                         onChange={this.callback}

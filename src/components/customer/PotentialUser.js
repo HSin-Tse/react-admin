@@ -463,13 +463,7 @@ export default class PotentialUser extends Component {
     }
 
     seeUSer = (record) => {
-
-        console.log('hcia record.id', record.id)
-        console.log('hcia record.id', record.id)
-        console.log('hcia record.id', record.leadId)
-
         this.props.history.push('/app/pass/passopen/user' + record.leadId)
-
     }
 
     handleCancel = (e) => {
@@ -825,7 +819,8 @@ export default class PotentialUser extends Component {
                     onChange={this.callback}
                     type="card">
                     <TabPane tab="潛在用戶" key="1">
-                        <Card title={'潜在用户信息表'}>
+                        <Card bodyStyle={{padding: 0, margin: 0}}
+                              title={'潜在用户信息表'}>
                             <Table rowKey="id"
                                    bordered
                                 // rowSelection={rowSelection}
@@ -844,7 +839,7 @@ export default class PotentialUser extends Component {
                     </TabPane>
 
                     <TabPane tab="模擬用戶" key="2">
-                        <Card title={'模拟用户信息表'}>
+                        <Card bodyStyle={{padding: 0, margin: 0}} title={'模拟用户信息表'}>
 
                             <Table rowKey="id"
                                    bordered
@@ -864,7 +859,7 @@ export default class PotentialUser extends Component {
 
                     </TabPane>
                     <TabPane tab="意向用戶" key="3">
-                        <Card title={'意向用户信息表'}>
+                        <Card bodyStyle={{padding: 0, margin: 0}} title={'意向用户信息表'}>
                             <Table rowKey="id"
                                    bordered
 
