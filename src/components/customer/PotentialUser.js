@@ -807,7 +807,7 @@ export default class PotentialUser extends Component {
                                 // rowSelection={rowSelection}
                                    columns={this.pageBColumns()}
                                    dataSource={this.state.bklistB}
-                                   scroll={{x: 1500}}
+                                   scroll={{x: 1600}}
                                    loading={this.state.loading}
                                    pagination={{  // 分页
                                        total: this.state.totalpageB * this.state.pgsize,

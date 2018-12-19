@@ -41,37 +41,27 @@ class Basic extends Component {
         window.Axios.post('dict/openDict', {
             'keys': 'suspend_reason_type',
         }).then(function (response) {
-            console.log(response);
-
             self.setState({
                     suspend_reason_type: response.data.data.suspend_reason_type
                 }
             );
-
-
-        }).catch(function (error) {
-            console.log(error);
-        });
+        })
 
         this.columns = [
             {
                 title: '客户姓名',
-                fixed: 'left',
-                width: 100,
                 dataIndex: 'name',
                 key: 'name',
                 render: (text, record) => (
                     <span>{record.name}</span>),
             }, {
                 title: '账号',
-                width: 150,
 
                 dataIndex: '申请序号',
                 key: '申请序号',
                 render: (text, record) => (<span>{record.accountNo}</span>),
             }, {
                 title: '账号类型',
-                width: 150,
 
                 dataIndex: '账号类型',
                 key: '账号类型',
@@ -81,7 +71,6 @@ class Basic extends Component {
                 title: '开户时间',
                 dataIndex: '开户时间',
                 key: '开户时间',
-                width: 240,
 
                 render: (text, record) => (
                     <span>{record.date}</span>),
@@ -89,21 +78,18 @@ class Basic extends Component {
                 title: '保证金占比',
                 dataIndex: '保证金占比',
                 key: '保证金占比',
-                width: 120,
                 render: (text, record) => (
                     <span>{record.marginLevel}</span>)
             }, {
                 title: '浮动余额',
                 dataIndex: '浮动余额',
                 key: '浮动余额',
-                width: 120,
                 render: (text, record) => (
                     <span>{record.cashBalance}</span>),
             }, {
                 title: '账户净值',
                 dataIndex: '账户净值',
                 key: '账户净值',
-                width: 120,
 
                 render: (text, record) => (
                     <span>{record.netEquity}</span>),
@@ -111,7 +97,6 @@ class Basic extends Component {
                 title: '当前状态',
                 dataIndex: '当前状态',
                 key: '当前状态',
-                width: 120,
                 render: (text, record) => (
                     <span>{record.accountStatus == 1 ? '正常' : (record.accountStatus == 2) ? '禁止登陆' : '禁止交易'}</span>
                 )
@@ -120,12 +105,10 @@ class Basic extends Component {
                 title: '备注',
                 dataIndex: '备注',
                 key: '备注',
-                width: 120,
                 render: (text, record) => (
                     <span>{record.comment}</span>)
             }, {
                 title: '刷新时间',
-                width: 140,
                 dataIndex: '刷新时间',
                 key: '刷新时间',
                 render: (text, record) => (
@@ -133,7 +116,6 @@ class Basic extends Component {
             }, {
                 title: '操作人',
                 dataIndex: '操作人',
-                width: 120,
 
                 key: '操作人',
                 render: (text, record) => (
@@ -141,16 +123,12 @@ class Basic extends Component {
             }, {
                 title: '操作详情',
                 dataIndex: '操作详情',
-                fixed: 'right',
-                width: 120,
                 key: '操作详情',
                 render: (text, record) => (
                     <Button className="ant-dropdown-link"
                             onClick={() => this.seeDetail(record)}>详情</Button>)
             }, {
                 title: '操作',
-                fixed: 'right',
-                width: 120,
                 key: 'action',
                 render: (text, record) => (
                     <div>
@@ -222,9 +200,7 @@ class Basic extends Component {
             );
 
 
-        }).catch(function (error) {
-            console.log(error);
-        });
+        })
     };
     handleChange = (value, record) => {
         let self = this
@@ -278,9 +254,7 @@ class Basic extends Component {
             );
 
 
-        }).catch(function (error) {
-            console.log(error);
-        });
+        })
     }
     changePage = (page) => {
         console.log('hcia page', page)
@@ -307,9 +281,7 @@ class Basic extends Component {
             });
             message.success('操作成功');
 
-        }).catch(function (error) {
-            console.log(error);
-        });
+        })
 
 
     }
@@ -345,9 +317,7 @@ class Basic extends Component {
             });
             message.success('操作成功');
 
-        }).catch(function (error) {
-            console.log(error);
-        });
+        })
     };
     handleCancel = (e) => {
         console.log(e);
