@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {DatePicker, Input, Modal, Button, Table, Tabs, message, Card, Tag, Layout, Icon, notification} from 'antd';
+import {DatePicker, Input, Modal, Button, Table, Tabs, message, Card, Select, Layout, Icon, notification} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {ThemePicker} from '@/components/widget';
 import classNames from "classnames";
 
+const Option = Select.Option;
 const TabPane = Tabs.TabPane;
 const {RangePicker} = DatePicker;
 const {TextArea} = Input;
@@ -458,6 +459,14 @@ export default class BlackList extends Component {
 
                         <div style={{display: 'flex', minHeight: 40}}>
                             <span style={{minWidth: 100}}>类型：</span>
+                            <Select defaultValue="0" style={{minWidth: 160}} onChange={this.handleChange}>
+                                <Option value="0">合规黑名单</Option>
+                                <Option value="1">开户黑名单</Option>
+                                <Option value="2">交易黑名单</Option>
+                            </Select>
+                        </div>
+                        <div style={{display: 'flex', minHeight: 40}}>
+                            <span style={{minWidth: 100}}>类型：</span>
                             <Input defaultValue={this.state.NameCn}
                                    onChange={this.onChangelastNameCn}
                                    style={{minWidth: 160}} tagkey="lastNameCn"
@@ -519,6 +528,8 @@ export default class BlackList extends Component {
         //     }
         // });
     }
-
+    handleChange = (value) => {
+        console.log(`selected ${value}`);
+    }
 }
 
