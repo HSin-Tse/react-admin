@@ -92,17 +92,13 @@ export default class CustomerSummary extends Component {
                 render: (text, record) => (
                     <span>{record.accountNo}</span>),
             }, {
+                width: 150,
+
                 title: '最近登录时间',
                 dataIndex: '最近登录时间',
                 key: '最近登录时间',
                 align: 'center',
                 render: (text, record) => (<span>{record.date}</span>),
-            }, {
-                title: '客诉次数',
-                dataIndex: '客诉次数',
-                key: '客诉次数',
-                align: 'center',
-                render: (text, record) => (<span>{record.complaintNum}</span>),
             }, {
                 title: '回访次数',
                 dataIndex: '回访次数',
@@ -135,9 +131,9 @@ export default class CustomerSummary extends Component {
                 render: (text, record) => (
                     <div>
                         <Button className="ant-dropdown-link" onClick={() => this.goToUserAccountInfo()}>备注</Button>
-                        <Button className="ant-dropdown-link" onClick={() => this.goToUserAccountInfo()}>開戶信息</Button>
+                        <Button className="ant-dropdown-link" onClick={() => this.goToUserAccountInfo()}>開戶</Button>
                         <Button className="ant-dropdown-link"
-                                onClick={() => this.goToUserInfo(record.belongUserId)}>行為信息</Button>
+                                onClick={() => this.goToUserInfo(record.belongUserId)}>行為</Button>
                     </div>
                 )
             }, {
@@ -149,8 +145,8 @@ export default class CustomerSummary extends Component {
                     <div>
                         <Button className="ant-dropdown-link" onClick={() => this.forzenAccount(record)}>凍結</Button>
                         <Button className="ant-dropdown-link"
-                                onClick={() => this.requestUnbindAccount(record)}>手機號解綁</Button>
-                        <Button className="ant-dropdown-link" onClick={() => this.forzenAccount(record)}>重置交易密码</Button>
+                                onClick={() => this.requestUnbindAccount(record)}>解綁</Button>
+                        <Button className="ant-dropdown-link" onClick={() => this.forzenAccount(record)}>重置密码</Button>
                     </div>
                 ),
             }, {
@@ -205,16 +201,13 @@ export default class CustomerSummary extends Component {
                 <BreadcrumbCustom first="用戶管理" second="用戶總表"/>
                 <Card
 
-                    // bodyStyle={{
-                    //     overflow: 'hidden'
-                    // }}
-                    // bodyStyle={{padding: 0, margin: 0}}
+                    bodyStyle={{padding: 0, margin: 0}}
 
                     title="用戶總表">
                     <Table
                         rowKey="id"
                         bordered
-                        scroll={{x: 2000}}
+                        scroll={{x: 1620}}
                         columns={this.columns}
                         dataSource={this.state.bklistA}
                         loading={this.state.loading}
