@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {DatePicker, Input, Modal, Button, Table, Tabs, message, Card, Tag, Layout, Icon} from 'antd';
+import {DatePicker, Input, Modal, Button, Table, Tabs, message, Card, Tag, Layout, Icon, notification} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {ThemePicker} from '@/components/widget';
 import classNames from "classnames";
 
 const TabPane = Tabs.TabPane;
 const {RangePicker} = DatePicker;
+const {TextArea} = Input;
 
 export default class BlackList extends Component {
 
@@ -25,6 +26,7 @@ export default class BlackList extends Component {
             nowKey: "1",
             pgsize: 10,
             loadingA: false,
+            showModaladdblack: false,
             loadingB: false,
             loadingC: false,
             selectMail: "",
@@ -381,20 +383,33 @@ export default class BlackList extends Component {
                             {/*>*/}
                             {/*批量移除*/}
                             {/*</Button>*/}
-                            <Table rowKey="id"
-                                   bordered
-                                // rowSelection={rowSelection}
-                                   columns={this.columns}
-                                   dataSource={this.state.bklistA}
-                                   scroll={{x: 1300}}
-                                   loading={this.state.loadingA}
-                                   pagination={{  // 分页
-                                       // showQuickJumper:true,
-                                       total: this.state.totalpageA * this.state.pgsize,
-                                       pageSize: this.state.pgsize,
-                                       onChange: this.changePageA,
-                                   }}
-                            />
+
+
+                            <Card
+                                bodyStyle={{padding: 0, margin: 0}}
+                                title={'合规黑名单'}
+                                extra={<Button onClick={() => {
+                                    this.setState({
+                                        showModaladdblack: true,
+                                    });
+                                }}>添加黑名单</Button>}
+                            >
+
+                                <Table rowKey="id"
+                                       bordered
+                                    // rowSelection={rowSelection}
+                                       columns={this.columns}
+                                       dataSource={this.state.bklistA}
+                                       scroll={{x: 1300}}
+                                       loading={this.state.loadingA}
+                                       pagination={{  // 分页
+                                           // showQuickJumper:true,
+                                           total: this.state.totalpageA * this.state.pgsize,
+                                           pageSize: this.state.pgsize,
+                                           onChange: this.changePageA,
+                                       }}
+                                />
+                            </Card>
                         </TabPane>
                         <TabPane tab="开户黑名单" key="2">
                             <Table rowKey="id"
@@ -424,13 +439,86 @@ export default class BlackList extends Component {
                         </TabPane>
                     </Tabs>
                 </Card>
+                <Modal
+                    width={370}
+                    title="添加黑名单"
+                    visible={this.state.showModaladdblack}
+                    onOk={this.handleOk}
+                    onCancel={(e) => {
+                        this.setState({
+                            showModaladdblack: false,
+                        });
+                    }}
+                >
 
+                    <Card
+
+
+                        bordered={true}>
+
+                        <div style={{display: 'flex', minHeight: 40}}>
+                            <span style={{minWidth: 100}}>类型：</span>
+                            <Input defaultValue={this.state.NameCn}
+                                   onChange={this.onChangelastNameCn}
+                                   style={{minWidth: 160}} tagkey="lastNameCn"
+                                   sdsd={'dd'}/>
+                        </div>
+
+                        <div style={{display: 'flex', minHeight: 40}}>
+                            <span style={{minWidth: 100}}>用户姓名：</span>
+                            <Input defaultValue={this.state.NameCn}
+                                   onChange={this.onChangelastNameCn}
+                                   style={{minWidth: 160}} tagkey="lastNameCn"
+                                   sdsd={'dd'}/>
+                        </div>
+
+                        <div style={{display: 'flex', minHeight: 40}}>
+                            <span style={{minWidth: 100}}>手机号码：</span>
+                            <Input defaultValue={this.state.phoneCn}
+                                   onChange={this.onChangePhone}
+                                   style={{minWidth: 160}}
+                                   sdsd={'dd'}
+                            />
+                        </div>
+
+
+                        <div style={{display: 'flex', minHeight: 40}}>
+                            <span style={{minWidth: 100}}>操作备注</span>
+                            <TextArea style={{minWidth: 160}}
+                                      value={this.state.changeNoteV}
+                                      rows={4}
+                                      onChange={(e) => {
+                                          this.setState({
+                                              changeNoteV: e.target.value,
+                                          });
+                                      }}/>
+                        </div>
+
+                    </Card>
+                </Modal>
 
             </div>
 
         )
     }
 
+    handleOk = (e) => {
+        let me = this
+        if (!me.state.changeNoteV) {
+            message.error('備註必填')
+            return
+        }
+        // window.Axios.post('auth/addBlackUser', {
+        //     'content': me.state.changeNoteV,
+        //     'id': me.state.recordData.id,
+        //     'listType': 2,//1:合规 2:开户 3:交易
+        // }).then(function (response) {
+        //     if (response.data.code === 1) {
+        //         // notification.close(key)
+        //         message.success('added  open  black')
+        //     }
+        // });
+    }
 
 }
 
