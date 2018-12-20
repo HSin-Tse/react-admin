@@ -173,7 +173,7 @@ class Basic extends Component {
                         <Button className="ant-dropdown-link"
                                 onClick={() => this.handleEdit(record)}>操作日志</Button>
                         <Button className="ant-dropdown-link"
-                                onClick={() => this.handleEdit(record)}>{record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '拒絕'}</Button>
+                                onClick={() => this.handleEdit(record)}>{record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'}</Button>
                         <Button className="ant-dropdown-link"
                                 onClick={() => this.handleEdit(record)}>{record.displayStatus}</Button>
                     </div>
