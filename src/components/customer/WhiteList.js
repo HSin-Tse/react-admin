@@ -53,17 +53,37 @@ export default class WhiteList extends Component {
                     <span>{record.name}</span>),
             }, {
                 align: 'center',
-                title: '活跃度',
-                dataIndex: '活跃度',
-                key: '活跃度',
+                title: '交易组',
+                dataIndex: '交易组',
+                key: '交易组',
+                render: (text, record) => (<span>{record.activeFlag}</span>),
+            }, {
+                align: 'center',
+                title: '交易账户',
+                dataIndex: '交易账户',
+                key: '交易账户',
                 render: (text, record) => (<span>{record.activeFlag}</span>),
             }, {
                 width: 150,
                 align: 'center',
-                title: 'APP注册时间',
-                dataIndex: 'APP注册时间',
-                key: 'APP注册时间',
+                title: '操作时间',
+                dataIndex: '操作时间',
+                key: '操作时间',
                 render: (text, record) => (<span>{record.date}</span>),
+            }, {
+                width: 150,
+                align: 'center',
+                title: '身份证号',
+                dataIndex: '身份证号',
+                key: '身份证号',
+                render: (text, record) => (<span>{record.nationalId}</span>),
+            }, {
+                width: 150,
+                align: 'center',
+                title: '邮箱地址',
+                dataIndex: '邮箱地址',
+                key: '邮箱地址',
+                render: (text, record) => (<span>{record.email}</span>),
             }, {
                 align: 'center',
                 title: '操作人',
@@ -79,12 +99,27 @@ export default class WhiteList extends Component {
                     <span>{record.comment}</span>),
             }, {
                 align: 'center',
+                title: '查看',
+                key: '查看',
+                render: (text, record) => (
+                    <div>
+                        <Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>备注
+                        </Button>
+
+                    </div>
+                ),
+            }, {
+                align: 'center',
                 title: '操作',
                 key: 'action',
                 render: (text, record) => (
                     <div>
-                        <span className="ant-divider"/>
+                        <Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>添加备注
+                        </Button>
                         <Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>移除</Button>
+
+                        <Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>操作日志
+                        </Button>
                     </div>
                 ),
             }];
@@ -387,7 +422,7 @@ export default class WhiteList extends Component {
                            bordered
                            columns={this.columns}
                            dataSource={this.state.bklistA}
-                           scroll={{x: 1300}}
+                           scroll={{x: 1600}}
                            loading={this.state.loading}
                            pagination={{
                                total: this.state.totalpageA * this.state.pgsize,

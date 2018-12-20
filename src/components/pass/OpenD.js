@@ -45,7 +45,8 @@ class PassOpenD extends Component {
             , leverageId: ''
             , leverageName: ''
             , changeNoteB: false
-            // , availableFlag: false
+            , mIsNeedAddBlack: false
+            , showREJECTmodel: true
             , waitSearchDb: {}
             , iconLoading: false
             , checkderesb: null
@@ -792,18 +793,21 @@ class PassOpenD extends Component {
 
                                 <Button
                                     disabled={!this.state.isNeedSave}
-                                    onClick={() => this.saveData()}>保存客戶信息</Button>
+                                    onClick={() => this.saveData()}>更新客户资料</Button>
 
 
-                                <Button onClick={() => this.saveNote()}>下载资料</Button>
+                                <Button onClick={() => this.saveNote()}>下载</Button>
 
-                                <Popconfirm title="是否确认拒绝当前用户的开户申请？" onConfirm={this.saveReject} okText="Yes"
-                                            cancelText="No">
-                                    <Button
-                                        loading={this.state.iconcanLoading}
-                                    >拒绝</Button>
+                                {/*<Popconfirm title="是否确认拒绝当前用户的开户申请？" onConfirm={this.saveReject} okText="Yes"*/}
+                                {/*cancelText="No">*/}
 
-                                </Popconfirm>
+
+                                {/*</Popconfirm>*/}
+                                <Button onClick={() => {
+                                    this.setState({
+                                        showREJECTmodel: true,
+                                    });
+                                }} loading={this.state.iconcanLoading}>拒绝</Button>
 
                             </div>
                         </Card>
@@ -874,6 +878,38 @@ class PassOpenD extends Component {
                     }
                 `}</style>
                 </div>
+
+                <Modal
+                    title="美股授权审核"
+                    visible={this.state.showREJECTmodel}
+                    onOk={this.saveReject}
+                    okType={'primary'}
+                    onCancel={(e) => {
+                        this.setState({
+                            showREJECTmodel: false,
+                        });
+                    }}
+                >
+
+                    <Card bordered={true}>
+                        <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
+
+                            <Checkbox
+                                checked={this.state.mIsNeedAddBlack}
+
+                                onChange={(e) => {
+
+                                    console.log('hcia e.target.checked', e.target.checked)
+                                    this.setState({
+                                        mIsNeedAddBlack: e.target.checked,
+                                    });
+                                }}>是否同时加入开户黑名单</Checkbox>
+                        </div>
+
+
+                    </Card>
+                </Modal>
+
                 <Modal
                     title="已对用户资料进行修改，是否保存？"
                     visible={this.state.visible}
@@ -1096,6 +1132,13 @@ class PassOpenD extends Component {
             iconcanLoading: true,
         });
         var me = this;
+
+
+        if (this.state.mIsNeedAddBlack) {
+            this.addBlackRequest()
+        }
+
+
         window.Axios.post('/open/cancelOpenApply', {
             'content': me.state.changeNoteV,
             'id': me.state.recordData.id
@@ -1107,7 +1150,10 @@ class PassOpenD extends Component {
 
             if (response.data.code == 1) {
                 message.info('拒絕成功')
-                me.openTipBlack()
+
+                me.setState({
+                    showREJECTmodel: false,
+                });
             }
 
         });
@@ -1444,7 +1490,7 @@ class PassOpenD extends Component {
         });
     }
 
-    addBlackRequest(key) {
+    addBlackRequest() {
         let me = this
         if (!me.state.changeNoteV) {
             message.error('備註必填')
@@ -1456,7 +1502,6 @@ class PassOpenD extends Component {
             'listType': 2,//1:合规 2:开户 3:交易
         }).then(function (response) {
             if (response.data.code === 1) {
-                notification.close(key)
                 message.success('added  open  black ')
             }
         });
