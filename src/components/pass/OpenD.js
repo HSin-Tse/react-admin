@@ -46,7 +46,7 @@ class PassOpenD extends Component {
             , leverageName: ''
             , changeNoteB: false
             , mIsNeedAddBlack: false
-            , showREJECTmodel: true
+            , showREJECTmodel: false
             , waitSearchDb: {}
             , iconLoading: false
             , checkderesb: null
