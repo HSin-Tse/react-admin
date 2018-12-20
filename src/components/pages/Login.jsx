@@ -140,8 +140,10 @@ class Login extends React.Component {
 
                 <div style={{zIndex: 10}} className="login-form">
 
+                    <div className="login-logoa">
+                        <img style={{height: 35, width: 35}} src={avater} alt="头像"/>
+                    </div>
                     <div className="login-logo">
-
                         <span>IX TRADER CRM</span>
                     </div>
                     <Form onSubmit={this.handleSubmit} style={{maxWidth: '300px'}}>
@@ -177,7 +179,6 @@ class Login extends React.Component {
                         </FormItem>
                     </Form>
                 </div>
-                {/*<img style={{height: 35, width: 35}} src={avater} alt="头像"/>*/}
 
                 <ReactCanvasNest className='canvasNest' config={{pointColor: ' 255, 255, 255 ',count:100}} style={{zIndex: 0}}/>
 
