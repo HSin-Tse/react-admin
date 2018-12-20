@@ -74,9 +74,9 @@ class Basic extends Component {
         this.columns = [
             {
                 title: '手机号',
+                align: 'center',
                 dataIndex: 'phoneNumber',
                 key: 'phoneNumber',
-                width: 150,
                 onFilter: (value, record) => {
                     return record.phoneNumber.includes(value)
                 },
@@ -115,15 +115,33 @@ class Basic extends Component {
                     <span>{record.displayApplyType}</span>),
             }, {
                 align: 'center',
+                width: 150,
                 title: '申请时间',
                 dataIndex: '申请时间',
                 key: '申请时间',
                 render: (text, record) => (
                     <span>{record.date}</span>),
             }, {
+                title: '身份证号',
+                dataIndex: '身份证号',
+                key: '身份证号',
+                render: (text, record) => (
+                    <span>{record.nationalID}</span>),
+            }, {
+                title: '邮箱地址',
+                dataIndex: '邮箱地址',
+                key: '邮箱地址',
+                render: (text, record) => (
+                    <span>{record.email}</span>),
+            }, {
+                title: '邮箱地址',
+                dataIndex: '邮箱地址',
+                key: '邮箱地址',
+                render: (text, record) => (
+                    <span>{record.email}</span>),
+            }, {
                 title: '审核状态',
                 dataIndex: '审核状态',
-                width: 120,
                 align: 'center',
 
                 filters: [
@@ -136,15 +154,14 @@ class Basic extends Component {
                 render: (text, record) => (
                     <span>{record.status == 0 ? '审核中' : (record.status == 1) ? '审核通过' : '审核拒绝'}</span>),
             }, {
-                title: '处理备注',
-                dataIndex: '处理备注',
-                key: '处理备注',
+                title: '处理人',
+                dataIndex: '处理人',
+                key: '处理人',
                 render: (text, record) => (
-                    <span>{record.comment}</span>),
+                    <span>{record.operator}</span>),
             }, {
                 title: '操作',
                 key: '操作',
-                width: 300,
                 align: 'center',
                 render: (text, record) => (
                     <div>
@@ -154,7 +171,7 @@ class Basic extends Component {
                         <Button className="ant-dropdown-link"
                                 onClick={() => this.handleEdit(record)}>{record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '拒絕'}</Button>
                         <Button className="ant-dropdown-link"
-                                onClick={() => this.handleEdit(record)}>美股权限</Button>
+                                onClick={() => this.handleEdit(record)}>{record.displayStatus}</Button>
                     </div>
                 ),
             }];
@@ -222,19 +239,19 @@ class Basic extends Component {
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
                 <Card bodyStyle={{padding: 0, margin: 0}}
                       title={'开户审核'}>
-                <Table rowKey="id"
-                       columns={this.columns}
-                       dataSource={this.state.userList}
-                       scroll={{x: 1300}}
-                       bordered
-                       loading={this.state.loading}
-                       pagination={{  // 分页
-                           total: this.state.pgsize * this.state.totalPage,
-                           pageSize: this.state.pgsize,
-                           onChange: this.changePage,
-                       }}
-                />
-            </Card>
+                    <Table rowKey="id"
+                           columns={this.columns}
+                           dataSource={this.state.userList}
+                           scroll={{x: 2100}}
+                           bordered
+                           loading={this.state.loading}
+                           pagination={{  // 分页
+                               total: this.state.pgsize * this.state.totalPage,
+                               pageSize: this.state.pgsize,
+                               onChange: this.changePage,
+                           }}
+                    />
+                </Card>
 
             </div>
 
