@@ -9,14 +9,44 @@ import {fetchData, receiveData} from '@/action';
 import {message} from 'antd';
 import axios from "axios";
 import {addTodo, setINFOR} from "../../action";
-import avater from '@/style/imgs/b1.jpg';
+import avater from '@/style/imgs/ixlogo.png';
+import CanvasNest from 'canvas-nest.js';
+import ReactCanvasNest from 'react-canvas-nest';
 
 const FormItem = Form.Item;
+
+const config = {
+    color: '255,0,0',
+    count: 88,
+};
+
+// var cn = new CanvasNest(document.getElementById('Loggin'), config);
 
 class Login extends React.Component {
     componentWillMount() {
         const {receiveData} = this.props;
         receiveData(null, 'auth');
+    }
+
+    // const cn = new CanvasNest(element, config);
+    componentWillUnmount() {
+        document.getElementById('openD')
+    }
+
+    componentWillMount() {
+        console.log('hcia componentWillMount')
+
+
+        // var cn = new CanvasNest(document.getElementById('Loggin'), config);
+        // console.log('hcia cn', cn)
+
+    }
+
+    componentDidMount() {
+        // var cn = new CanvasNest(document.getElementById('Loggin'), config);
+
+        console.log('hcia componentDidMount')
+
     }
 
     componentDidUpdate(prevProps) { // React 16.3+弃用componentWillReceiveProps
@@ -46,8 +76,6 @@ class Login extends React.Component {
         let self = this;
 
         this.props.form.validateFields((err, values) => {
-
-
 
 
             if (!err) {
@@ -92,7 +120,7 @@ class Login extends React.Component {
 
 
                 }).catch(function (error) {
-                    console.log('hcia error' , error)
+                    console.log('hcia error', error)
                     console.log(error);
                 });
 
@@ -107,11 +135,14 @@ class Login extends React.Component {
     render() {
         const {getFieldDecorator} = this.props.form;
         return (
-            <div  src={avater} className="login">
 
-                <div className="login-form">
+            <dic id="Loggin" className="login">
+
+                <div style={{zIndex: 10}} className="login-form">
+
                     <div className="login-logo">
-                        <span>IX TRADER Admin</span>
+
+                        <span>IX TRADER CRM</span>
                     </div>
                     <Form onSubmit={this.handleSubmit} style={{maxWidth: '300px'}}>
                         <FormItem>
@@ -146,7 +177,11 @@ class Login extends React.Component {
                         </FormItem>
                     </Form>
                 </div>
-            </div>
+                {/*<img style={{height: 35, width: 35}} src={avater} alt="头像"/>*/}
+
+                <ReactCanvasNest className='canvasNest' config={{pointColor: ' 255, 255, 255 ',count:100}} style={{zIndex: 0}}/>
+
+            </dic>
         );
     }
 }
