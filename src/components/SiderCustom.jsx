@@ -84,8 +84,45 @@ class SiderCustom extends Component {
         }
         return cloneObj;
     }
+    handleKeyPress = (event) => {
+        // console.log('hcia event' , event)
 
+        if (event.key === 'a') {
+            this.setState({
+                openKey: '/app/customer'
+            })
+        }
+        if (event.key === 's') {
+            this.setState({
+                openKey: '/app/pass'
+            })
+        }
+        if (event.key === 'd') {
+            this.setState({
+                openKey: '/app/trade'
+            })
+        }
+        if (event.key === 'f') {
+            this.setState({
+                openKey: '/app/pms'
+            })
+        }
+        if (event.key === 'c') {
+            this.setState({
+                openKey: ''
+            })
+        }
+    }
+
+    componentWillUnmount() {
+        // console.log('hcia componentWillUnmount')
+        document.removeEventListener("keydown", this.handleKeyPress, false);
+    }
     componentDidMount() {
+
+        document.addEventListener("keydown", this.handleKeyPress, false);
+
+
         // console.log('hcia  SiderCustom componentDidMount')
         // if (!this.state.infor) {return}
         // console.log('hcia  SiderCustom index componentWillMount AAAAAa')
@@ -146,6 +183,8 @@ class SiderCustom extends Component {
     }
 
     menuClick = e => {
+
+        console.log('hcia e.key', e.key)
         this.setState({
             selectedKey: e.key
         });
@@ -170,11 +209,14 @@ class SiderCustom extends Component {
                 style={{overflowY: 'auto'}}
             >
 
+                {/*<div><h1>{this.state.openKey}</h1></div>*/}
+
                 <div className="logo">
                     <img style={{height: 50, width: 50}} src={avater} alt="头像"/>
 
-
+                    {/*{this.state.openKey}*/}
                     {this.props.collapsed ? '' : 'CRM操作系统v1.0'}
+
 
                 </div>
                 <SiderMenu

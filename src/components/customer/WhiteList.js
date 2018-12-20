@@ -35,7 +35,6 @@ export default class WhiteList extends Component {
     componentWillMount() {
         console.log('hcia componentWillMount')
 
-        document.removeEventListener("keydown", this.handleKeyPress, false);
     }
 
     componentDidMount() {
