@@ -9,6 +9,7 @@ import {fetchData, receiveData} from '@/action';
 import {message} from 'antd';
 import axios from "axios";
 import {addTodo, setINFOR} from "../../action";
+import avater from '@/style/imgs/b1.jpg';
 
 const FormItem = Form.Item;
 
@@ -106,7 +107,8 @@ class Login extends React.Component {
     render() {
         const {getFieldDecorator} = this.props.form;
         return (
-            <div className="login">
+            <div  src={avater} className="login">
+
                 <div className="login-form">
                     <div className="login-logo">
                         <span>IX TRADER Admin</span>

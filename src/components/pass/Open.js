@@ -82,6 +82,15 @@ class Basic extends Component {
         }
 
         this.columns = [
+
+            {
+                title: '申请序号',
+                dataIndex: '申请序号',
+                align: 'center',
+
+                key: '申请序号',
+                render: (text, record) => (<span>{record.id}</span>),
+            },
             {
                 title: '手机号',
                 align: 'center',
@@ -112,13 +121,6 @@ class Basic extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <span>{record.cnName}</span>),
-            }, {
-                title: '申请序号',
-                dataIndex: '申请序号',
-                align: 'center',
-
-                key: '申请序号',
-                render: (text, record) => (<span>{record.id}</span>),
             }, {
                 title: '账户类型',
                 dataIndex: '账户类型',
@@ -276,7 +278,7 @@ class Basic extends Component {
                     <Table rowKey="id"
                            columns={this.columns}
                            dataSource={this.state.userList}
-                           scroll={{x: 2000}}
+                           scroll={{x: 1500}}
                            bordered
                            loading={this.state.loading}
                            pagination={{
