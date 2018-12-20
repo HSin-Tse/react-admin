@@ -151,77 +151,88 @@ class Basic extends Component {
 
         this.columns = [
             {
+                align: 'center',
+
+                title: '申请序号',
+                dataIndex: '申请序号',
+                key: '申请序号',
+                render: (text, record) => (
+                    <span>{record.id}</span>),
+            },
+            {
+                align: 'center',
+
                 title: '手机号',
-                width: 150,
                 dataIndex: '手机号',
                 key: '手机号',
                 render: (text, record) => (
                     <span>{record.mobile}</span>),
             },
             {
+                align: 'center',
+
                 title: '申请人',
-                width: 100,
                 dataIndex: 'name',
                 key: 'name',
                 render: (text, record) => (
                     <span>{record.name}</span>),
             }, {
+                align: 'center',
+
                 title: '申请账号',
-                width: 160,
 
                 dataIndex: '申请序号',
                 key: '申请序号',
                 render: (text, record) => (<span>{record.accountNo}</span>),
             }, {
+                align: 'center',
+
                 title: '账户类型',
-                width: 150,
 
                 dataIndex: '账户类型',
                 key: '账户类型',
                 render: (text, record) => (
                     <span>{record.broker}</span>),
             }, {
+                align: 'center',
+
                 title: '申请时间',
                 dataIndex: '申请时间',
                 key: '申请时间',
-                width: 240,
 
                 render: (text, record) => (
                     <span>{record.date}</span>),
             }, {
+                align: 'center',
+
                 title: '审核状态',
                 dataIndex: '审核状态',
                 key: '审核状态',
-                width: 120,
                 render: (text, record) => (
                     <span>{record.displayStatus}</span>
                 )
 
             }, {
-                title: '身份证号',
-                dataIndex: '身份证号',
-                key: '身份证号',
-                width: 120,
-                render: (text, record) => (
-                    <span>{record.nationalId}</span>)
-            }, {
+                align: 'center',
+
                 title: '邮箱地址',
-                width: 140,
                 dataIndex: '邮箱地址',
                 key: '邮箱地址',
                 render: (text, record) => (
                     <span>{record.email}</span>)
             }, {
+                align: 'center',
+
                 title: '处理备注',
                 dataIndex: '处理备注',
                 key: '处理备注',
-                width: 120,
                 render: (text, record) => (
                     <span>{record.comment}</span>)
             }, {
+                align: 'center',
+
                 title: '操作人',
                 dataIndex: '操作人',
-                width: 120,
 
                 key: '操作人',
                 render: (text, record) => (
@@ -230,7 +241,6 @@ class Basic extends Component {
                 title: '操作',
                 key: 'action',
                 align: 'center',
-                width: 200,
                 render: (text, record) => (
                     <div>
                         <Button onClick={() => this.showModalA(record.id)}>查看</Button>

@@ -73,11 +73,11 @@ export default class CustomerSummary extends Component {
                 render: (text, record) => (
                     <span>{record.name}</span>),
             }, {
-                title: '开户状态',
-                dataIndex: '开户状态',
-                key: '开户状态',
+                title: '邮箱',
+                dataIndex: '邮箱',
+                key: '邮箱',
                 align: 'center',
-                render: (text, record) => (<span>已开户</span>),
+                render: (text, record) => (<span>{record.email}</span>),
             },
             {
                 title: '交易组',
@@ -374,7 +374,6 @@ export default class CustomerSummary extends Component {
         })
 
     }
-
 
 
     requestData = () => {
