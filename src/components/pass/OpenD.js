@@ -880,7 +880,7 @@ class PassOpenD extends Component {
                 </div>
 
                 <Modal
-                    title="美股授权审核"
+                    title="拒絕"
                     visible={this.state.showREJECTmodel}
                     onOk={this.saveReject}
                     okType={'primary'}
