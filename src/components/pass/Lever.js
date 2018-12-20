@@ -173,11 +173,11 @@ class Basic extends Component {
                 key: '申请序号',
                 render: (text, record) => (<span>{record.accountNo}</span>),
             }, {
-                title: '账号类型',
+                title: '账户类型',
                 width: 150,
 
-                dataIndex: '账号类型',
-                key: '账号类型',
+                dataIndex: '账户类型',
+                key: '账户类型',
                 render: (text, record) => (
                     <span>{record.broker}</span>),
             }, {

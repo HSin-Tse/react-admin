@@ -80,9 +80,9 @@ export default class CustomerSummary extends Component {
                 render: (text, record) => (<span>已开户</span>),
             },
             {
-                title: '账户类型',
-                dataIndex: '账户类型',
-                key: '账户类型',
+                title: '交易组',
+                dataIndex: '交易组',
+                key: '交易组',
                 align: 'center',
                 render: (text, record) => (<span>{record.accountType}</span>),
             }, {

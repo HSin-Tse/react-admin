@@ -110,8 +110,8 @@ class IntendingUser extends Component {
 		render: (text, record) => (<Button>{record.versionInfo}</Button>),
 	}, {
 		title: '手机型号',
-		dataIndex: '11账号类型',
-		key: '11账号类型',
+		dataIndex: '手机型号',
+		key: '手机型号',
 		render: (text, record) => (
 			<Button>{record.systemInfo}</Button>),
 	}, {
