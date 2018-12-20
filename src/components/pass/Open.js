@@ -18,6 +18,7 @@ class Basic extends Component {
             date: new Date()
             , userList: []
             , loading: false
+            , showAmeStockModla: false
             , availableFlag: false
             , mStockRecordBEn: false
             , mStockRecordStatus: 0
@@ -227,6 +228,7 @@ class Basic extends Component {
         let self = this
         self.setState({
                 loading: true,
+                showAmeStockModla: false,
             }
         );
         window.Axios.post('open/getOpenApplyList', {
@@ -344,6 +346,8 @@ class Basic extends Component {
                 // content: this.state.changeNoteV,
             }).then((response) => {
                 self.requestPage()//1:合规 2:开户 3:交易
+                message.success('操作成功')
+
             });
         } else {
             message.error('檢查確定項')
