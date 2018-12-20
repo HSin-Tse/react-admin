@@ -76,13 +76,13 @@ export default {
                 icon: 'star',
                 component: 'IntendingUser'
             },
-            {
-                route: '/app/customer/PotentialUser',
-                tk: 'tk',
-                title: 'PotentialUser',
-                icon: 'star',
-                component: 'PotentialUser'
-            },
+            // {
+            //     route: '/app/customer/PotentialUser',
+            //     tk: 'tk',
+            //     title: 'PotentialUser',
+            //     icon: 'star',
+            //     component: 'PotentialUser'
+            // },
             {
                 route: '/app/customer/CustomerUserInfo:id',
                 tk: 'tk', title: 'CustomerUserInfo',
