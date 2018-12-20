@@ -175,10 +175,6 @@ export default class WhiteList extends Component {
         var selectTimeStart = value[0].unix() + '000'
         var selectTimeEnd = value[1].unix() + '000'
 
-        console.log('hcia selectTimeStart', selectTimeStart)
-        console.log('hcia selectTimeEnd', selectTimeEnd)
-
-
         this.setState({
             filterTimeFalue: value,
             selectTimeStart: selectTimeStart,
