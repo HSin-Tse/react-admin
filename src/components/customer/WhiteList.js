@@ -28,11 +28,19 @@ export default class WhiteList extends Component {
     }
 
     componentWillUnmount() {
+        console.log('hcia componentWillUnmount')
         document.removeEventListener("keydown", this.handleKeyPress, false);
     }
 
+    componentWillMount() {
+        console.log('hcia componentWillMount')
+
+        document.removeEventListener("keydown", this.handleKeyPress, false);
+    }
 
     componentDidMount() {
+        console.log('hcia componentDidMount')
+
         document.addEventListener("keydown", this.handleKeyPress, false);
 
         this.columns = [
@@ -70,13 +78,6 @@ export default class WhiteList extends Component {
                 dataIndex: '操作时间',
                 key: '操作时间',
                 render: (text, record) => (<span>{record.date}</span>),
-            }, {
-                width: 150,
-                align: 'center',
-                title: '身份证号',
-                dataIndex: '身份证号',
-                key: '身份证号',
-                render: (text, record) => (<span>{record.nationalId}</span>),
             }, {
                 width: 150,
                 align: 'center',
@@ -197,6 +198,7 @@ export default class WhiteList extends Component {
         });
     }
     handleKeyPress = (event) => {
+        console.log('hcia event' , event)
 
         if (event.key === 'o') {
             this.setState({
@@ -422,7 +424,7 @@ export default class WhiteList extends Component {
                            bordered
                            columns={this.columns}
                            dataSource={this.state.bklistA}
-                           scroll={{x: 1600}}
+                           scroll={{x: 1500}}
                            loading={this.state.loading}
                            pagination={{
                                total: this.state.totalpageA * this.state.pgsize,
