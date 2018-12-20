@@ -85,128 +85,132 @@ class SiderCustom extends Component {
         return cloneObj;
     }
     handleKeyPress = (event) => {
+        
+        console.log('hcia event' , event)
+
+        var self = this
+
+        if(event.metaKey  || event.ctrlKey){
+            if (event.key === '1') {
+                this.setState({
+                    openKey: '/app/customer',
+                    selectedKey: '/app/customer/PotentialUser'
+
+                })
+                this.props.history.replace('/app/customer/PotentialUser')
+
+            }
+            if (event.key === '2') {
+                this.setState({
+                    openKey: '/app/customer',
+                    selectedKey: '/app/customer/CustomerSummary'
+
+                })
+                this.props.history.replace('/app/customer/CustomerSummary')
+            }
+            if (event.key === '3') {
+                this.setState({
+                    openKey: '/app/customer',
+                    selectedKey: '/app/customer/blacklist'
+
+                })
+                this.props.history.replace('/app/customer/blacklist')
+            }
+
+            if (event.key === '4') {
+                this.setState({
+                    openKey: '/app/customer',
+                    selectedKey: '/app/customer/whitelist'
+
+                })
+                this.props.history.replace('/app/customer/whitelist')
+            }
+            if (event.key === '5') {
+                this.setState({
+                    openKey: '/app/pass',
+                    selectedKey: '/app/pass/open'
+
+                })
+                this.props.history.replace('/app/pass/open')
+            }
+            if (event.key === '6') {
+                this.setState({
+                    openKey: '/app/pass',
+                    selectedKey: '/app/pass/lever'
+
+                })
+                this.props.history.replace('/app/pass/lever')
+            }
+            if (event.key === '7') {
+                this.setState({
+                    openKey: '/app/trade',
+                    selectedKey: '/app/trade/account'
+
+                })
+                this.props.history.replace('/app/trade/account')
+            }
+
+            if (event.key === '8') {
+                this.setState({
+                    openKey: '/app/pms',
+                    selectedKey: '/app/pms/inneruserlist'
+
+                })
+                this.props.history.replace('/app/pms/inneruserlist')
+            }
+            if (event.key === '9') {
+                this.setState({
+                    openKey: '/app/pms',
+                    selectedKey: '/app/pms/roleset'
+
+                })
+                this.props.history.replace('/app/pms/roleset')
+            }
+
+
+            if (event.key === 'a') {
+                this.setState({
+                    openKey: '/app/customer'
+                })
+            }
+            if (event.key === 's') {
+                this.setState({
+                    openKey: '/app/pass'
+                })
+            }
+            if (event.key === 'd') {
+                this.setState({
+                    openKey: '/app/trade'
+                })
+            }
+            if (event.key === 'f') {
+                this.setState({
+                    openKey: '/app/pms'
+                })
+            }
+            if (event.key === 'c') {
+                this.setState({
+                    openKey: ''
+                })
+            }
+        }
         // console.log('hcia event' , event)
 
 
-        var self = this
-        // if (event.key === '1') {
-        //     this.setState({
-        //         openKey: '/app/customer',
-        //         selectedKey: '/app/customer/PotentialUser'
-        //
-        //     })
-        //     this.props.history.replace('/app/customer/PotentialUser')
-        //
-        // }
-        // if (event.key === '2') {
-        //     this.setState({
-        //         openKey: '/app/customer',
-        //         selectedKey: '/app/customer/CustomerSummary'
-        //
-        //     })
-        //     this.props.history.replace('/app/customer/CustomerSummary')
-        // }
-        // if (event.key === '3') {
-        //     this.setState({
-        //         openKey: '/app/customer',
-        //         selectedKey: '/app/customer/blacklist'
-        //
-        //     })
-        //     this.props.history.replace('/app/customer/blacklist')
-        // }
-        //
-        // if (event.key === '4') {
-        //     this.setState({
-        //         openKey: '/app/customer',
-        //         selectedKey: '/app/customer/whitelist'
-        //
-        //     })
-        //     this.props.history.replace('/app/customer/whitelist')
-        // }
-        // if (event.key === '5') {
-        //     this.setState({
-        //         openKey: '/app/pass',
-        //         selectedKey: '/app/pass/open'
-        //
-        //     })
-        //     this.props.history.replace('/app/pass/open')
-        // }
-        // if (event.key === '6') {
-        //     this.setState({
-        //         openKey: '/app/pass',
-        //         selectedKey: '/app/pass/lever'
-        //
-        //     })
-        //     this.props.history.replace('/app/pass/lever')
-        // }
-        // if (event.key === '7') {
-        //     this.setState({
-        //         openKey: '/app/trade',
-        //         selectedKey: '/app/trade/account'
-        //
-        //     })
-        //     this.props.history.replace('/app/trade/account')
-        // }
-        //
-        // if (event.key === '8') {
-        //     this.setState({
-        //         openKey: '/app/pms',
-        //         selectedKey: '/app/pms/inneruserlist'
-        //
-        //     })
-        //     this.props.history.replace('/app/pms/inneruserlist')
-        // }
-        // if (event.key === '9') {
-        //     this.setState({
-        //         openKey: '/app/pms',
-        //         selectedKey: '/app/pms/roleset'
-        //
-        //     })
-        //     this.props.history.replace('/app/pms/roleset')
-        // }
-        //
-        //
-        // if (event.key === 'a') {
-        //     this.setState({
-        //         openKey: '/app/customer'
-        //     })
-        // }
-        // if (event.key === 's') {
-        //     this.setState({
-        //         openKey: '/app/pass'
-        //     })
-        // }
-        // if (event.key === 'd') {
-        //     this.setState({
-        //         openKey: '/app/trade'
-        //     })
-        // }
-        // if (event.key === 'f') {
-        //     this.setState({
-        //         openKey: '/app/pms'
-        //     })
-        // }
-        // if (event.key === 'c') {
-        //     this.setState({
-        //         openKey: ''
-        //     })
-        // }
 
 
-        // if (event.key === '1') {
-        //     this.setState({
-        //         openKey: ''
-        //     })
-        // }
+
     }
 
     componentWillUnmount() {
         // console.log('hcia componentWillUnmount')
         document.removeEventListener("keydown", this.handleKeyPress, false);
+        // document.removeEventListener("keyup", this.handleKeyPress, false);
     }
     componentDidMount() {
 
         document.addEventListener("keydown", this.handleKeyPress, false);
+        // document.addEventListener("keyup", this.handleKeyPress, false);
 
 
         // console.log('hcia  SiderCustom componentDidMount')
