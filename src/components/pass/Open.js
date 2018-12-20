@@ -105,11 +105,15 @@ class Basic extends Component {
             }, {
                 title: '申请序号',
                 dataIndex: '申请序号',
+                align: 'center',
+
                 key: '申请序号',
                 render: (text, record) => (<span>{record.id}</span>),
             }, {
                 title: '账号类型',
                 dataIndex: '账号类型',
+                align: 'center',
+
                 key: '账号类型',
                 render: (text, record) => (
                     <span>{record.displayApplyType}</span>),
@@ -125,18 +129,16 @@ class Basic extends Component {
                 title: '身份证号',
                 dataIndex: '身份证号',
                 key: '身份证号',
+                align: 'center',
+
                 render: (text, record) => (
                     <span>{record.nationalID}</span>),
             }, {
                 title: '邮箱地址',
                 dataIndex: '邮箱地址',
                 key: '邮箱地址',
-                render: (text, record) => (
-                    <span>{record.email}</span>),
-            }, {
-                title: '邮箱地址',
-                dataIndex: '邮箱地址',
-                key: '邮箱地址',
+                align: 'center',
+
                 render: (text, record) => (
                     <span>{record.email}</span>),
             }, {
@@ -156,6 +158,8 @@ class Basic extends Component {
             }, {
                 title: '处理人',
                 dataIndex: '处理人',
+                align: 'center',
+
                 key: '处理人',
                 render: (text, record) => (
                     <span>{record.operator}</span>),
@@ -242,10 +246,10 @@ class Basic extends Component {
                     <Table rowKey="id"
                            columns={this.columns}
                            dataSource={this.state.userList}
-                           scroll={{x: 2100}}
+                           scroll={{x: 2000}}
                            bordered
                            loading={this.state.loading}
-                           pagination={{  // 分页
+                           pagination={{
                                total: this.state.pgsize * this.state.totalPage,
                                pageSize: this.state.pgsize,
                                onChange: this.changePage,
