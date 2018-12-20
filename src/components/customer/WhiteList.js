@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {DatePicker, Input, Modal, Button, Table, message, Card, Icon} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import classNames from "classnames";
+import html2canvas from "html2canvas";
+import * as jsPDF from "jspdf";
 
 const {RangePicker} = DatePicker;
 const {TextArea} = Input;
@@ -19,19 +21,20 @@ export default class WhiteList extends Component {
             loadingA: false,
             showModaladdWhite: false,
             selectPhone: "",
-            // selectMail: "",
-            // selectPhoneF: "",
-            // selectID: "",
-            // selectTimeStart: "",
-            // selectTimeEnd: "",
             NameCn: "",
             phoneCn: "",
             changeNoteV: "",
-            // switcherOn: true,
         };
     }
 
+    componentWillUnmount() {
+        document.removeEventListener("keydown", this.handleKeyPress, false);
+    }
+
+
     componentDidMount() {
+        document.addEventListener("keydown", this.handleKeyPress, false);
+
         this.columns = [
             {
                 align: 'center',
@@ -158,7 +161,14 @@ export default class WhiteList extends Component {
             selectID: e.target.value,
         });
     }
+    handleKeyPress = (event) => {
 
+        if (event.key === 'o') {
+            this.setState({
+                switcherOn: !this.state.switcherOn
+            })
+        }
+    }
     onChangeDate = (value, dateString) => {
 
 
@@ -217,7 +227,7 @@ export default class WhiteList extends Component {
         return (
 
 
-            <div>
+            <div id="whiteL">
                 <Modal
                     title="新增白名单成员"
                     visible={this.state.showModaladdWhite}
@@ -365,7 +375,6 @@ export default class WhiteList extends Component {
 
                     </div>
                 </div>
-
 
 
                 <h2 style={{marginTop: 15}}>

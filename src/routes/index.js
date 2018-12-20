@@ -84,7 +84,7 @@ export default class CRouter extends Component {
             var imuRou = Immutable.Map(routesAD).toObject()
             this.setState({cconfig: imuRou});
 
-            console.log('hcia imuRou', imuRou)
+            // console.log('hcia imuRou', imuRou)
             return
         }
         // var bbRouter = {...routes}
