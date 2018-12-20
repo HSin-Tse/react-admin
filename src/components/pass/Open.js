@@ -2,11 +2,13 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, Input, Card} from 'antd';
+import {Button, Table, Input, Card, Modal, Checkbox, message} from 'antd';
 
 
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
+
+const {TextArea} = Input;
 
 class Basic extends Component {
 
@@ -17,8 +19,15 @@ class Basic extends Component {
             , userList: []
             , loading: false
             , availableFlag: false
+            , mStockRecordBEn: false
+            , mStockRecordStatus: 0
             , isCanOP: 0
+            , current: 0
             , searchPhone: ''
+            , mStockRecord: {
+                status: 1,
+                ben: false
+            }
             , totalPage: 1
             , pgsize: 10
 
@@ -175,11 +184,11 @@ class Basic extends Component {
                         <Button className="ant-dropdown-link"
                                 onClick={() => this.handleEdit(record)}>{record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'}</Button>
                         <Button className="ant-dropdown-link"
-                                onClick={() => this.handleEdit(record)}>{record.displayStatus}</Button>
+                                onClick={() => this.handleAmStok(record)}>{record.displayStatus}</Button>
                     </div>
                 ),
             }];
-        this.requestPage(1)
+        this.requestPage()
     }
 
     handleEdit = (record) => {
@@ -195,8 +204,26 @@ class Basic extends Component {
     };
 
 
-    requestPage = (pg) => {
-        pg = pg - 1
+    handleAmStok = (record) => {
+        let self = this
+        self.setState({
+
+                mStockRecord: record,
+                mStockRecordBEn: false,
+                mStockRecordStatus: record.status,
+            },
+            () => {
+                self.setState({
+                        showAmeStockModla: true,
+                    }
+                );
+
+            }
+        );
+    };
+
+
+    requestPage = () => {
         let self = this
         self.setState({
                 loading: true,
@@ -204,7 +231,7 @@ class Basic extends Component {
         );
         window.Axios.post('open/getOpenApplyList', {
             'pageSize': this.state.pgsize,
-            'pageNo': pg,
+            'pageNo': this.state.current,
         }).then((response) => {
 
             self.setState({
@@ -218,12 +245,13 @@ class Basic extends Component {
     }
 
     changePage = (page) => {
+        page = page - 1
         console.log('hcia page', page)
         this.setState({
             current: page,
         }, () => {
 
-            this.requestPage(page)
+            this.requestPage()
 
         })
     }
@@ -257,9 +285,71 @@ class Basic extends Component {
                     />
                 </Card>
 
+                <Modal
+                    title="美股授权审核"
+                    visible={this.state.showAmeStockModla}
+                    onOk={this.handleOk}
+                    okType={((this.state.mStockRecordStatus == 1) && this.state.mStockRecordBEn) ? 'primary' : 'dashed'}
+                    onCancel={(e) => {
+                        this.setState({
+                            showAmeStockModla: false,
+                        });
+                    }}
+                >
+
+                    <Card bordered={true}>
+                        {/*record.status*/}
+                        <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
+
+
+                            <Checkbox checked={this.state.mStockRecordStatus == 1}>已确认可以已正常开户</Checkbox>
+
+
+                        </div>
+                        <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
+
+                            <Checkbox
+                                checked={this.state.mStockRecordBEn}
+
+                                onChange={(e) => {
+
+                                    console.log('hcia e.target.checked', e.target.checked)
+                                    this.setState({
+                                        mStockRecordBEn: e.target.checked,
+                                    });
+                                }}>已审核客户回传的W-8BEN表单</Checkbox>
+                        </div>
+
+
+                    </Card>
+                </Modal>
+
             </div>
 
         )
+    }
+
+    handleOk = (e) => {
+
+
+        if (((this.state.mStockRecordStatus == 1) && this.state.mStockRecordBEn)) {
+
+            console.log('hcia this.state.mStockRecord', this.state.mStockRecord.id)
+            console.log('hcia this.state.mStockRecord', this.state.mStockRecord.belongUserId)
+
+            let self = this
+            window.Axios.post('open/passUsStock', {
+                belongUserId: this.state.mStockRecord.belongUserId,
+                // mobile: this.state.phoneCn,
+                // content: this.state.changeNoteV,
+            }).then((response) => {
+                self.requestPage()//1:合规 2:开户 3:交易
+            });
+        } else {
+            message.error('檢查確定項')
+        }
+
+
     }
 }
 
