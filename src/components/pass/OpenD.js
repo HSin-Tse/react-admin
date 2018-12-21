@@ -105,12 +105,9 @@ class PassOpenD extends Component {
         window.Axios.post('dict/leverageList', {
             'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
         }).then((response) => {
-
             self.setState({
                 leverageList: response.data.data,
-
             });
-
         });
 
         window.Axios.post('dict/openDict', {

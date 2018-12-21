@@ -1,10 +1,24 @@
 import React, {Component} from 'react';
-import {DatePicker, Input, Modal, Button, Table, message, Card, Layout, Icon, Popconfirm, Tooltip} from 'antd';
+import {
+    DatePicker,
+    Input,
+    Modal,
+    Button,
+    Table,
+    message,
+    Card,
+    Row,
+    Icon,
+    Popconfirm,
+    Col,
+    Checkbox
+} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {ThemePicker} from '@/components/widget';
 import classNames from "classnames";
 
 const {RangePicker} = DatePicker;
+const {TextArea} = Input;
 
 export default class CustomerSummary extends Component {
 
@@ -13,9 +27,13 @@ export default class CustomerSummary extends Component {
         this.state = {
             bklistA: [],
             operationDiaryHistory: [],
+            checkedValues: [],
             currentA: 0,
+            otherComment: '',
+            otherCommentChecks: '',
             totalpageA: 0,
             switcherOn: false,
+            showUnBindPhoneModal: false,
             pgsize: 20,
             visible: false,
             modal2Visible: false,
@@ -144,7 +162,7 @@ export default class CustomerSummary extends Component {
                         </Popconfirm>
 
                         <Button className="ant-dropdown-link"
-                                onClick={() => this.requestUnbindAccount(record)}>解綁</Button>
+                                onClick={() => this.requestUnbindAccount(record)}>解绑</Button>
                         <Button className="ant-dropdown-link" onClick={() => this.forzenAccount(record)}>重置密码</Button>
                     </div>
                 ),
@@ -172,7 +190,8 @@ export default class CustomerSummary extends Component {
         return (
 
             <div>
-                {/*<div>selectMail :{this.state.selectMail}</div>*/}
+                <div>otherComment :{this.state.otherComment}</div>
+                <div>otherComment :{this.state.otherCommentChecks}</div>
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
                     <span className="sw-btn dark-white" onClick={this._switcherOn}>
                      <Icon type="setting" className="text-dark"/>
@@ -319,6 +338,82 @@ export default class CustomerSummary extends Component {
                            scroll={{x: 1300}}
                     />
                 </Modal>
+
+
+                <Modal
+                    bodyStyle={{padding: 0, margin: 15}}
+
+                    title="解绑手机号"
+                    visible={this.state.showUnBindPhoneModal}
+                    onOk={() => {
+
+
+
+                        if(this.state.otherComment){
+                            this.state.checkedValues.push('其他:'+this.state.otherComment)
+                        }
+
+                        window.Axios.post('star/unBindStarLiveAccount', {
+                            "starClientAccount": this.state.nowRECODE.accountNo,
+                            "belongUserId": this.state.nowRECODE.belongUserId,
+                            "content": this.state.checkedValues.toString(),
+                        }).then((response) => {
+                            message.success('操作成功')
+                        })
+
+
+                    }}
+                    okType={((this.state.mStockRecordStatus == 1) && this.state.mStockRecordBEn) ? 'primary' : 'dashed'}
+                    onCancel={(e) => {
+                        this.setState({
+                            showUnBindPhoneModal: false,
+                        });
+                    }}
+                >
+
+                    <Card title={'请确认客户信息：'} bordered={true}>
+                        {/*record.status*/}
+
+                        <Checkbox.Group style={{width: '100%'}} onChange={(checkedValues) => {
+
+                            this.setState({
+                                checkedValues: checkedValues,
+                                otherCommentChecks: checkedValues.toString(),
+                            });
+
+                        }}>
+
+                            <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
+
+
+                                <Checkbox value={"手机号"}>手机号</Checkbox>
+                                <Checkbox value={"邮箱"}>邮箱</Checkbox>
+                                <Checkbox value={"账号"}>账号</Checkbox>
+                                <Checkbox value={"地址"}>地址</Checkbox>
+                                <Checkbox value={"身份证号"}>身份证号</Checkbox>
+
+
+                            </div>
+                            <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
+                                <Checkbox value={"身份证正本"}>身份证正本</Checkbox>
+                            </div>
+
+                        </Checkbox.Group>
+                        <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
+
+                            <span style={{minWidth: 60}}>其他：</span>
+
+                            <Input value={this.state.otherComment}
+                                   onChange={(e) => {
+                                       this.setState({
+                                           otherComment: e.target.value,
+                                       });
+                                   }} style={{marginBottom: 10}} placeholder=""/>
+                        </div>
+                    </Card>
+                </Modal>
+
+
             </div>
 
         )
@@ -364,6 +459,7 @@ export default class CustomerSummary extends Component {
         });
     }
 
+
     handleCancel = (e) => {
         console.log(e);
         this.setState({
@@ -372,13 +468,15 @@ export default class CustomerSummary extends Component {
         });
     }
     requestUnbindAccount = (record) => {
-        window.Axios.post('star/unBindStarLiveAccount', {
-            "starClientAccount": record.accountNo,
-            "belongUserId": record.belongUserId,
-        }).then((response) => {
-
-            console.log('yyx handleAddComment success', response.data.data)
+        this.state.checkedValues.length = 0
+        this.setState({
+            checkedValues: [],
+            otherComment: '',
+            otherCommentChecks: '',
+            nowRECODE: record,
+            showUnBindPhoneModal: true
         })
+
 
     }
 
@@ -473,7 +571,7 @@ export default class CustomerSummary extends Component {
             "starClientAccount": record.accountNo,
             "belongUserId": record.belongUserId,
 
-        }).then((response) => {
+        }).then(() => {
             message.success(record.accountNo + '帳號凍結成功')
             self.requestData()
         })

@@ -42,6 +42,7 @@ export default class WhiteList extends Component {
 
         document.addEventListener("keydown", this.handleKeyPress, false);
 
+
         this.columns = [
             {
                 align: 'center',
@@ -197,13 +198,16 @@ export default class WhiteList extends Component {
         });
     }
     handleKeyPress = (event) => {
-        console.log('hcia event' , event)
 
-        if (event.key === 'o') {
-            this.setState({
-                switcherOn: !this.state.switcherOn
-            })
+
+        if (event.metaKey || event.ctrlKey) {
+            if (event.key === 'o') {
+                this.setState({
+                    switcherOn: !this.state.switcherOn
+                })
+            }
         }
+
     }
     onChangeDate = (value, dateString) => {
 

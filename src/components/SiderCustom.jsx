@@ -86,7 +86,7 @@ class SiderCustom extends Component {
     }
     handleKeyPress = (event) => {
         
-        console.log('hcia event' , event)
+        // console.log('hcia event' , event)
 
         var self = this
 
