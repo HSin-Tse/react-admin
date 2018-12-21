@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {DatePicker, Input, Modal, Button, Table, message, Card, Layout, Icon} from 'antd';
+import {DatePicker, Input, Modal, Button, Table, message, Card, Layout, Icon, Popconfirm, Tooltip} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {ThemePicker} from '@/components/widget';
 import classNames from "classnames";
@@ -134,7 +134,15 @@ export default class CustomerSummary extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button className="ant-dropdown-link" onClick={() => this.forzenAccount(record)}>凍結</Button>
+
+                        <Popconfirm title="确认当前用户开户申请通过"
+                                    onConfirm={() => this.forzenAccount(record)} okText="Yes"
+                                    cancelText="No">
+
+                            <Button className="ant-dropdown-link">凍結</Button>
+
+                        </Popconfirm>
+
                         <Button className="ant-dropdown-link"
                                 onClick={() => this.requestUnbindAccount(record)}>解綁</Button>
                         <Button className="ant-dropdown-link" onClick={() => this.forzenAccount(record)}>重置密码</Button>
@@ -144,7 +152,6 @@ export default class CustomerSummary extends Component {
                 title: '其他',
                 key: '其他',
                 dataIndex: '其他',
-
                 align: 'center',
                 render: (text, record) => (
                     <div>
@@ -392,7 +399,6 @@ export default class CustomerSummary extends Component {
 
         }).then((response) => {
 
-            console.log('hcia response', response)
             self.setState({
                 totalpageA: response.data.data.totalPage,
                 bklistA: response.data.data.list,
@@ -461,14 +467,15 @@ export default class CustomerSummary extends Component {
         });
     }
     forzenAccount = (record) => {
+
+        var self = this
         window.Axios.post('star/blockStarLiveAccount', {
             "starClientAccount": record.accountNo,
             "belongUserId": record.belongUserId,
 
         }).then((response) => {
-
-            console.log('forzenAccount Axios sucessful', response);
-            alert(record.accountNo + '帳號凍結成功')
+            message.success(record.accountNo + '帳號凍結成功')
+            self.requestData()
         })
     }
 }
