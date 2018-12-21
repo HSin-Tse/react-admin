@@ -349,6 +349,8 @@ export default class CustomerSummary extends Component {
 
 
 
+                        var self =  this
+
                         if(this.state.otherComment){
                             this.state.checkedValues.push('其他:'+this.state.otherComment)
                         }
@@ -359,6 +361,11 @@ export default class CustomerSummary extends Component {
                             "content": this.state.checkedValues.toString(),
                         }).then((response) => {
                             message.success('操作成功')
+
+                            self.setState({
+                                showUnBindPhoneModal:false
+
+                            })
                         })
 
 
