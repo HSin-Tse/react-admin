@@ -43,6 +43,8 @@ window.Axios.interceptors.request.use(
 
                 }
 
+                config.timeout=30*1000
+
                 config.headers = {
                     'token': xtoken,
                     'loginName': loginName,
@@ -84,7 +86,8 @@ window.Axios.interceptors.response.use(function (response) {
     return response
 }, function (error) {
 
-    console.log('hcia error', error)
+    console.log('hcia error', error.toString())
+    message.error(error.toString())
 
 
     // Do something with response error
