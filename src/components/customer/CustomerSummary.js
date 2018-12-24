@@ -24,6 +24,7 @@ export default class CustomerSummary extends Component {
             switcherOn: false,
             showUnBindPhoneModal: false,
             pgsize: 20,
+            opDayRecord: {},
             visible: false,
             modal2Visible: false,
         };
@@ -50,16 +51,16 @@ export default class CustomerSummary extends Component {
         document.addEventListener("keydown", this.handleKeyPress, false);
 
         this.requestData()
-        this.modalColumns = [
+        this.modalOPDayColumns = [
             {
                 title: '時間',
                 dataIndex: 'createDate',
                 key: 'operationDiary_Date',
 
                 render: (text, record) => (
-                    <Button>{record.createDate}</Button>),
+                    <Button>{this.timestampToTime(record.createDate)}</Button>),
             }, {
-                title: '狀態',
+                title: 'IP',
                 dataIndex: 'comment',
                 key: 'operationDiary_Status',
 
@@ -67,6 +68,13 @@ export default class CustomerSummary extends Component {
                     <Button>{record.comment}</Button>),
             }, {
                 title: '操作人',
+                dataIndex: 'comment',
+                key: 'operationDiary_Status',
+
+                render: (text, record) => (
+                    <Button>{record.comment}</Button>),
+            }, {
+                title: '操作',
                 dataIndex: 'bkUserName',
                 key: 'operationDiary_User',
 
@@ -188,7 +196,7 @@ export default class CustomerSummary extends Component {
                         {/* <span className="ant-divider" />
 						<Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>移除</Button> */}
                         <Button className="ant-dropdown-link" onClick={() => this.showModal(record)}>添加備註</Button>
-                        <Button className="ant-dropdown-link" onClick={() => this.showModal2()}>操作日誌</Button>
+                        <Button className="ant-dropdown-link" onClick={() => this.showModal2(record)}>操作日誌</Button>
 
                     </div>
                 ),
@@ -204,11 +212,11 @@ export default class CustomerSummary extends Component {
             <div>
 
                 {/*<KeyOp mCount={this.state.mCount}*/}
-                       {/*transferMsg={(mCount) => {*/}
-                           {/*this.setState({*/}
-                               {/*mCount*/}
-                           {/*});*/}
-                       {/*}}/>*/}
+                {/*transferMsg={(mCount) => {*/}
+                {/*this.setState({*/}
+                {/*mCount*/}
+                {/*});*/}
+                {/*}}/>*/}
                 {/*<div>mCount :{this.state.mCount}</div>*/}
                 <div>otherComment :{this.state.otherComment}</div>
                 <div>otherComment :{this.state.otherCommentChecks}</div>
@@ -326,7 +334,7 @@ export default class CustomerSummary extends Component {
                     <Table
                         rowKey="id"
                         bordered
-                        scroll={{x: 1620}}
+                        scroll={{x: 1800}}
                         columns={this.columns}
                         dataSource={this.state.bklistA}
                         loading={this.state.loading}
@@ -356,8 +364,8 @@ export default class CustomerSummary extends Component {
                     cancelText="取消"
                 >
                     <Table rowKey="id"
-                           columns={this.modalColumns} dataSource={this.state.operationDiaryHistory}
-                           scroll={{x: 1300}}
+                           columns={this.modalOPDayColumns}
+                           dataSource={this.state.operationDiaryHistory}
                     />
                 </Modal>
 
@@ -412,15 +420,11 @@ export default class CustomerSummary extends Component {
                         }}>
 
                             <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
-
-
                                 <Checkbox value={"手机号"}>手机号</Checkbox>
                                 <Checkbox value={"邮箱"}>邮箱</Checkbox>
                                 <Checkbox value={"账号"}>账号</Checkbox>
                                 <Checkbox value={"地址"}>地址</Checkbox>
                                 <Checkbox value={"身份证号"}>身份证号</Checkbox>
-
-
                             </div>
                             <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
                                 <Checkbox value={"身份证正本"}>身份证正本</Checkbox>
@@ -447,13 +451,47 @@ export default class CustomerSummary extends Component {
         )
     }
 
-    showModal2 = () => {
-        this.setState({
-            modal2Visible: true,
-            visible: false,
+    showModal2 = (record) => {
 
+        var self = this
+
+
+        self.setState({
+            opDayRecord: record
+        }, () => {
+            window.Axios.post('auth/getUserCommentList', {
+                'belongUserId': this.state.opDayRecord.belongUserId,
+            }).then(function (response) {
+                self.setState({operationDiaryHistory: response.data.data.list});
+            }, () => {
+                self.setState({
+                    modal2Visible: true,
+                    visible: false,
+                });
+            })
+            self.setState({
+                modal2Visible: true,
+                visible: false,
+            });
         });
+
+
     }
+
+    timestampToTime = (timestamp) => {
+        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
+        const year = dateObj.getFullYear() // 获取年，
+        const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
+        const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
+        const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
+        const minutes = this.pad(dateObj.getMinutes()) // 获取分
+        const seconds = this.pad(dateObj.getSeconds()) // 获取秒
+        return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
+    };
+
+    pad = (str) => {
+        return +str >= 10 ? str : '0' + str
+    };
     showModal = (record) => {
         let belongUserId = record.belongUserId
         this.setState({
@@ -467,7 +505,7 @@ export default class CustomerSummary extends Component {
         window.Axios.post('auth/addUserComment', {
             content: self.state.theComment,
             belongUserId: self.state.theBelongUserId,
-        }).then((response) => {
+        }).then(() => {
             message.success('操作成功')
         })
 
@@ -507,7 +545,6 @@ export default class CustomerSummary extends Component {
 
     requestData = () => {
         let self = this
-
         window.Axios.post('ixuser/getUserList', {
             pageNo: this.state.currentA,
             'listType': 4,
@@ -518,29 +555,15 @@ export default class CustomerSummary extends Component {
             starClientAccount: this.state.starClientAccount,
             startTime: this.state.selectTimeStart,
             endTime: this.state.selectTimeEnd,
-
         }).then((response) => {
-
             self.setState({
                 totalpageA: response.data.data.totalPage,
                 bklistA: response.data.data.list,
                 loadingA: false
 
             });
-
         })
 
-    }
-
-
-    requestUserCommentList = () => {
-        var tmp = this;
-        window.Axios.post('auth/getUserCommentList', {
-            'belongUserId': '4028b2a4631f770f01631f7770df0000',
-
-        }).then(function (response) {
-            tmp.setState({operationDiaryHistory: response.data.data.list});
-        })
     }
 
 
