@@ -203,14 +203,8 @@ class CustomerUserInfo extends Component {
                 <Button>{record.bkUserName}</Button>),
         }]
     }
-    hasChange = (status) => {
-        console.log('yyx', status.target.checked)
-    }
     checkDiary = () => {
 
-    }
-    selectDate = (date, dateString) => {
-        console.log(dateString, 'yyx', date);
     }
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容

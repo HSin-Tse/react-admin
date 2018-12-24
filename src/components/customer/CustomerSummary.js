@@ -39,8 +39,27 @@ export default class CustomerSummary extends Component {
             modal2Visible: false,
         };
     }
+    handleKeyPress = (event) => {
 
+
+        if (event.metaKey || event.ctrlKey) {
+            if (event.key === 'o') {
+                this.setState({
+                    switcherOn: !this.state.switcherOn
+                })
+            }
+        }
+
+    }
+    componentWillUnmount() {
+        console.log('hcia componentWillUnmount')
+        document.removeEventListener("keydown", this.handleKeyPress, false);
+    }
     componentDidMount() {
+
+        document.addEventListener("keydown", this.handleKeyPress, false);
+
+
         this.requestData()
         this.modalColumns = [
             {
@@ -153,11 +172,13 @@ export default class CustomerSummary extends Component {
                 render: (text, record) => (
                     <div>
 
-                        <Popconfirm title="确认当前用户开户申请通过"
+                        <Popconfirm title="确认凍結?"
                                     onConfirm={() => this.forzenAccount(record)} okText="Yes"
                                     cancelText="No">
 
-                            <Button className="ant-dropdown-link">凍結</Button>
+                            {/*<Button className="ant-dropdown-link">凍結</Button>*/}
+                            <Button className="ant-dropdown-link">{record.accountStatus===1?'正常':record.accountStatus===2?'禁止登陆'
+                                :record.accountStatus===3?'禁止交易':'accountStatus:'+record.accountStatus}</Button>
 
                         </Popconfirm>
 
@@ -167,6 +188,7 @@ export default class CustomerSummary extends Component {
                     </div>
                 ),
             }, {
+                //账户状态：1:正常（可冻结） 2:禁止登陆（可解冻） 3:禁止交易（可解冻）
                 title: '其他',
                 key: '其他',
                 dataIndex: '其他',
@@ -575,7 +597,7 @@ export default class CustomerSummary extends Component {
 
         var self = this
         window.Axios.post('star/blockStarLiveAccount', {
-            "starClientAccount": record.accountNo,
+            "starClientAccount": record.liveAccountId,
             "belongUserId": record.belongUserId,
 
         }).then(() => {
