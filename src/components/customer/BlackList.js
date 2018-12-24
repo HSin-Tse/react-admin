@@ -334,12 +334,7 @@ export default class BlackList extends Component {
 
 
             <div>
-                <div>NameCn :{JSON.stringify(this.state.NameCn)}</div>
-                <div>phoneCn :{JSON.stringify(this.state.phoneCn)}</div>
-                <div>IDCn :{JSON.stringify(this.state.IDCn)}</div>
-                <div>MAilCn :{JSON.stringify(this.state.MAilCn)}</div>
-                <div>TradeACcountCn :{JSON.stringify(this.state.TradeACcountCn)}</div>
-                <div>changeNoteVCN :{JSON.stringify(this.state.changeNoteVCN)}</div>
+
 
 
                 <div className={classNames('switcher dark-white', {active: switcherOn})}>
@@ -427,30 +422,52 @@ export default class BlackList extends Component {
                             </Card>
                         </TabPane>
                         <TabPane tab="开户黑名单" key="2">
-                            <Table rowKey="id"
-                                   columns={this.columns}
-                                   dataSource={this.state.bklistB}
-                                   scroll={{x: 1300}}
-                                   loading={this.state.loadingB}
-                                   pagination={{  // 分页
-                                       total: this.state.totalpageB * this.state.pgsize,
-                                       pageSize: this.state.pgsize,
-                                       onChange: this.changePageB,
-                                   }}
-                            />
+                            <Card
+                                bodyStyle={{padding: 0, margin: 0}}
+                                title={'开户黑名单'}
+                                extra={<Button onClick={() => {
+                                    this.setState({
+                                        showModaladdblack: true,
+                                    });
+                                }}>添加黑名单</Button>}
+                            >
+                                <Table rowKey="id"
+                                       columns={this.columns}
+                                       dataSource={this.state.bklistB}
+                                       scroll={{x: 1300}}
+                                       loading={this.state.loadingB}
+                                       pagination={{  // 分页
+                                           total: this.state.totalpageB * this.state.pgsize,
+                                           pageSize: this.state.pgsize,
+                                           onChange: this.changePageB,
+                                       }}
+                                />
+                            </Card>
+
                         </TabPane>
                         <TabPane tab="交易黑名单" key="3">
-                            <Table rowKey="id"
-                                   columns={this.columns}
-                                   dataSource={this.state.bklistC}
-                                   scroll={{x: 1300}}
-                                   loading={this.state.loadingC}
-                                   pagination={{  // 分页
-                                       total: this.state.totalpageC * this.state.pgsize,
-                                       pageSize: this.state.pgsize,
-                                       onChange: this.changePageC,
-                                   }}
-                            />
+                            <Card
+                                bodyStyle={{padding: 0, margin: 0}}
+                                title={'交易黑名单'}
+                                extra={<Button onClick={() => {
+                                    this.setState({
+                                        showModaladdblack: true,
+                                    });
+                                }}>添加黑名单</Button>}
+                            >
+                                <Table rowKey="id"
+                                       columns={this.columns}
+                                       dataSource={this.state.bklistC}
+                                       scroll={{x: 1300}}
+                                       loading={this.state.loadingC}
+                                       pagination={{  // 分页
+                                           total: this.state.totalpageC * this.state.pgsize,
+                                           pageSize: this.state.pgsize,
+                                           onChange: this.changePageC,
+                                       }}
+                                />
+                            </Card>
+
                         </TabPane>
                     </Tabs>
                 </Card>
@@ -473,7 +490,8 @@ export default class BlackList extends Component {
 
                         <div style={{display: 'flex', minHeight: 40}}>
                             <span style={{minWidth: 100}}>类型：</span>
-                            <Select value={this.state.addBlackType} style={{minWidth: 160}} onChange={this.handleADDBalckType}>
+                            <Select value={this.state.addBlackType} style={{minWidth: 160}}
+                                    onChange={this.handleADDBalckType}>
                                 <Option value="1">合规黑名单</Option>
                                 <Option value="2">开户黑名单</Option>
                                 <Option value="3">交易黑名单</Option>
@@ -570,12 +588,6 @@ export default class BlackList extends Component {
         let me = this
 
 
-        // NameCn: "",
-        //     phoneCn: "",
-        //     IDCn: "",
-        //     MAilCn: "",
-        //     TradeACcountCn: "",
-        //     changeNoteVCN: "",
 
 
         if (!(me.state.TradeACcountCn || me.state.phoneCn || me.state.MAilCn || me.state.IDCn)) {

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {DatePicker, Input, Modal, Button, Table, message, Card, Icon} from 'antd';
+import {DatePicker, Input, Modal, Button, Table, message, Card, Icon, Select} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import classNames from "classnames";
 import html2canvas from "html2canvas";
@@ -20,10 +20,10 @@ export default class WhiteList extends Component {
             pgsize: 10,
             loadingA: false,
             showModaladdWhite: false,
-            selectPhone: "",
-            NameCn: "",
-            phoneCn: "",
-            changeNoteV: "",
+            selectPhone: undefined,
+            NameCn: undefined,
+            phoneCn: undefined,
+            changeNoteV: undefined,
         };
     }
 
@@ -230,12 +230,26 @@ export default class WhiteList extends Component {
         });
     }
 
-    handleOk = (e) => {
+    handleAddWhite = (e) => {
         let self = this
+
+        if (!(self.state.TradeACcountCn || self.state.phoneCn)) {
+            message.error('手机和交易账号必选1')
+            return
+        }
+        if (!self.state.changeNoteVCN) {
+            message.error('備註必填')
+            return
+        }
+
+
         window.Axios.post('auth/addWhiteUser', {
-            name: this.state.NameCn,
-            mobile: this.state.phoneCn,
-            content: this.state.changeNoteV,
+            'mobile': self.state.phoneCn,
+            'email': self.state.MAilCn,
+            'nationalId': self.state.IDCn,
+            'name': self.state.NameCn,
+            'starClientAccount': self.state.TradeACcountCn,
+            content: self.state.changeNoteVCN,
         }).then((response) => {
             self.requestPageA()//1:合规 2:开户 3:交易
         });
@@ -259,10 +273,51 @@ export default class WhiteList extends Component {
 
 
             <div id="whiteL">
+                {/*<Modal*/}
+                {/*title="新增白名单成员"*/}
+                {/*visible={this.state.showModaladdWhite}*/}
+                {/*onOk={this.handleOk}*/}
+                {/*onCancel={(e) => {*/}
+                {/*this.setState({*/}
+                {/*showModaladdWhite: false,*/}
+                {/*});*/}
+                {/*}}*/}
+                {/*>*/}
+
+                {/*<Card bordered={true}>*/}
+
+                {/*<div style={{display: 'flex', minHeight: 40}}>*/}
+                {/*<span style={{width: 120}}>*用户姓名：</span>*/}
+                {/*<Input defaultValue={this.state.NameCn}*/}
+                {/*onChange={this.onChangelastNameCn}*/}
+                {/*style={{width: 120}} placeholder="Basic usage" tagkey="lastNameCn"*/}
+                {/*sdsd={'dd'}/>*/}
+                {/*</div>*/}
+
+                {/*<div style={{display: 'flex', minHeight: 40}}>*/}
+                {/*<span style={{minWidth: 120}}>*手机号码：</span>*/}
+                {/*<Input defaultValue={this.state.phoneCn}*/}
+                {/*onChange={this.onChangePhone}*/}
+                {/*style={{width: 120}} placeholder="Basic usage"/>*/}
+                {/*</div>*/}
+
+
+                {/*<div style={{display: 'flex', minHeight: 40}}>*/}
+                {/*<span style={{minWidth: 100}}>操作备注</span>*/}
+
+                {/*<div style={{display: 'flex', minHeight: 40}}>*/}
+                {/*<TextArea value={this.state.changeNoteV} rows={4} onChange={this.changeNote}/>*/}
+                {/*</div>*/}
+                {/*</div>*/}
+
+                {/*</Card>*/}
+                {/*</Modal>*/}
+
                 <Modal
-                    title="新增白名单成员"
+                    width={370}
+                    title="添加白名单"
                     visible={this.state.showModaladdWhite}
-                    onOk={this.handleOk}
+                    onOk={this.handleAddWhite}
                     onCancel={(e) => {
                         this.setState({
                             showModaladdWhite: false,
@@ -270,30 +325,85 @@ export default class WhiteList extends Component {
                     }}
                 >
 
-                    <Card bordered={true}>
+                    <Card
+
+
+                        bordered={true}>
+
 
                         <div style={{display: 'flex', minHeight: 40}}>
-                            <span style={{width: 120}}>*用户姓名：</span>
+                            <span style={{minWidth: 100}}>用户姓名：</span>
                             <Input defaultValue={this.state.NameCn}
-                                   onChange={this.onChangelastNameCn}
-                                   style={{width: 120}} placeholder="Basic usage" tagkey="lastNameCn"
+                                   onChange={(e) => {
+                                       this.setState({
+                                           NameCn: e.target.value,
+                                       });
+                                   }}
+                                   style={{minWidth: 160}}
+                                   tagkey="lastNameCn"
                                    sdsd={'dd'}/>
                         </div>
 
                         <div style={{display: 'flex', minHeight: 40}}>
-                            <span style={{minWidth: 120}}>*手机号码：</span>
+                            <span style={{minWidth: 100}}>手机号码：</span>
                             <Input defaultValue={this.state.phoneCn}
-                                   onChange={this.onChangePhone}
-                                   style={{width: 120}} placeholder="Basic usage"/>
+                                   onChange={(e) => {
+                                       this.setState({
+                                           phoneCn: e.target.value,
+                                       });
+                                   }} style={{minWidth: 160}}
+                                   sdsd={'dd'}
+                            />
                         </div>
 
+                        <div style={{display: 'flex', minHeight: 40}}>
+                            <span style={{minWidth: 100}}>身份证</span>
+                            <Input defaultValue={this.state.IDCn}
+                                   onChange={(e) => {
+                                       this.setState({
+                                           IDCn: e.target.value,
+                                       });
+                                   }}
+                                   style={{minWidth: 160}}
+                                   sdsd={'dd'}
+                            />
+                        </div>
+
+                        <div style={{display: 'flex', minHeight: 40}}>
+                            <span style={{minWidth: 100}}>邮箱</span>
+                            <Input defaultValue={this.state.MAilCn}
+                                   onChange={(e) => {
+                                       this.setState({
+                                           MAilCn: e.target.value,
+                                       });
+                                   }}
+                                   style={{minWidth: 160}}
+                                   sdsd={'dd'}
+                            />
+                        </div>
+                        <div style={{display: 'flex', minHeight: 40}}>
+                            <span style={{minWidth: 100}}>交易账号</span>
+                            <Input defaultValue={this.state.TradeACcountCn}
+                                   onChange={(e) => {
+                                       this.setState({
+                                           TradeACcountCn: e.target.value,
+                                       });
+                                   }}
+                                   style={{minWidth: 160}}
+                                   sdsd={'dd'}
+                            />
+                        </div>
 
                         <div style={{display: 'flex', minHeight: 40}}>
                             <span style={{minWidth: 100}}>操作备注</span>
-
-                            <div style={{display: 'flex', minHeight: 40}}>
-                                <TextArea value={this.state.changeNoteV} rows={4} onChange={this.changeNote}/>
-                            </div>
+                            <TextArea style={{minWidth: 160}}
+                                      value={this.state.changeNoteVCN}
+                                      rows={4}
+                                      onChange={(e) => {
+                                          this.setState({
+                                              changeNoteVCN: e.target.value,
+                                          });
+                                      }}/>
                         </div>
 
                     </Card>
@@ -305,6 +415,12 @@ export default class WhiteList extends Component {
                 {/*<div>changeNoteV :{this.state.changeNoteV}</div>*/}
                 {/*<div>selectTimeStart :{this.state.selectTimeStart}</div>*/}
                 {/*<div>selectTimeEnd :{this.state.selectTimeEnd}</div>*/}
+                {/*<div>NameCn :{JSON.stringify(this.state.NameCn)}</div>*/}
+                {/*<div>phoneCn :{JSON.stringify(this.state.phoneCn)}</div>*/}
+                {/*<div>IDCn :{JSON.stringify(this.state.IDCn)}</div>*/}
+                {/*<div>MAilCn :{JSON.stringify(this.state.MAilCn)}</div>*/}
+                {/*<div>TradeACcountCn :{JSON.stringify(this.state.TradeACcountCn)}</div>*/}
+                {/*<div>changeNoteVCN :{JSON.stringify(this.state.changeNoteVCN)}</div>*/}
 
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
                     <span className="sw-btn dark-white" onClick={this._switcherOn}>

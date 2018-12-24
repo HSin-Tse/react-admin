@@ -10,6 +10,15 @@ class CustomerUserInfo extends Component {
     state = {visible: false, modal2Visible: false}
 
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            date: new Date()
+            , userList: []
+            , operationDiaryHistory: []
+        };
+    }
+
     showModal2 = () => {
         this.setState({
             modal2Visible: true,
@@ -60,35 +69,26 @@ class CustomerUserInfo extends Component {
         return (
 
             <div>
-                <div>yyxLog log: CustomerUserInfo</div>
 
-                <p
-                    style={{
-                        fontSize: 14,
-                        color: 'rgba(0, 0, 0, 0.85)',
-                        marginBottom: 16,
-                        fontWeight: 500,
-                    }}>
+
+                <h2 style={{marginTop: 15}}>
                     用戶管理
-                </p>
-                <div><BreadcrumbCustom first="用户總表" second="行為信息"/></div>
+                </h2>
+
+                <BreadcrumbCustom first="用户總表" second="行為信息"/>
                 <Card
                     type="inner"
                     title="基本信息"
                 >
                     <Card
-
                         cover={<img alt=""
-                                    src={this.state.userList.length == 0 ? '' : this.state.userList.base.cellphone}/>}
-                    >
-                        < Meta title={this.state.userList.length == 0 ? '姓名：' : '姓名：' + this.state.userList.base.name}/>
-                        < Meta
-                            title={this.state.userList.length == 0 ? '手机：' : '手机：' + this.state.userList.base.cellphone}/>
-                        < Meta
-                            title={this.state.userList.length == 0 ? '邮箱：' : '邮箱：' + this.state.userList.base.email}/>
-
-
+                                    src={this.state.userList.length == 0 ? '' : this.state.userList.base.cellphone}/>}>
                     </Card>
+                    < Meta title={this.state.userList.length == 0 ? '姓名：' : '姓名：' + this.state.userList.base.name}/>
+                    < Meta
+                        title={this.state.userList.length == 0 ? '手机：' : '手机：' + this.state.userList.base.cellphone}/>
+                    < Meta
+                        title={this.state.userList.length == 0 ? '邮箱：' : '邮箱：' + this.state.userList.base.email}/>
                 </Card>
                 <Card
                     style={{marginTop: 16}}
@@ -137,46 +137,17 @@ class CustomerUserInfo extends Component {
         )
     }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            date: new Date()
-            , userList: []
-            , operationDiaryHistory: []
-        };
-    }
 
-
-    hasChangeAll = () => {
-
-    }
     requestUserCommentList = () => {
-        // must request data:
-        //belongUserId
-        //loginName
-        //token
-
-        //refernce request data:
-        //pageNo
-        //pageSize
-        //language
-        const url = 'http://mobile.nooko.cn:8090/auth/getUserCommentList'
-
         var tmp = this;
 
-        window.Axios.post(url, {
+        window.Axios.post('auth/getUserCommentList', {
             'belongUserId': '4028b2a4631f770f01631f7770df0000',
             'loginName': 'admin',
             'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHBpcmVUaW1lIjoxNTQ1NTI4ODM0MTk5LCJsb2dpbk5hbWUiOiJhZG1pbiJ9.F7moE4DsMUiajkKB1S_wemwsozlUW5VMxQKsg4KsSUQ'
-
-        }).then(function (response) {
-
+        }).then((response) => {
             tmp.setState({operationDiaryHistory: response.data.data.list});
-
-        }).catch(function (error) {
-            console.log(error);
-            // message.warn(error);
-        });
+        })
     }
 
     ediftModalColumn = () => {
@@ -203,9 +174,6 @@ class CustomerUserInfo extends Component {
                 <Button>{record.bkUserName}</Button>),
         }]
     }
-    checkDiary = () => {
-
-    }
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
         const year = dateObj.getFullYear() // 获取年，
@@ -215,10 +183,10 @@ class CustomerUserInfo extends Component {
         return year + '-' + month + '-' + date
     };
     requestListData = () => {
-        var self = this;//props.match.params.id
+        var self = this;
         window.Axios.post('ixuser/userOverView', {
             'belongUserId': self.props.match.params.id,
-        }).then(function (response) {
+        }).then((response) => {
             self.setState({userList: response.data.data});
         });
     };
