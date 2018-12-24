@@ -46,6 +46,8 @@ export default class PotentialUser extends Component {
     }
 
     componentDidMount() {
+        document.addEventListener("keydown", this.handleKeyPress, false);
+
         this.requestPageA()
         this.requestPageB()
         this.requestPageC()
@@ -393,6 +395,20 @@ export default class PotentialUser extends Component {
                 ),
             }];
     }
+    handleKeyPress = (event) => {
+        if (event.metaKey || event.ctrlKey) {
+            if (event.key === 'o') {
+                this.setState({
+                    switcherOn: !this.state.switcherOn
+                })
+            }
+        }
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener("keydown", this.handleKeyPress, false);
+    }
+
     handleDelay = (record) => {
         let belongUserId = record.belongUserId
         let accountNo = record.accountNo
@@ -549,10 +565,13 @@ export default class PotentialUser extends Component {
         window.Axios.post('ixuser/getUserList', {
             pageNo: this.state.currentA,
             'listType': 1,
-            'nationalId': this.state.selectID,
-            'startTime': this.state.selectTimeStart,
-            'endTime': this.state.selectTimeEnd,
             'pageSize': this.state.pgsize,
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            starClientAccount: this.state.starClientAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
 
         }).then((response) => {
             self.setState({
@@ -574,11 +593,14 @@ export default class PotentialUser extends Component {
         })
         window.Axios.post('ixuser / getUserList', {
             pageNo: this.state.currentB,
-            'listType': 2,
-            'nationalId': this.state.selectID,
-            'startTime': this.state.selectTimeStart,
-            'endTime': this.state.selectTimeEnd,
             'pageSize': this.state.pgsize,
+            'listType': 2,
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            starClientAccount: this.state.starClientAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
 
         }).then((response) => {
             console.log('kkk', response.data.data);
@@ -602,10 +624,13 @@ export default class PotentialUser extends Component {
         window.Axios.post('ixuser/getUserList', {
             pageNo: this.state.currentC,
             'listType': 3,
-            'nationalId': this.state.selectID,
-            'startTime': this.state.selectTimeStart,
-            'endTime': this.state.selectTimeEnd,
             'pageSize': this.state.pgsize,
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            starClientAccount: this.state.starClientAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
 
         }).then((response) => {
             console.log('iii', response.data.data);
@@ -737,31 +762,99 @@ export default class PotentialUser extends Component {
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 {/*<div>PotentialUser</div>*/}
-                <div className={classNames('switcher dark-white', {active: switcherOn})}>
-					<span className="sw-btn dark-white" onClick={this._switcherOn}>
-						<Icon type="setting" className="text-dark"/>
-					</span>
-                    <div>
+                <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
+                    <span className="sw-btn dark-white" onClick={this._switcherOn}>
+                     <Icon type="setting" className="text-dark"/>
+                    </span>
+                    <div style={{width: 270}}>
 
-                        <Card title="當前表搜索"
-                              extra={<Button type="primary" onClick={() => this.handleremoveSelect()}
-                              >清除條件</Button>}
+                        <Card
+                            title="當前表搜索"
+                            extra={<Button type="primary" onClick={() => {
+                                let self = this
+                                this.setState({
+                                    selectMail: undefined,
+                                    selectID: undefined,
+                                    startTime: undefined,
+                                    selectPhoneF: undefined,
+                                    starClientAccount: undefined,
+                                    selectTimeStart: undefined,
+                                    selectTimeEnd: undefined,
+                                    filterTimeFalue: undefined
+                                }, () => {
+                                    self.searchSelect()
+                                })
+                            }}
+                            >清除條件</Button>}
                         >
-                            <Input onChange={this.onChangeMail} style={{marginBottom: 5}} placeholder="邮箱"/>
-                            <Input value={this.state.selectPhone} onChange={this.onChangePhone}
-                                   style={{marginBottom: 5}} placeholder="手机号"/>
-                            <Input onChange={this.onChangeID} style={{marginBottom: 5}} placeholder="身份证号"/>
-                            <Input onChange={this.onChangeAccount} style={{marginBottom: 5}} placeholder="账户"/>
-                            <Input onChange={this.onChangeKeyWord} style={{marginBottom: 5}} placeholder="关键词"/>
+                            <Input value={this.state.selectMail} onChange={(e) => {
+                                this.setState({selectMail: e.target.value})
+                            }} style={{marginBottom: 10}} placeholder="邮箱"/>
+
+                            <Input value={this.state.selectPhoneF} onChange={(e) => {
+                                this.setState({
+                                    selectPhoneF: e.target.value,
+                                });
+                            }} style={{marginBottom: 10}} placeholder="手机号"/>
+
+
+                            <Input value={this.state.selectID} onChange={(e) => {
+                                this.setState({
+                                    selectID: e.target.value,
+                                });
+                            }} style={{marginBottom: 10}} placeholder="身份证号"/>
+
+                            <Input value={this.state.starClientAccount} onChange={(e) => {
+                                this.setState({
+                                    starClientAccount: e.target.value,
+                                });
+                            }} style={{marginBottom: 10}} placeholder="账户"/>
                             <RangePicker
+
+                                showToday
+                                style={{width: '100%'}}
                                 showTime={{format: 'YYYY-MM-DD HH:mm:ss'}}
                                 format="YYYY-MM-DD HH:mm:ss fff"
-                                placeholder={['Start Time', 'End Time']}
-                                onChange={this.onChangeDate}
-                                onOk={this.onOk}
+                                placeholder={['開始時間', '結束時間']}
+                                onChange={(value, dateString) => {
+
+
+                                    var selectTimeStart = value[0].unix() + '000'
+                                    var selectTimeEnd = value[1].unix() + '000'
+
+                                    console.log('hcia selectTimeStart', selectTimeStart)
+                                    console.log('hcia selectTimeEnd', selectTimeEnd)
+
+
+                                    this.setState({
+                                        filterTimeFalue: value,
+                                        selectTimeStart: selectTimeStart,
+                                        selectTimeEnd: selectTimeEnd,
+
+                                    });
+                                }}
+                                value={this.state.filterTimeFalue}
+                                onOk={(value) => {
+                                    console.log('hcia', 'onOk: ', value);
+
+
+                                    var selectTimeStart = value[0].unix() + '000'
+                                    var selectTimeEnd = value[1].unix() + '000'
+
+                                    console.log('hcia selectTimeStart', selectTimeStart)
+                                    console.log('hcia selectTimeEnd', selectTimeEnd)
+
+
+                                    this.setState({
+                                        filterTimeFalue: value,
+                                        selectTimeStart: selectTimeStart,
+                                        selectTimeEnd: selectTimeEnd,
+
+                                    });
+                                }}
                             />
 
-                            <Button onClick={() => this.searchSelect()} style={{marginTop: 10}} type="primary"
+                            <Button onClick={() => this.searchSelect()} style={{marginTop: 15}} type="primary"
                                     icon="search">Search</Button>
 
                         </Card>
