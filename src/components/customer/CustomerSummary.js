@@ -175,8 +175,8 @@ export default class CustomerSummary extends Component {
 
                             {/*<Button className="ant-dropdown-link">凍結</Button>*/}
                             <Button
-                                className="ant-dropdown-link">{record.accountStatus === 1 ? '正常' : record.accountStatus === 2 ? '禁止登陆'
-                                : record.accountStatus === 3 ? '禁止交易' : 'accountStatus:' + record.accountStatus}</Button>
+                                className="ant-dropdown-link">{record.accountStatus === 1 ? '正常:凍結' : record.accountStatus === 2 ? '禁止登陆:解冻'
+                                : record.accountStatus === 3 ? '禁止交易:解冻' : 'accountStatus:' + record.accountStatus}</Button>
 
                         </Popconfirm>
 
