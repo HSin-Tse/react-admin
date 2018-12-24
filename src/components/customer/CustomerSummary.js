@@ -65,21 +65,21 @@ export default class CustomerSummary extends Component {
                 key: 'operationDiary_Status',
 
                 render: (text, record) => (
-                    <Button>{record.comment}</Button>),
+                    <Button>{record.ip}</Button>),
             }, {
                 title: '操作人',
                 dataIndex: 'comment',
                 key: 'operationDiary_Status',
 
                 render: (text, record) => (
-                    <Button>{record.comment}</Button>),
+                    <Button>{record.user}</Button>),
             }, {
                 title: '操作',
                 dataIndex: 'bkUserName',
                 key: 'operationDiary_User',
 
                 render: (text, record) => (
-                    <Button>{record.bkUserName}</Button>),
+                    <Button>{record.comment}</Button>),
             }]
         this.columns = [
             {
@@ -218,8 +218,8 @@ export default class CustomerSummary extends Component {
                 {/*});*/}
                 {/*}}/>*/}
                 {/*<div>mCount :{this.state.mCount}</div>*/}
-                <div>otherComment :{this.state.otherComment}</div>
-                <div>otherComment :{this.state.otherCommentChecks}</div>
+                {/*<div>otherComment :{this.state.otherComment}</div>*/}
+                {/*<div>otherComment :{this.state.otherCommentChecks}</div>*/}
 
 
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
@@ -356,6 +356,7 @@ export default class CustomerSummary extends Component {
 
                 </Modal>
                 <Modal
+                    width={'100%'}
                     title="操作日誌"
                     visible={this.state.modal2Visible}
                     onOk={this.handleNOteOPOk}

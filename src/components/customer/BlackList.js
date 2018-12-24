@@ -35,6 +35,13 @@ export default class BlackList extends Component {
             selectID: "",
             selectTimeStart: "",
             selectTimeEnd: "",
+            NameCn: '',
+            phoneCn: '',
+            IDCn: '',
+            MAilCn: '',
+            TradeACcountCn: '',
+            changeNoteVCN: '',
+            addBlackType: "1",
         };
     }
 
@@ -233,7 +240,7 @@ export default class BlackList extends Component {
         page = page - 1
 
         this.setState({
-            currentb: page,
+            currentB: page,
         }, () => {
             this.requestPageB()
         })
@@ -327,7 +334,14 @@ export default class BlackList extends Component {
 
 
             <div>
-                {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
+                <div>NameCn :{JSON.stringify(this.state.NameCn)}</div>
+                <div>phoneCn :{JSON.stringify(this.state.phoneCn)}</div>
+                <div>IDCn :{JSON.stringify(this.state.IDCn)}</div>
+                <div>MAilCn :{JSON.stringify(this.state.MAilCn)}</div>
+                <div>TradeACcountCn :{JSON.stringify(this.state.TradeACcountCn)}</div>
+                <div>changeNoteVCN :{JSON.stringify(this.state.changeNoteVCN)}</div>
+
+
                 <div className={classNames('switcher dark-white', {active: switcherOn})}>
                 <span className="sw-btn dark-white" onClick={this._switcherOn}>
                     <Icon type="setting" className="text-dark"/>
@@ -444,7 +458,7 @@ export default class BlackList extends Component {
                     width={370}
                     title="添加黑名单"
                     visible={this.state.showModaladdblack}
-                    onOk={this.handleOk}
+                    onOk={this.handleADdBlackListByType}
                     onCancel={(e) => {
                         this.setState({
                             showModaladdblack: false,
@@ -459,46 +473,85 @@ export default class BlackList extends Component {
 
                         <div style={{display: 'flex', minHeight: 40}}>
                             <span style={{minWidth: 100}}>类型：</span>
-                            <Select defaultValue="0" style={{minWidth: 160}} onChange={this.handleChange}>
-                                <Option value="0">合规黑名单</Option>
-                                <Option value="1">开户黑名单</Option>
-                                <Option value="2">交易黑名单</Option>
+                            <Select value={this.state.addBlackType} style={{minWidth: 160}} onChange={this.handleADDBalckType}>
+                                <Option value="1">合规黑名单</Option>
+                                <Option value="2">开户黑名单</Option>
+                                <Option value="3">交易黑名单</Option>
                             </Select>
                         </div>
-                        <div style={{display: 'flex', minHeight: 40}}>
-                            <span style={{minWidth: 100}}>类型：</span>
-                            <Input defaultValue={this.state.NameCn}
-                                   onChange={this.onChangelastNameCn}
-                                   style={{minWidth: 160}} tagkey="lastNameCn"
-                                   sdsd={'dd'}/>
-                        </div>
+
 
                         <div style={{display: 'flex', minHeight: 40}}>
                             <span style={{minWidth: 100}}>用户姓名：</span>
                             <Input defaultValue={this.state.NameCn}
-                                   onChange={this.onChangelastNameCn}
-                                   style={{minWidth: 160}} tagkey="lastNameCn"
+                                   onChange={(e) => {
+                                       this.setState({
+                                           NameCn: e.target.value,
+                                       });
+                                   }}
+                                   style={{minWidth: 160}}
+                                   tagkey="lastNameCn"
                                    sdsd={'dd'}/>
                         </div>
 
                         <div style={{display: 'flex', minHeight: 40}}>
                             <span style={{minWidth: 100}}>手机号码：</span>
                             <Input defaultValue={this.state.phoneCn}
-                                   onChange={this.onChangePhone}
+                                   onChange={(e) => {
+                                       this.setState({
+                                           phoneCn: e.target.value,
+                                       });
+                                   }} style={{minWidth: 160}}
+                                   sdsd={'dd'}
+                            />
+                        </div>
+
+                        <div style={{display: 'flex', minHeight: 40}}>
+                            <span style={{minWidth: 100}}>身份证</span>
+                            <Input defaultValue={this.state.IDCn}
+                                   onChange={(e) => {
+                                       this.setState({
+                                           IDCn: e.target.value,
+                                       });
+                                   }}
                                    style={{minWidth: 160}}
                                    sdsd={'dd'}
                             />
                         </div>
 
+                        <div style={{display: 'flex', minHeight: 40}}>
+                            <span style={{minWidth: 100}}>邮箱</span>
+                            <Input defaultValue={this.state.MAilCn}
+                                   onChange={(e) => {
+                                       this.setState({
+                                           MAilCn: e.target.value,
+                                       });
+                                   }}
+                                   style={{minWidth: 160}}
+                                   sdsd={'dd'}
+                            />
+                        </div>
+                        <div style={{display: 'flex', minHeight: 40}}>
+                            <span style={{minWidth: 100}}>交易账号</span>
+                            <Input defaultValue={this.state.TradeACcountCn}
+                                   onChange={(e) => {
+                                       this.setState({
+                                           TradeACcountCn: e.target.value,
+                                       });
+                                   }}
+                                   style={{minWidth: 160}}
+                                   sdsd={'dd'}
+                            />
+                        </div>
 
                         <div style={{display: 'flex', minHeight: 40}}>
                             <span style={{minWidth: 100}}>操作备注</span>
                             <TextArea style={{minWidth: 160}}
-                                      value={this.state.changeNoteV}
+                                      value={this.state.changeNoteVCN}
                                       rows={4}
                                       onChange={(e) => {
                                           this.setState({
-                                              changeNoteV: e.target.value,
+                                              changeNoteVCN: e.target.value,
                                           });
                                       }}/>
                         </div>
@@ -511,25 +564,55 @@ export default class BlackList extends Component {
         )
     }
 
-    handleOk = (e) => {
+    handleADdBlackListByType = (e) => {
+
+
         let me = this
-        if (!me.state.changeNoteV) {
-            message.error('備註必填')
+
+
+        // NameCn: "",
+        //     phoneCn: "",
+        //     IDCn: "",
+        //     MAilCn: "",
+        //     TradeACcountCn: "",
+        //     changeNoteVCN: "",
+
+
+        if (!(me.state.TradeACcountCn || me.state.phoneCn || me.state.MAilCn || me.state.IDCn)) {
+            message.error('交易账号与手机/邮箱/身份证必选一')
+            return
+
+
+        }
+        if (!me.state.changeNoteVCN) {
+            message.error('備註必填 ex:信息不真实')
             return
         }
-        // window.Axios.post('auth/addBlackUser', {
-        //     'content': me.state.changeNoteV,
-        //     'id': me.state.recordData.id,
-        //     'listType': 2,//1:合规 2:开户 3:交易
-        // }).then(function (response) {
-        //     if (response.data.code === 1) {
-        //         // notification.close(key)
-        //         message.success('added  open  black')
-        //     }
-        // });
+
+
+        window.Axios.post('auth/addBlackUser', {
+            'listType': me.state.addBlackType,//1:合规 2:开户 3:交易,
+            'content': me.state.changeNoteVCN,
+            'mobile': me.state.phoneCn,
+            'email': me.state.MAilCn,
+            'nationalId': me.state.IDCn,
+            'name': me.state.NameCn,
+            'starClientAccount': me.state.TradeACcountCn,
+        }).then((response) => {
+            message.success('操作成功')
+
+            me.searchSelect()
+        });
     }
-    handleChange = (value) => {
-        console.log(`selected ${value}`);
+
+
+    handleADDBalckType = (value) => {
+        console.log('hcia value', value)
+
+
+        this.setState({
+            addBlackType: value
+        })
     }
 }
 
