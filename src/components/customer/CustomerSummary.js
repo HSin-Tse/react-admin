@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import { useState } from 'react';
 import {DatePicker, Input, Modal, Button, Table, message, Card, Icon, Popconfirm, Checkbox} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
+// import Example from '@/components/ui/Example';
+import KeyOp from '../ui/KeyOp';
+
 import classNames from "classnames";
 
 const {RangePicker} = DatePicker;
@@ -16,6 +18,7 @@ export default class CustomerSummary extends Component {
             checkedValues: [],
             currentA: 0,
             otherComment: '',
+            mCount: 0,
             otherCommentChecks: '',
             totalpageA: 0,
             switcherOn: false,
@@ -192,18 +195,6 @@ export default class CustomerSummary extends Component {
             }];
     }
 
-     Example=() =>{
-        const [count, setCount] = useState(0);
-
-        return (
-            <div>
-                <p>You clicked {count} times</p>
-                <button onClick={() => setCount(count + 1)}>
-                    Click me
-                </button>
-            </div>
-        );
-    }
 
     render() {
 
@@ -212,10 +203,17 @@ export default class CustomerSummary extends Component {
 
             <div>
 
-
+                {/*<KeyOp mCount={this.state.mCount}*/}
+                       {/*transferMsg={(mCount) => {*/}
+                           {/*this.setState({*/}
+                               {/*mCount*/}
+                           {/*});*/}
+                       {/*}}/>*/}
+                {/*<div>mCount :{this.state.mCount}</div>*/}
                 <div>otherComment :{this.state.otherComment}</div>
-
                 <div>otherComment :{this.state.otherCommentChecks}</div>
+
+
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
                     <span className="sw-btn dark-white" onClick={this._switcherOn}>
                      <Icon type="setting" className="text-dark"/>
@@ -352,7 +350,7 @@ export default class CustomerSummary extends Component {
                 <Modal
                     title="操作日誌"
                     visible={this.state.modal2Visible}
-                    onOk={this.handleOk}
+                    onOk={this.handleNOteOPOk}
                     onCancel={this.handleCancel}
                     okText="確認"
                     cancelText="取消"
@@ -478,7 +476,7 @@ export default class CustomerSummary extends Component {
             modal2Visible: false,
         });
     }
-    handleOk = () => {
+    handleNOteOPOk = () => {
         this.setState({
             visible: false,
             modal2Visible: false,

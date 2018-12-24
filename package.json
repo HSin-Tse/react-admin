@@ -62,7 +62,7 @@
     "react-canvas-nest": "^1.0.10",
     "react-color": "^2.14.1",
     "react-dev-utils": "^6.0.4",
-    "react-dom": "^16.5.2",
+    "react-dom": "^16.7.0",
     "react-draft-wysiwyg": "^1.12.13",
     "react-draggable": "^3.0.5",
     "react-hot-loader": "^4.3.11",
