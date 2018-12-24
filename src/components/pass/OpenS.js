@@ -104,6 +104,10 @@ class PassOpenD extends Component {
             'id': self.props.match.params.id,
         }).then(function (response) {
 
+          if (!response.data.data) {
+                return
+            }
+
             if (!response.data.data.state) {
                 return
             }

@@ -156,7 +156,7 @@ export default class CustomerSummary extends Component {
                 render: (text, record) => (
                     <div>
                         <Button className="ant-dropdown-link" onClick={() => this.goToUserAccountInfo()}>备注</Button>
-                        <Button className="ant-dropdown-link" onClick={() => this.goToUserAccountInfo()}>開戶</Button>
+                        <Button className="ant-dropdown-link" onClick={() => this.goToUserAccountInfo(record)}>開戶</Button>
                         <Button className="ant-dropdown-link"
                                 onClick={() => this.goToUserInfo(record.belongUserId)}>行為</Button>
                     </div>
@@ -604,7 +604,11 @@ export default class CustomerSummary extends Component {
         this.props.history.push('/app/customer/CustomerUserInfo' + belongUserId)
 
     }
-    goToUserAccountInfo = () => {
+    goToUserAccountInfo = (record) => {
+        console.log('hcia record' , record)
+
+        var gogo = 'user'
+        this.props.history.push('/app/pass/passopen/' + gogo + record.liveAccountId)
         console.log('goToUserAccountInfo')
     }
     addComment = (e) => {
