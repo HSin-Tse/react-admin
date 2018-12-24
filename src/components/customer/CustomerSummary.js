@@ -1,27 +1,14 @@
 import React, {Component} from 'react';
-import {
-    DatePicker,
-    Input,
-    Modal,
-    Button,
-    Table,
-    message,
-    Card,
-    Row,
-    Icon,
-    Popconfirm,
-    Col,
-    Checkbox
-} from 'antd';
+// import { useState } from 'react';
+import {DatePicker, Input, Modal, Button, Table, message, Card, Icon, Popconfirm, Checkbox} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
-import {ThemePicker} from '@/components/widget';
 import classNames from "classnames";
 
 const {RangePicker} = DatePicker;
 const {TextArea} = Input;
 
 export default class CustomerSummary extends Component {
-
+    // const [count, setCount] = useState(0);
     constructor(props) {
         super(props);
         this.state = {
@@ -39,6 +26,7 @@ export default class CustomerSummary extends Component {
             modal2Visible: false,
         };
     }
+
     handleKeyPress = (event) => {
 
 
@@ -51,14 +39,13 @@ export default class CustomerSummary extends Component {
         }
 
     }
+
     componentWillUnmount() {
-        console.log('hcia componentWillUnmount')
         document.removeEventListener("keydown", this.handleKeyPress, false);
     }
+
     componentDidMount() {
-
         document.addEventListener("keydown", this.handleKeyPress, false);
-
 
         this.requestData()
         this.modalColumns = [
@@ -177,8 +164,9 @@ export default class CustomerSummary extends Component {
                                     cancelText="No">
 
                             {/*<Button className="ant-dropdown-link">凍結</Button>*/}
-                            <Button className="ant-dropdown-link">{record.accountStatus===1?'正常':record.accountStatus===2?'禁止登陆'
-                                :record.accountStatus===3?'禁止交易':'accountStatus:'+record.accountStatus}</Button>
+                            <Button
+                                className="ant-dropdown-link">{record.accountStatus === 1 ? '正常' : record.accountStatus === 2 ? '禁止登陆'
+                                : record.accountStatus === 3 ? '禁止交易' : 'accountStatus:' + record.accountStatus}</Button>
 
                         </Popconfirm>
 
@@ -370,11 +358,10 @@ export default class CustomerSummary extends Component {
                     onOk={() => {
 
 
+                        var self = this
 
-                        var self =  this
-
-                        if(this.state.otherComment){
-                            this.state.checkedValues.push('其他:'+this.state.otherComment)
+                        if (this.state.otherComment) {
+                            this.state.checkedValues.push('其他:' + this.state.otherComment)
                         }
 
                         window.Axios.post('star/unBindStarLiveAccount', {
@@ -385,7 +372,7 @@ export default class CustomerSummary extends Component {
                             message.success('操作成功')
 
                             self.setState({
-                                showUnBindPhoneModal:false
+                                showUnBindPhoneModal: false
 
                             })
                         })
@@ -469,12 +456,8 @@ export default class CustomerSummary extends Component {
             content: self.state.theComment,
             belongUserId: self.state.theBelongUserId,
         }).then((response) => {
-
-
-            console.log('yyx handleAddComment success', response.data.data)
-        }).catch(function (error) {
-            console.log(error);
-        });
+            message.success('操作成功')
+        })
 
         this.setState({
             visible: false,
@@ -566,7 +549,6 @@ export default class CustomerSummary extends Component {
 
 
     onChangeMail = (e) => {
-
         this.setState({
             selectMail: e.target.value,
         });
