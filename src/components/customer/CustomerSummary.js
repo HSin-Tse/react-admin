@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-// import { useState } from 'react';
+import { useState } from 'react';
 import {DatePicker, Input, Modal, Button, Table, message, Card, Icon, Popconfirm, Checkbox} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import classNames from "classnames";
@@ -8,7 +8,6 @@ const {RangePicker} = DatePicker;
 const {TextArea} = Input;
 
 export default class CustomerSummary extends Component {
-    // const [count, setCount] = useState(0);
     constructor(props) {
         super(props);
         this.state = {
@@ -193,6 +192,18 @@ export default class CustomerSummary extends Component {
             }];
     }
 
+     Example=() =>{
+        const [count, setCount] = useState(0);
+
+        return (
+            <div>
+                <p>You clicked {count} times</p>
+                <button onClick={() => setCount(count + 1)}>
+                    Click me
+                </button>
+            </div>
+        );
+    }
 
     render() {
 
@@ -200,7 +211,10 @@ export default class CustomerSummary extends Component {
         return (
 
             <div>
+
+
                 <div>otherComment :{this.state.otherComment}</div>
+
                 <div>otherComment :{this.state.otherCommentChecks}</div>
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
                     <span className="sw-btn dark-white" onClick={this._switcherOn}>

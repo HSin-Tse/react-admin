@@ -12,7 +12,6 @@ import Recharts from './charts/Recharts';
 import Buttons from './ui/Buttons';
 import Spins from './ui/Spins';
 import Modals from './ui/Modals';
-import Notifications from './ui/Notifications';
 import Banners from './ui/banners';
 import Drags from './ui/Draggable';
 import Dashboard from './dashboard/Dashboard';
@@ -58,7 +57,6 @@ export default {
     Buttons,
     Spins,
     Modals,
-    Notifications,
     Banners,
     Drags,
     PassOpen,
