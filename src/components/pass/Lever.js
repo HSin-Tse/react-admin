@@ -420,11 +420,11 @@ class Basic extends Component {
 
                             <Row style={{marginTop: 20}}>
                                 <Col style={{textAlign: 'right'}} span={10}>杠杆修改:</Col>
-                                <Col style={{textAlign: 'center'}} span={14}>
+                                <Col style={{  textAlign: 'center'}} span={14}>
                                     <Select
                                         onChange={this.onChangeLe}
                                         defaultValue={this.state.detail.targetLeverage}
-                                        style={{marginLeft: 0}}>
+                                        style={{width:100,marginLeft: 0}}>
                                         {this.state.leavgeList.map(ccty => <Option
                                             value={ccty.id} key={ccty.leverage}>1:{ccty.leverage}</Option>)}
                                     </Select>
@@ -469,16 +469,10 @@ class Basic extends Component {
                     杠杆审核
                 </h2>
                 <BreadcrumbCustom first="审核管理" second="杠杆审核"/>
-                {/*<Button onClick={() => this.seeDetail()}*/}
-                {/*>详情:{this.state.count}</Button>*/}
-                {/*<Button*/}
-                {/*onClick={() => this.seeDetail()}*/}
-                {/*>详情: </Button>*/}
 
 
                 <Card title="杠杆审核"
                       bodyStyle={{padding: 0, margin: 0}}
-
                 >
 
                     <Table rowKey="id"
