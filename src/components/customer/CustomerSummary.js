@@ -169,7 +169,7 @@ export default class CustomerSummary extends Component {
                 render: (text, record) => (
                     <div>
 
-                        <Popconfirm title="确认凍結?"
+                        <Popconfirm title={record.accountStatus === 1 ? '确认凍結':'确认解冻'}
                                     onConfirm={() => this.forzenAccount(record)} okText="Yes"
                                     cancelText="No">
 
@@ -220,6 +220,8 @@ export default class CustomerSummary extends Component {
                 {/*<div>mCount :{this.state.mCount}</div>*/}
                 {/*<div>otherComment :{this.state.otherComment}</div>*/}
                 {/*<div>otherComment :{this.state.otherCommentChecks}</div>*/}
+                {/*<div>nowRECODE :{JSON.stringify(this.state.nowRECODE.liveAccountId)}</div>*/}
+                {/*<div>nowRECODE :{JSON.stringify(this.state.nowRECODE)}</div>*/}
 
 
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
@@ -386,7 +388,7 @@ export default class CustomerSummary extends Component {
                         }
 
                         window.Axios.post('star/unBindStarLiveAccount', {
-                            "starClientAccount": this.state.nowRECODE.accountNo,
+                            "starClientAccount": this.state.nowRECODE.liveAccountId,
                             "belongUserId": this.state.nowRECODE.belongUserId,
                             "content": this.state.checkedValues.toString(),
                         }).then((response) => {
@@ -614,14 +616,30 @@ export default class CustomerSummary extends Component {
     forzenAccount = (record) => {
 
         var self = this
-        window.Axios.post('star/blockStarLiveAccount', {
-            "starClientAccount": record.liveAccountId,
-            "belongUserId": record.belongUserId,
 
-        }).then(() => {
-            message.success(record.accountNo + '帳號凍結成功')
-            self.requestData()
-        })
+
+
+        if( record.accountStatus === 1){
+            window.Axios.post('star/blockStarLiveAccount', {
+                "starClientAccount": record.liveAccountId,
+                "belongUserId": record.belongUserId,
+
+            }).then(() => {
+                message.success(record.accountNo + '帳號凍結成功')
+                self.requestData()
+            })
+        }else{
+            window.Axios.post('star/unblockStarLiveAccount', {
+                "starClientAccount": record.liveAccountId,
+                "belongUserId": record.belongUserId,
+
+            }).then(() => {
+                message.success(record.accountNo + '操作成功')
+                self.requestData()
+            })
+        }
+
+
     }
 }
 
