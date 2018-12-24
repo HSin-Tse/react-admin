@@ -5,6 +5,7 @@ import {Col, Card, Row, DatePicker, Input, Modal, Button, Table, Icon, Checkbox}
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import axios from 'axios';
 import {parse} from 'querystring';
+import avater from "../../style/imgs/b1.jpg";
 
 class CustomerUserInfo extends Component {
     state = {visible: false, modal2Visible: false}
@@ -76,14 +77,23 @@ class CustomerUserInfo extends Component {
                 </h2>
 
                 <BreadcrumbCustom first="用户總表" second="行為信息"/>
+                {/*<Card*/}
+                    {/*style={{ width: 240 }}*/}
+                    {/*cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}*/}
+                {/*>*/}
+                    {/*<Meta*/}
+                        {/*title="Europe Street beat"*/}
+                        {/*description="www.instagram.com"*/}
+                    {/*/>*/}
+                {/*</Card>*/}
                 <Card
                     type="inner"
                     title="基本信息"
                 >
-                    <Card
-                        cover={<img alt=""
-                                    src={this.state.userList.length == 0 ? '' : this.state.userList.base.cellphone}/>}>
-                    </Card>
+
+
+
+                    <img style={{width:100}} src={avater} alt="头像"/>
                     < Meta title={this.state.userList.length == 0 ? '姓名：' : '姓名：' + this.state.userList.base.name}/>
                     < Meta
                         title={this.state.userList.length == 0 ? '手机：' : '手机：' + this.state.userList.base.cellphone}/>
@@ -128,7 +138,6 @@ class CustomerUserInfo extends Component {
                 >
                     <Table rowKey="id"
                            columns={this.modalColumns} dataSource={this.state.operationDiaryHistory}
-                           scroll={{x: 1300}}
                     />
                 </Card>
 
@@ -153,27 +162,50 @@ class CustomerUserInfo extends Component {
     ediftModalColumn = () => {
         this.modalColumns = [{
             title: '時間',
+            align:'center',
             dataIndex: 'createDate',
             key: 'operationDiary_Date',
 
             render: (text, record) => (
-                <Button>{record.createDate}</Button>),
+                <Button>{this.timestampToTimeNI(record.createDate)}</Button>),
         }, {
-            title: '狀態',
-            dataIndex: 'comment',
-            key: 'operationDiary_Status',
-
+            title: 'ip',
+            dataIndex: 'ip',
+            key: 'ip',
+            align:'center',
             render: (text, record) => (
-                <Button>{record.comment}</Button>),
+                <Button>{record.ip}</Button>),
         }, {
+            align:'center',
+            title: '操作',
+            dataIndex: '操作',
+            key: '操作',
+            render: (text, record) => (
+                <Button>{record.bkUserName}</Button>),
+        }, {
+            align:'center',
             title: '操作人',
             dataIndex: 'bkUserName',
             key: 'operationDiary_User',
-
             render: (text, record) => (
                 <Button>{record.bkUserName}</Button>),
         }]
     }
+
+    timestampToTimeNI = (timestamp) => {
+        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
+        const year = dateObj.getFullYear() // 获取年，
+        const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
+        const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
+        const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
+        const minutes = this.pad(dateObj.getMinutes()) // 获取分
+        const seconds = this.pad(dateObj.getSeconds()) // 获取秒
+        return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
+    };
+    pad = (str) => {
+        return +str >= 10 ? str : '0' + str
+    };
+
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
         const year = dateObj.getFullYear() // 获取年，
