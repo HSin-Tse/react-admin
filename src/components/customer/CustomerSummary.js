@@ -134,21 +134,14 @@ export default class CustomerSummary extends Component {
                 key: '最近登录时间',
                 render: (text, record) => (<span>{record.date}</span>),
             }, {
-                title: '回访次数',
-                dataIndex: '回访次数',
-                key: '回访次数',
+                title: '激活绑定',
+                dataIndex: '激活绑定',
+                key: '激活绑定',
                 align: 'center',
                 render: (text, record) => (
-                    <span>{record.commentNum}</span>),
+                    <span>激活绑定</span>),
             },
             {
-                title: '操作人',
-                dataIndex: '操作人',
-                key: '操作人',
-                align: 'center',
-                render: (text, record) => (
-                    <span>{record.operator}</span>),
-            }, {
                 title: '查看',
                 dataIndex: '查看',
                 key: '查看',
@@ -156,7 +149,8 @@ export default class CustomerSummary extends Component {
                 render: (text, record) => (
                     <div>
                         <Button className="ant-dropdown-link" onClick={() => this.goToUserAccountInfo()}>备注</Button>
-                        <Button className="ant-dropdown-link" onClick={() => this.goToUserAccountInfo(record)}>開戶</Button>
+                        <Button className="ant-dropdown-link"
+                                onClick={() => this.goToUserAccountInfo(record)}>開戶</Button>
                         <Button className="ant-dropdown-link"
                                 onClick={() => this.goToUserInfo(record.belongUserId)}>行為</Button>
                     </div>
@@ -169,7 +163,7 @@ export default class CustomerSummary extends Component {
                 render: (text, record) => (
                     <div>
 
-                        <Popconfirm title={record.accountStatus === 1 ? '确认凍結':'确认解冻'}
+                        <Popconfirm title={record.accountStatus === 1 ? '确认凍結' : '确认解冻'}
                                     onConfirm={() => this.forzenAccount(record)} okText="Yes"
                                     cancelText="No">
 
@@ -605,7 +599,7 @@ export default class CustomerSummary extends Component {
 
     }
     goToUserAccountInfo = (record) => {
-        console.log('hcia record' , record)
+        console.log('hcia record', record)
 
         var gogo = 'user'
         this.props.history.push('/app/pass/passopen/' + gogo + record.liveAccountId)
@@ -622,8 +616,7 @@ export default class CustomerSummary extends Component {
         var self = this
 
 
-
-        if( record.accountStatus === 1){
+        if (record.accountStatus === 1) {
             window.Axios.post('star/blockStarLiveAccount', {
                 "starClientAccount": record.liveAccountId,
                 "belongUserId": record.belongUserId,
@@ -632,7 +625,7 @@ export default class CustomerSummary extends Component {
                 message.success(record.accountNo + '帳號凍結成功')
                 self.requestData()
             })
-        }else{
+        } else {
             window.Axios.post('star/unblockStarLiveAccount', {
                 "starClientAccount": record.liveAccountId,
                 "belongUserId": record.belongUserId,
