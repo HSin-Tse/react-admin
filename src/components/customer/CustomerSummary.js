@@ -22,11 +22,11 @@ export default class CustomerSummary extends Component {
             otherCommentChecks: '',
             totalpageA: 0,
             switcherOn: false,
-            showUnBindPhoneModal: false,
             pgsize: 20,
             opDayRecord: {},
-            NoteModalVisible: false,
-            modal2Visible: false,
+            showUnBindPhoneModal4: false,
+            NoteModalVisible2: false,
+            modal2Visible1: false,
         };
     }
 
@@ -159,7 +159,14 @@ export default class CustomerSummary extends Component {
                 key: '激活绑定',
                 align: 'center',
                 render: (text, record) => (
-                    <span>激活绑定</span>),
+                    <div>
+                        <span>{record.mobile}</span>
+                        {/*<Button style={{marginLeft: 15}}>解绑</Button>*/}
+                        <Button style={{marginLeft: 15}}
+                                onClick={() => this.requestUnbindAccount(record)}>{record.mobile ? '解绑' : '未激活'}</Button>
+
+                    </div>
+                ),
             },
             {
                 title: '查看',
@@ -168,7 +175,7 @@ export default class CustomerSummary extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.goToUserAccountInfo()}>备注</Button>
+                        <Button>备注</Button>
                         <Button onClick={() => this.goToUserAccountInfo(record)}>開戶</Button>
                         <Button onClick={() => this.goToUserInfo(record.belongUserId)}>行為</Button>
                     </div>
@@ -187,8 +194,7 @@ export default class CustomerSummary extends Component {
                             <Button>{record.accountStatus === 1 ? '凍結' : record.accountStatus === 2 ? '禁止登陆:解冻'
                                 : record.accountStatus === 3 ? '解冻' : '-'}</Button>
                         </Popconfirm>
-                        <Button onClick={() => this.requestUnbindAccount(record)}>解绑</Button>
-                        <Button onClick={() => this.forzenAccount(record)}>重置密码</Button>
+                        <Button onClick={() => this.resetSeret(record)}>重置密码</Button>
                     </div>
                 ),
             }, {
@@ -212,7 +218,6 @@ export default class CustomerSummary extends Component {
                 <div>otherComment query :{JSON.stringify(this.state.otherComment)}</div>
 
                 {/*<KeyOp mCount={this.state.mCount}*/}
-
 
 
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
@@ -320,9 +325,9 @@ export default class CustomerSummary extends Component {
                     />
                 </Card>
                 <Modal
-                    width={'100%'}
+                    // width={'100%'}
                     title="添加備註"
-                    visible={this.state.NoteModalVisible}
+                    visible={this.state.NoteModalVisible2}
                     onOk={this.handleAddComment}
                     onCancel={this.handleCancel}
                     okText="提交"
@@ -345,9 +350,9 @@ export default class CustomerSummary extends Component {
                     />
                 </Modal>
                 <Modal
-                    width={'100%'}
+                    // width={'100%'}
                     title="操作日誌"
-                    visible={this.state.modal2Visible}
+                    visible={this.state.modal2Visible1}
                     onOk={this.handleNOteOPOk}
                     onCancel={this.handleCancel}
                     okText="確認"
@@ -364,7 +369,7 @@ export default class CustomerSummary extends Component {
                     bodyStyle={{padding: 0, margin: 15}}
 
                     title="解绑手机号"
-                    visible={this.state.showUnBindPhoneModal}
+                    visible={this.state.showUnBindPhoneModal4}
                     onOk={() => {
 
 
@@ -378,11 +383,10 @@ export default class CustomerSummary extends Component {
                             "starClientAccount": this.state.nowRECODE.liveAccountId,
                             "belongUserId": this.state.nowRECODE.belongUserId,
                             "content": this.state.checkedValues.toString(),
-                        }).then((response) => {
+                        }).then(() => {
                             message.success('操作成功')
-
                             self.setState({
-                                showUnBindPhoneModal: false,
+                                showUnBindPhoneModal4: false,
                                 otherComment: ''
 
                             })
@@ -393,7 +397,7 @@ export default class CustomerSummary extends Component {
                     okType={((this.state.mStockRecordStatus == 1) && this.state.mStockRecordBEn) ? 'primary' : 'dashed'}
                     onCancel={(e) => {
                         this.setState({
-                            showUnBindPhoneModal: false,
+                            showUnBindPhoneModal4: false,
                         });
                     }}
                 >
@@ -455,8 +459,8 @@ export default class CustomerSummary extends Component {
                 self.setState({operationDiaryHistory: response.data.data.list});
             })
             self.setState({
-                modal2Visible: true,
-                NoteModalVisible: false,
+                modal2Visible1: true,
+                NoteModalVisible2: false,
             });
         });
 
@@ -492,8 +496,8 @@ export default class CustomerSummary extends Component {
             })
             self.setState({
                 theBelongUserId: belongUserId,
-                NoteModalVisible: true,
-                modal2Visible: false,
+                NoteModalVisible2: true,
+                modal2Visible1: false,
             });
         });
 
@@ -509,15 +513,15 @@ export default class CustomerSummary extends Component {
         })
 
         this.setState({
-            NoteModalVisible: false,
-            modal2Visible: false,
+            NoteModalVisible2: false,
+            modal2Visible1: false,
         });
     }
     handleNOteOPOk = () => {
         this.setState({
             theComment: '',
-            NoteModalVisible: false,
-            modal2Visible: false,
+            NoteModalVisible2: false,
+            modal2Visible1: false,
         });
     }
 
@@ -525,8 +529,8 @@ export default class CustomerSummary extends Component {
     handleCancel = (e) => {
         console.log(e);
         this.setState({
-            NoteModalVisible: false,
-            modal2Visible: false,
+            NoteModalVisible2: false,
+            modal2Visible1: false,
         });
     }
     requestUnbindAccount = (record) => {
@@ -536,7 +540,7 @@ export default class CustomerSummary extends Component {
             otherComment: '',
             otherCommentChecks: '',
             nowRECODE: record,
-            showUnBindPhoneModal: true
+            showUnBindPhoneModal4: true
         })
 
 
@@ -633,6 +637,11 @@ export default class CustomerSummary extends Component {
                 self.requestData()
             })
         }
+
+
+    }
+    resetSeret = (record) => {
+        console.log('hcia record', record)
 
 
     }

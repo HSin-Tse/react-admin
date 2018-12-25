@@ -153,6 +153,14 @@ export default class PotentialUser extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <span>{record.channelInfo}</span>),
+            }
+            , {
+                title: 'IP',
+                dataIndex: 'IP',
+                key: 'IP',
+                align: 'center',
+                render: (text, record) => (
+                    <span>{record.ipAddress}</span>),
             }, {
                 title: '地理位置',
                 dataIndex: '地理位置',
