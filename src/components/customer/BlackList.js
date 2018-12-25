@@ -91,13 +91,16 @@ export default class BlackList extends Component {
                 key: '操作人',
                 render: (text, record) => (<span>{record.operator}</span>),
             }, {
-                title: '处理备注',
                 align: 'center',
-
-                dataIndex: '处理备注',
-                key: '处理备注',
+                title: '查看',
+                key: '查看',
                 render: (text, record) => (
-                    <span>{record.comment}</span>),
+                    <div>
+                        <Button className="ant-dropdown-link">备注
+                        </Button>
+
+                    </div>
+                ),
             }, {
                 title: '操作',
 
@@ -354,7 +357,6 @@ export default class BlackList extends Component {
             <div>
 
 
-
                 <div className={classNames('switcher dark-white', {active: switcherOn})}>
                 <span className="sw-btn dark-white" onClick={this._switcherOn}>
                     <Icon type="setting" className="text-dark"/>
@@ -604,8 +606,6 @@ export default class BlackList extends Component {
 
 
         let me = this
-
-
 
 
         if (!(me.state.TradeACcountCn || me.state.phoneCn || me.state.MAilCn || me.state.IDCn)) {

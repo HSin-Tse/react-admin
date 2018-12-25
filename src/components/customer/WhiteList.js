@@ -99,7 +99,7 @@ export default class WhiteList extends Component {
                 key: '查看',
                 render: (text, record) => (
                     <div>
-                        <Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>备注
+                        <Button className="ant-dropdown-link">备注
                         </Button>
 
                     </div>
