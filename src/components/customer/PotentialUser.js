@@ -102,16 +102,16 @@ export default class PotentialUser extends Component {
         return [
             {
                 title: '序号',
-                dataIndex: 'phoneNumber',
-                key: 'phoneNumber',
+                dataIndex: '序号',
+                key: '序号',
                 align: 'center',
                 render: (text, record, index) => (
                     <span>{this.state.currentA * this.state.pgsize + index + 1}</span>
                 ),
             }, {
                 title: '手机号',
-                dataIndex: 'phoneNumber',
-                key: 'phoneNumber',
+                dataIndex: '手机号',
+                key: '手机号',
                 align: 'center',
                 render: (text, record) => (
 
@@ -202,8 +202,8 @@ export default class PotentialUser extends Component {
         return this.columns = [
             {
                 title: '序号',
-                dataIndex: 'phoneNumber',
-                key: 'phoneNumber',
+                dataIndex: '序号',
+                key: '序号',
                 align: 'center',
                 render: (text, record, index) => (
                     <span>{this.state.currentB * this.state.pgsize + index + 1}</span>
@@ -211,8 +211,8 @@ export default class PotentialUser extends Component {
             },
             {
                 title: '手机号',
-                dataIndex: 'phoneNumber',
-                key: 'phoneNumber',
+                dataIndex: '手机号',
+                key: '手机号',
                 align: 'center',
                 render: (text, record) => (
                     <span>{record.mobile}</span>
@@ -296,8 +296,8 @@ export default class PotentialUser extends Component {
         return this.columns = [
             {
                 title: '序号',
-                dataIndex: 'phoneNumber',
-                key: 'phoneNumber',
+                dataIndex: '序号',
+                key: '序号',
                 align: 'center',
                 render: (text, record, index) => (
                     <span>{this.state.currentC * this.state.pgsize + index + 1}</span>
@@ -305,8 +305,8 @@ export default class PotentialUser extends Component {
             },
             {
                 title: '手机号',
-                dataIndex: 'phoneNumber',
-                key: 'phoneNumber',
+                dataIndex: '手机号',
+                key: '手机号',
                 align: 'center',
                 render: (text, record) => (
 
@@ -921,7 +921,7 @@ export default class PotentialUser extends Component {
                                    dataSource={this.state.bklistC}
                                    scroll={{x: 1500}}
                                    loading={this.state.loading}
-                                   pagination={{  // 分页
+                                   pagination={{
                                        total: this.state.totalpageC * this.state.pgsize,
                                        pageSize: this.state.pgsize,
                                        onChange: this.changePageC,
