@@ -66,9 +66,27 @@ export default class BlackList extends Component {
                     <span>{record.name}</span>
                 ),
             }, {
-                title: '操作人',
+                title: '邮箱地址',
+                align: 'center',
+                dataIndex: '邮箱地址',
+                key: '邮箱地址',
+                render: (text, record) => (<span>{record.email}</span>),
+            }, {
+                title: '身份证号',
+                align: 'center',
+                dataIndex: '身份证号',
+                key: '身份证号',
+                render: (text, record) => (<span>{record.nationalId}</span>),
+            }, {
+                title: '操作时间',
                 align: 'center',
 
+                dataIndex: '操作时间',
+                key: '操作时间',
+                render: (text, record) => (<span>{record.date}</span>),
+            }, {
+                title: '操作人',
+                align: 'center',
                 dataIndex: '操作人',
                 key: '操作人',
                 render: (text, record) => (<span>{record.operator}</span>),
