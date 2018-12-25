@@ -58,28 +58,28 @@ export default class CustomerSummary extends Component {
                 key: 'operationDiary_Date',
 
                 render: (text, record) => (
-                    <Button>{this.timestampToTime(record.createDate)}</Button>),
+                    <span>{this.timestampToTime(record.createDate)}</span>),
             }, {
                 title: 'IP',
                 dataIndex: 'comment',
                 key: 'operationDiary_Status',
 
                 render: (text, record) => (
-                    <Button>{record.ip}</Button>),
+                    <span>{record.ipAddress}</span>),
             }, {
                 title: '操作人',
                 dataIndex: 'comment',
                 key: 'operationDiary_Status',
 
                 render: (text, record) => (
-                    <Button>{record.user}</Button>),
+                    <span>{record.bkUserName}</span>),
             }, {
                 title: '操作',
                 dataIndex: 'bkUserName',
                 key: 'operationDiary_User',
 
                 render: (text, record) => (
-                    <Button>{record.comment}</Button>),
+                    <span>{record.comment}</span>),
             }]
         this.columns = [
             {
@@ -346,10 +346,12 @@ export default class CustomerSummary extends Component {
                     visible={this.state.visible}
                     onOk={this.handleAddComment}
                     onCancel={this.handleCancel}
-                    okText="確認"
+                    okText="提交"
                     cancelText="取消">
-                    <Input onChange={this.addComment} placeholder="填写回访次数以及结果"/>
-
+                    <TextArea rows={4} onChange={this.addComment} placeholder="在这里填写回访次数以及备注信息"/>
+                    {/*<TextArea value={this.state.detail.comment}*/}
+                    {/*onChange={this.changeNote}*/}
+                    {/*rows={4}></TextArea>*/}
                 </Modal>
                 <Modal
                     width={'100%'}
