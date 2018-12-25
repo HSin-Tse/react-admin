@@ -54,8 +54,8 @@ export default class CustomerSummary extends Component {
         this.modalOPDayColumns = [
             {
                 title: '時間',
-                dataIndex: 'createDate',
-                key: 'operationDiary_Date',
+                dataIndex: '時間',
+                key: '時間',
 
                 render: (text, record) => (
                     <span>{this.timestampToTime(record.createDate)}</span>),
@@ -77,6 +77,29 @@ export default class CustomerSummary extends Component {
                 title: '操作',
                 dataIndex: 'bkUserName',
                 key: 'operationDiary_User',
+
+                render: (text, record) => (
+                    <span>{record.comment}</span>),
+            }]
+        this.modalOPDayL2 = [
+            {
+                title: '操作人',
+                dataIndex: 'comment',
+                key: 'operationDiary_Status',
+
+                render: (text, record) => (
+                    <span>{record.bkUserName}</span>),
+            }, {
+                title: '操作時間',
+                dataIndex: 'bkUserName',
+                key: 'operationDiary_User',
+
+                render: (text, record) => (
+                    <span>{this.timestampToTime(record.createDate)}</span>),
+            }, {
+                title: '备注',
+                dataIndex: 'comment',
+                key: 'operationDiary_Status',
 
                 render: (text, record) => (
                     <span>{record.comment}</span>),
@@ -148,11 +171,9 @@ export default class CustomerSummary extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button className="ant-dropdown-link" onClick={() => this.goToUserAccountInfo()}>备注</Button>
-                        <Button className="ant-dropdown-link"
-                                onClick={() => this.goToUserAccountInfo(record)}>開戶</Button>
-                        <Button className="ant-dropdown-link"
-                                onClick={() => this.goToUserInfo(record.belongUserId)}>行為</Button>
+                        <Button onClick={() => this.goToUserAccountInfo()}>备注</Button>
+                        <Button onClick={() => this.goToUserAccountInfo(record)}>開戶</Button>
+                        <Button onClick={() => this.goToUserInfo(record.belongUserId)}>行為</Button>
                     </div>
                 )
             }, {
@@ -166,17 +187,11 @@ export default class CustomerSummary extends Component {
                         <Popconfirm title={record.accountStatus === 1 ? '确认凍結' : '确认解冻'}
                                     onConfirm={() => this.forzenAccount(record)} okText="Yes"
                                     cancelText="No">
-
-                            {/*<Button className="ant-dropdown-link">凍結</Button>*/}
-                            <Button
-                                className="ant-dropdown-link">{record.accountStatus === 1 ? '凍結' : record.accountStatus === 2 ? '禁止登陆:解冻'
+                            <Button>{record.accountStatus === 1 ? '凍結' : record.accountStatus === 2 ? '禁止登陆:解冻'
                                 : record.accountStatus === 3 ? '解冻' : '-'}</Button>
-
                         </Popconfirm>
-
-                        <Button className="ant-dropdown-link"
-                                onClick={() => this.requestUnbindAccount(record)}>解绑</Button>
-                        <Button className="ant-dropdown-link" onClick={() => this.forzenAccount(record)}>重置密码</Button>
+                        <Button onClick={() => this.requestUnbindAccount(record)}>解绑</Button>
+                        <Button onClick={() => this.forzenAccount(record)}>重置密码</Button>
                     </div>
                 ),
             }, {
@@ -187,36 +202,18 @@ export default class CustomerSummary extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        {/* <span className="ant-divider" />
-						<Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>移除</Button> */}
-                        <Button className="ant-dropdown-link" onClick={() => this.showModal(record)}>添加備註</Button>
-                        <Button className="ant-dropdown-link" onClick={() => this.showModal2(record)}>操作日誌</Button>
-
+                        <Button onClick={() => this.showModalNote(record)}>添加備註</Button>
+                        <Button onClick={() => this.showModalOPDAY(record)}>操作日誌</Button>
                     </div>
                 ),
             }];
     }
 
-
     render() {
-
-
         return (
-
             <div>
 
                 {/*<KeyOp mCount={this.state.mCount}*/}
-                {/*transferMsg={(mCount) => {*/}
-                {/*this.setState({*/}
-                {/*mCount*/}
-                {/*});*/}
-                {/*}}/>*/}
-                {/*<div>mCount :{this.state.mCount}</div>*/}
-                {/*<div>otherComment :{this.state.otherComment}</div>*/}
-                {/*<div>otherComment :{this.state.otherCommentChecks}</div>*/}
-                {/*<div>nowRECODE :{JSON.stringify(this.state.nowRECODE.liveAccountId)}</div>*/}
-                {/*<div>nowRECODE :{JSON.stringify(this.state.nowRECODE)}</div>*/}
-
 
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
                     <span className="sw-btn dark-white" onClick={this._switcherOn}>
@@ -342,6 +339,7 @@ export default class CustomerSummary extends Component {
                     />
                 </Card>
                 <Modal
+                    width={'100%'}
                     title="添加備註"
                     visible={this.state.visible}
                     onOk={this.handleAddComment}
@@ -349,9 +347,13 @@ export default class CustomerSummary extends Component {
                     okText="提交"
                     cancelText="取消">
                     <TextArea rows={4} onChange={this.addComment} placeholder="在这里填写回访次数以及备注信息"/>
-                    {/*<TextArea value={this.state.detail.comment}*/}
-                    {/*onChange={this.changeNote}*/}
-                    {/*rows={4}></TextArea>*/}
+                    <Table
+                        style={{marginTop: 15}}
+                        bordered
+                        rowKey="id"
+                        columns={this.modalOPDayL2}
+                        dataSource={this.state.operationDiaryHistory}
+                    />
                 </Modal>
                 <Modal
                     width={'100%'}
@@ -450,10 +452,9 @@ export default class CustomerSummary extends Component {
         )
     }
 
-    showModal2 = (record) => {
+    showModalOPDAY = (record) => {
 
         var self = this
-
 
         self.setState({
             opDayRecord: record
@@ -462,11 +463,6 @@ export default class CustomerSummary extends Component {
                 'belongUserId': this.state.opDayRecord.belongUserId,
             }).then(function (response) {
                 self.setState({operationDiaryHistory: response.data.data.list});
-            }, () => {
-                self.setState({
-                    modal2Visible: true,
-                    visible: false,
-                });
             })
             self.setState({
                 modal2Visible: true,
@@ -491,13 +487,33 @@ export default class CustomerSummary extends Component {
     pad = (str) => {
         return +str >= 10 ? str : '0' + str
     };
-    showModal = (record) => {
+    showModalNote = (record) => {
         let belongUserId = record.belongUserId
-        this.setState({
-            theBelongUserId: belongUserId,
-            visible: true,
-            modal2Visible: false,
+        // this.setState({
+        //     theBelongUserId: belongUserId,
+        //     visible: true,
+        //     modal2Visible: false,
+        // });
+
+
+        var self = this
+
+        self.setState({
+            opDayRecord: record
+        }, () => {
+            window.Axios.post('auth/getUserCommentList', {
+                'belongUserId': this.state.opDayRecord.belongUserId,
+            }).then(function (response) {
+                self.setState({operationDiaryHistory: response.data.data.list});
+            })
+            self.setState({
+                theBelongUserId: belongUserId,
+                visible: true,
+                modal2Visible: false,
+            });
         });
+
+
     }
     handleAddComment = (e) => {
         let self = this;
