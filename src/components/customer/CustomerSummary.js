@@ -25,14 +25,12 @@ export default class CustomerSummary extends Component {
             showUnBindPhoneModal: false,
             pgsize: 20,
             opDayRecord: {},
-            visible: false,
+            NoteModalVisible: false,
             modal2Visible: false,
         };
     }
 
     handleKeyPress = (event) => {
-
-
         if (event.metaKey || event.ctrlKey) {
             if (event.key === 'o') {
                 this.setState({
@@ -40,7 +38,6 @@ export default class CustomerSummary extends Component {
                 })
             }
         }
-
     }
 
     componentWillUnmount() {
@@ -212,8 +209,11 @@ export default class CustomerSummary extends Component {
     render() {
         return (
             <div>
+                <div>otherComment query :{JSON.stringify(this.state.otherComment)}</div>
 
                 {/*<KeyOp mCount={this.state.mCount}*/}
+
+
 
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
                     <span className="sw-btn dark-white" onClick={this._switcherOn}>
@@ -270,15 +270,8 @@ export default class CustomerSummary extends Component {
                                 format="YYYY-MM-DD HH:mm:ss fff"
                                 placeholder={['開始時間', '結束時間']}
                                 onChange={(value, dateString) => {
-
-
                                     var selectTimeStart = value[0].unix() + '000'
                                     var selectTimeEnd = value[1].unix() + '000'
-
-                                    console.log('hcia selectTimeStart', selectTimeStart)
-                                    console.log('hcia selectTimeEnd', selectTimeEnd)
-
-
                                     this.setState({
                                         filterTimeFalue: value,
                                         selectTimeStart: selectTimeStart,
@@ -288,16 +281,8 @@ export default class CustomerSummary extends Component {
                                 }}
                                 value={this.state.filterTimeFalue}
                                 onOk={(value) => {
-                                    console.log('hcia', 'onOk: ', value);
-
-
                                     var selectTimeStart = value[0].unix() + '000'
                                     var selectTimeEnd = value[1].unix() + '000'
-
-                                    console.log('hcia selectTimeStart', selectTimeStart)
-                                    console.log('hcia selectTimeEnd', selectTimeEnd)
-
-
                                     this.setState({
                                         filterTimeFalue: value,
                                         selectTimeStart: selectTimeStart,
@@ -311,8 +296,6 @@ export default class CustomerSummary extends Component {
                                     icon="search">Search</Button>
 
                         </Card>
-
-
                     </div>
                 </div>
                 <h2 style={{marginTop: 15}}>
@@ -320,9 +303,7 @@ export default class CustomerSummary extends Component {
                 </h2>
                 <BreadcrumbCustom first="用戶管理" second="用戶總表"/>
                 <Card
-
                     bodyStyle={{padding: 0, margin: 0}}
-
                     title="用戶總表">
                     <Table
                         rowKey="id"
@@ -341,12 +322,20 @@ export default class CustomerSummary extends Component {
                 <Modal
                     width={'100%'}
                     title="添加備註"
-                    visible={this.state.visible}
+                    visible={this.state.NoteModalVisible}
                     onOk={this.handleAddComment}
                     onCancel={this.handleCancel}
                     okText="提交"
                     cancelText="取消">
-                    <TextArea rows={4} onChange={this.addComment} placeholder="在这里填写回访次数以及备注信息"/>
+                    <TextArea rows={4}
+                              value={this.state.theComment}
+                              onChange={(e) => {
+                                  let comment = e.target.value;
+                                  this.setState({
+                                      theComment: comment
+                                  });
+                              }}
+                              placeholder="在这里填写回访次数以及备注信息"/>
                     <Table
                         style={{marginTop: 15}}
                         bordered
@@ -393,7 +382,8 @@ export default class CustomerSummary extends Component {
                             message.success('操作成功')
 
                             self.setState({
-                                showUnBindPhoneModal: false
+                                showUnBindPhoneModal: false,
+                                otherComment: ''
 
                             })
                         })
@@ -457,7 +447,7 @@ export default class CustomerSummary extends Component {
         var self = this
 
         self.setState({
-            opDayRecord: record
+            opDayRecord: record,
         }, () => {
             window.Axios.post('auth/getUserCommentList', {
                 'belongUserId': this.state.opDayRecord.belongUserId,
@@ -466,7 +456,7 @@ export default class CustomerSummary extends Component {
             })
             self.setState({
                 modal2Visible: true,
-                visible: false,
+                NoteModalVisible: false,
             });
         });
 
@@ -489,17 +479,11 @@ export default class CustomerSummary extends Component {
     };
     showModalNote = (record) => {
         let belongUserId = record.belongUserId
-        // this.setState({
-        //     theBelongUserId: belongUserId,
-        //     visible: true,
-        //     modal2Visible: false,
-        // });
-
-
         var self = this
 
         self.setState({
-            opDayRecord: record
+            opDayRecord: record,
+            theComment: ''
         }, () => {
             window.Axios.post('auth/getUserCommentList', {
                 'belongUserId': this.state.opDayRecord.belongUserId,
@@ -508,7 +492,7 @@ export default class CustomerSummary extends Component {
             })
             self.setState({
                 theBelongUserId: belongUserId,
-                visible: true,
+                NoteModalVisible: true,
                 modal2Visible: false,
             });
         });
@@ -525,13 +509,14 @@ export default class CustomerSummary extends Component {
         })
 
         this.setState({
-            visible: false,
+            NoteModalVisible: false,
             modal2Visible: false,
         });
     }
     handleNOteOPOk = () => {
         this.setState({
-            visible: false,
+            theComment: '',
+            NoteModalVisible: false,
             modal2Visible: false,
         });
     }
@@ -540,7 +525,7 @@ export default class CustomerSummary extends Component {
     handleCancel = (e) => {
         console.log(e);
         this.setState({
-            visible: false,
+            NoteModalVisible: false,
             modal2Visible: false,
         });
     }
@@ -623,12 +608,7 @@ export default class CustomerSummary extends Component {
         this.props.history.push('/app/pass/passopen/' + gogo + record.liveAccountId)
         console.log('goToUserAccountInfo')
     }
-    addComment = (e) => {
-        let comment = e.target.value;
-        this.setState({
-            theComment: comment
-        });
-    }
+
     forzenAccount = (record) => {
 
         var self = this
