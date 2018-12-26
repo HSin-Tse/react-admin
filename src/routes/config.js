@@ -47,7 +47,7 @@ export default {
                     key: '/app/customer/blacklists',
                     title: '黑名单',
                     component: 'BlackList',
-                    pg: '2'
+                    pg: '3'
                 },
 
                 // {tk: 'SERVICE_GROUP_MGMT', key: '/app/trade/depart', title: '組管理', component: 'TradeDepart'},
