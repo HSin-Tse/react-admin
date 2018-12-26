@@ -108,24 +108,17 @@ class Basic extends Component {
                 loading: true,
             }
         );
-
         window.Axios.post('finance/getLeverageApplyList', {
             'pageSize': self.state.pgsize,
             'pageNo': self.state.current,
         }).then(function (response) {
-            console.log(response);
-
             self.setState({
                     totalPage: response.data.data.totalPage,
                     loading: false,
                     userList: response.data.data.list
                 }
             );
-
-
-        }).catch(function (error) {
-            console.log(error);
-        });
+        })
     }
     changePage = (page) => {
         console.log('hcia page', page)
@@ -152,7 +145,6 @@ class Basic extends Component {
         this.columns = [
             {
                 align: 'center',
-
                 title: '申请序号',
                 dataIndex: '申请序号',
                 key: '申请序号',
@@ -161,7 +153,6 @@ class Basic extends Component {
             },
             {
                 align: 'center',
-
                 title: '手机号',
                 dataIndex: '手机号',
                 key: '手机号',
@@ -170,27 +161,39 @@ class Basic extends Component {
             },
             {
                 align: 'center',
-
-                title: '申请人',
+                title: '姓名',
                 dataIndex: 'name',
                 key: 'name',
                 render: (text, record) => (
                     <span>{record.name}</span>),
+            }
+            , {
+                align: 'center',
+                title: '邮箱地址',
+                dataIndex: '邮箱地址',
+                key: '邮箱地址',
+                render: (text, record) => (
+                    <span>{record.email}</span>),
+            }
+            , {
+                align: 'center',
+                title: '交易组',
+                dataIndex: '交易组',
+                key: '交易组',
+                render: (text, record) => (
+                    <span>{record.accountType}</span>),
             }, {
                 align: 'center',
-
-                title: '申请账号',
-
-                dataIndex: '申请序号',
-                key: '申请序号',
-                render: (text, record) => (<span>{record.accountNo}</span>),
+                title: '交易账号',
+                dataIndex: '交易账号',
+                key: '交易账号',
+                render: (text, record) => (
+                    <span>{record.accountNo}</span>),
             }, {
                 align: 'center',
-
-                title: '账户类型',
-
-                dataIndex: '账户类型',
-                key: '账户类型',
+                title: '账号类型',
+                dataIndex: '账号类型',
+                key: '账号类型',
                 render: (text, record) => (
                     <span>{record.broker}</span>),
             }, {
@@ -215,25 +218,8 @@ class Basic extends Component {
             }, {
                 align: 'center',
 
-                title: '邮箱地址',
-                dataIndex: '邮箱地址',
-                key: '邮箱地址',
-                render: (text, record) => (
-                    <span>{record.email}</span>)
-            }, {
-                align: 'center',
-
-                title: '处理备注',
-                dataIndex: '处理备注',
-                key: '处理备注',
-                render: (text, record) => (
-                    <span>{record.comment}</span>)
-            }, {
-                align: 'center',
-
                 title: '操作人',
                 dataIndex: '操作人',
-
                 key: '操作人',
                 render: (text, record) => (
                     <span>{record.operator}</span>)
@@ -243,8 +229,9 @@ class Basic extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.showModalA(record.id)}>查看</Button>
+                        <Button onClick={() => this.showModalA(record.id)}>操作日志</Button>
                         <Button onClick={() => this.showModalB(record.id)}>审核</Button>
+                        <Button onClick={() => this.showModalB(record.id)}>查看</Button>
                     </div>
                 ),
             }];
@@ -420,11 +407,11 @@ class Basic extends Component {
 
                             <Row style={{marginTop: 20}}>
                                 <Col style={{textAlign: 'right'}} span={10}>杠杆修改:</Col>
-                                <Col style={{  textAlign: 'center'}} span={14}>
+                                <Col style={{textAlign: 'center'}} span={14}>
                                     <Select
                                         onChange={this.onChangeLe}
                                         defaultValue={this.state.detail.targetLeverage}
-                                        style={{width:100,marginLeft: 0}}>
+                                        style={{width: 100, marginLeft: 0}}>
                                         {this.state.leavgeList.map(ccty => <Option
                                             value={ccty.id} key={ccty.leverage}>1:{ccty.leverage}</Option>)}
                                     </Select>

@@ -59,7 +59,7 @@ export default class WhiteList extends Component {
                 title: '交易组',
                 dataIndex: '交易组',
                 key: '交易组',
-                render: (text, record) => (<span>{record.activeFlag}</span>),
+                render: (text, record) => (<span>{record.activeFlag}?</span>),
             }, {
                 align: 'center',
                 title: '交易账户',
@@ -73,7 +73,17 @@ export default class WhiteList extends Component {
                 dataIndex: '操作时间',
                 key: '操作时间',
                 render: (text, record) => (<span>{record.date}</span>),
-            }, {
+            }
+
+            , {
+                width: 150,
+                align: 'center',
+                title: '身份证号',
+                dataIndex: '身份证号',
+                key: '身份证号',
+                render: (text, record) => (<span>{record.nationalId}</span>),
+            }
+            , {
                 width: 150,
                 align: 'center',
                 title: '邮箱地址',
@@ -86,13 +96,6 @@ export default class WhiteList extends Component {
                 dataIndex: '操作人',
                 key: '操作人',
                 render: (text, record) => (<span>{record.operator}</span>),
-            }, {
-                align: 'center',
-                title: '处理备注',
-                dataIndex: '处理备注',
-                key: '处理备注',
-                render: (text, record) => (
-                    <span>{record.comment}</span>),
             }, {
                 align: 'center',
                 title: '查看',

@@ -109,6 +109,7 @@ export default class BlackList extends Component {
                 render: (text, record) => (
                     <div>
                         <span className="ant-divider"/>
+                        <Button className="ant-dropdown-link" >操作日志</Button>
                         <Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>移除</Button>
                     </div>
                 ),
