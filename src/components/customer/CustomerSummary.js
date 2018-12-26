@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import {DatePicker, Input, Modal, Button, Table, message, Card, Icon, Popconfirm, Checkbox} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
-// import Example from '@/components/ui/Example';
-import KeyOp from '../ui/KeyOp';
 
 import classNames from "classnames";
 
@@ -112,9 +110,9 @@ export default class CustomerSummary extends Component {
                 ),
             },
             {
-                title: '手机号',
-                dataIndex: '手机号',
-                key: '手机号',
+                title: '开户手机号',
+                dataIndex: '开户手机号',
+                key: '开户手机号',
                 align: 'center',
                 render: (text, record) => (
                     <span>{record.mobile}</span>
@@ -160,11 +158,15 @@ export default class CustomerSummary extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <span>{record.mobile}</span>
+                        <span>{!record.belongUserId?'-':record.mobile}</span>
                         {/*<Button style={{marginLeft: 15}}>解绑</Button>*/}
-                        <Button style={{marginLeft: 15}}
-                                onClick={() => this.requestUnbindAccount(record)}>{record.mobile ? '解绑' : '未激活'}</Button>
 
+
+                        <Button style={{display: !record.belongUserId ? 'none' : '', marginLeft: 15}}
+                                onClick={() => this.requestUnbindAccount(record)}>解绑</Button>
+
+
+                        <span style={{display: record.belongUserId ? 'none' : '', marginLeft: 15}}>未激活</span>
                     </div>
                 ),
             },
@@ -219,13 +221,11 @@ export default class CustomerSummary extends Component {
 
                 {/*<KeyOp mCount={this.state.mCount}*/}
 
-
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
                     <span className="sw-btn dark-white" onClick={this._switcherOn}>
                      <Icon type="setting" className="text-dark"/>
                     </span>
                     <div style={{width: 270}}>
-
                         <Card
                             title="當前表搜索"
                             extra={<Button type="primary" onClick={() => {
@@ -242,9 +242,7 @@ export default class CustomerSummary extends Component {
                                 }, () => {
                                     self.requestData()
                                 })
-                            }}
-                            >清除條件</Button>}
-                        >
+                            }}>清除條件</Button>}>
                             <Input value={this.state.selectMail} onChange={(e) => {
                                 this.setState({selectMail: e.target.value})
                             }} style={{marginBottom: 10}} placeholder="邮箱"/>
@@ -254,7 +252,6 @@ export default class CustomerSummary extends Component {
                                     selectPhoneF: e.target.value,
                                 });
                             }} style={{marginBottom: 10}} placeholder="手机号"/>
-
 
                             <Input value={this.state.selectID} onChange={(e) => {
                                 this.setState({
@@ -268,7 +265,6 @@ export default class CustomerSummary extends Component {
                                 });
                             }} style={{marginBottom: 10}} placeholder="账户"/>
                             <RangePicker
-
                                 showToday
                                 style={{width: '100%'}}
                                 showTime={{format: 'YYYY-MM-DD HH:mm:ss'}}
@@ -379,6 +375,13 @@ export default class CustomerSummary extends Component {
                             this.state.checkedValues.push('其他:' + this.state.otherComment)
                         }
 
+                        if (!this.state.nowRECODE.belongUserId) {
+                            message.error('dev log belongUserId :' + this.state.nowRECODE.belongUserId)
+                            return
+                        }
+
+                        console.log('hcia this.state.nowRECODE', this.state.nowRECODE.belongUserId)
+
                         window.Axios.post('star/unBindStarLiveAccount', {
                             "starClientAccount": this.state.nowRECODE.liveAccountId,
                             "belongUserId": this.state.nowRECODE.belongUserId,
@@ -391,8 +394,6 @@ export default class CustomerSummary extends Component {
 
                             })
                         })
-
-
                     }}
                     okType={((this.state.mStockRecordStatus == 1) && this.state.mStockRecordBEn) ? 'primary' : 'dashed'}
                     onCancel={(e) => {
@@ -403,7 +404,6 @@ export default class CustomerSummary extends Component {
                 >
 
                     <Card title={'请确认客户信息：'} bordered={true}>
-                        {/*record.status*/}
 
                         <Checkbox.Group style={{width: '100%'}} onChange={(checkedValues) => {
 
@@ -427,9 +427,7 @@ export default class CustomerSummary extends Component {
 
                         </Checkbox.Group>
                         <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
-
                             <span style={{minWidth: 60}}>其他：</span>
-
                             <Input value={this.state.otherComment}
                                    onChange={(e) => {
                                        this.setState({
@@ -438,6 +436,13 @@ export default class CustomerSummary extends Component {
                                    }} style={{marginBottom: 10}} placeholder=""/>
                         </div>
                     </Card>
+
+                    <Table
+                        style={{marginTop: 15}}
+                        rowKey="id"
+                        columns={this.modalOPDayColumns}
+                        dataSource={this.state.operationDiaryHistory}
+                    />
                 </Modal>
 
 
@@ -527,13 +532,25 @@ export default class CustomerSummary extends Component {
 
 
     handleCancel = (e) => {
-        console.log(e);
         this.setState({
             NoteModalVisible2: false,
             modal2Visible1: false,
         });
     }
     requestUnbindAccount = (record) => {
+
+
+        // window.Axios.post('auth/getUserCommentList', {
+        //     'belongUserId': this.state.opDayRecord.belongUserId,
+        // }).then(function (response) {
+        //     self.setState({operationDiaryHistory: response.data.data.list});
+        // })
+        // self.setState({
+        //     modal2Visible1: true,
+        //     NoteModalVisible2: false,
+        // });
+
+
         this.state.checkedValues.length = 0
         this.setState({
             checkedValues: [],

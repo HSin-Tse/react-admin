@@ -979,25 +979,21 @@ class PassOpenD extends Component {
             'content': me.state.changeNoteV,
             'belongUserId': me.state.recordData.belongUserId,
             'id': me.state.recordData.id,
-        }).then(function (response) {
-
-
+        }).then(() => {
             me.setState({
                 iconLoading: false,
             });
-            console.log(response);
-
-            if (response.data.code == 1) {
-
-                message.success('開戶通過')
-                me.props.history.goBack()
-
-            }
-
-        });
+            message.success('開戶通過')
+            me.props.history.goBack()
+        }).catch(() => {
+            me.setState({
+                iconLoading: false,
+            });
+        })
 
 
-    };
+    }
+
     searchFromLocalDB = () => {
         this.setState({
             icondbALoading: true,
@@ -1197,16 +1193,8 @@ class PassOpenD extends Component {
 
     handleACType = (value, label) => {
 
-        // console.log('hcia value', value)
-        // console.log('hcia label', label.props)
 
         var self = this
-        //
-        // // this.state.leverageId = value.key
-        // // this.state.recordData.leverage = value.key
-        // this.state.leverageName = value.label
-        //
-        //
 
         self.setState({
             recordData: {...self.state.recordData, accountType: value}
@@ -1216,13 +1204,7 @@ class PassOpenD extends Component {
 
     handleChangeLeavage = (value, label) => {
 
-        // console.log('hcia value', value)
-        // console.log('hcia label', label.props.children)
-
         var self = this
-
-        // this.state.leverageId = value.key
-        // this.state.recordData.leverage = value.key
         this.state.leverageName = value.label
 
 
@@ -1234,9 +1216,6 @@ class PassOpenD extends Component {
 
 
     };
-    handleChange = (value) => {
-        // console.log('hcia value', value)
-    };
     checkfromdbType = (value) => {
         this.setState({
             checkfromdbName: (value == 0 ? this.state.recordData.phoneNumber : value == 1 ? this.state.recordData.nationalID : this.state.recordData.email),
@@ -1244,7 +1223,6 @@ class PassOpenD extends Component {
         });
     };
     onChangetradeType = (e) => {
-        console.log('radio3 checked', e.target.value);
         this.setState({
             tradrType: e.target.value,
         });
