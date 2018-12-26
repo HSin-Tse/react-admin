@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import {Layout} from 'antd';
 import {withRouter} from 'react-router-dom';
 import routes from '@/routes/config';
-import routesAD from '@/routes/configadmin';
+import routesAD from '@/routes/config';
 import SiderMenu from './SiderMenu';
 import avater from "../style/imgs/ixlogo.png";
 import * as Immutable from 'immutable';

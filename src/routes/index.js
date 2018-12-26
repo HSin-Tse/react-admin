@@ -6,7 +6,7 @@ import {Route, Redirect, Switch} from 'react-router-dom';
 import AllComponents from '../components';
 import * as Immutable from 'immutable';
 // import routes from './config';
-import routesAD from '@/routes/configadmin';
+import routesAD from '@/routes/config';
 
 export default class CRouter extends Component {
 
@@ -161,7 +161,7 @@ export default class CRouter extends Component {
                                         exact path={r.route || r.key}
                                         render={props => r.login ?
                                             <Component {...props} />
-                                            : this.requireLogin(<Component opau={r.op} tk={r.tk} {...props} />)}
+                                            : this.requireLogin(<Component opau={r.op} pg={r.pg} tk={r.tk} {...props} />)}
                                     />
                                 )
                             }

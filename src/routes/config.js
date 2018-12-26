@@ -19,7 +19,13 @@ export default {
                     title: '用户总表',
                     component: 'CustomerSummary'
                 },
-                {tk: 'SERVICE_GROUP_MGMT', key: '/app/customer/blacklist', title: '黑名单', component: 'BlackList'},
+                {
+                    tk: 'SERVICE_GROUP_MGMT',
+                    key: '/app/customer/blacklist',
+                    title: '黑名单',
+                    component: 'BlackList',
+                    pg: '1'
+                },
                 {tk: 'SERVICE_GROUP_MGMT', key: '/app/customer/whitelist', title: '白名单', component: 'WhiteList'},
             ],
         },
@@ -36,6 +42,14 @@ export default {
             tk: 'SERVICE_GROUP_MGMT', key: '/app/trade', title: '交易管理', icon: 'safety',
             subs: [
                 {tk: 'SERVICE_GROUP_MGMT', key: '/app/trade/account', title: '交易账户管理', component: 'TradeAccount'},
+                {
+                    tk: 'SERVICE_GROUP_MGMT',
+                    key: '/app/customer/blacklists',
+                    title: '黑名单',
+                    component: 'BlackList',
+                    pg: '2'
+                },
+
                 // {tk: 'SERVICE_GROUP_MGMT', key: '/app/trade/depart', title: '組管理', component: 'TradeDepart'},
             ],
         },

@@ -46,6 +46,15 @@ export default class BlackList extends Component {
     }
 
     componentDidMount() {
+
+
+        console.log('hcia  Black this.props', this.props.pg)
+
+        this.setState({
+            nowKey: this.props.pg,
+        })
+
+
         this.columns = [
             {
                 title: '手机号',
@@ -109,7 +118,7 @@ export default class BlackList extends Component {
                 render: (text, record) => (
                     <div>
                         <span className="ant-divider"/>
-                        <Button className="ant-dropdown-link" >操作日志</Button>
+                        <Button className="ant-dropdown-link">操作日志</Button>
                         <Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>移除</Button>
                     </div>
                 ),
@@ -400,6 +409,7 @@ export default class BlackList extends Component {
                 >
 
                     <Tabs
+                        activeKey={this.state.nowKey}
                         onChange={this.callback}
                         type="card">
                         <TabPane tab="合规黑名单" key="1">
