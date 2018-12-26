@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
+import PopupContainer from './hoc/PopupContainer';
 import {DatePicker, Input, Modal, Button, Table, message, Card, Icon, Popconfirm, Checkbox} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 
 import classNames from "classnames";
+import CustomerUserInfo from "./CustomerUserInfo";
 
 const {RangePicker} = DatePicker;
 const {TextArea} = Input;
 
-export default class CustomerSummary extends Component {
+class CustomerSummary extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -664,3 +666,4 @@ export default class CustomerSummary extends Component {
     }
 }
 
+export default PopupContainer(CustomerSummary);
