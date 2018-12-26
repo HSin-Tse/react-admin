@@ -107,8 +107,10 @@ export default class CRouter extends Component {
                 var ssb = key.subs.filter((sbkey, index, array) => {
                     var back = false
                     inforMenuList.forEach((item, index, array) => {
-                        if (sbkey.title == item.name) {
-                            // console.log('hcia sbkey.title', sbkey.title, item.name, item.availableFlag, (sbkey.title == item.name))
+                        console.log('hcia sbkey.tk', sbkey.tk, item.key, item.availableFlag, (sbkey.tk == item.key))
+
+                        if (sbkey.tk == item.key) {
+                            console.log('hcia sbkey.tk', sbkey.tk, item.key, item.availableFlag, (sbkey.tk == item.key))
                             back = true
                             sbkey.op = item.availableFlag
 
@@ -155,13 +157,12 @@ export default class CRouter extends Component {
 
                                 return (
                                     <Route
-
-
                                         key={r.route || r.key}
                                         exact path={r.route || r.key}
                                         render={props => r.login ?
                                             <Component {...props} />
-                                            : this.requireLogin(<Component opau={r.op} pg={r.pg} tk={r.tk} {...props} />)}
+                                            : this.requireLogin(<Component opau={r.op} pg={r.pg}
+                                                                           tk={r.tk} {...props} />)}
                                     />
                                 )
                             }

@@ -247,14 +247,13 @@ class SiderCustom extends Component {
             }
             if (key.subs) {
 
-
                 var ssb = key.subs.filter((sbkey, index, array) => {
                     var back = false
 
                     inforMenuList.forEach((item, index, array) => {
                         // console.log('hcia sbkey.title','side', sbkey.title, item.name, item.key, (sbkey.title == item.name))
 
-                        if (sbkey.title == item.name) {
+                        if (sbkey.tk == item.key) {
                             back = true
                         }
                     });
@@ -274,16 +273,15 @@ class SiderCustom extends Component {
 
     menuClick = e => {
 
-        console.log('hcia e.key', e.key)
+
+
         this.setState({
             selectedKey: e.key
         });
-        // console.log(this.state);
         const {popoverHide} = this.props; // 响应式布局控制小屏幕点击菜单时隐藏菜单操作
         popoverHide && popoverHide();
     };
     openMenu = v => {
-        // console.log(v);
         this.setState({
             openKey: v[v.length - 1],
             firstHide: false,

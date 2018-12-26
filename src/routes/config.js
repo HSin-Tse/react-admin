@@ -20,7 +20,7 @@ export default {
                     component: 'CustomerSummary'
                 },
                 {
-                    tk: 'TRADE_BLACK_LIST',
+                    tk: 'BLACK_LIST',
                     key: '/app/customer/blacklist',
                     title: '黑名单',
                     component: 'BlackList',
