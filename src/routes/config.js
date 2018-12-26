@@ -8,32 +8,32 @@ export default {
             tk: 'SERVICE_GROUP_MGMT', key: '/app/customer', title: '用户管理', icon: 'team',
             subs: [
                 {
-                    tk: 'SERVICE_GROUP_MGMT',
+                    tk: 'LEAD_MGMT',
                     key: '/app/customer/PotentialUser',
                     title: 'Leads管理',
                     component: 'PotentialUser'
                 },
                 {
-                    tk: 'SERVICE_GROUP_MGMT',
+                    tk: 'USERS_LIST',
                     key: '/app/customer/CustomerSummary',
                     title: '用户总表',
                     component: 'CustomerSummary'
                 },
                 {
-                    tk: 'SERVICE_GROUP_MGMT',
+                    tk: 'TRADE_BLACK_LIST',
                     key: '/app/customer/blacklist',
                     title: '黑名单',
                     component: 'BlackList',
                     pg: '1'
                 },
-                {tk: 'SERVICE_GROUP_MGMT', key: '/app/customer/whitelist', title: '白名单', component: 'WhiteList'},
+                {tk: 'WHITE_LIST', key: '/app/customer/whitelist', title: '白名单', component: 'WhiteList'},
             ],
         },
         {
             tk: 'SERVICE_GROUP_MGMT', key: '/app/pass', title: '审核管理', icon: 'safety',
             subs: [
                 {tk: 'OPEN_AUDIT_LIST', key: '/app/pass/open', title: '开户审核', component: 'PassOpen'},
-                {tk: 'SERVICE_GROUP_MGMT', key: '/app/pass/lever', title: '杠杆审核', component: 'PassLever'},
+                {tk: 'AUDIT_LEVERAGE', key: '/app/pass/lever', title: '杠杆审核', component: 'PassLever'},
 
             ],
         },
@@ -41,9 +41,9 @@ export default {
         {
             tk: 'SERVICE_GROUP_MGMT', key: '/app/trade', title: '交易管理', icon: 'safety',
             subs: [
-                {tk: 'SERVICE_GROUP_MGMT', key: '/app/trade/account', title: '交易账户管理', component: 'TradeAccount'},
+                {tk: 'TRADE_ACCOUNT_MGMT', key: '/app/trade/account', title: '交易账户管理', component: 'TradeAccount'},
                 {
-                    tk: 'SERVICE_GROUP_MGMT',
+                    tk: 'TRADE_BLACK_LIST',
                     key: '/app/customer/blacklists',
                     title: '黑名单',
                     component: 'BlackList',
@@ -58,8 +58,8 @@ export default {
             tk: 'SERVICE_GROUP_MGMT', key: '/app/pms', title: '权限管理', icon: 'safety',
             subs: [
                 {tk: 'SERVICE_GROUP_MGMT', key: '/app/pms/inneruserlist', title: '内部成员配置', component: 'InnerUserList'},
-                {tk: 'SERVICE_GROUP_MGMT', key: '/app/pms/roleset', title: '角色配置', component: 'RoleSet'},
-                // {tk:'SERVICE_GROUP_MGMT,key: '/app/pms/rolelog', title: '操作日志', component: 'RoleLog'},
+                {tk: 'ROLE_MGMT', key: '/app/pms/roleset', title: '角色配置', component: 'RoleSet'},
+                // {tk:'OPERATION_HISTORY,key: '/app/pms/rolelog', title: '操作日志', component: 'RoleLog'},
 
             ],
         },
