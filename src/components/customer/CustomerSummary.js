@@ -219,7 +219,7 @@ class CustomerSummary extends Component {
     render() {
         return (
             <div>
-                <div>otherComment query :{JSON.stringify(this.state.otherComment)}</div>
+                {/*<div>otherComment query :{JSON.stringify(this.state.otherComment)}</div>*/}
 
                 {/*<KeyOp mCount={this.state.mCount}*/}
 
