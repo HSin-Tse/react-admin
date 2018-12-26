@@ -154,14 +154,16 @@ export default class PotentialUser extends Component {
                 render: (text, record) => (
                     <span>{record.channelInfo}</span>),
             }
+            // , {
+            //     title: 'IP',
+            //     dataIndex: 'IP',
+            //     key: 'IP',
+            //     align: 'center',
+            //     render: (text, record) => (
+            //         <span>{record.ipAddress}</span>),
+            // }
+
             , {
-                title: 'IP',
-                dataIndex: 'IP',
-                key: 'IP',
-                align: 'center',
-                render: (text, record) => (
-                    <span>{record.ipAddress}</span>),
-            }, {
                 title: '地理位置',
                 dataIndex: '地理位置',
                 key: '地理位置',
@@ -175,22 +177,40 @@ export default class PotentialUser extends Component {
                 align: 'center',
                 render: (text, record) => (<span>{record.feebackStatus}</span>),
 
-            }, {
-                title: '备注',
-
-                dataIndex: '备注',
-                key: '备注',
-                align: 'center',
-                render: (text, record) => (
-                    <span>{record.comment}</span>),
-            }, {
+            }
+            // , {
+            //     title: '备注',
+            //
+            //     dataIndex: '备注',
+            //     key: '备注',
+            //     align: 'center',
+            //     render: (text, record) => (
+            //         <span>{record.comment}</span>),
+            // }
+            , {
                 title: '操作人',
                 dataIndex: '操作人',
                 key: '操作人',
                 align: 'center',
                 render: (text, record) => (
                     <span>{record.operator}</span>),
-            }, {
+            },
+
+
+            {
+                title: '查看',
+                dataIndex: '查看',
+                key: '查看',
+                align: 'center',
+                render: (text, record) => (
+                    <div>
+                        <Button>备注</Button>
+
+                    </div>
+                )
+            }
+            ,
+            {
 
                 title: '操作',
                 key: 'action',
@@ -263,13 +283,15 @@ export default class PotentialUser extends Component {
 
                 key: '回访状态',
                 render: (text, record) => (<span>{record.feebackStatus}</span>),
-            }, {
-                title: '备注',
-
-                dataIndex: '备注',
-                key: '备注',
-                render: (text, record) => (<span>{record.comment}</span>),
-            }, {
+            }
+            // , {
+            //     title: '备注',
+            //
+            //     dataIndex: '备注',
+            //     key: '备注',
+            //     render: (text, record) => (<span>{record.comment}</span>),
+            // }
+            , {
                 title: '活跃程度',
                 dataIndex: '活跃程度',
                 key: '活跃程度',
@@ -281,7 +303,23 @@ export default class PotentialUser extends Component {
                 dataIndex: '操作人',
                 key: '操作人',
                 render: (text, record) => (<span>{record.operator}</span>),
-            }, {
+            }
+
+
+            ,
+            {
+                title: '查看',
+                dataIndex: '查看',
+                key: '查看',
+                align: 'center',
+                render: (text, record) => (
+                    <div>
+                        <Button>备注</Button>
+
+                    </div>
+                )
+            }
+            , {
                 title: '操作',
                 key: 'action',
                 align: 'center',
@@ -293,7 +331,7 @@ export default class PotentialUser extends Component {
 
                         </Popconfirm>
 
-                        <Button className="ant-dropdown-link" onClick={() => this.showModal(record)}>添加備註</Button>
+                        <Button className="ant-dropdown-link" onClick={() => this.showModal(record)}>添加回访</Button>
                         <Button className="ant-dropdown-link"
                                 onClick={() => this.showModal2(record.belongUserId)}>操作日誌</Button>
                     </div>
@@ -365,15 +403,17 @@ export default class PotentialUser extends Component {
 
                 align: 'center',
                 render: (text, record) => (<span>{record.feebackStatus}</span>),
-            }, {
-                title: '备注',
-                dataIndex: '备注',
-                key: '备注',
-
-                align: 'center',
-                render: (text, record) => (
-                    <span>{record.comment}</span>),
-            }, {
+            }
+            // , {
+            //     title: '备注',
+            //     dataIndex: '备注',
+            //     key: '备注',
+            //
+            //     align: 'center',
+            //     render: (text, record) => (
+            //         <span>{record.comment}</span>),
+            // }
+            , {
                 title: '操作人',
                 dataIndex: '操作人',
                 key: '操作人',
@@ -385,18 +425,23 @@ export default class PotentialUser extends Component {
                 title: '查看',
                 dataIndex: '查看',
                 key: '查看',
-
                 align: 'center',
                 render: (text, record) => (
-                    <span><Button onClick={() => this.seeUSer(record)}
-                                  className="ant-dropdown-link">查看信息 </Button></span>),
-            }, {
+                    <div>
+                        <Button onClick={() => this.seeUSer(record)}
+                                className="ant-dropdown-link">用户信息 </Button>
+                        <Button>备注</Button>
+
+                    </div>
+                )
+            },
+            {
                 title: '操作',
                 key: 'action',
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button className="ant-dropdown-link" onClick={() => this.showModal(record)}>添加備註</Button>
+                        <Button className="ant-dropdown-link" onClick={() => this.showModal(record)}>添加回访</Button>
                         <Button className="ant-dropdown-link"
                                 onClick={() => this.showModal2(record.belongUserId)}>操作日誌</Button>
                     </div>
