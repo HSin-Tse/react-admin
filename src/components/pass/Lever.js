@@ -229,9 +229,9 @@ class Basic extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.showModalA(record.id)}>操作日志</Button>
+                        <Button >操作日志</Button>
                         <Button onClick={() => this.showModalB(record.id)}>审核</Button>
-                        <Button onClick={() => this.showModalB(record.id)}>查看</Button>
+                        <Button onClick={() => this.showModalA(record.id)}>查看</Button>
                     </div>
                 ),
             }];
