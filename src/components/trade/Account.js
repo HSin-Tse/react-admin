@@ -181,7 +181,6 @@ class Basic extends Component {
         this.nodeColumns = [
             {
                 align: 'center',
-
                 title: '日期',
                 width: 140,
                 dataIndex: '日期',
