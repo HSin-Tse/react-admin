@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import {Route, Redirect, Switch} from 'react-router-dom';
 import AllComponents from '../components';
 import * as Immutable from 'immutable';
-import routes from './config';
+// import routes from './config';
 import routesAD from '@/routes/configadmin';
 
 export default class CRouter extends Component {

@@ -61,6 +61,13 @@ export default {
                 icon: 'star',
                 component: 'PassOpenD'
             },
+            {
+                route: '/app/pass/passopenrs/detail:id',
+                tk: 'tk',
+                title: 'PassOpenRS',
+                icon: 'star',
+                component: 'PassOpenRS'
+            },
             {route: '/app/pass/passopen/user:id', tk: 'tk', title: 'PassOpenS', icon: 'star', component: 'PassOpenS'},
             {
                 route: '/app/customer/SimulatorUser',
@@ -76,13 +83,7 @@ export default {
                 icon: 'star',
                 component: 'IntendingUser'
             },
-            // {
-            //     route: '/app/customer/PotentialUser',
-            //     tk: 'tk',
-            //     title: 'PotentialUser',
-            //     icon: 'star',
-            //     component: 'PotentialUser'
-            // },
+
             {
                 route: '/app/customer/CustomerUserInfo:id',
                 tk: 'tk', title: 'CustomerUserInfo',

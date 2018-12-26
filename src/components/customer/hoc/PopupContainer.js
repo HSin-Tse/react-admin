@@ -15,16 +15,17 @@ const PopupContainer = (Wrapper,handleKeyPress) =>
         //     }
         // }
 
+
         componentDidMount() {
             console.log('hcia','componentDidMount')
             console.log('hcia CustomerSummary.handleKeyPress' , handleKeyPress)
-            document.addEventListener("keydown", handleKeyPress, false);
+            document.addEventListener("keydown", super.handleKeyPressOOP, false);
 
         }
 
         componentWillUnmount() {
             console.log('hcia','componentWillUnmount')
-            document.removeEventListener("keydown", handleKeyPress, false);
+            document.removeEventListener("keydown", CustomerSummary.handleKeyPressOOP, false);
 
         }
 

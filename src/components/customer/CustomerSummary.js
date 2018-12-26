@@ -4,7 +4,7 @@ import {DatePicker, Input, Modal, Button, Table, message, Card, Icon, Popconfirm
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 
 import classNames from "classnames";
-import CustomerUserInfo from "./CustomerUserInfo";
+// import CustomerUserInfo from "./CustomerUserInfo";
 
 const {RangePicker} = DatePicker;
 const {TextArea} = Input;
@@ -30,7 +30,7 @@ class CustomerSummary extends Component {
         };
     }
 
-    handleKeyPress = (event) => {
+   static handleKeyPressOOP = (event) => {
         if (event.metaKey || event.ctrlKey) {
             if (event.key === 'o') {
                 this.setState({
@@ -41,11 +41,11 @@ class CustomerSummary extends Component {
     }
 
     componentWillUnmount() {
-        document.removeEventListener("keydown", this.handleKeyPress, false);
+        document.removeEventListener("keydown", this.handleKeyPressOOP, false);
     }
 
     componentDidMount() {
-        document.addEventListener("keydown", this.handleKeyPress, false);
+        // document.addEventListener("keydown", this.handleKeyPressOOP, false);
 
         this.requestData()
         this.modalOPDayColumns = [
@@ -627,9 +627,12 @@ class CustomerSummary extends Component {
     goToUserAccountInfo = (record) => {
         console.log('hcia record', record)
 
-        var gogo = 'user'
-        this.props.history.push('/app/pass/passopen/' + gogo + record.liveAccountId)
+        var gogo = 'detail'
+        this.props.history.push('/app/pass/passopenrs/' + gogo + record.liveAccountId)
         console.log('goToUserAccountInfo')
+
+        // route: '/app/pass/passopenrs/detail:id',
+
     }
 
     forzenAccount = (record) => {

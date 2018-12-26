@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import {
-    Tooltip, Popconfirm, Icon, Upload, Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, notification
+    Popconfirm, Icon, Upload, Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, notification
 } from 'antd';
 import {Radio} from 'antd';
 import {message} from 'antd';
@@ -15,21 +15,19 @@ import PhotoswipeUIDefault from "photoswipe/dist/photoswipe-ui-default";
 import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
 import moment from 'moment';
-import axios from "axios";
-import AllComponents from "../index";
-import {Route} from "react-router-dom";
 
-const Search = Input.Search;
 const {TextArea} = Input;
 const RadioGroup = Radio.Group;
 const Option = Select.Option;
 
+const tradeType = [
+    {label: 'CFD', value: 'CFD'},
+    {label: 'CFD_2', value: 'CFD_2'},
+    {label: 'CFD_3', value: 'CFD_3'},
+];
 const dateFormat = 'YYYY-MM-DD';
-var aaxios = axios.create({
-    baseURL: 'http://mobile.nooko.cn:8090/'
-});
 
-class PassOpenD extends Component {
+class PassOpenRS extends Component {
 
     constructor(props) {
         super(props);
@@ -42,11 +40,7 @@ class PassOpenD extends Component {
             , waitUpdate: {}
             , changeNoteV: ''
             , cardid2: ''
-            , leverageId: ''
-            , leverageName: ''
             , changeNoteB: false
-            , mIsNeedAddBlack: false
-            , showREJECTmodel: false
             , waitSearchDb: {}
             , iconLoading: false
             , checkderesb: null
@@ -55,7 +49,6 @@ class PassOpenD extends Component {
             , iconcanLoading: false
             , visible: false
             , secondCheckOpen: false
-            , selectedLeaf: false
             , tradrType: 'CFD'
             , testeee: '1976-11-23'
             , mGender: ''
@@ -66,48 +59,28 @@ class PassOpenD extends Component {
             , mAnnualIncome: ''
             , sss: 'aa'
             , IXIncomeList: []
-            , leverageList: []
             , IXPercentage: []
             , IXFundsSource: []
             , IXUStax: []
             , IXTradingExperience: []
             , IXTradingObjectives: []
             , IXRisk_Tolerance: []
-            , accountType: []
             , gallery: null
 
         };
     }
 
     componentDidMount() {
+
+
         var self = this;
-
-
-        // if (localStorage.getItem('infor')) {
-        //     var menuInfor = JSON.parse(localStorage.getItem('infor'))
-        //     // console.log('hcia menuInfor', menuInfor.menuList)
-        //     // console.log('hcia  this.props', this.props)
-        //
-        //     var findEmpty = menuInfor.menuList.find((item) => {
-        //         // console.log('hcia  this.props', this.props)
-        //         return this.props.tk === item.key;
-        //     });
-        //
-        //     // console.log('hcia findEmpty', findEmpty.availableFlag)
-        //     self.setState({
-        //         availableFlag: findEmpty.availableFlag === 1,
-        //
-        //     });
-        //
-        // }
-
+        console.log('hcia me.props.history', self.props.history)
 
         window.Axios.post('dict/leverageList', {
             'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
         }).then((response) => {
-            self.setState({
-                leverageList: response.data.data,
-            });
+
+
         });
 
         window.Axios.post('dict/openDict', {
@@ -122,18 +95,19 @@ class PassOpenD extends Component {
                 IXTradingExperience: response.data.data.IX_Trading_Experience,
                 IXTradingObjectives: response.data.data.IX_Trading_Objectives,
                 IXRisk_Tolerance: response.data.data.IX_Risk_Tolerance,
-                accountType: response.data.data.account_type,
 
             });
         });
 
-
-        window.Axios.post('open/getOpenApplyDetail', {
+        window.Axios.post('open/getLiveAccountDetail', {
             'id': self.props.match.params.id,
         }).then(function (response) {
 
-            if (!response.data.data.state) {
+          if (!response.data.data) {
+                return
+            }
 
+            if (!response.data.data.state) {
                 return
             }
 
@@ -150,18 +124,15 @@ class PassOpenD extends Component {
                 mriskTolerance: response.data.data.riskTolerance,
                 mState: response.data.data.state,
                 mCity: response.data.data.city,
-                leverageId: response.data.data.leverage,
                 changeNoteV: response.data.data.comment,
                 checkfromdbName: response.data.data.phoneNumber,
             }, () => {
-
-
                 window.Axios.post('dict/openDict', {
                     'keys': 'div_type',
                     'division': 'province',
                     'code': '1',
                 }).then(function (response) {
-                    // console.log('hcia response', response)
+                    console.log('hcia response', response)
 
                     self.setState({
                         provinceDatAarra: response.data.data.div_type,
@@ -177,7 +148,7 @@ class PassOpenD extends Component {
                             'code': nowCity[0].code
                         }).then((ress) => {
 
-                            // console.log('hcia ress', ress)
+                            console.log('hcia ress', ress)
                             self.setState({
                                 cityDatAarra: ress.data.data.div_type
                             })
@@ -201,11 +172,6 @@ class PassOpenD extends Component {
     }
 
     render() {
-
-        var isSetL = this.state.leverageId ? this.state.leverageId.length > 0 : false
-
-
-        // console.log('hcia isSetL', isSetL)
         var self = this;
 
         this.mIncomesOPS = this.state.IXIncomeList.map(d => <Option key={d.name}>{d.name}</Option>);
@@ -215,150 +181,7 @@ class PassOpenD extends Component {
         this.mIXTradingExperience = this.state.IXTradingExperience.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXTradingObjectives = this.state.IXTradingObjectives.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXRisk_Tolerance = this.state.IXRisk_Tolerance.map(d => <Option key={d.name}>{d.name}</Option>);
-        const uploadProps1 = {
-            action: 'open/leadDetailAttachs',
-            multiple: false,
-            data: {'id': this.state.recordData.id, 'key': 'idcard_1'},
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-            onStart(file) {
-                console.log('onStart', file, file.name);
-            },
-            onSuccess(ret, file) {
-                console.log('onSuccess', ret, file.name);
-            },
-            onError(err) {
-                console.log('onError', err);
-            },
-            onProgress({percent}, file) {
-                console.log('onProgress', `${percent}%`, file.name);
-            },
-            customRequest({
-                              data,
-                              file,
-                          }) {
 
-                const formData = new FormData();
-                if (data) {
-                    Object.keys(data).map(key => {
-                        formData.append(key, data[key]);
-                    });
-                }
-                formData.append('file', file);
-                formData.append('loginName', localStorage.getItem('loginName'))
-                formData.append('token', localStorage.getItem('too'))
-
-                aaxios.post('open/leadDetailAttachs', formData, {})
-                    .then(function (response) {
-                        // console.log('hcia response', response.data.data)
-                        self.setState({
-                            recordData: {...self.state.recordData, idcard_1: response.data.data}
-                        })
-                    })
-                    .catch(error => {
-                        // console.log('hcia error', error)
-                    });
-
-
-            },
-        };
-        const uploadProps0 = {
-            action: 'open/leadDetailAttachs',
-            multiple: false,
-            data: {'id': this.state.recordData.id, 'key': 'idcard_0'},
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-            onStart(file) {
-                console.log('onStart', file, file.name);
-            },
-            onSuccess(ret, file) {
-                console.log('onSuccess', ret, file.name);
-            },
-            onError(err) {
-                console.log('onError', err);
-            },
-            onProgress({percent}, file) {
-                console.log('onProgress', `${percent}%`, file.name);
-            },
-            customRequest({
-                              data,
-                              file,
-                          }) {
-
-                const formData = new FormData();
-                if (data) {
-                    Object.keys(data).map(key => {
-                        formData.append(key, data[key]);
-                    });
-                }
-                formData.append('file', file);
-                formData.append('loginName', localStorage.getItem('loginName'))
-                formData.append('token', localStorage.getItem('too'))
-
-                aaxios.post('open/leadDetailAttachs', formData, {})
-                    .then(function (response) {
-                        // console.log('hcia response', response.data.data)
-                        self.setState({
-                            recordData: {...self.state.recordData, idcard_0: response.data.data}
-                        })
-                    })
-                    .catch(error => {
-                        // console.log('hcia error', error)
-                    });
-
-
-            },
-        };
-        const uploadProps = {
-            action: 'open/leadDetailAttachs',
-            multiple: false,
-            data: {'id': this.state.recordData.id, 'key': 'idcard_2'},
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-            onStart(file) {
-                console.log('onStart', file, file.name);
-            },
-            onSuccess(ret, file) {
-                console.log('onSuccess', ret, file.name);
-            },
-            onError(err) {
-                console.log('onError', err);
-            },
-            onProgress({percent}, file) {
-                console.log('onProgress', `${percent}%`, file.name);
-            },
-            customRequest({
-                              data,
-                              file,
-                          }) {
-
-                const formData = new FormData();
-                if (data) {
-                    Object.keys(data).map(key => {
-                        formData.append(key, data[key]);
-                    });
-                }
-                formData.append('file', file);
-                formData.append('loginName', localStorage.getItem('loginName'))
-                formData.append('token', localStorage.getItem('too'))
-
-                aaxios.post('open/leadDetailAttachs', formData, {})
-                    .then(function (response) {
-                        // console.log('hcia response', response.data.data)
-                        self.setState({
-                            recordData: {...self.state.recordData, idcard_2: response.data.data}
-                        })
-                    })
-                    .catch(error => {
-                        // console.log('hcia error', error)
-                    });
-
-
-            },
-        };
 
         return (
             <div id="openD">
@@ -367,7 +190,8 @@ class PassOpenD extends Component {
                 {/*<div>status: {this.state.recordData.status}</div>*/}
                 {/*<div>isNeedSave :{this.state.isNeedSave.toString()}</div>*/}
                 {/*<div>waitUpdate :{JSON.stringify(this.state.waitUpdate)}</div>*/}
-                {/*<div>this.state.availableFlag :{JSON.stringify(this.state.availableFlag)}</div>*/}
+                {/*<div>recordDictirys :{JSON.stringify(this.state.recordDictirys)}</div>*/}
+
                 <h2 style={{marginTop: 15}}>
                     开户信息详情
                 </h2>
@@ -375,13 +199,13 @@ class PassOpenD extends Component {
                 <Card disabled={true} title="IX账户审核 " bordered={true}>
 
                     <Row gutter={1}>
-                        <Col md={8}>
+                        <Col md={6}>
                             <p>客户姓名:{this.state.recordData.cnName}</p>
                         </Col>
-                        <Col md={8}>
+                        <Col md={6}>
                             <p>客户邮箱：{this.state.recordData.email}</p>
                         </Col>
-                        <Col md={8}>
+                        <Col md={6}>
                             <p>手机号码：{this.state.recordData.phoneNumber} </p>
                         </Col>
                     </Row>
@@ -396,21 +220,28 @@ class PassOpenD extends Component {
                                               disabled={true}>MT4</Checkbox>
                                     <Checkbox checked={this.state.recordData.applyMT5} disabled={true}>MT5</Checkbox>
                                     <Checkbox checked={this.state.recordData.applySTAR}
-                                              disabled={true}>IX-TRADER</Checkbox>
+                                              disabled={true}>TRADER</Checkbox>
 
                                 </div>
                             </Card>
+                            <Card bordered={false}>
 
-
+                                <div>
+                                    交易类型:
+                                    <RadioGroup onChange={this.onChangetradeType} options={tradeType}
+                                                value={this.state.tradrType} style={{marginLeft: 20, width: 520}}
+                                    />
+                                </div>
+                            </Card>
                         </Col>
                         <Col md={8}>
                             <Card bordered={false}>
                                 <div>
+
                                     服务器 :
-                                    <Select
-                                        disabled={true}
-                                        labelInValue defaultValue={{key: 'jack'}}
-                                        style={{marginLeft: 20, width: 120}}
+                                    <Select labelInValue defaultValue={{key: 'jack'}}
+                                            style={{marginLeft: 20, width: 120}}
+                                            onChange={this.handleChange}
                                     >
                                         <Option value="jack">服务器地址</Option>
                                         <Option value="lucy">Lucy (101)</Option>
@@ -423,13 +254,12 @@ class PassOpenD extends Component {
                             <Card bordered={false}>
                                 <div>
                                     交易组 :
-                                    <Select value={this.state.recordData.accountType}
+                                    <Select labelInValue defaultValue={{key: 'lucy'}}
                                             style={{marginLeft: 20, width: 120}}
-                                            onChange={(v, key) => this.handleACType(v, key)}>
-                                        {this.state.accountType.map(acType => <Option
-                                            key={acType.name} kk={acType.id}>{acType.name}</Option>)}
+                                            onChange={this.handleChange}>
+                                        <Option value="jack">Jack (100)</Option>
+                                        <Option value="lucy">S-STP</Option>
                                     </Select>
-
                                 </div>
                             </Card>
                         </Col>
@@ -440,18 +270,39 @@ class PassOpenD extends Component {
                             <Card bordered={false}>
                                 <div>
                                     杠杆组 :
-                                    <Select
-                                        value={this.state.leverageId}
-                                        style={{marginLeft: 20, width: 120}}
-                                        onChange={(v, key) => this.handleChangeLeavage(v, key)}>
-                                        {this.state.leverageList.map(leaf => <Option
-                                            key={leaf.id}>{leaf.clientGroupName}</Option>)}
-
+                                    <Select labelInValue defaultValue={{key: 'lucy'}}
+                                            style={{marginLeft: 20, width: 120}}
+                                            onChange={this.handleChange}>
+                                        <Option value="jack">Jack (100)</Option>
+                                        <Option value="lucy">Lucy (101)</Option>
                                     </Select>
                                 </div>
                             </Card>
                         </Col>
-
+                        <Col md={8}>
+                            <Card bordered={false}>
+                                <div>
+                                    <Select labelInValue defaultValue={{key: 'lucy'}}
+                                            style={{marginLeft: 20}}
+                                            onChange={this.handleChange}>
+                                        <Option value="jack">Jack (100)</Option>
+                                        <Option value="lucy">Lucy (101)</Option>
+                                    </Select>
+                                </div>
+                            </Card>
+                        </Col>
+                        <Col md={8}>
+                            <Card bordered={false}>
+                                <div>
+                                    <Select labelInValue defaultValue={{key: 'lucy'}}
+                                            style={{marginLeft: 20}}
+                                            onChange={this.handleChange}>
+                                        <Option value="jack">Jack (100)</Option>
+                                        <Option value="lucy">Lucy (101)</Option>
+                                    </Select>
+                                </div>
+                            </Card>
+                        </Col>
                     </Row>
                 </Card>
                 <Card title="IX账户申请表单" bordered={true} style={{marginTop: 15}}>
@@ -546,7 +397,7 @@ class PassOpenD extends Component {
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*联系电话</span>
                                     <Input defaultValue={this.state.recordData.phoneNumber} disabled={true}
-                                           style={{width: 130}} placeholder="Basic usage"/>
+                                           style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*邮箱地址</span>
@@ -626,19 +477,18 @@ class PassOpenD extends Component {
                                     </Select>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{width: 120}}>交易类型</span>
-                                    <Input defaultValue={this.state.recordData.accountType} disabled={true}
+                                    <span style={{width: 120}}>账户类型</span>
+                                    <Input defaultValue={this.state.recordData.country} disabled={true}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>交易货币</span>
-                                    <Input defaultValue={this.state.recordData.currency} disabled={true}
+                                    <Input defaultValue={this.state.recordData.country} disabled={true}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*交易密码</span>
-                                    <Input defaultValue={this.state.recordData.accountPassword}
-                                           disabled={true}
+                                    <Input defaultValue={this.state.sss} onChange={this.onChangeSSS}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
                             </Card>
@@ -655,12 +505,8 @@ class PassOpenD extends Component {
                                           <a href={this.state.recordData.idcard_0}
                                              target="_blank"
                                              rel="noopener noreferrer">身份证反面照片</a>
-                                      </h3>,
-                                      <Upload  {...uploadProps0} >
-                                          <h3 className="pa-m">
-                                              点击上传可修改照片<Icon type="upload"/>
-                                          </h3>
-                                      </Upload>]}>
+                                      </h3>]
+                                  }>
                                 <img
                                     onClick={() => this.openGallery(this.state.recordData.idcard_0)}
                                     alt="example" width="100%"
@@ -674,12 +520,8 @@ class PassOpenD extends Component {
                                           <a href={this.state.recordData.idcard_1}
                                              target="_blank"
                                              rel="noopener noreferrer">身份证反面照片</a>
-                                      </h3>,
-                                      <Upload  {...uploadProps1} >
-                                          <h3 className="pa-m">
-                                              点击上传可修改照片<Icon type="upload"/>
-                                          </h3>
-                                      </Upload>]}>
+                                      </h3>]
+                                  }>
                                 <img
                                     onClick={() => this.openGallery(this.state.recordData.idcard_1)}
                                     alt="example" width="100%"
@@ -693,12 +535,8 @@ class PassOpenD extends Component {
                                           <a href={this.state.recordData.idcard_2}
                                              target="_blank"
                                              rel="noopener noreferrer">身份证反面照片</a>
-                                      </h3>,
-                                      <Upload  {...uploadProps} >
-                                          <h3 className="pa-m">
-                                              点击上传可修改照片<Icon type="upload"/>
-                                          </h3>
-                                      </Upload>]}>
+                                      </h3>]
+                                  }>
                                 <img
                                     onClick={() => this.openGallery(this.state.recordData.idcard_2)}
                                     alt="example" width="100%"
@@ -709,53 +547,6 @@ class PassOpenD extends Component {
 
                 </Card>
 
-                <Card title="IX账户身份查重" bordered={true} style={{marginTop: 15}}>
-
-                    <Row gutter={12}>
-                        <Col md={4}>
-                            <div style={{display: 'flex', minHeight: 40}}>
-                                <Select
-                                    onChange={this.checkfromdbType}
-                                    defaultValue="0"
-                                    style={{width: 120}}>
-                                    <Option value="0">手机号</Option>
-                                    <Option value="1">身份证</Option>
-                                    <Option value="2">邮箱</Option>
-                                </Select>
-                            </div>
-
-                        </Col>
-                        <Col md={8}>
-                            <div style={{display: 'flex', maxHeight: 40}}>
-                                <Search
-                                    value={this.state.checkfromdbName}
-                                    onChange={e => this.onTodoChange(e.target.value)}
-                                    style={{width: 220}} placeholder="输入要查询的内容"/>
-                            </div>
-                        </Col>
-                        <Col md={4}>
-                            <div style={{display: 'flex', minHeight: 40}}>
-                                <Button loading={this.state.icondbALoading}
-                                        onClick={() => this.searchFromLocalDB()}>本库查询</Button>
-                            </div>
-                        </Col>
-                        <Col md={4}>
-                            <div style={{display: 'flex', minHeight: 40}}>
-                                <Button loading={this.state.icondbALoadingA}
-                                        onClick={() => this.searchFromOtherDB()}>异库查询</Button>
-
-                            </div>
-                        </Col>
-                        <Col md={24}>
-                            <div style={{display: 'flex', minHeight: 40}}>
-                                {this.state.checkderesb == null ? null :
-                                    <h3 style={{margin: 'auto'}}>本库查询结果：{this.state.checkderesb ? '有' : '無'}重合</h3>}
-                                {this.state.checkderesa == null ? null :
-                                    <h3 style={{margin: 'auto'}}>异库查询结果：{this.state.checkderesa ? '有' : '無'}重合</h3>}
-                            </div>
-                        </Col>
-                    </Row>
-                </Card>
                 <Card title="IX账户审核备注" bordered={true} style={{marginTop: 15}}>
                     <Row gutter={12}>
 
@@ -767,49 +558,7 @@ class PassOpenD extends Component {
 
 
                     </Row>
-                    <Row gutter={12}>
-                        <Card style={{marginTop: 10}}>
 
-                            <div>
-                                <Tooltip placement="top"
-                                         title={!isSetL ? '需要添加杠杆组' : this.state.isNeedSave ? '保存信息' : ''}>
-
-                                    <Popconfirm disabled={this.state.isNeedSave || !isSetL} title="确认当前用户开户申请通过"
-                                                onConfirm={this.confirmOpen} okText="Yes"
-                                                cancelText="No">
-
-
-                                        <Button
-                                            disabled={this.state.isNeedSave || !isSetL}
-                                            loading={this.state.iconLoading}>
-                                            开户通过
-                                        </Button>
-                                    </Popconfirm>
-                                </Tooltip>
-
-
-                                <Button
-                                    disabled={!this.state.isNeedSave}
-                                    onClick={() => this.saveData()}>更新客户资料</Button>
-
-
-                                <Button onClick={() => this.saveNote()}>下载</Button>
-
-                                {/*<Popconfirm title="是否确认拒绝当前用户的开户申请？" onConfirm={this.saveReject} okText="Yes"*/}
-                                {/*cancelText="No">*/}
-
-
-                                {/*</Popconfirm>*/}
-                                <Button onClick={() => {
-                                    this.setState({
-                                        showREJECTmodel: true,
-                                    });
-                                }} loading={this.state.iconcanLoading}>拒绝</Button>
-
-                            </div>
-                        </Card>
-                        {/*disabled={!this.state.isNeedSave || this.state.recordData.status != 0}*/}
-                    </Row>
 
                 </Card>
 
@@ -875,38 +624,6 @@ class PassOpenD extends Component {
                     }
                 `}</style>
                 </div>
-
-                <Modal
-                    title="拒絕"
-                    visible={this.state.showREJECTmodel}
-                    onOk={this.saveReject}
-                    okType={'primary'}
-                    onCancel={(e) => {
-                        this.setState({
-                            showREJECTmodel: false,
-                        });
-                    }}
-                >
-
-                    <Card bordered={true}>
-                        <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
-
-                            <Checkbox
-                                checked={this.state.mIsNeedAddBlack}
-
-                                onChange={(e) => {
-
-                                    console.log('hcia e.target.checked', e.target.checked)
-                                    this.setState({
-                                        mIsNeedAddBlack: e.target.checked,
-                                    });
-                                }}>是否同时加入开户黑名单</Checkbox>
-                        </div>
-
-
-                    </Card>
-                </Modal>
-
                 <Modal
                     title="已对用户资料进行修改，是否保存？"
                     visible={this.state.visible}
@@ -942,10 +659,6 @@ class PassOpenD extends Component {
                         :{this.state.recordData.tradingObjectives}-->{this.state.ix_Trading_ObjectivesNAME}:{this.state.waitUpdate.ix_Trading_Objectives}</p>
                     <p>*风险承受力
                         :{this.state.recordData.riskTolerance}-->{this.state.ix_Risk_ToleranceNAME}:{this.state.waitUpdate.ix_Risk_Tolerance}</p>
-                    <p>*外汇杠杆ID(操作人員必填寫)
-                        :{this.state.leverageName}{this.state.leverageId}</p>
-                    <p>*账户类型
-                        :{this.state.recordData.accountType}</p>
                 </Modal>
             </div>
 
@@ -977,23 +690,27 @@ class PassOpenD extends Component {
 
         window.Axios.post('/open/passOpenApply', {
             'content': me.state.changeNoteV,
-            // 'belongUserId': me.state.recordData.belongUserId,
+            'belongUserId': me.state.recordData.belongUserId,
             'id': me.state.recordData.id,
-        }).then(() => {
+        }).then(function (response) {
+
+
             me.setState({
                 iconLoading: false,
             });
-            message.success('開戶通過')
-            me.props.history.goBack()
-        }).catch(() => {
-            me.setState({
-                iconLoading: false,
-            });
-        })
+            console.log(response);
+
+            if (response.data.code == 1) {
+
+                message.success('開戶通過')
+                me.props.history.goBack()
+
+            }
+
+        });
 
 
-    }
-
+    };
     searchFromLocalDB = () => {
         this.setState({
             icondbALoading: true,
@@ -1004,7 +721,7 @@ class PassOpenD extends Component {
             window.Axios.post('open/localExistOpenAccount', {
                 'phoneNumber': me.state.checkfromdbName,
             }).then(function (response) {
-                // console.log('hcia response', response)
+                console.log('hcia response', response)
                 me.setState({
                     icondbALoading: false,
                     checkderesb: response.data.data.isExist
@@ -1044,7 +761,7 @@ class PassOpenD extends Component {
             window.Axios.post('open/remoteExistOpenAccount', {
                 'phoneNumber': me.state.checkfromdbName,
             }).then(function (response) {
-                // console.log('hcia response', response)
+                console.log('hcia response', response)
                 me.setState({
                     icondbALoadingA: false,
                     checkderesa: response.data.data.isExist
@@ -1055,7 +772,7 @@ class PassOpenD extends Component {
             window.Axios.post('open/remoteExistOpenAccount', {
                 'nationalId': me.state.checkfromdbName,
             }).then(function (response) {
-                // console.log('hcia response', response)
+                console.log('hcia response', response)
                 me.setState({
                     icondbALoadingA: false,
                     checkderesa: response.data.data.isExist
@@ -1065,7 +782,7 @@ class PassOpenD extends Component {
             window.Axios.post('open/remoteExistOpenAccount', {
                 'email': me.state.checkfromdbName,
             }).then(function (response) {
-                // console.log('hcia response', response.data.data.isExist)
+                console.log('hcia response', response.data.data.isExist)
                 me.setState({
                     checkderesa: response.data.data.isExist,
                     icondbALoadingA: false,
@@ -1082,7 +799,7 @@ class PassOpenD extends Component {
     };
     printDocument = () => {
         const input = document.getElementById('openD');
-        // console.log('hcia input', input)
+        console.log('hcia input', input)
         html2canvas(input,
             {
                 scale: 4,
@@ -1125,13 +842,6 @@ class PassOpenD extends Component {
             iconcanLoading: true,
         });
         var me = this;
-
-
-        if (this.state.mIsNeedAddBlack) {
-            this.addBlackRequest()
-        }
-
-
         window.Axios.post('/open/cancelOpenApply', {
             'content': me.state.changeNoteV,
             'id': me.state.recordData.id
@@ -1143,10 +853,7 @@ class PassOpenD extends Component {
 
             if (response.data.code == 1) {
                 message.info('拒絕成功')
-
-                me.setState({
-                    showREJECTmodel: false,
-                });
+                me.openTipBlack()
             }
 
         });
@@ -1189,32 +896,8 @@ class PassOpenD extends Component {
         });
         this.gallery.init();
     };
-
-
-    handleACType = (value, label) => {
-
-
-        var self = this
-
-        self.setState({
-            recordData: {...self.state.recordData, accountType: value}
-        })
-
-    };
-
-    handleChangeLeavage = (value, label) => {
-
-        var self = this
-        this.state.leverageName = value.label
-
-
-        self.setState({
-            isNeedSave: true,
-            leverageId: value,
-            leverageName: label.props.children
-        })
-
-
+    handleChange = (value) => {
+        console.log('hcia value', value)
     };
     checkfromdbType = (value) => {
         this.setState({
@@ -1223,6 +906,7 @@ class PassOpenD extends Component {
         });
     };
     onChangetradeType = (e) => {
+        console.log('radio3 checked', e.target.value);
         this.setState({
             tradrType: e.target.value,
         });
@@ -1235,12 +919,10 @@ class PassOpenD extends Component {
         window.Axios.post('open/prestore',
             {
                 id: self.state.recordData.id,
-                leverageId: this.state.leverageId,
-                accountType: this.state.recordData.accountType,
                 ...self.state.waitUpdate
             }
         ).then(function (response) {
-            // console.log('hcia response', response)
+            console.log('hcia response', response)
             if (response.data.code === 1) {
                 message.success('save ok!')
                 self.setState({
@@ -1359,7 +1041,7 @@ class PassOpenD extends Component {
         });
     }
     onChangegender = (value) => {
-        // console.log('hcia value', value)
+        console.log('hcia value', value)
         this.state.waitUpdate.gender = (value === 'Male' ? 1 : 0);
         this.setState({
             mGender: value,//1:male 0:female
@@ -1464,8 +1146,14 @@ class PassOpenD extends Component {
             isNeedSave: true,
         });
     }
+    onChangeSSS = (e) => {
+        this.state.waitUpdate.lastNameCn = e.target.value
+        this.setState({
+            isNeedSave: true,
+        });
+    };
 
-    addBlackRequest() {
+    addBlackRequest(key) {
         let me = this
         if (!me.state.changeNoteV) {
             message.error('備註必填')
@@ -1477,6 +1165,7 @@ class PassOpenD extends Component {
             'listType': 2,//1:合规 2:开户 3:交易
         }).then(function (response) {
             if (response.data.code === 1) {
+                notification.close(key)
                 message.success('added  open  black ')
             }
         });
@@ -1491,7 +1180,7 @@ class PassOpenD extends Component {
             </Button>
         );
         const close = (e) => {
-            // console.log('hcia e', e)
+            console.log('hcia e', e)
         };
 
         notification.open({
@@ -1507,4 +1196,4 @@ class PassOpenD extends Component {
     }
 }
 
-export default PassOpenD;
+export default PassOpenRS;

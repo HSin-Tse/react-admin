@@ -22,6 +22,7 @@ import RouterEnter from './auth/RouterEnter';
 import PassOpen from './pass/Open';
 import PassOpenD from './pass/OpenD';
 import PassOpenS from './pass/OpenS';
+import PassOpenRS from './pass/OpenRS';
 import PassLever from './pass/Lever';
 
 import SimulatorUser from './customer/SimulatorUser';
@@ -79,6 +80,7 @@ export default {
     AddUser,
     EditUser,
     AddRole,
+    PassOpenRS,
     EditRole,
     TradeAccount,
     TradeDepart
