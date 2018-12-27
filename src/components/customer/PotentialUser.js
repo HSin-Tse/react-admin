@@ -154,14 +154,7 @@ export default class PotentialUser extends Component {
                 render: (text, record) => (
                     <span>{record.channelInfo}</span>),
             }
-            // , {
-            //     title: 'IP',
-            //     dataIndex: 'IP',
-            //     key: 'IP',
-            //     align: 'center',
-            //     render: (text, record) => (
-            //         <span>{record.ipAddress}</span>),
-            // }
+
 
             , {
                 title: '地理位置',
@@ -171,33 +164,27 @@ export default class PotentialUser extends Component {
                 render: (text, record) => (
                     <span>{record.location}</span>),
             }, {
+                title: 'IP',
+                dataIndex: 'IP',
+                key: 'IP',
+                align: 'center',
+                render: (text, record) => (
+                    <span>{record.ipAddress}</span>),
+            }, {
                 title: '回访状态',
                 dataIndex: '回访状态',
                 key: '回访状态',
                 align: 'center',
                 render: (text, record) => (<span>{record.feebackStatus}</span>),
 
-            }
-            // , {
-            //     title: '备注',
-            //
-            //     dataIndex: '备注',
-            //     key: '备注',
-            //     align: 'center',
-            //     render: (text, record) => (
-            //         <span>{record.comment}</span>),
-            // }
-            , {
+            }, {
                 title: '操作人',
                 dataIndex: '操作人',
                 key: '操作人',
                 align: 'center',
                 render: (text, record) => (
                     <span>{record.operator}</span>),
-            },
-
-
-            {
+            }, {
                 title: '查看',
                 dataIndex: '查看',
                 key: '查看',

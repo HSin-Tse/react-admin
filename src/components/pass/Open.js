@@ -2,13 +2,15 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, Input, Card, Modal, Checkbox, message} from 'antd';
+import {Button, Table, Input, Card, Modal, Checkbox, message, Icon, DatePicker} from 'antd';
 
 
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
+import classNames from "classnames";
 
 const {TextArea} = Input;
+const {RangePicker} = DatePicker;
 
 class Basic extends Component {
 
@@ -46,8 +48,31 @@ class Basic extends Component {
         clearFilters();
         this.setState({searchPhone: ''});
     }
+    // sda = setInterval(() => {
+    //     // console.log('hcia setInterval')
+    //     // this.requestData()
+    //     // this.requestPageWinoRe()
+    //
+    //
+    // }, 5000)
+    handleKeyPressOOP = (event) => {
+        // console.log('hcia event' , event)
+        if (event.metaKey || event.ctrlKey) {
+            if (event.key === 'o') {
+                this.setState({
+                    switcherOn: !this.state.switcherOn
+                })
+            }
+        }
+    }
+    componentWillUnmount() {
+        // clearInterval(this.sda);
+        document.removeEventListener("keydown", this.handleKeyPressOOP, false);
+    }
+
 
     componentDidMount() {
+        document.addEventListener("keydown", this.handleKeyPressOOP, false);
 
 
         var self = this;
@@ -226,6 +251,29 @@ class Basic extends Component {
     };
 
 
+    requestPageWinoRe = () => {
+        let self = this
+        window.Axios.post('open/getOpenApplyList', {
+            'pageSize': this.state.pgsize,
+            'pageNo': this.state.current,
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            starClientAccount: this.state.starClientAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
+        }).then((response) => {
+
+            self.setState({
+                    totalPage: response.data.data.totalPage,
+                    loading: false,
+                    userList: response.data.data.list
+                }
+            );
+
+        })
+    }
+
     requestPage = () => {
         let self = this
         self.setState({
@@ -236,6 +284,12 @@ class Basic extends Component {
         window.Axios.post('open/getOpenApplyList', {
             'pageSize': this.state.pgsize,
             'pageNo': this.state.current,
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            starClientAccount: this.state.starClientAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
         }).then((response) => {
 
             self.setState({
@@ -327,6 +381,106 @@ class Basic extends Component {
 
                     </Card>
                 </Modal>
+                <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
+                    <span className="sw-btn dark-white" onClick={this._switcherOn}>
+                     <Icon type="setting" className="text-dark"/>
+                    </span>
+                    <div style={{width: 270}}>
+
+                        <Card
+                            title="當前表搜索"
+                            extra={<Button type="primary" onClick={() => {
+                                let self = this
+                                this.setState({
+                                    selectMail: '',
+                                    selectID: '',
+                                    startTime: '',
+                                    selectPhoneF: '',
+                                    starClientAccount: '',
+                                    selectTimeStart: '',
+                                    selectTimeEnd: '',
+                                    filterTimeFalue: null
+                                }, () => {
+                                    self.requestPage()
+                                })
+                            }}
+                            >清除條件</Button>}
+                        >
+                            <Input value={this.state.selectMail} onChange={(e) => {
+                                this.setState({selectMail: e.target.value})
+                            }} style={{marginBottom: 10}} placeholder="邮箱"/>
+
+                            <Input value={this.state.selectPhoneF} onChange={(e) => {
+                                this.setState({
+                                    selectPhoneF: e.target.value,
+                                });
+                            }} style={{marginBottom: 10}} placeholder="手机号"/>
+
+
+                            <Input value={this.state.selectID} onChange={(e) => {
+                                this.setState({
+                                    selectID: e.target.value,
+                                });
+                            }} style={{marginBottom: 10}} placeholder="身份证号"/>
+
+                            <Input value={this.state.starClientAccount} onChange={(e) => {
+                                this.setState({
+                                    starClientAccount: e.target.value,
+                                });
+                            }} style={{marginBottom: 10}} placeholder="账户"/>
+                            <RangePicker
+
+                                showToday
+                                style={{width: '100%'}}
+                                showTime={{format: 'YYYY-MM-DD HH:mm:ss'}}
+                                format="YYYY-MM-DD HH:mm:ss fff"
+                                placeholder={['開始時間', '結束時間']}
+                                onChange={(value, dateString) => {
+
+
+                                    var selectTimeStart = value[0].unix() + '000'
+                                    var selectTimeEnd = value[1].unix() + '000'
+
+                                    console.log('hcia selectTimeStart', selectTimeStart)
+                                    console.log('hcia selectTimeEnd', selectTimeEnd)
+
+
+                                    this.setState({
+                                        filterTimeFalue: value,
+                                        selectTimeStart: selectTimeStart,
+                                        selectTimeEnd: selectTimeEnd,
+
+                                    });
+                                }}
+                                value={this.state.filterTimeFalue}
+                                onOk={(value) => {
+                                    console.log('hcia', 'onOk: ', value);
+
+
+                                    var selectTimeStart = value[0].unix() + '000'
+                                    var selectTimeEnd = value[1].unix() + '000'
+
+                                    console.log('hcia selectTimeStart', selectTimeStart)
+                                    console.log('hcia selectTimeEnd', selectTimeEnd)
+
+
+                                    this.setState({
+                                        filterTimeFalue: value,
+                                        selectTimeStart: selectTimeStart,
+                                        selectTimeEnd: selectTimeEnd,
+
+                                    });
+                                }}
+                            />
+
+                            <Button onClick={() => this.requestPage()} style={{marginTop: 15}} type="primary"
+                                    icon="search">Search</Button>
+
+                        </Card>
+
+
+                    </div>
+                </div>
 
             </div>
 
