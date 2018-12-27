@@ -45,7 +45,7 @@ class CustomerSummary extends Component {
     }
 
     componentDidMount() {
-        // document.addEventListener("keydown", this.handleKeyPressOOP, false);
+        document.addEventListener("keydown", this.handleKeyPressOOP, false);
 
         this.requestData()
         this.modalOPDayColumns = [
@@ -385,7 +385,7 @@ class CustomerSummary extends Component {
                         console.log('hcia this.state.nowRECODE', this.state.nowRECODE.belongUserId)
 
                         window.Axios.post('star/unBindStarLiveAccount', {
-                            "starClientAccount": this.state.nowRECODE.liveAccountId,
+                            "starClientAccount": this.state.nowRECODE.accountNo,
                             "belongUserId": this.state.nowRECODE.belongUserId,
                             "content": this.state.checkedValues.toString(),
                         }).then(() => {
@@ -395,6 +395,8 @@ class CustomerSummary extends Component {
                                 otherComment: ''
 
                             })
+
+                            self.requestData()
                         })
                     }}
                     okType={((this.state.mStockRecordStatus == 1) && this.state.mStockRecordBEn) ? 'primary' : 'dashed'}
