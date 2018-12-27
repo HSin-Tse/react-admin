@@ -696,69 +696,7 @@ class PassOpenD extends Component {
                     </Row>
 
                 </Card>
-                {/*<Card title="IX账户身份信息" bordered={true} style={{marginTop: 15}}>*/}
-                    {/*<Row gutter={16}>*/}
 
-                        {/*<Col md={8}>*/}
-                            {/*<Card bordered={true} bodyStyle={{padding: 10}}*/}
-                                  {/*actions={[*/}
-                                      {/*<h3 className="pa-m">*/}
-                                          {/*<a href={this.state.recordData.idcard_0}*/}
-                                             {/*target="_blank"*/}
-                                             {/*rel="noopener noreferrer">身份证反面照片</a>*/}
-                                      {/*</h3>,*/}
-                                      {/*<Upload  {...uploadProps0} >*/}
-                                          {/*<h3 className="pa-m">*/}
-                                              {/*点击上传可修改照片<Icon type="upload"/>*/}
-                                          {/*</h3>*/}
-                                      {/*</Upload>]}>*/}
-                                {/*<img*/}
-                                    {/*onClick={() => this.openGallery(this.state.recordData.idcard_0)}*/}
-                                    {/*alt="example" width="100%"*/}
-                                    {/*src={this.state.recordData.idcard_0}/>*/}
-                            {/*</Card>*/}
-                        {/*</Col>*/}
-                        {/*<Col md={8}>*/}
-                            {/*<Card bordered={true} bodyStyle={{padding: 10}}*/}
-                                  {/*actions={[*/}
-                                      {/*<h3 className="pa-m">*/}
-                                          {/*<a href={this.state.recordData.idcard_1}*/}
-                                             {/*target="_blank"*/}
-                                             {/*rel="noopener noreferrer">身份证反面照片</a>*/}
-                                      {/*</h3>,*/}
-                                      {/*<Upload  {...uploadProps1} >*/}
-                                          {/*<h3 className="pa-m">*/}
-                                              {/*点击上传可修改照片<Icon type="upload"/>*/}
-                                          {/*</h3>*/}
-                                      {/*</Upload>]}>*/}
-                                {/*<img*/}
-                                    {/*onClick={() => this.openGallery(this.state.recordData.idcard_1)}*/}
-                                    {/*alt="example" width="100%"*/}
-                                    {/*src={this.state.recordData.idcard_1}/>*/}
-                            {/*</Card>*/}
-                        {/*</Col>*/}
-                        {/*<Col md={8}>*/}
-                            {/*<Card bordered={true} bodyStyle={{padding: 10}}*/}
-                                  {/*actions={[*/}
-                                      {/*<h3 className="pa-m">*/}
-                                          {/*<a href={this.state.recordData.idcard_2}*/}
-                                             {/*target="_blank"*/}
-                                             {/*rel="noopener noreferrer">身份证反面照片</a>*/}
-                                      {/*</h3>,*/}
-                                      {/*<Upload  {...uploadProps} >*/}
-                                          {/*<h3 className="pa-m">*/}
-                                              {/*点击上传可修改照片<Icon type="upload"/>*/}
-                                          {/*</h3>*/}
-                                      {/*</Upload>]}>*/}
-                                {/*<img*/}
-                                    {/*onClick={() => this.openGallery(this.state.recordData.idcard_2)}*/}
-                                    {/*alt="example" width="100%"*/}
-                                    {/*src={this.state.recordData.idcard_2}/>*/}
-                            {/*</Card>*/}
-                        {/*</Col>*/}
-                    {/*</Row>*/}
-
-                {/*</Card>*/}
 
                 <Card title="IX账户身份查重" bordered={true} style={{marginTop: 15}}>
 
@@ -1555,6 +1493,7 @@ class PassOpenD extends Component {
         });
 
 
-    }}
+    }
+}
 
 export default PassOpenD;
