@@ -18,6 +18,7 @@ class CustomerSummary extends Component {
             checkedValues: [],
             currentA: 0,
             otherComment: '',
+            accountPassword: '',
             mCount: 0,
             otherCommentChecks: '',
             totalpageA: 0,
@@ -25,6 +26,7 @@ class CustomerSummary extends Component {
             pgsize: 20,
             opDayRecord: {},
             showUnBindPhoneModal4: false,
+            resetSeretModal5: false,
             NoteModalVisible2: false,
             modal2Visible1: false,
         };
@@ -380,25 +382,109 @@ class CustomerSummary extends Component {
 
                 <Modal
                     bodyStyle={{padding: 0, margin: 15}}
-
-                    title="解绑手机号"
-                    visible={this.state.showUnBindPhoneModal4}
+                    title="重置交易密码"
+                    visible={this.state.resetSeretModal5}
                     onOk={() => {
-
-
                         var self = this
-
                         if (this.state.otherComment) {
                             this.state.checkedValues.push('其他:' + this.state.otherComment)
                         }
-
                         if (!this.state.nowRECODE.belongUserId) {
                             message.error('dev log belongUserId :' + this.state.nowRECODE.belongUserId)
                             return
                         }
+                        window.Axios.post('star/updateStarLiveAccount', {
+                            "id": this.state.nowRECODE.starAccountId,
+                            "accountPassword": this.state.accountPassword,
+                            // "belongUserId": this.state.nowRECODE.belongUserId,
+                            "content": this.state.checkedValues.toString(),
+                        }).then(() => {
+                            message.success('操作成功')
+                            self.setState({
+                                resetSeretModal5: false,
+                                otherComment: '',
+                                accountPassword: ''
+                            })
+                            this.state.checkedValues.length = 0
+                            self.requestData()
+                        })
+                    }}
+                    okType={((this.state.mStockRecordStatus == 1) && this.state.mStockRecordBEn) ? 'primary' : 'dashed'}
+                    onCancel={(e) => {
+                        this.setState({
+                            resetSeretModal5: false,
+                        });
+                    }}
+                >
 
-                        console.log('hcia this.state.nowRECODE', this.state.nowRECODE.belongUserId)
+                    <Card title={'请确认客户信息：'} bordered={true}>
 
+                        <Checkbox.Group style={{width: '100%'}} value={this.state.checkedValues}
+                                        onChange={(checkedValues) => {
+
+                                            this.setState({
+                                                checkedValues: checkedValues,
+                                                otherCommentChecks: checkedValues.toString(),
+                                            });
+
+                                        }}>
+
+                            <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
+                                <Checkbox value={"手机号"}>手机号</Checkbox>
+                                <Checkbox value={"邮箱"}>邮箱</Checkbox>
+                                <Checkbox value={"账号"}>账号</Checkbox>
+                                <Checkbox value={"地址"}>地址</Checkbox>
+                                <Checkbox value={"身份证号"}>身份证号</Checkbox>
+                            </div>
+                            <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
+                                <Checkbox value={"身份证正本"}>身份证正本</Checkbox>
+                            </div>
+
+                        </Checkbox.Group>
+                        <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
+                            <span style={{minWidth: 80}}>其他：</span>
+                            <Input value={this.state.otherComment}
+                                   onChange={(e) => {
+                                       this.setState({
+                                           otherComment: e.target.value,
+                                       });
+                                   }} style={{marginBottom: 10}} placeholder=""/>
+                        </div>
+                        <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
+                            <span style={{minWidth: 80}}>交易密码：</span>
+                            <Input value={this.state.accountPassword}
+                                   onChange={(e) => {
+                                       this.setState({
+                                           accountPassword: e.target.value,
+                                       });
+                                   }} style={{marginBottom: 10}} placeholder=""/>
+                        </div>
+                    </Card>
+
+                    <Table
+                        style={{marginTop: 15}}
+                        rowKey="id"
+                        columns={this.modalOPDayColumns}
+                        dataSource={this.state.operationDiaryHistory}
+                    />
+                </Modal>
+
+
+
+
+                <Modal
+                    bodyStyle={{padding: 0, margin: 15}}
+                    title="解绑手机号"
+                    visible={this.state.showUnBindPhoneModal4}
+                    onOk={() => {
+                        var self = this
+                        if (this.state.otherComment) {
+                            this.state.checkedValues.push('其他:' + this.state.otherComment)
+                        }
+                        if (!this.state.nowRECODE.belongUserId) {
+                            message.error('dev log belongUserId :' + this.state.nowRECODE.belongUserId)
+                            return
+                        }
                         window.Axios.post('star/unBindStarLiveAccount', {
                             "id": this.state.nowRECODE.starAccountId,
                             "belongUserId": this.state.nowRECODE.belongUserId,
@@ -408,11 +494,8 @@ class CustomerSummary extends Component {
                             self.setState({
                                 showUnBindPhoneModal4: false,
                                 otherComment: ''
-
                             })
                             this.state.checkedValues.length = 0
-
-
                             self.requestData()
                         })
                     }}
@@ -684,7 +767,32 @@ class CustomerSummary extends Component {
 
     }
     resetSeret = (record) => {
+
+        // resetSeretModal5
         console.log('hcia record', record)
+
+        let belongUserId = record.belongUserId
+
+        var self = this
+
+
+        window.Axios.post('auth/getUserCommentList', {
+            'belongUserId': belongUserId,
+        }).then(function (response) {
+            self.setState({operationDiaryHistory: response.data.data.list});
+        })
+
+
+        console.log('hcia record', record)
+
+        this.state.checkedValues.length = 0
+        this.setState({
+            checkedValues: [],
+            otherComment: '',
+            otherCommentChecks: '',
+            nowRECODE: record,
+            resetSeretModal5: true
+        })
     }
 
 
