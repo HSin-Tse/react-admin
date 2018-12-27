@@ -30,7 +30,8 @@ class CustomerSummary extends Component {
         };
     }
 
-   static handleKeyPressOOP = (event) => {
+    handleKeyPressOOP = (event) => {
+        // console.log('hcia event' , event)
         if (event.metaKey || event.ctrlKey) {
             if (event.key === 'o') {
                 this.setState({
