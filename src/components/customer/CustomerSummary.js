@@ -180,7 +180,7 @@ class CustomerSummary extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button>备注</Button>
+                        <Button onClick={() => this.justSeenote(record)} >备注</Button>
                         <Button onClick={() => this.goToUserAccountInfo(record)}>開戶</Button>
                         <Button onClick={() => this.goToUserInfo(record.belongUserId)}>行為</Button>
                     </div>
@@ -210,7 +210,7 @@ class CustomerSummary extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.showModalNote(record)}>添加備註</Button>
+                        <Button onClick={() => this.showModalNote(record)}>添加备注</Button>
                         <Button onClick={() => this.showModalOPDAY(record)}>操作日誌</Button>
                     </div>
                 ),
@@ -325,7 +325,7 @@ class CustomerSummary extends Component {
                 </Card>
                 <Modal
                     // width={'100%'}
-                    title="添加備註"
+                    title="添加备注"
                     visible={this.state.NoteModalVisible2}
                     onOk={this.handleAddComment}
                     onCancel={this.handleCancel}
@@ -350,7 +350,7 @@ class CustomerSummary extends Component {
                 </Modal>
                 <Modal
                     // width={'100%'}
-                    title="操作日誌"
+                    title="查看操作日志"
                     visible={this.state.modal2Visible1}
                     onOk={this.handleNOteOPOk}
                     onCancel={this.handleCancel}
@@ -396,6 +396,8 @@ class CustomerSummary extends Component {
                                 otherComment: ''
 
                             })
+                            this.state.checkedValues.length = 0
+
 
                             self.requestData()
                         })
@@ -410,7 +412,7 @@ class CustomerSummary extends Component {
 
                     <Card title={'请确认客户信息：'} bordered={true}>
 
-                        <Checkbox.Group style={{width: '100%'}} onChange={(checkedValues) => {
+                        <Checkbox.Group style={{width: '100%'}}  value ={this.state.checkedValues} onChange={(checkedValues) => {
 
                             this.setState({
                                 checkedValues: checkedValues,
@@ -670,7 +672,30 @@ class CustomerSummary extends Component {
     }
     resetSeret = (record) => {
         console.log('hcia record', record)
+    }
 
+
+    justSeenote = (record) => {
+        console.log('hcia record', record)
+
+        let belongUserId = record.belongUserId
+        var self = this
+
+        self.setState({
+            opDayRecord: record,
+            theComment: ''
+        }, () => {
+            window.Axios.post('auth/getUserCommentList', {
+                'belongUserId': this.state.opDayRecord.belongUserId,
+            }).then(function (response) {
+                self.setState({operationDiaryHistory: response.data.data.list});
+            })
+            self.setState({
+                theBelongUserId: belongUserId,
+                NoteModalVisible2: false,
+                modal2Visible1: true,
+            });
+        });
 
     }
 }
