@@ -48,7 +48,6 @@ class CustomerSummary extends Component {
     }, 1000)
 
 
-
     componentWillUnmount() {
         clearInterval(this.sda);
         document.removeEventListener("keydown", this.handleKeyPressOOP, false);
@@ -57,12 +56,12 @@ class CustomerSummary extends Component {
     componentDidMount() {
 
 
-
         document.addEventListener("keydown", this.handleKeyPressOOP, false);
 
         this.requestData()
         this.modalOPDayColumns = [
             {
+                align: 'center',
                 title: '時間',
                 dataIndex: '時間',
                 key: '時間',
@@ -70,6 +69,7 @@ class CustomerSummary extends Component {
                 render: (text, record) => (
                     <span>{this.timestampToTime(record.createDate)}</span>),
             }, {
+                align: 'center',
                 title: 'IP',
                 dataIndex: 'comment',
                 key: 'operationDiary_Status',
@@ -77,6 +77,7 @@ class CustomerSummary extends Component {
                 render: (text, record) => (
                     <span>{record.ipAddress}</span>),
             }, {
+                align: 'center',
                 title: '操作人',
                 dataIndex: 'comment',
                 key: 'operationDiary_Status',
@@ -84,6 +85,7 @@ class CustomerSummary extends Component {
                 render: (text, record) => (
                     <span>{record.bkUserName}</span>),
             }, {
+                align: 'center',
                 title: '操作',
                 dataIndex: 'bkUserName',
                 key: 'operationDiary_User',
@@ -558,17 +560,16 @@ class CustomerSummary extends Component {
         });
     }
     requestUnbindAccount = (record) => {
+        let belongUserId = record.belongUserId
+
+        var self = this
 
 
-        // window.Axios.post('auth/getUserCommentList', {
-        //     'belongUserId': this.state.opDayRecord.belongUserId,
-        // }).then(function (response) {
-        //     self.setState({operationDiaryHistory: response.data.data.list});
-        // })
-        // self.setState({
-        //     modal2Visible1: true,
-        //     NoteModalVisible2: false,
-        // });
+        window.Axios.post('auth/getUserCommentList', {
+            'belongUserId': belongUserId,
+        }).then(function (response) {
+            self.setState({operationDiaryHistory: response.data.data.list});
+        })
 
 
         console.log('hcia record', record)
@@ -688,7 +689,6 @@ class CustomerSummary extends Component {
 
 
     justSeenote = (record) => {
-        console.log('hcia record', record)
 
         let belongUserId = record.belongUserId
         var self = this
