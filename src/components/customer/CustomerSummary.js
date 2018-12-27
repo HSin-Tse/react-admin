@@ -386,7 +386,7 @@ class CustomerSummary extends Component {
                         console.log('hcia this.state.nowRECODE', this.state.nowRECODE.belongUserId)
 
                         window.Axios.post('star/unBindStarLiveAccount', {
-                            "starClientAccount": this.state.nowRECODE.accountNo,
+                            "id": this.state.nowRECODE.starAccountId,
                             "belongUserId": this.state.nowRECODE.belongUserId,
                             "content": this.state.checkedValues.toString(),
                         }).then(() => {
@@ -556,6 +556,8 @@ class CustomerSummary extends Component {
         // });
 
 
+        console.log('hcia record' , record)
+
         this.state.checkedValues.length = 0
         this.setState({
             checkedValues: [],
@@ -564,6 +566,7 @@ class CustomerSummary extends Component {
             nowRECODE: record,
             showUnBindPhoneModal4: true
         })
+
 
 
     }
@@ -645,7 +648,7 @@ class CustomerSummary extends Component {
 
         if (record.accountStatus === 1) {
             window.Axios.post('star/blockStarLiveAccount', {
-                "starClientAccount": record.liveAccountId,
+                "id": record.starAccountId,
                 "belongUserId": record.belongUserId,
 
             }).then(() => {
@@ -654,7 +657,7 @@ class CustomerSummary extends Component {
             })
         } else {
             window.Axios.post('star/unblockStarLiveAccount', {
-                "starClientAccount": record.liveAccountId,
+                "id": record.starAccountId,
                 "belongUserId": record.belongUserId,
 
             }).then(() => {
