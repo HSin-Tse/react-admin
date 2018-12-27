@@ -41,11 +41,23 @@ class CustomerSummary extends Component {
         }
     }
 
+    sda = setInterval(() => {
+        // console.log('hcia setInterval')
+        // this.requestData()
+
+    }, 1000)
+
+
+
     componentWillUnmount() {
+        clearInterval(this.sda);
         document.removeEventListener("keydown", this.handleKeyPressOOP, false);
     }
 
     componentDidMount() {
+
+
+
         document.addEventListener("keydown", this.handleKeyPressOOP, false);
 
         this.requestData()
@@ -161,7 +173,7 @@ class CustomerSummary extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <span>{!record.belongUserId?'-':record.mobile}</span>
+                        <span>{!record.belongUserId ? '-' : record.mobile}</span>
                         {/*<Button style={{marginLeft: 15}}>解绑</Button>*/}
 
 
@@ -180,7 +192,7 @@ class CustomerSummary extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.justSeenote(record)} >备注</Button>
+                        <Button onClick={() => this.justSeenote(record)}>备注</Button>
                         <Button onClick={() => this.goToUserAccountInfo(record)}>開戶</Button>
                         <Button onClick={() => this.goToUserInfo(record.belongUserId)}>行為</Button>
                     </div>
@@ -412,14 +424,15 @@ class CustomerSummary extends Component {
 
                     <Card title={'请确认客户信息：'} bordered={true}>
 
-                        <Checkbox.Group style={{width: '100%'}}  value ={this.state.checkedValues} onChange={(checkedValues) => {
+                        <Checkbox.Group style={{width: '100%'}} value={this.state.checkedValues}
+                                        onChange={(checkedValues) => {
 
-                            this.setState({
-                                checkedValues: checkedValues,
-                                otherCommentChecks: checkedValues.toString(),
-                            });
+                                            this.setState({
+                                                checkedValues: checkedValues,
+                                                otherCommentChecks: checkedValues.toString(),
+                                            });
 
-                        }}>
+                                        }}>
 
                             <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
                                 <Checkbox value={"手机号"}>手机号</Checkbox>
@@ -558,7 +571,7 @@ class CustomerSummary extends Component {
         // });
 
 
-        console.log('hcia record' , record)
+        console.log('hcia record', record)
 
         this.state.checkedValues.length = 0
         this.setState({
@@ -568,7 +581,6 @@ class CustomerSummary extends Component {
             nowRECODE: record,
             showUnBindPhoneModal4: true
         })
-
 
 
     }
@@ -658,7 +670,7 @@ class CustomerSummary extends Component {
                 self.requestData()
             })
         } else {
-            window.Axios.post('star/unblockStarLiveAccount', {
+            window.Axios.post('star/unBlockStarLiveAccount', {
                 "id": record.starAccountId,
                 "belongUserId": record.belongUserId,
 
