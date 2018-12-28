@@ -1,5 +1,19 @@
 import React, {Component} from 'react';
-import {DatePicker, Input, Modal, Button, Table, Tabs, message, Card, Select, Layout, Icon, notification} from 'antd';
+import {
+    DatePicker,
+    Input,
+    Modal,
+    Button,
+    Table,
+    Tabs,
+    message,
+    Card,
+    Select,
+    Layout,
+    Icon,
+    notification,
+    Popconfirm, Tooltip
+} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {ThemePicker} from '@/components/widget';
 import classNames from "classnames";
@@ -136,7 +150,14 @@ export default class BlackList extends Component {
                     <div>
                         <span className="ant-divider"/>
                         <Button className="ant-dropdown-link">操作日志</Button>
-                        <Button className="ant-dropdown-link" onClick={() => this.handleremove(record)}>移除</Button>
+
+                        <Popconfirm  title="移除?"
+                                    onConfirm={() => this.handleremove(record)} okText="Yes"
+                                    cancelText="No">
+
+                            <Button className="ant-dropdown-link" >移除</Button>
+
+                        </Popconfirm>
                     </div>
                 ),
             }];
@@ -338,26 +359,14 @@ export default class BlackList extends Component {
 
     render() {
 
-        const {loading, selectedRowKeys} = this.state;
-        const hasSelected = selectedRowKeys.length > 0;
-        const rowSelection = {
-            selectedRowKeys,
-            onChange: this.onSelectChange,
-        };
-        const {switcherOn, background} = this.state;
 
         return (
-
-
             <div>
-
-
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
                     <span className="sw-btn dark-white" onClick={this._switcherOn}>
                      <Icon type="setting" className="text-dark"/>
                     </span>
                     <div style={{width: 270}}>
-
                         <Card
                             title="當前表搜索"
                             extra={<Button type="primary" onClick={() => {
