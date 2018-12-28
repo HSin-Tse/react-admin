@@ -1,4 +1,4 @@
-import { DatePicker, Input, Modal, Button, Table, Tabs, message, Card, Tag, Layout, Icon } from 'antd';
+import { message} from 'antd';
 export default class yyx {
     static checkResponseCode =(response) =>{
         if (response.data.code != 1) {

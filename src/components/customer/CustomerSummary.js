@@ -67,7 +67,6 @@ class CustomerSummary extends Component {
                 title: '時間',
                 dataIndex: '時間',
                 key: '時間',
-
                 render: (text, record) => (
                     <span>{this.timestampToTime(record.createDate)}</span>),
             }, {
@@ -75,7 +74,6 @@ class CustomerSummary extends Component {
                 title: 'IP',
                 dataIndex: 'comment',
                 key: 'operationDiary_Status',
-
                 render: (text, record) => (
                     <span>{record.ipAddress}</span>),
             }, {

@@ -37,7 +37,8 @@ export default class PotentialUser extends Component {
             selectID: "",
             selectTimeStart: "",
             selectTimeEnd: "",
-            modal2Visible: false,
+            modal2OPDAYVisible: false,
+            modal3NoteVisible: false,
             visible: false,
             operationDiaryHistory: [],
         };
@@ -51,48 +52,60 @@ export default class PotentialUser extends Component {
         this.requestPageC()
     }
 
+    componentWillUnmount() {
+        document.removeEventListener("keydown", this.handleKeyPress, false);
+    }
 
-    showModal2 = (belongUserId) => {
+
+    showOPDAyModal2 = (belongUserId) => {
         this.requestUserCommentList(belongUserId)
         this.setState({
-            modal2Visible: true,
+            modal2OPDAYVisible: true,
             visible: false,
-
         });
-    }
-    showModal = (record) => {
-        let belongUserId = record.belongUserId
+    };
+    shownoteModal = (belongUserId) => {
+        this.requestUserCommentList(belongUserId)
         this.setState({
-            theBelongUserId: belongUserId,
-            visible: true,
-            modal2Visible: false,
-            theComment: record.comment,
+            modal3NoteVisible: true,
+            visible: false,
         });
+    };
 
-    }
+    showAddbAckModal = (record) => {
+        this.requestUserCommentList(record.belongUserId)
+        this.setState({
+            theBelongUserId: record.belongUserId,
+            visible: true,
+            modal2OPDAYVisible: false,
+        });
+    };
 
     modalColums = () => {
-        return [{
-            title: '時間',
-            dataIndex: 'createDate',
-            key: 'operationDiary_Date',
-            render: (text, record) => (
-                <span>{record.createDate}</span>),
-        }, {
-            title: '狀態',
-            dataIndex: 'comment',
-            key: 'operationDiary_Status',
-            render: (text, record) => (
-                <span>{record.comment}</span>),
-        }, {
-            title: '操作人',
-            width: 130,
+        return [
 
-            dataIndex: 'bkUserName',
-            key: 'operationDiary_User',
-            render: (text, record) => (
-                <span>{record.bkUserName}</span>),
-        }]
+            {
+                title: '操作人',
+                width: 130,
+
+                dataIndex: 'bkUserName',
+                key: 'operationDiary_User',
+                render: (text, record) => (
+                    <span>{record.bkUserName}</span>),
+            },
+            {
+                title: '操作时间',
+                dataIndex: 'createDate',
+                key: 'operationDiary_Date',
+                render: (text, record) => (
+                    <span>{record.createDate}</span>),
+            }, {
+                title: '备注',
+                dataIndex: 'comment',
+                key: 'operationDiary_Status',
+                render: (text, record) => (
+                    <span>{record.comment}</span>),
+            }]
     }
     pageAColumns = () => {
         return [
@@ -128,7 +141,6 @@ export default class PotentialUser extends Component {
                 align: 'center',
                 render: (text, record) => (<span>{record.clientInfo}</span>),
             }, {
-
                 title: '操作系统型号',
                 dataIndex: '操作系统型号',
                 key: '操作系统型号',
@@ -140,7 +152,6 @@ export default class PotentialUser extends Component {
                 key: '注册时间',
                 align: 'center',
                 width: 150,
-
                 render: (text, record) => (<span>{record.date}</span>),
             }, {
                 title: '下载平台',
@@ -186,7 +197,7 @@ export default class PotentialUser extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button>备注</Button>
+                        <Button onClick={() => this.shownoteModal(record.belongUserId)}>备注</Button>
                     </div>
                 )
             },
@@ -197,9 +208,8 @@ export default class PotentialUser extends Component {
                 render: (text, record) => (
 
                     <div>
-                        <Button onClick={() => this.showModal(record)}>添加回访</Button>
-                        <Button
-                            onClick={() => this.showModal2(record.belongUserId)}>操作日志</Button>
+                        <Button onClick={() => this.showAddbAckModal(record)}>添加回访</Button>
+                        <Button onClick={() => this.showOPDAyModal2(record.belongUserId)}>操作日志</Button>
                     </div>
                 ),
             }];
@@ -309,9 +319,9 @@ export default class PotentialUser extends Component {
 
                         </Popconfirm>
 
-                        <Button onClick={() => this.showModal(record)}>添加回访</Button>
+                        <Button onClick={() => this.showAddbAckModal(record)}>添加回访</Button>
                         <Button
-                            onClick={() => this.showModal2(record.belongUserId)}>操作日誌</Button>
+                            onClick={() => this.showOPDAyModal2(record.belongUserId)}>操作日誌</Button>
                     </div>
                 ),
             }];
@@ -407,9 +417,8 @@ export default class PotentialUser extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.showModal(record)}>添加回访</Button>
-                        <Button
-                            onClick={() => this.showModal2(record.belongUserId)}>操作日誌</Button>
+                        <Button onClick={() => this.showAddbAckModal(record)}>添加回访</Button>
+                        <Button onClick={() => this.showOPDAyModal2(record.belongUserId)}>操作日誌</Button>
                     </div>
                 ),
             }];
@@ -424,9 +433,6 @@ export default class PotentialUser extends Component {
         }
     }
 
-    componentWillUnmount() {
-        document.removeEventListener("keydown", this.handleKeyPress, false);
-    }
 
     handleDelay = (record) => {
         let belongUserId = record.belongUserId
@@ -447,10 +453,9 @@ export default class PotentialUser extends Component {
     }
 
     handleCancel = (e) => {
-        console.log(e);
         this.setState({
             visible: false,
-            modal2Visible: false,
+            modal2OPDAYVisible: false,
         });
     }
     handleAddComment = (e) => {
@@ -460,14 +465,12 @@ export default class PotentialUser extends Component {
             belongUserId: self.state.theBelongUserId,
         }).then(() => {
             message.success('提交成功')
-            self.state.theComment = ''
-
-
         });
 
         this.setState({
             visible: false,
-            modal2Visible: false,
+            theComment: '',
+            modal2OPDAYVisible: false,
         });
     }
 
@@ -486,6 +489,7 @@ export default class PotentialUser extends Component {
             });
         });
     }
+
     requestPageA = () => {
         let self = this
         self.setState({
@@ -599,20 +603,11 @@ export default class PotentialUser extends Component {
         })
     }
 
-    // callback = (key) => {
-    //     this.setState({
-    //         nowKey: key,
-    //     })
-    // }
     addComment = (e) => {
         let comment = e.target.value;
         this.setState({
             theComment: comment
         });
-    }
-    onSelectChange = (selectedRowKeys) => {
-        console.log('hcia', 'selectedRowKeys changed: ', selectedRowKeys);
-        this.setState({selectedRowKeys});
     }
 
     state = {
@@ -671,13 +666,6 @@ export default class PotentialUser extends Component {
 
     render() {
 
-        const {loading, selectedRowKeys} = this.state;
-        const hasSelected = selectedRowKeys.length > 0;
-        const rowSelection = {
-            selectedRowKeys,
-            onChange: this.onSelectChange,
-        };
-        const {switcherOn} = this.state;
 
         return (
 
@@ -810,7 +798,7 @@ export default class PotentialUser extends Component {
                                    dataSource={this.state.bklistA}
                                    scroll={{x: 1500}}
                                    loading={this.state.loadingA}
-                                   pagination={{  // 分页
+                                   pagination={{
                                        total: this.state.totalpageA * this.state.pgsize,
                                        pageSize: this.state.pgsize,
                                        onChange: this.changePageA,
@@ -831,7 +819,7 @@ export default class PotentialUser extends Component {
                                    dataSource={this.state.bklistB}
                                    scroll={{x: 1600}}
                                    loading={this.state.loading}
-                                   pagination={{  // 分页
+                                   pagination={{
                                        total: this.state.totalpageB * this.state.pgsize,
                                        pageSize: this.state.pgsize,
                                        onChange: this.changePageB,
@@ -844,8 +832,6 @@ export default class PotentialUser extends Component {
                         <Card bodyStyle={{padding: 0, margin: 0}} title={'意向用户信息表'}>
                             <Table rowKey="id"
                                    bordered
-
-                                // rowSelection={rowSelection}
                                    columns={this.pageCColumns()}
                                    dataSource={this.state.bklistC}
                                    scroll={{x: 1500}}
@@ -857,34 +843,118 @@ export default class PotentialUser extends Component {
                                    }}
                             />
                         </Card>
-
                     </TabPane>
                 </Tabs>
 
                 <Modal
-                    title="添加備註"
+                    title="添加回访"
                     visible={this.state.visible}
                     onOk={this.handleAddComment}
                     onCancel={this.handleCancel}
                     okText="確認"
-                    cancelText="取消">
+                    cancelText="取消"
+                    align={'center'}>
                     <TextArea
                         value={this.state.theComment}
                         placeholder="填写回访次数以及结果"
                         onChange={this.addComment}
                         rows={4}/>
+
+                    <Table style={{marginTop: 15}}
+                           rowKey="id"
+                           columns={this.modalColums()} dataSource={this.state.operationDiaryHistory}
+                           loading={this.state.loadingComment}
+                           pagination={{
+                               total: this.state.totalpageComments * this.state.pgsize,
+                               pageSize: this.state.pgsize,
+                               onChange: this.changePageComment,
+                           }}
+                    />
+
                 </Modal>
                 <Modal
-                    title="操作日誌"
-                    visible={this.state.modal2Visible}
+                    title="查看操作日志"
+                    visible={this.state.modal2OPDAYVisible}
                     onCancel={this.handleCancel}
                     width={600}
                     footer={null}
                 >
                     <Table rowKey="id"
-                           columns={this.modalColums()} dataSource={this.state.operationDiaryHistory}
+                           columns={[
+                               {
+                                   title: '时间',
+                                   dataIndex: 'createDate',
+                                   key: 'operationDiary_Date',
+                                   render: (text, record) => (
+                                       <span>{record.createDate}</span>),
+                               }, {
+                                   title: 'IP',
+                                   dataIndex: 'IP',
+                                   key: 'IP',
+                                   render: (text, record) => (
+                                       <span>{record.ipAddress}</span>),
+                               }, {
+                                   title: '操作人',
+                                   width: 130,
+                                   dataIndex: 'bkUserName',
+                                   key: 'operationDiary_User',
+                                   render: (text, record) => (
+                                       <span>{record.bkUserName}</span>),
+                               }, {
+                                   title: '操作',
+                                   dataIndex: 'comment',
+                                   key: 'operationDiary_Status',
+                                   render: (text, record) => (
+                                       <span>{record.comment}</span>),
+                               }]}
+                           dataSource={this.state.operationDiaryHistory}
                            loading={this.state.loadingComment}
-                           pagination={{  // 分页
+                           pagination={{
+                               total: this.state.totalpageComments * this.state.pgsize,
+                               pageSize: this.state.pgsize,
+                               onChange: this.changePageComment,
+                           }}
+                    />
+
+                </Modal>
+                <Modal
+                    title="查看备注"
+                    visible={this.state.modal3NoteVisible}
+                    onCancel={(e) => {
+                        this.setState({
+                            modal3NoteVisible: false,
+                        });
+                    }}
+                    width={600}
+                    footer={null}
+                >
+                    <Table rowKey="id"
+                           columns={[
+
+                               {
+                                   title: '操作人',
+                                   width: 130,
+
+                                   dataIndex: 'bkUserName',
+                                   key: 'operationDiary_User',
+                                   render: (text, record) => (
+                                       <span>{record.bkUserName}</span>),
+                               },
+                               {
+                                   title: '操作时间',
+                                   dataIndex: 'createDate',
+                                   key: 'operationDiary_Date',
+                                   render: (text, record) => (
+                                       <span>{record.createDate}</span>),
+                               }, {
+                                   title: '备注',
+                                   dataIndex: 'comment',
+                                   key: 'operationDiary_Status',
+                                   render: (text, record) => (
+                                       <span>{record.comment}</span>),
+                               }]} dataSource={this.state.operationDiaryHistory}
+                           loading={this.state.loadingComment}
+                           pagination={{
                                total: this.state.totalpageComments * this.state.pgsize,
                                pageSize: this.state.pgsize,
                                onChange: this.changePageComment,
