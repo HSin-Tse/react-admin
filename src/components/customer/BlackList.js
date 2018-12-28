@@ -45,7 +45,24 @@ export default class BlackList extends Component {
         };
     }
 
+    handleKeyPress = (event) => {
+
+        if (event.metaKey || event.ctrlKey) {
+            if (event.key === 'o' || event.key === 'ㄟ') {
+                this.setState({
+                    switcherOn: !this.state.switcherOn
+                })
+            }
+        }
+
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener("keydown", this.handleKeyPress, false);
+    }
+
     componentDidMount() {
+        document.addEventListener("keydown", this.handleKeyPress, false);
 
 
         console.log('hcia  Black this.props', this.props.pg)
@@ -194,12 +211,13 @@ export default class BlackList extends Component {
         window.Axios.post('auth/getBlackList', {
             pageNo: this.state.currentA,
             'listType': 1,//1:合规 2:开户 3:交易
-            'email': this.state.selectMail,
-            'nationalId': this.state.selectID,
-            'startTime': this.state.selectTimeStart,
-            'endTime': this.state.selectTimeEnd,
-            'mobile': this.state.selectPhone,
-            'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
+            'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易,
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            starClientAccount: this.state.starClientAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
         }).then((response) => {
             self.setState({
                 totalpageA: response.data.data.totalPage,
@@ -230,7 +248,6 @@ export default class BlackList extends Component {
                 bklistB: response.data.data.list,
                 loadingB: false
             });
-
 
         });
     }
@@ -326,7 +343,6 @@ export default class BlackList extends Component {
     }
     searchSelect = () => {
         let self = this
-        console.log('hcia self.state.nowKey', self.state.nowKey)
         if (self.state.nowKey == 1) {
             this.requestPageA()//1:合规 2:开户 3:交易
         }
@@ -367,31 +383,99 @@ export default class BlackList extends Component {
             <div>
 
 
-                <div className={classNames('switcher dark-white', {active: switcherOn})}>
-                <span className="sw-btn dark-white" onClick={this._switcherOn}>
-                    <Icon type="setting" className="text-dark"/>
-                </span>
-                    <div>
+                <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
+                    <span className="sw-btn dark-white" onClick={this._switcherOn}>
+                     <Icon type="setting" className="text-dark"/>
+                    </span>
+                    <div style={{width: 270}}>
 
-                        <Card title="當前表搜索"
-                              extra={<Button type="primary" onClick={() => this.handleremoveSelect()}
-                              >清除條件</Button>}
+                        <Card
+                            title="當前表搜索"
+                            extra={<Button type="primary" onClick={() => {
+                                let self = this
+                                this.setState({
+                                    selectMail: '',
+                                    selectID: '',
+                                    startTime: '',
+                                    selectPhoneF: '',
+                                    starClientAccount: '',
+                                    selectTimeStart: '',
+                                    selectTimeEnd: '',
+                                    filterTimeFalue: null
+                                }, () => {
+                                    self.searchSelect()
+                                })
+                            }}
+                            >清除條件</Button>}
                         >
-                            <Input onChange={this.onChangeMail} style={{marginBottom: 5}} placeholder="邮箱"/>
-                            <Input value={this.state.selectPhone} onChange={this.onChangePhone}
-                                   style={{marginBottom: 5}} placeholder="手机号"/>
-                            <Input onChange={this.onChangeID} style={{marginBottom: 5}} placeholder="身份证号"/>
-                            <Input onChange={this.onChangeAccount} style={{marginBottom: 5}} placeholder="账户"/>
-                            <Input onChange={this.onChangeKeyWord} style={{marginBottom: 5}} placeholder="关键词"/>
+                            <Input value={this.state.selectMail} onChange={(e) => {
+                                this.setState({selectMail: e.target.value})
+                            }} style={{marginBottom: 10}} placeholder="邮箱"/>
+
+                            <Input value={this.state.selectPhoneF} onChange={(e) => {
+                                this.setState({
+                                    selectPhoneF: e.target.value,
+                                });
+                            }} style={{marginBottom: 10}} placeholder="手机号"/>
+
+
+                            <Input value={this.state.selectID} onChange={(e) => {
+                                this.setState({
+                                    selectID: e.target.value,
+                                });
+                            }} style={{marginBottom: 10}} placeholder="身份证号"/>
+
+                            <Input value={this.state.starClientAccount} onChange={(e) => {
+                                this.setState({
+                                    starClientAccount: e.target.value,
+                                });
+                            }} style={{marginBottom: 10}} placeholder="账户"/>
                             <RangePicker
+
+                                showToday
+                                style={{width: '100%'}}
                                 showTime={{format: 'YYYY-MM-DD HH:mm:ss'}}
                                 format="YYYY-MM-DD HH:mm:ss fff"
-                                placeholder={['Start Time', 'End Time']}
-                                onChange={this.onChangeDate}
-                                onOk={this.onOk}
+                                placeholder={['開始時間', '結束時間']}
+                                onChange={(value, dateString) => {
+
+
+                                    var selectTimeStart = value[0].unix() + '000'
+                                    var selectTimeEnd = value[1].unix() + '000'
+
+                                    console.log('hcia selectTimeStart', selectTimeStart)
+                                    console.log('hcia selectTimeEnd', selectTimeEnd)
+
+
+                                    this.setState({
+                                        filterTimeFalue: value,
+                                        selectTimeStart: selectTimeStart,
+                                        selectTimeEnd: selectTimeEnd,
+
+                                    });
+                                }}
+                                value={this.state.filterTimeFalue}
+                                onOk={(value) => {
+                                    console.log('hcia', 'onOk: ', value);
+
+
+                                    var selectTimeStart = value[0].unix() + '000'
+                                    var selectTimeEnd = value[1].unix() + '000'
+
+                                    console.log('hcia selectTimeStart', selectTimeStart)
+                                    console.log('hcia selectTimeEnd', selectTimeEnd)
+
+
+                                    this.setState({
+                                        filterTimeFalue: value,
+                                        selectTimeStart: selectTimeStart,
+                                        selectTimeEnd: selectTimeEnd,
+
+                                    });
+                                }}
                             />
 
-                            <Button onClick={() => this.searchSelect()} style={{marginTop: 10}} type="primary"
+                            <Button onClick={() => this.searchSelect()} style={{marginTop: 15}} type="primary"
                                     icon="search">Search</Button>
 
                         </Card>
@@ -404,26 +488,13 @@ export default class BlackList extends Component {
                 </h2>
                 <BreadcrumbCustom first="用戶管理" second="黑名單"/>
 
-                <Card
-                    bodyStyle={{padding: 0, margin: 0}}
-                >
+                <Card bodyStyle={{padding: 0, margin: 0}}>
 
                     <Tabs
                         activeKey={this.state.nowKey}
                         onChange={this.callback}
                         type="card">
                         <TabPane tab="合规黑名单" key="1">
-                            {/*<Button*/}
-
-
-                            {/*style={{marginBottom: 10}}*/}
-                            {/*type="primary"*/}
-                            {/*onClick={() => this.handleremoveList()}*/}
-                            {/*disabled={!hasSelected}*/}
-                            {/*loading={loading}*/}
-                            {/*>*/}
-                            {/*批量移除*/}
-                            {/*</Button>*/}
 
 
                             <Card
@@ -433,8 +504,7 @@ export default class BlackList extends Component {
                                     this.setState({
                                         showModaladdblack: true,
                                     });
-                                }}>添加黑名单</Button>}
-                            >
+                                }}>添加黑名单</Button>}>
 
                                 <Table rowKey="id"
                                        bordered
@@ -511,14 +581,9 @@ export default class BlackList extends Component {
                         this.setState({
                             showModaladdblack: false,
                         });
-                    }}
-                >
+                    }}>
 
-                    <Card
-
-
-                        bordered={true}>
-
+                    <Card bordered={true}>
                         <div style={{display: 'flex', minHeight: 40}}>
                             <span style={{minWidth: 100}}>类型：</span>
                             <Select value={this.state.addBlackType} style={{minWidth: 160}}
@@ -528,7 +593,6 @@ export default class BlackList extends Component {
                                 <Option value="3">交易黑名单</Option>
                             </Select>
                         </div>
-
 
                         <div style={{display: 'flex', minHeight: 40}}>
                             <span style={{minWidth: 100}}>用户姓名：</span>
