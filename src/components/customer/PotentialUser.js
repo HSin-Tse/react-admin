@@ -41,7 +41,6 @@ export default class PotentialUser extends Component {
             visible: false,
             operationDiaryHistory: [],
 
-
         };
     }
 
@@ -57,7 +56,6 @@ export default class PotentialUser extends Component {
     showModal2 = (belongUserId) => {
         this.requestUserCommentList(belongUserId)
         this.setState({
-            // theComment: comment
             modal2Visible: true,
             visible: false,
 
@@ -155,7 +153,6 @@ export default class PotentialUser extends Component {
                     <span>{record.channelInfo}</span>),
             }
 
-
             , {
                 title: '地理位置',
                 dataIndex: '地理位置',
@@ -192,7 +189,6 @@ export default class PotentialUser extends Component {
                 render: (text, record) => (
                     <div>
                         <Button>备注</Button>
-
                     </div>
                 )
             }
@@ -206,9 +202,9 @@ export default class PotentialUser extends Component {
 
                     <div>
 
-                        <Button className="ant-dropdown-link" onClick={() => this.showModal(record)}>添加備註</Button>
+                        <Button className="ant-dropdown-link" onClick={() => this.showModal(record)}>添加回访</Button>
                         <Button className="ant-dropdown-link"
-                                onClick={() => this.showModal2(record.belongUserId)}>操作日誌</Button>
+                                onClick={() => this.showModal2(record.belongUserId)}>操作日志</Button>
                     </div>
                 ),
             }];
@@ -978,38 +974,30 @@ export default class PotentialUser extends Component {
                     onOk={this.handleAddComment}
                     onCancel={this.handleCancel}
                     okText="確認"
-                    cancelText="取消"
-                >
-                    {/*<p><Input onChange={this.addComment} placeholder="填写回访次数以及结果"/></p>*/}
-
+                    cancelText="取消">
                     <TextArea
                         value={this.state.theComment}
                         placeholder="填写回访次数以及结果"
                         onChange={this.addComment}
-                        rows={4}></TextArea>
+                        rows={4}/>
                 </Modal>
                 <Modal
                     title="操作日誌"
                     visible={this.state.modal2Visible}
-                    // onOk={this.handleOk}
                     onCancel={this.handleCancel}
-                    // okText="確認"
                     width={600}
-                    // cancelText="取消"
                     footer={null}
                 >
-                    <p>
-                        <Table rowKey="id"
-                               columns={this.modalColums()} dataSource={this.state.operationDiaryHistory}
-                               loading={this.state.loadingComment}
-                               pagination={{  // 分页
-                                   total: this.state.totalpageComments * this.state.pgsize,
-                                   pageSize: this.state.pgsize,
-                                   onChange: this.changePageComment,
-                               }}
-                        />
+                    <Table rowKey="id"
+                           columns={this.modalColums()} dataSource={this.state.operationDiaryHistory}
+                           loading={this.state.loadingComment}
+                           pagination={{  // 分页
+                               total: this.state.totalpageComments * this.state.pgsize,
+                               pageSize: this.state.pgsize,
+                               onChange: this.changePageComment,
+                           }}
+                    />
 
-                    </p>
                 </Modal>
             </div>
 
