@@ -32,6 +32,8 @@ export default class BlackList extends Component {
             bklistA: [],
             bklistB: [],
             bklistC: [],
+            currentComment: 0,
+
             currentA: 0,
             currentB: 0,
             currentC: 0,
@@ -42,6 +44,7 @@ export default class BlackList extends Component {
             pgsize: 10,
             loadingA: false,
             showModaladdblack: false,
+            modal2OPDAYVisible: false,
             loadingB: false,
             loadingC: false,
             selectMail: "",
@@ -69,6 +72,37 @@ export default class BlackList extends Component {
             }
         }
 
+    }
+    showOPDAyModal2 = (recodrd) => {
+        this.requestUserCommentList(recodrd)
+        this.setState({
+            modal2OPDAYVisible: true,
+            visible: false,
+        });
+    };
+    changePageComment = (page) => {
+        page = page - 1
+        this.setState({
+            currentComment: page,
+        }, () => {
+            this.requestUserCommentList()
+        })
+    }
+    requestUserCommentList = (record) => {
+        var self = this;
+        window.Axios.post('/auth/getRecordCommentList', {
+            id: record.id,
+            commentType: 10,
+            pageNo: this.state.currentComment,
+            pageSize: this.state.pgsize,
+
+        }).then(function (response) {
+
+            self.setState({
+                totalpageComments: response.data.data.totalPage,
+                operationDiaryHistory: response.data.data.list,
+            });
+        });
     }
 
     componentWillUnmount() {
@@ -136,7 +170,7 @@ export default class BlackList extends Component {
                 key: '查看',
                 render: (text, record) => (
                     <div>
-                        <Button className="ant-dropdown-link">备注
+                        <Button >备注
                         </Button>
 
                     </div>
@@ -148,15 +182,11 @@ export default class BlackList extends Component {
                 key: 'action',
                 render: (text, record) => (
                     <div>
-                        <span className="ant-divider"/>
-                        <Button className="ant-dropdown-link">操作日志</Button>
+                        <Button onClick={() => this.showOPDAyModal2(record)}>操作日志</Button>
 
-                        <Popconfirm  title="移除?"
-                                    onConfirm={() => this.handleremove(record)} okText="Yes"
+                        <Popconfirm title="移除?" onConfirm={() => this.handleremove(record)} okText="Yes"
                                     cancelText="No">
-
-                            <Button className="ant-dropdown-link" >移除</Button>
-
+                            <Button >移除</Button>
                         </Popconfirm>
                     </div>
                 ),
@@ -172,14 +202,9 @@ export default class BlackList extends Component {
         window.Axios.post('auth/removeBlackUser', {
             'id': record.id//1:合规 2:开户 3:交易
         }).then((response) => {
-
             message.success('操作成功')
-
             self.searchSelect()
-
-
         });
-
     };
     handleremoveList = () => {
 
@@ -565,7 +590,12 @@ export default class BlackList extends Component {
                         <div style={{display: 'flex', minHeight: 40}}>
                             <span style={{minWidth: 100}}>类型：</span>
                             <Select value={this.state.addBlackType} style={{minWidth: 160}}
-                                    onChange={this.handleADDBalckType}>
+                                    onChange={(value) => {
+
+                                        this.setState({
+                                            addBlackType: value
+                                        })
+                                    }}>
                                 <Option value="1">合规黑名单</Option>
                                 <Option value="2">开户黑名单</Option>
                                 <Option value="3">交易黑名单</Option>
@@ -649,7 +679,56 @@ export default class BlackList extends Component {
 
                     </Card>
                 </Modal>
+                <Modal
+                    title="查看操作日志"
+                    visible={this.state.modal2OPDAYVisible}
+                    onCancel={() => {
+                        this.setState({
+                            visible: false,
+                            modal2OPDAYVisible: false,
+                        });
+                    }}
+                    width={600}
+                    footer={null}
+                >
+                    <Table rowKey="id"
+                           columns={[
+                               {
+                                   title: '时间',
+                                   dataIndex: 'createDate',
+                                   key: 'operationDiary_Date',
+                                   render: (text, record) => (
+                                       <span>{record.createDate}</span>),
+                               }, {
+                                   title: 'IP',
+                                   dataIndex: 'IP',
+                                   key: 'IP',
+                                   render: (text, record) => (
+                                       <span>{record.ipAddress}</span>),
+                               }, {
+                                   title: '操作人',
+                                   width: 130,
+                                   dataIndex: 'bkUserName',
+                                   key: 'operationDiary_User',
+                                   render: (text, record) => (
+                                       <span>{record.bkUserName}</span>),
+                               }, {
+                                   title: '操作',
+                                   dataIndex: 'comment',
+                                   key: 'operationDiary_Status',
+                                   render: (text, record) => (
+                                       <span>{record.comment}</span>),
+                               }]}
+                           dataSource={this.state.operationDiaryHistory}
+                           loading={this.state.loadingComment}
+                           pagination={{
+                               total: this.state.totalpageComments * this.state.pgsize,
+                               pageSize: this.state.pgsize,
+                               onChange: this.changePageComment,
+                           }}
+                    />
 
+                </Modal>
             </div>
 
         )
@@ -657,21 +736,17 @@ export default class BlackList extends Component {
 
     handleADdBlackListByType = (e) => {
 
-
         let me = this
-
 
         if (!(me.state.TradeACcountCn || me.state.phoneCn || me.state.MAilCn || me.state.IDCn)) {
             message.error('交易账号与手机/邮箱/身份证必选一')
             return
-
 
         }
         if (!me.state.changeNoteVCN) {
             message.error('備註必填 ex:信息不真实')
             return
         }
-
 
         window.Axios.post('auth/addBlackUser', {
             'listType': me.state.addBlackType,//1:合规 2:开户 3:交易,
@@ -681,21 +756,12 @@ export default class BlackList extends Component {
             'nationalId': me.state.IDCn,
             'name': me.state.NameCn,
             'starClientAccount': me.state.TradeACcountCn,
-        }).then((response) => {
+        }).then(() => {
             message.success('操作成功')
-
             me.searchSelect()
         });
     }
 
 
-    handleADDBalckType = (value) => {
-        console.log('hcia value', value)
-
-
-        this.setState({
-            addBlackType: value
-        })
-    }
 }
 
