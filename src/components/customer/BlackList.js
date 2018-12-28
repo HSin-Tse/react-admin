@@ -691,8 +691,7 @@ export default class BlackList extends Component {
                         });
                     }}
                     width={600}
-                    footer={null}
-                >
+                    footer={null}>
                     <Table rowKey="id"
                            columns={[
                                {
