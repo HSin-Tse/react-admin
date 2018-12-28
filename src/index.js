@@ -67,33 +67,15 @@ window.Axios.interceptors.request.use(
 
 
 window.Axios.interceptors.response.use(function (response) {
-    // token 已过期，重定向到登录页面
-    // console.log('hcia response' , response)
 
     if (response.data.code != 1) {
-
-        // localStorage.clear()
-        // router.replace({
-        //     path: '/signin',
-        //     query: {redirect: router.currentRoute.fullPath}
-        // })
         message.error(response.data.msg)
         return Promise.reject(response)
-        // this.props.history.goBack()
-
-
     }
     return response
 }, function (error) {
-
-    console.log('hcia error', error.toString())
     message.error(error.toString())
-
-
-    // Do something with response error
     return Promise.reject(error)
-
-
 })
 
 // console.log('hcia statee',store.getState());

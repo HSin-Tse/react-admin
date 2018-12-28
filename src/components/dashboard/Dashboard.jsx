@@ -2,7 +2,7 @@
  * Created by hao.cheng on 2017/5/3.
  */
 import React from 'react';
-import {Row, Col, Card, Timeline, Icon} from 'antd';
+import {Row, Col, Card, Timeline, Icon, Input, message} from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
 import EchartsViews from './EchartsViews';
 import EchartsProjects from './EchartsProjects';
@@ -10,6 +10,7 @@ import b1 from '../../style/imgs/b1.jpg';
 import {bindActionCreators} from "redux";
 import {addTodo, setINFOR} from "../../action";
 import connect from "react-redux/es/connect/connect";
+import axios from "axios";
 
 
 class Dashboard extends React.Component {
@@ -24,12 +25,26 @@ class Dashboard extends React.Component {
         this.state = {
             menuList: [],
             displayName: '',
+            HOST: 'http://mobile.nooko.cn:8090/',
 
         };
     }
 
+    // Request URL: http://127.0.0.1:8080/open/getOpenApplyList
+
+
     componentDidMount() {
         this.setState({displayName: localStorage.getItem('loginName')});
+
+
+
+
+        
+        
+        // console.log('hcia window.Axios.baseURL' , window.Axios.config.baseURL)
+        console.log('hcia window.Axios.baseURL' , JSON.stringify(window.Axios.baseURL))
+
+        this.setState({HOST: window.Axios.defaults.baseURL});
 
     }
 
@@ -44,6 +59,88 @@ class Dashboard extends React.Component {
                 <h2 style={{marginTop: 15}}>
                     个人待办事项
                 </h2>
+                <div style={{display: 'flex', minHeight: 40}}>
+                    <span style={{width: 120}}>host:</span>
+                    <Input
+
+                        value={this.state.HOST}
+                        onChange={(e) => {
+
+                            var self = this
+                            this.setState({
+                                HOST: e.target.value,
+                            }, () => {
+                                var Axios = axios.create({
+                                    baseURL: self.state.HOST
+                                });
+
+                                window.Axios = Axios;
+
+                                window.Axios.interceptors.request.use(
+                                    config => {
+                                        var xtoken = localStorage.getItem('too')
+                                        var loginName = localStorage.getItem('loginName')
+
+                                        loginName = encodeURI(loginName)
+
+                                        // console.log('hcia loginName' , loginName)
+                                        // console.log('hcia xtoken' , xtoken)
+
+                                        if (xtoken != null) {
+                                            config.headers['X-Token'] = xtoken
+                                            if (config.method == 'post') {
+                                                config.data = {
+                                                    ...config.data,
+                                                    'token': xtoken,
+                                                    'loginName': loginName,
+                                                    'language': 'zh-CN',
+
+                                                }
+
+                                                config.timeout=30*1000
+
+                                                config.headers = {
+                                                    'token': xtoken,
+                                                    'loginName': loginName,
+                                                }
+
+                                            } else if (config.method == 'get') {
+                                                config.params = {
+                                                    _t: Date.parse(new Date()) / 1000,
+                                                    ...config.params
+                                                }
+                                            }
+                                        }
+
+                                        return config
+                                    }, function (error) {
+
+                                        console.log('hcia error', error)
+                                        return Promise.reject(error)
+                                    })
+
+
+                                window.Axios.interceptors.response.use(function (response) {
+
+                                    if (response.data.code != 1) {
+                                        message.error(response.data.msg)
+                                        return Promise.reject(response)
+                                    }
+                                    return response
+                                }, function (error) {
+                                    message.error(error.toString())
+                                    return Promise.reject(error)
+                                })
+                            });
+
+
+                        }}
+                        style={{width: 620}} placeholder="http://127.0.0.1:8080/"/>
+                </div>
+                <p>http://mobile.nooko.cn:8090/</p>
+                <p>http://127.0.0.1:8080/</p>
+
+
                 <BreadcrumbCustom first="" second="个人待办事项"/>
 
                 <Card disabled={true} title="登陆信息 " bordered={true}>
