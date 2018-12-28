@@ -564,7 +564,7 @@ class CustomerSummary extends Component {
             window.Axios.post('auth/getUserCommentList', {
                 'belongUserId': this.state.opDayRecord.belongUserId,
             }).then(function (response) {
-                self.setState({operationDiaryHistory: response.data.data.list});
+                self.setState({operaftionDiaryHistory: response.data.data.list});
             })
             self.setState({
                 modal2Visible1: true,

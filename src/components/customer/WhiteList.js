@@ -17,10 +17,14 @@ export default class WhiteList extends Component {
             bklistA: [],
             currentA: 0,
             totalpageA: 0,
+            opDayRecord: {},
+
             currentComment: 0,
             pgsize: 10,
             loadingA: false,
             modal3OPDAYVisible: false,
+            modal2OPDAYVisible: false,
+            NoteModalVisible2: false,
             showModaladdWhite: false,
             selectPhone: undefined,
             NameCn: undefined,
@@ -33,6 +37,27 @@ export default class WhiteList extends Component {
         document.removeEventListener("keydown", this.handleKeyPress, false);
     }
 
+    showModalNote = (record) => {
+
+
+        this.requestUserCommentList(record)
+
+        let id = record.id
+        var self = this
+
+        self.setState({
+            opDayRecord: record,
+            theComment: ''
+        }, () => {
+
+            self.setState({
+                theBelongUserId: id,
+                NoteModalVisible2: true,
+            });
+        });
+
+
+    }
 
     componentDidMount() {
         console.log('hcia componentDidMount')
@@ -114,21 +139,30 @@ export default class WhiteList extends Component {
                 key: 'action',
                 render: (text, record) => (
                     <div>
-                        <Button>添加备注</Button>
+                        {/*<Button>添加备注</Button>*/}
+                        <Button onClick={() => this.showModalNote(record)}>添加备注</Button>
 
-                        <Popconfirm title="移除?" onConfirm={() => this.handleremove(record)} okText="Yes"
+                        <Popconfirm title="移除?"
+                                    onConfirm={() => this.handleremove(record)} okText="Yes"
                                     cancelText="No">
                             <Button>移除</Button>
                         </Popconfirm>
+                        <Button onClick={() => this.showOPDAyModal2(record)}>操作日志</Button>
 
-                        <Button onClick={() => this.handleremove(record)}>操作日志
-                        </Button>
+                        {/*<Button onClick={() => this.handleremove(record)}>操作日志</Button>*/}
                     </div>
                 ),
             }];
         this.requestPageA()//1:合规 2:开户 3:交易
     }
 
+    showOPDAyModal2 = (recodrd) => {
+        this.requestUserCommentList(recodrd)
+        this.setState({
+            modal2OPDAYVisible: true,
+            visible: false,
+        });
+    };
     showOPDAyModal3 = (recodrd) => {
         this.requestUserCommentList(recodrd)
         this.setState({
@@ -138,6 +172,8 @@ export default class WhiteList extends Component {
     };
 
     requestUserCommentList = (record) => {
+
+
         var self = this;
         window.Axios.post('/auth/getRecordCommentList', {
             id: record.id,
@@ -258,7 +294,28 @@ export default class WhiteList extends Component {
             showModaladdWhite: true,
         });
     }
+    handleAddComment = (e) => {
+        let self = this;
+        window.Axios.post('auth/addRecordComment', {
+            id: self.state.theBelongUserId,
+            commentType: 8,
+            content: self.state.theComment,
+        }).then(() => {
+            message.success('操作成功')
+        })
 
+        this.setState({
+            NoteModalVisible2: false,
+            modal2Visible1: false,
+        });
+    }
+
+
+    handleCancel = (e) => {
+        this.setState({
+            NoteModalVisible2: false,
+        });
+    }
     handleAddWhite = (e) => {
         let self = this
 
@@ -621,6 +678,115 @@ export default class WhiteList extends Component {
                            }}
                     />
 
+                </Modal>
+                <Modal
+                    title="查看操作日志"
+                    visible={this.state.modal2OPDAYVisible}
+                    onCancel={() => {
+                        this.setState({
+                            visible: false,
+                            modal2OPDAYVisible: false,
+                        });
+                    }}
+                    width={600}
+                    footer={null}>
+                    <Table rowKey="id"
+                           columns={[
+                               {
+                                   title: '时间',
+                                   dataIndex: 'createDate',
+                                   key: 'operationDiary_Date',
+                                   render: (text, record) => (
+                                       <span>{record.createDate}</span>),
+                               }, {
+                                   title: 'IP',
+                                   dataIndex: 'IP',
+                                   key: 'IP',
+                                   render: (text, record) => (
+                                       <span>{record.ipAddress}</span>),
+                               }, {
+                                   title: '操作人',
+                                   width: 130,
+                                   dataIndex: 'bkUserName',
+                                   key: 'operationDiary_User',
+                                   render: (text, record) => (
+                                       <span>{record.bkUserName}</span>),
+                               }, {
+                                   title: '操作',
+                                   dataIndex: 'comment',
+                                   key: 'operationDiary_Status',
+                                   render: (text, record) => (
+                                       <span>{record.comment}</span>),
+                               }]}
+                           dataSource={this.state.operationDiaryHistory}
+                           loading={this.state.loadingComment}
+                           pagination={{
+                               total: this.state.totalpageComments * this.state.pgsize,
+                               pageSize: this.state.pgsize,
+                               onChange: this.changePageComment,
+                           }}
+                    />
+
+                </Modal>
+
+
+                <Modal
+                    // width={'100%'}
+                    title="添加备注"
+                    visible={this.state.NoteModalVisible2}
+                    onOk={this.handleAddComment}
+                    onCancel={this.handleCancel}
+                    okText="提交"
+                    cancelText="取消">
+                    <TextArea rows={4}
+                              value={this.state.theComment}
+                              onChange={(e) => {
+                                  let comment = e.target.value;
+                                  this.setState({
+                                      theComment: comment
+                                  });
+                              }}
+                              placeholder="在这里填写回访次数以及备注信息"/>
+                    {/*<Table*/}
+                    {/*bordered*/}
+                    {/*rowKey="id"*/}
+                    {/*columns={this.modalOPDayL2}*/}
+                    {/*dataSource={this.state.operationDiaryHistory}*/}
+                    {/*/>*/}
+
+                    <Table rowKey="id"
+                           style={{marginTop: 15}}
+
+                           columns={[
+
+                               {
+                                   title: '操作人',
+                                   width: 130,
+                                   dataIndex: 'bkUserName',
+                                   key: 'operationDiary_User',
+                                   render: (text, record) => (
+                                       <span>{record.bkUserName}</span>),
+                               }, {
+                                   title: '操作时间',
+                                   dataIndex: 'createDate',
+                                   key: 'operationDiary_Date',
+                                   render: (text, record) => (
+                                       <span>{record.createDate}</span>),
+                               }, {
+                                   title: '备注',
+                                   dataIndex: 'comment',
+                                   key: 'operationDiary_Status',
+                                   render: (text, record) => (
+                                       <span>{record.comment}</span>),
+                               }]}
+                           dataSource={this.state.operationDiaryHistory}
+                           loading={this.state.loadingComment}
+                           pagination={{
+                               total: this.state.totalpageComments * this.state.pgsize,
+                               pageSize: this.state.pgsize,
+                               onChange: this.changePageComment,
+                           }}
+                    />
                 </Modal>
             </div>
         )
