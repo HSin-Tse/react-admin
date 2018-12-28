@@ -45,6 +45,7 @@ export default class BlackList extends Component {
             loadingA: false,
             showModaladdblack: false,
             modal2OPDAYVisible: false,
+            modal3OPDAYVisible: false,
             loadingB: false,
             loadingC: false,
             selectMail: "",
@@ -73,6 +74,13 @@ export default class BlackList extends Component {
         }
 
     }
+    showOPDAyModal3 = (recodrd) => {
+        this.requestUserCommentList(recodrd)
+        this.setState({
+            modal3OPDAYVisible: true,
+            visible: false,
+        });
+    };
     showOPDAyModal2 = (recodrd) => {
         this.requestUserCommentList(recodrd)
         this.setState({
@@ -92,12 +100,10 @@ export default class BlackList extends Component {
         var self = this;
         window.Axios.post('/auth/getRecordCommentList', {
             id: record.id,
-            commentType: 10,
+            commentType: 7,
             pageNo: this.state.currentComment,
             pageSize: this.state.pgsize,
-
         }).then(function (response) {
-
             self.setState({
                 totalpageComments: response.data.data.totalPage,
                 operationDiaryHistory: response.data.data.list,
@@ -170,9 +176,7 @@ export default class BlackList extends Component {
                 key: '查看',
                 render: (text, record) => (
                     <div>
-                        <Button >备注
-                        </Button>
-
+                        <Button onClick={() => this.showOPDAyModal3(record)}>备注</Button>
                     </div>
                 ),
             }, {
@@ -186,7 +190,7 @@ export default class BlackList extends Component {
 
                         <Popconfirm title="移除?" onConfirm={() => this.handleremove(record)} okText="Yes"
                                     cancelText="No">
-                            <Button >移除</Button>
+                            <Button>移除</Button>
                         </Popconfirm>
                     </div>
                 ),
@@ -714,6 +718,51 @@ export default class BlackList extends Component {
                                        <span>{record.bkUserName}</span>),
                                }, {
                                    title: '操作',
+                                   dataIndex: 'comment',
+                                   key: 'operationDiary_Status',
+                                   render: (text, record) => (
+                                       <span>{record.comment}</span>),
+                               }]}
+                           dataSource={this.state.operationDiaryHistory}
+                           loading={this.state.loadingComment}
+                           pagination={{
+                               total: this.state.totalpageComments * this.state.pgsize,
+                               pageSize: this.state.pgsize,
+                               onChange: this.changePageComment,
+                           }}
+                    />
+
+                </Modal>
+                <Modal
+                    title="备注"
+                    visible={this.state.modal3OPDAYVisible}
+                    onCancel={() => {
+                        this.setState({
+                            visible: false,
+                            modal3OPDAYVisible: false,
+                        });
+                    }}
+                    width={600}
+                    footer={null}
+                >
+                    <Table rowKey="id"
+                           columns={[
+
+                               {
+                                   title: '操作人',
+                                   width: 130,
+                                   dataIndex: 'bkUserName',
+                                   key: 'operationDiary_User',
+                                   render: (text, record) => (
+                                       <span>{record.bkUserName}</span>),
+                               },{
+                                   title: '操作时间',
+                                   dataIndex: 'createDate',
+                                   key: 'operationDiary_Date',
+                                   render: (text, record) => (
+                                       <span>{record.createDate}</span>),
+                               },{
+                                   title: '备注',
                                    dataIndex: 'comment',
                                    key: 'operationDiary_Status',
                                    render: (text, record) => (
