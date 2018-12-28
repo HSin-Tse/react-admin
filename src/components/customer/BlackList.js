@@ -153,15 +153,9 @@ export default class BlackList extends Component {
         }).then((response) => {
 
             message.success('操作成功')
-            if (self.state.nowKey == 1) {
-                this.requestPageA()//1:合规 2:开户 3:交易
-            }
-            if (self.state.nowKey == 2) {
-                this.requestPageB()//1:合规 2:开户 3:交易
-            }
-            if (self.state.nowKey == 3) {
-                this.requestPageC()//1:合规 2:开户 3:交易
-            }
+
+            self.searchSelect()
+
 
         });
 
@@ -171,19 +165,9 @@ export default class BlackList extends Component {
         let self = this
         window.Axios.post('auth/removeBlackUserBulk', {
             'idList': this.state.selectedRowKeys//1:合规 2:开户 3:交易
-        }).then((response) => {
-
+        }).then(() => {
             message.success('操作成功')
-            if (self.state.nowKey == 1) {
-                this.requestPageA()//1:合规 2:开户 3:交易
-            }
-            if (self.state.nowKey == 2) {
-                this.requestPageB()//1:合规 2:开户 3:交易
-            }
-            if (self.state.nowKey == 3) {
-                this.requestPageC()//1:合规 2:开户 3:交易
-            }
-
+            self.searchSelect()
         });
 
     };
@@ -235,13 +219,14 @@ export default class BlackList extends Component {
         })
         window.Axios.post('auth/getBlackList', {
             pageNo: this.state.currentB,
+            'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易,
             'listType': 2,//1:合规 2:开户 3:交易
-            'email': this.state.selectMail,
-            'nationalId': this.state.selectID,
-            'startTime': this.state.selectTimeStart,
-            'endTime': this.state.selectTimeEnd,
-            'mobile': this.state.selectPhone,
-            'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            starClientAccount: this.state.starClientAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
         }).then((response) => {
             self.setState({
                 totalpageB: response.data.data.totalPage,
@@ -259,12 +244,13 @@ export default class BlackList extends Component {
         window.Axios.post('auth/getBlackList', {
             pageNo: this.state.currentC,
             'listType': 3,//1:合规 2:开户 3:交易
-            'email': this.state.selectMail,
-            'nationalId': this.state.selectID,
-            'startTime': this.state.selectTimeStart,
-            'endTime': this.state.selectTimeEnd,
-            'mobile': this.state.selectPhone,
-            'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易
+            'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易,
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            starClientAccount: this.state.starClientAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
         }).then((response) => {
 
             self.setState({
@@ -316,9 +302,6 @@ export default class BlackList extends Component {
         this.setState({selectedRowKeys});
     }
 
-    state = {
-        switcherOn: true,
-    }
     _switcherOn = () => {
         this.setState({
             switcherOn: !this.state.switcherOn
@@ -326,30 +309,16 @@ export default class BlackList extends Component {
     };
 
 
-    onChangeMail = (e) => {
-        this.setState({
-            selectMail: e.target.value,
-        });
-    }
-    onChangePhone = (e) => {
-        this.setState({
-            selectPhone: e.target.value,
-        });
-    }
-    onChangeID = (e) => {
-        this.setState({
-            selectID: e.target.value,
-        });
-    }
     searchSelect = () => {
+
         let self = this
-        if (self.state.nowKey == 1) {
+        if (self.state.nowKey === '1') {
             this.requestPageA()//1:合规 2:开户 3:交易
         }
-        if (self.state.nowKey == 2) {
+        if (self.state.nowKey === '2') {
             this.requestPageB()//1:合规 2:开户 3:交易
         }
-        if (self.state.nowKey == 3) {
+        if (self.state.nowKey === '3') {
             this.requestPageC()//1:合规 2:开户 3:交易
         }
     }
