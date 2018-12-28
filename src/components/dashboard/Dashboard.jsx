@@ -37,12 +37,8 @@ class Dashboard extends React.Component {
         this.setState({displayName: localStorage.getItem('loginName')});
 
 
-
-
-        
-        
         // console.log('hcia window.Axios.baseURL' , window.Axios.config.baseURL)
-        console.log('hcia window.Axios.baseURL' , JSON.stringify(window.Axios.baseURL))
+        console.log('hcia window.Axios.baseURL', JSON.stringify(window.Axios.baseURL))
 
         this.setState({HOST: window.Axios.defaults.baseURL});
 
@@ -56,89 +52,102 @@ class Dashboard extends React.Component {
                 {/*{JSON.stringify(this.props.infor)}*/}
                 {/*{JSON.stringify(localStorage.getItem('infor'))}*/}
 
+
+                <div style={{display:    this.state.displayName=='admin'?'':'none'}}>
+
+                    <h1 style={{marginTop: 15}}>
+                        Change your Base URL
+                    </h1>
+
+                    <div style={{display: 'flex', minHeight: 40}}>
+                        <span style={{width: 120}}>now host:</span>
+                        <Input
+
+                            value={this.state.HOST}
+                            onChange={(e) => {
+
+                                var self = this
+                                this.setState({
+                                    HOST: e.target.value,
+                                }, () => {
+                                    var Axios = axios.create({
+                                        baseURL: self.state.HOST
+                                    });
+
+                                    window.Axios = Axios;
+
+                                    window.Axios.interceptors.request.use(
+                                        config => {
+                                            var xtoken = localStorage.getItem('too')
+                                            var loginName = localStorage.getItem('loginName')
+
+                                            loginName = encodeURI(loginName)
+
+                                            // console.log('hcia loginName' , loginName)
+                                            // console.log('hcia xtoken' , xtoken)
+
+                                            if (xtoken != null) {
+                                                config.headers['X-Token'] = xtoken
+                                                if (config.method == 'post') {
+                                                    config.data = {
+                                                        ...config.data,
+                                                        'token': xtoken,
+                                                        'loginName': loginName,
+                                                        'language': 'zh-CN',
+
+                                                    }
+
+                                                    config.timeout = 30 * 1000
+
+                                                    config.headers = {
+                                                        'token': xtoken,
+                                                        'loginName': loginName,
+                                                    }
+
+                                                } else if (config.method == 'get') {
+                                                    config.params = {
+                                                        _t: Date.parse(new Date()) / 1000,
+                                                        ...config.params
+                                                    }
+                                                }
+                                            }
+
+                                            return config
+                                        }, function (error) {
+
+                                            console.log('hcia error', error)
+                                            return Promise.reject(error)
+                                        })
+
+
+                                    window.Axios.interceptors.response.use(function (response) {
+
+                                        if (response.data.code != 1) {
+                                            message.error(response.data.msg)
+                                            return Promise.reject(response)
+                                        }
+                                        return response
+                                    }, function (error) {
+                                        message.error(error.toString())
+                                        return Promise.reject(error)
+                                    })
+                                });
+
+
+                            }}
+                            style={{width: 620}} placeholder="http://127.0.0.1:8080/"/>
+                    </div>
+                    <h3>you can set like below </h3>
+                    <p>http://mobile.nooko.cn:8090/</p>
+                    <p>http://127.0.0.1:8080/</p>
+
+                </div>
+
                 <h2 style={{marginTop: 15}}>
                     个人待办事项
                 </h2>
-                <div style={{display: 'flex', minHeight: 40}}>
-                    <span style={{width: 120}}>host:</span>
-                    <Input
-
-                        value={this.state.HOST}
-                        onChange={(e) => {
-
-                            var self = this
-                            this.setState({
-                                HOST: e.target.value,
-                            }, () => {
-                                var Axios = axios.create({
-                                    baseURL: self.state.HOST
-                                });
-
-                                window.Axios = Axios;
-
-                                window.Axios.interceptors.request.use(
-                                    config => {
-                                        var xtoken = localStorage.getItem('too')
-                                        var loginName = localStorage.getItem('loginName')
-
-                                        loginName = encodeURI(loginName)
-
-                                        // console.log('hcia loginName' , loginName)
-                                        // console.log('hcia xtoken' , xtoken)
-
-                                        if (xtoken != null) {
-                                            config.headers['X-Token'] = xtoken
-                                            if (config.method == 'post') {
-                                                config.data = {
-                                                    ...config.data,
-                                                    'token': xtoken,
-                                                    'loginName': loginName,
-                                                    'language': 'zh-CN',
-
-                                                }
-
-                                                config.timeout=30*1000
-
-                                                config.headers = {
-                                                    'token': xtoken,
-                                                    'loginName': loginName,
-                                                }
-
-                                            } else if (config.method == 'get') {
-                                                config.params = {
-                                                    _t: Date.parse(new Date()) / 1000,
-                                                    ...config.params
-                                                }
-                                            }
-                                        }
-
-                                        return config
-                                    }, function (error) {
-
-                                        console.log('hcia error', error)
-                                        return Promise.reject(error)
-                                    })
 
 
-                                window.Axios.interceptors.response.use(function (response) {
-
-                                    if (response.data.code != 1) {
-                                        message.error(response.data.msg)
-                                        return Promise.reject(response)
-                                    }
-                                    return response
-                                }, function (error) {
-                                    message.error(error.toString())
-                                    return Promise.reject(error)
-                                })
-                            });
-
-
-                        }}
-                        style={{width: 620}} placeholder="http://127.0.0.1:8080/"/>
-                </div>
-                <p>http://mobile.nooko.cn:8090/</p>
-                <p>http://127.0.0.1:8080/</p>
 
 
                 <BreadcrumbCustom first="" second="个人待办事项"/>
