@@ -26,7 +26,7 @@ export default class PotentialUser extends Component {
             totalpageB: 0,
             totalpageC: 0,
             totalpageComments: 0,
-            nowKey: "1",
+            nowKey: '1',
             pgsize: 10,
             loadingA: false,
             loadingB: false,
@@ -40,7 +40,6 @@ export default class PotentialUser extends Component {
             modal2Visible: false,
             visible: false,
             operationDiaryHistory: [],
-
         };
     }
 
@@ -71,7 +70,6 @@ export default class PotentialUser extends Component {
         });
 
     }
-
 
     modalColums = () => {
         return [{
@@ -191,20 +189,17 @@ export default class PotentialUser extends Component {
                         <Button>备注</Button>
                     </div>
                 )
-            }
-            ,
+            },
             {
-
                 title: '操作',
                 key: 'action',
                 align: 'center',
                 render: (text, record) => (
 
                     <div>
-
-                        <Button className="ant-dropdown-link" onClick={() => this.showModal(record)}>添加回访</Button>
-                        <Button className="ant-dropdown-link"
-                                onClick={() => this.showModal2(record.belongUserId)}>操作日志</Button>
+                        <Button onClick={() => this.showModal(record)}>添加回访</Button>
+                        <Button
+                            onClick={() => this.showModal2(record.belongUserId)}>操作日志</Button>
                     </div>
                 ),
             }];
@@ -310,13 +305,13 @@ export default class PotentialUser extends Component {
                     <div>
                         <Popconfirm title="延期申请？" onConfirm={() => this.handleDelay(record)} okText="Yes"
                                     cancelText="No">
-                            <Button className="ant-dropdown-link">延期</Button>
+                            <Button>延期</Button>
 
                         </Popconfirm>
 
-                        <Button className="ant-dropdown-link" onClick={() => this.showModal(record)}>添加回访</Button>
-                        <Button className="ant-dropdown-link"
-                                onClick={() => this.showModal2(record.belongUserId)}>操作日誌</Button>
+                        <Button onClick={() => this.showModal(record)}>添加回访</Button>
+                        <Button
+                            onClick={() => this.showModal2(record.belongUserId)}>操作日誌</Button>
                     </div>
                 ),
             }];
@@ -386,17 +381,7 @@ export default class PotentialUser extends Component {
 
                 align: 'center',
                 render: (text, record) => (<span>{record.feebackStatus}</span>),
-            }
-            // , {
-            //     title: '备注',
-            //     dataIndex: '备注',
-            //     key: '备注',
-            //
-            //     align: 'center',
-            //     render: (text, record) => (
-            //         <span>{record.comment}</span>),
-            // }
-            , {
+            }, {
                 title: '操作人',
                 dataIndex: '操作人',
                 key: '操作人',
@@ -411,22 +396,20 @@ export default class PotentialUser extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.seeUSer(record)}
-                                className="ant-dropdown-link">用户信息 </Button>
+                        <Button onClick={() => this.seeUSer(record)}>用户信息 </Button>
                         <Button>备注</Button>
 
                     </div>
                 )
-            },
-            {
+            }, {
                 title: '操作',
                 key: 'action',
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button className="ant-dropdown-link" onClick={() => this.showModal(record)}>添加回访</Button>
-                        <Button className="ant-dropdown-link"
-                                onClick={() => this.showModal2(record.belongUserId)}>操作日誌</Button>
+                        <Button onClick={() => this.showModal(record)}>添加回访</Button>
+                        <Button
+                            onClick={() => this.showModal2(record.belongUserId)}>操作日誌</Button>
                     </div>
                 ),
             }];
@@ -448,27 +431,14 @@ export default class PotentialUser extends Component {
     handleDelay = (record) => {
         let belongUserId = record.belongUserId
         let accountNo = record.accountNo
-        console.log('yyx', record);
         let self = this;
         window.Axios.post('ixuser/delayDemoAccount', {
             "accountNo": accountNo,
             "belongUserId": belongUserId,
         }).then((response) => {
-            if (response.data.code === 1) {
-                message.success('操作成功')
-                if (self.state.nowKey == 1) {
-                    this.requestPageA()//1:合规 2:开户 3:交易
-                }
-                if (self.state.nowKey == 2) {
-                    this.requestPageB()//1:合规 2:开户 3:交易
-                }
-                if (self.state.nowKey == 3) {
-                    this.requestPageC()//1:合规 2:开户 3:交易
-                }
-            }
-        }).catch(function (error) {
-            console.log(error);
-        });
+            message.success('操作成功')
+            self.reflesh()
+        })
 
     }
 
@@ -488,91 +458,19 @@ export default class PotentialUser extends Component {
         window.Axios.post('auth/addUserComment', {
             content: self.state.theComment,
             belongUserId: self.state.theBelongUserId,
-        }).then((response) => {
-            if (yyx.checkResponseCode(response)) {
-                message.success('提交成功')
-                self.state.theComment = ''
-                if (self.state.nowKey == 1) {
-                    this.requestPageA()//1:合规 2:开户 3:交易
-                }
-                if (self.state.nowKey == 2) {
-                    this.requestPageB()//1:合规 2:开户 3:交易
-                }
-                if (self.state.nowKey == 3) {
-                    this.requestPageC()//1:合规 2:开户 3:交易
-                }
-            }
-        })
+        }).then(() => {
+            message.success('提交成功')
+            self.state.theComment = ''
+
+
+        });
 
         this.setState({
             visible: false,
             modal2Visible: false,
         });
     }
-    handleremove = (record) => {
 
-        let self = this
-        window.Axios.post('auth/removeBlackUser', {
-            'id': record.id//1:合规 2:开户 3:交易
-        }).then((response) => {
-
-            message.success('操作成功')
-            if (self.state.nowKey == 1) {
-                this.requestPageA()
-            }
-            if (self.state.nowKey == 2) {
-                this.requestPageB()//1:合规 2:开户 3:交易
-            }
-            if (self.state.nowKey == 3) {
-                this.requestPageC()//1:合规 2:开户 3:交易
-            }
-
-        }).catch(function (error) {
-            console.log(error);
-        });
-
-    };
-    handleremoveList = () => {
-
-        let self = this
-        window.Axios.post('auth/removeBlackUserBulk', {
-            'idList': this.state.selectedRowKeys//1:合规 2:开户 3:交易
-        }).then((response) => {
-
-            message.success('操作成功')
-            if (self.state.nowKey == 1) {
-                this.requestPageA()//1:合规 2:开户 3:交易
-            }
-            if (self.state.nowKey == 2) {
-                this.requestPageB()//1:合规 2:开户 3:交易
-            }
-            if (self.state.nowKey == 3) {
-                this.requestPageC()//1:合规 2:开户 3:交易
-            }
-
-        }).catch(function (error) {
-            console.log(error);
-        });
-
-    };
-
-    handleremoveSelect = () => {
-
-
-        let self = this
-        this.setState({
-            selectMail: '',
-            selectID: '',
-            startTime: '',
-            selectPhone: '',
-            selectTimeStart: '',
-            selectTimeEnd: ''
-        }, () => {
-            self.searchSelect()
-        })
-
-
-    };
     requestUserCommentList = (record) => {
         var self = this;
         window.Axios.post('/auth/getUserCommentList', {
@@ -581,11 +479,6 @@ export default class PotentialUser extends Component {
             pageSize: this.state.pgsize,
 
         }).then(function (response) {
-
-            if (response.data.code != 1) {
-                message.warn('request User CommentList error')
-                console.log('yyx requestUserCommentList error');
-            }
 
             self.setState({
                 totalpageComments: response.data.data.totalPage,
@@ -617,11 +510,11 @@ export default class PotentialUser extends Component {
 
             });
 
-        }).catch(function (error) {
-            console.log(error);
-        });
+        })
     }
     requestPageB = () => {
+
+        console.log('hcia requestPageB')
         let self = this
 
         self.setState({
@@ -647,9 +540,7 @@ export default class PotentialUser extends Component {
             });
 
 
-        }).catch(function (error) {
-            console.log(error);
-        });
+        })
     }
     requestPageC = () => {
         let self = this
@@ -669,17 +560,12 @@ export default class PotentialUser extends Component {
             endTime: this.state.selectTimeEnd,
 
         }).then((response) => {
-            console.log('iii', response.data.data);
             self.setState({
                 totalpageC: response.data.data.totalPage,
                 bklistC: response.data.data.list,
                 loadingC: false
             });
-
-
-        }).catch(function (error) {
-            console.log(error);
-        });
+        })
     }
 
 
@@ -713,13 +599,11 @@ export default class PotentialUser extends Component {
         })
     }
 
-    callback = (key) => {
-
-        this.setState({
-            nowKey: key,
-        })
-
-    }
+    // callback = (key) => {
+    //     this.setState({
+    //         nowKey: key,
+    //     })
+    // }
     addComment = (e) => {
         let comment = e.target.value;
         this.setState({
@@ -756,19 +640,22 @@ export default class PotentialUser extends Component {
             selectID: e.target.value,
         });
     }
-    searchSelect = () => {
-        let self = this
-        console.log('hcia self.state.nowKey', self.state.nowKey)
-        if (self.state.nowKey == 1) {
+
+    reflesh = () => {
+
+        console.log('hcia this.state.nowKey', this.state.nowKey, (this.state.nowKey === 2), 2)
+
+        if (this.state.nowKey === '1') {
             this.requestPageA()//1:Potential 2:simulator 3:intend
         }
-        if (self.state.nowKey == 2) {
+        if (this.state.nowKey === '2') {
             this.requestPageB()
         }
-        if (self.state.nowKey == 3) {
+        if (this.state.nowKey === '3') {
             this.requestPageC()
         }
     }
+
 
     onChangeDate = (value, dateString) => {
     }
@@ -818,7 +705,7 @@ export default class PotentialUser extends Component {
                                     selectTimeEnd: undefined,
                                     filterTimeFalue: undefined
                                 }, () => {
-                                    self.searchSelect()
+                                    self.reflesh()
                                 })
                             }}
                             >清除條件</Button>}
@@ -890,7 +777,7 @@ export default class PotentialUser extends Component {
                                 }}
                             />
 
-                            <Button onClick={() => this.searchSelect()} style={{marginTop: 15}} type="primary"
+                            <Button onClick={() => this.reflesh()} style={{marginTop: 15}} type="primary"
                                     icon="search">Search</Button>
 
                         </Card>
@@ -905,7 +792,13 @@ export default class PotentialUser extends Component {
 
 
                 <Tabs
-                    onChange={this.callback}
+                    onChange={(key) => {
+
+                        console.log('hcia key', key)
+                        this.setState({
+                            nowKey: key,
+                        })
+                    }}
                     type="card">
                     <TabPane tab="潛在用戶" key="1">
                         <Card bodyStyle={{padding: 0, margin: 0}}
