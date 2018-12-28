@@ -53,7 +53,7 @@ class Dashboard extends React.Component {
                 {/*{JSON.stringify(localStorage.getItem('infor'))}*/}
 
 
-                <div style={{display:    this.state.displayName=='admin'?'':'none'}}>
+                <div style={{display: this.state.displayName == 'admin' ? '' : 'none'}}>
 
                     <h1 style={{marginTop: 15}}>
                         Change your Base URL
@@ -146,9 +146,6 @@ class Dashboard extends React.Component {
                 <h2 style={{marginTop: 15}}>
                     个人待办事项
                 </h2>
-
-
-
 
                 <BreadcrumbCustom first="" second="个人待办事项"/>
 

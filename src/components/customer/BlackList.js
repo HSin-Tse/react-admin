@@ -412,9 +412,7 @@ export default class BlackList extends Component {
                                 }, () => {
                                     self.searchSelect()
                                 })
-                            }}
-                            >清除條件</Button>}
-                        >
+                            }}>清除條件</Button>}>
                             <Input value={this.state.selectMail} onChange={(e) => {
                                 this.setState({selectMail: e.target.value})
                             }} style={{marginBottom: 10}} placeholder="邮箱"/>
