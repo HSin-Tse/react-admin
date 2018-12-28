@@ -87,7 +87,6 @@ export default class PotentialUser extends Component {
             {
                 title: '操作人',
                 width: 130,
-
                 dataIndex: 'bkUserName',
                 key: 'operationDiary_User',
                 render: (text, record) => (
@@ -271,15 +270,7 @@ export default class PotentialUser extends Component {
 
                 key: '回访状态',
                 render: (text, record) => (<span>{record.feebackStatus}</span>),
-            }
-            // , {
-            //     title: '备注',
-            //
-            //     dataIndex: '备注',
-            //     key: '备注',
-            //     render: (text, record) => (<span>{record.comment}</span>),
-            // }
-            , {
+            }, {
                 title: '活跃程度',
                 dataIndex: '活跃程度',
                 key: '活跃程度',
@@ -291,10 +282,7 @@ export default class PotentialUser extends Component {
                 dataIndex: '操作人',
                 key: '操作人',
                 render: (text, record) => (<span>{record.operator}</span>),
-            }
-
-
-            ,
+            },
             {
                 title: '查看',
                 dataIndex: '查看',
@@ -302,8 +290,7 @@ export default class PotentialUser extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button>备注</Button>
-
+                        <Button onClick={() => this.shownoteModal(record.belongUserId)}>备注</Button>
                     </div>
                 )
             }
@@ -395,7 +382,6 @@ export default class PotentialUser extends Component {
                 title: '操作人',
                 dataIndex: '操作人',
                 key: '操作人',
-
                 align: 'center',
                 render: (text, record) => (
                     <span>{record.operator}</span>),
@@ -407,8 +393,7 @@ export default class PotentialUser extends Component {
                 render: (text, record) => (
                     <div>
                         <Button onClick={() => this.seeUSer(record)}>用户信息 </Button>
-                        <Button>备注</Button>
-
+                        <Button onClick={() => this.shownoteModal(record.belongUserId)}>备注</Button>
                     </div>
                 )
             }, {
