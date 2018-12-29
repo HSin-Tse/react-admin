@@ -70,9 +70,12 @@ class DEVhboard extends React.Component {
                     <h1 style={{marginTop: 15}}>
                         Change your Base URL
                     </h1>
+                    <h3>http://mobile.nooko.cn:8090/</h3>
+                    <h3>http://127.0.0.1:8080/</h3>
+
 
                     <div style={{display: 'flex', minHeight: 40}}>
-                        <span style={{width: 120}}>now host:</span>
+                        <span style={{width: 80}}>now host:</span>
                         <Input
 
                             value={this.state.HOST}
@@ -149,8 +152,8 @@ class DEVhboard extends React.Component {
                             }}
                             style={{width: 620}} placeholder="http://127.0.0.1:8080/"/>
                     </div>
-                    <h4>loginName:{localStorage.getItem('loginName')}</h4>
-                    <h4>token:{localStorage.getItem('too')}</h4>
+                    <h4>{localStorage.getItem('loginName')}</h4>
+                    <h4>{localStorage.getItem('too')}</h4>
 
                     <div style={{display: 'flex', minHeight: 40}}>
                         <span style={{minWidth: 80}}>Request </span>
@@ -185,39 +188,35 @@ class DEVhboard extends React.Component {
                     </div>
 
 
-
-
-
-
                     <Button
 
                         disabled={!this.isJson(this.state.requestBody)}
                         onClick={() => {
 
-                        var self = this
+                            var self = this
 
-                        console.log('hcia this.state.requestBody', this.state.requestBody)
+                            console.log('hcia this.state.requestBody', this.state.requestBody)
 
-                        const isFirst = JSON.parse(self.state.requestBody);
-                        console.log('hcia isFirst', isFirst)
+                            const isFirst = JSON.parse(self.state.requestBody);
+                            console.log('hcia isFirst', isFirst)
 
-                        window.Axios.post('/auth/getRecordCommentList', isFirst)
-                            .then(function (response) {
+                            window.Axios.post('/auth/getRecordCommentList', isFirst)
+                                .then(function (response) {
 
+                                    self.setState({
+                                        resp: response.data,
+                                    });
+
+                                }).catch(error => {
+
+                                console.log('hcia error', error)
                                 self.setState({
-                                    resp: response.data,
+                                    resp: error,
                                 });
 
-                            }).catch(error => {
-
-                            console.log('hcia error', error)
-                            self.setState({
-                                resp: error,
-                            });
-
-                            // message.error(error)
-                        })
-                    }}> send </Button>
+                                // message.error(error)
+                            })
+                        }}> send </Button>
 
                     <ReactJson src={this.state.resp}></ReactJson>
 
