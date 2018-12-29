@@ -9,13 +9,10 @@ import {
     message,
     Card,
     Select,
-    Layout,
     Icon,
-    notification,
-    Popconfirm, Tooltip
+    Popconfirm
 } from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
-import {ThemePicker} from '@/components/widget';
 import classNames from "classnames";
 
 const Option = Select.Option;
@@ -53,12 +50,12 @@ export default class BlackList extends Component {
             selectID: "",
             selectTimeStart: "",
             selectTimeEnd: "",
-            NameCn: '',
-            phoneCn: '',
-            IDCn: '',
-            MAilCn: '',
-            TradeACcountCn: '',
-            changeNoteVCN: '',
+            NameCn: undefined,
+            phoneCn: undefined,
+            IDCn: undefined,
+            MAilCn: undefined,
+            TradeACcountCn: undefined,
+            changeNoteVCN: undefined,
             addBlackType: "1",
         };
     }
@@ -752,13 +749,13 @@ export default class BlackList extends Component {
                                    key: 'operationDiary_User',
                                    render: (text, record) => (
                                        <span>{record.bkUserName}</span>),
-                               },{
+                               }, {
                                    title: '操作时间',
                                    dataIndex: 'createDate',
                                    key: 'operationDiary_Date',
                                    render: (text, record) => (
                                        <span>{record.createDate}</span>),
-                               },{
+                               }, {
                                    title: '备注',
                                    dataIndex: 'comment',
                                    key: 'operationDiary_Status',

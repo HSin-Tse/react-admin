@@ -13,6 +13,7 @@ import connect from "react-redux/es/connect/connect";
 import axios from "axios";
 import ReactJson from 'react-json-view'
 import Iframe from 'react-iframe'
+
 const {TextArea} = Input;
 
 
@@ -22,7 +23,6 @@ class DEVhboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            menuList: [],
             resp: undefined,
             displayName: '',
             too: '',
@@ -72,10 +72,10 @@ class DEVhboard extends React.Component {
                 <Row gutter={1}>
                     <Col md={24}>
                         <div style={{display: this.state.displayName == 'admin' ? '' : 'none'}}>
-                            <h4>{localStorage.getItem('loginName')}  tokon:</h4>
+                            <h4>{localStorage.getItem('loginName')} tokon:</h4>
                             <TextArea style={{width: '100%'}}
                                       value={this.state.too}
-                                      />
+                            />
                             <h1 style={{marginTop: 15}}>
                                 Change your Base URL
                             </h1>
@@ -178,16 +178,12 @@ class DEVhboard extends React.Component {
                                         }, () => {
 
 
-
-
-
                                         });
 
 
                                     }}
                                     style={{width: 320}} placeholder="a/b/c"/>
                             </div>
-
 
 
                             <div style={{display: 'flex', minHeight: 40}}>
@@ -224,7 +220,7 @@ class DEVhboard extends React.Component {
 
 
                             <Button
-                                style={{marginBottom:15}}
+                                style={{marginBottom: 15}}
 
                                 disabled={!this.isJson(this.state.requestBody)}
                                 onClick={() => {
@@ -236,7 +232,7 @@ class DEVhboard extends React.Component {
                                     const isFirst = JSON.parse(self.state.requestBody);
                                     console.log('hcia isFirst', isFirst)
 
-                                    window.Axios.post( this.state.path    , isFirst)
+                                    window.Axios.post(this.state.path, isFirst)
                                         .then(function (response) {
 
                                             self.setState({
@@ -254,21 +250,50 @@ class DEVhboard extends React.Component {
                                     })
                                 }}> send </Button>
 
-                            <ReactJson  src={this.state.resp}></ReactJson>
+                            <ReactJson src={this.state.resp}></ReactJson>
 
 
                         </div>
 
                     </Col>
                     {/*<Col md={12}>*/}
-                        {/*<Iframe url="http://note.youdao.com/share/?id=28f19f75d6b6d7ae49c57a60be984f6b&type=note#/"></Iframe>*/}
+                    {/*<Iframe url="http://note.youdao.com/share/?id=28f19f75d6b6d7ae49c57a60be984f6b&type=note#/"></Iframe>*/}
                     {/*</Col>*/}
                 </Row>
 
+                <Row gutter={1}>
+                    <Col md={24}>
+                        <div>Cache Copy all and Past</div>
+
+
+                        <TextArea style={{width: 180}}
+                                  value={
+                                      JSON.stringify(this.state)
+                                  }
+                                  rows={4}
+                                  onChange={(e) => {
 
 
 
 
+                                      // self.getURL(e.target.value).then(function onFulfilled(value) {
+                                      //     console.log('hcia value', value)
+                                      //
+                                      // }, function onRejected(error) {
+                                      //     console.log('hcia error', error)
+                                      //
+                                      // });
+                                      // (this.isJson(e.target.value)) ? JSON.parse(e.target.value) : '{error:a}'
+
+                                      this.setState({
+
+                                          ...JSON.parse(e.target.value)
+                                      });
+
+                                  }}/>
+
+                    </Col>
+                </Row>
             </div>
         )
     }
