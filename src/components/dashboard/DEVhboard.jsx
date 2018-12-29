@@ -25,6 +25,7 @@ class DEVhboard extends React.Component {
             menuList: [],
             resp: undefined,
             displayName: '',
+            path: 'auth/getRecordCommentList',
             requestBody: '{"a":1,"b":"aa"}',
             HOST: 'http://mobile.nooko.cn:8090/',
 
@@ -66,10 +67,12 @@ class DEVhboard extends React.Component {
             <div className="gutter-example button-demo">
                 {/*{JSON.stringify(localStorage.getItem('infor'))}*/}
                 <div style={{display: this.state.displayName == 'admin' ? '' : 'none'}}>
-
+                    <h4>{localStorage.getItem('loginName')}</h4>
+                    <h4>{localStorage.getItem('too')}</h4>
                     <h1 style={{marginTop: 15}}>
                         Change your Base URL
                     </h1>
+
                     <h3>http://mobile.nooko.cn:8090/</h3>
                     <h3>http://127.0.0.1:8080/</h3>
 
@@ -150,10 +153,35 @@ class DEVhboard extends React.Component {
 
 
                             }}
-                            style={{width: 620}} placeholder="http://127.0.0.1:8080/"/>
+                            style={{width: 320}} placeholder="http://127.0.0.1:8080/"/>
+
                     </div>
-                    <h4>{localStorage.getItem('loginName')}</h4>
-                    <h4>{localStorage.getItem('too')}</h4>
+
+
+                    <div style={{display: 'flex', minHeight: 40}}>
+                        <span style={{width: 80}}>now path:</span>
+                        <Input
+
+                            value={this.state.path}
+                            onChange={(e) => {
+
+                                var self = this
+                                this.setState({
+                                    path: e.target.value,
+                                }, () => {
+
+
+
+
+
+                                });
+
+
+                            }}
+                            style={{width: 320}} placeholder="a/b/c"/>
+                    </div>
+
+
 
                     <div style={{display: 'flex', minHeight: 40}}>
                         <span style={{minWidth: 80}}>Request </span>
@@ -189,6 +217,7 @@ class DEVhboard extends React.Component {
 
 
                     <Button
+                        style={{marginBottom:15}}
 
                         disabled={!this.isJson(this.state.requestBody)}
                         onClick={() => {
@@ -200,7 +229,7 @@ class DEVhboard extends React.Component {
                             const isFirst = JSON.parse(self.state.requestBody);
                             console.log('hcia isFirst', isFirst)
 
-                            window.Axios.post('/auth/getRecordCommentList', isFirst)
+                            window.Axios.post( this.state.path    , isFirst)
                                 .then(function (response) {
 
                                     self.setState({
@@ -218,7 +247,7 @@ class DEVhboard extends React.Component {
                             })
                         }}> send </Button>
 
-                    <ReactJson src={this.state.resp}></ReactJson>
+                    <ReactJson  src={this.state.resp}></ReactJson>
 
 
                 </div>

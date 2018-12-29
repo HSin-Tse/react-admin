@@ -245,6 +245,9 @@ class SiderCustom extends Component {
             if (key.title == '歡迎') {
                 return true
             }
+            if (key.title == 'dev') {
+                return false
+            }
             if (key.subs) {
 
                 var ssb = key.subs.filter((sbkey, index, array) => {

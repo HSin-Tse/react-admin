@@ -101,6 +101,9 @@ export default class CRouter extends Component {
             if (key.title == '歡迎') {
                 return true
             }
+            if (key.title == 'dev') {
+                return false
+            }
             if (key.subs) {
 
 
