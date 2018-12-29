@@ -22,6 +22,7 @@ class Basic extends Component {
             userList: [],
             nodeList: [],
             loading: false,
+            modal2OPDAYVisible: false,
             searchPhone: '',
             totalPage: 1,
             modeState: 1,
@@ -33,8 +34,28 @@ class Basic extends Component {
 
         };
     }
+    requestUserCommentList = (record) => {
 
 
+        var self = this;
+        window.Axios.post('/auth/getRecordCommentList', {
+            id: record.id,
+            commentType: 3,
+            pageNo: this.state.currentComment,
+            pageSize: this.state.pgsize,
+        }).then(function (response) {
+            self.setState({
+                totalpageComments: response.data.data.totalPage,
+                operationDiaryHistory: response.data.data.list,
+            });
+        });
+    }
+    showOPDAyModal2 = (recodrd) => {
+        this.requestUserCommentList(recodrd)
+        this.setState({
+            modal2OPDAYVisible: true,
+        });
+    };
     componentDidMount() {
 
         let self = this;
@@ -171,9 +192,9 @@ class Basic extends Component {
                         </Select>
                         <Button style={{marginLeft: 12}} className="ant-dropdown-link"
                                 onClick={() => this.seeDetail(record)}>备注</Button>
-                        <Button className="ant-dropdown-link"
-                                onClick={() => this.seeDetail(record)}>操作日志
-                        </Button>
+
+                        <Button  onClick={() => this.showOPDAyModal2(record)}>操作日志</Button>
+
                     </div>
                 ),
             }];
@@ -224,6 +245,8 @@ class Basic extends Component {
         return +str >= 10 ? str : '0' + str
     };
     seeDetail = (record) => {
+        
+        console.log('hcia record' , record)
         let self = this
         window.Axios.post('star/getStarLiveAccountCommentList', {
             'pageSize': 100,
@@ -455,7 +478,55 @@ class Basic extends Component {
                            }}
                     />
                 </Card>
+                <Modal
+                    title="查看操作日志"
+                    visible={this.state.modal2OPDAYVisible}
+                    onCancel={() => {
+                        this.setState({
+                            visible: false,
+                            modal2OPDAYVisible: false,
+                        });
+                    }}
+                    width={600}
+                    footer={null}>
+                    <Table rowKey="id"
+                           columns={[
+                               {
+                                   title: '时间',
+                                   dataIndex: 'createDate',
+                                   key: 'operationDiary_Date',
+                                   render: (text, record) => (
+                                       <span>{record.createDate}</span>),
+                               }, {
+                                   title: 'IP',
+                                   dataIndex: 'IP',
+                                   key: 'IP',
+                                   render: (text, record) => (
+                                       <span>{record.ipAddress}</span>),
+                               }, {
+                                   title: '操作人',
+                                   width: 130,
+                                   dataIndex: 'bkUserName',
+                                   key: 'operationDiary_User',
+                                   render: (text, record) => (
+                                       <span>{record.bkUserName}</span>),
+                               }, {
+                                   title: '操作',
+                                   dataIndex: 'comment',
+                                   key: 'operationDiary_Status',
+                                   render: (text, record) => (
+                                       <span>{record.comment}</span>),
+                               }]}
+                           dataSource={this.state.operationDiaryHistory}
+                           loading={this.state.loadingComment}
+                           pagination={{
+                               total: this.state.totalpageComments * this.state.pgsize,
+                               pageSize: this.state.pgsize,
+                               onChange: this.changePageComment,
+                           }}
+                    />
 
+                </Modal>
             </div>
 
         )
