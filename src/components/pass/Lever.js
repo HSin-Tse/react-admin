@@ -229,7 +229,7 @@ class Basic extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button >操作日志</Button>
+                        <Button>操作日志</Button>
                         <Button onClick={() => this.showModalB(record.id)}>审核</Button>
                         <Button onClick={() => this.showModalA(record.id)}>查看</Button>
                     </div>
@@ -378,17 +378,9 @@ class Basic extends Component {
                     visible={this.state.visibleB}
 
                     footer={[
-                        <Popconfirm title="确认？" onConfirm={this.handleOk}
-                                    okText="Yes"
-                                    cancelText="No">
-                            <Button type="normal" key="submit">通過</Button>
-                        </Popconfirm>,
-                        <Popconfirm title="拒绝？"
-                                    onConfirm={this.handleReject}
-                                    okText="Yes"
-                                    cancelText="No">
-                            <Button type="normal" key="back">拒絕</Button>
-                        </Popconfirm>
+
+                        <Button type="normal" onClick={this.handleOk} key="submit">通過</Button>,
+                        <Button type="normal" onClick={this.handleReject} key="back">拒絕</Button>
                     ]}
                 >
                     <Card
