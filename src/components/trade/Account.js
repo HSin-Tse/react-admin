@@ -2,13 +2,14 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, message, Select, Modal, Card, Col} from 'antd';
+import {Button, Table, message, Select, Modal, Card, Col, Popconfirm, Row, Input} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 
 const Option = Select.Option;
+const {TextArea} = Input;
 
 class Basic extends Component {
 
@@ -20,7 +21,29 @@ class Basic extends Component {
             visibleOpM: false,
             date: new Date(),
             userList: [],
+            leavgeList: [],
             nodeList: [],
+            detail: {
+                "name": null,
+                "id": "27",
+                "date": "",
+                "comment": null,
+                "status": 0,
+
+                "currentLeverage": "1 : 100",
+                "targetLeverage": "1 : 200",
+                "operator": null,
+                "email": null,
+                "mobile": null,
+                "nationalId": null,
+                "accountNo": "live545491475",
+                "marginLevel": "N/A",
+                "displayStatus": "审核中",
+                "broker": null,
+                "cashBalance": "0.0"
+            },
+
+            visibleB: false,
             loading: false,
             modal2OPDAYVisible: false,
             modal3OPDAYVisible: false,
@@ -59,12 +82,55 @@ class Basic extends Component {
             });
         });
     }
+    onChangeLe = (value) => {
+        // updateLeverageApply
+        let self = this
+
+        console.log('hcia value', value)
+        window.Axios.post('finance/updateLeverageApply', {
+            id: this.state.detail.id,
+            leverageId: value,
+        }).then((response) => {
+            console.log('hcia response', response)
+            // self.setState({
+            //     leavgeList: response.data.data,
+            // })
+        });
+
+
+    }
+    showModalB = (recodrd) => {
+        
+        console.log('hcia recodrd' , recodrd)
+        this.requestUserCommentList(recodrd)
+
+        let self = this
+        self.setState({
+            loading: true,
+        });
+
+        window.Axios.post('finance/getLeverageApplyDetail', {
+            'id': recodrd.id,
+        }).then(function (response) {
+
+            self.setState({
+                // detail: response.data.data,
+                visibleB: true,
+                loading: false,
+
+            });
+
+        });
+
+
+    }
     showOPDAyModal2 = (recodrd) => {
         this.requestUserCommentList(recodrd)
         this.setState({
             modal2OPDAYVisible: true,
         });
     };
+
     componentDidMount() {
 
         let self = this;
@@ -76,6 +142,16 @@ class Basic extends Component {
                 }
             );
         })
+
+        window.Axios.post('dict/leverageList', {
+            'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
+        }).then((response) => {
+            console.log('hcia response', response)
+            self.setState({
+                leavgeList: response.data.data,
+            })
+        });
+
 
         this.columns = [
             {
@@ -179,13 +255,17 @@ class Basic extends Component {
                 dataIndex: '当前杠杆',
                 key: '当前杠杆',
                 render: (text, record) => (
-                    <Select value={record.displayStatus} style={{width: 100}}
-                            onChange={(value) => this.handleChange(value, record)}>
-                        <Option key="1" value="正常">正常</Option>
-                        <Option key="2" value="禁止登陆">禁止登陆</Option>
-                        <Option key="3" value="禁止交易">禁止交易</Option>
 
-                    </Select>)
+                    <Button style={{display: record.displayStatus == '审核通过' ? 'none' : ''}}
+                            onClick={() => this.showModalB(record)}>{record.displayLeverage}</Button>
+                )
+                // <Select value={record.displayStatus} style={{width: 100}}
+                //         onChange={(value) => this.handleChange(value, record)}>
+                //     <Option key="1" value="正常">正常</Option>
+                //     <Option key="2" value="禁止登陆">禁止登陆</Option>
+                //     <Option key="3" value="禁止交易">禁止交易</Option>
+                //
+                // </Select>)
             }, {
                 align: 'center',
                 title: '操作',
@@ -200,12 +280,12 @@ class Basic extends Component {
 
                         </Select>
                         {/*<Button style={{marginLeft: 12}} className="ant-dropdown-link"*/}
-                                {/*onClick={() => this.seeDetail(record)}>备注</Button>*/}
+                        {/*onClick={() => this.seeDetail(record)}>备注</Button>*/}
 
 
                         <Button style={{marginLeft: 12}} onClick={() => this.showOPDAyModal3(record)}>备注</Button>
 
-                        <Button  onClick={() => this.showOPDAyModal2(record)}>操作日志</Button>
+                        <Button onClick={() => this.showOPDAyModal2(record)}>操作日志</Button>
 
                     </div>
                 ),
@@ -257,8 +337,8 @@ class Basic extends Component {
         return +str >= 10 ? str : '0' + str
     };
     seeDetail = (record) => {
-        
-        console.log('hcia record' , record)
+
+        console.log('hcia record', record)
         let self = this
         window.Axios.post('star/getStarLiveAccountCommentList', {
             'pageSize': 100,
@@ -425,7 +505,111 @@ class Basic extends Component {
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
                 {/*this.state.selectedRowKeys.length > 0*/}
+                <Modal
+                    width={500}
+                    title={this.state.modeState == '正常' ? '恢复正常' : this.state.modeState}
+                    onCancel={(e) => {
+                        this.setState({
+                            visibleB: false,
+                        });
+                    }}
+                    visible={this.state.visibleB}
 
+                    footer={[
+                        <Popconfirm title="确认？" onConfirm={this.handleOk}
+                                    okText="Yes"
+                                    cancelText="No">
+                            <Button type="normal" key="submit">通過</Button>
+                        </Popconfirm>,
+                        <Popconfirm title="拒绝？"
+                                    onConfirm={this.handleReject} e
+                                    okText="Yes"
+                                    cancelText="No">
+                            <Button type="normal" key="back">拒絕</Button>
+                        </Popconfirm>
+                    ]}
+                >
+                    <Card
+
+                        title={'账户：' + this.state.detail.accountNo}
+                        bordered={true}>
+
+                        <div>
+                            <Row style={{marginTop: 20}}>
+                                <Col style={{textAlign: 'right'}} span={10}>当前杠杆:</Col>
+                                <Col style={{textAlign: 'center'}} span={14}>{this.state.detail.targetLeverage}</Col>
+                            </Row>
+                            <Row style={{marginTop: 20}}>
+                                <Col style={{textAlign: 'right'}} span={10}>余额:</Col>
+                                <Col style={{textAlign: 'center'}} span={14}>{this.state.detail.cashBalance}</Col>
+                            </Row>
+
+                            <Row style={{marginTop: 20}}>
+                                <Col style={{textAlign: 'right'}} span={10}>杠杆修改:</Col>
+                                <Col style={{textAlign: 'center'}} span={14}>
+                                    <Select
+                                        onChange={this.onChangeLe}
+                                        defaultValue={this.state.detail.targetLeverage}
+                                        style={{width: 100, marginLeft: 0}}>
+                                        {this.state.leavgeList.map(ccty => <Option
+                                            value={ccty.id} key={ccty.leverage}>1:{ccty.leverage}</Option>)}
+                                    </Select>
+                                </Col>
+                            </Row>
+                            <Row style={{marginTop: 20}}>
+                                <Col style={{textAlign: 'right'}} span={10}>保证金占比:</Col>
+                                <Col style={{textAlign: 'center'}} span={14}>{this.state.detail.marginLevel}</Col>
+                            </Row>
+                            <Row style={{marginTop: 20}}>
+                                <Col span={24}>处理备注：</Col>
+                                <Col style={{marginTop: 20}} span={24}>
+                                <TextArea value={this.state.detail.comment}
+                                          onChange={this.changeNote}
+                                          rows={4}></TextArea>
+                                </Col>
+                            </Row>
+
+                            <Table rowKey="id"
+                                   columns={[
+                                       {
+                                           title: '时间',
+                                           dataIndex: 'createDate',
+                                           key: 'operationDiary_Date',
+                                           render: (text, record) => (
+                                               <span>{record.createDate}</span>),
+                                       }, {
+                                           title: 'IP',
+                                           dataIndex: 'IP',
+                                           key: 'IP',
+                                           render: (text, record) => (
+                                               <span>{record.ipAddress}</span>),
+                                       }, {
+                                           title: '操作人',
+                                           width: 130,
+                                           dataIndex: 'bkUserName',
+                                           key: 'operationDiary_User',
+                                           render: (text, record) => (
+                                               <span>{record.bkUserName}</span>),
+                                       }, {
+                                           title: '操作',
+                                           dataIndex: 'comment',
+                                           key: 'operationDiary_Status',
+                                           render: (text, record) => (
+                                               <span>{record.comment}</span>),
+                                       }]}
+                                   dataSource={this.state.operationDiaryHistory}
+                                   loading={this.state.loadingComment}
+                                   pagination={{
+                                       total: this.state.totalpageComments * this.state.pgsize,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePageComment,
+                                   }}
+                            />
+                        </div>
+                    </Card>
+
+
+                </Modal>
                 <Modal
                     title={this.state.modeState == '正常' ? '恢复正常' : this.state.modeState}
                     onCancel={this.handleCancel}
