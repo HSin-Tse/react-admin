@@ -12,7 +12,7 @@ import {addTodo, setINFOR} from "../../action";
 import connect from "react-redux/es/connect/connect";
 import axios from "axios";
 import ReactJson from 'react-json-view'
-
+import Iframe from 'react-iframe'
 const {TextArea} = Input;
 
 
@@ -70,12 +70,11 @@ class DEVhboard extends React.Component {
                 {/*{JSON.stringify(localStorage.getItem('infor'))}*/}
 
                 <Row gutter={1}>
-                    <Col md={12}>
+                    <Col md={24}>
                         <div style={{display: this.state.displayName == 'admin' ? '' : 'none'}}>
                             <h4>{localStorage.getItem('loginName')}  tokon:</h4>
                             <TextArea style={{width: '100%'}}
                                       value={this.state.too}
-                                      rows={2}
                                       />
                             <h1 style={{marginTop: 15}}>
                                 Change your Base URL
@@ -261,9 +260,9 @@ class DEVhboard extends React.Component {
                         </div>
 
                     </Col>
-                    <Col md={12}>
-                        <iframe src="http://note.youdao.com/share/?id=28f19f75d6b6d7ae49c57a60be984f6b&type=note#/"></iframe>
-                    </Col>
+                    {/*<Col md={12}>*/}
+                        {/*<Iframe url="http://note.youdao.com/share/?id=28f19f75d6b6d7ae49c57a60be984f6b&type=note#/"></Iframe>*/}
+                    {/*</Col>*/}
                 </Row>
 
 
