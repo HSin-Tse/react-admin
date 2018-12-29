@@ -18,6 +18,7 @@ class Basic extends Component {
             count: 0,
             current: 0,
             pgsize: 10,
+            modal2OPDAYVisible: false,
             visibleA: false,
             visibleB: false,
             user: '',
@@ -100,7 +101,28 @@ class Basic extends Component {
 
         };
     }
+    requestUserCommentList = (record) => {
 
+
+        var self = this;
+        window.Axios.post('/auth/getRecordCommentList', {
+            id: record.id,
+            commentType: 4,
+            pageNo: this.state.currentComment,
+            pageSize: this.state.pgsize,
+        }).then(function (response) {
+            self.setState({
+                totalpageComments: response.data.data.totalPage,
+                operationDiaryHistory: response.data.data.list,
+            });
+        });
+    }
+    showOPDAyModal2 = (recodrd) => {
+        this.requestUserCommentList(recodrd)
+        this.setState({
+            modal2OPDAYVisible: true,
+        });
+    };
     requestPage = () => {
 
         let self = this
@@ -229,7 +251,7 @@ class Basic extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button >操作日志</Button>
+                        <Button onClick={() => this.showOPDAyModal2(record)}>操作日志</Button>
                         <Button onClick={() => this.showModalB(record.id)}>审核</Button>
                         <Button onClick={() => this.showModalA(record.id)}>查看</Button>
                     </div>
@@ -476,6 +498,55 @@ class Basic extends Component {
                            }}
                     />
                 </Card>
+                <Modal
+                    title="查看操作日志"
+                    visible={this.state.modal2OPDAYVisible}
+                    onCancel={() => {
+                        this.setState({
+                            visible: false,
+                            modal2OPDAYVisible: false,
+                        });
+                    }}
+                    width={600}
+                    footer={null}>
+                    <Table rowKey="id"
+                           columns={[
+                               {
+                                   title: '时间',
+                                   dataIndex: 'createDate',
+                                   key: 'operationDiary_Date',
+                                   render: (text, record) => (
+                                       <span>{record.createDate}</span>),
+                               }, {
+                                   title: 'IP',
+                                   dataIndex: 'IP',
+                                   key: 'IP',
+                                   render: (text, record) => (
+                                       <span>{record.ipAddress}</span>),
+                               }, {
+                                   title: '操作人',
+                                   width: 130,
+                                   dataIndex: 'bkUserName',
+                                   key: 'operationDiary_User',
+                                   render: (text, record) => (
+                                       <span>{record.bkUserName}</span>),
+                               }, {
+                                   title: '操作',
+                                   dataIndex: 'comment',
+                                   key: 'operationDiary_Status',
+                                   render: (text, record) => (
+                                       <span>{record.comment}</span>),
+                               }]}
+                           dataSource={this.state.operationDiaryHistory}
+                           loading={this.state.loadingComment}
+                           pagination={{
+                               total: this.state.totalpageComments * this.state.pgsize,
+                               pageSize: this.state.pgsize,
+                               onChange: this.changePageComment,
+                           }}
+                    />
+
+                </Modal>
             </div>
         )
     }
