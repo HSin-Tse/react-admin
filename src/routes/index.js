@@ -58,12 +58,6 @@ export default class CRouter extends Component {
 
 
 
-        // console.log('hcia  router index componentWillMount')
-        // console.log('hcia  router index componentWillMount AAAAAa')
-
-        // console.log('hcia this.state.infor' , this.state.infor)
-
-
         if (!this.state.infor) {
 
             var bbRouter = this.deepClone(routesAD);
@@ -91,10 +85,6 @@ export default class CRouter extends Component {
 
 
         var bbRouter = this.deepClone(routesAD);
-
-
-        // console.log('hcia bbRouter' , bbRouter)
-
 
         var aaaaa = [...bbRouter.menus]
         var nowRouter = aaaaa.filter((key, index, array) => {

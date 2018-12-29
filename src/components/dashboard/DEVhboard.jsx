@@ -13,6 +13,8 @@ import connect from "react-redux/es/connect/connect";
 import axios from "axios";
 import ReactJson from 'react-json-view'
 import Iframe from 'react-iframe'
+import Base64  from 'base-64';
+
 
 const {TextArea} = Input;
 
@@ -27,7 +29,7 @@ class DEVhboard extends React.Component {
             displayName: '',
             too: '',
             path: 'auth/getRecordCommentList',
-            requestBody: '{"a":1,"b":"aa"}',
+            requestBody: '{"/a":1,"b":"aa"}',
             HOST: 'http://mobile.nooko.cn:8090/',
 
         };
@@ -52,7 +54,28 @@ class DEVhboard extends React.Component {
         console.log('hcia this.props', this.props)
         var ss = this.props.match.params.catch
 
-        console.log('hcia ss', ss)
+        console.log('hcia catch', ss)
+
+        if(ss==':catch'){
+
+        }else{
+            console.log('hcia  decode catch', Base64.decode(ss))
+
+            if ((this.isJson(Base64.decode(ss)))) {
+                this.setState({
+
+                    ...JSON.parse(Base64.decode(ss))
+                });
+
+            } else {
+
+            }
+
+
+
+        }
+
+
 
         this.setState({displayName: localStorage.getItem('loginName')});
         this.setState({too: localStorage.getItem('too')});
@@ -261,13 +284,20 @@ class DEVhboard extends React.Component {
                 </Row>
 
 
-                {/*<Row gutter={1}>*/}
-                    {/*<Col md={24}>*/}
-                        {/*<div>{'http://localhost:3006/#/app/devboard/index/' + encodeURI(JSON.stringify(this.state))}</div>*/}
+                <Row gutter={1}>
+                    <Col md={24}>
+                        <div>URL to CHROME Copy all and Past</div>
+
+                    <TextArea style={{width: 580}}
+                              value={
+                                  'http://mobile.nooko.cn:8090/#/app/devboard/index' + Base64.encode(JSON.stringify(this.state))
+                              }
+                              rows={1}
+                    />
 
 
-                    {/*</Col>*/}
-                {/*</Row>*/}
+                    </Col>
+                </Row>
 
                 <Row gutter={1}>
                     <Col md={24}>

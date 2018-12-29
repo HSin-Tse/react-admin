@@ -16,6 +16,7 @@
     "babel-plugin-import": "^1.9.1",
     "babel-plugin-named-asset-import": "^0.2.2",
     "babel-preset-react-app": "^5.0.3",
+    "base-64": "^0.1.0",
     "bfj": "6.1.1",
     "canvas-nest.js": "^2.0.4",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
