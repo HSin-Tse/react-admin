@@ -147,7 +147,7 @@ class Dashboard extends React.Component {
                     <h4>token:{localStorage.getItem('too')}</h4>
 
                     <div style={{display: 'flex', minHeight: 40}}>
-                        <span style={{minWidth: 100}}>Request  Body  Auto add token and loginName</span>
+                        <span style={{minWidth: 100}}>Request </span>
                         <TextArea style={{minWidth: 160}}
                                   value={this.state.requestBody}
                                   rows={4}
