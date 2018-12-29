@@ -11,6 +11,7 @@ import {bindActionCreators} from "redux";
 import {addTodo, setINFOR} from "../../action";
 import connect from "react-redux/es/connect/connect";
 import axios from "axios";
+import ReactJson from 'react-json-view'
 
 const {TextArea} = Input;
 
@@ -26,6 +27,7 @@ class Dashboard extends React.Component {
         super(props);
         this.state = {
             menuList: [],
+            resp: undefined,
             displayName: '',
             requestBody: '{"a":1,"b":"aa"}',
             HOST: 'http://mobile.nooko.cn:8090/',
@@ -171,19 +173,22 @@ class Dashboard extends React.Component {
                         window.Axios.post('/auth/getRecordCommentList', isFirst)
                             .then(function (response) {
 
-                                // self.setState({
-                                //     operationDiaryHistory: response.data.data.list,
-                                // });
+                                self.setState({
+                                    resp: response.data,
+                                });
 
                             }).catch(error => {
-                                
-                                console.log('hcia error' , error)
 
+                            console.log('hcia error', error)
+                            self.setState({
+                                resp: error,
+                            });
 
                             // message.error(error)
                         })
                     }}> send </Button>
 
+                    <ReactJson src = {this.state.resp}></ReactJson>
 
 
                 </div>
