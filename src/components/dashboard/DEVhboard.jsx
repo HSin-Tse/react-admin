@@ -61,10 +61,10 @@ class DEVhboard extends React.Component {
         }else{
             console.log('hcia  decode catch', Base64.decode(ss))
 
-            if ((this.isJson(Base64.decode(ss)))) {
+            if ((this.isJson(decodeURIComponent(Base64.decode(ss))))) {
                 this.setState({
 
-                    ...JSON.parse(Base64.decode(ss))
+                    ...JSON.parse(decodeURIComponent(Base64.decode(ss)) )
                 });
 
             } else {
@@ -290,7 +290,7 @@ class DEVhboard extends React.Component {
 
                     <TextArea style={{width: 580}}
                               value={
-                                  'http://mobile.nooko.cn:8090/#/app/devboard/index' + Base64.encode(JSON.stringify(this.state))
+                                  'http://mobile.nooko.cn:8090/#/app/devboard/index' + Base64.encode(encodeURIComponent(JSON.stringify(this.state))  )
                               }
                               rows={1}
                     />
