@@ -23,6 +23,7 @@ class Basic extends Component {
             nodeList: [],
             loading: false,
             modal2OPDAYVisible: false,
+            modal3OPDAYVisible: false,
             searchPhone: '',
             totalPage: 1,
             modeState: 1,
@@ -34,6 +35,14 @@ class Basic extends Component {
 
         };
     }
+
+    showOPDAyModal3 = (recodrd) => {
+        this.requestUserCommentList(recodrd)
+        this.setState({
+            modal3OPDAYVisible: true,
+            visible: false,
+        });
+    };
     requestUserCommentList = (record) => {
 
 
@@ -190,8 +199,11 @@ class Basic extends Component {
                             <Option key="3" value="禁止交易">禁止交易</Option>
 
                         </Select>
-                        <Button style={{marginLeft: 12}} className="ant-dropdown-link"
-                                onClick={() => this.seeDetail(record)}>备注</Button>
+                        {/*<Button style={{marginLeft: 12}} className="ant-dropdown-link"*/}
+                                {/*onClick={() => this.seeDetail(record)}>备注</Button>*/}
+
+
+                        <Button style={{marginLeft: 12}} onClick={() => this.showOPDAyModal3(record)}>备注</Button>
 
                         <Button  onClick={() => this.showOPDAyModal2(record)}>操作日志</Button>
 
@@ -275,6 +287,14 @@ class Basic extends Component {
         );
 
     };
+    changePageComment = (page) => {
+        page = page - 1
+        this.setState({
+            currentComment: page,
+        }, () => {
+            this.requestUserCommentList()
+        })
+    }
     forbitChange = (value) => {
         let self = this
         self.setState({
@@ -512,6 +532,52 @@ class Basic extends Component {
                                        <span>{record.bkUserName}</span>),
                                }, {
                                    title: '操作',
+                                   dataIndex: 'comment',
+                                   key: 'operationDiary_Status',
+                                   render: (text, record) => (
+                                       <span>{record.comment}</span>),
+                               }]}
+                           dataSource={this.state.operationDiaryHistory}
+                           loading={this.state.loadingComment}
+                           pagination={{
+                               total: this.state.totalpageComments * this.state.pgsize,
+                               pageSize: this.state.pgsize,
+                               onChange: this.changePageComment,
+                           }}
+                    />
+
+                </Modal>
+
+                <Modal
+                    title="备注"
+                    visible={this.state.modal3OPDAYVisible}
+                    onCancel={() => {
+                        this.setState({
+                            visible: false,
+                            modal3OPDAYVisible: false,
+                        });
+                    }}
+                    width={600}
+                    footer={null}
+                >
+                    <Table rowKey="id"
+                           columns={[
+
+                               {
+                                   title: '操作人',
+                                   width: 130,
+                                   dataIndex: 'bkUserName',
+                                   key: 'operationDiary_User',
+                                   render: (text, record) => (
+                                       <span>{record.bkUserName}</span>),
+                               }, {
+                                   title: '操作时间',
+                                   dataIndex: 'createDate',
+                                   key: 'operationDiary_Date',
+                                   render: (text, record) => (
+                                       <span>{record.createDate}</span>),
+                               }, {
+                                   title: '备注',
                                    dataIndex: 'comment',
                                    key: 'operationDiary_Status',
                                    render: (text, record) => (
