@@ -39,9 +39,7 @@ class DEVhboard extends React.Component {
         var promise = new Promise(function (resolve, reject) {
 
             JSON.parse(url)
-
             resolve(url)
-
 
         });
 
@@ -49,6 +47,13 @@ class DEVhboard extends React.Component {
     }
 
     componentDidMount() {
+
+
+        console.log('hcia this.props', this.props)
+        var ss = this.props.match.params.catch
+
+        console.log('hcia ss', ss)
+
         this.setState({displayName: localStorage.getItem('loginName')});
         this.setState({too: localStorage.getItem('too')});
         this.setState({HOST: window.Axios.defaults.baseURL});
@@ -171,16 +176,10 @@ class DEVhboard extends React.Component {
 
                                     value={this.state.path}
                                     onChange={(e) => {
-
                                         var self = this
                                         this.setState({
                                             path: e.target.value,
-                                        }, () => {
-
-
                                         });
-
-
                                     }}
                                     style={{width: 320}} placeholder="a/b/c"/>
                             </div>
@@ -261,6 +260,15 @@ class DEVhboard extends React.Component {
                     {/*</Col>*/}
                 </Row>
 
+
+                {/*<Row gutter={1}>*/}
+                    {/*<Col md={24}>*/}
+                        {/*<div>{'http://localhost:3006/#/app/devboard/index/' + encodeURI(JSON.stringify(this.state))}</div>*/}
+
+
+                    {/*</Col>*/}
+                {/*</Row>*/}
+
                 <Row gutter={1}>
                     <Col md={24}>
                         <div>Cache Copy all and Past</div>
@@ -273,27 +281,14 @@ class DEVhboard extends React.Component {
                                   rows={4}
                                   onChange={(e) => {
 
-
-
-
-                                      // self.getURL(e.target.value).then(function onFulfilled(value) {
-                                      //     console.log('hcia value', value)
-                                      //
-                                      // }, function onRejected(error) {
-                                      //     console.log('hcia error', error)
-                                      //
-                                      // });
-                                      // (this.isJson(e.target.value)) ? JSON.parse(e.target.value) : '{error:a}'
-
-
-                                      if((this.isJson(e.target.value))){
+                                      if ((this.isJson(e.target.value))) {
                                           this.setState({
 
                                               ...JSON.parse(e.target.value)
                                           });
 
-                                      }else{
-                                          
+                                      } else {
+
                                       }
 
                                   }}/>

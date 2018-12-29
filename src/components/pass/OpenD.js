@@ -16,12 +16,9 @@ import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
 import moment from 'moment';
 import axios from "axios";
-import AllComponents from "../index";
-import {Route} from "react-router-dom";
 
 const Search = Input.Search;
 const {TextArea} = Input;
-const RadioGroup = Radio.Group;
 const Option = Select.Option;
 
 const dateFormat = 'YYYY-MM-DD';
