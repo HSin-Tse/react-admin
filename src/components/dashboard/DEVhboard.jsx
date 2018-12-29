@@ -25,6 +25,7 @@ class DEVhboard extends React.Component {
             menuList: [],
             resp: undefined,
             displayName: '',
+            too: '',
             path: 'auth/getRecordCommentList',
             requestBody: '{"a":1,"b":"aa"}',
             HOST: 'http://mobile.nooko.cn:8090/',
@@ -49,6 +50,7 @@ class DEVhboard extends React.Component {
 
     componentDidMount() {
         this.setState({displayName: localStorage.getItem('loginName')});
+        this.setState({too: localStorage.getItem('too')});
         this.setState({HOST: window.Axios.defaults.baseURL});
     }
 
@@ -66,191 +68,207 @@ class DEVhboard extends React.Component {
         return (
             <div className="gutter-example button-demo">
                 {/*{JSON.stringify(localStorage.getItem('infor'))}*/}
-                <div style={{display: this.state.displayName == 'admin' ? '' : 'none'}}>
-                    <h4>{localStorage.getItem('loginName')}</h4>
-                    <h4>{localStorage.getItem('too')}</h4>
-                    <h1 style={{marginTop: 15}}>
-                        Change your Base URL
-                    </h1>
 
-                    <h3>http://mobile.nooko.cn:8090/</h3>
-                    <h3>http://127.0.0.1:8080/</h3>
+                <Row gutter={1}>
+                    <Col md={12}>
+                        <div style={{display: this.state.displayName == 'admin' ? '' : 'none'}}>
+                            <h4>{localStorage.getItem('loginName')}  tokon:</h4>
+                            <TextArea style={{width: '100%'}}
+                                      value={this.state.too}
+                                      rows={2}
+                                      />
+                            <h1 style={{marginTop: 15}}>
+                                Change your Base URL
+                            </h1>
+
+                            <h3>http://mobile.nooko.cn:8090/</h3>
+                            <h3>http://127.0.0.1:8080/</h3>
 
 
-                    <div style={{display: 'flex', minHeight: 40}}>
-                        <span style={{width: 80}}>now host:</span>
-                        <Input
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <span style={{width: 80}}>now host:</span>
+                                <Input
 
-                            value={this.state.HOST}
-                            onChange={(e) => {
+                                    value={this.state.HOST}
+                                    onChange={(e) => {
 
-                                var self = this
-                                this.setState({
-                                    HOST: e.target.value,
-                                }, () => {
-                                    var Axios = axios.create({
-                                        baseURL: self.state.HOST
-                                    });
+                                        var self = this
+                                        this.setState({
+                                            HOST: e.target.value,
+                                        }, () => {
+                                            var Axios = axios.create({
+                                                baseURL: self.state.HOST
+                                            });
 
-                                    window.Axios = Axios;
+                                            window.Axios = Axios;
 
-                                    window.Axios.interceptors.request.use(
-                                        config => {
-                                            var xtoken = localStorage.getItem('too')
-                                            var loginName = localStorage.getItem('loginName')
+                                            window.Axios.interceptors.request.use(
+                                                config => {
+                                                    var xtoken = localStorage.getItem('too')
+                                                    var loginName = localStorage.getItem('loginName')
 
-                                            loginName = encodeURI(loginName)
+                                                    loginName = encodeURI(loginName)
 
-                                            // console.log('hcia loginName' , loginName)
-                                            // console.log('hcia xtoken' , xtoken)
+                                                    // console.log('hcia loginName' , loginName)
+                                                    // console.log('hcia xtoken' , xtoken)
 
-                                            if (xtoken != null) {
-                                                config.headers['X-Token'] = xtoken
-                                                if (config.method == 'post') {
-                                                    config.data = {
-                                                        ...config.data,
-                                                        'token': xtoken,
-                                                        'loginName': loginName,
-                                                        'language': 'zh-CN',
+                                                    if (xtoken != null) {
+                                                        config.headers['X-Token'] = xtoken
+                                                        if (config.method == 'post') {
+                                                            config.data = {
+                                                                ...config.data,
+                                                                'token': xtoken,
+                                                                'loginName': loginName,
+                                                                'language': 'zh-CN',
 
+                                                            }
+
+                                                            config.timeout = 30 * 1000
+
+                                                            config.headers = {
+                                                                'token': xtoken,
+                                                                'loginName': loginName,
+                                                            }
+
+                                                        } else if (config.method == 'get') {
+                                                            config.params = {
+                                                                _t: Date.parse(new Date()) / 1000,
+                                                                ...config.params
+                                                            }
+                                                        }
                                                     }
 
-                                                    config.timeout = 30 * 1000
+                                                    return config
+                                                }, function (error) {
 
-                                                    config.headers = {
-                                                        'token': xtoken,
-                                                        'loginName': loginName,
-                                                    }
+                                                    console.log('hcia error', error)
+                                                    return Promise.reject(error)
+                                                })
 
-                                                } else if (config.method == 'get') {
-                                                    config.params = {
-                                                        _t: Date.parse(new Date()) / 1000,
-                                                        ...config.params
-                                                    }
+
+                                            window.Axios.interceptors.response.use(function (response) {
+
+                                                if (response.data.code != 1) {
+                                                    message.error(response.data.msg)
+                                                    return Promise.reject(response)
                                                 }
-                                            }
-
-                                            return config
-                                        }, function (error) {
-
-                                            console.log('hcia error', error)
-                                            return Promise.reject(error)
-                                        })
+                                                return response
+                                            }, function (error) {
+                                                message.error(error.toString())
+                                                return Promise.reject(error)
+                                            })
+                                        });
 
 
-                                    window.Axios.interceptors.response.use(function (response) {
+                                    }}
+                                    style={{width: 320}} placeholder="http://127.0.0.1:8080/"/>
 
-                                        if (response.data.code != 1) {
-                                            message.error(response.data.msg)
-                                            return Promise.reject(response)
-                                        }
-                                        return response
-                                    }, function (error) {
-                                        message.error(error.toString())
-                                        return Promise.reject(error)
+                            </div>
+
+
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <span style={{width: 80}}>now path:</span>
+                                <Input
+
+                                    value={this.state.path}
+                                    onChange={(e) => {
+
+                                        var self = this
+                                        this.setState({
+                                            path: e.target.value,
+                                        }, () => {
+
+
+
+
+
+                                        });
+
+
+                                    }}
+                                    style={{width: 320}} placeholder="a/b/c"/>
+                            </div>
+
+
+
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <span style={{minWidth: 80}}>Request </span>
+                                <TextArea style={{width: 180}}
+                                          value={this.state.requestBody}
+                                          rows={4}
+                                          onChange={(e) => {
+
+                                              var self = this
+
+                                              // self.getURL(e.target.value).then(function onFulfilled(value) {
+                                              //     console.log('hcia value', value)
+                                              //
+                                              // }, function onRejected(error) {
+                                              //     console.log('hcia error', error)
+                                              //
+                                              // });
+
+                                              self.setState({
+                                                  requestBody: e.target.value
+                                              });
+
+                                          }}/>
+
+                                <ReactJson
+                                    onEdit={(edit) => {
+                                        console.log('edit =======>', edit)
+                                    }}
+                                    src={
+                                        (this.isJson(this.state.requestBody)) ? JSON.parse(this.state.requestBody) : '{error:a}'
+                                    }/>
+                            </div>
+
+
+                            <Button
+                                style={{marginBottom:15}}
+
+                                disabled={!this.isJson(this.state.requestBody)}
+                                onClick={() => {
+
+                                    var self = this
+
+                                    console.log('hcia this.state.requestBody', this.state.requestBody)
+
+                                    const isFirst = JSON.parse(self.state.requestBody);
+                                    console.log('hcia isFirst', isFirst)
+
+                                    window.Axios.post( this.state.path    , isFirst)
+                                        .then(function (response) {
+
+                                            self.setState({
+                                                resp: response.data,
+                                            });
+
+                                        }).catch(error => {
+
+                                        console.log('hcia error', error)
+                                        self.setState({
+                                            resp: error,
+                                        });
+
+                                        // message.error(error)
                                     })
-                                });
+                                }}> send </Button>
+
+                            <ReactJson  src={this.state.resp}></ReactJson>
 
 
-                            }}
-                            style={{width: 320}} placeholder="http://127.0.0.1:8080/"/>
+                        </div>
 
-                    </div>
-
-
-                    <div style={{display: 'flex', minHeight: 40}}>
-                        <span style={{width: 80}}>now path:</span>
-                        <Input
-
-                            value={this.state.path}
-                            onChange={(e) => {
-
-                                var self = this
-                                this.setState({
-                                    path: e.target.value,
-                                }, () => {
+                    </Col>
+                    <Col md={12}>
+                        <iframe src="http://note.youdao.com/share/?id=28f19f75d6b6d7ae49c57a60be984f6b&type=note#/"></iframe>
+                    </Col>
+                </Row>
 
 
 
 
-
-                                });
-
-
-                            }}
-                            style={{width: 320}} placeholder="a/b/c"/>
-                    </div>
-
-
-
-                    <div style={{display: 'flex', minHeight: 40}}>
-                        <span style={{minWidth: 80}}>Request </span>
-                        <TextArea style={{width: 180}}
-                                  value={this.state.requestBody}
-                                  rows={4}
-                                  onChange={(e) => {
-
-                                      var self = this
-
-                                      // self.getURL(e.target.value).then(function onFulfilled(value) {
-                                      //     console.log('hcia value', value)
-                                      //
-                                      // }, function onRejected(error) {
-                                      //     console.log('hcia error', error)
-                                      //
-                                      // });
-
-                                      self.setState({
-                                          requestBody: e.target.value
-                                      });
-
-                                  }}/>
-
-                        <ReactJson
-                            onEdit={(edit) => {
-                                console.log('edit =======>', edit)
-                            }}
-                            src={
-                                (this.isJson(this.state.requestBody)) ? JSON.parse(this.state.requestBody) : '{error:a}'
-                            }/>
-                    </div>
-
-
-                    <Button
-                        style={{marginBottom:15}}
-
-                        disabled={!this.isJson(this.state.requestBody)}
-                        onClick={() => {
-
-                            var self = this
-
-                            console.log('hcia this.state.requestBody', this.state.requestBody)
-
-                            const isFirst = JSON.parse(self.state.requestBody);
-                            console.log('hcia isFirst', isFirst)
-
-                            window.Axios.post( this.state.path    , isFirst)
-                                .then(function (response) {
-
-                                    self.setState({
-                                        resp: response.data,
-                                    });
-
-                                }).catch(error => {
-
-                                console.log('hcia error', error)
-                                self.setState({
-                                    resp: error,
-                                });
-
-                                // message.error(error)
-                            })
-                        }}> send </Button>
-
-                    <ReactJson  src={this.state.resp}></ReactJson>
-
-
-                </div>
 
             </div>
         )
