@@ -2,7 +2,7 @@
  * Created by hao.cheng on 2017/5/3.
  */
 import React from 'react';
-import {Row, Col, Card, Timeline, Icon, Input, message} from 'antd';
+import {Row, Col, Card, Button, Icon, Input, message} from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
 import EchartsViews from './EchartsViews';
 import EchartsProjects from './EchartsProjects';
@@ -11,6 +11,8 @@ import {bindActionCreators} from "redux";
 import {addTodo, setINFOR} from "../../action";
 import connect from "react-redux/es/connect/connect";
 import axios from "axios";
+
+const {TextArea} = Input;
 
 
 class Dashboard extends React.Component {
@@ -25,6 +27,7 @@ class Dashboard extends React.Component {
         this.state = {
             menuList: [],
             displayName: '',
+            requestBody: '{"a":1,"b":"aa"}',
             HOST: 'http://mobile.nooko.cn:8090/',
 
         };
@@ -140,6 +143,48 @@ class Dashboard extends React.Component {
                     <h3>you can set like below </h3>
                     <p>http://mobile.nooko.cn:8090/</p>
                     <p>http://127.0.0.1:8080/</p>
+                    <h4>loginName:{localStorage.getItem('loginName')}</h4>
+                    <h4>token:{localStorage.getItem('too')}</h4>
+
+                    <div style={{display: 'flex', minHeight: 40}}>
+                        <span style={{minWidth: 100}}>Request  Body  Auto add token and loginName</span>
+                        <TextArea style={{minWidth: 160}}
+                                  value={this.state.requestBody}
+                                  rows={4}
+                                  onChange={(e) => {
+                                      this.setState({
+                                          requestBody: e.target.value,
+                                      });
+                                  }}/>
+                    </div>
+
+
+                    <Button onClick={() => {
+
+                        var self = this
+
+                        console.log('hcia this.state.requestBody', this.state.requestBody)
+
+                        const isFirst = JSON.parse(self.state.requestBody);
+                        console.log('hcia isFirst', isFirst)
+
+                        window.Axios.post('/auth/getRecordCommentList', isFirst)
+                            .then(function (response) {
+
+                                // self.setState({
+                                //     operationDiaryHistory: response.data.data.list,
+                                // });
+
+                            }).catch(error => {
+                                
+                                console.log('hcia error' , error)
+
+
+                            // message.error(error)
+                        })
+                    }}> send </Button>
+
+
 
                 </div>
 
