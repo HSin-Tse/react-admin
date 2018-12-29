@@ -285,10 +285,16 @@ class DEVhboard extends React.Component {
                                       // });
                                       // (this.isJson(e.target.value)) ? JSON.parse(e.target.value) : '{error:a}'
 
-                                      this.setState({
 
-                                          ...JSON.parse(e.target.value)
-                                      });
+                                      if((this.isJson(e.target.value))){
+                                          this.setState({
+
+                                              ...JSON.parse(e.target.value)
+                                          });
+
+                                      }else{
+                                          
+                                      }
 
                                   }}/>
 
