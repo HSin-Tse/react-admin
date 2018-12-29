@@ -231,7 +231,14 @@ export default class WhiteList extends Component {
             this.requestPageA()
         })
     }
-
+    changePageComment = (page) => {
+        page = page - 1
+        this.setState({
+            currentComment: page,
+        }, () => {
+            this.requestUserCommentList()
+        })
+    }
     onChangelastNameCn = (e) => {
         this.state.NameCn = e.target.value
     }

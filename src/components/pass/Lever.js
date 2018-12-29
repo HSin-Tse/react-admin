@@ -101,6 +101,7 @@ class Basic extends Component {
 
         };
     }
+
     requestUserCommentList = (record) => {
 
 
@@ -252,8 +253,8 @@ class Basic extends Component {
                 render: (text, record) => (
                     <div>
                         <Button onClick={() => this.showOPDAyModal2(record)}>操作日志</Button>
-                        <Button onClick={() => this.showModalB(record.id)}>审核</Button>
-                        <Button onClick={() => this.showModalA(record.id)}>查看</Button>
+                        <Button onClick={() => this.showModalB(record)}>审核</Button>
+                        <Button onClick={() => this.showModalA(record)}>查看</Button>
                     </div>
                 ),
             }];
@@ -261,13 +262,22 @@ class Basic extends Component {
 
     }
 
+    changePageComment = (page) => {
+        page = page - 1
+        this.setState({
+            currentComment: page,
+        }, () => {
+            this.requestUserCommentList()
+        })
+    }
     seeDetail = () => {
         const {addTodo} = this.props;
         console.log('hcia seeDetail')
         addTodo('a')
 
     }
-    showModalA = (id) => {
+    showModalA = (recodrd) => {
+        this.requestUserCommentList(recodrd)
 
         let self = this
 
@@ -276,7 +286,7 @@ class Basic extends Component {
         });
 
         window.Axios.post('finance/getLeverageApplyDetail', {
-            'id': id,
+            'id': recodrd.id,
         }).then(function (response) {
             console.log('hcia response', response)
 
@@ -290,7 +300,8 @@ class Basic extends Component {
 
 
     }
-    showModalB = (id) => {
+    showModalB = (recodrd) => {
+        this.requestUserCommentList(recodrd)
 
         let self = this
         self.setState({
@@ -298,7 +309,7 @@ class Basic extends Component {
         });
 
         window.Axios.post('finance/getLeverageApplyDetail', {
-            'id': id,
+            'id': recodrd.id,
         }).then(function (response) {
             console.log('hcia response', response)
 
@@ -406,7 +417,7 @@ class Basic extends Component {
                             <Button type="normal" key="submit">通過</Button>
                         </Popconfirm>,
                         <Popconfirm title="拒绝？"
-                                    onConfirm={this.handleReject}
+                                    onConfirm={this.handleReject} e
                                     okText="Yes"
                                     cancelText="No">
                             <Button type="normal" key="back">拒絕</Button>
@@ -414,6 +425,7 @@ class Basic extends Component {
                     ]}
                 >
                     <Card
+
                         title={'账户：' + this.state.detail.accountNo}
                         bordered={true}>
 
@@ -451,6 +463,43 @@ class Basic extends Component {
                                           rows={4}></TextArea>
                                 </Col>
                             </Row>
+
+                            <Table rowKey="id"
+                                   columns={[
+                                       {
+                                           title: '时间',
+                                           dataIndex: 'createDate',
+                                           key: 'operationDiary_Date',
+                                           render: (text, record) => (
+                                               <span>{record.createDate}</span>),
+                                       }, {
+                                           title: 'IP',
+                                           dataIndex: 'IP',
+                                           key: 'IP',
+                                           render: (text, record) => (
+                                               <span>{record.ipAddress}</span>),
+                                       }, {
+                                           title: '操作人',
+                                           width: 130,
+                                           dataIndex: 'bkUserName',
+                                           key: 'operationDiary_User',
+                                           render: (text, record) => (
+                                               <span>{record.bkUserName}</span>),
+                                       }, {
+                                           title: '操作',
+                                           dataIndex: 'comment',
+                                           key: 'operationDiary_Status',
+                                           render: (text, record) => (
+                                               <span>{record.comment}</span>),
+                                       }]}
+                                   dataSource={this.state.operationDiaryHistory}
+                                   loading={this.state.loadingComment}
+                                   pagination={{
+                                       total: this.state.totalpageComments * this.state.pgsize,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePageComment,
+                                   }}
+                            />
                         </div>
                     </Card>
 
@@ -473,6 +522,44 @@ class Basic extends Component {
                             <TextArea value={this.state.detail.comment} rows={4}></TextArea>
                         </div>
                     </Card>
+
+                    <Table rowKey="id"
+                           columns={[
+                               {
+                                   title: '时间',
+                                   dataIndex: 'createDate',
+                                   key: 'operationDiary_Date',
+                                   render: (text, record) => (
+                                       <span>{record.createDate}</span>),
+                               }, {
+                                   title: 'IP',
+                                   dataIndex: 'IP',
+                                   key: 'IP',
+                                   render: (text, record) => (
+                                       <span>{record.ipAddress}</span>),
+                               }, {
+                                   title: '操作人',
+                                   width: 130,
+                                   dataIndex: 'bkUserName',
+                                   key: 'operationDiary_User',
+                                   render: (text, record) => (
+                                       <span>{record.bkUserName}</span>),
+                               }, {
+                                   title: '操作',
+                                   dataIndex: 'comment',
+                                   key: 'operationDiary_Status',
+                                   render: (text, record) => (
+                                       <span>{record.comment}</span>),
+                               }]}
+                           dataSource={this.state.operationDiaryHistory}
+                           loading={this.state.loadingComment}
+                           pagination={{
+                               total: this.state.totalpageComments * this.state.pgsize,
+                               pageSize: this.state.pgsize,
+                               onChange: this.changePageComment,
+                           }}
+                    />
+
                 </Modal>
                 <h2 style={{marginTop: 15}}>
                     杠杆审核
