@@ -1,6 +1,9 @@
 export default {
     menus: [ // 菜单相关路由
         {
+            tk: 'dash', key: '/app/devboard/index',
+            title: 'DEV', icon: 'user', component: 'DEVhboard'
+        },{
             tk: 'dash', key: '/app/dashboard/index',
             title: '歡迎', icon: 'user', component: 'Dashboard'
         },

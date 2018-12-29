@@ -15,6 +15,7 @@ import Modals from './ui/Modals';
 import Banners from './ui/banners';
 import Drags from './ui/Draggable';
 import Dashboard from './dashboard/Dashboard';
+import DEVhboard from './dashboard/DEVhboard';
 import Gallery from './ui/Gallery';
 import BasicAnimations from './animation/BasicAnimations';
 import AuthBasic from './auth/Basic';
@@ -79,6 +80,7 @@ export default {
     CustomerUserInfo,
     AddUser,
     EditUser,
+    DEVhboard,
     AddRole,
     PassOpenRS,
     EditRole,

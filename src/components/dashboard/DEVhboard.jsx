@@ -1,0 +1,242 @@
+/**
+ * Created by hao.cheng on 2017/5/3.
+ */
+import React from 'react';
+import {Row, Col, Card, Button, Icon, Input, message} from 'antd';
+import BreadcrumbCustom from '../BreadcrumbCustom';
+import EchartsViews from './EchartsViews';
+import EchartsProjects from './EchartsProjects';
+import b1 from '../../style/imgs/b1.jpg';
+import {bindActionCreators} from "redux";
+import {addTodo, setINFOR} from "../../action";
+import connect from "react-redux/es/connect/connect";
+import axios from "axios";
+import ReactJson from 'react-json-view'
+
+const {TextArea} = Input;
+
+
+class DEVhboard extends React.Component {
+
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            menuList: [],
+            resp: undefined,
+            displayName: '',
+            requestBody: '{"a":1,"b":"aa"}',
+            HOST: 'http://mobile.nooko.cn:8090/',
+
+        };
+    }
+
+    getURL = (url) => {
+
+
+        var promise = new Promise(function (resolve, reject) {
+
+            JSON.parse(url)
+
+            resolve(url)
+
+
+        });
+
+        return promise
+    }
+
+    componentDidMount() {
+        this.setState({displayName: localStorage.getItem('loginName')});
+        this.setState({HOST: window.Axios.defaults.baseURL});
+    }
+
+    isJson = (str) => {
+        try {
+            JSON.parse(str);
+        } catch (e) {
+            return false;
+        }
+        return true;
+    }
+
+
+    render() {
+        return (
+            <div className="gutter-example button-demo">
+                {/*{JSON.stringify(localStorage.getItem('infor'))}*/}
+                <div style={{display: this.state.displayName == 'admin' ? '' : 'none'}}>
+
+                    <h1 style={{marginTop: 15}}>
+                        Change your Base URL
+                    </h1>
+
+                    <div style={{display: 'flex', minHeight: 40}}>
+                        <span style={{width: 120}}>now host:</span>
+                        <Input
+
+                            value={this.state.HOST}
+                            onChange={(e) => {
+
+                                var self = this
+                                this.setState({
+                                    HOST: e.target.value,
+                                }, () => {
+                                    var Axios = axios.create({
+                                        baseURL: self.state.HOST
+                                    });
+
+                                    window.Axios = Axios;
+
+                                    window.Axios.interceptors.request.use(
+                                        config => {
+                                            var xtoken = localStorage.getItem('too')
+                                            var loginName = localStorage.getItem('loginName')
+
+                                            loginName = encodeURI(loginName)
+
+                                            // console.log('hcia loginName' , loginName)
+                                            // console.log('hcia xtoken' , xtoken)
+
+                                            if (xtoken != null) {
+                                                config.headers['X-Token'] = xtoken
+                                                if (config.method == 'post') {
+                                                    config.data = {
+                                                        ...config.data,
+                                                        'token': xtoken,
+                                                        'loginName': loginName,
+                                                        'language': 'zh-CN',
+
+                                                    }
+
+                                                    config.timeout = 30 * 1000
+
+                                                    config.headers = {
+                                                        'token': xtoken,
+                                                        'loginName': loginName,
+                                                    }
+
+                                                } else if (config.method == 'get') {
+                                                    config.params = {
+                                                        _t: Date.parse(new Date()) / 1000,
+                                                        ...config.params
+                                                    }
+                                                }
+                                            }
+
+                                            return config
+                                        }, function (error) {
+
+                                            console.log('hcia error', error)
+                                            return Promise.reject(error)
+                                        })
+
+
+                                    window.Axios.interceptors.response.use(function (response) {
+
+                                        if (response.data.code != 1) {
+                                            message.error(response.data.msg)
+                                            return Promise.reject(response)
+                                        }
+                                        return response
+                                    }, function (error) {
+                                        message.error(error.toString())
+                                        return Promise.reject(error)
+                                    })
+                                });
+
+
+                            }}
+                            style={{width: 620}} placeholder="http://127.0.0.1:8080/"/>
+                    </div>
+                    <h4>loginName:{localStorage.getItem('loginName')}</h4>
+                    <h4>token:{localStorage.getItem('too')}</h4>
+
+                    <div style={{display: 'flex', minHeight: 40}}>
+                        <span style={{minWidth: 80}}>Request </span>
+                        <TextArea style={{width: 180}}
+                                  value={this.state.requestBody}
+                                  rows={4}
+                                  onChange={(e) => {
+
+                                      var self = this
+
+                                      // self.getURL(e.target.value).then(function onFulfilled(value) {
+                                      //     console.log('hcia value', value)
+                                      //
+                                      // }, function onRejected(error) {
+                                      //     console.log('hcia error', error)
+                                      //
+                                      // });
+
+                                      self.setState({
+                                          requestBody: e.target.value
+                                      });
+
+                                  }}/>
+
+                        <ReactJson
+                            onEdit={(edit) => {
+                                console.log('edit =======>', edit)
+                            }}
+                            src={
+                                (this.isJson(this.state.requestBody)) ? JSON.parse(this.state.requestBody) : '{error:a}'
+                            }/>
+                    </div>
+
+
+
+
+
+
+                    <Button
+
+                        disabled={!this.isJson(this.state.requestBody)}
+                        onClick={() => {
+
+                        var self = this
+
+                        console.log('hcia this.state.requestBody', this.state.requestBody)
+
+                        const isFirst = JSON.parse(self.state.requestBody);
+                        console.log('hcia isFirst', isFirst)
+
+                        window.Axios.post('/auth/getRecordCommentList', isFirst)
+                            .then(function (response) {
+
+                                self.setState({
+                                    resp: response.data,
+                                });
+
+                            }).catch(error => {
+
+                            console.log('hcia error', error)
+                            self.setState({
+                                resp: error,
+                            });
+
+                            // message.error(error)
+                        })
+                    }}> send </Button>
+
+                    <ReactJson src={this.state.resp}></ReactJson>
+
+
+                </div>
+
+            </div>
+        )
+    }
+}
+
+
+const mapStateToProps = state => {
+    const todps = state.todos;
+    const infor = state.infor;
+    return {todps, infor};
+};
+const mapDispatchToProps = dispatch => ({
+    addTodo: bindActionCreators(addTodo, dispatch),
+    setUSER: bindActionCreators(setINFOR, dispatch),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(DEVhboard);
