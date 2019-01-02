@@ -398,14 +398,14 @@ export default class BlackList extends Component {
                             extra={<Button type="primary" onClick={() => {
                                 let self = this
                                 this.setState({
-                                    selectMail: '',
-                                    selectID: '',
-                                    startTime: '',
-                                    selectPhoneF: '',
-                                    starClientAccount: '',
-                                    selectTimeStart: '',
-                                    selectTimeEnd: '',
-                                    filterTimeFalue: null
+                                    selectMail: undefined,
+                                    selectID: undefined,
+                                    startTime: undefined,
+                                    selectPhoneF: undefined,
+                                    starClientAccount: undefined,
+                                    selectTimeStart: undefined,
+                                    selectTimeEnd: undefined,
+                                    filterTimeFalue: undefined
                                 }, () => {
                                     self.searchSelect()
                                 })

@@ -1253,11 +1253,32 @@ class PassOpenD extends Component {
             changeNoteB: true,
         });
     }
+    isChineseChar = (str) => {
+
+        var reg = /[\u4E00-\u9FA5\uF900-\uFA2D]/;
+
+        return reg.test(str);
+
+    }
     onChangelastNameCn = (e) => {
-        this.state.waitUpdate.lastNameCn = e.target.value
-        this.setState({
-            isNeedSave: true,
-        });
+
+
+        var sss = this.isChineseChar(e.target.value)
+        console.log('hcia sss', sss)
+        console.log('hcia e.target.value', e.target.value)
+
+        if(sss){
+            this.state.waitUpdate.lastNameCn = e.target.value
+            this.setState({
+                isNeedSave: true,
+            });
+        }else{
+            message.error('*姓（中文）')
+
+
+        }
+
+
     }
     onChangefirstNameCn = (e) => {
         this.state.waitUpdate.firstNameCn = e.target.value
