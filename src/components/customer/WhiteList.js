@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import {DatePicker, Input, Modal, Button, Table, message, Card, Icon, Select, Popconfirm} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import classNames from "classnames";
-import html2canvas from "html2canvas";
-import * as jsPDF from "jspdf";
 
 const {RangePicker} = DatePicker;
 const {TextArea} = Input;
