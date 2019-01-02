@@ -83,25 +83,6 @@ class Basic extends Component {
             });
         });
     }
-    onChangeLe = (value) => {
-
-        console.log('hcia value', value)
-        // updateLeverageApply
-        let self = this
-
-        // console.log('hcia value', value)
-        // window.Axios.post('open/prestoreLiveAccount', {
-        //     id: this.state.detail.id,//真实账户ID
-        //     leverageId: value,//外汇杠杆ID
-        // }).then((response) => {
-        //     console.log('hcia response', response)
-        //     // self.setState({
-        //     //     leavgeList: response.data.data,
-        //     // })
-        // });
-
-
-    }
     showModalChangeLeavge = (recodrd) => {
 
         console.log('hcia recodrd', recodrd)
@@ -504,24 +485,29 @@ class Basic extends Component {
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
                 {/*this.state.selectedRowKeys.length > 0*/}
                 <Modal
-                    // style={{ width: 100000 }}
                     width={'700px'}
-
                     onCancel={(e) => {
                         this.setState({
                             visibleChangeLeavgeModal: false,
                         });
                     }}
                     visible={this.state.visibleChangeLeavgeModal}
-
                     footer={[
-                        <Popconfirm title="确认？" onConfirm={this.handleOk}
+                        <Popconfirm title="确认？" onConfirm={() => {
+
+
+                            console.log('hcia mLeverageId', this.state.mLeverageId)
+                        }}
                                     okText="Yes"
                                     cancelText="No">
                             <Button type="normal" key="submit">通過</Button>
                         </Popconfirm>,
                         <Popconfirm title="拒绝？"
-                                    onConfirm={this.handleReject} e
+                                    onConfirm={(e) => {
+                                        this.setState({
+                                            visibleChangeLeavgeModal: false,
+                                        });
+                                    }}
                                     okText="Yes"
                                     cancelText="No">
                             <Button type="normal" key="back">拒絕</Button>
@@ -530,7 +516,6 @@ class Basic extends Component {
                 >
                     <Card
                         // bodyStyle={{padding: 0, margin: 0}}
-
                         title={'账户：' + this.state.detail.accountNo}
                         bordered={true}>
 
@@ -543,13 +528,33 @@ class Basic extends Component {
                                 <Col style={{textAlign: 'right'}} span={10}>余额:</Col>
                                 <Col style={{textAlign: 'center'}} span={14}>{this.state.detail.cashBalance}</Col>
                             </Row>
-
                             <Row style={{marginTop: 20}}>
                                 <Col style={{textAlign: 'right'}} span={10}>杠杆修改:</Col>
                                 <Col style={{textAlign: 'center'}} span={14}>
                                     <Select
-                                        onChange={this.onChangeLe}
-                                        defaultValue={this.state.detail.displayLeverage}
+                                        onChange={(value) => {
+
+                                            console.log('hcia value', value)
+                                            // updateLeverageApply
+                                            this.setState({
+                                                mLeverageId: value,
+                                                detail:{...this.state.detail,leverageId:value}
+                                            })
+
+                                            // console.log('hcia value', value)
+                                            // window.Axios.post('open/prestoreLiveAccount', {
+                                            //     id: this.state.detail.id,//真实账户ID
+                                            //     leverageId: value,//外汇杠杆ID
+                                            // }).then((response) => {
+                                            //     console.log('hcia response', response)
+                                            //     // self.setState({
+                                            //     //     leavgeList: response.data.data,
+                                            //     // })
+                                            // });
+
+
+                                        }}
+                                        value={this.state.detail.leverageId}
                                         style={{width: 100, marginLeft: 0}}>
                                         {this.state.leavgeList.map(ccty => <Option
                                             value={ccty.id} key={ccty.leverage}>1:{ccty.leverage}</Option>)}
@@ -568,7 +573,6 @@ class Basic extends Component {
                                           rows={4}></TextArea>
                                 </Col>
                             </Row>
-
                             <Table rowKey="id"
                                    columns={[
                                        {
