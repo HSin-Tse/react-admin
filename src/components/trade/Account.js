@@ -504,14 +504,23 @@ class Basic extends Component {
                             }
 
                             var self = this
-
+                            self.setState({
+                                    loading: true,
+                                }
+                            );
                             window.Axios.post('open/prestoreLiveAccount', {
                                 "id": this.state.detail.liveAccountId,
                                 "leverageId": this.state.mLeverageId,
                                 "content": this.state.mChLeadComment,
                             }).then(() => {
-                                message.success('操作成功')
 
+                                message.success('操作成功')
+                                self.setState({
+                                        mChLeadComment: undefined,
+                                        visibleChangeLeavgeModal: false,
+                                        loading: false,
+                                    }
+                                );
                                 self.requestPage()
 
 
@@ -521,7 +530,7 @@ class Basic extends Component {
                         }}
                                     okText="Yes"
                                     cancelText="No">
-                            <Button type="normal" key="submit">通過</Button>
+                            <Button loading={this.state.loading} type="normal" key="submit">通過</Button>
                         </Popconfirm>,
                         <Popconfirm title="拒绝？"
                                     onConfirm={(e) => {
