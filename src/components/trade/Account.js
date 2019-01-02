@@ -31,6 +31,7 @@ class Basic extends Component {
                 "id": "27",
                 "date": "",
                 "comment": null,
+                "mChLeadComment": '',
                 "status": 0,
                 "currentLeverage": "1 : 100",
                 "targetLeverage": "1 : 200",
@@ -50,6 +51,7 @@ class Basic extends Component {
             modal2OPDAYVisible: false,
             modal3OPDAYVisible: false,
             searchPhone: '',
+            mLeverageId: undefined,
             totalPage: 1,
             modeState: 1,
             forbiddenValue: 0,
@@ -496,7 +498,26 @@ class Basic extends Component {
                         <Popconfirm title="确认？" onConfirm={() => {
 
 
-                            console.log('hcia mLeverageId', this.state.mLeverageId)
+                            if (!this.state.mLeverageId) {
+                                message.error('no change')
+                                return
+                            }
+
+                            var self = this
+
+                            window.Axios.post('open/prestoreLiveAccount', {
+                                "id": this.state.detail.liveAccountId,
+                                "leverageId": this.state.mLeverageId,
+                                "content": this.state.mChLeadComment,
+                            }).then(() => {
+                                message.success('操作成功')
+
+                                self.requestPage()
+
+
+                            })
+
+
                         }}
                                     okText="Yes"
                                     cancelText="No">
@@ -538,19 +559,8 @@ class Basic extends Component {
                                             // updateLeverageApply
                                             this.setState({
                                                 mLeverageId: value,
-                                                detail:{...this.state.detail,leverageId:value}
+                                                detail: {...this.state.detail, leverageId: value}
                                             })
-
-                                            // console.log('hcia value', value)
-                                            // window.Axios.post('open/prestoreLiveAccount', {
-                                            //     id: this.state.detail.id,//真实账户ID
-                                            //     leverageId: value,//外汇杠杆ID
-                                            // }).then((response) => {
-                                            //     console.log('hcia response', response)
-                                            //     // self.setState({
-                                            //     //     leavgeList: response.data.data,
-                                            //     // })
-                                            // });
 
 
                                         }}
@@ -568,9 +578,14 @@ class Basic extends Component {
                             <Row style={{marginTop: 20}}>
                                 <Col span={24}>处理备注：</Col>
                                 <Col style={{marginTop: 20}} span={24}>
-                                <TextArea value={this.state.detail.comment}
-                                          onChange={this.changeNote}
-                                          rows={4}></TextArea>
+                                <TextArea defaultValue={this.state.mChLeadComment}
+                                          onChange={(e) => {
+                                              this.setState({
+                                                  mChLeadComment: e.target.value,
+                                              });
+
+                                          }}
+                                          rows={4}/>
                                 </Col>
                             </Row>
                             <Table rowKey="id"
