@@ -2,14 +2,16 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {message, Input, Button, Card, Table, Select, Modal, Popconfirm, Row, Col} from 'antd';
+import {message, Input, Button, Card, Table, Select, Modal, Popconfirm, Row, Col, Icon, DatePicker} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {bindActionCreators} from "redux";
 import {addTodo} from "../../action";
 import connect from "react-redux/es/connect/connect";
+import classNames from "classnames";
 
 const {TextArea} = Input;
 const Option = Select.Option;
+const {RangePicker} = DatePicker;
 
 class Basic extends Component {
     constructor(props) {
@@ -134,6 +136,12 @@ class Basic extends Component {
         window.Axios.post('finance/getLeverageApplyList', {
             'pageSize': self.state.pgsize,
             'pageNo': self.state.current,
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            starClientAccount: this.state.starClientAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
         }).then(function (response) {
             self.setState({
                     totalPage: response.data.data.totalPage,
@@ -395,7 +403,11 @@ class Basic extends Component {
 
 
     }
-
+    _switcherOn = () => {
+        this.setState({
+            switcherOn: !this.state.switcherOn
+        })
+    };
     render() {
         const gridStyle = {
             width: '50%',
@@ -403,6 +415,122 @@ class Basic extends Component {
         };
         return (
             <div>
+
+                <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
+                    <span className="sw-btn dark-white" onClick={this._switcherOn}>
+                     <Icon type="setting" className="text-dark"/>
+                    </span>
+                    <div style={{width: 270}}>
+
+                        <Card
+                            title="當前表搜索"
+                            extra={<Button type="primary" onClick={() => {
+                                let self = this
+                                this.setState({
+                                    selectMail: '',
+                                    selectID: '',
+                                    startTime: '',
+                                    selectPhoneF: '',
+                                    starClientAccount: '',
+                                    selectTimeStart: '',
+                                    selectTimeEnd: '',
+                                    filterTimeFalue: null
+                                }, () => {
+                                    self.requestPage()
+                                })
+                            }}
+                            >清除條件</Button>}
+                        >
+                            <Input value={this.state.selectMail} onChange={(e) => {
+                                this.setState({selectMail: e.target.value})
+                            }} style={{marginBottom: 10}} placeholder="邮箱"/>
+
+                            <Input value={this.state.selectPhoneF} onChange={(e) => {
+                                this.setState({
+                                    selectPhoneF: e.target.value,
+                                });
+                            }} style={{marginBottom: 10}} placeholder="手机号"/>
+
+
+                            <Input value={this.state.selectID} onChange={(e) => {
+                                this.setState({
+                                    selectID: e.target.value,
+                                });
+                            }} style={{marginBottom: 10}} placeholder="身份证号"/>
+
+                            <Input value={this.state.starClientAccount} onChange={(e) => {
+                                this.setState({
+                                    starClientAccount: e.target.value,
+                                });
+                            }} style={{marginBottom: 10}} placeholder="账户"/>
+                            <RangePicker
+
+                                showToday
+                                style={{width: '100%'}}
+                                showTime={{format: 'YYYY-MM-DD HH:mm:ss'}}
+                                format="YYYY-MM-DD HH:mm:ss fff"
+                                placeholder={['開始時間', '結束時間']}
+                                onChange={(value, dateString) => {
+
+
+                                    console.log('hcia value', value)
+
+
+                                    if (value.length === 0) {
+
+                                        this.setState({
+                                            filterTimeFalue: undefined,
+                                            selectTimeStart: undefined,
+                                            selectTimeEnd: undefined,
+
+                                        });
+                                    } else {
+                                        var selectTimeStart = value[0].unix() + '000'
+                                        var selectTimeEnd = value[1].unix() + '000'
+
+                                        console.log('hcia selectTimeStart', selectTimeStart)
+                                        console.log('hcia selectTimeEnd', selectTimeEnd)
+
+
+                                        this.setState({
+                                            filterTimeFalue: value,
+                                            selectTimeStart: selectTimeStart,
+                                            selectTimeEnd: selectTimeEnd,
+
+                                        });
+                                    }
+
+
+                                }}
+                                value={this.state.filterTimeFalue}
+                                onOk={(value) => {
+                                    console.log('hcia', 'onOk: ', value);
+
+
+                                    var selectTimeStart = value[0].unix() + '000'
+                                    var selectTimeEnd = value[1].unix() + '000'
+
+                                    console.log('hcia selectTimeStart', selectTimeStart)
+                                    console.log('hcia selectTimeEnd', selectTimeEnd)
+
+
+                                    this.setState({
+                                        filterTimeFalue: value,
+                                        selectTimeStart: selectTimeStart,
+                                        selectTimeEnd: selectTimeEnd,
+
+                                    });
+                                }}
+                            />
+
+                            <Button onClick={() => this.requestPage()} style={{marginTop: 15}} type="primary"
+                                    icon="search">Search</Button>
+
+                        </Card>
+
+
+                    </div>
+                </div>
                 {/*{JSON.stringify(this.props.todps)}*/}
                 <Modal
                     width={500}
