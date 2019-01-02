@@ -85,7 +85,7 @@ class Basic extends Component {
     }
     onChangeLe = (value) => {
 
-        console.log('hcia value' , value)
+        console.log('hcia value', value)
         // updateLeverageApply
         let self = this
 
@@ -107,12 +107,10 @@ class Basic extends Component {
         console.log('hcia recodrd', recodrd)
         this.requestUserCommentList(recodrd)
 
-        let self = this
 
-        self.setState({
+        this.setState({
             detail: recodrd,
             visibleChangeLeavgeModal: true,
-
         });
 
 
@@ -344,9 +342,9 @@ class Basic extends Component {
         })
     };
     handleChange = (value, record) => {
-        
-        console.log('hcia value' , value)
-        console.log('hcia record' , record)
+
+        console.log('hcia value', value)
+        console.log('hcia record', record)
         let self = this
         self.setState({
                 modeState: value,
@@ -354,9 +352,9 @@ class Basic extends Component {
             }, () => {
                 // self.showModalOP()
 
-            this.setState({
-                visibleOpM: true,
-            });
+                this.setState({
+                    visibleOpM: true,
+                });
             }
         );
 
@@ -506,7 +504,9 @@ class Basic extends Component {
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
                 {/*this.state.selectedRowKeys.length > 0*/}
                 <Modal
-                    width={500}
+                    // style={{ width: 100000 }}
+                    width={'80%'}
+
                     onCancel={(e) => {
                         this.setState({
                             visibleChangeLeavgeModal: false,
@@ -529,6 +529,7 @@ class Basic extends Component {
                     ]}
                 >
                     <Card
+                        // bodyStyle={{padding: 0, margin: 0}}
 
                         title={'账户：' + this.state.detail.accountNo}
                         bordered={true}>
