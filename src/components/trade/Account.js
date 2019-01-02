@@ -505,7 +505,7 @@ class Basic extends Component {
                 {/*this.state.selectedRowKeys.length > 0*/}
                 <Modal
                     // style={{ width: 100000 }}
-                    width={'80%'}
+                    width={'700px'}
 
                     onCancel={(e) => {
                         this.setState({
@@ -572,26 +572,21 @@ class Basic extends Component {
                             <Table rowKey="id"
                                    columns={[
                                        {
-                                           title: '时间',
-                                           dataIndex: 'createDate',
-                                           key: 'operationDiary_Date',
-                                           render: (text, record) => (
-                                               <span>{record.createDate}</span>),
-                                       }, {
-                                           title: 'IP',
-                                           dataIndex: 'IP',
-                                           key: 'IP',
-                                           render: (text, record) => (
-                                               <span>{record.ipAddress}</span>),
-                                       }, {
                                            title: '操作人',
                                            width: 130,
                                            dataIndex: 'bkUserName',
                                            key: 'operationDiary_User',
                                            render: (text, record) => (
                                                <span>{record.bkUserName}</span>),
+                                       },
+                                       {
+                                           title: '操作时间',
+                                           dataIndex: 'createDate',
+                                           key: 'operationDiary_Date',
+                                           render: (text, record) => (
+                                               <span>{record.createDate}</span>),
                                        }, {
-                                           title: '操作',
+                                           title: '备注',
                                            dataIndex: 'comment',
                                            key: 'operationDiary_Status',
                                            render: (text, record) => (
