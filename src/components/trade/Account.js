@@ -510,7 +510,6 @@ class Basic extends Component {
                 {/*this.state.selectedRowKeys.length > 0*/}
                 <Modal
                     width={500}
-                    title={this.state.modeState == '正常' ? '恢复正常' : this.state.modeState}
                     onCancel={(e) => {
                         this.setState({
                             visibleB: false,
