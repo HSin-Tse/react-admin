@@ -36,6 +36,11 @@ import CustomerUserInfo from './customer/CustomerUserInfo'
 import AddUser from './pms/AddUser'
 import EditUser from './pms/EditUser'
 import TradeAccount from './trade/Account'
+import InComeMoney from './fina/IncomeMoney'
+import TeleMoney from './fina/TeleMoney'
+import OutMoney from './fina/OutMoney'
+import InOutTA from './fina/InOutTA'
+import ChannelMY from './fina/ChannelMY'
 import TradeDepart from './trade/Depart'
 import RoleSet from './pms/RoleSet'
 import AddRole from './pms/AddRole'
@@ -85,5 +90,10 @@ export default {
     PassOpenRS,
     EditRole,
     TradeAccount,
+    InComeMoney,
+    TeleMoney,
+    OutMoney,
+    InOutTA,
+    ChannelMY,
     TradeDepart
 }

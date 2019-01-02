@@ -56,7 +56,16 @@ export default {
                 // {tk: 'SERVICE_GROUP_MGMT', key: '/app/trade/depart', title: '組管理', component: 'TradeDepart'},
             ],
         },
-
+        {
+            tk: 'SERVICE_GROUP_MGMT', key: '/app/fina', title: '财务管理', icon: 'safety',
+            subs: [
+                {tk: 'TRADE_ACCOUNT_MGMT', key: '/app/fina/in', title: '入金管理', component: 'InComeMoney'},
+                {tk: 'TRADE_ACCOUNT_MGMT', key: '/app/fina/tel', title: '电汇入金', component: 'TeleMoney'},
+                {tk: 'TRADE_ACCOUNT_MGMT', key: '/app/fina/out', title: '出金管理', component: 'OutMoney'},
+                {tk: 'TRADE_ACCOUNT_MGMT', key: '/app/fina/inout', title: '出入金报表', component: 'InOutTA'},
+                {tk: 'TRADE_ACCOUNT_MGMT', key: '/app/fina/cha', title: '渠道管理', component: 'ChannelMY'},
+            ],
+        },
         {
             tk: 'SERVICE_GROUP_MGMT', key: '/app/pms', title: '权限管理', icon: 'safety',
             subs: [
