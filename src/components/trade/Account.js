@@ -45,7 +45,7 @@ class Basic extends Component {
                 "cashBalance": "0.0"
             },
 
-            visibleB: false,
+            visibleChangeLeavgeModal: false,
             loading: false,
             modal2OPDAYVisible: false,
             modal3OPDAYVisible: false,
@@ -84,23 +84,25 @@ class Basic extends Component {
         });
     }
     onChangeLe = (value) => {
+
+        console.log('hcia value' , value)
         // updateLeverageApply
         let self = this
 
-        console.log('hcia value', value)
-        window.Axios.post('finance/updateLeverageApply', {
-            id: this.state.detail.id,
-            leverageId: value,
-        }).then((response) => {
-            console.log('hcia response', response)
-            // self.setState({
-            //     leavgeList: response.data.data,
-            // })
-        });
+        // console.log('hcia value', value)
+        // window.Axios.post('open/prestoreLiveAccount', {
+        //     id: this.state.detail.id,//真实账户ID
+        //     leverageId: value,//外汇杠杆ID
+        // }).then((response) => {
+        //     console.log('hcia response', response)
+        //     // self.setState({
+        //     //     leavgeList: response.data.data,
+        //     // })
+        // });
 
 
     }
-    showModalB = (recodrd) => {
+    showModalChangeLeavge = (recodrd) => {
 
         console.log('hcia recodrd', recodrd)
         this.requestUserCommentList(recodrd)
@@ -109,7 +111,7 @@ class Basic extends Component {
 
         self.setState({
             detail: recodrd,
-            visibleB: true,
+            visibleChangeLeavgeModal: true,
 
         });
 
@@ -248,7 +250,7 @@ class Basic extends Component {
                 render: (text, record) => (
 
                     <Button style={{display: record.displayStatus == '审核通过' ? 'none' : ''}}
-                            onClick={() => this.showModalB(record)}>{record.displayLeverage}</Button>
+                            onClick={() => this.showModalChangeLeavge(record)}>{record.displayLeverage}</Button>
                 )
 
             }, {
@@ -342,12 +344,19 @@ class Basic extends Component {
         })
     };
     handleChange = (value, record) => {
+        
+        console.log('hcia value' , value)
+        console.log('hcia record' , record)
         let self = this
         self.setState({
                 modeState: value,
                 opRecord: record
             }, () => {
-                self.showModalOP()
+                // self.showModalOP()
+
+            this.setState({
+                visibleOpM: true,
+            });
             }
         );
 
@@ -443,11 +452,11 @@ class Basic extends Component {
             visible: true,
         });
     }
-    showModalOP = () => {
-        this.setState({
-            visibleOpM: true,
-        });
-    }
+    // showModalOP = () => {
+    //     this.setState({
+    //         visibleOpM: true,
+    //     });
+    // }
     handleOk = () => {
         var mStatus = this.state.modeState == '正常' ? 1 : this.state.modeState == '禁止登陆' ? 2 : 3;
         // var reasonType = mStatus ==2?
@@ -500,10 +509,10 @@ class Basic extends Component {
                     width={500}
                     onCancel={(e) => {
                         this.setState({
-                            visibleB: false,
+                            visibleChangeLeavgeModal: false,
                         });
                     }}
-                    visible={this.state.visibleB}
+                    visible={this.state.visibleChangeLeavgeModal}
 
                     footer={[
                         <Popconfirm title="确认？" onConfirm={this.handleOk}
@@ -719,6 +728,8 @@ class Basic extends Component {
 
                     </div>
                 </div>
+
+
                 <Modal
                     title={this.state.modeState == '正常' ? '恢复正常' : this.state.modeState}
                     onCancel={this.handleCancel}
