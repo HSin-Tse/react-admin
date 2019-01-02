@@ -52,6 +52,7 @@ class Basic extends Component {
             modal3OPDAYVisible: false,
             searchPhone: '',
             mLeverageId: undefined,
+            mChLeadComment: undefined,
             totalPage: 1,
             modeState: 1,
             forbiddenValue: 0,
@@ -434,11 +435,6 @@ class Basic extends Component {
             visible: true,
         });
     }
-    // showModalOP = () => {
-    //     this.setState({
-    //         visibleOpM: true,
-    //     });
-    // }
     handleOk = () => {
         var mStatus = this.state.modeState == '正常' ? 1 : this.state.modeState == '禁止登陆' ? 2 : 3;
         // var reasonType = mStatus ==2?
@@ -446,15 +442,18 @@ class Basic extends Component {
         self.setState({
             loadFor: true
         })
+
         window.Axios.post('star/updateStarLiveAccount', {
             'id': self.state.opRecord.id,
             'status': mStatus,
             'reasonType': self.state.forbiddenValue,
+            'content': self.state.mChLeadComment,
         }).then(function (response) {
             console.log(response);
             self.setState({
                 visibleOpM: false,
                 loadFor: false,
+                mChLeadComment: undefined,
             }, () => {
                 self.state.forbiddenValue = 0
                 self.requestPage()
@@ -781,7 +780,18 @@ class Basic extends Component {
                                     value={ccty.value} key={ccty.value}>{ccty.name}</Option>)}
                             </Select> : null}
                     </div>
+                    <Row style={{marginTop: 0}}>
+                        <Col style={{marginTop: 15}} span={24}>
+                                <TextArea defaultValue={this.state.mChLeadComment}
+                                          onChange={(e) => {
+                                              this.setState({
+                                                  mChLeadComment: e.target.value,
+                                              });
 
+                                          }}
+                                          rows={4}/>
+                        </Col>
+                    </Row>
 
                 </Modal>
 
