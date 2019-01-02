@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {DatePicker, Input, Modal, Button, Table, Tabs, message, Card, Tag, Layout, Icon, Col, Popconfirm} from 'antd';
+import {DatePicker, Input, Modal, Button, Table, Tabs, message, Card, Icon, Popconfirm} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {ThemePicker} from '@/components/widget';
 import classNames from "classnames";
-import yyx from '../utility/Utility';
+// import yyx from '../utility/Utility';
 
 const TabPane = Tabs.TabPane;
 const {RangePicker} = DatePicker;
@@ -18,9 +18,9 @@ export default class PotentialUser extends Component {
             bklistA: [],
             bklistB: [],
             bklistC: [],
-            currentA: 0,//潜在用户
-            currentB: 0,//SimulatorUser
-            currentC: 0,//IntendingUser
+            currentA: 0,
+            currentB: 0,
+            currentC: 0,
             currentComment: 0,
             totalpageA: 0,
             totalpageB: 0,
@@ -410,7 +410,7 @@ export default class PotentialUser extends Component {
     }
     handleKeyPress = (event) => {
         if (event.metaKey || event.ctrlKey) {
-            if (event.key === 'o') {
+            if (event.key === 'o' || event.key === 'ㄟ') {
                 this.setState({
                     switcherOn: !this.state.switcherOn
                 })
@@ -623,7 +623,6 @@ export default class PotentialUser extends Component {
 
     reflesh = () => {
 
-        console.log('hcia this.state.nowKey', this.state.nowKey, (this.state.nowKey === 2), 2)
 
         if (this.state.nowKey === '1') {
             this.requestPageA()//1:Potential 2:simulator 3:intend
@@ -636,9 +635,6 @@ export default class PotentialUser extends Component {
         }
     }
 
-
-    onChangeDate = (value, dateString) => {
-    }
 
     onOk = (value) => {
         var selectTimeStart = value[0].unix() + '000'
@@ -715,19 +711,34 @@ export default class PotentialUser extends Component {
                                 onChange={(value, dateString) => {
 
 
-                                    var selectTimeStart = value[0].unix() + '000'
-                                    var selectTimeEnd = value[1].unix() + '000'
-
-                                    console.log('hcia selectTimeStart', selectTimeStart)
-                                    console.log('hcia selectTimeEnd', selectTimeEnd)
+                                    console.log('hcia value', value)
 
 
-                                    this.setState({
-                                        filterTimeFalue: value,
-                                        selectTimeStart: selectTimeStart,
-                                        selectTimeEnd: selectTimeEnd,
+                                    if (value.length === 0) {
 
-                                    });
+                                        this.setState({
+                                            filterTimeFalue: undefined,
+                                            selectTimeStart: undefined,
+                                            selectTimeEnd: undefined,
+
+                                        });
+                                    } else {
+                                        var selectTimeStart = value[0].unix() + '000'
+                                        var selectTimeEnd = value[1].unix() + '000'
+
+                                        console.log('hcia selectTimeStart', selectTimeStart)
+                                        console.log('hcia selectTimeEnd', selectTimeEnd)
+
+
+                                        this.setState({
+                                            filterTimeFalue: value,
+                                            selectTimeStart: selectTimeStart,
+                                            selectTimeEnd: selectTimeEnd,
+
+                                        });
+                                    }
+
+
                                 }}
                                 value={this.state.filterTimeFalue}
                                 onOk={(value) => {
