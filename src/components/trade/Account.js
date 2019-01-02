@@ -32,7 +32,6 @@ class Basic extends Component {
                 "date": "",
                 "comment": null,
                 "status": 0,
-
                 "currentLeverage": "1 : 100",
                 "targetLeverage": "1 : 200",
                 "operator": null,
@@ -71,7 +70,6 @@ class Basic extends Component {
     };
     requestUserCommentList = (record) => {
 
-
         var self = this;
         window.Axios.post('/auth/getRecordCommentList', {
             id: record.id,
@@ -108,47 +106,10 @@ class Basic extends Component {
         this.requestUserCommentList(recodrd)
 
         let self = this
+
         self.setState({
-            loading: true,
-        });
-
-        window.Axios.post('finance/getLeverageApplyDetail', {
-            'id': recodrd.leverageId,
-        }).then(function (response) {
-
-            console.log('hcia response' , response.data.data)
-
-
-
-            self.setState({
-                detail: recodrd,
-                visibleB: true,
-                loading: false,
-
-            });
-
-
-
-            // if(response.data.data){
-            //     self.setState({
-            //         // detail: response.data.data,
-            //         visibleB: true,
-            //         loading: false,
-            //
-            //     });
-            // }else{
-            //     self.setState({
-            //         // detail: response.data.data,
-            //         visibleB: true,
-            //         loading: false,
-            //
-            //     });
-            // }
-
-
-
-
-
+            detail: recodrd,
+            visibleB: true,
 
         });
 
