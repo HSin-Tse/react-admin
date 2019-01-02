@@ -549,7 +549,7 @@ class Basic extends Component {
                                 <Col style={{textAlign: 'center'}} span={14}>
                                     <Select
                                         onChange={this.onChangeLe}
-                                        defaultValue={this.state.detail.targetLeverage}
+                                        defaultValue={this.state.detail.displayLeverage}
                                         style={{width: 100, marginLeft: 0}}>
                                         {this.state.leavgeList.map(ccty => <Option
                                             value={ccty.id} key={ccty.leverage}>1:{ccty.leverage}</Option>)}
