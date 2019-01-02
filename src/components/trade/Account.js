@@ -113,15 +113,42 @@ class Basic extends Component {
         });
 
         window.Axios.post('finance/getLeverageApplyDetail', {
-            'id': recodrd.id,
+            'id': recodrd.leverageId,
         }).then(function (response) {
 
+            console.log('hcia response' , response.data.data)
+
+
+
             self.setState({
-                // detail: response.data.data,
+                detail: recodrd,
                 visibleB: true,
                 loading: false,
 
             });
+
+
+
+            // if(response.data.data){
+            //     self.setState({
+            //         // detail: response.data.data,
+            //         visibleB: true,
+            //         loading: false,
+            //
+            //     });
+            // }else{
+            //     self.setState({
+            //         // detail: response.data.data,
+            //         visibleB: true,
+            //         loading: false,
+            //
+            //     });
+            // }
+
+
+
+
+
 
         });
 
@@ -539,7 +566,7 @@ class Basic extends Component {
                         <div>
                             <Row style={{marginTop: 20}}>
                                 <Col style={{textAlign: 'right'}} span={10}>当前杠杆:</Col>
-                                <Col style={{textAlign: 'center'}} span={14}>{this.state.detail.targetLeverage}</Col>
+                                <Col style={{textAlign: 'center'}} span={14}>{this.state.detail.displayLeverage}</Col>
                             </Row>
                             <Row style={{marginTop: 20}}>
                                 <Col style={{textAlign: 'right'}} span={10}>余额:</Col>
