@@ -8,6 +8,7 @@ import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import classNames from "classnames";
+
 const {RangePicker} = DatePicker;
 
 const Option = Select.Option;
@@ -102,8 +103,8 @@ class Basic extends Component {
 
     }
     showModalB = (recodrd) => {
-        
-        console.log('hcia recodrd' , recodrd)
+
+        console.log('hcia recodrd', recodrd)
         this.requestUserCommentList(recodrd)
 
         let self = this
@@ -261,13 +262,7 @@ class Basic extends Component {
                     <Button style={{display: record.displayStatus == '审核通过' ? 'none' : ''}}
                             onClick={() => this.showModalB(record)}>{record.displayLeverage}</Button>
                 )
-                // <Select value={record.displayStatus} style={{width: 100}}
-                //         onChange={(value) => this.handleChange(value, record)}>
-                //     <Option key="1" value="正常">正常</Option>
-                //     <Option key="2" value="禁止登陆">禁止登陆</Option>
-                //     <Option key="3" value="禁止交易">禁止交易</Option>
-                //
-                // </Select>)
+
             }, {
                 align: 'center',
                 title: '操作',
