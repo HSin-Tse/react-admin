@@ -241,7 +241,8 @@ class Basic extends Component {
                 render: (text, record) => (
                     <div>
                         <Select value={record.displayStatus} style={{width: 100}}
-                                onChange={(value) => this.handleChange(value, record)}>
+                                onChange={(value) => this.handleChange(value, record)}
+                        >
                             <Option key="1" value="正常">正常</Option>
                             <Option key="2" value="禁止登陆">禁止登陆</Option>
                             <Option key="3" value="禁止交易">禁止交易</Option>
