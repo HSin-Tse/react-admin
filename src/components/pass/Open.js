@@ -459,19 +459,34 @@ class Basic extends Component {
                                 onChange={(value, dateString) => {
 
 
-                                    var selectTimeStart = value[0].unix() + '000'
-                                    var selectTimeEnd = value[1].unix() + '000'
-
-                                    console.log('hcia selectTimeStart', selectTimeStart)
-                                    console.log('hcia selectTimeEnd', selectTimeEnd)
+                                    console.log('hcia value', value)
 
 
-                                    this.setState({
-                                        filterTimeFalue: value,
-                                        selectTimeStart: selectTimeStart,
-                                        selectTimeEnd: selectTimeEnd,
+                                    if (value.length === 0) {
 
-                                    });
+                                        this.setState({
+                                            filterTimeFalue: undefined,
+                                            selectTimeStart: undefined,
+                                            selectTimeEnd: undefined,
+
+                                        });
+                                    } else {
+                                        var selectTimeStart = value[0].unix() + '000'
+                                        var selectTimeEnd = value[1].unix() + '000'
+
+                                        console.log('hcia selectTimeStart', selectTimeStart)
+                                        console.log('hcia selectTimeEnd', selectTimeEnd)
+
+
+                                        this.setState({
+                                            filterTimeFalue: value,
+                                            selectTimeStart: selectTimeStart,
+                                            selectTimeEnd: selectTimeEnd,
+
+                                        });
+                                    }
+
+
                                 }}
                                 value={this.state.filterTimeFalue}
                                 onOk={(value) => {

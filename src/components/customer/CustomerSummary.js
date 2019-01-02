@@ -288,14 +288,36 @@ class CustomerSummary extends Component {
                                 format="YYYY-MM-DD HH:mm:ss fff"
                                 placeholder={['開始時間', '結束時間']}
                                 onChange={(value, dateString) => {
-                                    var selectTimeStart = value[0].unix() + '000'
-                                    var selectTimeEnd = value[1].unix() + '000'
-                                    this.setState({
-                                        filterTimeFalue: value,
-                                        selectTimeStart: selectTimeStart,
-                                        selectTimeEnd: selectTimeEnd,
 
-                                    });
+
+                                    console.log('hcia value', value)
+
+
+                                    if (value.length === 0) {
+
+                                        this.setState({
+                                            filterTimeFalue: undefined,
+                                            selectTimeStart: undefined,
+                                            selectTimeEnd: undefined,
+
+                                        });
+                                    } else {
+                                        var selectTimeStart = value[0].unix() + '000'
+                                        var selectTimeEnd = value[1].unix() + '000'
+
+                                        console.log('hcia selectTimeStart', selectTimeStart)
+                                        console.log('hcia selectTimeEnd', selectTimeEnd)
+
+
+                                        this.setState({
+                                            filterTimeFalue: value,
+                                            selectTimeStart: selectTimeStart,
+                                            selectTimeEnd: selectTimeEnd,
+
+                                        });
+                                    }
+
+
                                 }}
                                 value={this.state.filterTimeFalue}
                                 onOk={(value) => {
