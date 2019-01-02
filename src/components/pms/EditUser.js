@@ -417,8 +417,7 @@ class EditUser extends PureComponent {
 
                                 <h3 style={{marginLeft: 80, width: 120}}>请重复密码:</h3>
 
-                                <FormItem
-                                >
+                                <FormItem>
                                     {getFieldDecorator('2', {
                                         rules: [{
                                             required: true, message: 'Please input your password!',

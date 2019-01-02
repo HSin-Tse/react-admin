@@ -3,7 +3,21 @@
  */
 import React, {Component} from 'react';
 import {
-    Tooltip, Popconfirm, Icon, Upload, Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, notification
+    Tooltip,
+    Popconfirm,
+    Icon,
+    Upload,
+    Col,
+    Card,
+    Row,
+    Button,
+    Modal,
+    Select,
+    Input,
+    Checkbox,
+    DatePicker,
+    notification,
+    Form
 } from 'antd';
 import {Radio} from 'antd';
 import {message} from 'antd';
@@ -20,6 +34,7 @@ import axios from "axios";
 const Search = Input.Search;
 const {TextArea} = Input;
 const Option = Select.Option;
+const FormItem = Form.Item;
 
 const dateFormat = 'YYYY-MM-DD';
 var aaxios = axios.create({
@@ -191,13 +206,35 @@ class PassOpenD extends Component {
 
     }
 
+    compareToFirstPassword = (rule, value, callback) => {
+        const form = this.props.form;
+        console.log('hcia value', value)
+        console.log('hcia rule', rule)
+        // callback('Two passwords that you enter is inconsistent!');
+        callback();
+        // if(value)
+
+
+    }
+
     onTodoChange(value) {
         this.setState({
             checkfromdbName: value
         });
     }
 
+    validateToNextPassword = (rule, value, callback) => {
+        const form = this.props.form;
+        if (value && this.state.confirmDirty) {
+            form.validateFields(['confirm'], {force: true});
+        }
+        callback();
+    }
+
     render() {
+
+        const {getFieldDecorator} = this.props.form;
+
 
         var isSetL = this.state.leverageId ? this.state.leverageId.length > 0 : false
 
@@ -359,6 +396,10 @@ class PassOpenD extends Component {
 
         return (
             <div id="openD">
+
+
+
+
 
                 {/*<div>id: {this.state.recordData.id}</div>*/}
                 {/*<div>status: {this.state.recordData.status}</div>*/}
@@ -552,9 +593,26 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*邮编</span>
-                                    <Input defaultValue={this.state.recordData.postalCode}
-                                           onChange={this.onChangepostalCode}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                    <FormItem>
+
+
+                                        {
+                                            getFieldDecorator('id', {
+                                                rules: [{
+                                                    required: false,
+                                                    message: '请输入正确的ID'
+                                                }, {
+                                                    validator: this.compareToFirstPassword,
+                                                }],
+                                                getValueFromEvent: (event) => {
+                                                    return event.target.value.replace(/\D/g, '')
+                                                },
+                                                initialValue: this.state.recordData.postalCode
+                                            })(<Input defaultValue={this.state.recordData.postalCode}
+                                                      onChange={this.onChangepostalCode}
+                                                      style={{width: 120}} placeholder="邮编"/>)
+                                        }
+                                    </FormItem>
                                 </div>
                             </Card>
 
@@ -1267,12 +1325,12 @@ class PassOpenD extends Component {
         console.log('hcia sss', sss)
         console.log('hcia e.target.value', e.target.value)
 
-        if(sss){
+        if (sss) {
             this.state.waitUpdate.lastNameCn = e.target.value
             this.setState({
                 isNeedSave: true,
             });
-        }else{
+        } else {
             message.error('*姓（中文）')
 
 
@@ -1525,4 +1583,6 @@ class PassOpenD extends Component {
     }
 }
 
-export default PassOpenD;
+const PassOpenDForm = Form.create()(PassOpenD);
+
+export default PassOpenDForm;

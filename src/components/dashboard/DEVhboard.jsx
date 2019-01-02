@@ -144,7 +144,9 @@ class DEVhboard extends React.Component {
                                                                 'language': 'zh-CN',
 
                                                             }
-
+                                                            self.setState({
+                                                                requestBody: config.data
+                                                            });
                                                             config.timeout = 30 * 1000
 
                                                             config.headers = {
