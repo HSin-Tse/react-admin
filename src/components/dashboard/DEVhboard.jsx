@@ -2,17 +2,12 @@
  * Created by hao.cheng on 2017/5/3.
  */
 import React from 'react';
-import {Row, Col, Card, Button, Icon, Input, message} from 'antd';
-import BreadcrumbCustom from '../BreadcrumbCustom';
-import EchartsViews from './EchartsViews';
-import EchartsProjects from './EchartsProjects';
-import b1 from '../../style/imgs/b1.jpg';
+import {Row, Col, Button, Input, message} from 'antd';
 import {bindActionCreators} from "redux";
 import {addTodo, setINFOR} from "../../action";
 import connect from "react-redux/es/connect/connect";
 import axios from "axios";
 import ReactJson from 'react-json-view'
-import Iframe from 'react-iframe'
 import Base64  from 'base-64';
 
 
@@ -283,6 +278,8 @@ class DEVhboard extends React.Component {
                     {/*</Col>*/}
                 </Row>
 
+
+                <hr/>
 
                 <Row gutter={1}>
                     <Col md={24}>
