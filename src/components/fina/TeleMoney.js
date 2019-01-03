@@ -270,22 +270,25 @@ class Basic extends Component {
 
                 <div style={{transform: "scale(1.3,1.3)"}}>
 
-                    <Steps style={{marginLeft: "15%", marginTop: "40px", width: "70%", height: 90}}
-                           labelPlacement={'vertical'} current={this.state.currentStep}>
+                    <Steps
+                        style={{marginLeft: "15%", marginBottom: "20px", marginTop: "40px", width: "70%", height: 90}}
+                        labelPlacement={'vertical'} current={this.state.currentStep}>
                         {steps.map(item => <Step key={item.title} title={item.title}/>)}
                     </Steps>
 
                 </div>
+                {/*<div style="text-align:center;background-color:pink;width:200px;height:60">這裡是文字</div>*/}
 
                 <Card
-                    style={{marginTop: 15}}
-
                     actions={[<Button style={{height: 40, width: 200}} block>创建 </Button>,
                         <Button style={{height: 40, width: 200}} block>重新输入 </Button>]}
-                    title="新增客户入金" bordered={true} style={{width: '100%'}}>
+                    title={<span>新增客户入金</span>}
+                    bordered={true}
+                    headStyle={{textAlign: 'center', width: '100%'}}
+                    style={{marginLeft: '20%', width: '60%'}}>
                     <Row gutter={8}>
                         <Col md={12}>
-                            <Card bordered={true}>
+                            <Card bordered={false}>
 
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>客户归属:</span>
@@ -325,7 +328,7 @@ class Basic extends Component {
                         </Col>
                         <Col md={12}>
 
-                            <Card bordered={true}>
+                            <Card bordered={false}>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*入金渠道:</span>
                                     <Select value={this.state.mAnnualIncome}
@@ -369,9 +372,9 @@ class Basic extends Component {
                         </Col>
                     </Row>
 
-                    <Divider></Divider>
+                    {/*<Divider></Divider>*/}
                     <Row gutter={8}>
-                        <Col md={12}>
+                        <Col md={24}>
                             <Card bordered={true}>
 
                                 <div style={{display: 'flex', minHeight: 40}}>
@@ -392,7 +395,7 @@ class Basic extends Component {
                 </Card>
 
 
-                <Card title="电汇入金列表"
+                <Card style={{marginTop: 15}} title="电汇入金列表"
                       bodyStyle={{padding: 0, margin: 0}}
 
                 >
