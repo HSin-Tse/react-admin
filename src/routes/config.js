@@ -3,7 +3,7 @@ export default {
         {
             tk: 'dash', key: '/app/devboard/index:catch',
             title: 'dev', icon: 'user', component: 'DEVhboard'
-        },{
+        }, {
             tk: 'dash', key: '/app/dashboard/index',
             title: '歡迎', icon: 'user', component: 'Dashboard'
         },
@@ -136,6 +136,11 @@ export default {
             tk: 'tk', title: 'EditRole',
             icon: 'star',
             component: 'EditRole'
+        }, {
+            route: '/app/fina/juoutm:id',
+            tk: 'tk', title: 'JUOutM',
+            icon: 'star',
+            component: 'OutMoneyJU'
         },
         ]
 }

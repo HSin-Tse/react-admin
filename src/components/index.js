@@ -38,6 +38,7 @@ import EditUser from './pms/EditUser'
 import TradeAccount from './trade/Account'
 import InComeMoney from './fina/IncomeMoney'
 import TeleMoney from './fina/TeleMoney'
+import OutMoneyJU from './fina/OutMoneyJU'
 import OutMoney from './fina/OutMoney'
 import InOutTA from './fina/InOutTA'
 import ChannelMY from './fina/ChannelMY'
@@ -89,6 +90,7 @@ export default {
     AddRole,
     PassOpenRS,
     EditRole,
+    OutMoneyJU,
     TradeAccount,
     InComeMoney,
     TeleMoney,
