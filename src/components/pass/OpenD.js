@@ -548,15 +548,18 @@ class PassOpenD extends Component {
                                     <span style={{width: 120}}>*姓（中文）</span>
                                     <Form layout="vertical">
                                         <FormItem
+
                                             id="control-mention"
                                             labelCol={{ span: 6 }}
                                             wrapperCol={{ span: 16 }}
                                         >
                                             {getFieldDecorator('mention2', {
+                                                required: true,
                                                 rules: [
-                                                    { validator: this.checkMention },
+                                                    { validator: this.checkMention},
                                                 ],
                                                 initialValue: this.state.recordData.lastNameCn,
+
                                             })(
                                                 <Input defaultValue={this.state.recordData.lastNameCn}
                                                        // onChange={this.onChangelastNameCn}
