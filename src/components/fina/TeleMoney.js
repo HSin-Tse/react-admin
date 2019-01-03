@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, message, Select, Modal, Card, Col, Popconfirm, Row, Input} from 'antd';
+import {Button, Table, message, Select, Modal, Card, Col, Popconfirm, Row, Input, DatePicker, Divider} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
@@ -17,36 +17,11 @@ class Basic extends Component {
         super(props);
         this.state = {
             selectedRowKeys: [],
-            visible: false,
-            visibleOpM: false,
             date: new Date(),
             userList: [],
             leavgeList: [],
             nodeList: [],
-            detail: {
-                "name": null,
-                "id": "27",
-                "date": "",
-                "comment": null,
-                "status": 0,
-
-                "currentLeverage": "1 : 100",
-                "targetLeverage": "1 : 200",
-                "operator": null,
-                "email": null,
-                "mobile": null,
-                "nationalId": null,
-                "accountNo": "live545491475",
-                "marginLevel": "N/A",
-                "displayStatus": "审核中",
-                "broker": null,
-                "cashBalance": "0.0"
-            },
-
-            visibleB: false,
             loading: false,
-            modal2OPDAYVisible: false,
-            modal3OPDAYVisible: false,
             searchPhone: '',
             totalPage: 1,
             modeState: 1,
@@ -84,13 +59,13 @@ class Basic extends Component {
 
         this.columns = [
             {
-                align: 'center',
-
                 title: '序号',
                 dataIndex: '序号',
                 key: '序号',
-                render: (text, record) => (
-                    <span>{1}</span>),
+                align: 'center',
+                render: (text, record, index) => (
+                    <span>{this.state.current * this.state.pgsize + index + 1}</span>
+                ),
             },
             {
                 align: 'center',
@@ -257,7 +232,6 @@ class Basic extends Component {
         }).then(function (response) {
             console.log(response);
             self.setState({
-                visibleOpM: false,
                 loadFor: false,
             }, () => {
                 self.requestPage()
@@ -271,12 +245,6 @@ class Basic extends Component {
 
 
     render() {
-        const {selectedRowKeys} = this.state;
-        const hasSelected = selectedRowKeys.length > 0;
-        const rowSelection = {
-            selectedRowKeys,
-            onChange: this.onSelectChange,
-        };
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
@@ -284,21 +252,130 @@ class Basic extends Component {
                 {/*this.state.selectedRowKeys.length > 0*/}
 
                 <h2 style={{marginTop: 15}}>
-                    入金审核
+                    新增电汇入金
                 </h2>
-                <BreadcrumbCustom first="交易管理" second="入金审核"/>
+                <Card
 
-                <Card title="入金审核"
+                    actions={[<Button style={{height: 40, width: 200}} block>创建 </Button>,
+                        <Button style={{height: 40, width: 200}} block>重新输入 </Button>]}
+                    title="新增客户入金" bordered={true} style={{width: '100%'}}>
+                    <Row gutter={8}>
+                        <Col md={12}>
+                            <Card bordered={true}>
+
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{width: 120}}>客户归属:</span>
+
+                                    <Input defaultValue={this.state.country} disabled={true}
+                                           style={{width: 120}} placeholder=""/>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{width: 120}}>交易平台:</span>
+                                    <Input defaultValue={this.state.lastNameCn}
+                                           style={{width: 120}} placeholder=""/>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{width: 120}}>交易账号:</span>
+                                    <Input defaultValue={this.state.lastNameCn}
+                                           style={{width: 120}} placeholder=""/>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{width: 120}}>账户余额:</span>
+                                    <Input defaultValue={this.state.lastNameCn}
+                                           style={{width: 120}} placeholder=""/>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{width: 120}}>执行金额:</span>
+                                    <Input defaultValue={this.state.lastNameCn}
+                                           style={{width: 120}} placeholder=""/>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{width: 120}}>汇率:</span>
+                                    <Input defaultValue={this.state.lastNameCn}
+                                           style={{width: 120}} placeholder=""/>
+                                </div>
+
+                            </Card>
+
+
+                        </Col>
+                        <Col md={12}>
+
+                            <Card bordered={true}>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>*入金渠道:</span>
+                                    <Select value={this.state.mAnnualIncome}
+                                            style={{width: 120}}>
+                                        {this.mIncomesOPS}
+                                    </Select>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>*支付通道:</span>
+                                    <Select value={this.state.mAnnualIncome}
+                                            style={{width: 120}}>
+                                        {this.mIncomesOPS}
+                                    </Select>
+                                </div>
+
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>期望到账时间:</span>
+                                    <Input defaultValue={this.state.accountPassword}
+                                           disabled={true}
+                                           style={{width: 120}} placeholder=""/>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>账号币种:</span>
+                                    <Input defaultValue={this.state.accountPassword}
+                                           disabled={true}
+                                           style={{width: 120}} placeholder=""/>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>账号所有人:</span>
+                                    <Input defaultValue={this.state.accountPassword}
+                                           disabled={true}
+                                           style={{width: 120}} placeholder=""/>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{minWidth: 120}}>支付币种:</span>
+                                    <Input defaultValue={this.state.accountPassword}
+                                           disabled={true}
+                                           style={{width: 120}} placeholder=""/>
+                                </div>
+                            </Card>
+                        </Col>
+                    </Row>
+
+                    <Divider></Divider>
+                    <Row gutter={8}>
+                        <Col md={12}>
+                            <Card bordered={true}>
+
+                                <div style={{display: 'flex', minHeight: 40}}>
+                                    <span style={{width: 120}}>创建备注:</span>
+
+                                    <Input defaultValue={this.state.country}
+                                           style={{width: 120}} placeholder=""/>
+                                </div>
+
+
+                            </Card>
+
+
+                        </Col>
+
+                    </Row>
+
+                </Card>
+
+
+                <BreadcrumbCustom first="交易管理" second="电汇入金"/>
+
+                <Card title="电汇入金列表"
                       bodyStyle={{padding: 0, margin: 0}}
 
-                      extra={
-                          <Button type="default" disabled={!hasSelected}
-                                  onClick={() => this.refleshNowpage()}>刷新当前页面
-                          </Button>
-                      }>
+                >
 
                     <Table rowKey="id"
-                           rowSelection={rowSelection}
 
                            columns={this.columns}
                            dataSource={this.state.userList}
