@@ -1356,7 +1356,7 @@ class PassOpenD extends Component {
         var isNum = reg.test(input)
         console.log('hcia input' , input)
         console.log('hcia isNum', isNum)
-        if (isNum ) {
+        if (isNum ||  input.length===0 ) {
             this.state.waitUpdate.lastName = e.target.value
             this.setState({
                 isNeedSave: true,
@@ -1370,13 +1370,19 @@ class PassOpenD extends Component {
     }
     onChangenationalId = (e) => {
 
+        
 
-        var reg = new RegExp("^.[A-Za-z0-9]+$");
+
+
+
+        var reg = new RegExp("^[0-9a-zA_Z]+$");
         var input = e.target.value
+
+        // input.length
 
         var isNum = reg.test(input)
         console.log('hcia isNum', isNum)
-        if (isNum) {
+        if (isNum  ||  input.length===0) {
             this.state.waitUpdate.nationalId = e.target.value
             this.setState({
                 isNeedSave: true,
@@ -1400,7 +1406,7 @@ class PassOpenD extends Component {
         var isNum = reg.test(input)
         console.log('hcia input' , input)
         console.log('hcia isNum', isNum)
-        if (isNum ) {
+        if (isNum  || input.length===0) {
             this.state.waitUpdate.firstName = e.target.value
             this.setState({
                 isNeedSave: true,
