@@ -216,6 +216,47 @@ class PassOpenD extends Component {
 
     }
 
+     checkLenAndIsChinese=(input) =>{
+        var reg = /^[\u4e00-\u9fa5]+$/;
+        var len = input.length;
+        var flag = true;
+        if (len < 1 || len > 4 || !reg.test(input)) {
+            flag = false;
+        }
+        return flag;
+    }
+    checkMention = (rule, value, callback) => {
+        var sss = this.checkLenAndIsChinese(value)
+        console.log('hcia sss', sss)
+        console.log('hcia value', value)
+        if (sss) {
+            this.state.waitUpdate.lastNameCn = value
+            this.setState({
+                isNeedSave: true,
+            });
+            callback()
+        } else {
+            message.error('*姓（中文）')
+            callback('*姓（中文）');
+
+        }
+    }
+    checkMention2 = (rule, value, callback) => {
+        var sss = this.checkLenAndIsChinese(value)
+        console.log('hcia sss', sss)
+        console.log('hcia value', value)
+        if (sss) {
+            this.state.waitUpdate.firstNameCn = value
+            this.setState({
+                isNeedSave: true,
+            });
+            callback()
+        } else {
+            message.error('*名（中文）')
+            callback('*名（中文）');
+
+        }
+    }
     onTodoChange(value) {
         this.setState({
             checkfromdbName: value
@@ -501,22 +542,60 @@ class PassOpenD extends Component {
                                     <Input defaultValue={this.state.recordData.country} disabled={true}
                                            style={{width: 120}} placeholder=""/>
                                 </div>
+
+
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*姓（中文）</span>
-                                    <Input defaultValue={this.state.recordData.lastNameCn}
-                                           onChange={this.onChangelastNameCn}
-                                           style={{width: 120}} placeholder="" tagkey="lastNameCn"
-                                           sdsd={'dd'}/>
+                                    <Form layout="vertical">
+                                        <FormItem
+                                            id="control-mention"
+                                            labelCol={{ span: 6 }}
+                                            wrapperCol={{ span: 16 }}
+                                        >
+                                            {getFieldDecorator('mention2', {
+                                                rules: [
+                                                    { validator: this.checkMention },
+                                                ],
+                                                initialValue: this.state.recordData.lastNameCn,
+                                            })(
+                                                <Input defaultValue={this.state.recordData.lastNameCn}
+                                                       // onChange={this.onChangelastNameCn}
+                                                       style={{width: 120}} placeholder="" tagkey="lastNameCn"
+                                                       sdsd={'dd'}/>
+                                            )}
+                                        </FormItem>
+
+                                    </Form>
 
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*名（中文）</span>
-                                    <Input
+                                    <Form layout="vertical">
+                                        <FormItem
+                                            id="control-mention2"
+                                            labelCol={{ span: 6 }}
+                                            wrapperCol={{ span: 16 }}
+                                        >
+                                            {getFieldDecorator('mention', {
+                                                rules: [
+                                                    { validator: this.checkMention2 },
+                                                ],
+                                                initialValue: this.state.recordData.firstNameCn,
+                                            })(
+                                                <Input defaultValue={this.state.recordData.firstNameCn}
+                                                       // onChange={this.onChangefirstNameCn}
+                                                       style={{width: 120}} placeholder="" tagkey="lastNameCn"
+                                                       sdsd={'dd'}/>
+                                            )}
+                                        </FormItem>
 
-                                        type={{}}
-                                        value={this.state.recordData.firstNameCn}
-                                        onChange={this.onChangefirstNameCn}
-                                        style={{width: 120}} placeholder=""/>
+                                    </Form>
+                                    {/*<Input*/}
+
+                                        {/*type={{}}*/}
+                                        {/*value={this.state.recordData.firstNameCn}*/}
+                                        {/*onChange={this.onChangefirstNameCn}*/}
+                                        {/*style={{width: 120}} placeholder=""/>*/}
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*姓</span>
@@ -1330,7 +1409,7 @@ class PassOpenD extends Component {
         var reg = new RegExp("[\u4e00-\u9fa5]");
         var input = e.target.value
 
-        var isCh = reg.test(input)
+        var isCh = new RegExp("[\u4e00-\u9fa5]").test(input)
 
         console.log('hcia isCh', isCh)
         if (isCh) {
