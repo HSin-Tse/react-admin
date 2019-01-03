@@ -23,25 +23,6 @@ class Basic extends Component {
             userList: [],
             leavgeList: [],
             nodeList: [],
-            detail: {
-                "name": null,
-                "id": "27",
-                "date": "",
-                "comment": null,
-                "status": 0,
-                "currentLeverage": "1 : 100",
-                "targetLeverage": "1 : 200",
-                "operator": null,
-                "email": null,
-                "mobile": null,
-                "nationalId": null,
-                "accountNo": "live545491475",
-                "marginLevel": "N/A",
-                "displayStatus": "审核中",
-                "broker": null,
-                "cashBalance": "0.0"
-            },
-
             visibleB: false,
             loading: false,
             modal2OPDAYVisible: false,
@@ -81,26 +62,10 @@ class Basic extends Component {
             });
         });
     }
-    onChangeLe = (value) => {
-        // updateLeverageApply
-        let self = this
 
-        console.log('hcia value', value)
-        window.Axios.post('finance/updateLeverageApply', {
-            id: this.state.detail.id,
-            leverageId: value,
-        }).then((response) => {
-            console.log('hcia response', response)
-            // self.setState({
-            //     leavgeList: response.data.data,
-            // })
-        });
-
-
-    }
     showModalB = (recodrd) => {
-        
-        console.log('hcia recodrd' , recodrd)
+
+        console.log('hcia recodrd', recodrd)
         this.requestUserCommentList(recodrd)
 
         let self = this
@@ -113,7 +78,6 @@ class Basic extends Component {
         }).then(function (response) {
 
             self.setState({
-                // detail: response.data.data,
                 visibleB: true,
                 loading: false,
 
@@ -514,10 +478,12 @@ class Basic extends Component {
                 <Card title="渠道管理"
                       bodyStyle={{padding: 0, margin: 0}}
 
-                      extra={
-                          <Button type="default" disabled={!hasSelected}
-                                  onClick={() => this.refleshNowpage()}>刷新当前页面
-                          </Button>
+                      extra={[<Button type="primary"
+                                      onClick={() => this.refleshNowpage()}>汇率调整
+                      </Button>, <Button type="primary"
+                                         onClick={() => this.refleshNowpage()}>新增渠道
+                      </Button>]
+
                       }>
 
                     <Table rowKey="id"
@@ -527,6 +493,12 @@ class Basic extends Component {
                            dataSource={this.state.userList}
                            scroll={{x: 2000}}
                            bordered
+                           footer={() => [<Button type="default" disabled={!hasSelected}
+                                                  onClick={() => this.refleshNowpage()}>批量开启
+                           </Button>,
+                               <Button type="default" disabled={!hasSelected}
+                                       onClick={() => this.refleshNowpage()}>批量关闭
+                               </Button>]}
                            loading={this.state.loading}
                            pagination={{  // 分页
                                total: this.state.pgsize * this.state.totalPage,
