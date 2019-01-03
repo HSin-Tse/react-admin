@@ -267,7 +267,7 @@ class Basic extends Component {
                 </h2>
                 <BreadcrumbCustom first="财务管理" second="电汇入金"/>
 
-                <Steps style={{marginTop: 15 ,height:90}} labelPlacement={'vertical'} size="large"  current={this.state.currentStep}>
+                <Steps style={{marginLeft:"15%",marginTop: 15 ,width:"70%",height:90}} labelPlacement={'vertical'}  current={this.state.currentStep}>
                     {steps.map(item => <Step key={item.title} title={item.title} />)}
                 </Steps>
                 <Card
