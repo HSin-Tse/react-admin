@@ -120,90 +120,66 @@ class Basic extends Component {
             {
                 align: 'center',
 
-                title: '客户姓名',
-                dataIndex: 'name',
-                key: 'name',
+                title: '渠道名称',
+                dataIndex: '渠道名称',
+                key: '渠道名称',
                 render: (text, record) => (
                     <span>{record.name}</span>),
             }, {
-
-                title: '账号',
-
-                dataIndex: '申请序号',
-                key: '申请序号',
+                title: '渠道状态',
+                dataIndex: '渠道状态',
+                key: '渠道状态',
                 render: (text, record) => (<span>{record.accountNo}</span>),
                 align: 'center',
             }, {
-
-                title: '账户类型',
-
-                dataIndex: '账户类型',
-                key: '账户类型',
+                title: '渠道是否可用',
+                dataIndex: '渠道是否可用',
+                key: '渠道是否可用',
                 render: (text, record) => (
                     <span>{record.broker}</span>),
                 align: 'center',
             }, {
-
-                title: '交易组',
-
-                dataIndex: '交易组',
-                key: '交易组',
-                render: (text, record) => (
-                    <span>{record.accountType}</span>),
                 align: 'center',
-            }, {
-                align: 'center',
-
-                title: '开户时间',
-                dataIndex: '开户时间',
-                key: '开户时间',
+                title: '渠道更新时间',
+                dataIndex: '渠道更新时间',
+                key: '渠道更新时间',
 
                 render: (text, record) => (
                     <span>{record.date}</span>),
             }, {
                 align: 'center',
 
-                title: '保证金占比',
-                dataIndex: '保证金占比',
-                key: '保证金占比',
+                title: '入金汇率',
+                dataIndex: '入金汇率',
+                key: '入金汇率',
                 render: (text, record) => (
                     <span>{record.marginLevel}</span>)
             }, {
                 align: 'center',
 
-                title: '浮动余额',
-                dataIndex: '浮动余额',
-                key: '浮动余额',
+                title: '当前启用入金支付渠道',
+                dataIndex: '当前启用入金支付渠道',
+                key: '当前启用入金支付渠道',
                 render: (text, record) => (
                     <span>{record.cashBalance}</span>),
             }, {
                 align: 'center',
 
-                title: '账户净值',
-                dataIndex: '账户净值',
-                key: '账户净值',
+                title: '出金汇率',
+                dataIndex: '出金汇率',
+                key: '出金汇率',
 
                 render: (text, record) => (
                     <span>{record.netEquity}</span>),
             }, {
                 align: 'center',
 
-                title: '刷新时间',
-                dataIndex: '刷新时间',
-                key: '刷新时间',
+                title: '当前启用出金支付渠道ㄋ',
+                dataIndex: '当前启用出金支付渠道ㄋ',
+                key: '当前启用出金支付渠道ㄋ',
 
                 render: (text, record) => (
                     <span>{record.lastUpdateDate}</span>),
-            }, {
-                align: 'center',
-
-                title: '当前状态',
-                dataIndex: '当前状态',
-                key: '当前状态',
-                render: (text, record) => (
-                    <span>{record.accountStatus == 1 ? '正常' : (record.accountStatus == 2) ? '禁止登陆' : '禁止交易'}</span>
-                )
-
             }, {
                 align: 'center',
                 title: '操作人',
@@ -211,44 +187,28 @@ class Basic extends Component {
                 key: '操作人',
                 render: (text, record) => (
                     <span>{record.operator}</span>)
-            }, {
+            }
+            , {
                 align: 'center',
-
-                title: '当前杠杆',
-                dataIndex: '当前杠杆',
-                key: '当前杠杆',
-                render: (text, record) => (
-
-                    <Button style={{display: record.displayStatus == '审核通过' ? 'none' : ''}}
-                            onClick={() => this.showModalB(record)}>{record.displayLeverage}</Button>
-                )
-                // <Select value={record.displayStatus} style={{width: 100}}
-                //         onChange={(value) => this.handleChange(value, record)}>
-                //     <Option key="1" value="正常">正常</Option>
-                //     <Option key="2" value="禁止登陆">禁止登陆</Option>
-                //     <Option key="3" value="禁止交易">禁止交易</Option>
-                //
-                // </Select>)
-            }, {
-                align: 'center',
-                title: '操作',
-                key: 'action',
+                title: '查看',
+                dataIndex: '查看',
+                key: '查看',
                 render: (text, record) => (
                     <div>
-                        <Select value={record.displayStatus} style={{width: 100}}
-                                onChange={(value) => this.handleChange(value, record)}>
-                            <Option key="1" value="正常">正常</Option>
-                            <Option key="2" value="禁止登陆">禁止登陆</Option>
-                            <Option key="3" value="禁止交易">禁止交易</Option>
+                        <Button onClick={() => this.showOPDAyModal2(record)}>备注</Button>
 
-                        </Select>
-                        {/*<Button style={{marginLeft: 12}} className="ant-dropdown-link"*/}
-                        {/*onClick={() => this.seeDetail(record)}>备注</Button>*/}
-
-
-                        <Button style={{marginLeft: 12}} onClick={() => this.showOPDAyModal3(record)}>备注</Button>
-
+                    </div>
+                ),
+            }
+            , {
+                align: 'center',
+                title: '操作',
+                dataIndex: '操作',
+                key: '操作',
+                render: (text, record) => (
+                    <div>
                         <Button onClick={() => this.showOPDAyModal2(record)}>操作日志</Button>
+                        <Button style={{marginLeft: 12}} onClick={() => this.showOPDAyModal3(record)}>渠道设置</Button>
 
                     </div>
                 ),
