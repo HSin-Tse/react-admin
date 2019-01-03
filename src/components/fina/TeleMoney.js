@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, message, Select, Modal, Card, Col, Popconfirm, Row, Input, DatePicker, Divider} from 'antd';
+import {Button, Table, message, Select, Steps, Card, Col, Popconfirm, Row, Input, DatePicker, Divider} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
@@ -10,7 +10,7 @@ import {receiveData} from "../../action";
 
 const Option = Select.Option;
 const {TextArea} = Input;
-
+const Step = Steps.Step;
 class Basic extends Component {
 
     constructor(props) {
@@ -27,6 +27,7 @@ class Basic extends Component {
             modeState: 1,
             forbiddenValue: 0,
             current: 0,
+            currentStep: 0,
             pgsize: 10,
             loadFor: false,
             suspend_reason_type: []
@@ -245,6 +246,16 @@ class Basic extends Component {
 
 
     render() {
+        const steps = [{
+            title: '新增',
+            content: 'First-content',
+        }, {
+            title: '财务审核',
+            content: 'Second-content',
+        }, {
+            title: '完成入金',
+            content: 'Last-content',
+        }];
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
@@ -254,7 +265,13 @@ class Basic extends Component {
                 <h2 style={{marginTop: 15}}>
                     新增电汇入金
                 </h2>
+                <BreadcrumbCustom first="财务管理" second="电汇入金"/>
+
+                <Steps style={{marginTop: 15 ,height:90}} labelPlacement={'vertical'} size="large"  current={this.state.currentStep}>
+                    {steps.map(item => <Step key={item.title} title={item.title} />)}
+                </Steps>
                 <Card
+                    style={{marginTop: 15}}
 
                     actions={[<Button style={{height: 40, width: 200}} block>创建 </Button>,
                         <Button style={{height: 40, width: 200}} block>重新输入 </Button>]}
@@ -368,7 +385,6 @@ class Basic extends Component {
                 </Card>
 
 
-                <BreadcrumbCustom first="交易管理" second="电汇入金"/>
 
                 <Card title="电汇入金列表"
                       bodyStyle={{padding: 0, margin: 0}}
