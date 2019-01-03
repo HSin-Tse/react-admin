@@ -11,6 +11,7 @@ import {receiveData} from "../../action";
 const Option = Select.Option;
 const {TextArea} = Input;
 const Step = Steps.Step;
+
 class Basic extends Component {
 
     constructor(props) {
@@ -267,9 +268,15 @@ class Basic extends Component {
                 </h2>
                 <BreadcrumbCustom first="财务管理" second="电汇入金"/>
 
-                <Steps style={{marginLeft:"15%",marginTop: 15 ,width:"70%",height:90}} labelPlacement={'vertical'}  current={this.state.currentStep}>
-                    {steps.map(item => <Step key={item.title} title={item.title} />)}
-                </Steps>
+                <div style={{transform: "scale(1.3,1.3)"}}>
+
+                    <Steps style={{marginLeft: "15%", marginTop: "40px", width: "70%", height: 90}}
+                           labelPlacement={'vertical'} current={this.state.currentStep}>
+                        {steps.map(item => <Step key={item.title} title={item.title}/>)}
+                    </Steps>
+
+                </div>
+
                 <Card
                     style={{marginTop: 15}}
 
@@ -383,7 +390,6 @@ class Basic extends Component {
                     </Row>
 
                 </Card>
-
 
 
                 <Card title="电汇入金列表"
