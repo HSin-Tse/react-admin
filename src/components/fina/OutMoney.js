@@ -275,7 +275,11 @@ class Basic extends Component {
                 key: '操作',
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.showOPDAyModal2(record)}>审核</Button>
+                        <Button onClick={() => {
+                            this.props.history.push('/app/fina/juoutm1')
+
+
+                        }}>审核</Button>
                         <Button onClick={() => this.showOPDAyModal2(record)}>已成功</Button>
 
                     </div>
