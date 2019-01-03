@@ -397,9 +397,6 @@ class PassOpenD extends Component {
             <div id="openD">
 
 
-
-
-
                 {/*<div>id: {this.state.recordData.id}</div>*/}
                 {/*<div>status: {this.state.recordData.status}</div>*/}
                 {/*<div>isNeedSave :{this.state.isNeedSave.toString()}</div>*/}
@@ -592,26 +589,9 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*邮编</span>
-                                    <FormItem>
-
-
-                                        {
-                                            getFieldDecorator('id', {
-                                                rules: [{
-                                                    required: false,
-                                                    message: '请输入正确的ID'
-                                                }, {
-                                                    validator: this.compareToFirstPassword,
-                                                }],
-                                                getValueFromEvent: (event) => {
-                                                    return event.target.value.replace(/\D/g, '')
-                                                },
-                                                initialValue: this.state.recordData.postalCode
-                                            })(<Input defaultValue={this.state.recordData.postalCode}
-                                                      onChange={this.onChangepostalCode}
-                                                      style={{width: 120}} placeholder="邮编"/>)
-                                        }
-                                    </FormItem>
+                                    <Input value={this.state.recordData.postalCode}
+                                           onChange={this.onChangepostalCode}
+                                           style={{width: 120}} placeholder="邮编"/>
                                 </div>
                             </Card>
 
@@ -1374,10 +1354,26 @@ class PassOpenD extends Component {
         });
     }
     onChangepostalCode = (e) => {
-        this.state.waitUpdate.postalCode = e.target.value
-        this.setState({
-            isNeedSave: true,
-        });
+        // this.state.recordData.postalCode
+        var reg = new RegExp("^[0-9]*$");
+        var input = e.target.value
+
+        var isNum = reg.test(input)
+        console.log('hcia isNum', isNum)
+        if (isNum) {
+            this.state.waitUpdate.postalCode = e.target.value
+            this.setState({
+                isNeedSave: true,
+                recordData: {...this.state.recordData, postalCode: input}
+            });
+
+        } else {
+            message.error('只能输入数字:' + input)
+        }
+
+        console.log('hcia input', input)
+
+
     }
     handleProvinceChange = (value) => {
 
