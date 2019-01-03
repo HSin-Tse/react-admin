@@ -321,9 +321,9 @@ class DEVhboard extends React.Component {
 
 
 const mapStateToProps = state => {
-    const todps = state.todos;
+    const todos = state.todos;
     const infor = state.infor;
-    return {todps, infor};
+    return {todos, infor};
 };
 const mapDispatchToProps = dispatch => ({
     addTodo: bindActionCreators(addTodo, dispatch),
