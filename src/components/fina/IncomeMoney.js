@@ -400,10 +400,7 @@ class Basic extends Component {
                       extra={
                           <Button type="primary"
                                   onClick={() => {
-                                      
-                                      console.log('hcia onClick' )
-                                      
-
+                                      console.log('hcia onClick')
                                   }
                                   }>电汇入金
                           </Button>
