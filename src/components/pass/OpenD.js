@@ -544,7 +544,7 @@ class PassOpenD extends Component {
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*身份证号码</span>
-                                    <Input defaultValue={this.state.recordData.nationalID}
+                                    <Input value={this.state.recordData.nationalID}
                                            onChange={this.onChangenationalId}
                                            style={{width: 120}} placeholder="Basic usage"/>
                                 </div>
@@ -1334,6 +1334,26 @@ class PassOpenD extends Component {
         this.setState({
             isNeedSave: true,
         });
+
+
+        var reg = new RegExp("^.[A-Za-z0-9]+$");
+        var input = e.target.value
+
+        var isNum = reg.test(input)
+        console.log('hcia isNum', isNum)
+        if (isNum) {
+            this.state.waitUpdate.nationalId = e.target.value
+            this.setState({
+                isNeedSave: true,
+                recordData: {...this.state.recordData, nationalID: input}
+            });
+
+        } else {
+            message.error('只能输入数字英文:' + input)
+        }
+
+        console.log('hcia input', input)
+
     }
     onChangefirstName = (e) => {
         this.state.waitUpdate.firstName = e.target.value
