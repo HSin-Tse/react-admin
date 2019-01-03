@@ -281,10 +281,10 @@ class EditRole extends Component {
                 {/*<div>name :{JSON.stringify(this.state.name)}</div>*/}
                 {/*<div>powerList :{JSON.stringify(this.state.powerList)}</div>*/}
                 {/*<div>realp :{JSON.stringify(this.state.realp)}</div>*/}
-                <div>allMenu :{JSON.stringify(this.state.allMenu)}</div>
-                <div>powerList :{JSON.stringify(this.state.powerList)}</div>
-                <div>allMenu :{JSON.stringify(Object.keys(allMenu))}</div>
-                <div>allMenu :{JSON.stringify(Object.keys(allMenu).map(Number))}</div>
+                {/*<div>allMenu :{JSON.stringify(this.state.allMenu)}</div>*/}
+                {/*<div>powerList :{JSON.stringify(this.state.powerList)}</div>*/}
+                {/*<div>allMenu :{JSON.stringify(Object.keys(allMenu))}</div>*/}
+                {/*<div>allMenu :{JSON.stringify(Object.keys(allMenu).map(Number))}</div>*/}
 
 
                 <div><BreadcrumbCustom first="内部成员列表" second="内部人员配置"/></div>

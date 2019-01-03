@@ -320,12 +320,12 @@ class EditUser extends PureComponent {
         return (
             <div>
                 {/*<div>姓名 name:{JSON.stringify(this.state.name)}</div>*/}
-                <div>邮箱 email:{JSON.stringify(this.state.email)}</div>
+                {/*<div>邮箱 email:{JSON.stringify(this.state.email)}</div>*/}
                 {/*<div>手机 mobile:{JSON.stringify(this.state.mobile)}</div>*/}
                 {/*<div>性别 gender:{JSON.stringify(this.state.gender)}</div>*/}
                 {/*<div>新的登陆名 newLoginName:{JSON.stringify(this.state.newLoginName)}</div>*/}
-                <div>新的密码 newPassword:{JSON.stringify(this.state.newPassword)}</div>
-                <div>驗證密码 secondPassword:{JSON.stringify(this.state.secondPassword)}</div>
+                {/*<div>新的密码 newPassword:{JSON.stringify(this.state.newPassword)}</div>*/}
+                {/*<div>驗證密码 secondPassword:{JSON.stringify(this.state.secondPassword)}</div>*/}
                 {/*<div>角色 idList:{JSON.stringify(this.state.idList)}</div>*/}
                 {/*<div>内部人员备注 content:{JSON.stringify(this.state.content)}</div>*/}
                 {/*<div>当前操作人员的密码 password:{JSON.stringify(this.state.password)}</div>*/}
