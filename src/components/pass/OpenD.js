@@ -499,32 +499,36 @@ class PassOpenD extends Component {
                                     <span style={{width: 120}}>国家:</span>
 
                                     <Input defaultValue={this.state.recordData.country} disabled={true}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                           style={{width: 120}} placeholder=""/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*姓（中文）</span>
                                     <Input defaultValue={this.state.recordData.lastNameCn}
                                            onChange={this.onChangelastNameCn}
-                                           style={{width: 120}} placeholder="Basic usage" tagkey="lastNameCn"
+                                           style={{width: 120}} placeholder="" tagkey="lastNameCn"
                                            sdsd={'dd'}/>
+
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*名（中文）</span>
-                                    <Input defaultValue={this.state.recordData.firstNameCn}
-                                           onChange={this.onChangefirstNameCn}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                    <Input
+
+                                        type={{}}
+                                        value={this.state.recordData.firstNameCn}
+                                        onChange={this.onChangefirstNameCn}
+                                        style={{width: 120}} placeholder=""/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*姓</span>
-                                    <Input defaultValue={this.state.recordData.lastName}
+                                    <Input value={this.state.recordData.lastName}
                                            onChange={this.onChangelastName}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                           style={{width: 120}} placeholder=""/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}> *名</span>
-                                    <Input defaultValue={this.state.recordData.firstName}
+                                    <Input value={this.state.recordData.firstName}
                                            onChange={this.onChangefirstName}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                           style={{width: 120}} placeholder=""/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*出生日期</span>
@@ -546,7 +550,7 @@ class PassOpenD extends Component {
                                     <span style={{minWidth: 120}}>*身份证号码</span>
                                     <Input value={this.state.recordData.nationalID}
                                            onChange={this.onChangenationalId}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                           style={{width: 120}} placeholder=""/>
                                 </div>
 
                                 <div style={{display: 'flex', minHeight: 40}}>
@@ -575,17 +579,17 @@ class PassOpenD extends Component {
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*详细地址</span>
                                     <Input defaultValue={this.state.recordData.street} onChange={this.onChangestreet}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                           style={{width: 120}} placeholder=""/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*联系电话</span>
                                     <Input defaultValue={this.state.recordData.phoneNumber} disabled={true}
-                                           style={{width: 130}} placeholder="Basic usage"/>
+                                           style={{width: 130}} placeholder=""/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*邮箱地址</span>
                                     <Input defaultValue={this.state.recordData.email} onChange={this.onChangeemail}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                           style={{width: 120}} placeholder=""/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*邮编</span>
@@ -662,18 +666,18 @@ class PassOpenD extends Component {
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>交易类型</span>
                                     <Input defaultValue={this.state.recordData.accountType} disabled={true}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                           style={{width: 120}} placeholder=""/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>交易货币</span>
                                     <Input defaultValue={this.state.recordData.currency} disabled={true}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                           style={{width: 120}} placeholder=""/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*交易密码</span>
                                     <Input defaultValue={this.state.recordData.accountPassword}
                                            disabled={true}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                           style={{width: 120}} placeholder=""/>
                                 </div>
                             </Card>
                         </Col>
@@ -1318,22 +1322,53 @@ class PassOpenD extends Component {
 
     }
     onChangefirstNameCn = (e) => {
-        this.state.waitUpdate.firstNameCn = e.target.value
-        this.setState({
-            isNeedSave: true,
-        });
+        // this.state.waitUpdate.firstNameCn = e.target.value
+        // this.setState({
+        //     isNeedSave: true,
+        // });
+        // var pattern = /[\u3105-\u3129\u02CA\u02C7\u02CB\u02D9]/;
+        var reg = new RegExp("[\u4e00-\u9fa5]");
+        var input = e.target.value
+
+        var isCh = reg.test(input)
+
+        console.log('hcia isCh', isCh)
+        if (isCh) {
+            this.state.waitUpdate.firstNameCn = e.target.value
+            this.setState({
+                isNeedSave: true,
+                recordData: {...this.state.recordData, firstNameCn: input}
+            });
+
+        } else {
+            message.error('只能输入中文:' + input)
+        }
+
+        console.log('hcia input', input)
+
     }
     onChangelastName = (e) => {
-        this.state.waitUpdate.lastName = e.target.value
-        this.setState({
-            isNeedSave: true,
-        });
+
+
+        var reg = new RegExp("^[A-Za-z]+$");
+        var input = e.target.value
+
+        var isNum = reg.test(input)
+        console.log('hcia input' , input)
+        console.log('hcia isNum', isNum)
+        if (isNum ) {
+            this.state.waitUpdate.lastName = e.target.value
+            this.setState({
+                isNeedSave: true,
+                recordData: {...this.state.recordData, lastName: input}
+            });
+
+        } else {
+            message.error('只能输入英文:' + input)
+        }
+
     }
     onChangenationalId = (e) => {
-        this.state.waitUpdate.nationalId = e.target.value
-        this.setState({
-            isNeedSave: true,
-        });
 
 
         var reg = new RegExp("^.[A-Za-z0-9]+$");
@@ -1356,10 +1391,25 @@ class PassOpenD extends Component {
 
     }
     onChangefirstName = (e) => {
-        this.state.waitUpdate.firstName = e.target.value
-        this.setState({
-            isNeedSave: true,
-        });
+
+
+
+        var reg = new RegExp("^[A-Za-z]+$");
+        var input = e.target.value
+
+        var isNum = reg.test(input)
+        console.log('hcia input' , input)
+        console.log('hcia isNum', isNum)
+        if (isNum ) {
+            this.state.waitUpdate.firstName = e.target.value
+            this.setState({
+                isNeedSave: true,
+                recordData: {...this.state.recordData, firstName: input}
+            });
+
+        } else {
+            message.error('只能输入英文:' + input)
+        }
     }
     onChangestreet = (e) => {
         this.state.waitUpdate.street = e.target.value
