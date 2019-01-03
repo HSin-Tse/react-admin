@@ -207,7 +207,6 @@ class PassOpenD extends Component {
     }
 
     compareToFirstPassword = (rule, value, callback) => {
-        const form = this.props.form;
         console.log('hcia value', value)
         console.log('hcia rule', rule)
         // callback('Two passwords that you enter is inconsistent!');
