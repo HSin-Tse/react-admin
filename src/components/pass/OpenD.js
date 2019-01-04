@@ -95,9 +95,6 @@ class PassOpenD extends Component {
         var self = this;
 
 
-
-
-
         window.Axios.post('dict/leverageList', {
             'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
         }).then((response) => {
@@ -200,7 +197,7 @@ class PassOpenD extends Component {
 
     }
 
-     checkLenAndIsChinese=(input) =>{
+    checkLenAndIsChinese = (input) => {
         var reg = /^[\u4e00-\u9fa5]+$/;
         var len = input.length;
         var flag = true;
@@ -241,6 +238,7 @@ class PassOpenD extends Component {
 
         }
     }
+
     onTodoChange(value) {
         this.setState({
             checkfromdbName: value
@@ -534,19 +532,19 @@ class PassOpenD extends Component {
                                         <FormItem
 
                                             id="control-mention"
-                                            labelCol={{ span: 6 }}
-                                            wrapperCol={{ span: 16 }}
+                                            labelCol={{span: 6}}
+                                            wrapperCol={{span: 16}}
                                         >
                                             {getFieldDecorator('mention2', {
                                                 required: true,
                                                 rules: [
-                                                    { validator: this.checkMention},
+                                                    {validator: this.checkMention},
                                                 ],
                                                 initialValue: this.state.recordData.lastNameCn,
 
                                             })(
                                                 <Input defaultValue={this.state.recordData.lastNameCn}
-                                                       // onChange={this.onChangelastNameCn}
+                                                    // onChange={this.onChangelastNameCn}
                                                        style={{width: 120}} placeholder="" tagkey="lastNameCn"
                                                        sdsd={'dd'}/>
                                             )}
@@ -560,17 +558,17 @@ class PassOpenD extends Component {
                                     <Form layout="vertical">
                                         <FormItem
                                             id="control-mention2"
-                                            labelCol={{ span: 6 }}
-                                            wrapperCol={{ span: 16 }}
+                                            labelCol={{span: 6}}
+                                            wrapperCol={{span: 16}}
                                         >
                                             {getFieldDecorator('mention', {
                                                 rules: [
-                                                    { validator: this.checkMention2 },
+                                                    {validator: this.checkMention2},
                                                 ],
                                                 initialValue: this.state.recordData.firstNameCn,
                                             })(
                                                 <Input defaultValue={this.state.recordData.firstNameCn}
-                                                       // onChange={this.onChangefirstNameCn}
+                                                    // onChange={this.onChangefirstNameCn}
                                                        style={{width: 120}} placeholder="" tagkey="lastNameCn"
                                                        sdsd={'dd'}/>
                                             )}
@@ -579,10 +577,10 @@ class PassOpenD extends Component {
                                     </Form>
                                     {/*<Input*/}
 
-                                        {/*type={{}}*/}
-                                        {/*value={this.state.recordData.firstNameCn}*/}
-                                        {/*onChange={this.onChangefirstNameCn}*/}
-                                        {/*style={{width: 120}} placeholder=""/>*/}
+                                    {/*type={{}}*/}
+                                    {/*value={this.state.recordData.firstNameCn}*/}
+                                    {/*onChange={this.onChangefirstNameCn}*/}
+                                    {/*style={{width: 120}} placeholder=""/>*/}
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*姓</span>
@@ -1420,9 +1418,9 @@ class PassOpenD extends Component {
         var input = e.target.value
 
         var isNum = reg.test(input)
-        console.log('hcia input' , input)
+        console.log('hcia input', input)
         console.log('hcia isNum', isNum)
-        if (isNum ||  input.length===0 ) {
+        if (isNum || input.length === 0) {
             this.state.waitUpdate.lastName = e.target.value
             this.setState({
                 isNeedSave: true,
@@ -1436,10 +1434,6 @@ class PassOpenD extends Component {
     }
     onChangenationalId = (e) => {
 
-        
-
-
-
 
         var reg = new RegExp("^[0-9a-zA_Z]+$");
         var input = e.target.value
@@ -1448,7 +1442,7 @@ class PassOpenD extends Component {
 
         var isNum = reg.test(input)
         console.log('hcia isNum', isNum)
-        if (isNum  ||  input.length===0) {
+        if (isNum || input.length === 0) {
             this.state.waitUpdate.nationalId = e.target.value
             this.setState({
                 isNeedSave: true,
@@ -1465,14 +1459,13 @@ class PassOpenD extends Component {
     onChangefirstName = (e) => {
 
 
-
         var reg = new RegExp("^[A-Za-z]+$");
         var input = e.target.value
 
         var isNum = reg.test(input)
-        console.log('hcia input' , input)
+        console.log('hcia input', input)
         console.log('hcia isNum', isNum)
-        if (isNum  || input.length===0) {
+        if (isNum || input.length === 0) {
             this.state.waitUpdate.firstName = e.target.value
             this.setState({
                 isNeedSave: true,

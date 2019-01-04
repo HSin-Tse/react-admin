@@ -156,36 +156,36 @@ class PassOpenRS extends Component {
             }, () => {
 
 
-                window.Axios.post('dict/openDict', {
-                    'keys': 'div_type',
-                    'division': 'province',
-                    'code': '1',
-                }).then(function (response) {
-                    // console.log('hcia response', response)
-
-                    self.setState({
-                        provinceDatAarra: response.data.data.div_type,
-                    }, () => {
-
-                        var nowCity = self.state.provinceDatAarra.filter(function (item, index, array) {
-                            return item.value == self.state.mState;
-                        });
-
-                        window.Axios.post('dict/openDict', {
-                            'keys': 'div_type',
-                            'division': 'city',
-                            'code': nowCity[0].code
-                        }).then((ress) => {
-
-                            // console.log('hcia ress', ress)
-                            self.setState({
-                                cityDatAarra: ress.data.data.div_type
-                            })
-                        });
-                    });
-
-
-                });
+                // window.Axios.post('dict/openDict', {
+                //     'keys': 'div_type',
+                //     'division': 'province',
+                //     'code': '1',
+                // }).then(function (response) {
+                //     // console.log('hcia response', response)
+                //
+                //     self.setState({
+                //         provinceDatAarra: response.data.data.div_type,
+                //     }, () => {
+                //
+                //         var nowCity = self.state.provinceDatAarra.filter(function (item, index, array) {
+                //             return item.value == self.state.mState;
+                //         });
+                //
+                //         window.Axios.post('dict/openDict', {
+                //             'keys': 'div_type',
+                //             'division': 'city',
+                //             'code': nowCity[0].code
+                //         }).then((ress) => {
+                //
+                //             // console.log('hcia ress', ress)
+                //             self.setState({
+                //                 cityDatAarra: ress.data.data.div_type
+                //             })
+                //         });
+                //     });
+                //
+                //
+                // });
 
 
             });
