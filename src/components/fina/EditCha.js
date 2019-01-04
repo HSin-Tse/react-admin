@@ -1,11 +1,11 @@
 /* eslint-disable react/sort-comp */
 
 import React, {Component} from 'react';
-import {Col, Card, Row, DatePicker, Input, Modal, Button, Table} from 'antd';
+import {Select, Card, Row, DatePicker, Input, Modal, Button, Table} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {parse} from 'querystring';
-import avater from "../../style/imgs/b1.jpg";
 
+const Option = Select.Option;
 const {Meta} = Card;
 
 class EditCha extends Component {
@@ -13,17 +13,15 @@ class EditCha extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            date: new Date()
-            , userList: []
-            , operationDiaryHistory: []
+            date: new Date(),
+            mDetail: {},
+            operationDiaryHistory: []
         };
     }
 
     componentDidMount() {
-
         this.requestD()
         // this.requestUserCommentList()
-
     }
 
     render() {
@@ -37,9 +35,34 @@ class EditCha extends Component {
 
                 <BreadcrumbCustom first="财务审核" second="渠道管理" third="渠道设置"/>
                 <Card title="某渠道设置">
+                    <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
+                        <span style={{minWidth: 80}}>渠道名称：</span>
+                        <Input
 
-                    <img style={{width: 100}} src={avater} alt="头像"/>
-                    {/*< Meta title={this.state.userList.length == 0 ? '姓名：' : '姓名：' + this.state.userList.base.name}/>*/}
+                            value={this.state.mDetail.channelName}
+
+                            onChange={(e) => {
+                                this.setState({
+                                    mDetail: {...this.state.mDetail, channelName: e.target.value},
+                                });
+                            }} style={{width: 200, marginBottom: 10}} placeholder=""/>
+                    </div>
+                    <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
+                        <span style={{minWidth: 80}}>渠道编号：</span>
+                        <Input value={this.state.mDetail.channelCode}
+                               onChange={(e) => {
+                                   this.setState({
+                                       mDetail: {...this.state.mDetail, channelCode: e.target.value},
+                                   });
+                               }} style={{width: 200, marginBottom: 10}} placeholder=""/>
+                    </div>
+                    <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
+                        <span style={{minWidth: 80}}>渠道状态：</span>
+                        <Select value={this.state.mDetail.displayStatus} style={{width: 200}}>
+                            <Option value="可用">打开</Option>
+                            <Option value="不可用">关闭</Option>
+                        </Select>
+                    </div>
 
                 </Card>
                 <Card
@@ -68,36 +91,30 @@ class EditCha extends Component {
 
                 >
                     <Table rowKey="id"
-                           columns={[{
-                               title: '時間',
-                               align: 'center',
-                               dataIndex: 'createDate',
-                               key: 'operationDiary_Date',
+                           columns={[
+                               {
+                                   align: 'center',
+                                   title: '操作人',
+                                   dataIndex: 'bkUserName',
+                                   key: 'operationDiary_User',
+                                   render: (text, record) => (
+                                       <span>{record.bkUserName}</span>),
+                               }, {
+                                   align: 'center',
+                                   title: '操作备注',
+                                   dataIndex: '操作备注',
+                                   key: '操作备注',
+                                   render: (text, record) => (
+                                       <span>{record.comment}</span>),
+                               }, {
+                                   title: '操作時間',
+                                   align: 'center',
+                                   dataIndex: 'createDate',
+                                   key: 'operationDiary_Date',
 
-                               render: (text, record) => (
-                                   <span>{record.date}</span>),
-                           }, {
-                               title: 'ip',
-                               dataIndex: 'ip',
-                               key: 'ip',
-                               align: 'center',
-                               render: (text, record) => (
-                                   <span>{record.ip}</span>),
-                           }, {
-                               align: 'center',
-                               title: '操作',
-                               dataIndex: '操作',
-                               key: '操作',
-                               render: (text, record) => (
-                                   <span>{record.comment}</span>),
-                           }, {
-                               align: 'center',
-                               title: '操作人',
-                               dataIndex: 'bkUserName',
-                               key: 'operationDiary_User',
-                               render: (text, record) => (
-                                   <span>{record.bkUserName}</span>),
-                           }]} dataSource={this.state.operationDiaryHistory}
+                                   render: (text, record) => (
+                                       <span>{record.date}</span>),
+                               }]} dataSource={this.state.operationDiaryHistory}
                     />
                 </Card>
 
@@ -120,10 +137,10 @@ class EditCha extends Component {
 
     requestD = () => {
         var self = this;
-        window.Axios.post('finance/updateDepositChannel', {
+        window.Axios.post('finance/getDepositChannelDetail', {
             'id': self.props.match.params.id,
         }).then((response) => {
-            self.setState({userList: response.data.data});
+            self.setState({mDetail: response.data.data});
         });
     };
 }
