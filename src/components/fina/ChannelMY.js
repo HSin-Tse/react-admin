@@ -379,14 +379,18 @@ class Basic extends Component {
                 <h2 style={{marginTop: 15}}>
                     渠道管理
                 </h2>
-                <BreadcrumbCustom first="交易管理" second="渠道管理"/>
+                <BreadcrumbCustom first="财务审核" second="渠道管理"/>
 
                 <Card title="渠道管理"
                       bodyStyle={{padding: 0, margin: 0}}
 
                       extra={[
                           <Button type="primary" onClick={() => this.refleshNowpage()}>汇率调整</Button>,
-                          <Button type="primary" onClick={() => this.refleshNowpage()}>新增渠道</Button>
+                          <Button type="primary" onClick={() => {
+                              this.props.history.push('/app/fina/editcha123')
+
+
+                          }}>新增渠道</Button>
                       ]
                       }>
 

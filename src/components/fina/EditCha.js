@@ -67,13 +67,12 @@ class EditCha extends Component {
 
 
                 <h2 style={{marginTop: 15}}>
-                    行為信息
+                    渠道设置
                 </h2>
 
-                <BreadcrumbCustom first="用户總表" second="行為信息"/>
+                <BreadcrumbCustom first="财务审核" second="渠道管理" third="渠道设置"/>
                 <Card
-                    type="inner"
-                    title="基本信息"
+                    title="某渠道设置"
                 >
 
                     <img style={{width: 100}} src={avater} alt="头像"/>
