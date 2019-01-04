@@ -52,7 +52,7 @@ class Basic extends Component {
         var self = this;
         window.Axios.post('/auth/getRecordCommentList', {
             id: record.id,
-            commentType: 3,
+            commentType: 11,
             pageNo: this.state.currentComment,
             pageSize: this.state.pgsize,
         }).then(function (response) {
@@ -124,19 +124,19 @@ class Basic extends Component {
                 dataIndex: '渠道名称',
                 key: '渠道名称',
                 render: (text, record) => (
-                    <span>{record.name}</span>),
+                    <span>{record.channelName}</span>),
             }, {
                 title: '渠道状态',
                 dataIndex: '渠道状态',
                 key: '渠道状态',
-                render: (text, record) => (<span>{record.accountNo}</span>),
+                render: (text, record) => (<span>{record.status === 0 ? '可用（打开）' : '不可用（关闭）'}</span>),
                 align: 'center',
             }, {
                 title: '渠道是否可用',
                 dataIndex: '渠道是否可用',
                 key: '渠道是否可用',
                 render: (text, record) => (
-                    <span>{record.broker}</span>),
+                    <span>{record.displayStatus}</span>),
                 align: 'center',
             }, {
                 align: 'center',
@@ -153,7 +153,7 @@ class Basic extends Component {
                 dataIndex: '入金汇率',
                 key: '入金汇率',
                 render: (text, record) => (
-                    <span>{record.marginLevel}</span>)
+                    <span>{record.depositRate}</span>)
             }, {
                 align: 'center',
 
@@ -161,7 +161,7 @@ class Basic extends Component {
                 dataIndex: '当前启用入金支付渠道',
                 key: '当前启用入金支付渠道',
                 render: (text, record) => (
-                    <span>{record.cashBalance}</span>),
+                    <span>{record.depositChannel}</span>),
             }, {
                 align: 'center',
 
@@ -170,16 +170,16 @@ class Basic extends Component {
                 key: '出金汇率',
 
                 render: (text, record) => (
-                    <span>{record.netEquity}</span>),
+                    <span>{record.withdrawRate}</span>),
             }, {
                 align: 'center',
 
-                title: '当前启用出金支付渠道ㄋ',
-                dataIndex: '当前启用出金支付渠道ㄋ',
-                key: '当前启用出金支付渠道ㄋ',
+                title: '当前启用出金支付渠道',
+                dataIndex: '当前启用出金支付渠道',
+                key: '当前启用出金支付渠道',
 
                 render: (text, record) => (
-                    <span>{record.lastUpdateDate}</span>),
+                    <span>{record.withdrawChannel}</span>),
             }, {
                 align: 'center',
                 title: '操作人',
@@ -195,8 +195,7 @@ class Basic extends Component {
                 key: '查看',
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.showOPDAyModal2(record)}>备注</Button>
-
+                        <Button onClick={() => this.showOPDAyModal3(record)}>备注</Button>
                     </div>
                 ),
             }
@@ -208,8 +207,7 @@ class Basic extends Component {
                 render: (text, record) => (
                     <div>
                         <Button onClick={() => this.showOPDAyModal2(record)}>操作日志</Button>
-                        <Button style={{marginLeft: 12}} onClick={() => this.showOPDAyModal3(record)}>渠道设置</Button>
-
+                        <Button style={{marginLeft: 12}} >渠道设置</Button>
                     </div>
                 ),
             }];
@@ -325,7 +323,7 @@ class Basic extends Component {
                 loading: true,
             }
         );
-        window.Axios.post('star/getStarLiveAccountList', {
+        window.Axios.post('finance/getDepositChannelList', {
             'pageSize': self.state.pgsize,
             'pageNo': self.state.current,
         }).then(function (response) {
@@ -334,7 +332,7 @@ class Basic extends Component {
             self.setState({
                     totalPage: response.data.data.totalPage,
                     loading: false,
-                    userList: response.data.data.list
+                    userList: response.data.data
                 }
             );
 
@@ -467,6 +465,100 @@ class Basic extends Component {
                            }}
                     />
                 </Card>
+                <Modal
+                    title="查看操作日志"
+                    visible={this.state.modal2OPDAYVisible}
+                    onCancel={() => {
+                        this.setState({
+                            visible: false,
+                            modal2OPDAYVisible: false,
+                        });
+                    }}
+                    width={600}
+                    footer={null}>
+                    <Table rowKey="id"
+                           columns={[
+                               {
+                                   title: '时间',
+                                   dataIndex: 'createDate',
+                                   key: 'operationDiary_Date',
+                                   render: (text, record) => (
+                                       <span>{record.createDate}</span>),
+                               }, {
+                                   title: 'IP',
+                                   dataIndex: 'IP',
+                                   key: 'IP',
+                                   render: (text, record) => (
+                                       <span>{record.ipAddress}</span>),
+                               }, {
+                                   title: '操作人',
+                                   width: 130,
+                                   dataIndex: 'bkUserName',
+                                   key: 'operationDiary_User',
+                                   render: (text, record) => (
+                                       <span>{record.bkUserName}</span>),
+                               }, {
+                                   title: '操作',
+                                   dataIndex: 'comment',
+                                   key: 'operationDiary_Status',
+                                   render: (text, record) => (
+                                       <span>{record.comment}</span>),
+                               }]}
+                           dataSource={this.state.operationDiaryHistory}
+                           loading={this.state.loadingComment}
+                           pagination={{
+                               total: this.state.totalpageComments * this.state.pgsize,
+                               pageSize: this.state.pgsize,
+                               onChange: this.changePageComment,
+                           }}
+                    />
+
+                </Modal>
+                <Modal
+                    title="备注"
+                    visible={this.state.modal3OPDAYVisible}
+                    onCancel={() => {
+                        this.setState({
+                            visible: false,
+                            modal3OPDAYVisible: false,
+                        });
+                    }}
+                    width={600}
+                    footer={null}
+                >
+                    <Table rowKey="id"
+                           columns={[
+
+                               {
+                                   title: '操作人',
+                                   width: 130,
+                                   dataIndex: 'bkUserName',
+                                   key: 'operationDiary_User',
+                                   render: (text, record) => (
+                                       <span>{record.bkUserName}</span>),
+                               }, {
+                                   title: '操作时间',
+                                   dataIndex: 'createDate',
+                                   key: 'operationDiary_Date',
+                                   render: (text, record) => (
+                                       <span>{record.createDate}</span>),
+                               }, {
+                                   title: '备注',
+                                   dataIndex: 'comment',
+                                   key: 'operationDiary_Status',
+                                   render: (text, record) => (
+                                       <span>{record.comment}</span>),
+                               }]}
+                           dataSource={this.state.operationDiaryHistory}
+                           loading={this.state.loadingComment}
+                           pagination={{
+                               total: this.state.totalpageComments * this.state.pgsize,
+                               pageSize: this.state.pgsize,
+                               onChange: this.changePageComment,
+                           }}
+                    />
+
+                </Modal>
 
             </div>
 
