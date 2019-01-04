@@ -37,6 +37,7 @@ import AddUser from './pms/AddUser'
 import EditUser from './pms/EditUser'
 import TradeAccount from './trade/Account'
 import InComeMoney from './fina/IncomeMoney'
+import EditCha from './fina/EditCha'
 import TeleMoney from './fina/TeleMoney'
 import OutMoneyJU from './fina/OutMoneyJU'
 import OutMoney from './fina/OutMoney'
@@ -87,6 +88,7 @@ export default {
     AddUser,
     EditUser,
     DEVhboard,
+    EditCha,
     AddRole,
     PassOpenRS,
     EditRole,

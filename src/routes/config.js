@@ -141,6 +141,11 @@ export default {
             tk: 'tk', title: 'JUOutM',
             icon: 'star',
             component: 'OutMoneyJU'
+        }, {
+            route: '/app/fina/editcha:id',
+            tk: 'tk', title: 'EditCha',
+            icon: 'star',
+            component: 'EditCha'
         },
         ]
 }
