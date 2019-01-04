@@ -73,18 +73,18 @@ class CustomerUserInfo extends Component {
 
 
                 <h2 style={{marginTop: 15}}>
-                    用戶管理
+                    行為信息
                 </h2>
 
                 <BreadcrumbCustom first="用户總表" second="行為信息"/>
                 {/*<Card*/}
-                    {/*style={{ width: 240 }}*/}
-                    {/*cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}*/}
+                {/*style={{ width: 240 }}*/}
+                {/*cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}*/}
                 {/*>*/}
-                    {/*<Meta*/}
-                        {/*title="Europe Street beat"*/}
-                        {/*description="www.instagram.com"*/}
-                    {/*/>*/}
+                {/*<Meta*/}
+                {/*title="Europe Street beat"*/}
+                {/*description="www.instagram.com"*/}
+                {/*/>*/}
                 {/*</Card>*/}
                 <Card
                     type="inner"
@@ -92,8 +92,7 @@ class CustomerUserInfo extends Component {
                 >
 
 
-
-                    <img style={{width:100}} src={avater} alt="头像"/>
+                    <img style={{width: 100}} src={avater} alt="头像"/>
                     < Meta title={this.state.userList.length == 0 ? '姓名：' : '姓名：' + this.state.userList.base.name}/>
                     < Meta
                         title={this.state.userList.length == 0 ? '手机：' : '手机：' + this.state.userList.base.cellphone}/>
@@ -162,33 +161,33 @@ class CustomerUserInfo extends Component {
     ediftModalColumn = () => {
         this.modalColumns = [{
             title: '時間',
-            align:'center',
+            align: 'center',
             dataIndex: 'createDate',
             key: 'operationDiary_Date',
 
             render: (text, record) => (
-                <Button>{this.timestampToTimeNI(record.createDate)}</Button>),
+                <span>{this.timestampToTimeNI(record.createDate)}</span>),
         }, {
             title: 'ip',
             dataIndex: 'ip',
             key: 'ip',
-            align:'center',
+            align: 'center',
             render: (text, record) => (
-                <Button>{record.ip}</Button>),
+                <span>{record.ip}</span>),
         }, {
-            align:'center',
+            align: 'center',
             title: '操作',
             dataIndex: '操作',
             key: '操作',
             render: (text, record) => (
-                <Button>{record.bkUserName}</Button>),
+                <span>{record.comment}</span>),
         }, {
-            align:'center',
+            align: 'center',
             title: '操作人',
             dataIndex: 'bkUserName',
             key: 'operationDiary_User',
             render: (text, record) => (
-                <Button>{record.bkUserName}</Button>),
+                <span>{record.bkUserName}</span>),
         }]
     }
 

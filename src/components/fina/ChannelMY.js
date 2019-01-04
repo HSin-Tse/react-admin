@@ -21,7 +21,6 @@ class Basic extends Component {
             visibleOpM: false,
             date: new Date(),
             userList: [],
-            leavgeList: [],
             nodeList: [],
             visibleB: false,
             loading: false,
@@ -34,7 +33,6 @@ class Basic extends Component {
             current: 0,
             pgsize: 10,
             loadFor: false,
-            suspend_reason_type: []
 
         };
     }
@@ -96,30 +94,9 @@ class Basic extends Component {
 
     componentDidMount() {
 
-        let self = this;
-        window.Axios.post('dict/openDict', {
-            'keys': 'suspend_reason_type',
-        }).then(function (response) {
-            self.setState({
-                    suspend_reason_type: response.data.data.suspend_reason_type
-                }
-            );
-        })
-
-        window.Axios.post('dict/leverageList', {
-            'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
-        }).then((response) => {
-            console.log('hcia response', response)
-            self.setState({
-                leavgeList: response.data.data,
-            })
-        });
-
-
         this.columns = [
             {
                 align: 'center',
-
                 title: '渠道名称',
                 dataIndex: '渠道名称',
                 key: '渠道名称',
@@ -207,40 +184,11 @@ class Basic extends Component {
                 render: (text, record) => (
                     <div>
                         <Button onClick={() => this.showOPDAyModal2(record)}>操作日志</Button>
-                        <Button style={{marginLeft: 12}} >渠道设置</Button>
+                        <Button style={{marginLeft: 12}}>渠道设置</Button>
                     </div>
                 ),
             }];
 
-        this.nodeColumns = [
-            {
-                align: 'center',
-                title: '日期',
-                width: 140,
-                dataIndex: '日期',
-                key: '日期',
-                render: (text, record) => (
-                    <span>{this.timestampToTime(record.createDate)}</span>)
-            },
-            {
-                align: 'center',
-
-                title: '备注',
-                dataIndex: '备注',
-                key: '备注',
-                width: 120,
-                render: (text, record) => (
-                    <span>{record.comment}</span>)
-            }, {
-                align: 'center',
-
-                title: '操作人',
-                dataIndex: '操作人',
-                width: 120,
-                key: '操作人',
-                render: (text, record) => (
-                    <span>{record.bkUserName}</span>)
-            }];
         this.requestPage()
     }
 
@@ -436,12 +384,10 @@ class Basic extends Component {
                 <Card title="渠道管理"
                       bodyStyle={{padding: 0, margin: 0}}
 
-                      extra={[<Button type="primary"
-                                      onClick={() => this.refleshNowpage()}>汇率调整
-                      </Button>, <Button type="primary"
-                                         onClick={() => this.refleshNowpage()}>新增渠道
-                      </Button>]
-
+                      extra={[
+                          <Button type="primary" onClick={() => this.refleshNowpage()}>汇率调整</Button>,
+                          <Button type="primary" onClick={() => this.refleshNowpage()}>新增渠道</Button>
+                      ]
                       }>
 
                     <Table rowKey="id"
