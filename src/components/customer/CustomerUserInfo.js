@@ -3,9 +3,9 @@
 import React, {Component} from 'react';
 import {Col, Card, Row, DatePicker, Input, Modal, Button, Table, Icon, Checkbox} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
-import axios from 'axios';
 import {parse} from 'querystring';
 import avater from "../../style/imgs/b1.jpg";
+const {Meta} = Card;
 
 class CustomerUserInfo extends Component {
     state = {visible: false, modal2Visible: false}
@@ -60,12 +60,6 @@ class CustomerUserInfo extends Component {
     }
 
     render() {
-        const style1 = {
-            padding: '8px',
-        };
-        const {
-            Meta
-        } = Card;
 
         return (
 
@@ -77,20 +71,10 @@ class CustomerUserInfo extends Component {
                 </h2>
 
                 <BreadcrumbCustom first="用户總表" second="行為信息"/>
-                {/*<Card*/}
-                {/*style={{ width: 240 }}*/}
-                {/*cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}*/}
-                {/*>*/}
-                {/*<Meta*/}
-                {/*title="Europe Street beat"*/}
-                {/*description="www.instagram.com"*/}
-                {/*/>*/}
-                {/*</Card>*/}
                 <Card
                     type="inner"
                     title="基本信息"
                 >
-
 
                     <img style={{width: 100}} src={avater} alt="头像"/>
                     < Meta title={this.state.userList.length == 0 ? '姓名：' : '姓名：' + this.state.userList.base.name}/>
@@ -147,12 +131,12 @@ class CustomerUserInfo extends Component {
 
 
     requestUserCommentList = () => {
-        var tmp = this;
+        var self = this;
 
         window.Axios.post('auth/getUserCommentList', {
-            'belongUserId': '4028b2a4631f770f01631f7770df0000',
+            'belongUserId': self.props.match.params.id,
         }).then((response) => {
-            tmp.setState({operationDiaryHistory: response.data.data.list});
+            self.setState({operationDiaryHistory: response.data.data.list});
         })
     }
 

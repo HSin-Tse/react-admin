@@ -95,23 +95,7 @@ class PassOpenD extends Component {
         var self = this;
 
 
-        // if (localStorage.getItem('infor')) {
-        //     var menuInfor = JSON.parse(localStorage.getItem('infor'))
-        //     // console.log('hcia menuInfor', menuInfor.menuList)
-        //     // console.log('hcia  this.props', this.props)
-        //
-        //     var findEmpty = menuInfor.menuList.find((item) => {
-        //         // console.log('hcia  this.props', this.props)
-        //         return this.props.tk === item.key;
-        //     });
-        //
-        //     // console.log('hcia findEmpty', findEmpty.availableFlag)
-        //     self.setState({
-        //         availableFlag: findEmpty.availableFlag === 1,
-        //
-        //     });
-        //
-        // }
+
 
 
         window.Axios.post('dict/leverageList', {
