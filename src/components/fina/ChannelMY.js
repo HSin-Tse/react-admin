@@ -184,7 +184,11 @@ class Basic extends Component {
                 render: (text, record) => (
                     <div>
                         <Button onClick={() => this.showOPDAyModal2(record)}>操作日志</Button>
-                        <Button style={{marginLeft: 12}}>渠道设置</Button>
+                        <Button onClick={()=>{
+
+                            this.props.history.push('/app/fina/editcha'+record.id)
+
+                        }} style={{marginLeft: 12}}>渠道设置</Button>
                     </div>
                 ),
             }];
@@ -383,7 +387,6 @@ class Basic extends Component {
 
                 <Card title="渠道管理"
                       bodyStyle={{padding: 0, margin: 0}}
-
                       extra={[
                           <Button type="primary" onClick={() => this.refleshNowpage()}>汇率调整</Button>,
                           <Button type="primary" onClick={() => {
@@ -396,7 +399,6 @@ class Basic extends Component {
 
                     <Table rowKey="id"
                            rowSelection={rowSelection}
-
                            columns={this.columns}
                            dataSource={this.state.userList}
                            scroll={{x: 2000}}
@@ -408,7 +410,7 @@ class Basic extends Component {
                                        onClick={() => this.refleshNowpage()}>批量关闭
                                </Button>]}
                            loading={this.state.loading}
-                           pagination={{  // 分页
+                           pagination={{
                                total: this.state.pgsize * this.state.totalPage,
                                pageSize: this.state.pgsize,
                                onChange: this.changePage,
