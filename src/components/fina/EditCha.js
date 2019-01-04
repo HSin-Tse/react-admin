@@ -1,7 +1,7 @@
 /* eslint-disable react/sort-comp */
 
 import React, {Component} from 'react';
-import {Select, Card, Row, DatePicker, Input, Modal, Button, Table} from 'antd';
+import {Select, Card, Checkbox, DatePicker, Input, Modal, Button, Table} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {parse} from 'querystring';
 
@@ -68,26 +68,35 @@ class EditCha extends Component {
                 <Card
                     style={{marginTop: 16}}
                     type="inner"
-                    title="數據信息"
+                    title="支付通道设置"
                 >
-                    < Meta
-                        title={'123'}/>
+
+                    {this.state.mDetail.subDepositChannelMODList ? this.state.mDetail.subDepositChannelMODList.map(pay =>
+                        <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
+                            <Checkbox
+                                value={pay.id}
+                                style={{width: 160, marginBottom: 10}}
+                                onChange={(changeValue) => {
+                                    console.log('hcia changeValue' , changeValue)
+                                // console.log('hcia e.target.checked', e.target.checked)
+
+                            }}>{pay.channelName}</Checkbox>
+                            <span >限额：</span>
+                            <Input value={pay.max}
+                                   onChange={(e) => {
+
+                                       pay.max= e.target.value
+
+                                   }} style={{width: 200, marginBottom: 10}} placeholder=""/>
+                        </div>) : ''}
 
 
                 </Card>
+
                 <Card
                     style={{marginTop: 16}}
                     type="inner"
-                    title="行為信息"
-                >
-                    {/*< Meta title={this.state.userList.length == 0 ? 'APP版本:' : 'APP版本:' + this.state.userList.base.versionInfo}/>*/}
-
-
-                </Card>
-                <Card
-                    style={{marginTop: 16}}
-                    type="inner"
-                    title="其他"
+                    title="操作日志"
 
                 >
                     <Table rowKey="id"
