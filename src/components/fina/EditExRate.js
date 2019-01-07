@@ -51,31 +51,25 @@ class EditCha extends Component {
                 <BreadcrumbCustom first="财务审核" second="渠道管理" third="渠道设置"/>
                 <Card title={this.state.mDetail.channelName + '设置'}>
                     <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
-                        <span style={{minWidth: 80}}>渠道KEY：</span>
+                        <span style={{minWidth: 80}}>渠道名称：</span>
                         <Input
 
-                            value={this.state.mDetail.channelCode}
+                            value={this.state.mDetail.channelName}
 
                             onChange={(e) => {
                                 this.setState({
-                                    mDetail: {...this.state.mDetail, channelCode: e.target.value},
+                                    mDetail: {...this.state.mDetail, channelName: e.target.value},
                                 });
                             }} style={{width: 200, marginBottom: 10}} placeholder=""/>
-                        <span style={{ marginLeft:16, minWidth: 80}}>后台配置,不可修改</span>
-
                     </div>
                     <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
-
-
-                        <span style={{minWidth: 80}}>渠道名称：</span>
-                        <Input value={this.state.mDetail.channelName}
+                        <span style={{minWidth: 80}}>渠道编号：</span>
+                        <Input value={this.state.mDetail.channelCode}
                                onChange={(e) => {
                                    this.setState({
-                                       mDetail: {...this.state.mDetail,channelName : e.target.value},
+                                       mDetail: {...this.state.mDetail, channelCode: e.target.value},
                                    });
                                }} style={{width: 200, marginBottom: 10}} placeholder=""/>
-                        <span style={{ marginLeft:16, minWidth: 80}}>输入APP显示的渠道名称,可修改</span>
-
                     </div>
                     <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
                         <span style={{minWidth: 80}}>渠道状态：</span>
@@ -157,8 +151,8 @@ class EditCha extends Component {
                                    render: (text, record) => (
                                        <span>{record.bkUserName}</span>),
                                }, {
+                                   align: 'center',
                                    title: '操作备注',
-                                   width:600,
                                    dataIndex: '操作备注',
                                    key: '操作备注',
                                    render: (text, record) => (
@@ -235,7 +229,7 @@ class EditCha extends Component {
             id: self.props.match.params.id,
             commentType: 11,
             // pageNo: this.state.currentComment,
-            pageSize: 300,
+            pageSize: 30,
         }).then(function (response) {
             self.setState({
                 // totalpageComments: response.data.data.totalPage,
