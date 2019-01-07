@@ -12,6 +12,19 @@ import Base64 from 'base-64';
 
 const {TextArea} = Input;
 
+ export  const ThemedButton=(props)=> {
+    return <Button type={props.theme} >{props.children}</Button>;
+}
+
+// 中间组件
+export  const  Toolbar = (props) => {
+    return (
+        <div>
+            <ThemedButton theme={props.theme} > 333</ThemedButton>
+            <ThemedButton>333 sss</ThemedButton>
+        </div>
+    );
+}
 
 class DEVhboard extends React.Component {
 
@@ -88,7 +101,7 @@ class DEVhboard extends React.Component {
         return (
             <div className="gutter-example button-demo">
                 {/*{JSON.stringify(localStorage.getItem('infor'))}*/}
-
+                <Toolbar theme='danger' />
                 <Row gutter={1}>
                     <Col md={24}>
                         <div style={{display: this.state.displayName == 'admin' ? '' : 'none'}}>

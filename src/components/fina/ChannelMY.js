@@ -393,8 +393,6 @@ class Basic extends Component {
                               disabled='true'
                               type="primary" onClick={() => {
                               this.props.history.push('/app/fina/editcha123')
-
-
                           }}>新增渠道</Button>
                       ]
                       }>
