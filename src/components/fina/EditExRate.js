@@ -45,97 +45,14 @@ class EditCha extends Component {
 
 
                 <h2 style={{marginTop: 15}}>
-                    渠道设置
+                    汇率调整
                 </h2>
 
-                <BreadcrumbCustom first="财务审核" second="渠道管理" third="渠道设置"/>
-                <Card title={this.state.mDetail.channelName + '设置'}>
-                    <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
-                        <span style={{minWidth: 80}}>渠道名称：</span>
-                        <Input
-
-                            value={this.state.mDetail.channelName}
-
-                            onChange={(e) => {
-                                this.setState({
-                                    mDetail: {...this.state.mDetail, channelName: e.target.value},
-                                });
-                            }} style={{width: 200, marginBottom: 10}} placeholder=""/>
-                    </div>
-                    <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
-                        <span style={{minWidth: 80}}>渠道编号：</span>
-                        <Input value={this.state.mDetail.channelCode}
-                               onChange={(e) => {
-                                   this.setState({
-                                       mDetail: {...this.state.mDetail, channelCode: e.target.value},
-                                   });
-                               }} style={{width: 200, marginBottom: 10}} placeholder=""/>
-                    </div>
-                    <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
-                        <span style={{minWidth: 80}}>渠道状态：</span>
-                        <Select onChange={(valu) => {
-                            this.setState({
-                                mDetail: {...this.state.mDetail, displayStatus: valu},
-                            });
-                        }} value={this.state.mDetail.displayStatus} style={{width: 200}}>
-                            <Option value="可用">打开</Option>
-                            <Option value="不可用">关闭</Option>
-                        </Select>
-                    </div>
+                <BreadcrumbCustom first="财务审核" second="渠道管理" third="汇率调整"/>
+                <Card title={'汇率设置'}>
 
                 </Card>
-                <Card
-                    style={{marginTop: 16}}
-                    type="inner"
-                    title="支付通道设置"
-                >
 
-                    {this.state.mDetail.subDepositChannelMODList ? this.state.mDetail.subDepositChannelMODList.map(pay =>
-                        <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
-                            <Checkbox
-                                value={pay.id}
-                                style={{width: 160, marginBottom: 10}}
-                                onChange={(changeValue) => {
-                                    if (changeValue.target.checked) {
-                                        pay.checked = changeValue.target.checked
-
-                                        this.state.mMultiMap[pay.id] = pay.max
-
-                                    } else {
-                                        pay.checked = undefined
-                                        this.state.mMultiMap[pay.id] = undefined
-
-                                    }
-
-                                    this.setState({})
-                                    console.log('hcia changeValue', changeValue.target.value)
-                                    console.log('hcia e.target.checked', changeValue.target.checked)
-                                    console.log('hcia e.target.checked', pay.max)
-
-                                }}>{pay.channelName}</Checkbox>
-                            <span>限额：</span>
-                            <Input value={pay.max}
-                                   onChange={(e) => {
-                                       // pay.checked = true
-
-                                       pay.max = e.target.value
-
-
-                                       console.log('hcia pay.max', pay.checked)
-                                       if (pay.checked) {
-                                           this.state.mMultiMap[pay.id] = pay.max
-                                       } else {
-                                           this.state.mMultiMap[pay.id] = undefined
-                                       }
-
-                                       this.setState({})
-                                   }}
-                                   style={{width: 200, marginBottom: 10}}
-                                   placeholder=""/>
-                        </div>) : ''}
-
-
-                </Card>
 
                 <Card
                     style={{marginTop: 15}}
@@ -243,8 +160,7 @@ class EditCha extends Component {
 
     requestD = () => {
         var self = this;
-        window.Axios.post('finance/getDepositChannelDetail', {
-            'id': self.props.match.params.id,
+        window.Axios.post('finance/getChannelRateList', {
         }).then((response) => {
             self.setState({mDetail: response.data.data});
         });

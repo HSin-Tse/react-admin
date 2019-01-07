@@ -38,6 +38,7 @@ import EditUser from './pms/EditUser'
 import TradeAccount from './trade/Account'
 import InComeMoney from './fina/IncomeMoney'
 import EditCha from './fina/EditCha'
+import EditExRate from './fina/EditExRate'
 import TeleMoney from './fina/TeleMoney'
 import OutMoneyJU from './fina/OutMoneyJU'
 import OutMoney from './fina/OutMoney'
@@ -89,6 +90,7 @@ export default {
     EditUser,
     DEVhboard,
     EditCha,
+    EditExRate,
     AddRole,
     PassOpenRS,
     EditRole,

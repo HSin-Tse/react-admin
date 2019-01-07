@@ -146,6 +146,11 @@ export default {
             tk: 'tk', title: 'EditCha',
             icon: 'star',
             component: 'EditCha'
+        }, {
+            route: '/app/fina/editexrate',
+            tk: 'tk', title: 'EditExRate',
+            icon: 'star',
+            component: 'EditExRate'
         },
         ]
 }
