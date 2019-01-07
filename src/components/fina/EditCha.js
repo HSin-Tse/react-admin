@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 import {Select, Card, Checkbox, DatePicker, Input, Modal, Button, Table} from 'antd';
-import { message } from 'antd';
+import {message} from 'antd';
 
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {parse} from 'querystring';
@@ -20,7 +20,7 @@ class EditCha extends Component {
             mName: '',
             mCode: '',
             mStatus: '',
-            CommentViSible: true,
+            CommentViSible: false,
             mMultiMap: {},
             mContent: '',
         };
@@ -28,7 +28,8 @@ class EditCha extends Component {
 
     componentDidMount() {
         this.requestD()
-        // this.requestUserCommentList()
+
+        this.requestUserCommentList()
     }
 
     render() {
@@ -176,7 +177,6 @@ class EditCha extends Component {
                     });
 
 
-
                 }} style={{marginTop: 15}}>添加备注并保存 </Button>
 
                 <Modal
@@ -189,11 +189,11 @@ class EditCha extends Component {
                             'name': this.state.mDetail.channelName,
                             'code': this.state.mDetail.channelCode,
                             'status': this.state.mDetail.displayStatus == '可用' ? 0 : 1,
-                            'multiMap': this.state.mMultiMap,
+                            'multiMap': JSON.stringify(this.state.mMultiMap) == "{}" ? undefined : this.state.mMultiMap,
                             'content': self.state.mContent,
                         }).then((response) => {
                             message.success('操作成功')
-                            // self.setState({operationDiaryHistory: response.data.data.list});
+                            self.setState({mContent: '', CommentViSible: false});
                         })
                     }}
                     onCancel={(e) => {
@@ -224,11 +224,20 @@ class EditCha extends Component {
     requestUserCommentList = () => {
         var self = this;
 
-        window.Axios.post('auth/getUserCommentList', {
-            'belongUserId': self.props.match.params.id,
-        }).then((response) => {
-            self.setState({operationDiaryHistory: response.data.data.list});
-        })
+        var self = this;
+        window.Axios.post('/auth/getRecordCommentList', {
+            id: self.props.match.params.id,
+            commentType: 11,
+            // pageNo: this.state.currentComment,
+            pageSize: 30,
+        }).then(function (response) {
+            self.setState({
+                // totalpageComments: response.data.data.totalPage,
+                operationDiaryHistory: response.data.data.list,
+            });
+        });
+
+
     }
 
 
