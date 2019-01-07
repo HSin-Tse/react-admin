@@ -15,7 +15,6 @@ class EditCha extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            mDetail: {},
             rateList: [],
             operationDiaryHistory: [],
             mName: '',
@@ -30,7 +29,6 @@ class EditCha extends Component {
     componentDidMount() {
         this.requestD()
 
-        this.requestUserCommentList()
     }
 
     render() {
@@ -38,7 +36,7 @@ class EditCha extends Component {
         return (
             <div>
                 {/*<div>name :{JSON.stringify(this.state.rateList)}</div>*/}
-                <div>multiMap :{JSON.stringify(this.state.mMultiMap)}</div>
+                {/*<div>multiMap :{JSON.stringify(this.state.mMultiMap)}</div>*/}
                 {/*<div>content :{JSON.stringify(this.state.mContent)}</div>*/}
 
 
@@ -62,7 +60,6 @@ class EditCha extends Component {
                                     <h3>{pay.resourceCurrency}</h3>
                                     <Input
 
-                                        // value={this.state.mDetail.channelCode}
                                         value={pay.rate}
 
                                         onChange={(changeValue) => {
@@ -92,7 +89,6 @@ class EditCha extends Component {
                                     <h3>{pay.destnationCurrency}</h3>
                                     <Input
 
-                                        // value={this.state.mDetail.channelCode}
                                         value={pay.rate}
 
                                         onChange={(changeValue) => {
@@ -163,6 +159,9 @@ class EditCha extends Component {
                         }).then((response) => {
                             message.success('操作成功')
                             self.setState({mContent: '', CommentViSible: false});
+
+                            self.requestD()
+
                         })
                     }}
                     onCancel={(e) => {
@@ -191,12 +190,17 @@ class EditCha extends Component {
 
 
     requestUserCommentList = () => {
+        console.log('hcia requestUserCommentList' )
 
+        var ssss =this.state.rateList.map(function(item, index, array){
+            return item.id
+        })
+
+        console.log('hcia ssss' , ssss)
         var self = this;
         window.Axios.post('/auth/getRecordCommentList', {
-            id: self.props.match.params.id,
-            commentType: 11,
-            // pageNo: this.state.currentComment,
+            commentType: 12,
+            idList: ssss,
             pageSize: 30,
         }).then(function (response) {
             self.setState({
@@ -210,9 +214,15 @@ class EditCha extends Component {
 
 
     requestD = () => {
+        console.log('hcia requestD' )
         var self = this;
         window.Axios.post('finance/getChannelRateList', {}).then((response) => {
-            self.setState({rateList: response.data.data});
+            self.setState({rateList: response.data.data},()=>{
+
+
+                self.requestUserCommentList()
+
+            });
         });
     };
 }
