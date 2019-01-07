@@ -44,7 +44,7 @@ class EditCha extends Component {
                 </h2>
 
                 <BreadcrumbCustom first="财务审核" second="渠道管理" third="渠道设置"/>
-                <Card title="某渠道设置">
+                <Card title={this.state.mDetail.channelName+'设置'}>
                     <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
                         <span style={{minWidth: 80}}>渠道名称：</span>
                         <Input
@@ -68,7 +68,7 @@ class EditCha extends Component {
                     </div>
                     <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
                         <span style={{minWidth: 80}}>渠道状态：</span>
-                        <Select  onChange ={(valu) => {
+                        <Select onChange={(valu) => {
                             this.setState({
                                 mDetail: {...this.state.mDetail, displayStatus: valu},
                             });
@@ -91,20 +91,18 @@ class EditCha extends Component {
                                 value={pay.id}
                                 style={{width: 160, marginBottom: 10}}
                                 onChange={(changeValue) => {
-                                    if(changeValue.target.checked){
-                                        pay.checked=changeValue.target.checked
+                                    if (changeValue.target.checked) {
+                                        pay.checked = changeValue.target.checked
 
-                                        this.state.mMultiMap[pay.id]=pay.max
+                                        this.state.mMultiMap[pay.id] = pay.max
 
-                                    }else{
-                                        pay.checked=undefined
-                                        this.state.mMultiMap[pay.id]=undefined
+                                    } else {
+                                        pay.checked = undefined
+                                        this.state.mMultiMap[pay.id] = undefined
 
                                     }
 
-                                    this.setState({
-
-                                    })
+                                    this.setState({})
                                     console.log('hcia changeValue', changeValue.target.value)
                                     console.log('hcia e.target.checked', changeValue.target.checked)
                                     console.log('hcia e.target.checked', pay.max)
@@ -118,16 +116,14 @@ class EditCha extends Component {
                                        pay.max = e.target.value
 
 
-                                       console.log('hcia pay.max' , pay.checked)
-                                       if(pay.checked){
-                                           this.state.mMultiMap[pay.id]=pay.max
-                                       }else{
-                                           this.state.mMultiMap[pay.id]=undefined
+                                       console.log('hcia pay.max', pay.checked)
+                                       if (pay.checked) {
+                                           this.state.mMultiMap[pay.id] = pay.max
+                                       } else {
+                                           this.state.mMultiMap[pay.id] = undefined
                                        }
 
-                                       this.setState({
-
-                                       })
+                                       this.setState({})
                                    }}
                                    style={{width: 200, marginBottom: 10}}
                                    placeholder=""/>
@@ -173,11 +169,11 @@ class EditCha extends Component {
 
                     window.Axios.post('finance/updateDepositChannel', {
                         'id': this.state.mDetail.id,
-                        'name': self.state.id,
-                        'code': self.state.id,
-                        'status': self.state.id,
-                        'multiMap': self.state.id,
-                        'content': self.props.mContent,
+                        'name': this.state.mDetail.channelName,
+                        'code': this.state.mDetail.channelCode,
+                        'status': this.state.mDetail.displayStatus == '可用' ? 0 : 1,
+                        'multiMap': this.state.mMultiMap,
+                        'content': self.state.mContent,
                     }).then((response) => {
                         // self.setState({operationDiaryHistory: response.data.data.list});
                     })
