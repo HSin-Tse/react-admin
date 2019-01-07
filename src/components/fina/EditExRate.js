@@ -37,11 +37,8 @@ class EditCha extends Component {
 
         return (
             <div>
-                {/*<div>id :{JSON.stringify(this.state.mDetail.id)}</div>*/}
-                <div>name :{JSON.stringify(this.state.rateList)}</div>
-                {/*<div>code :{JSON.stringify(this.state.mDetail.channelCode)}</div>*/}
-                {/*<div>0:可用（打开）1:不可用（关闭）| status :{JSON.stringify(this.state.mDetail.displayStatus)}</div>*/}
-                {/*<div>multiMap :{JSON.stringify(this.state.mMultiMap)}</div>*/}
+                {/*<div>name :{JSON.stringify(this.state.rateList)}</div>*/}
+                <div>multiMap :{JSON.stringify(this.state.mMultiMap)}</div>
                 {/*<div>content :{JSON.stringify(this.state.mContent)}</div>*/}
 
 
@@ -66,12 +63,15 @@ class EditCha extends Component {
                                     <Input
 
                                         // value={this.state.mDetail.channelCode}
-                                        defaultValue={pay.rate}
+                                        value={pay.rate}
 
-                                        onChange={(e) => {
-                                            this.setState({
-                                                mDetail: {...this.state.mDetail, channelCode: e.target.value},
-                                            });
+                                        onChange={(changeValue) => {
+
+                                            console.log('hcia changeValue', changeValue)
+                                            pay.rate = changeValue.target.value
+                                            this.state.mMultiMap[pay.id] = pay.rate
+
+                                            this.setState({})
                                         }} style={{}} placeholder=""/>
                                 </div>
                             </Card.Grid>)}
@@ -93,12 +93,15 @@ class EditCha extends Component {
                                     <Input
 
                                         // value={this.state.mDetail.channelCode}
-                                        defaultValue={pay.rate}
+                                        value={pay.rate}
 
-                                        onChange={(e) => {
-                                            this.setState({
-                                                mDetail: {...this.state.mDetail, channelCode: e.target.value},
-                                            });
+                                        onChange={(changeValue) => {
+
+                                            console.log('hcia changeValue', changeValue)
+                                            pay.rate = changeValue.target.value
+                                            this.state.mMultiMap[pay.id] = pay.rate
+
+                                            this.setState({})
                                         }} style={{}} placeholder=""/>
                                 </div>
                             </Card.Grid>)}
@@ -141,7 +144,6 @@ class EditCha extends Component {
                 </Card>
 
                 <Button onClick={() => {
-                    var self = this;
 
                     this.setState({
                         CommentViSible: true,
@@ -155,11 +157,7 @@ class EditCha extends Component {
                     visible={this.state.CommentViSible}
                     onOk={(e) => {
                         let self = this;
-                        window.Axios.post('finance/updateDepositChannel', {
-                            'id': this.state.mDetail.id,
-                            'name': this.state.mDetail.channelName,
-                            'code': this.state.mDetail.channelCode,
-                            'status': this.state.mDetail.displayStatus == '可用' ? 0 : 1,
+                        window.Axios.post('finance/updateChannelRate', {
                             'multiMap': JSON.stringify(this.state.mMultiMap) == "{}" ? undefined : this.state.mMultiMap,
                             'content': self.state.mContent,
                         }).then((response) => {
