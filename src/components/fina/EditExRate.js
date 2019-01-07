@@ -33,7 +33,10 @@ class EditCha extends Component {
     }
 
     render() {
-
+        const gridStyle = {
+            width: '14%',
+            textAlign: 'center',
+        };
         return (
             <div>
                 {/*<div>id :{JSON.stringify(this.state.mDetail.id)}</div>*/}
@@ -50,7 +53,21 @@ class EditCha extends Component {
 
                 <BreadcrumbCustom first="财务审核" second="渠道管理" third="汇率调整"/>
                 <Card title={'汇率设置'}>
+                    <Card title={'入金'}>
+                        <Card.Grid style={gridStyle}>
+                            <div>
 
+                                <h3>CNY</h3>
+                                <h3>1234</h3>
+                            </div>
+                        </Card.Grid>
+                        <Card.Grid style={gridStyle}>Content</Card.Grid>
+                        <Card.Grid style={gridStyle}>Content</Card.Grid>
+                        <Card.Grid style={gridStyle}>Content</Card.Grid>
+                        <Card.Grid style={gridStyle}>Content</Card.Grid>
+                        <Card.Grid style={gridStyle}>Content</Card.Grid>
+                        <Card.Grid style={gridStyle}>Content</Card.Grid>
+                    </Card>
                 </Card>
 
 
@@ -139,7 +156,6 @@ class EditCha extends Component {
 
 
     requestUserCommentList = () => {
-        var self = this;
 
         var self = this;
         window.Axios.post('/auth/getRecordCommentList', {
@@ -160,8 +176,7 @@ class EditCha extends Component {
 
     requestD = () => {
         var self = this;
-        window.Axios.post('finance/getChannelRateList', {
-        }).then((response) => {
+        window.Axios.post('finance/getChannelRateList', {}).then((response) => {
             self.setState({mDetail: response.data.data});
         });
     };
