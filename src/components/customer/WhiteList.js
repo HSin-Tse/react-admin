@@ -145,7 +145,7 @@ export default class WhiteList extends Component {
                                     cancelText="No">
                             <Button>移除</Button>
                         </Popconfirm>
-                        <Button onClick={() => this.showOPDAyModal2(record)}>操作日志</Button>
+                        <Button onClick={() => this.showOPDAyModal2(record)}>日志</Button>
 
                         {/*<Button onClick={() => this.handleremove(record)}>操作日志</Button>*/}
                     </div>

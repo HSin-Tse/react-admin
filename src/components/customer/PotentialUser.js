@@ -208,7 +208,7 @@ export default class PotentialUser extends Component {
 
                     <div>
                         <Button onClick={() => this.showAddbAckModal(record)}>添加回访</Button>
-                        <Button onClick={() => this.showOPDAyModal2(record.belongUserId)}>操作日志</Button>
+                        <Button onClick={() => this.showOPDAyModal2(record.belongUserId)}>日志</Button>
                     </div>
                 ),
             }];

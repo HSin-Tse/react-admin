@@ -183,7 +183,7 @@ export default class BlackList extends Component {
                 key: 'action',
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.showOPDAyModal2(record)}>操作日志</Button>
+                        <Button onClick={() => this.showOPDAyModal2(record)}>日志</Button>
 
                         <Popconfirm title="移除?" onConfirm={() => this.handleremove(record)} okText="Yes"
                                     cancelText="No">

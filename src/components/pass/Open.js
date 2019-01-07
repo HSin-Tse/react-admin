@@ -207,7 +207,7 @@ class Basic extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.showOPDAyModal2(record)}>操作日志</Button>
+                        <Button onClick={() => this.showOPDAyModal2(record)}>日志</Button>
 
                         <Button onClick={() => this.handleEdit(record)}>{record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'}</Button>
                         <Button onClick={() => this.handleAmStok(record)}>{record.displayStatus}</Button>

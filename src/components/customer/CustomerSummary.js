@@ -225,7 +225,7 @@ class CustomerSummary extends Component {
                 render: (text, record) => (
                     <div>
                         <Button onClick={() => this.showModalNote(record)}>添加备注</Button>
-                        <Button onClick={() => this.showModalOPDAY(record)}>操作日誌</Button>
+                        <Button onClick={() => this.showModalOPDAY(record)}>日志</Button>
                     </div>
                 ),
             }];

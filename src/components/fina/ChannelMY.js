@@ -178,7 +178,7 @@ class Basic extends Component {
                 key: '操作',
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.showOPDAyModal2(record)}>操作日志</Button>
+                        <Button onClick={() => this.showOPDAyModal2(record)}>日志</Button>
                         <Button onClick={() => {
 
                             this.props.history.push('/app/fina/editcha' + record.id)
