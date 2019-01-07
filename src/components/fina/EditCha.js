@@ -34,7 +34,7 @@ class EditCha extends Component {
                 <div>id :{JSON.stringify(this.state.mDetail.id)}</div>
                 <div>name :{JSON.stringify(this.state.mDetail.channelName)}</div>
                 <div>code :{JSON.stringify(this.state.mDetail.channelCode)}</div>
-                <div>status :{JSON.stringify(this.state.mDetail.displayStatus)}</div>
+                <div>0:可用（打开）1:不可用（关闭）| status :{JSON.stringify(this.state.mDetail.displayStatus)}</div>
                 <div>multiMap :{JSON.stringify(this.state.mMultiMap)}</div>
                 <div>content :{JSON.stringify(this.state.mContent)}</div>
 
@@ -68,7 +68,11 @@ class EditCha extends Component {
                     </div>
                     <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
                         <span style={{minWidth: 80}}>渠道状态：</span>
-                        <Select value={this.state.mDetail.displayStatus} style={{width: 200}}>
+                        <Select  onChange ={(valu) => {
+                            this.setState({
+                                mDetail: {...this.state.mDetail, displayStatus: valu},
+                            });
+                        }} value={this.state.mDetail.displayStatus} style={{width: 200}}>
                             <Option value="可用">打开</Option>
                             <Option value="不可用">关闭</Option>
                         </Select>
@@ -116,12 +120,9 @@ class EditCha extends Component {
 
                                        console.log('hcia pay.max' , pay.checked)
                                        if(pay.checked){
-
                                            this.state.mMultiMap[pay.id]=pay.max
-
                                        }else{
                                            this.state.mMultiMap[pay.id]=undefined
-
                                        }
 
                                        this.setState({
