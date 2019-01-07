@@ -78,9 +78,7 @@ class Basic extends Component {
             self.setState({
                 visibleB: true,
                 loading: false,
-
             });
-
         });
 
 
@@ -106,7 +104,7 @@ class Basic extends Component {
                 title: '渠道状态',
                 dataIndex: '渠道状态',
                 key: '渠道状态',
-                render: (text, record) => (<span>{record.status === 0 ? '可用（打开）' : '不可用（关闭）'}</span>),
+                render: (text, record) => (<span>{record.status === 0 ? '打开' : '关闭'}</span>),
                 align: 'center',
             }, {
                 title: '渠道是否可用',

@@ -228,7 +228,6 @@ class EditCha extends Component {
 
 
     requestUserCommentList = () => {
-        var self = this;
 
         var self = this;
         window.Axios.post('/auth/getRecordCommentList', {
