@@ -16,6 +16,7 @@ class EditCha extends Component {
         super(props);
         this.state = {
             mDetail: {},
+            rateList: [],
             operationDiaryHistory: [],
             mName: '',
             mCode: '',
@@ -33,14 +34,11 @@ class EditCha extends Component {
     }
 
     render() {
-        const gridStyle = {
-            width: '14%',
-            textAlign: 'left',
-        };
+
         return (
             <div>
                 {/*<div>id :{JSON.stringify(this.state.mDetail.id)}</div>*/}
-                {/*<div>name :{JSON.stringify(this.state.mDetail.channelName)}</div>*/}
+                <div>name :{JSON.stringify(this.state.rateList)}</div>
                 {/*<div>code :{JSON.stringify(this.state.mDetail.channelCode)}</div>*/}
                 {/*<div>0:可用（打开）1:不可用（关闭）| status :{JSON.stringify(this.state.mDetail.displayStatus)}</div>*/}
                 {/*<div>multiMap :{JSON.stringify(this.state.mMultiMap)}</div>*/}
@@ -53,29 +51,59 @@ class EditCha extends Component {
 
                 <BreadcrumbCustom first="财务审核" second="渠道管理" third="汇率调整"/>
                 <Card title={'汇率设置'}>
-                    <Card title={'入金'}>
-                        <Card.Grid style={gridStyle}>
-                            <div>
+                    <Card title={'入金'} bodyStyle={{padding: 0, margin: 0}}>
 
-                                <h3>CNY</h3>
-                                <Input
+                        {this.state.rateList.filter(function (item, index, array) {
+                            return item.type == 1;
+                        }).map(pay =>
+                            <Card.Grid style={{
+                                width: 100 / this.state.rateList.length * 2 + '%',
+                                textAlign: 'left',
+                            }}>
+                                <div>
 
-                                    // value={this.state.mDetail.channelCode}
-                                    defaultValue={'123'}
+                                    <h3>{pay.resourceCurrency}</h3>
+                                    <Input
 
-                                    onChange={(e) => {
-                                        this.setState({
-                                            mDetail: {...this.state.mDetail, channelCode: e.target.value},
-                                        });
-                                    }} style={{ }} placeholder=""/>
-                            </div>
-                        </Card.Grid>
-                        <Card.Grid style={gridStyle}>Content</Card.Grid>
-                        <Card.Grid style={gridStyle}>Content</Card.Grid>
-                        <Card.Grid style={gridStyle}>Content</Card.Grid>
-                        <Card.Grid style={gridStyle}>Content</Card.Grid>
-                        <Card.Grid style={gridStyle}>Content</Card.Grid>
-                        <Card.Grid style={gridStyle}>Content</Card.Grid>
+                                        // value={this.state.mDetail.channelCode}
+                                        defaultValue={pay.rate}
+
+                                        onChange={(e) => {
+                                            this.setState({
+                                                mDetail: {...this.state.mDetail, channelCode: e.target.value},
+                                            });
+                                        }} style={{}} placeholder=""/>
+                                </div>
+                            </Card.Grid>)}
+
+
+                    </Card>
+                    <Card title={'出金'} bodyStyle={{padding: 0, margin: 0}}>
+
+                        {this.state.rateList.filter(function (item, index, array) {
+                            return item.type == 2;
+                        }).map(pay =>
+                            <Card.Grid style={{
+                                width: 100 / this.state.rateList.length * 2 + '%',
+                                textAlign: 'left',
+                            }}>
+                                <div>
+
+                                    <h3>{pay.destnationCurrency}</h3>
+                                    <Input
+
+                                        // value={this.state.mDetail.channelCode}
+                                        defaultValue={pay.rate}
+
+                                        onChange={(e) => {
+                                            this.setState({
+                                                mDetail: {...this.state.mDetail, channelCode: e.target.value},
+                                            });
+                                        }} style={{}} placeholder=""/>
+                                </div>
+                            </Card.Grid>)}
+
+
                     </Card>
                 </Card>
 
@@ -186,7 +214,7 @@ class EditCha extends Component {
     requestD = () => {
         var self = this;
         window.Axios.post('finance/getChannelRateList', {}).then((response) => {
-            self.setState({mDetail: response.data.data});
+            self.setState({rateList: response.data.data});
         });
     };
 }
