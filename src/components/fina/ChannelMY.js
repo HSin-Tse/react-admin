@@ -150,7 +150,6 @@ class Basic extends Component {
                     <span>{record.withdrawRate}</span>),
             }, {
                 align: 'center',
-
                 title: '当前启用出金支付渠道',
                 dataIndex: '当前启用出金支付渠道',
                 key: '当前启用出金支付渠道',
@@ -164,8 +163,7 @@ class Basic extends Component {
                 key: '操作人',
                 render: (text, record) => (
                     <span>{record.operator}</span>)
-            }
-            , {
+            }, {
                 align: 'center',
                 title: '查看',
                 dataIndex: '查看',
@@ -175,8 +173,7 @@ class Basic extends Component {
                         <Button onClick={() => this.showOPDAyModal3(record)}>备注</Button>
                     </div>
                 ),
-            }
-            , {
+            }, {
                 align: 'center',
                 title: '操作',
                 dataIndex: '操作',
@@ -184,9 +181,9 @@ class Basic extends Component {
                 render: (text, record) => (
                     <div>
                         <Button onClick={() => this.showOPDAyModal2(record)}>操作日志</Button>
-                        <Button onClick={()=>{
+                        <Button onClick={() => {
 
-                            this.props.history.push('/app/fina/editcha'+record.id)
+                            this.props.history.push('/app/fina/editcha' + record.id)
 
                         }} style={{marginLeft: 12}}>渠道设置</Button>
                     </div>

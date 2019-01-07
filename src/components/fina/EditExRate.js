@@ -35,7 +35,7 @@ class EditCha extends Component {
     render() {
         const gridStyle = {
             width: '14%',
-            textAlign: 'center',
+            textAlign: 'left',
         };
         return (
             <div>
@@ -58,7 +58,16 @@ class EditCha extends Component {
                             <div>
 
                                 <h3>CNY</h3>
-                                <h3>1234</h3>
+                                <Input
+
+                                    // value={this.state.mDetail.channelCode}
+                                    defaultValue={'123'}
+
+                                    onChange={(e) => {
+                                        this.setState({
+                                            mDetail: {...this.state.mDetail, channelCode: e.target.value},
+                                        });
+                                    }} style={{ }} placeholder=""/>
                             </div>
                         </Card.Grid>
                         <Card.Grid style={gridStyle}>Content</Card.Grid>
