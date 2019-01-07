@@ -19,7 +19,6 @@ import {
     notification,
     Form
 } from 'antd';
-import {Radio} from 'antd';
 import {message} from 'antd';
 import html2canvas from 'html2canvas';
 import * as jsPDF from 'jspdf'

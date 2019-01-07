@@ -2,10 +2,13 @@
 
 import React, {Component} from 'react';
 import {Select, Card, Checkbox, DatePicker, Input, Modal, Button, Table} from 'antd';
+import { message } from 'antd';
+
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {parse} from 'querystring';
 
 const Option = Select.Option;
+const {TextArea} = Input;
 
 class EditCha extends Component {
 
@@ -17,6 +20,7 @@ class EditCha extends Component {
             mName: '',
             mCode: '',
             mStatus: '',
+            CommentViSible: true,
             mMultiMap: {},
             mContent: '',
         };
@@ -44,7 +48,7 @@ class EditCha extends Component {
                 </h2>
 
                 <BreadcrumbCustom first="财务审核" second="渠道管理" third="渠道设置"/>
-                <Card title={this.state.mDetail.channelName+'设置'}>
+                <Card title={this.state.mDetail.channelName + '设置'}>
                     <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
                         <span style={{minWidth: 80}}>渠道名称：</span>
                         <Input
@@ -167,20 +171,51 @@ class EditCha extends Component {
                 <Button onClick={() => {
                     var self = this;
 
-                    window.Axios.post('finance/updateDepositChannel', {
-                        'id': this.state.mDetail.id,
-                        'name': this.state.mDetail.channelName,
-                        'code': this.state.mDetail.channelCode,
-                        'status': this.state.mDetail.displayStatus == '可用' ? 0 : 1,
-                        'multiMap': this.state.mMultiMap,
-                        'content': self.state.mContent,
-                    }).then((response) => {
-                        // self.setState({operationDiaryHistory: response.data.data.list});
-                    })
+                    this.setState({
+                        CommentViSible: true,
+                    });
+
+
 
                 }} style={{marginTop: 15}}>添加备注并保存 </Button>
 
+                <Modal
+                    title="添加备注并保存"
+                    visible={this.state.CommentViSible}
+                    onOk={(e) => {
+                        let self = this;
+                        window.Axios.post('finance/updateDepositChannel', {
+                            'id': this.state.mDetail.id,
+                            'name': this.state.mDetail.channelName,
+                            'code': this.state.mDetail.channelCode,
+                            'status': this.state.mDetail.displayStatus == '可用' ? 0 : 1,
+                            'multiMap': this.state.mMultiMap,
+                            'content': self.state.mContent,
+                        }).then((response) => {
+                            message.success('操作成功')
+                            // self.setState({operationDiaryHistory: response.data.data.list});
+                        })
+                    }}
+                    onCancel={(e) => {
+                        this.setState({
+                            CommentViSible: false,
+                        });
+                    }}
+                    okText="確認"
+                    cancelText="取消"
+                    align={'center'}>
+                    <TextArea
+                        value={this.state.mContent}
+                        placeholder="请输入备注"
+                        onChange={(e) => {
+                            this.setState({
+                                mContent: e.target.value
+                            });
+                        }}
+                        rows={4}/>
 
+
+                </Modal>
             </div>
         )
     }
