@@ -60,7 +60,7 @@ class AddUser extends Component {
             message.error('密碼')
             return
         }
-        if ( this.state.newPassword !== this.state.secondPassword) {
+        if (this.state.newPassword !== this.state.secondPassword) {
             message.error('密碼不一致')
             return
         }
@@ -453,7 +453,7 @@ class AddUser extends Component {
                                    dataSource={this.state.userList}
                                    bordered
                                    loading={this.state.loading}
-                                   pagination={{  // 分页
+                                   pagination={{
                                        total: this.state.pgsize * this.state.totalPage,
                                        pageSize: this.state.pgsize,
                                        onChange: this.changePage,
