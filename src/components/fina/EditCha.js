@@ -6,14 +6,12 @@ import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {parse} from 'querystring';
 
 const Option = Select.Option;
-const {Meta} = Card;
 
 class EditCha extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            date: new Date(),
             mDetail: {},
             operationDiaryHistory: []
         };
@@ -28,6 +26,8 @@ class EditCha extends Component {
 
         return (
             <div>
+                <div>this.state.availableFlag :{JSON.stringify(this.state)}</div>
+
 
                 <h2 style={{marginTop: 15}}>
                     渠道设置
