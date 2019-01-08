@@ -122,72 +122,33 @@ export default class BlackList extends Component {
 
         this.columns = [
             {
-                title: '手机号',
+                title: '日期/时间',
                 align: 'center',
-
-                dataIndex: 'phoneNumber',
-                key: 'phoneNumber',
+                dataIndex: '日期/时间',
+                key: '日期/时间',
                 render: (text, record) => (
                     <span>{record.mobile}</span>
                 ),
             }, {
-                title: '姓名',
+                title: '使用者',
                 align: 'center',
-
-                dataIndex: 'name',
-                key: 'name',
+                dataIndex: '使用者',
+                key: '使用者',
                 render: (text, record) => (
                     <span>{record.name}</span>
                 ),
             }, {
-                title: '邮箱地址',
+                title: '模块',
                 align: 'center',
-                dataIndex: '邮箱地址',
-                key: '邮箱地址',
+                dataIndex: '模块',
+                key: '模块',
                 render: (text, record) => (<span>{record.email}</span>),
             }, {
-                title: '身份证号',
+                title: '详细内容',
                 align: 'center',
-                dataIndex: '身份证号',
-                key: '身份证号',
-                render: (text, record) => (<span>{record.nationalId}</span>),
-            }, {
-                title: '操作时间',
-                align: 'center',
-
-                dataIndex: '操作时间',
-                key: '操作时间',
-                render: (text, record) => (<span>{record.date}</span>),
-            }, {
-                title: '操作人',
-                align: 'center',
-                dataIndex: '操作人',
-                key: '操作人',
+                dataIndex: '详细内容',
+                key: '详细内容',
                 render: (text, record) => (<span>{record.operator}</span>),
-            }, {
-                align: 'center',
-                title: '查看',
-                key: '查看',
-                render: (text, record) => (
-                    <div>
-                        <Button onClick={() => this.showOPDAyModal3(record)}>备注</Button>
-                    </div>
-                ),
-            }, {
-                title: '操作',
-
-                align: 'center',
-                key: 'action',
-                render: (text, record) => (
-                    <div>
-                        <Button onClick={() => this.showOPDAyModal2(record)}>日志</Button>
-
-                        <Popconfirm title="移除?" onConfirm={() => this.handleremove(record)} okText="Yes"
-                                    cancelText="No">
-                            <Button>移除</Button>
-                        </Popconfirm>
-                    </div>
-                ),
             }];
         this.requestPageA()//1:合规 2:开户 3:交易
         this.requestPageB()
@@ -505,24 +466,19 @@ export default class BlackList extends Component {
                         activeKey={this.state.nowKey}
                         onChange={this.callback}
                         type="card">
-                        <TabPane  tab="登录记录" key="1">
+                        <TabPane tab="登录记录" key="1">
 
 
                             <Card
                                 bodyStyle={{padding: 0, margin: 0}}
                                 title={'登录记录'}
-                                extra={<Button onClick={() => {
-                                    this.setState({
-                                        showModaladdblack: true,
-                                    });
-                                }}>添加黑名单</Button>}>
+                            >
 
                                 <Table rowKey="id"
                                        bordered
                                     // rowSelection={rowSelection}
                                        columns={this.columns}
                                        dataSource={this.state.bklistA}
-                                       scroll={{x: 1300}}
                                        loading={this.state.loadingA}
                                        pagination={{  // 分页
                                            // showQuickJumper:true,
@@ -537,16 +493,11 @@ export default class BlackList extends Component {
                             <Card
                                 bodyStyle={{padding: 0, margin: 0}}
                                 title={'浏览记录'}
-                                extra={<Button onClick={() => {
-                                    this.setState({
-                                        showModaladdblack: true,
-                                    });
-                                }}>添加黑名单</Button>}
+
                             >
                                 <Table rowKey="id"
                                        columns={this.columns}
                                        dataSource={this.state.bklistB}
-                                       scroll={{x: 1300}}
                                        loading={this.state.loadingB}
                                        pagination={{  // 分页
                                            total: this.state.totalpageB * this.state.pgsize,
@@ -561,16 +512,11 @@ export default class BlackList extends Component {
                             <Card
                                 bodyStyle={{padding: 0, margin: 0}}
                                 title={'操作记录'}
-                                extra={<Button onClick={() => {
-                                    this.setState({
-                                        showModaladdblack: true,
-                                    });
-                                }}>添加黑名单</Button>}
+
                             >
                                 <Table rowKey="id"
                                        columns={this.columns}
                                        dataSource={this.state.bklistC}
-                                       scroll={{x: 1300}}
                                        loading={this.state.loadingC}
                                        pagination={{  // 分页
                                            total: this.state.totalpageC * this.state.pgsize,
