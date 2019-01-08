@@ -71,6 +71,7 @@ export default {
             subs: [
                 {tk: 'SERVICE_GROUP_MGMT', key: '/app/pms/inneruserlist', title: '内部成员配置', component: 'InnerUserList'},
                 {tk: 'ROLE_MGMT', key: '/app/pms/roleset', title: '角色配置', component: 'RoleSet'},
+                {tk: 'ROLE_MGs', key: '/app/pms/oplog', title: '操作日志', component: 'OpLog'},
                 // {tk:'OPERATION_HISTORY,key: '/app/pms/rolelog', title: '操作日志', component: 'RoleLog'},
 
             ],

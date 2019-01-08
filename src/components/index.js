@@ -46,6 +46,7 @@ import InOutTA from './fina/InOutTA'
 import ChannelMY from './fina/ChannelMY'
 import TradeDepart from './trade/Depart'
 import RoleSet from './pms/RoleSet'
+import OpLog from './pms/OpLog'
 import AddRole from './pms/AddRole'
 import EditRole from './pms/EditRole'
 import InnerUserList from './pms/InnerUserList'
@@ -60,6 +61,7 @@ export default {
     BasicForm,
     InnerUserList,
     RoleSet,
+    OpLog,
     AdvancedTable,
     AsynchronousTable,
     Echarts,

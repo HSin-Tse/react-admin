@@ -511,7 +511,7 @@ export default class BlackList extends Component {
                         activeKey={this.state.nowKey}
                         onChange={this.callback}
                         type="card">
-                        <TabPane tab="合规黑名单" key="1">
+                        <TabPane type={'primary'} tab="合规黑名单" key="1">
 
 
                             <Card
