@@ -396,15 +396,7 @@ class Basic extends Component {
 
                 <Card title="入金管理"
                       bodyStyle={{padding: 0, margin: 0}}
-
-                      extra={
-                          <Button type="primary"
-                                  onClick={() => {
-                                      console.log('hcia onClick')
-                                  }
-                                  }>电汇入金
-                          </Button>
-                      }>
+                >
 
                     <Table rowKey="id"
                            rowSelection={rowSelection}
