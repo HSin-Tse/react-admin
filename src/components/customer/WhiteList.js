@@ -2,9 +2,15 @@ import React, {Component} from 'react';
 import {DatePicker, Input, Modal, Button, Table, message, Card, Icon, Select, Popconfirm} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import classNames from "classnames";
+import {CSVLink, CSVDownload} from "react-csv";
+
+import ExportJsonExcel from "js-export-excel";
+// import ReactHTMLTableToExcel from 'react-html-table-to-excel'
+import * as ReactDOM from "react-dom";
 
 const {RangePicker} = DatePicker;
 const {TextArea} = Input;
+
 
 export default class WhiteList extends Component {
 
@@ -16,7 +22,6 @@ export default class WhiteList extends Component {
             currentA: 0,
             totalpageA: 0,
             opDayRecord: {},
-
             currentComment: 0,
             pgsize: 10,
             loadingA: false,
@@ -33,6 +38,8 @@ export default class WhiteList extends Component {
 
     componentWillUnmount() {
         document.removeEventListener("keydown", this.handleKeyPress, false);
+
+        // maintbale
     }
 
     showModalNote = (record) => {
@@ -58,23 +65,21 @@ export default class WhiteList extends Component {
     }
 
     componentDidMount() {
-        console.log('hcia componentDidMount')
-
         document.addEventListener("keydown", this.handleKeyPress, false);
-
-
         this.columns = [
             {
                 align: 'center',
                 title: '手机号',
+                label: '手机号',
                 dataIndex: 'phoneNumber',
-                key: 'phoneNumber',
+                key: 'mobile',
                 render: (text, record) => (
                     <span>{record.mobile}</span>
                 ),
             }, {
                 align: 'center',
                 title: '姓名',
+                label: '姓名',
                 dataIndex: 'name',
                 key: 'name',
                 render: (text, record) => (
@@ -82,21 +87,24 @@ export default class WhiteList extends Component {
             }, {
                 align: 'center',
                 title: '交易组',
+                label: '交易组',
                 dataIndex: '交易组',
-                key: '交易组',
-                render: (text, record) => (<span>{record.activeFlag}?</span>),
+                key: 'activeFlag',
+                render: (text, record) => (<span>{record.activeFlag}</span>),
             }, {
                 align: 'center',
                 title: '交易账户',
+                label: '交易账户',
                 dataIndex: '交易账户',
-                key: '交易账户',
+                key: 'activeFlag',
                 render: (text, record) => (<span>{record.activeFlag}</span>),
             }, {
                 width: 150,
                 align: 'center',
                 title: '操作时间',
+                label: '操作时间',
                 dataIndex: '操作时间',
-                key: '操作时间',
+                key: 'date',
                 render: (text, record) => (<span>{record.date}</span>),
             }
 
@@ -104,22 +112,25 @@ export default class WhiteList extends Component {
                 width: 150,
                 align: 'center',
                 title: '身份证号',
+                label: '身份证号',
                 dataIndex: '身份证号',
-                key: '身份证号',
+                key: 'nationalId',
                 render: (text, record) => (<span>{record.nationalId}</span>),
             }
             , {
                 width: 150,
                 align: 'center',
                 title: '邮箱地址',
+                label: '邮箱地址',
                 dataIndex: '邮箱地址',
-                key: '邮箱地址',
+                key: 'email',
                 render: (text, record) => (<span>{record.email}</span>),
             }, {
                 align: 'center',
                 title: '操作人',
+                label: '操作人',
                 dataIndex: '操作人',
-                key: '操作人',
+                key: 'operator',
                 render: (text, record) => (<span>{record.operator}</span>),
             }, {
                 align: 'center',
@@ -168,7 +179,6 @@ export default class WhiteList extends Component {
             visible: false,
         });
     };
-
     requestUserCommentList = (record) => {
 
 
@@ -193,8 +203,6 @@ export default class WhiteList extends Component {
             this.requestPageA()//1:合规 2:开户 3:交易
         });
     };
-
-
     requestPageA = () => {
         let self = this
         self.setState({
@@ -219,8 +227,6 @@ export default class WhiteList extends Component {
             });
         });
     }
-
-
     changePageA = (page) => {
         page = page - 1
         this.setState({
@@ -243,20 +249,15 @@ export default class WhiteList extends Component {
     onChangePhone = (e) => {
         this.state.phoneCn = e.target.value
     }
-
     onSelectChange = (selectedRowKeys) => {
         console.log('hcia', 'selectedRowKeys changed: ', selectedRowKeys);
         this.setState({selectedRowKeys});
     }
-
-
     _switcherOn = () => {
         this.setState({
             switcherOn: !this.state.switcherOn
         })
     };
-
-
     onChangeID = (e) => {
         this.setState({
             selectID: e.target.value,
@@ -292,8 +293,6 @@ export default class WhiteList extends Component {
             changeNoteV: e.target.value,
         });
     }
-
-
     showModal = () => {
         this.setState({
             showModaladdWhite: true,
@@ -314,8 +313,6 @@ export default class WhiteList extends Component {
             modal2Visible1: false,
         });
     }
-
-
     handleCancel = (e) => {
         this.setState({
             NoteModalVisible2: false,
@@ -357,52 +354,12 @@ export default class WhiteList extends Component {
 
     };
 
-
     render() {
 
         return (
 
-
             <div id="whiteL">
-                {/*<Modal*/}
-                {/*title="新增白名单成员"*/}
-                {/*visible={this.state.showModaladdWhite}*/}
-                {/*onOk={this.handleOk}*/}
-                {/*onCancel={(e) => {*/}
-                {/*this.setState({*/}
-                {/*showModaladdWhite: false,*/}
-                {/*});*/}
-                {/*}}*/}
-                {/*>*/}
 
-                {/*<Card bordered={true}>*/}
-
-                {/*<div style={{display: 'flex', minHeight: 40}}>*/}
-                {/*<span style={{width: 120}}>*用户姓名：</span>*/}
-                {/*<Input defaultValue={this.state.NameCn}*/}
-                {/*onChange={this.onChangelastNameCn}*/}
-                {/*style={{width: 120}} placeholder="Basic usage" tagkey="lastNameCn"*/}
-                {/*sdsd={'dd'}/>*/}
-                {/*</div>*/}
-
-                {/*<div style={{display: 'flex', minHeight: 40}}>*/}
-                {/*<span style={{minWidth: 120}}>*手机号码：</span>*/}
-                {/*<Input defaultValue={this.state.phoneCn}*/}
-                {/*onChange={this.onChangePhone}*/}
-                {/*style={{width: 120}} placeholder="Basic usage"/>*/}
-                {/*</div>*/}
-
-
-                {/*<div style={{display: 'flex', minHeight: 40}}>*/}
-                {/*<span style={{minWidth: 100}}>操作备注</span>*/}
-
-                {/*<div style={{display: 'flex', minHeight: 40}}>*/}
-                {/*<TextArea value={this.state.changeNoteV} rows={4} onChange={this.changeNote}/>*/}
-                {/*</div>*/}
-                {/*</div>*/}
-
-                {/*</Card>*/}
-                {/*</Modal>*/}
 
                 <Modal
                     width={370}
@@ -499,20 +456,6 @@ export default class WhiteList extends Component {
 
                     </Card>
                 </Modal>
-                {/*<div>selectMail :{this.state.selectMail}</div>*/}
-                {/*<div>selectID :{this.state.selectID}</div>*/}
-                {/*<div>starClientAccount :{this.state.starClientAccount}</div>*/}
-                {/*<div>selectPhoneF :{this.state.selectPhoneF}</div>*/}
-                {/*<div>changeNoteV :{this.state.changeNoteV}</div>*/}
-                {/*<div>selectTimeStart :{this.state.selectTimeStart}</div>*/}
-                {/*<div>selectTimeEnd :{this.state.selectTimeEnd}</div>*/}
-                {/*<div>NameCn :{JSON.stringify(this.state.NameCn)}</div>*/}
-                {/*<div>phoneCn :{JSON.stringify(this.state.phoneCn)}</div>*/}
-                {/*<div>IDCn :{JSON.stringify(this.state.IDCn)}</div>*/}
-                {/*<div>MAilCn :{JSON.stringify(this.state.MAilCn)}</div>*/}
-                {/*<div>TradeACcountCn :{JSON.stringify(this.state.TradeACcountCn)}</div>*/}
-                {/*<div>changeNoteVCN :{JSON.stringify(this.state.changeNoteVCN)}</div>*/}
-
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
                     <span className="sw-btn dark-white" onClick={this._switcherOn}>
                      <Icon type="setting" className="text-dark"/>
@@ -625,7 +568,6 @@ export default class WhiteList extends Component {
 
                         </Card>
 
-
                     </div>
                 </div>
 
@@ -633,24 +575,37 @@ export default class WhiteList extends Component {
                 <h2 style={{marginTop: 15}}>
                     白名单
                 </h2>
+                {/*<ReactHTMLTableToExcel*/}
+                {/*id="test-table-xls-button"*/}
+                {/*className="download-table-xls-button"*/}
+                {/*table="table-to-xls"*/}
+                {/*filename="tablexls"*/}
+                {/*sheet="tablexls"*/}
+                {/*buttonText="Download as XLS"/>*/}
                 <BreadcrumbCustom first="用戶管理" second="白名單"/>
 
                 <Card
                     bodyStyle={{padding: 0, margin: 0}}
                     title={'白名单'}
-                    extra={<Button onClick={() => this.showModal()}>新增白名单用户</Button>}
+                    extra={[
+
+
+                        <CSVLink filename={"白名單.csv"} data={this.state.bklistA} headers={this.columns}>
+                            <Button>csv</Button>
+                        </CSVLink>, <Button style={{marginLeft: 15}} onClick={() => this.showModal()}>新增白名单用户</Button>]}
                 >
-                    <Table rowKey="id"
-                           bordered
-                           columns={this.columns}
-                           dataSource={this.state.bklistA}
-                           scroll={{x: 1500}}
-                           loading={this.state.loading}
-                           pagination={{
-                               total: this.state.totalpageA * this.state.pgsize,
-                               pageSize: this.state.pgsize,
-                               onChange: this.changePageA,
-                           }}
+                    <Table
+                        rowKey="id"
+                        bordered
+                        columns={this.columns}
+                        dataSource={this.state.bklistA}
+                        scroll={{x: 1500}}
+                        loading={this.state.loading}
+                        pagination={{
+                            total: this.state.totalpageA * this.state.pgsize,
+                            pageSize: this.state.pgsize,
+                            onChange: this.changePageA,
+                        }}
                     />
                 </Card>
 
