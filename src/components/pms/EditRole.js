@@ -140,7 +140,6 @@ class EditRole extends Component {
         var multilevelList = []
 
 
-
         let list = this.state.powerList;
         // list.push(1)
 
@@ -273,21 +272,11 @@ class EditRole extends Component {
 
         return (
             <div>
-                <h2 style={{marginTop: 15}}>
-                    内部用户权限设置
-                </h2>
-
-                {/*<div>changeNoteV :{JSON.stringify(this.state.changeNoteV)}</div>*/}
+                <h2 style={{marginTop: 15}}>内部用户权限设置</h2>
                 {/*<div>name :{JSON.stringify(this.state.name)}</div>*/}
-                {/*<div>powerList :{JSON.stringify(this.state.powerList)}</div>*/}
-                {/*<div>realp :{JSON.stringify(this.state.realp)}</div>*/}
-                {/*<div>allMenu :{JSON.stringify(this.state.allMenu)}</div>*/}
-                {/*<div>powerList :{JSON.stringify(this.state.powerList)}</div>*/}
-                {/*<div>allMenu :{JSON.stringify(Object.keys(allMenu))}</div>*/}
-                {/*<div>allMenu :{JSON.stringify(Object.keys(allMenu).map(Number))}</div>*/}
 
 
-                <div><BreadcrumbCustom first="内部成员列表" second="内部人员配置"/></div>
+                <BreadcrumbCustom first="内部成员列表" second="内部人员配置"/>
 
 
                 <Card bodyStyle={{marginLeft: 10}} title={<span style={{fontSize: 18}}> 基本信息 </span>} bordered={true}

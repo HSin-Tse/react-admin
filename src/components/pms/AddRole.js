@@ -1,32 +1,23 @@
-/* eslint-disable react/sort-comp */
-
 import React, {Component} from 'react';
 import {
     Col,
     Card,
     Row,
-    Radio,
     Input,
-    Switch,
     Button,
     Table,
     Icon,
     Checkbox,
-    Select,
     Popconfirm,
     message,
     Form
 } from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
-import axios from 'axios';
-import {parse} from 'querystring';
 import {bindActionCreators} from "redux";
 import {setINFOR} from "../../action";
 import connect from "react-redux/es/connect/connect";
 
-const RadioGroup = Radio.Group;
 const {TextArea} = Input;
-const CheckboxGroup = Checkbox.Group;
 
 class AddRole extends Component {
 
@@ -47,12 +38,7 @@ class AddRole extends Component {
         };
     }
 
-
     componentDidMount() {
-
-
-
-
 
         this.columns = [
             {
@@ -71,9 +57,15 @@ class AddRole extends Component {
                 render: (text, record) => (
                     <span>{record.comment}</span>),
             }, {
+                title: '操作人',
+                align: 'center',
+                dataIndex: '操作人',
+                key: '操作人',
+                render: (text, record) => (
+                    <span>{record.oprator}</span>),
+            }, {
                 title: '操作',
                 align: 'center',
-
                 dataIndex: '操作',
                 key: '操作',
                 render: (text, record) => (
@@ -93,12 +85,7 @@ class AddRole extends Component {
 
     confirmSave = () => {
 
-
         var self = this;
-
-
-        var multilevelList = []
-
 
 
         let list = this.state.powerList;
@@ -112,7 +99,6 @@ class AddRole extends Component {
             var flasg = array.filter((item, index, array) => {
                 return item < 0;
             });
-
             ids.forEach((item) => {
                 var select = flasg.some(function (flagItem, index, array) {
                     return ((flagItem + item) === 0) // 當全部 age 大於 10 才能回傳 true
@@ -130,8 +116,7 @@ class AddRole extends Component {
         console.log('hcia sorted', sorted)
 
 
-
-        if(sorted.length==0){
+        if (sorted.length == 0) {
             message.error('权限沒有配置')
             return
         }
@@ -181,9 +166,13 @@ class AddRole extends Component {
     render() {
 
         const {getFieldDecorator} = this.props.form;
-        const ss = this.state.menuList.map(function (item, index) {
+        const setingBlok = this.state.menuList.map(function (item, index) {
                 return (
-                    <Card bodyStyle={{marginLeft: 10}} style={{marginTop: 15}} key={index} title={item.name}
+                    <Card bodyStyle={{marginLeft: 10}} style={{marginTop: 15}} key={index}
+
+
+                          title= {<span style={{marginLeft: 15,fontSize: 14}}> {item.name} </span>}
+                          // title={item.name}
                           bordered={true}>
                         {
                             item.childrenMenu.map(function (item1, number) {
@@ -209,12 +198,10 @@ class AddRole extends Component {
         )
         return (
             <div>
-                <h2 style={{marginTop: 15}}>
-                    新增/编辑资料
-                </h2>
+                <h2 style={{marginTop: 15}}>新增/编辑角色</h2>
 
 
-                <div><BreadcrumbCustom first="内部成员列表" second="新增/编辑资料"/></div>
+                <BreadcrumbCustom first="权限管理" second="内部人员配置" third="新增/编辑角色"/>
 
 
                 <Card bodyStyle={{marginLeft: 10}} title={<span style={{fontSize: 18}}> 基本信息 </span>} bordered={true}
@@ -225,7 +212,6 @@ class AddRole extends Component {
 
                             <div style={{fontWeight: 'bold', fontSize: 16, display: 'flex', minHeight: 50}}>
                                 <span style={{width: 100}}>角色名称:</span>
-
                                 <Input
                                     onChange={this.changeName}
                                     defaultValue={this.state.name}
@@ -233,14 +219,11 @@ class AddRole extends Component {
                             </div>
                             <div style={{fontWeight: 'bold', fontSize: 16, display: 'flex', minHeight: 50}}>
                                 <span style={{width: 100}}>角色备注:</span>
-
-                                {/*<Input defaultValue={this.state.name}*/}
-                                {/*style={{width: 180}}/>*/}
                                 <TextArea
                                     style={{width: 180}}
                                     value={this.state.changeNoteV}
                                     onChange={this.changeNote}
-                                    rows={4}></TextArea>
+                                    rows={4}/>
                             </div>
 
 
@@ -248,16 +231,44 @@ class AddRole extends Component {
                     </Row>
                 </Card>
 
-                <Card bodyStyle={{marginLeft: 10}} title={<span style={{fontSize: 18}}> 权限配置 </span>} bordered={true}
+                <Card bodyStyle={{padding: 0, margin: 0}} title={<span style={{fontSize: 18}}> 权限配置 </span>} bordered={true}
                       style={{marginTop: 15}}>
 
                     <Row gutter={8}>
                         <Checkbox.Group style={{width: '100%'}} onChange={this.onChange}>
                             <Col md={24}>
-                                {ss}
+                                {setingBlok}
                             </Col>
                         </Checkbox.Group>
                     </Row>
+                </Card>
+
+                <Card bodyStyle={{padding: 0, margin: 0}}
+                      title={<span style={{fontSize: 18}}> 特殊权限配置 </span>} bordered={true}
+                      style={{marginTop: 15}}>
+
+                    {/*<Row gutter={8}>*/}
+                        {/*<Checkbox.Group style={{width: '100%'}} onChange={this.onChange}>*/}
+                            {/*<Col md={24}>*/}
+                                {/*{setingBlok}*/}
+                            {/*</Col>*/}
+                        {/*</Checkbox.Group>*/}
+                    {/*</Row>*/}
+                    <Card bodyStyle={{marginLeft: 15}}  title= {<span style={{marginLeft: 15,fontSize: 14}}> 电汇入金 </span>}
+                          bordered={true}>
+
+                        <Checkbox >创建</Checkbox>
+                        <Checkbox >财务审核</Checkbox>
+                        <Checkbox >入金完成（只读）</Checkbox>
+                    </Card>
+                    <Card bodyStyle={{marginLeft: 15}}  title= {<span style={{marginLeft: 15,fontSize: 14}}> 出金管理</span>}
+                          bordered={true}>
+
+                        <Checkbox >客维审核</Checkbox>
+                        <Checkbox >后台审核</Checkbox>
+                        <Checkbox >银行放款</Checkbox>
+                        <Checkbox >入金完成（只读）</Checkbox>
+                    </Card>
                 </Card>
 
 
@@ -286,14 +297,10 @@ class AddRole extends Component {
                 </Card>
                 <Card bodyStyle={{marginLeft: 10}} title={<span style={{fontSize: 18}}> 安全验证 </span>} bordered={true}
                       style={{marginTop: 15}}>
-
                     <Row gutter={8}>
                         <Col md={24}>
-
                             <div style={{fontWeight: 'bold', fontSize: 16, display: 'flex', minHeight: 50}}>
                                 <span style={{width: 200}}>請輸入你的密碼:</span>
-
-
                                 {getFieldDecorator('password', {
                                     rules: [{
                                         required: true, message: 'Please input your password!',
@@ -301,15 +308,10 @@ class AddRole extends Component {
                                         validator: this.validateToNextPassword,
                                     }],
                                 })(
-                                    <Input style={{width: 800}} addonAfter={<Icon  style={{color: 'red'}}  type="star" />}
+                                    <Input style={{width: 800}} addonAfter={<Icon style={{color: 'red'}} type="star"/>}
                                            onChange={this.changeScret} placeholder="請輸入你的密碼加以驗證:" type="password"/>
                                 )}
-
-
-
                             </div>
-
-
                         </Col>
                     </Row>
                 </Card>
@@ -337,8 +339,6 @@ class AddRole extends Component {
 
 }
 
-// export default AddRole;
-
 const mapStateToPorps = state => {
     const {auth} = state.httpData;
     const infor = state.infor;
@@ -346,8 +346,6 @@ const mapStateToPorps = state => {
 };
 const mapDispatchToProps = dispatch => ({
     setUSER: bindActionCreators(setINFOR, dispatch),
-
 });
-
 
 export default connect(mapStateToPorps, mapDispatchToProps)(Form.create()(AddRole));
