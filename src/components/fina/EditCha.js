@@ -33,7 +33,6 @@ class EditCha extends Component {
     }
 
     render() {
-
         return (
             <div>
                 {/*<div>id :{JSON.stringify(this.state.mDetail.id)}</div>*/}

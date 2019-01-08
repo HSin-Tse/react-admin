@@ -12,8 +12,8 @@ import React from "react";
 export const Toolbar = (props) => {
     return (
         <div>
-            <ThemedButton theme={props.theme}> 333</ThemedButton>
-            <ThemedButton>333 sss</ThemedButton>
+            <ThemedButton > 333</ThemedButton>
+            {/*<ThemedButton>333 sss</ThemedButton>*/}
         </div>
     );
 }

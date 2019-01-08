@@ -10,6 +10,7 @@ import axios from "axios";
 import ReactJson from 'react-json-view'
 import Base64 from 'base-64';
 import {Toolbar} from "../widget/ToorBar";
+import {Provider} from "../widget/ThemedButton";
 
 const {TextArea} = Input;
 
@@ -44,7 +45,6 @@ class DEVhboard extends React.Component {
     }
 
     getURL = (url) => {
-
 
         var promise = new Promise(function (resolve, reject) {
 
@@ -99,10 +99,15 @@ class DEVhboard extends React.Component {
 
 
     render() {
+
         return (
             <div className="gutter-example button-demo">
                 {/*{JSON.stringify(localStorage.getItem('infor'))}*/}
-                <Toolbar theme='danger'/>
+
+                {/*<Toolbar theme='danger'  value="dash"/>*/}
+                <Provider value="primary">
+                    <Toolbar />
+                </Provider>
                 <Row gutter={1}>
                     <Col md={24}>
                         <div style={{display: this.state.displayName == 'admin' ? '' : 'none'}}>
