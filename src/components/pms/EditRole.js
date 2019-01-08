@@ -243,9 +243,39 @@ class EditRole extends Component {
         //         );
         //     }
         // )
-        const ss = this.state.menuList.map(function (item, index) {
+        // const ss = this.state.menuList.map(function (item, index) {
+        //         return (
+        //             <Card bodyStyle={{marginLeft: 10}} style={{marginTop: 15}} key={index} title={item.name}
+        //                   bordered={true}>
+        //                 {
+        //                     item.childrenMenu.map(function (item1, number) {
+        //
+        //
+        //                         // console.log('hcia item1' , item1)
+        //                         return (
+        //
+        //
+        //                             <Card.Grid style={{maxWidth: 250, textAlign: 'center', display: 'flex'}}>
+        //                                 <Checkbox key={number} value={item1.id} id={number}>{item1.name}</Checkbox>
+        //                                 <Checkbox key={number} value={-item1.id} id={number}>可操作</Checkbox>
+        //                                 {/*<Switch checkedChildren="可操作" unCheckedChildren="只讀" defaultChecked />*/}
+        //                             </Card.Grid>
+        //
+        //
+        //                         );
+        //                     })
+        //                 }
+        //             </Card>
+        //         );
+        //     }
+        // )
+        const setBlock = this.state.menuList.map(function (item, index) {
                 return (
-                    <Card bodyStyle={{marginLeft: 10}} style={{marginTop: 15}} key={index} title={item.name}
+                    <Card bodyStyle={{padding: 0, margin: 0}}  key={index}
+
+
+                          title= {<span style={{marginLeft: 15,fontSize: 16}}> {item.name} </span>}
+                        // title={item.name}
                           bordered={true}>
                         {
                             item.childrenMenu.map(function (item1, number) {
@@ -269,7 +299,6 @@ class EditRole extends Component {
                 );
             }
         )
-
         return (
             <div>
                 <h2 style={{marginTop: 15}}>内部用户权限设置</h2>
@@ -308,13 +337,13 @@ class EditRole extends Component {
                     </Row>
                 </Card>
 
-                <Card bodyStyle={{marginLeft: 10}} title={<span style={{fontSize: 18}}> 权限配置 </span>} bordered={true}
+                <Card bodyStyle={{padding: 0, margin: 0}} title={<span style={{fontSize: 18}}> 权限配置 </span>} bordered={true}
                       style={{marginTop: 15}}>
 
                     <Row gutter={8}>
                         <Checkbox.Group style={{width: '100%'}} value={this.state.powerList} onChange={this.onChange}>
                             <Col md={24}>
-                                {ss}
+                                {setBlock}
                             </Col>
                         </Checkbox.Group>
                     </Row>
