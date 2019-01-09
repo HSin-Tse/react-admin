@@ -2,12 +2,15 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, message, Select, Steps, Card, Col, Divider, Row, Input} from 'antd';
+import {Button, Tabs, message, Select, Steps, Card, Col, Divider, Row, Input} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import {steps} from "./model/Steps"
+
+const TabPane = Tabs.TabPane;
+
 const Option = Select.Option;
 const Step = Steps.Step;
 
@@ -259,9 +262,34 @@ class Basic extends Component {
                                     <span style={{fontSize: '13px'}}>备注:</span>
                                     <span style={{fontSize: '13px'}}><Input style={{margin:5, width: 220}} placeholder=""/></span>
                                 </div>
+                                <div >
+                                    <Tabs type="card">
+                                        <TabPane tab={steps[0].title} key="1">
+                                            <p>Content of Tab Pane 1</p>
+                                            <p>Content of Tab Pane 1</p>
+                                            <p>Content of Tab Pane 1</p>
+                                        </TabPane>
+                                        <TabPane tab={steps[1].title} key="2">
+                                            <p>Content of Tab Pane 2</p>
+                                            <p>Content of Tab Pane 2</p>
+                                            <p>Content of Tab Pane 2</p>
+                                        </TabPane>
+                                        <TabPane tab={steps[2].title}key="3">
+                                            <p>Content of Tab Pane 3</p>
+                                            <p>Content of Tab Pane 3</p>
+                                            <p>Content of Tab Pane 3</p>
+                                        </TabPane>
+                                    </Tabs>
+                                </div>
                             </Card>
                         </Col>
+                        <Col span={12}>
+
+                        </Col>
+
+
                     </Row>
+
 
 
                 </Card>
