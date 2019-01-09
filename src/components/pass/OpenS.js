@@ -3,9 +3,8 @@
  */
 import React, {Component} from 'react';
 import {
-    Tooltip, Popconfirm, Icon, Upload, Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, notification
+    Tooltip, Popconfirm, Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, notification
 } from 'antd';
-import {Radio} from 'antd';
 import {message} from 'antd';
 import html2canvas from 'html2canvas';
 import * as jsPDF from 'jspdf'
@@ -16,12 +15,9 @@ import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
 import moment from 'moment';
 import axios from "axios";
-import AllComponents from "../index";
-import {Route} from "react-router-dom";
 
 const Search = Input.Search;
 const {TextArea} = Input;
-const RadioGroup = Radio.Group;
 const Option = Select.Option;
 
 const dateFormat = 'YYYY-MM-DD';
@@ -83,23 +79,6 @@ class PassOpenD extends Component {
         var self = this;
 
 
-        // if (localStorage.getItem('infor')) {
-        //     var menuInfor = JSON.parse(localStorage.getItem('infor'))
-        //     // console.log('hcia menuInfor', menuInfor.menuList)
-        //     // console.log('hcia  this.props', this.props)
-        //
-        //     var findEmpty = menuInfor.menuList.find((item) => {
-        //         // console.log('hcia  this.props', this.props)
-        //         return this.props.tk === item.key;
-        //     });
-        //
-        //     // console.log('hcia findEmpty', findEmpty.availableFlag)
-        //     self.setState({
-        //         availableFlag: findEmpty.availableFlag === 1,
-        //
-        //     });
-        //
-        // }
 
 
         window.Axios.post('dict/leverageList', {
@@ -215,150 +194,6 @@ class PassOpenD extends Component {
         this.mIXTradingExperience = this.state.IXTradingExperience.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXTradingObjectives = this.state.IXTradingObjectives.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXRisk_Tolerance = this.state.IXRisk_Tolerance.map(d => <Option key={d.name}>{d.name}</Option>);
-        const uploadProps1 = {
-            action: 'open/leadDetailAttachs',
-            multiple: false,
-            data: {'id': this.state.recordData.id, 'key': 'idcard_1'},
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-            onStart(file) {
-                console.log('onStart', file, file.name);
-            },
-            onSuccess(ret, file) {
-                console.log('onSuccess', ret, file.name);
-            },
-            onError(err) {
-                console.log('onError', err);
-            },
-            onProgress({percent}, file) {
-                console.log('onProgress', `${percent}%`, file.name);
-            },
-            customRequest({
-                              data,
-                              file,
-                          }) {
-
-                const formData = new FormData();
-                if (data) {
-                    Object.keys(data).map(key => {
-                        formData.append(key, data[key]);
-                    });
-                }
-                formData.append('file', file);
-                formData.append('loginName', localStorage.getItem('loginName'))
-                formData.append('token', localStorage.getItem('too'))
-
-                aaxios.post('open/leadDetailAttachs', formData, {})
-                    .then(function (response) {
-                        // console.log('hcia response', response.data.data)
-                        self.setState({
-                            recordData: {...self.state.recordData, idcard_1: response.data.data}
-                        })
-                    })
-                    .catch(error => {
-                        // console.log('hcia error', error)
-                    });
-
-
-            },
-        };
-        const uploadProps0 = {
-            action: 'open/leadDetailAttachs',
-            multiple: false,
-            data: {'id': this.state.recordData.id, 'key': 'idcard_0'},
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-            onStart(file) {
-                console.log('onStart', file, file.name);
-            },
-            onSuccess(ret, file) {
-                console.log('onSuccess', ret, file.name);
-            },
-            onError(err) {
-                console.log('onError', err);
-            },
-            onProgress({percent}, file) {
-                console.log('onProgress', `${percent}%`, file.name);
-            },
-            customRequest({
-                              data,
-                              file,
-                          }) {
-
-                const formData = new FormData();
-                if (data) {
-                    Object.keys(data).map(key => {
-                        formData.append(key, data[key]);
-                    });
-                }
-                formData.append('file', file);
-                formData.append('loginName', localStorage.getItem('loginName'))
-                formData.append('token', localStorage.getItem('too'))
-
-                aaxios.post('open/leadDetailAttachs', formData, {})
-                    .then(function (response) {
-                        // console.log('hcia response', response.data.data)
-                        self.setState({
-                            recordData: {...self.state.recordData, idcard_0: response.data.data}
-                        })
-                    })
-                    .catch(error => {
-                        // console.log('hcia error', error)
-                    });
-
-
-            },
-        };
-        const uploadProps = {
-            action: 'open/leadDetailAttachs',
-            multiple: false,
-            data: {'id': this.state.recordData.id, 'key': 'idcard_2'},
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-            onStart(file) {
-                console.log('onStart', file, file.name);
-            },
-            onSuccess(ret, file) {
-                console.log('onSuccess', ret, file.name);
-            },
-            onError(err) {
-                console.log('onError', err);
-            },
-            onProgress({percent}, file) {
-                console.log('onProgress', `${percent}%`, file.name);
-            },
-            customRequest({
-                              data,
-                              file,
-                          }) {
-
-                const formData = new FormData();
-                if (data) {
-                    Object.keys(data).map(key => {
-                        formData.append(key, data[key]);
-                    });
-                }
-                formData.append('file', file);
-                formData.append('loginName', localStorage.getItem('loginName'))
-                formData.append('token', localStorage.getItem('too'))
-
-                aaxios.post('open/leadDetailAttachs', formData, {})
-                    .then(function (response) {
-                        // console.log('hcia response', response.data.data)
-                        self.setState({
-                            recordData: {...self.state.recordData, idcard_2: response.data.data}
-                        })
-                    })
-                    .catch(error => {
-                        // console.log('hcia error', error)
-                    });
-
-
-            },
-        };
 
         return (
             <div id="openD">
@@ -369,9 +204,9 @@ class PassOpenD extends Component {
                 {/*<div>waitUpdate :{JSON.stringify(this.state.waitUpdate)}</div>*/}
                 {/*<div>this.state.availableFlag :{JSON.stringify(this.state.availableFlag)}</div>*/}
                 <h2 style={{marginTop: 15}}>
-                    开户信息详情
+                    开户信息
                 </h2>
-                <BreadcrumbCustom first="审核管理" second="开户信息详情"/>
+                <BreadcrumbCustom first="审核管理" second="用户开户信息"/>
                 <Card disabled={true} title="IX账户审核 " bordered={true}>
 
                     <Row gutter={1}>
@@ -423,7 +258,9 @@ class PassOpenD extends Component {
                             <Card bordered={false}>
                                 <div>
                                     交易组 :
-                                    <Select value={this.state.recordData.accountType}
+                                    <Select
+                                        disabled={true}
+                                        value={this.state.recordData.accountType}
                                             style={{marginLeft: 20, width: 120}}
                                             onChange={(v, key) => this.handleACType(v, key)}>
                                         {this.state.accountType.map(acType => <Option
@@ -441,6 +278,7 @@ class PassOpenD extends Component {
                                 <div>
                                     杠杆组 :
                                     <Select
+                                        disabled={true}
                                         value={this.state.leverageId}
                                         style={{marginLeft: 20, width: 120}}
                                         onChange={(v, key) => this.handleChangeLeavage(v, key)}>
@@ -462,39 +300,51 @@ class PassOpenD extends Component {
                             <Card bordered={true}>
 
                                 <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{width: 120}}>国家:</span>
+                                    <span style={{width: 120}}>国家</span>
 
                                     <Input defaultValue={this.state.recordData.country} disabled={true}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                           style={{width: 120}} placeholder=""
+                                    disabled={true}
+                                    />
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*姓（中文）</span>
                                     <Input defaultValue={this.state.recordData.lastNameCn}
                                            onChange={this.onChangelastNameCn}
-                                           style={{width: 120}} placeholder="Basic usage" tagkey="lastNameCn"
+                                           style={{width: 120}} placeholder=""
+                                           disabled={true}
+                                           tagkey="lastNameCn"
                                            sdsd={'dd'}/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*名（中文）</span>
                                     <Input defaultValue={this.state.recordData.firstNameCn}
                                            onChange={this.onChangefirstNameCn}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                           style={{width: 120}} placeholder=""
+                                    disabled={true}
+                                    />
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{width: 120}}>*姓</span>
                                     <Input defaultValue={this.state.recordData.lastName}
                                            onChange={this.onChangelastName}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                           style={{width: 120}} placeholder=""
+                                    disabled={true}
+                                    />
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}> *名</span>
                                     <Input defaultValue={this.state.recordData.firstName}
                                            onChange={this.onChangefirstName}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                           style={{width: 120}} placeholder=""
+                                    disabled={true}
+                                    />
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*出生日期</span>
-                                    <DatePicker value={moment(this.state.testeee, dateFormat)}
+                                    <DatePicker
+                                        disabled={true}
+                                        value={moment(this.state.testeee, dateFormat)}
                                                 onChange={this.onChangeBirth}
                                                 format={dateFormat}/>
 
@@ -502,6 +352,7 @@ class PassOpenD extends Component {
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*性别</span>
                                     <Select value={this.state.mGender}
+                                            disabled={true}
                                             onChange={this.onChangegender}
                                             style={{width: 120}}>
                                         <Option value="Male">男</Option>
@@ -512,13 +363,16 @@ class PassOpenD extends Component {
                                     <span style={{minWidth: 120}}>*身份证号码</span>
                                     <Input defaultValue={this.state.recordData.nationalID}
                                            onChange={this.onChangenationalId}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                           style={{width: 120}} placeholder=""
+                                    disabled={true}
+                                    />
                                 </div>
 
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*城市</span>
 
                                     <Select
+                                        disabled={true}
                                         value={this.state.mState}
                                         style={{width: 120}}
                                         onChange={this.handleProvinceChange}
@@ -528,6 +382,7 @@ class PassOpenD extends Component {
 
                                     </Select>
                                     <Select
+                                        disabled={true}
                                         style={{width: 120}}
                                         value={this.state.mCity}
                                         onChange={this.onSecondCityChange}
@@ -541,23 +396,31 @@ class PassOpenD extends Component {
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*详细地址</span>
                                     <Input defaultValue={this.state.recordData.street} onChange={this.onChangestreet}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                           style={{width: 120}} placeholder=""
+                                    disabled={true}
+                                    />
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*联系电话</span>
                                     <Input defaultValue={this.state.recordData.phoneNumber} disabled={true}
-                                           style={{width: 130}} placeholder="Basic usage"/>
+                                           style={{width: 130}} placeholder=""
+                                    disabled={true}
+                                    />
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*邮箱地址</span>
                                     <Input defaultValue={this.state.recordData.email} onChange={this.onChangeemail}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                           style={{width: 120}} placeholder=""
+                                    disabled={true}
+                                    />
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*邮编</span>
                                     <Input defaultValue={this.state.recordData.postalCode}
                                            onChange={this.onChangepostalCode}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                           style={{width: 120}} placeholder=""
+                                    disabled={true}
+                                    />
                                 </div>
                             </Card>
 
@@ -570,6 +433,7 @@ class PassOpenD extends Component {
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>当前年收入</span>
                                     <Select value={this.state.mAnnualIncome}
+                                            disabled={true}
                                             onChange={this.onChangeannualIncome}
                                             style={{width: 120}}>
                                         {this.mIncomesOPS}
@@ -578,6 +442,7 @@ class PassOpenD extends Component {
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>初始入金金额占比</span>
                                     <Select value={this.state.mInitialDepositToYourNetLiquidAssets}
+                                            disabled={true}
                                             onChange={this.onChangemInitialDepositToYourNetLiquidAssets}
                                     >
                                         {this.mIXPercentage}
@@ -586,6 +451,7 @@ class PassOpenD extends Component {
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>交易本金来源</span>
                                     <Select value={this.state.mfundsSource}
+                                            disabled={true}
                                             onChange={this.onChangemfundsSource}
                                     >
                                         {this.mIXFundsSource}
@@ -594,6 +460,7 @@ class PassOpenD extends Component {
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*是否美国公民</span>
                                     <Select value={this.state.musCitizenOrResidentForTaxPurpposes}
+                                            disabled={true}
                                             onChange={this.onChangemusCitizenOrResidentForTaxPurpposes}
                                     >
                                         {this.mIXUStax}
@@ -602,6 +469,7 @@ class PassOpenD extends Component {
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>交易经验</span>
                                     <Select value={this.state.myearsTrading}
+                                            disabled={true}
                                             onChange={this.onChangemyearsTrading}
 
                                     >
@@ -611,6 +479,7 @@ class PassOpenD extends Component {
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>交易目的</span>
                                     <Select
+                                        disabled={true}
                                         onChange={this.onChangemtradingObjectives}
                                         value={this.state.mtradingObjectives}>
                                         {this.mIXTradingObjectives}
@@ -619,6 +488,7 @@ class PassOpenD extends Component {
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*风险承受力</span>
                                     <Select
+                                        disabled={true}
                                         style={{maxWidth: 220}}
                                         onChange={this.onChangemriskTolerance}
                                         value={this.state.mriskTolerance}>
@@ -760,22 +630,11 @@ class PassOpenD extends Component {
                         <Card style={{marginTop: 10}}>
 
                             <div>
-                                <Tooltip placement="top"
-                                         title={!isSetL ? '需要添加杠杆组' : this.state.isNeedSave ? '保存信息' : ''}>
-
-                                    <Popconfirm disabled={this.state.isNeedSave || !isSetL} title="确认当前用户开户申请通过"
-                                                onConfirm={this.confirmOpen} okText="Yes"
-                                                cancelText="No">
-
-
-                                        <Button
-                                            disabled={this.state.isNeedSave || !isSetL}
-                                            loading={this.state.iconLoading}>
-                                            开户通过
-                                        </Button>
-                                    </Popconfirm>
-                                </Tooltip>
-
+                                <Button
+                                    disabled={true}
+                                >
+                                    开户通过
+                                </Button>
 
                                 <Button
                                     disabled={!this.state.isNeedSave}
@@ -784,20 +643,18 @@ class PassOpenD extends Component {
 
                                 <Button onClick={() => this.saveNote()}>下载</Button>
 
-                                {/*<Popconfirm title="是否确认拒绝当前用户的开户申请？" onConfirm={this.saveReject} okText="Yes"*/}
-                                {/*cancelText="No">*/}
+                                <Button
 
+                                    disabled={true}
 
-                                {/*</Popconfirm>*/}
-                                <Button onClick={() => {
-                                    this.setState({
-                                        showREJECTmodel: true,
-                                    });
-                                }} loading={this.state.iconcanLoading}>拒绝</Button>
+                                    onClick={() => {
+                                        this.setState({
+                                            showREJECTmodel: true,
+                                        });
+                                    }} loading={this.state.iconcanLoading}>拒绝</Button>
 
                             </div>
                         </Card>
-                        {/*disabled={!this.state.isNeedSave || this.state.recordData.status != 0}*/}
                     </Row>
 
                 </Card>

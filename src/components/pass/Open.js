@@ -9,7 +9,6 @@ import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import classNames from "classnames";
 
-const {TextArea} = Input;
 const {RangePicker} = DatePicker;
 
 class Basic extends Component {
@@ -59,13 +58,14 @@ class Basic extends Component {
     handleKeyPressOOP = (event) => {
         // console.log('hcia event' , event)
         if (event.metaKey || event.ctrlKey) {
-            if (event.key === 'o') {
+            if (event.key === 'o' || event.key === 'ㄅ') {
                 this.setState({
                     switcherOn: !this.state.switcherOn
                 })
             }
         }
     }
+
     componentWillUnmount() {
         // clearInterval(this.sda);
         document.removeEventListener("keydown", this.handleKeyPressOOP, false);
@@ -108,7 +108,6 @@ class Basic extends Component {
         }
 
         this.columns = [
-
             {
                 title: '申请序号',
                 dataIndex: '申请序号',
@@ -183,7 +182,6 @@ class Basic extends Component {
                 title: '审核状态',
                 dataIndex: '审核状态',
                 align: 'center',
-
                 filters: [
                     {text: '审核中', value: 0},
                     {text: '审核通过', value: 1},
@@ -209,13 +207,16 @@ class Basic extends Component {
                     <div>
                         <Button onClick={() => this.showOPDAyModal2(record)}>日志</Button>
 
-                        <Button onClick={() => this.handleEdit(record)}>{record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'}</Button>
+                        <Button
+                            onClick={() => this.handleEdit(record)}>{record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'}
+                        </Button>
                         <Button onClick={() => this.handleAmStok(record)}>{record.displayStatus}</Button>
                     </div>
                 ),
             }];
         this.requestPage()
     }
+
     requestUserCommentList = (record) => {
 
 
@@ -246,6 +247,9 @@ class Basic extends Component {
             this.props.history.push('/app/pass/passopen/detail' + record.id)
             return
         }
+
+
+
 
 
         var gogo = record.status === 0 ? 'detail' : (record.status === 1) ? 'user' : 'user'
@@ -345,7 +349,8 @@ class Basic extends Component {
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
                 {/*{JSON.stringify(this.props.todps)}*/}
                 <h2 style={{marginTop: 15}}>
-                    开户审核
+                    开户审核{this.state.availableFlag}
+                    开户审核{this.state.availableFlag?'W':'R'}
                 </h2>
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
                 <Card bodyStyle={{padding: 0, margin: 0}}
@@ -571,6 +576,7 @@ class Basic extends Component {
 
         )
     }
+
     changePageComment = (page) => {
         page = page - 1
         this.setState({
@@ -580,7 +586,6 @@ class Basic extends Component {
         })
     }
     handleOk = (e) => {
-
 
         if (((this.state.mStockRecordStatus == 1) && this.state.mStockRecordBEn)) {
 
@@ -593,9 +598,8 @@ class Basic extends Component {
                 // mobile: this.state.phoneCn,
                 // content: this.state.changeNoteV,
             }).then((response) => {
-                self.requestPage()//1:合规 2:开户 3:交易
+                self.requestPage()
                 message.success('操作成功')
-
             });
         } else {
             message.error('檢查確定項')

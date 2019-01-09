@@ -15,10 +15,6 @@ import ReactCanvasNest from 'react-canvas-nest';
 
 const FormItem = Form.Item;
 
-const config = {
-    color: '255,0,0',
-    count: 88,
-};
 
 // var cn = new CanvasNest(document.getElementById('Loggin'), config);
 
@@ -37,13 +33,10 @@ class Login extends React.Component {
         console.log('hcia componentWillMount')
 
 
-        // var cn = new CanvasNest(document.getElementById('Loggin'), config);
-        // console.log('hcia cn', cn)
 
     }
 
     componentDidMount() {
-        // var cn = new CanvasNest(document.getElementById('Loggin'), config);
 
         console.log('hcia componentDidMount')
 
