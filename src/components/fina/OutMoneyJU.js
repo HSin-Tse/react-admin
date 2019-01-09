@@ -263,7 +263,7 @@ class Basic extends Component {
                                     <span style={{fontSize: '13px'}}><Input style={{margin:5, width: 220}} placeholder=""/></span>
                                 </div>
                                 <div >
-                                    <Tabs type="card">
+                                    <Tabs tabBarGutter={'0%'} tabBarStyle={{width:'100%'}} type="card">
                                         <TabPane tab={steps[0].title} key="1">
                                             <p>Content of Tab Pane 1</p>
                                             <p>Content of Tab Pane 1</p>
