@@ -92,7 +92,6 @@ class Basic extends Component {
             id: this.state.detail.id,
             leverageId: value,
         }).then((response) => {
-            console.log('hcia response', response)
             // self.setState({
             //     leavgeList: response.data.data,
             // })
@@ -387,7 +386,6 @@ class Basic extends Component {
             'pageSize': 100,
             'id': record.id,
         }).then(function (response) {
-            console.log(response);
 
             self.setState({
                     nodeList: response.data.data.list
@@ -449,7 +447,6 @@ class Basic extends Component {
             'pageSize': self.state.pgsize,
             'pageNo': self.state.current,
         }).then(function (response) {
-            console.log(response);
 
             self.setState({
                     totalPage: response.data.data.totalPage,
@@ -477,7 +474,6 @@ class Basic extends Component {
         window.Axios.post('star/refreshStarLiveAccount', {
             idList: result,
         }).then(function (response) {
-            console.log(response);
             self.setState({
                 visibleOpM: false,
                 loadFor: false,
@@ -512,7 +508,6 @@ class Basic extends Component {
             'status': mStatus,
             'reasonType': self.state.forbiddenValue,
         }).then(function (response) {
-            console.log(response);
             self.setState({
                 visibleOpM: false,
                 loadFor: false,

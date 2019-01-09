@@ -11,14 +11,14 @@
 
 function *foo() {
     for (let i = 1; i <= 3; i++) {
-        let x = yield `hcia 再等一下，i = ${i}`;
-        console.log(x);
+        // let x = yield `hcia 再等一下，i = ${i}`;
+        // console.log(x);
     }
 }
-console.log('hcia 終於輪到我了 A');
+// console.log('hcia 終於輪到我了 A');
 
 setTimeout(() => {
-    console.log('hcia 終於輪到我了');
+    // console.log('hcia 終於輪到我了');
 }, 300);
 
 var a = foo();
@@ -65,7 +65,7 @@ async function add() {
     var y = await getB();
     var z = await getC();
 
-    console.log('hcia',x + y + z);
+    // console.log('hcia',x + y + z);
 }
 
 add(); // 6
