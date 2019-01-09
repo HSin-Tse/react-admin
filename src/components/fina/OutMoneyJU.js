@@ -107,7 +107,7 @@ class Basic extends Component {
                                     display: 'flex',
                                     minHeight: 40
                                 }}>
-                                    <span style={{fontSize: '15px'}}>可用余额:</span>
+                                    <span style={{fontSize: '15px'}}>可用余额</span>
                                     <span style={{fontSize: '15px'}}>00.00</span>
                                 </div>
                                 <div style={ssdds}>
@@ -145,7 +145,7 @@ class Basic extends Component {
                                     display: 'flex',
                                     minHeight: 40
                                 }}>
-                                    <span style={{fontSize: '15px'}}>可用余额:</span>
+                                    <span style={{fontSize: '15px'}}>成功交易</span>
                                     <span style={{fontSize: '15px'}}>00.00</span>
                                 </div>
                                 <div style={ssdds}>
@@ -188,16 +188,22 @@ class Basic extends Component {
                                     display: 'flex',
                                     minHeight: 40
                                 }}>
-                                    <span style={{fontSize: '15px'}}>可用余额:</span>
+                                    <span style={{fontSize: '15px'}}>出金申请详情</span>
                                     <span style={{fontSize: '15px'}}>00.00</span>
                                 </div>
                                 <div style={ssdds}>
-                                    <span style={{fontSize: '13px'}}>余额:</span>
+                                    <span style={{fontSize: '13px'}}>请求出金金额:</span>
                                     <span style={{fontSize: '13px'}}>00.00</span>
                                 </div>
                                 <div style={ssdds}>
-                                    <span style={{fontSize: '13px'}}>奖励金:</span>
-                                    <span style={{fontSize: '13px'}}>00.00</span>
+                                    <span style={{fontSize: '13px'}}><span style={{color: 'red'}}>*</span>出金金额:</span>
+                                    <span style={{fontSize: '13px'}}><Input style={{width: 220}} placeholder="100.00"/>USD</span>
+                                </div>
+
+
+                                <div style={ssdds}>
+                                    <span style={{fontSize: '13px'}}>出金日期</span>
+                                    <span style={{fontSize: '13px'}}>1900-10-10 10:10:10</span>
                                 </div>
                                 <div style={ssdds}>
                                     <span style={{fontSize: '13px'}}>出金待审核:</span>
@@ -211,6 +217,10 @@ class Basic extends Component {
                                 <div style={ssdds}>
                                     <span style={{fontSize: '13px'}}>出金:</span>
                                     <span style={{fontSize: '13px'}}>00.00</span>
+                                </div>
+                                <div style={ssdds}>
+                                    <span style={{fontSize: '13px'}}>备注:</span>
+                                    <span style={{fontSize: '13px'}}><Input style={{width: 220}} placeholder=""/></span>
                                 </div>
                             </Card>
                         </Col>
