@@ -8,7 +8,7 @@ import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import {steps} from "./model/Steps"
-
+const Option = Select.Option;
 const Step = Steps.Step;
 
 class Basic extends Component {
@@ -199,28 +199,65 @@ class Basic extends Component {
                                     <span style={{fontSize: '13px'}}><span style={{color: 'red'}}>*</span>出金金额:</span>
                                     <span style={{fontSize: '13px'}}><Input style={{width: 220}} placeholder="100.00"/>USD</span>
                                 </div>
-
-
                                 <div style={ssdds}>
                                     <span style={{fontSize: '13px'}}>出金日期</span>
                                     <span style={{fontSize: '13px'}}>1900-10-10 10:10:10</span>
                                 </div>
+
                                 <div style={ssdds}>
-                                    <span style={{fontSize: '13px'}}>出金待审核:</span>
-                                    <span style={{fontSize: '13px'}}>00.00</span>
-                                </div>
-                                <Divider style={{paddingLeft: 15, paddingRight: 15}}/>
-                                <div style={ssdds}>
-                                    <span style={{fontSize: '13px'}}>总入金:</span>
-                                    <span style={{fontSize: '13px'}}>00.00</span>
+                                    <span style={{fontSize: '13px'}}>用户名/帐号</span>
+                                    <span style={{fontSize: '13px'}}>1900-10-10 10:10:10</span>
                                 </div>
                                 <div style={ssdds}>
-                                    <span style={{fontSize: '13px'}}>出金:</span>
-                                    <span style={{fontSize: '13px'}}>00.00</span>
+                                    <span style={{fontSize: '13px'}}>订单号</span>
+                                    <span style={{fontSize: '13px'}}>0001</span>
+                                </div>
+                                <div style={ssdds}>
+                                    <span style={{fontSize: '13px'}}>经济商</span>
+                                    <span style={{fontSize: '13px'}}>BBIX</span>
+                                </div>
+                                <div style={ssdds}>
+                                    <span style={{fontSize: '13px'}}>支付方式</span>
+
+                                    <Select defaultValue="lucy" style={{margin:5, width: 220}} >
+                                        <Option value="jack">001</Option>
+                                        <Option value="lucy">002</Option>
+                                    </Select>
+
+                                </div>
+                                <div style={ssdds}>
+                                    <span style={{fontSize: '13px'}}><span style={{color: 'red'}}>*</span>银行名称</span>
+                                    <span style={{fontSize: '13px'}}><Input style={{margin:5, width: 220}} placeholder=""/></span>
+                                </div>
+                                <div style={ssdds}>
+                                    <span style={{fontSize: '13px'}}>收款银行预留手机号</span>
+                                    <span style={{fontSize: '13px'}}><Input style={{margin:5, width: 220}} placeholder=""/></span>
+                                </div>
+
+                                <div style={ssdds}>
+                                    <span style={{fontSize: '13px'}}><span style={{color: 'red'}}>*</span> 省</span>
+                                    <span style={{fontSize: '13px'}}><Input style={{margin:5, width: 220}} placeholder=""/></span>
+                                </div>
+                                <div style={ssdds}>
+                                    <span style={{fontSize: '13px'}}><span style={{color: 'red'}}>*</span>城市</span>
+                                    <span style={{fontSize: '13px'}}><Input style={{margin:5, width: 220}} placeholder=""/></span>
+                                </div>
+
+                                <div style={ssdds}>
+                                    <span style={{fontSize: '13px'}}><span style={{color: 'red'}}>*</span>支行名称</span>
+                                    <span style={{fontSize: '13px'}}><Input style={{margin:5, width: 220}} placeholder=""/></span>
+                                </div>
+                                <div style={ssdds}>
+                                    <span style={{fontSize: '13px'}}><span style={{color: 'red'}}>*</span>收款人姓名</span>
+                                    <span style={{fontSize: '13px'}}><Input style={{margin:5, width: 220}} placeholder=""/></span>
+                                </div>
+                                <div style={ssdds}>
+                                    <span style={{fontSize: '13px'}}><span style={{color: 'red'}}>*</span>收款银行账户</span>
+                                    <span style={{fontSize: '13px'}}><Input style={{margin:5, width: 220}} placeholder=""/></span>
                                 </div>
                                 <div style={ssdds}>
                                     <span style={{fontSize: '13px'}}>备注:</span>
-                                    <span style={{fontSize: '13px'}}><Input style={{width: 220}} placeholder=""/></span>
+                                    <span style={{fontSize: '13px'}}><Input style={{margin:5, width: 220}} placeholder=""/></span>
                                 </div>
                             </Card>
                         </Col>
