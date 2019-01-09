@@ -348,7 +348,7 @@ class CustomerSummary extends Component {
                     <Table
                         rowKey="id"
                         bordered
-                        scroll={{x: 1800}}
+                        scroll={{x: 2000}}
                         columns={this.columns}
                         dataSource={this.state.bklistA}
                         loading={this.state.loading}
