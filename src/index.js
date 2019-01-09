@@ -7,11 +7,18 @@ import {createStore, applyMiddleware} from 'redux';
 import reducer from './reducer';
 import {AppContainer} from 'react-hot-loader';
 import Page from './Page';
+import {} from './try'
 import './style/lib/animate.css';
 import './style/antd/index.less';
 import './style/index.less';
 import axios from "axios";
 import {message} from 'antd';
+
+
+
+
+
+
 
 // redux 注入操作
 const middleware = [thunk];

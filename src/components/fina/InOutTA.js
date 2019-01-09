@@ -7,6 +7,7 @@ import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
+import {CSVLink} from "react-csv";
 
 const Option = Select.Option;
 const {TextArea} = Input;
@@ -157,17 +158,25 @@ class Basic extends Component {
 
             {
                 title: '序号',
+                label: '序号',
                 dataIndex: '序号',
-                key: '序号',
+                key: 'index',
                 align: 'center',
-                render: (text, record, index) => (
-                    <span>{this.state.current * this.state.pgsize + index + 1}</span>
-                ),
+                render: (text, record, index) =>
+                {
+
+                    record.index =this.state.current * this.state.pgsize + index + 1
+                   return (
+
+                       <span>{this.state.current * this.state.pgsize + index + 1}</span>
+                   )
+                }
             },
             {
                 align: 'center',
 
                 title: '订单编号',
+                label: '订单编号',
                 dataIndex: '订单编号',
                 key: '订单编号',
                 render: (text, record) => (
@@ -175,13 +184,15 @@ class Basic extends Component {
             }, {
 
                 title: '客户邮箱',
+                label: '客户邮箱',
                 dataIndex: '客户邮箱',
                 key: '客户邮箱',
-                render: (text, record) => (<span>{record.accountNo}</span>),
+                render: (text, record) => (<span>{record.email}</span>),
                 align: 'center',
             }, {
 
                 title: '交易账户',
+                label: '交易账户',
                 dataIndex: '交易账户',
                 key: '交易账户',
                 render: (text, record) => (
@@ -190,6 +201,7 @@ class Basic extends Component {
             }, {
 
                 title: '交易组',
+                label: '交易组',
                 dataIndex: '交易组',
                 key: '交易组',
                 render: (text, record) => (
@@ -198,6 +210,7 @@ class Basic extends Component {
             }, {
 
                 title: '类型',
+                label: '类型',
                 dataIndex: '类型',
                 key: '类型',
                 render: (text, record) => (
@@ -207,6 +220,7 @@ class Basic extends Component {
                 align: 'center',
 
                 title: '客户申请时间',
+                label: '客户申请时间',
                 dataIndex: '客户申请时间',
                 key: '客户申请时间',
 
@@ -216,6 +230,7 @@ class Basic extends Component {
                 align: 'center',
 
                 title: '经纪商',
+                label: '经纪商',
                 dataIndex: '经纪商',
                 key: '经纪商',
                 render: (text, record) => (
@@ -224,6 +239,7 @@ class Basic extends Component {
                 align: 'center',
 
                 title: '出入金渠道',
+                label: '出入金渠道',
                 dataIndex: '出入金渠道',
                 key: '出入金渠道',
                 render: (text, record) => (
@@ -232,6 +248,7 @@ class Basic extends Component {
                 align: 'center',
 
                 title: '交易币种',
+                label: '交易币种',
                 dataIndex: '交易币种',
                 key: '交易币种',
 
@@ -241,6 +258,7 @@ class Basic extends Component {
                 align: 'center',
 
                 title: '金额',
+                label: '金额',
                 dataIndex: '金额',
                 key: '金额',
 
@@ -250,6 +268,7 @@ class Basic extends Component {
                 align: 'center',
 
                 title: '执行金额',
+                label: '执行金额',
                 dataIndex: '执行金额',
                 key: '执行金额',
 
@@ -259,6 +278,7 @@ class Basic extends Component {
                 align: 'center',
 
                 title: '执行币种',
+                label: '执行币种',
                 dataIndex: '执行币种',
                 key: '执行币种',
 
@@ -268,6 +288,7 @@ class Basic extends Component {
                 align: 'center',
 
                 title: '使用汇率',
+                label: '使用汇率',
                 dataIndex: '使用汇率',
                 key: '使用汇率',
 
@@ -277,6 +298,7 @@ class Basic extends Component {
                 align: 'center',
 
                 title: '手续费',
+                label: '手续费',
                 dataIndex: '手续费',
                 key: '手续费',
 
@@ -286,6 +308,7 @@ class Basic extends Component {
                 align: 'center',
 
                 title: '执行时间',
+                label: '执行时间',
                 dataIndex: '执行时间',
                 key: '执行时间',
 
@@ -294,6 +317,7 @@ class Basic extends Component {
             }, {
                 align: 'center',
                 title: '处理人',
+                label: '处理人',
                 dataIndex: '处理人',
                 key: '处理人',
                 render: (text, record) => (
@@ -681,11 +705,18 @@ class Basic extends Component {
                       bodyStyle={{padding: 0, margin: 0}}
 
                       extra={
-                          <Button type="default"
-                                  onClick={() => {
-                                  }
-                                  }>下载当前列表
-                          </Button>
+
+                          <CSVLink filename={"出入金报表.csv"} data={this.state.userList} headers={this.columns}>
+                              <Button>下载当前列表</Button>
+                          </CSVLink>
+                          // <Button type="default"
+                          //         onClick={() => {
+                          //
+                          //
+                          //
+                          //         }
+                          //         }>下载当前列表
+                          // </Button>
                       }>
 
                     <Table rowKey="id"
