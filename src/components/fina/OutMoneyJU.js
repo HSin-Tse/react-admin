@@ -7,9 +7,8 @@ import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
+import {steps} from "./model/Steps"
 
-const Option = Select.Option;
-const {TextArea} = Input;
 const Step = Steps.Step;
 
 class Basic extends Component {
@@ -54,19 +53,7 @@ class Basic extends Component {
 
 
     render() {
-        const steps = [{
-            title: '新增',
-            content: 'First-content',
-        }, {
-            title: '客维审核',
-            content: 'Second-content',
-        }, {
-            title: '后台审核',
-            content: 'Last-content',
-        }, {
-            title: '银行放款',
-            content: 'Last-content',
-        }];
+
 
         var ssdds = {
             paddingLeft: 15,
@@ -83,9 +70,9 @@ class Basic extends Component {
                 {/*this.state.selectedRowKeys.length > 0*/}
 
                 <h2 style={{marginTop: 15}}>
-                    新增电汇入金
+                    {steps[0].title}
                 </h2>
-                <BreadcrumbCustom first="财务管理" second="电汇入金"/>
+                <BreadcrumbCustom first="财务管理" second="出金管理" third={steps[0].title}/>
 
                 <div style={{transform: "scale(1.3,1.3)"}}>
 
@@ -107,7 +94,7 @@ class Basic extends Component {
                     <Row
 
                         gutter={32}>
-                        <Col  span={12}>
+                        <Col span={12}>
                             <Card
                                 bodyStyle={{padding: 0, margin: 0}}
                                 bordered={false}>
@@ -146,7 +133,7 @@ class Basic extends Component {
                                 </div>
                             </Card>
                             <Card
-                                style={{marginTop:15}}
+                                style={{marginTop: 15}}
                                 bodyStyle={{padding: 0, margin: 0}}
                                 bordered={false}>
                                 <div style={{
@@ -185,7 +172,7 @@ class Basic extends Component {
                             </Card>
 
                         </Col>
-                        <Col  span={12}>
+                        <Col span={12}>
 
                             <Card
                                 bodyStyle={{padding: 0, margin: 0}}
