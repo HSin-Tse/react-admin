@@ -35,7 +35,7 @@ class Basic extends Component {
             , pgsize: 10
 
         };
-        console.log('hcia  this.props', this.props)
+        // console.log('hcia  this.props', this.props)
 
     }
 
@@ -92,12 +92,12 @@ class Basic extends Component {
                 });
             } else {
                 var isCanOp = menuInfor.menuList.find((item) => {
-                    console.log('hcia  this.props', this.props)
+                    // console.log('hcia  this.props', this.props)
                     return this.props.tk === item.key;
                 });
 
-                console.log('hcia isCanOp', isCanOp.availableFlag)
-                console.log('hcia isCanOp', isCanOp.availableFlag)
+                // console.log('hcia isCanOp', isCanOp.availableFlag)
+                // console.log('hcia isCanOp', isCanOp.availableFlag)
                 self.setState({
                     availableFlag: isCanOp.availableFlag === 1,
                     isCanOP: isCanOp.availableFlag
@@ -351,7 +351,7 @@ class Basic extends Component {
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
                 {/*{JSON.stringify(this.props.todps)}*/}
                 <h2 style={{marginTop: 15}}>
-                    开户审核{this.state.availableFlag}
+                    {/*开户审核{this.state.availableFlag}*/}
                     开户审核{this.state.availableFlag?'W':'R'}
                 </h2>
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>

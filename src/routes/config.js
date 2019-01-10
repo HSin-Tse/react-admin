@@ -1,5 +1,7 @@
 export default {
     menus: [ // 菜单相关路由
+
+
         {
             tk: 'dash', key: '/app/devboard/index:catch',
             title: 'dev', icon: 'user', component: 'DEVhboard'
@@ -52,6 +54,7 @@ export default {
                     component: 'BlackList',
                     pg: '3'
                 },
+
 
                 // {tk: 'SERVICE_GROUP_MGMT', key: '/app/trade/depart', title: '組管理', component: 'TradeDepart'},
             ],

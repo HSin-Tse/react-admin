@@ -100,10 +100,10 @@ export default class CRouter extends Component {
                 var ssb = key.subs.filter((sbkey, index, array) => {
                     var back = false
                     inforMenuList.forEach((item, index, array) => {
-                        console.log('hcia sbkey.tk', sbkey.tk, item.key, item.availableFlag, (sbkey.tk == item.key))
+                        // console.log('hcia sbkey.tk', sbkey.tk, item.key, item.availableFlag, (sbkey.tk == item.key))
 
                         if (sbkey.tk == item.key) {
-                            console.log('hcia sbkey.tk', sbkey.tk, item.key, item.availableFlag, (sbkey.tk == item.key))
+                            // console.log('hcia sbkey.tk', sbkey.tk, item.key, item.availableFlag, (sbkey.tk == item.key))
                             back = true
                             sbkey.op = item.availableFlag
 

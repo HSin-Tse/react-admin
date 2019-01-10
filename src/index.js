@@ -41,7 +41,7 @@ window.Axios.interceptors.request.use(
 
                 // Toast.success('加载完成')
                 
-                console.log('hcia hideLoading' , hideLoading)
+                // console.log('hcia hideLoading' , hideLoading)
 
                 if(hideLoading){
 
@@ -94,7 +94,7 @@ window.Axios.interceptors.response.use(function (response) {
         message.error(response.data.msg)
         return Promise.reject(response)
     }
-    setTimeout(hideLoading, 600)
+    setTimeout(hideLoading, 600000000)
     hideLoading=undefined
     // setTimeout(ss, 0);
 
