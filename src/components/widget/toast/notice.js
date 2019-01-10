@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import Image from 'react-shimmer'
+import React, {Component} from 'react'
+
 class Notice extends Component {
     render() {
         const icons = {
@@ -9,18 +9,18 @@ class Notice extends Component {
             error: 'icon-close-circle-fill',
             loading: 'icon-loading'
         }
-        const { type, content } = this.props
+        const {type, content} = this.props
         return (
             <div className={`toast-notice ${type}`}>
                 <svg className="icon" aria-hidden="true">
-                    <use xlinkHref={`#${icons[type]}`} />
+                    <use xlinkHref={`#${icons[type]}`}/>
                 </svg>
                 {/*<Image*/}
-                    {/*src={'https://example.com/test.jpg'}*/}
-                    {/*width={1200} height={1200}*/}
-                    {/*// style={{objectFit: 'cover'}} // Style your <img>*/}
-                    {/*// delay={25}*/}
-                    {/*duration={1000} // Customize the animation duration (s).*/}
+                {/*src={'https://example.com/test.jpg'}*/}
+                {/*width={1200} height={1200}*/}
+                {/*// style={{objectFit: 'cover'}} // Style your <img>*/}
+                {/*// delay={25}*/}
+                {/*duration={1000} // Customize the animation duration (s).*/}
                 {/*/>*/}
                 {/*<div>IX</div>*/}
                 <span>{content}</span>
