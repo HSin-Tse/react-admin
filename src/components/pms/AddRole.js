@@ -154,6 +154,10 @@ class AddRole extends Component {
 
         const {getFieldDecorator} = this.props.form;
         const setingBlok = this.state.menuList.map(function (item, index) {
+
+
+
+
                 return (
                     <Card bodyStyle={{padding: 0, margin: 0, marginLeft: 10}} style={{marginTop: 15}} key={index}
 
@@ -161,7 +165,11 @@ class AddRole extends Component {
                           title={<span style={{marginLeft: 15, fontSize: 14}}> {item.name} </span>}
                         // title={item.name}
                           bordered={true}>
+
                         {
+
+
+
                             item.childrenMenu.map(function (item1, number) {
 
 
@@ -193,17 +201,17 @@ class AddRole extends Component {
 
             <div>
                 <h2 style={{marginTop: 15}}>新增角色</h2>
-                <Collapse  onChange={(key) => {
-                    console.log(key);
-                }}>
-                    <Panel header="This is panel header 1" key="1">
-                        <p>{text}</p>
-                    </Panel>
-                    <Panel header="This is panel header 2" key="2">
-                        <p>{text}</p>
-                    </Panel>
+                {/*<Collapse  onChange={(key) => {*/}
+                    {/*console.log(key);*/}
+                {/*}}>*/}
+                    {/*<Panel header="This is panel header 1" key="1">*/}
+                        {/*<p>{text}</p>*/}
+                    {/*</Panel>*/}
+                    {/*<Panel header="This is panel header 2" key="2">*/}
+                        {/*<p>{text}</p>*/}
+                    {/*</Panel>*/}
 
-                </Collapse>
+                {/*</Collapse>*/}
 
                 <BreadcrumbCustom first="权限管理" second="内部人员配置" third="新增角色"/>
 
