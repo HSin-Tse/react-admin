@@ -17,8 +17,9 @@ class Notification extends Component {
     }
 
     addNotice(notice) {
+
         const { notices } = this.state
-        notice.key = this.getNoticeKey()
+        notice.key = 1
         if (notices.every(item => item.key !== notice.key)) {
             if (notice.length > 0 && notices[notice.length - 1].type === 'loading') {
                 notices.push(notice)

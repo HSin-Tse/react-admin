@@ -40,6 +40,8 @@ window.Axios.interceptors.request.use(
             if (config.method == 'post') {
 
                 // Toast.success('加载完成')
+                
+                console.log('hcia hideLoading' , hideLoading)
 
                 if(hideLoading){
 
