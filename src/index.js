@@ -92,7 +92,7 @@ window.Axios.interceptors.response.use(function (response) {
         message.error(response.data.msg)
         return Promise.reject(response)
     }
-    setTimeout(hideLoading, 1000)
+    setTimeout(hideLoading, 600)
     hideLoading=undefined
     // setTimeout(ss, 0);
 
