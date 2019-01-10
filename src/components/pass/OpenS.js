@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import {
-    Tooltip, Popconfirm, Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, notification
+    Tooltip, Popconfirm, Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, notification, Table
 } from 'antd';
 import {message} from 'antd';
 import html2canvas from 'html2canvas';
@@ -615,13 +615,51 @@ class PassOpenD extends Component {
                         </Col>
                     </Row>
                 </Card>
-                <Card title="IX账户审核备注" bordered={true} style={{marginTop: 15}}>
+                <Card title="IX账户开户备注" bordered={true} style={{marginTop: 15}}>
                     <Row gutter={12}>
 
                         <Col md={24}>
-                            <div style={{display: 'flex', minHeight: 40}}>
-                                <TextArea value={this.state.changeNoteV} rows={4} onChange={this.changeNote}/>
-                            </div>
+
+
+                            <Table rowKey="id"
+                                   columns={[
+                                       {
+                                           title: '操作人',
+                                           dataIndex: 'createDate',
+                                           key: 'operationDiary_Date',
+                                           render: (text, record) => (
+                                               <span>{record.createDate}</span>),
+                                       }, {
+                                           title: '操作时间',
+                                           dataIndex: '操作时间',
+                                           key: '操作时间',
+                                           render: (text, record) => (
+                                               <span>{record.ipAddress}</span>),
+                                       }, {
+                                           title: '操作',
+                                           width: 130,
+                                           dataIndex: 'bkUserName',
+                                           key: 'operationDiary_User',
+                                           render: (text, record) => (
+                                               <span>{record.bkUserName}</span>),
+                                       }, {
+                                           title: '备注内容',
+                                           dataIndex: 'comment',
+                                           key: 'operationDiary_Status',
+                                           render: (text, record) => (
+                                               <span>{record.comment}</span>),
+                                       }]}
+                                   dataSource={this.state.operationDiaryHistory}
+                                   loading={this.state.loadingComment}
+                                   pagination={{
+                                       total: this.state.totalpageComments * this.state.pgsize,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePageComment,
+                                   }}
+                            />
+                            {/*<div style={{display: 'flex', minHeight: 40}}>*/}
+                                {/*<TextArea value={this.state.changeNoteV} rows={4} onChange={this.changeNote}/>*/}
+                            {/*</div>*/}
                         </Col>
 
 
