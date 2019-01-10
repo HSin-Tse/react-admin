@@ -135,7 +135,7 @@ class AddRole extends Component {
                          var s1= inItem.key
                          var b1= itttt.key
 
-                        console.log('hcia inItem' , inItem.key  ,'--',itttt.key ,(s1== b1),(inItem.key == itttt.key))
+                        console.log('hcia inItem' , inItem.key  ,'--',itttt.key ,(s1== b1),(inItem.key === itttt.key))
 
                          if(!(inItem.key ==itttt.key))
                          isOK = false
