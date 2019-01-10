@@ -7,10 +7,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fetchData, receiveData} from '@/action';
 import {message} from 'antd';
-import axios from "axios";
 import {addTodo, setINFOR} from "../../action";
 import avater from '@/style/imgs/ixlogo.png';
-import CanvasNest from 'canvas-nest.js';
 import ReactCanvasNest from 'react-canvas-nest';
 
 const FormItem = Form.Item;
@@ -24,41 +22,9 @@ class Login extends React.Component {
         receiveData(null, 'auth');
     }
 
-    // const cn = new CanvasNest(element, config);
-    componentWillUnmount() {
-        document.getElementById('openD')
-    }
-
-    componentWillMount() {
-        console.log('hcia componentWillMount')
-
-
-
-    }
-
-    componentDidMount() {
-
-        console.log('hcia componentDidMount')
-
-    }
 
     componentDidUpdate(prevProps) { // React 16.3+弃用componentWillReceiveProps
-        // const {auth: nextAuth = {}, history} = this.props;
 
-        // var ssss = localStorage.getItem('infor');
-        // if (nextAuth.data && nextAuth.data.uid) { // 判断是否登陆
-        //     localStorage.setItem('user', JSON.stringify(nextAuth.data));
-        // }
-        // console.log('hcia ssss' , ssss)
-        // var ssss = localStorage.getItem('too');
-        //
-        // if (ssss) {
-        //     console.log('hcia ssss' , ssss)
-        //     history.push('/app/dashboard/index');
-        // } else {
-        //     // message.error('等待跳轉~'+ssss )
-        //
-        // }
 
 
     }
@@ -173,7 +139,8 @@ class Login extends React.Component {
                     </Form>
                 </div>
 
-                <ReactCanvasNest className='canvasNest' config={{pointColor: ' 255, 255, 255 ',count:100}} style={{zIndex: 0}}/>
+                <ReactCanvasNest className='canvasNest' config={{pointColor: ' 255, 255, 255 ', count: 100}}
+                                 style={{zIndex: 0}}/>
 
             </dic>
         );

@@ -725,15 +725,8 @@ class Basic extends Component {
                                 }}
                                 value={this.state.filterTimeFalue}
                                 onOk={(value) => {
-                                    console.log('hcia', 'onOk: ', value);
-
-
                                     var selectTimeStart = value[0].unix() + '000'
                                     var selectTimeEnd = value[1].unix() + '000'
-
-                                    console.log('hcia selectTimeStart', selectTimeStart)
-                                    console.log('hcia selectTimeEnd', selectTimeEnd)
-
 
                                     this.setState({
                                         filterTimeFalue: value,
@@ -806,7 +799,6 @@ class Basic extends Component {
                            dataSource={this.state.nodeList}// nodeList
                     />
 
-
                 </Modal>
                 <h2 style={{marginTop: 15}}>
                     账户管理
@@ -815,7 +807,6 @@ class Basic extends Component {
 
                 <Card title="账户管理"
                       bodyStyle={{padding: 0, margin: 0}}
-
                       extra={
                           <Button type="default" disabled={!hasSelected}
                                   onClick={() => this.refleshNowpage()}>刷新当前页面
@@ -824,7 +815,6 @@ class Basic extends Component {
 
                     <Table rowKey="id"
                            rowSelection={rowSelection}
-
                            columns={this.columns}
                            dataSource={this.state.userList}
                            scroll={{x: 2000}}

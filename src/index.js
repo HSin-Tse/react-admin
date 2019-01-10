@@ -13,12 +13,7 @@ import './style/antd/index.less';
 import './style/index.less';
 import axios from "axios";
 import {message} from 'antd';
-
-
-
-
-
-
+import Toast from './components/widget/toast'
 
 // redux 注入操作
 const middleware = [thunk];
@@ -29,6 +24,7 @@ var Axios = axios.create({
 
 window.Axios = Axios;
 
+var hideLoading
 window.Axios.interceptors.request.use(
     config => {
         var xtoken = localStorage.getItem('too')
@@ -42,6 +38,23 @@ window.Axios.interceptors.request.use(
         if (xtoken != null) {
             config.headers['X-Token'] = xtoken
             if (config.method == 'post') {
+
+                // Toast.success('加载完成')
+
+                if(hideLoading){
+
+                }else{
+                    hideLoading = Toast.loading('加载中...', 0, () => {
+                        // Toast.success('加载完成')
+                    })
+                }
+
+                message.config({
+                    top: '40%',
+                    maxCount: 3,
+                });
+                // ss=   message.loading('Action in progress..', 0)
+                // message.success('Loading finished', 2.5)
                 config.data = {
                     ...config.data,
                     'token': xtoken,
@@ -50,7 +63,7 @@ window.Axios.interceptors.request.use(
 
                 }
 
-                config.timeout=30*1000
+                config.timeout = 30 * 1000
 
                 config.headers = {
                     'token': xtoken,
@@ -79,6 +92,10 @@ window.Axios.interceptors.response.use(function (response) {
         message.error(response.data.msg)
         return Promise.reject(response)
     }
+    setTimeout(hideLoading, 1000)
+    hideLoading=undefined
+    // setTimeout(ss, 0);
+
     return response
 }, function (error) {
     message.error(error.toString())
@@ -86,12 +103,14 @@ window.Axios.interceptors.response.use(function (response) {
 })
 
 
-
 ReactDOM.render(
     <AppContainer>
         <Provider store={store}>
             <Page store={store}/>
+
         </Provider>
+
+
     </AppContainer>
     ,
     document.getElementById('root')

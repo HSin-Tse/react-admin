@@ -105,9 +105,10 @@ class DEVhboard extends React.Component {
                 {/*{JSON.stringify(localStorage.getItem('infor'))}*/}
 
                 {/*<Toolbar theme='danger'  value="dash"/>*/}
-                <Provider value="primary">
-                    <Toolbar />
-                </Provider>
+                {/*<Provider value="primary">*/}
+                {/*<Toolbar />*/}
+                {/*</Provider>*/}
+
                 <Row gutter={1}>
                     <Col md={24}>
                         <div style={{display: this.state.displayName == 'admin' ? '' : 'none'}}>
