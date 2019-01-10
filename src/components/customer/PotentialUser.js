@@ -434,6 +434,8 @@ export default class PotentialUser extends Component {
     }
 
     seeUSer = (record) => {
+
+
         this.props.history.push('/app/pass/passopen/user' + record.leadId)
     }
 
@@ -769,9 +771,7 @@ export default class PotentialUser extends Component {
 
                     </div>
                 </div>
-                <h2 style={{marginTop: 15}}>
-                    Leads管理
-                </h2>
+                <h2 style={{marginTop: 15}}>Leads管理</h2>
                 <BreadcrumbCustom first="用户管理" second="Leads管理"/>
 
 

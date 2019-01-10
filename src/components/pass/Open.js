@@ -254,6 +254,8 @@ class Basic extends Component {
 
         var gogo = record.status === 0 ? 'detail' : (record.status === 1) ? 'user' : 'user'
         this.props.history.push('/app/pass/passopen/' + gogo + record.id)
+
+
     };
 
 
