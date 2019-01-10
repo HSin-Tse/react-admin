@@ -40,12 +40,12 @@ window.Axios.interceptors.request.use(
             if (config.method == 'post') {
 
                 // Toast.success('加载完成')
-                
+
                 // console.log('hcia hideLoading' , hideLoading)
 
-                if(hideLoading){
+                if (hideLoading) {
 
-                }else{
+                } else {
                     hideLoading = Toast.loading('加载中...', 0, () => {
                         // Toast.success('加载完成')
                     })
@@ -94,8 +94,8 @@ window.Axios.interceptors.response.use(function (response) {
         message.error(response.data.msg)
         return Promise.reject(response)
     }
-    setTimeout(hideLoading, 600000000)
-    hideLoading=undefined
+    setTimeout(hideLoading, 0)
+    hideLoading = undefined
     // setTimeout(ss, 0);
 
     return response
