@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
+import spelist from './model/speList'
 import {
     Col,
     Card,
     Row,
     Input,
-    Collapse,
     Button,
     Table,
     Icon,
@@ -19,7 +19,6 @@ import {setINFOR} from "../../action";
 import connect from "react-redux/es/connect/connect";
 
 const {TextArea} = Input;
-const Panel = Collapse.Panel;
 
 class AddRole extends Component {
 
@@ -41,37 +40,6 @@ class AddRole extends Component {
     }
 
     componentDidMount() {
-        this.columns = [
-            {
-                align: 'center',
-                title: '时间',
-                dataIndex: '时间',
-                key: '时间',
-                render: (text, record) => (
-                    <span>{record.date}</span>),
-            }, {
-                title: 'ip',
-                align: 'center',
-
-                dataIndex: 'ip',
-                key: 'ip',
-                render: (text, record) => (
-                    <span>{record.comment}</span>),
-            }, {
-                title: '操作人',
-                align: 'center',
-                dataIndex: '操作人',
-                key: '操作人',
-                render: (text, record) => (
-                    <span>{record.oprator}</span>),
-            }, {
-                title: '操作',
-                align: 'center',
-                dataIndex: '操作',
-                key: '操作',
-                render: (text, record) => (
-                    <span>{record.comment}</span>),
-            }];
         var self = this;
         window.Axios.post('back/getMenuList', {}).then(function (response) {
             self.setState({
@@ -156,7 +124,28 @@ class AddRole extends Component {
         const setingBlok = this.state.menuList.map(function (item, index) {
 
 
+                console.log('hcia item', item)
 
+                var ssdsss = item.childrenMenu.filter((itttt, ind) => {
+
+
+                    var isOK = true
+                     spelist.forEach((inItem,indd,oo)=>{
+
+                         var s1= inItem.key
+                         var b1= itttt.key
+
+                        console.log('hcia inItem' , inItem.key  ,'--',itttt.key ,(s1== b1),(inItem.key == itttt.key))
+
+                         if(!(inItem.key ==itttt.key))
+                         isOK = false
+                        // return  !(inItem.key ==it.key)
+                    })
+                    console.log('hcia isOK' , isOK)
+
+                  return  isOK
+
+                })
 
                 return (
                     <Card bodyStyle={{padding: 0, margin: 0, marginLeft: 10}} style={{marginTop: 15}} key={index}
@@ -166,11 +155,11 @@ class AddRole extends Component {
                         // title={item.name}
                           bordered={true}>
 
+
                         {
 
 
-
-                            item.childrenMenu.map(function (item1, number) {
+                            ssdsss.map(function (item1, number) {
 
 
                                 // console.log('hcia item1' , item1)
@@ -202,14 +191,14 @@ class AddRole extends Component {
             <div>
                 <h2 style={{marginTop: 15}}>新增角色</h2>
                 {/*<Collapse  onChange={(key) => {*/}
-                    {/*console.log(key);*/}
+                {/*console.log(key);*/}
                 {/*}}>*/}
-                    {/*<Panel header="This is panel header 1" key="1">*/}
-                        {/*<p>{text}</p>*/}
-                    {/*</Panel>*/}
-                    {/*<Panel header="This is panel header 2" key="2">*/}
-                        {/*<p>{text}</p>*/}
-                    {/*</Panel>*/}
+                {/*<Panel header="This is panel header 1" key="1">*/}
+                {/*<p>{text}</p>*/}
+                {/*</Panel>*/}
+                {/*<Panel header="This is panel header 2" key="2">*/}
+                {/*<p>{text}</p>*/}
+                {/*</Panel>*/}
 
                 {/*</Collapse>*/}
 
@@ -293,7 +282,37 @@ class AddRole extends Component {
                         <Col md={24}>
 
                             <Table rowKey="id"
-                                   columns={this.columns}
+                                   columns={[
+                                       {
+                                           align: 'center',
+                                           title: '时间',
+                                           dataIndex: '时间',
+                                           key: '时间',
+                                           render: (text, record) => (
+                                               <span>{record.date}</span>),
+                                       }, {
+                                           title: 'ip',
+                                           align: 'center',
+
+                                           dataIndex: 'ip',
+                                           key: 'ip',
+                                           render: (text, record) => (
+                                               <span>{record.comment}</span>),
+                                       }, {
+                                           title: '操作人',
+                                           align: 'center',
+                                           dataIndex: '操作人',
+                                           key: '操作人',
+                                           render: (text, record) => (
+                                               <span>{record.oprator}</span>),
+                                       }, {
+                                           title: '操作',
+                                           align: 'center',
+                                           dataIndex: '操作',
+                                           key: '操作',
+                                           render: (text, record) => (
+                                               <span>{record.comment}</span>),
+                                       }]}
                                    dataSource={this.state.userList}
                                    bordered
                                    loading={this.state.loading}
