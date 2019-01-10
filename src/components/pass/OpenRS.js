@@ -3,7 +3,21 @@
  */
 import React, {Component} from 'react';
 import {
-    Tooltip, Popconfirm, Icon, Upload, Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, notification
+    Tooltip,
+    Popconfirm,
+    Icon,
+    Upload,
+    Col,
+    Card,
+    Row,
+    Button,
+    Modal,
+    Select,
+    Input,
+    Checkbox,
+    DatePicker,
+    notification,
+    Table
 } from 'antd';
 import {Radio} from 'antd';
 import {message} from 'antd';
@@ -153,41 +167,6 @@ class PassOpenRS extends Component {
                 leverageId: response.data.data.leverage,
                 changeNoteV: response.data.data.comment,
                 checkfromdbName: response.data.data.phoneNumber,
-            }, () => {
-
-
-                // window.Axios.post('dict/openDict', {
-                //     'keys': 'div_type',
-                //     'division': 'province',
-                //     'code': '1',
-                // }).then(function (response) {
-                //     // console.log('hcia response', response)
-                //
-                //     self.setState({
-                //         provinceDatAarra: response.data.data.div_type,
-                //     }, () => {
-                //
-                //         var nowCity = self.state.provinceDatAarra.filter(function (item, index, array) {
-                //             return item.value == self.state.mState;
-                //         });
-                //
-                //         window.Axios.post('dict/openDict', {
-                //             'keys': 'div_type',
-                //             'division': 'city',
-                //             'code': nowCity[0].code
-                //         }).then((ress) => {
-                //
-                //             // console.log('hcia ress', ress)
-                //             self.setState({
-                //                 cityDatAarra: ress.data.data.div_type
-                //             })
-                //         });
-                //     });
-                //
-                //
-                // });
-
-
             });
         });
 
@@ -204,10 +183,6 @@ class PassOpenRS extends Component {
 
         var isSetL = this.state.leverageId ? this.state.leverageId.length > 0 : false
 
-
-        // console.log('hcia isSetL', isSetL)
-        var self = this;
-
         this.mIncomesOPS = this.state.IXIncomeList.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXPercentage = this.state.IXPercentage.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXFundsSource = this.state.IXFundsSource.map(d => <Option key={d.name}>{d.name}</Option>);
@@ -215,150 +190,6 @@ class PassOpenRS extends Component {
         this.mIXTradingExperience = this.state.IXTradingExperience.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXTradingObjectives = this.state.IXTradingObjectives.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXRisk_Tolerance = this.state.IXRisk_Tolerance.map(d => <Option key={d.name}>{d.name}</Option>);
-        const uploadProps1 = {
-            action: 'open/leadDetailAttachs',
-            multiple: false,
-            data: {'id': this.state.recordData.id, 'key': 'idcard_1'},
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-            onStart(file) {
-                console.log('onStart', file, file.name);
-            },
-            onSuccess(ret, file) {
-                console.log('onSuccess', ret, file.name);
-            },
-            onError(err) {
-                console.log('onError', err);
-            },
-            onProgress({percent}, file) {
-                console.log('onProgress', `${percent}%`, file.name);
-            },
-            customRequest({
-                              data,
-                              file,
-                          }) {
-
-                const formData = new FormData();
-                if (data) {
-                    Object.keys(data).map(key => {
-                        formData.append(key, data[key]);
-                    });
-                }
-                formData.append('file', file);
-                formData.append('loginName', localStorage.getItem('loginName'))
-                formData.append('token', localStorage.getItem('too'))
-
-                aaxios.post('open/leadDetailAttachs', formData, {})
-                    .then(function (response) {
-                        // console.log('hcia response', response.data.data)
-                        self.setState({
-                            recordData: {...self.state.recordData, idcard_1: response.data.data}
-                        })
-                    })
-                    .catch(error => {
-                        // console.log('hcia error', error)
-                    });
-
-
-            },
-        };
-        const uploadProps0 = {
-            action: 'open/leadDetailAttachs',
-            multiple: false,
-            data: {'id': this.state.recordData.id, 'key': 'idcard_0'},
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-            onStart(file) {
-                console.log('onStart', file, file.name);
-            },
-            onSuccess(ret, file) {
-                console.log('onSuccess', ret, file.name);
-            },
-            onError(err) {
-                console.log('onError', err);
-            },
-            onProgress({percent}, file) {
-                console.log('onProgress', `${percent}%`, file.name);
-            },
-            customRequest({
-                              data,
-                              file,
-                          }) {
-
-                const formData = new FormData();
-                if (data) {
-                    Object.keys(data).map(key => {
-                        formData.append(key, data[key]);
-                    });
-                }
-                formData.append('file', file);
-                formData.append('loginName', localStorage.getItem('loginName'))
-                formData.append('token', localStorage.getItem('too'))
-
-                aaxios.post('open/leadDetailAttachs', formData, {})
-                    .then(function (response) {
-                        // console.log('hcia response', response.data.data)
-                        self.setState({
-                            recordData: {...self.state.recordData, idcard_0: response.data.data}
-                        })
-                    })
-                    .catch(error => {
-                        // console.log('hcia error', error)
-                    });
-
-
-            },
-        };
-        const uploadProps = {
-            action: 'open/leadDetailAttachs',
-            multiple: false,
-            data: {'id': this.state.recordData.id, 'key': 'idcard_2'},
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-            onStart(file) {
-                console.log('onStart', file, file.name);
-            },
-            onSuccess(ret, file) {
-                console.log('onSuccess', ret, file.name);
-            },
-            onError(err) {
-                console.log('onError', err);
-            },
-            onProgress({percent}, file) {
-                console.log('onProgress', `${percent}%`, file.name);
-            },
-            customRequest({
-                              data,
-                              file,
-                          }) {
-
-                const formData = new FormData();
-                if (data) {
-                    Object.keys(data).map(key => {
-                        formData.append(key, data[key]);
-                    });
-                }
-                formData.append('file', file);
-                formData.append('loginName', localStorage.getItem('loginName'))
-                formData.append('token', localStorage.getItem('too'))
-
-                aaxios.post('open/leadDetailAttachs', formData, {})
-                    .then(function (response) {
-                        // console.log('hcia response', response.data.data)
-                        self.setState({
-                            recordData: {...self.state.recordData, idcard_2: response.data.data}
-                        })
-                    })
-                    .catch(error => {
-                        // console.log('hcia error', error)
-                    });
-
-
-            },
-        };
 
         return (
             <div id="openD">
@@ -369,9 +200,9 @@ class PassOpenRS extends Component {
                 {/*<div>waitUpdate :{JSON.stringify(this.state.waitUpdate)}</div>*/}
                 {/*<div>this.state.availableFlag :{JSON.stringify(this.state.availableFlag)}</div>*/}
                 <h2 style={{marginTop: 15}}>
-                    开户信息详情
+                    开户信息
                 </h2>
-                <BreadcrumbCustom first="审核管理" second="开户信息详情"/>
+                <BreadcrumbCustom first="IX账户信息" second="用户总表" third="开户信息"/>
                 <Card disabled={true} title="IX账户审核 " bordered={true}>
 
                     <Row gutter={1}>
@@ -698,106 +529,49 @@ class PassOpenRS extends Component {
                 </Card>
 
 
-                <Card title="IX账户身份查重" bordered={true} style={{marginTop: 15}}>
-
-                    <Row gutter={12}>
-                        <Col md={4}>
-                            <div style={{display: 'flex', minHeight: 40}}>
-                                <Select
-                                    onChange={this.checkfromdbType}
-                                    defaultValue="0"
-                                    style={{width: 120}}>
-                                    <Option value="0">手机号</Option>
-                                    <Option value="1">身份证</Option>
-                                    <Option value="2">邮箱</Option>
-                                </Select>
-                            </div>
-
-                        </Col>
-                        <Col md={8}>
-                            <div style={{display: 'flex', maxHeight: 40}}>
-                                <Search
-                                    value={this.state.checkfromdbName}
-                                    onChange={e => this.onTodoChange(e.target.value)}
-                                    style={{width: 220}} placeholder="输入要查询的内容"/>
-                            </div>
-                        </Col>
-                        <Col md={4}>
-                            <div style={{display: 'flex', minHeight: 40}}>
-                                <Button loading={this.state.icondbALoading}
-                                        onClick={() => this.searchFromLocalDB()}>本库查询</Button>
-                            </div>
-                        </Col>
-                        <Col md={4}>
-                            <div style={{display: 'flex', minHeight: 40}}>
-                                <Button loading={this.state.icondbALoadingA}
-                                        onClick={() => this.searchFromOtherDB()}>异库查询</Button>
-
-                            </div>
-                        </Col>
-                        <Col md={24}>
-                            <div style={{display: 'flex', minHeight: 40}}>
-                                {this.state.checkderesb == null ? null :
-                                    <h3 style={{margin: 'auto'}}>本库查询结果：{this.state.checkderesb ? '有' : '無'}重合</h3>}
-                                {this.state.checkderesa == null ? null :
-                                    <h3 style={{margin: 'auto'}}>异库查询结果：{this.state.checkderesa ? '有' : '無'}重合</h3>}
-                            </div>
-                        </Col>
-                    </Row>
-                </Card>
-                <Card title="IX账户审核备注" bordered={true} style={{marginTop: 15}}>
+                <Card title="IX账户开户备注" bordered={true} style={{marginTop: 15}}>
                     <Row gutter={12}>
 
                         <Col md={24}>
-                            <div style={{display: 'flex', minHeight: 40}}>
-                                <TextArea value={this.state.changeNoteV} rows={4} onChange={this.changeNote}/>
-                            </div>
+                            <Table rowKey="id"
+                                   columns={[
+                                       {
+                                           title: '操作人',
+                                           dataIndex: 'createDate',
+                                           key: 'operationDiary_Date',
+                                           render: (text, record) => (
+                                               <span>{record.createDate}</span>),
+                                       }, {
+                                           title: '操作时间',
+                                           dataIndex: '操作时间',
+                                           key: '操作时间',
+                                           render: (text, record) => (
+                                               <span>{record.ipAddress}</span>),
+                                       }, {
+                                           title: '操作',
+                                           width: 130,
+                                           dataIndex: 'bkUserName',
+                                           key: 'operationDiary_User',
+                                           render: (text, record) => (
+                                               <span>{record.bkUserName}</span>),
+                                       }, {
+                                           title: '备注内容',
+                                           dataIndex: 'comment',
+                                           key: 'operationDiary_Status',
+                                           render: (text, record) => (
+                                               <span>{record.comment}</span>),
+                                       }]}
+                                   dataSource={this.state.operationDiaryHistory}
+                                   loading={this.state.loadingComment}
+                                   pagination={{
+                                       total: this.state.totalpageComments * this.state.pgsize,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePageComment,
+                                   }}
+                            />
                         </Col>
 
 
-                    </Row>
-                    <Row gutter={12}>
-                        <Card style={{marginTop: 10}}>
-
-                            <div>
-                                <Tooltip placement="top"
-                                         title={!isSetL ? '需要添加杠杆组' : this.state.isNeedSave ? '保存信息' : ''}>
-
-                                    <Popconfirm disabled={this.state.isNeedSave || !isSetL} title="确认当前用户开户申请通过"
-                                                onConfirm={this.confirmOpen} okText="Yes"
-                                                cancelText="No">
-
-
-                                        <Button
-                                            disabled={this.state.isNeedSave || !isSetL}
-                                            loading={this.state.iconLoading}>
-                                            开户通过
-                                        </Button>
-                                    </Popconfirm>
-                                </Tooltip>
-
-
-                                <Button
-                                    disabled={!this.state.isNeedSave}
-                                    onClick={() => this.saveData()}>更新客户资料</Button>
-
-
-                                <Button onClick={() => this.saveNote()}>下载</Button>
-
-                                {/*<Popconfirm title="是否确认拒绝当前用户的开户申请？" onConfirm={this.saveReject} okText="Yes"*/}
-                                {/*cancelText="No">*/}
-
-
-                                {/*</Popconfirm>*/}
-                                <Button onClick={() => {
-                                    this.setState({
-                                        showREJECTmodel: true,
-                                    });
-                                }} loading={this.state.iconcanLoading}>拒绝</Button>
-
-                            </div>
-                        </Card>
-                        {/*disabled={!this.state.isNeedSave || this.state.recordData.status != 0}*/}
                     </Row>
 
                 </Card>
