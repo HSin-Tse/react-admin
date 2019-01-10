@@ -4,6 +4,7 @@ import {
     Card,
     Row,
     Input,
+    Collapse,
     Button,
     Table,
     Icon,
@@ -18,6 +19,7 @@ import {setINFOR} from "../../action";
 import connect from "react-redux/es/connect/connect";
 
 const {TextArea} = Input;
+const Panel = Collapse.Panel;
 
 class AddRole extends Component {
 
@@ -39,7 +41,6 @@ class AddRole extends Component {
     }
 
     componentDidMount() {
-
         this.columns = [
             {
                 align: 'center',
@@ -71,11 +72,7 @@ class AddRole extends Component {
                 render: (text, record) => (
                     <span>{record.comment}</span>),
             }];
-
-
         var self = this;
-
-
         window.Axios.post('back/getMenuList', {}).then(function (response) {
             self.setState({
                 menuList: response.data.data
@@ -84,13 +81,8 @@ class AddRole extends Component {
     }
 
     confirmSave = () => {
-
         var self = this;
-
-
         let list = this.state.powerList;
-        // list.push(1)
-
         var groupBy = (array, f) => {
             let ansList = [];
             var ids = array.filter((item, index, array) => {
@@ -127,11 +119,7 @@ class AddRole extends Component {
             password: self.state.realp,
         }).then(function (response) {
             console.log('hcia response', response)
-
-            if (response.data.code == 1) {
-                message.success('操作成功')
-
-            }
+            message.success('操作成功')
         });
 
     }
@@ -141,7 +129,6 @@ class AddRole extends Component {
             realp: e.target.value,
         });
     }
-
 
     changeName = (e) => {
         this.setState({
@@ -168,11 +155,11 @@ class AddRole extends Component {
         const {getFieldDecorator} = this.props.form;
         const setingBlok = this.state.menuList.map(function (item, index) {
                 return (
-                    <Card bodyStyle={{padding: 0, margin: 0,marginLeft: 10}} style={{marginTop: 15}} key={index}
+                    <Card bodyStyle={{padding: 0, margin: 0, marginLeft: 10}} style={{marginTop: 15}} key={index}
 
 
-                          title= {<span style={{marginLeft: 15,fontSize: 14}}> {item.name} </span>}
-                          // title={item.name}
+                          title={<span style={{marginLeft: 15, fontSize: 14}}> {item.name} </span>}
+                        // title={item.name}
                           bordered={true}>
                         {
                             item.childrenMenu.map(function (item1, number) {
@@ -196,13 +183,29 @@ class AddRole extends Component {
                 );
             }
         )
+        const text = `
+  A dog is a type of domesticated animal.
+  Known for its loyalty and faithfulness,
+  it can be found as a welcome guest in many households across the world.
+`;
         return (
+
+
             <div>
-                <h2 style={{marginTop: 15}}>新增/编辑角色</h2>
+                <h2 style={{marginTop: 15}}>新增角色</h2>
+                <Collapse  onChange={(key) => {
+                    console.log(key);
+                }}>
+                    <Panel header="This is panel header 1" key="1">
+                        <p>{text}</p>
+                    </Panel>
+                    <Panel header="This is panel header 2" key="2">
+                        <p>{text}</p>
+                    </Panel>
 
+                </Collapse>
 
-                <BreadcrumbCustom first="权限管理" second="内部人员配置" third="新增/编辑角色"/>
-
+                <BreadcrumbCustom first="权限管理" second="内部人员配置" third="新增角色"/>
 
                 <Card bodyStyle={{marginLeft: 10}} title={<span style={{fontSize: 18}}> 基本信息 </span>} bordered={true}
                       style={{marginTop: 15}}>
@@ -231,7 +234,8 @@ class AddRole extends Component {
                     </Row>
                 </Card>
 
-                <Card bodyStyle={{padding: 0, margin: 0}} title={<span style={{fontSize: 18}}> 权限配置 </span>} bordered={true}
+                <Card bodyStyle={{padding: 0, margin: 0}} title={<span style={{fontSize: 18}}> 权限配置 </span>}
+                      bordered={true}
                       style={{marginTop: 15}}>
 
                     <Row gutter={8}>
@@ -248,26 +252,27 @@ class AddRole extends Component {
                       style={{marginTop: 15}}>
 
                     {/*<Row gutter={8}>*/}
-                        {/*<Checkbox.Group style={{width: '100%'}} onChange={this.onChange}>*/}
-                            {/*<Col md={24}>*/}
-                                {/*{setingBlok}*/}
-                            {/*</Col>*/}
-                        {/*</Checkbox.Group>*/}
+                    {/*<Checkbox.Group style={{width: '100%'}} onChange={this.onChange}>*/}
+                    {/*<Col md={24}>*/}
+                    {/*{setingBlok}*/}
+                    {/*</Col>*/}
+                    {/*</Checkbox.Group>*/}
                     {/*</Row>*/}
-                    <Card bodyStyle={{marginLeft: 15}}  title= {<span style={{marginLeft: 15,fontSize: 14}}> 电汇入金 </span>}
+                    <Card bodyStyle={{marginLeft: 15}}
+                          title={<span style={{marginLeft: 15, fontSize: 14}}> 电汇入金 </span>}
                           bordered={true}>
 
-                        <Checkbox >创建</Checkbox>
-                        <Checkbox >财务审核</Checkbox>
-                        <Checkbox >入金完成（只读）</Checkbox>
+                        <Checkbox>创建</Checkbox>
+                        <Checkbox>财务审核</Checkbox>
+                        <Checkbox>入金完成（只读）</Checkbox>
                     </Card>
-                    <Card bodyStyle={{marginLeft: 15}}  title= {<span style={{marginLeft: 15,fontSize: 14}}> 出金管理</span>}
+                    <Card bodyStyle={{marginLeft: 15}} title={<span style={{marginLeft: 15, fontSize: 14}}> 出金管理</span>}
                           bordered={true}>
 
-                        <Checkbox >客维审核</Checkbox>
-                        <Checkbox >后台审核</Checkbox>
-                        <Checkbox >银行放款</Checkbox>
-                        <Checkbox >入金完成（只读）</Checkbox>
+                        <Checkbox>客维审核</Checkbox>
+                        <Checkbox>后台审核</Checkbox>
+                        <Checkbox>银行放款</Checkbox>
+                        <Checkbox>入金完成（只读）</Checkbox>
                     </Card>
                 </Card>
 

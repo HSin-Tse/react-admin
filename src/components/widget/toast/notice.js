@@ -21,9 +21,8 @@ class Notice extends Component {
 
     componentDidMount(){
         
-        console.log('hcia componentDidMount' )
-        
-        console.log('hcia this.props' , this.props,`toast-notice ${this.props.type}`)
+        // console.log('hcia componentDidMount' )
+        // console.log('hcia this.props' , this.props,`toast-notice ${this.props.type}`)
         
     }
 
