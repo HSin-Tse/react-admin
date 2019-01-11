@@ -148,7 +148,7 @@ class AddRole extends Component {
 
         const {getFieldDecorator} = this.props.form;
         const setingBlok = this.state.menuList.map(function (item, index) {
-                 const _childList = item.childrenMenu
+                const _childList = item.childrenMenu
                 return (
                     <Card bodyStyle={{padding: 0, margin: 0, marginLeft: 0}} style={{marginTop: 0}} key={index}
                           title={<span style={{marginLeft: 0, fontSize: 14}}> {item.name} </span>}
