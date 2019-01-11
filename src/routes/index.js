@@ -8,8 +8,13 @@ import * as Immutable from 'immutable';
 // import routes from './config';
 import routesAD from '@/routes/config';
 
-export default class CRouter extends Component {
 
+
+
+
+
+
+export default class CRouter extends Component {
 
     constructor(props) {
         super(props);
@@ -68,15 +73,11 @@ export default class CRouter extends Component {
 
         if (inforSuperFlag === 1) {
             // this.setState({cconfig: {...routesAD}});
-
             var imuRou = Immutable.Map(routesAD).toObject()
             this.setState({cconfig: imuRou});
-
             // console.log('hcia imuRou', imuRou)
             return
         }
-
-
         var bbRouter = this.deepClone(routesAD);
 
         var _menu = [...bbRouter.menus]
@@ -118,8 +119,8 @@ export default class CRouter extends Component {
 
 
     requireLogin = (component) => {
-        
-        console.log('hcia component ！！！' , component )
+
+        console.log('hcia component ！！！', component)
 
         if (!localStorage.getItem('too')) { // 线上环境判断是否登录
 

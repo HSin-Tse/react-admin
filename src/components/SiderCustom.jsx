@@ -201,13 +201,54 @@ class SiderCustom extends Component {
 
 
     }
+    logout = () => {
+        // localStorage.setItem('infor', JSON.stringify(response.data.data));
+        // localStorage.setItem('displayName', response.data.data.displayName);
+        // localStorage.setItem('loginName', response.data.data.loginName);
+        // localStorage.setItem('too', response.data.data.token);
+        localStorage.removeItem('infor');
+        localStorage.removeItem('user');
+        localStorage.removeItem('too');
+        localStorage.removeItem('displayName');
 
+        this.props.history.push('/login')
+    };
     componentWillUnmount() {
         // console.log('hcia componentWillUnmount')
         document.removeEventListener("keydown", this.handleKeyPress, false);
+
+
+        this.props.history.push('/login')
         // document.removeEventListener("keyup", this.handleKeyPress, false);
     }
     componentDidMount() {
+
+        window.onunload = function(){
+            alert("unload is work");
+        }
+        window.addEventListener("beforeunload", (ev) =>
+        {
+
+            localStorage.removeItem('infor');
+            localStorage.removeItem('user');
+            localStorage.removeItem('too');
+            localStorage.removeItem('displayName');
+            // ev.preventDefault();
+            // return ev.returnValue = 'Are you sure you want to close?';
+        });
+
+        // window.addEventListener("onunload", (ev) =>
+        // {
+        //
+        //
+        //     localStorage.removeItem('infor');
+        //     localStorage.removeItem('user');
+        //     localStorage.removeItem('too');
+        //     localStorage.removeItem('displayName');
+        //     ev.preventDefault();
+        //     return ev.returnValue = 'Are you sure you want to close?';
+        // });
+        // this.logout
 
         document.addEventListener("keydown", this.handleKeyPress, false);
         // document.addEventListener("keyup", this.handleKeyPress, false);
