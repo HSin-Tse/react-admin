@@ -233,6 +233,8 @@ class SiderCustom extends Component {
             localStorage.removeItem('user');
             localStorage.removeItem('too');
             localStorage.removeItem('displayName');
+            alert("unload is work");
+
             // ev.preventDefault();
             // return ev.returnValue = 'Are you sure you want to close?';
         });
