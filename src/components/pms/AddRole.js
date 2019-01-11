@@ -56,6 +56,8 @@ class AddRole extends Component {
     }
 
     confirmSave = () => {
+
+
         var self = this;
         let list = this.state.powerList;
         var groupBy = (array, f) => {
@@ -87,15 +89,15 @@ class AddRole extends Component {
             message.error('权限沒有配置')
             return
         }
-        window.Axios.post('back/saveOrUpdateRole', {
-            name: self.state.name,
-            content: self.state.changeNoteV,
-            multilevelList: sorted,
-            password: self.state.realp,
-        }).then(function (response) {
-            console.log('hcia response', response)
-            message.success('操作成功')
-        });
+        // window.Axios.post('back/saveOrUpdateRole', {
+        //     name: self.state.name,
+        //     content: self.state.changeNoteV,
+        //     multilevelList: sorted,
+        //     password: self.state.realp,
+        // }).then(function (response) {
+        //     console.log('hcia response', response)
+        //     message.success('操作成功')
+        // });
 
     }
 
@@ -129,6 +131,7 @@ class AddRole extends Component {
                                 return (
                                     <Card.Grid style={{textAlign: 'center', display: 'flex'}}>
                                         <Checkbox
+                                            style={{whiteSpace:'nowrap'}}
                                             onChange={(value) => {
                                                 item1.sscheck = value.target.checked
                                             }}
@@ -143,7 +146,7 @@ class AddRole extends Component {
                                             key={number}
                                             value={-item1.id} id={number}>可操作</Checkbox>
 
-                                        <div style={{display: item1.sscheck ? '' : 'none'}}>
+                                        <div style={{   display: item1.sscheck ? '' : 'none'}}>
                                             {
                                                 item1.childrenMenu.map((item2, num2) => {
                                                     return (
