@@ -26,7 +26,6 @@ class AddRole extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            subSelectList: new Set(),
             menuList: [],
             idList: [],
             powerList: [],
@@ -144,12 +143,10 @@ class AddRole extends Component {
                                             key={number}
                                             value={-item1.id} id={number}>可操作</Checkbox>
 
-                                        <div>
+                                        <div style={{display: item1.sscheck ? '' : 'none'}}>
                                             {
                                                 item1.childrenMenu.map((item2, num2) => {
-
                                                     return (
-
                                                         <Checkbox
                                                             disabled={!item1.sscheck}
                                                             onChange={(value) => {
@@ -163,6 +160,13 @@ class AddRole extends Component {
                                             }
                                         </div>
 
+                                        <div
+                                            style={{display: (item1.sscheck || item1.childrenMenu.length == 0) ? 'none' : ''}}>
+
+                                            <Checkbox
+                                                disabled={true}
+                                                id={number}>特殊权限配置</Checkbox>
+                                        </div>
 
 
                                     </Card.Grid>
@@ -182,9 +186,7 @@ class AddRole extends Component {
 
                 <BreadcrumbCustom first="权限管理" second="内部人员配置" third="新增角色"/>
 
-                {/*<div>subSelectList :{JSON.stringify(this.state.subSelectList.toString())}</div>*/}
-                {/*<div>subSelectList :{this.state.subSelectList}</div>*/}
-                <div>subSelectList :{Array.from(this.state.subSelectList)}</div>
+                <div>subSelectList :{JSON.stringify(this.state.powerList)}</div>
 
                 {/*subSelectList*/}
 
