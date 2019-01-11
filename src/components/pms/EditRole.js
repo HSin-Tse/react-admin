@@ -346,7 +346,7 @@ class EditRole extends Component {
             <div>
                 <h2 style={{marginTop: 15}}>内部用户权限设置</h2>
                 {/*<div>name :{JSON.stringify(this.state.name)}</div>*/}
-                <div>powerList :{JSON.stringify(this.state.powerList)}</div>
+                {/*<div>powerList :{JSON.stringify(this.state.powerList)}</div>*/}
 
 
                 <BreadcrumbCustom first="内部成员列表" second="内部人员配置"/>

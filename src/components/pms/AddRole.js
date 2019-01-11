@@ -228,7 +228,7 @@ class AddRole extends Component {
 
                 <BreadcrumbCustom first="权限管理" second="内部人员配置" third="新增角色"/>
 
-                <div>subSelectList :{JSON.stringify(this.state.powerList)}</div>
+                {/*<div>subSelectList :{JSON.stringify(this.state.powerList)}</div>*/}
 
                 {/*subSelectList*/}
 
