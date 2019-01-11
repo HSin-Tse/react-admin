@@ -2,7 +2,7 @@
  * Created by hao.cheng on 2017/4/13.
  */
 import React, {Component} from 'react';
-import {Layout} from 'antd';
+import {Layout, message} from 'antd';
 import {withRouter} from 'react-router-dom';
 import routes from '@/routes/config';
 import routesAD from '@/routes/config';
@@ -231,9 +231,28 @@ class SiderCustom extends Component {
             localStorage.removeItem('user');
             localStorage.removeItem('too');
             localStorage.removeItem('displayName');
-            alert("unload is work");
+
+            window.Axios.post('auth/login', {
+                'moduleLog': 'Logout',
+                'pageLog': 'Logout',
+                'commentLog': '登出',
+                'typeLog': "1",
+            }).then(function (response) {
+
+
+                    // self.props.setUSER(response.data.data)
+
+
+
+
+            })
+
+
+
+            // alert("unload is work");
 
             // ev.preventDefault();
+
             // return ev.returnValue = 'Are you sure you want to close?';
         });
 
