@@ -26,6 +26,7 @@ class AddRole extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            subSelectList: new Set(),
             menuList: [],
             idList: [],
             powerList: [],
@@ -37,6 +38,11 @@ class AddRole extends Component {
             seret: '',
             realp: ''
         };
+    }
+
+    handleChange = (value) => {
+        console.log('hcia s value', value)
+
     }
 
     componentDidMount() {
@@ -105,8 +111,9 @@ class AddRole extends Component {
 
     render() {
 
+        const self = this
         const {getFieldDecorator} = this.props.form;
-        const {powerList} = this.state;
+        // const {powerList} = this.state;
         const setingBlok = this.state.menuList.map(function (item, index) {
                 // console.log('hcia item', item)
                 var _childList = item.childrenMenu
@@ -117,15 +124,18 @@ class AddRole extends Component {
                           bordered={true}>
                         {
                             _childList.map(function (item1, number) {
-                                console.log('hcia item1', item1)
+                                // console.log('hcia item1', item1)
 
 
                                 return (
                                     <Card.Grid style={{textAlign: 'center', display: 'flex'}}>
-                                        <Checkbox onChange={(value) => {
-                                            item1.sscheck = value.target.checked
-
-                                        }} key={number} value={item1.id} id={number}>{item1.name}</Checkbox>
+                                        <Checkbox
+                                            onChange={(value) => {
+                                                item1.sscheck = value.target.checked
+                                            }}
+                                            key={number}
+                                            value={item1.id}
+                                            id={number}>{item1.name}</Checkbox>
 
 
                                         <Checkbox
@@ -134,46 +144,25 @@ class AddRole extends Component {
                                             key={number}
                                             value={-item1.id} id={number}>可操作</Checkbox>
 
-
-                                        <Select
-                                            disabled={!item1.sscheck}
-
-                                            onChange={(value)=>{
-                                                console.log('hcia value' , value)
-
-                                            }}
-                                            style={{width: '80%', display: item1.childrenMenu.length == 0 ? 'none' : ''}}
-                                            mode="tags"
-                                            // style={{ width: '100%' }}
-                                            placeholder="特殊权限配置"
-                                            // onChange={handleChange}
-                                        >
+                                        <div>
                                             {
                                                 item1.childrenMenu.map((item2, num2) => {
 
                                                     return (
 
-                                                        <Option
-                                                            key={item2.id}
-                                                            id={number}>{item2.name}
-                                                        </Option>
+                                                        <Checkbox
+                                                            disabled={!item1.sscheck}
+                                                            onChange={(value) => {
+                                                                item2.sscheck = value.target.checked
+                                                            }}
+                                                            key={number}
+                                                            value={item2.id}
+                                                            id={number}>{item2.name}</Checkbox>
                                                     )
                                                 })
                                             }
+                                        </div>
 
-                                        </Select>
-                                        {/*{*/}
-                                        {/*item1.childrenMenu.map((item2,num2)=>{*/}
-
-                                        {/*return(*/}
-
-                                        {/*<Checkbox onChange={(value) => {*/}
-                                        {/*item2.sscheck = value.target.checked*/}
-
-                                        {/*}} key={number} value={item2.id} id={number}>{item2.name}</Checkbox>*/}
-                                        {/*)*/}
-                                        {/*})*/}
-                                        {/*}*/}
 
 
                                     </Card.Grid>
@@ -193,13 +182,25 @@ class AddRole extends Component {
 
                 <BreadcrumbCustom first="权限管理" second="内部人员配置" third="新增角色"/>
 
-                <Card bodyStyle={{marginLeft: 10}} title={<span style={{fontSize: 18}}> 基本信息 </span>} bordered={true}
+                {/*<div>subSelectList :{JSON.stringify(this.state.subSelectList.toString())}</div>*/}
+                {/*<div>subSelectList :{this.state.subSelectList}</div>*/}
+                <div>subSelectList :{Array.from(this.state.subSelectList)}</div>
+
+                {/*subSelectList*/}
+
+                <Card bodyStyle={{marginLeft: 10}} title={<span style={{fontSize: 18}}> 基本信息 </span>}
+                      bordered={true}
                       style={{marginTop: 15}}>
 
                     <Row gutter={8}>
                         <Col md={12}>
 
-                            <div style={{fontWeight: 'bold', fontSize: 16, display: 'flex', minHeight: 50}}>
+                            <div style={{
+                                fontWeight: 'bold',
+                                fontSize: 16,
+                                display: 'flex',
+                                minHeight: 50
+                            }}>
                                 <span style={{width: 100}}>角色名称:</span>
                                 <Input
                                     onChange={(e) => {
@@ -210,7 +211,12 @@ class AddRole extends Component {
                                     defaultValue={this.state.name}
                                     style={{width: 180}}/>
                             </div>
-                            <div style={{fontWeight: 'bold', fontSize: 16, display: 'flex', minHeight: 50}}>
+                            <div style={{
+                                fontWeight: 'bold',
+                                fontSize: 16,
+                                display: 'flex',
+                                minHeight: 50
+                            }}>
                                 <span style={{width: 100}}>角色备注:</span>
                                 <TextArea
                                     style={{width: 180}}
@@ -229,7 +235,8 @@ class AddRole extends Component {
                     </Row>
                 </Card>
 
-                <Card bodyStyle={{padding: 0, margin: 0}} title={<span style={{fontSize: 18}}> 权限配置 </span>}
+                <Card bodyStyle={{padding: 0, margin: 0}}
+                      title={<span style={{fontSize: 18}}> 权限配置 </span>}
                       bordered={true}
                       style={{marginTop: 15}}>
 
@@ -251,13 +258,7 @@ class AddRole extends Component {
                       title={<span style={{fontSize: 18}}> 特殊权限配置 </span>} bordered={true}
                       style={{marginTop: 15}}>
 
-                    {/*<Row gutter={8}>*/}
-                    {/*<Checkbox.Group style={{width: '100%'}} onChange={this.onChange}>*/}
-                    {/*<Col md={24}>*/}
-                    {/*{setingBlok}*/}
-                    {/*</Col>*/}
-                    {/*</Checkbox.Group>*/}
-                    {/*</Row>*/}
+
                     <Card bodyStyle={{marginLeft: 15}}
                           title={<span style={{marginLeft: 15, fontSize: 14}}> 电汇入金 </span>}
                           bordered={true}>
@@ -266,7 +267,8 @@ class AddRole extends Component {
                         <Checkbox>财务审核</Checkbox>
                         <Checkbox>入金完成（只读）</Checkbox>
                     </Card>
-                    <Card bodyStyle={{marginLeft: 15}} title={<span style={{marginLeft: 15, fontSize: 14}}> 出金管理</span>}
+                    <Card bodyStyle={{marginLeft: 15}}
+                          title={<span style={{marginLeft: 15, fontSize: 14}}> 出金管理</span>}
                           bordered={true}>
 
                         <Checkbox>客维审核</Checkbox>
@@ -330,11 +332,17 @@ class AddRole extends Component {
                         </Col>
                     </Row>
                 </Card>
-                <Card bodyStyle={{marginLeft: 10}} title={<span style={{fontSize: 18}}> 安全验证 </span>} bordered={true}
+                <Card bodyStyle={{marginLeft: 10}} title={<span style={{fontSize: 18}}> 安全验证 </span>}
+                      bordered={true}
                       style={{marginTop: 15}}>
                     <Row gutter={8}>
                         <Col md={24}>
-                            <div style={{fontWeight: 'bold', fontSize: 16, display: 'flex', minHeight: 50}}>
+                            <div style={{
+                                fontWeight: 'bold',
+                                fontSize: 16,
+                                display: 'flex',
+                                minHeight: 50
+                            }}>
                                 <span style={{width: 200}}>請輸入你的密碼:</span>
                                 {getFieldDecorator('password', {
                                     rules: [{
@@ -343,7 +351,8 @@ class AddRole extends Component {
                                         validator: this.validateToNextPassword,
                                     }],
                                 })(
-                                    <Input style={{width: 800}} addonAfter={<Icon style={{color: 'red'}} type="star"/>}
+                                    <Input style={{width: 800}}
+                                           addonAfter={<Icon style={{color: 'red'}} type="star"/>}
                                            onChange={(e) => {
                                                this.setState({
                                                    realp: e.target.value,
