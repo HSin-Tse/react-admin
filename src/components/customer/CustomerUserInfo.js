@@ -76,7 +76,7 @@ class CustomerUserInfo extends Component {
                     title="基本信息"
                 >
 
-                    <img style={{width: 100}} src={avater} alt="头像"/>
+                    {/*<img style={{width: 100}} src={avater} alt="头像"/>*/}
                     < Meta title={this.state.userList.length == 0 ? '姓名：' : '姓名：' + this.state.userList.base.name}/>
                     < Meta
                         title={this.state.userList.length == 0 ? '手机：' : '手机：' + this.state.userList.base.cellphone}/>

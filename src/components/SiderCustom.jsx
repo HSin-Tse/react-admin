@@ -222,52 +222,40 @@ class SiderCustom extends Component {
         // document.removeEventListener("keyup", this.handleKeyPress, false);
     }
     componentDidMount() {
+        
+        
+        // console.log('hcia window.location' , window.location.host)
+        // console.log('hcia  this.props' ,  this.props)
+        
+        console.log('hcia window.location.host' , window.location.host)
+        
 
 
-        window.addEventListener("beforeunload", (ev) =>
-        {
-
-            localStorage.removeItem('infor');
-            localStorage.removeItem('user');
-            localStorage.removeItem('too');
-            localStorage.removeItem('displayName');
-
-            window.Axios.post('back/addLogHistory', {
-                'moduleLog': 'Logout',
-                'pageLog': 'Logout',
-                'commentLog': '登出',
-                'typeLog': "1",
-            }).then(function (response) {
+        if(window.location.host =='127.0.0.1:3006'){
 
 
-                    // self.props.setUSER(response.data.data)
+        }else{
+            window.addEventListener("beforeunload", (ev) =>
+            {
+
+                localStorage.removeItem('infor');
+                localStorage.removeItem('user');
+                localStorage.removeItem('too');
+                localStorage.removeItem('displayName');
+
+                window.Axios.post('back/addLogHistory', {
+                    'moduleLog': 'Logout',
+                    'pageLog': 'Logout',
+                    'commentLog': '登出',
+                    'typeLog': "1",
+                }).then(function (response) {
+                })
+            });
+        }
 
 
 
 
-            })
-
-
-
-            // alert("unload is work");
-
-            // ev.preventDefault();
-
-            // return ev.returnValue = 'Are you sure you want to close?';
-        });
-
-        // window.addEventListener("onunload", (ev) =>
-        // {
-        //
-        //
-        //     localStorage.removeItem('infor');
-        //     localStorage.removeItem('user');
-        //     localStorage.removeItem('too');
-        //     localStorage.removeItem('displayName');
-        //     ev.preventDefault();
-        //     return ev.returnValue = 'Are you sure you want to close?';
-        // });
-        // this.logout
 
         document.addEventListener("keydown", this.handleKeyPress, false);
         // document.addEventListener("keyup", this.handleKeyPress, false);
