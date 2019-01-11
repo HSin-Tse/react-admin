@@ -19,19 +19,7 @@ import {setINFOR} from "../../action";
 import connect from "react-redux/es/connect/connect";
 
 const {TextArea} = Input;
-const Option = Select.Option;
-Array.prototype.indexOf = function(val) {
-    for (var i = 0; i < this.length; i++) {
-        if (this[i] == val) return i;
-    }
-    return -1;
-};
-Array.prototype.remove = function(val) {
-    var index = this.indexOf(val);
-    if (index > -1) {
-        this.splice(index, 1);
-    }
-};
+
 class AddRole extends Component {
 
     constructor(props) {
