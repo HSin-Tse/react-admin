@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import spelist from './model/speList'
+import localmenuList from './model/localmenuList'
 import {
     Col,
     Card,
@@ -28,7 +29,7 @@ class AddRole extends Component {
             menuList: [],
             idList: [],
             powerList: [],
-            allMenu: [],
+            localmenuList: localmenuList,
             modal2Visible: false,
             operationDiaryHistory: [],
             anyThing: 'asdasd',
@@ -40,6 +41,10 @@ class AddRole extends Component {
     }
 
     componentDidMount() {
+
+
+        console.log('hcia powList', localmenuList)
+        console.log('hcia spelist', spelist)
         var self = this;
         window.Axios.post('back/getMenuList', {}).then(function (response) {
             self.setState({
@@ -121,31 +126,14 @@ class AddRole extends Component {
     render() {
 
         const {getFieldDecorator} = this.props.form;
+        // const setingBlok = this.state.localmenuList.map(function (item, index) {
         const setingBlok = this.state.menuList.map(function (item, index) {
 
 
                 console.log('hcia item', item)
 
-                var ssdsss = item.childrenMenu.filter((itttt, ind) => {
-
-
-                    var isOK = true
-                     spelist.forEach((inItem,indd,oo)=>{
-
-                         var s1= inItem.key
-                         var b1= itttt.key
-
-                        console.log('hcia inItem' , inItem.key  ,'--',itttt.key ,(s1== b1),(inItem.key === itttt.key))
-
-                         if(!(inItem.key ==itttt.key))
-                         isOK = false
-                        // return  !(inItem.key ==it.key)
-                    })
-                    console.log('hcia isOK' , isOK)
-
-                  return  isOK
-
-                })
+                var _childList = item.childrenMenu
+                
 
                 return (
                     <Card bodyStyle={{padding: 0, margin: 0, marginLeft: 10}} style={{marginTop: 15}} key={index}
@@ -159,7 +147,7 @@ class AddRole extends Component {
                         {
 
 
-                            ssdsss.map(function (item1, number) {
+                            _childList.map(function (item1, number) {
 
 
                                 // console.log('hcia item1' , item1)
