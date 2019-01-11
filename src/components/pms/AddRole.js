@@ -106,18 +106,13 @@ class AddRole extends Component {
         const {getFieldDecorator} = this.props.form;
         const setingBlok = this.state.menuList.map(function (item, index) {
 
-
                 // console.log('hcia item', item)
 
                 var _childList = item.childrenMenu
 
-
                 return (
                     <Card bodyStyle={{padding: 0, margin: 0, marginLeft: 10}} style={{marginTop: 15}} key={index}
-
-
                           title={<span style={{marginLeft: 15, fontSize: 14}}> {item.name} </span>}
-                        // title={item.name}
                           bordered={true}>
                         {
                             _childList.map(function (item1, number) {
@@ -128,8 +123,6 @@ class AddRole extends Component {
                                         <Checkbox key={number} value={-item1.id} id={number}>可操作</Checkbox>
                                         {/*<Switch checkedChildren="可操作" unCheckedChildren="只讀" defaultChecked />*/}
                                     </Card.Grid>
-
-
                                 );
                             })
                         }
@@ -143,17 +136,6 @@ class AddRole extends Component {
 
             <div>
                 <h2 style={{marginTop: 15}}>新增角色</h2>
-                {/*<Collapse  onChange={(key) => {*/}
-                {/*console.log(key);*/}
-                {/*}}>*/}
-                {/*<Panel header="This is panel header 1" key="1">*/}
-                {/*<p>{text}</p>*/}
-                {/*</Panel>*/}
-                {/*<Panel header="This is panel header 2" key="2">*/}
-                {/*<p>{text}</p>*/}
-                {/*</Panel>*/}
-
-                {/*</Collapse>*/}
 
                 <BreadcrumbCustom first="权限管理" second="内部人员配置" third="新增角色"/>
 
