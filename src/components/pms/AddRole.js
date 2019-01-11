@@ -185,7 +185,10 @@ class AddRole extends Component {
                                                 id={number}>特殊权限配置</Checkbox>
                                         </div>
 
-                                        <div style={{marginLeft: 10, width: '100%'}}>
+                                        <div style={{marginLeft: 0, width: '100%'}}>
+                                            <Icon
+                                                style={{display: item1.childrenMenu.length == 0 ? 'none' : (item1.sscheck) ? '' : 'none'}}
+                                                type="caret-right"/>
                                             {
                                                 item1.childrenMenu.map((item2, num2) => {
                                                     return (

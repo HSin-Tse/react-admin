@@ -91,6 +91,8 @@ window.Axios.interceptors.request.use(
 window.Axios.interceptors.response.use(function (response) {
 
     if (response.data.code != 1) {
+        setTimeout(hideLoading, 0)
+
         message.error(response.data.msg)
         return Promise.reject(response)
     }
@@ -100,6 +102,8 @@ window.Axios.interceptors.response.use(function (response) {
 
     return response
 }, function (error) {
+    setTimeout(hideLoading, 0)
+
     message.error(error.toString())
     return Promise.reject(error)
 })

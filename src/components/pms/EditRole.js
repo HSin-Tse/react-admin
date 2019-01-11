@@ -193,6 +193,7 @@ class EditRole extends Component {
         }
         var self = this
         window.Axios.post('back/saveOrUpdateRole', {
+            id: this.props.match.params.id,
             name: self.state.name,
             content: self.state.changeNoteV,
             multilevelList: sorted,
@@ -201,6 +202,21 @@ class EditRole extends Component {
             console.log('hcia response', response)
             message.success('操作成功')
         });
+
+        // window.Axios.post('back/saveOrUpdateRole', {
+        //     id: this.props.match.params.id,
+        //     name: self.state.name,
+        //     content: self.state.changeNoteV,
+        //     multilevelList: sorted,
+        //     password: self.state.realp,
+        // }).then(function (response) {
+        //     console.log('hcia response', response)
+        //
+        //     if (response.data.code == 1) {
+        //         message.success('操作成功')
+        //
+        //     }
+        // });
 
     }
 
@@ -291,7 +307,11 @@ class EditRole extends Component {
                                                 id={number}>特殊权限配置</Checkbox>
                                         </div>
 
-                                        <div style={{marginLeft: 10, width: '100%'}}>
+                                        <div style={{marginLeft: 0, width: '100%'}}>
+                                            {/*<Icon type="arrow-down" />*/}
+                                            <Icon
+                                                style={{display: item1.childrenMenu.length == 0 ? 'none' : (item1.sscheck) ? '' : 'none'}}
+                                                type="caret-right"/>
                                             {
                                                 item1.childrenMenu.map((item2, num2) => {
                                                     return (
