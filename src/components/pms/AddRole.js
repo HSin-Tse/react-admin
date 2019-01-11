@@ -62,14 +62,14 @@ class AddRole extends Component {
         // let isOut1 = false
         // let isOut2 = false
 
-        var isOut1 = list.some(function(item, index, array){
-            return item ==  25
+        var isOut1 = list.some(function (item, index, array) {
+            return item == 25
         });
-        var isOut2 = list.some(function(item, index, array){
-            return item ==  41
+        var isOut2 = list.some(function (item, index, array) {
+            return item == 41
         });
 
-        if (!isOut1){
+        if (!isOut1) {
             // list.
 
             list.remove(27)
@@ -78,7 +78,8 @@ class AddRole extends Component {
             list.remove(40)
             // 27, 28, 26, 40
 
-        }   if (!isOut2){
+        }
+        if (!isOut2) {
             // list.
 
             list.remove(23)
@@ -88,10 +89,9 @@ class AddRole extends Component {
 
         }
 
+        console.log('hcia isOut1', isOut1)
+        console.log('hcia list', list)
 
-        console.log('hcia isOut1' , isOut1)
-        console.log('hcia list' , list)
-        
 
         var groupBy = (array, f) => {
             let ansList = [];
@@ -162,7 +162,7 @@ class AddRole extends Component {
 
 
                                 return (
-                                    <Card.Grid style={{flexWrap: 'wrap', textAlign: 'center', display: 'flex'}}>
+                                    <Card.Grid style={{flexWrap: 'wrap', display: 'flex'}}>
                                         <Checkbox
                                             style={{whiteSpace: 'nowrap'}}
                                             onChange={(value) => {
@@ -173,27 +173,12 @@ class AddRole extends Component {
                                             id={number}>{item1.name}</Checkbox>
 
 
+                                        <br/>
                                         <Checkbox
                                             style={{display: item1.childrenMenu.length == 0 ? '' : 'none'}}
                                             disabled={!item1.sscheck}
                                             key={number}
                                             value={-item1.id} id={number}>可操作</Checkbox>
-
-                                        {
-                                            item1.childrenMenu.map((item2, num2) => {
-                                                return (
-                                                    <Checkbox
-                                                        style={{whiteSpace: 'nowrap', display: item1.sscheck ? '' : 'none'}}
-                                                        disabled={!item1.sscheck}
-                                                        onChange={(value) => {
-                                                            item2.sscheck = value.target.checked
-                                                        }}
-                                                        key={number}
-                                                        value={item2.id}
-                                                        id={number}>{item2.name}</Checkbox>
-                                                )
-                                            })
-                                        }
 
                                         <div
                                             style={{display: (item1.sscheck || item1.childrenMenu.length == 0) ? 'none' : ''}}>
@@ -201,6 +186,28 @@ class AddRole extends Component {
                                             <Checkbox
                                                 disabled={true}
                                                 id={number}>特殊权限配置</Checkbox>
+                                        </div>
+
+                                        <div style={{marginLeft: 10, width: '90%'}}>
+                                            {
+                                                item1.childrenMenu.map((item2, num2) => {
+                                                    return (
+                                                        <Checkbox
+                                                            style={{
+                                                                whiteSpace: 'nowrap',
+                                                                display: item1.sscheck ? '' : 'none'
+                                                            }}
+                                                            disabled={!item1.sscheck}
+                                                            onChange={(value) => {
+                                                                item2.sscheck = value.target.checked
+                                                            }}
+                                                            key={number}
+                                                            value={item2.id}
+                                                            id={number}>{item2.name}</Checkbox>
+                                                    )
+                                                })
+                                            }
+
                                         </div>
 
 
@@ -292,27 +299,27 @@ class AddRole extends Component {
                 </Card>
 
                 {/*<Card bodyStyle={{padding: 0, margin: 0}}*/}
-                      {/*title={<span style={{fontSize: 18}}> 特殊权限配置 </span>} bordered={true}*/}
-                      {/*style={{marginTop: 15}}>*/}
+                {/*title={<span style={{fontSize: 18}}> 特殊权限配置 </span>} bordered={true}*/}
+                {/*style={{marginTop: 15}}>*/}
 
 
-                    {/*<Card bodyStyle={{marginLeft: 15}}*/}
-                          {/*title={<span style={{marginLeft: 15, fontSize: 14}}> 电汇入金 </span>}*/}
-                          {/*bordered={true}>*/}
+                {/*<Card bodyStyle={{marginLeft: 15}}*/}
+                {/*title={<span style={{marginLeft: 15, fontSize: 14}}> 电汇入金 </span>}*/}
+                {/*bordered={true}>*/}
 
-                        {/*<Checkbox>创建</Checkbox>*/}
-                        {/*<Checkbox>财务审核</Checkbox>*/}
-                        {/*<Checkbox>入金完成（只读）</Checkbox>*/}
-                    {/*</Card>*/}
-                    {/*<Card bodyStyle={{marginLeft: 15}}*/}
-                          {/*title={<span style={{marginLeft: 15, fontSize: 14}}> 出金管理</span>}*/}
-                          {/*bordered={true}>*/}
+                {/*<Checkbox>创建</Checkbox>*/}
+                {/*<Checkbox>财务审核</Checkbox>*/}
+                {/*<Checkbox>入金完成（只读）</Checkbox>*/}
+                {/*</Card>*/}
+                {/*<Card bodyStyle={{marginLeft: 15}}*/}
+                {/*title={<span style={{marginLeft: 15, fontSize: 14}}> 出金管理</span>}*/}
+                {/*bordered={true}>*/}
 
-                        {/*<Checkbox>客维审核</Checkbox>*/}
-                        {/*<Checkbox>后台审核</Checkbox>*/}
-                        {/*<Checkbox>银行放款</Checkbox>*/}
-                        {/*<Checkbox>入金完成（只读）</Checkbox>*/}
-                    {/*</Card>*/}
+                {/*<Checkbox>客维审核</Checkbox>*/}
+                {/*<Checkbox>后台审核</Checkbox>*/}
+                {/*<Checkbox>银行放款</Checkbox>*/}
+                {/*<Checkbox>入金完成（只读）</Checkbox>*/}
+                {/*</Card>*/}
                 {/*</Card>*/}
 
 
