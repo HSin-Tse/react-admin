@@ -29,8 +29,6 @@ const {TextArea} = Input;
 // }
 
 class DEVhboard extends React.Component {
-
-
     constructor(props) {
         super(props);
         this.state = {
@@ -45,14 +43,10 @@ class DEVhboard extends React.Component {
     }
 
     getURL = (url) => {
-
         var promise = new Promise(function (resolve, reject) {
-
             JSON.parse(url)
             resolve(url)
-
         });
-
         return promise
     }
 
@@ -62,7 +56,7 @@ class DEVhboard extends React.Component {
         console.log('hcia this.props', this.props)
         var ss = this.props.match.params.catch
 
-        console.log('hcia catch', ss)
+        // console.log('hcia catch', ss)
 
         if (ss == ':catch') {
 

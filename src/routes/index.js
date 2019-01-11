@@ -21,10 +21,6 @@ export default class CRouter extends Component {
         };
 
 
-        // localStorage.setItem('@primary-color', '#0000ff');
-        // window.less.modifyVars({
-        //     '@primary-color': '#000000',
-        // })
     }
 
 
@@ -57,7 +53,6 @@ export default class CRouter extends Component {
     componentWillMount() {
 
 
-
         if (!this.state.infor) {
 
             var bbRouter = this.deepClone(routesAD);
@@ -74,20 +69,18 @@ export default class CRouter extends Component {
         if (inforSuperFlag === 1) {
             // this.setState({cconfig: {...routesAD}});
 
-
             var imuRou = Immutable.Map(routesAD).toObject()
             this.setState({cconfig: imuRou});
 
             // console.log('hcia imuRou', imuRou)
             return
         }
-        // var bbRouter = {...routes}
 
 
         var bbRouter = this.deepClone(routesAD);
 
-        var aaaaa = [...bbRouter.menus]
-        var nowRouter = aaaaa.filter((key, index, array) => {
+        var _menu = [...bbRouter.menus]
+        var nowRouter = _menu.filter((key, index, array) => {
             if (key.title == '歡迎') {
                 return true
             }
@@ -125,6 +118,8 @@ export default class CRouter extends Component {
 
 
     requireLogin = (component) => {
+        
+        console.log('hcia component ！！！' , component )
 
         if (!localStorage.getItem('too')) { // 线上环境判断是否登录
 

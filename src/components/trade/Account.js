@@ -88,7 +88,7 @@ class Basic extends Component {
     }
     showModalChangeLeavge = (recodrd) => {
 
-        console.log('hcia recodrd', recodrd)
+        // console.log('hcia recodrd', recodrd)
         this.requestUserCommentList(recodrd)
 
 
@@ -121,7 +121,7 @@ class Basic extends Component {
         window.Axios.post('dict/leverageList', {
             'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
         }).then((response) => {
-            console.log('hcia response', response)
+            // console.log('hcia response', response)
             self.setState({
                 leavgeList: response.data.data,
             })
@@ -308,7 +308,7 @@ class Basic extends Component {
     };
     seeDetail = (record) => {
 
-        console.log('hcia record', record)
+        // console.log('hcia record', record)
         let self = this
         window.Axios.post('star/getStarLiveAccountCommentList', {
             'pageSize': 100,
@@ -328,8 +328,8 @@ class Basic extends Component {
     };
     handleChange = (value, record) => {
 
-        console.log('hcia value', value)
-        console.log('hcia record', record)
+        // console.log('hcia value', value)
+        // console.log('hcia record', record)
         let self = this
         self.setState({
                 modeState: value,
@@ -389,7 +389,6 @@ class Basic extends Component {
             startTime: this.state.selectTimeStart,
             endTime: this.state.selectTimeEnd,
         }).then(function (response) {
-            console.log(response);
 
             self.setState({
                     totalPage: response.data.data.totalPage,
@@ -402,7 +401,7 @@ class Basic extends Component {
         })
     }
     changePage = (page) => {
-        console.log('hcia page', page)
+        // console.log('hcia page', page)
         this.setState({
             current: page - 1,
         }, () => {
@@ -417,7 +416,6 @@ class Basic extends Component {
         window.Axios.post('star/refreshStarLiveAccount', {
             idList: result,
         }).then(function (response) {
-            console.log(response);
             self.setState({
                 visibleOpM: false,
                 loadFor: false,
@@ -449,7 +447,6 @@ class Basic extends Component {
             'reasonType': self.state.forbiddenValue,
             'content': self.state.mChLeadComment,
         }).then(function (response) {
-            console.log(response);
             self.setState({
                 visibleOpM: false,
                 loadFor: false,
@@ -463,14 +460,13 @@ class Basic extends Component {
         })
     };
     handleCancel = (e) => {
-        console.log(e);
         this.setState({
             visible: false,
             visibleOpM: false,
         });
     };
     onSelectChange = (selectedRowKeys) => {
-        console.log('hcia', 'selectedRowKeys changed: ', selectedRowKeys);
+        // console.log('hcia', 'selectedRowKeys changed: ', selectedRowKeys);
         this.setState({selectedRowKeys});
     }
 
@@ -564,7 +560,7 @@ class Basic extends Component {
                                     <Select
                                         onChange={(value) => {
 
-                                            console.log('hcia value', value)
+                                            // console.log('hcia value', value)
                                             // updateLeverageApply
                                             this.setState({
                                                 mLeverageId: value,

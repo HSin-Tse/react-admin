@@ -192,7 +192,7 @@ class EditRole extends Component {
             return
         }
 
-        if (!this.state.realp ) {
+        if (!this.state.realp) {
             message.error('請輸入你的密碼')
             return
         }

@@ -43,7 +43,7 @@ class Dashboard extends React.Component {
 
 
         // console.log('hcia window.Axios.baseURL' , window.Axios.config.baseURL)
-        console.log('hcia window.Axios.baseURL', JSON.stringify(window.Axios.baseURL))
+        // console.log('hcia window.Axios.baseURL', JSON.stringify(window.Axios.baseURL))
 
         this.setState({HOST: window.Axios.defaults.baseURL});
 
