@@ -223,9 +223,7 @@ class SiderCustom extends Component {
     }
     componentDidMount() {
 
-        window.onunload = function(){
-            alert("unload is work");
-        }
+
         window.addEventListener("beforeunload", (ev) =>
         {
 
