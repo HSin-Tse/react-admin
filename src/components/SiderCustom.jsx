@@ -232,7 +232,7 @@ class SiderCustom extends Component {
             localStorage.removeItem('too');
             localStorage.removeItem('displayName');
 
-            window.Axios.post('auth/login', {
+            window.Axios.post('back/addLogHistory', {
                 'moduleLog': 'Logout',
                 'pageLog': 'Logout',
                 'commentLog': '登出',
