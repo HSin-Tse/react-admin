@@ -40,12 +40,9 @@ class AddRole extends Component {
 
     handleChange = (value) => {
         console.log('hcia s value', value)
-
     }
 
     componentDidMount() {
-
-
         var self = this;
         window.Axios.post('back/getMenuList', {}).then(function (response) {
             self.setState({
@@ -122,6 +119,10 @@ class AddRole extends Component {
             message.error('权限沒有配置')
             return
         }
+        if (!this.state.realp ) {
+            message.error('請輸入你的密碼')
+            return
+        }
         var self = this
         window.Axios.post('back/saveOrUpdateRole', {
             name: self.state.name,
@@ -140,9 +141,7 @@ class AddRole extends Component {
         this.setState({
             changeNoteV: e.target.value,
         });
-
     }
-
 
     render() {
 

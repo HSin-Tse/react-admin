@@ -191,6 +191,12 @@ class EditRole extends Component {
             message.error('权限沒有配置')
             return
         }
+
+        if (!this.state.realp ) {
+            message.error('請輸入你的密碼')
+            return
+        }
+
         var self = this
         window.Axios.post('back/saveOrUpdateRole', {
             id: this.props.match.params.id,
