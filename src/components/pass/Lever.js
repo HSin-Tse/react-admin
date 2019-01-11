@@ -161,7 +161,38 @@ class Basic extends Component {
     }
 
     componentDidMount() {
+        this.columnsLog =[
+            {
+                title: '时间',
+                dataIndex: 'createDate',
+                key: 'operationDiary_Date',
+                render: (text, record) => (
+                    <span>{
+                        this.timestampToTime(record.createDate)
+                    }</span>),
 
+
+
+            }, {
+                title: 'IP',
+                dataIndex: 'IP',
+                key: 'IP',
+                render: (text, record) => (
+                    <span>{record.ipAddress}</span>),
+            }, {
+                title: '操作人',
+                width: 130,
+                dataIndex: 'bkUserName',
+                key: 'operationDiary_User',
+                render: (text, record) => (
+                    <span>{record.bkUserName}</span>),
+            }, {
+                title: '操作',
+                dataIndex: 'comment',
+                key: 'operationDiary_Status',
+                render: (text, record) => (
+                    <span>{record.comment}</span>),
+            }]
         let self = this
 
         window.Axios.post('dict/leverageList', {
@@ -741,33 +772,7 @@ class Basic extends Component {
                     width={600}
                     footer={null}>
                     <Table rowKey="id"
-                           columns={[
-                               {
-                                   title: '时间',
-                                   dataIndex: 'createDate',
-                                   key: 'operationDiary_Date',
-                                   render: (text, record) => (
-                                       <span>{record.createDate}</span>),
-                               }, {
-                                   title: 'IP',
-                                   dataIndex: 'IP',
-                                   key: 'IP',
-                                   render: (text, record) => (
-                                       <span>{record.ipAddress}</span>),
-                               }, {
-                                   title: '操作人',
-                                   width: 130,
-                                   dataIndex: 'bkUserName',
-                                   key: 'operationDiary_User',
-                                   render: (text, record) => (
-                                       <span>{record.bkUserName}</span>),
-                               }, {
-                                   title: '操作',
-                                   dataIndex: 'comment',
-                                   key: 'operationDiary_Status',
-                                   render: (text, record) => (
-                                       <span>{record.comment}</span>),
-                               }]}
+                           columns={this.columnsLog}
                            dataSource={this.state.operationDiaryHistory}
                            loading={this.state.loadingComment}
                            pagination={{
