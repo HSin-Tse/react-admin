@@ -104,24 +104,42 @@ class AddRole extends Component {
     render() {
 
         const {getFieldDecorator} = this.props.form;
+        const {powerList} = this.state;
         const setingBlok = this.state.menuList.map(function (item, index) {
-
                 // console.log('hcia item', item)
-
                 var _childList = item.childrenMenu
 
                 return (
-                    <Card bodyStyle={{padding: 0, margin: 0, marginLeft: 10}} style={{marginTop: 15}} key={index}
-                          title={<span style={{marginLeft: 15, fontSize: 14}}> {item.name} </span>}
+                    <Card bodyStyle={{padding: 0, margin: 0, marginLeft: 0}} style={{marginTop: 15}} key={index}
+                          title={<span style={{marginLeft: 0, fontSize: 14}}> {item.name} </span>}
                           bordered={true}>
                         {
                             _childList.map(function (item1, number) {
                                 // console.log('hcia item1' , item1)
+                                console.log('hcia powerList', powerList)
+                                // var isShow = powerList.some((_item, index, array) => {
+                                //     console.log('hcia isShow', _item.id, item1.id)
+                                //
+                                //     return item1.id == _item.id // 當全部 age 大於 10 才能回傳 true
+                                //
+                                // });
+
+                                // console.log('hcia powerList' , powerList )
+                                // console.log('hcia isShow', isShow)
+
+                                var ss = false
                                 return (
                                     <Card.Grid style={{maxWidth: 250, textAlign: 'center', display: 'flex'}}>
-                                        <Checkbox key={number} value={item1.id} id={number}>{item1.name}</Checkbox>
-                                        <Checkbox key={number} value={-item1.id} id={number}>可操作</Checkbox>
-                                        {/*<Switch checkedChildren="可操作" unCheckedChildren="只讀" defaultChecked />*/}
+                                        <Checkbox onChange={(value) => {
+                                            console.log('hcia value', value.target.checked)
+                                            ss = value.target.checked
+                                            item1.sscheck = value.target.checked
+
+                                        }} key={number} value={item1.id} id={number}>{item1.name}</Checkbox>
+                                        <Checkbox
+                                            disabled={!item1.sscheck}
+                                            key={number}
+                                            value={-item1.id} id={number}>可操作</Checkbox>
                                     </Card.Grid>
                                 );
                             })
