@@ -225,27 +225,15 @@ class EditRole extends Component {
 
 
     render() {
-        const {allMenu} = this.state
 
         const {getFieldDecorator} = this.props.form;
-        // const ss = this.state.menuList.map(function (item, index) {
+        // const setBlock = this.state.menuList.map(function (item, index) {
         //         return (
-        //             <Card bodyStyle={{marginLeft: 10}} style={{marginTop: 15}} key={index} title={item.name}
-        //                   bordered={true}>
-        //                 {
-        //                     item.childrenMenu.map((item1, number) => {
-        //                         return (
-        //                             <Checkbox key={number} value={item1.id}>{item1.name}</Checkbox>
-        //                         );
-        //                     })
-        //                 }
-        //             </Card>
-        //         );
-        //     }
-        // )
-        // const ss = this.state.menuList.map(function (item, index) {
-        //         return (
-        //             <Card bodyStyle={{marginLeft: 10}} style={{marginTop: 15}} key={index} title={item.name}
+        //             <Card bodyStyle={{padding: 0, margin: 0}} key={index}
+        //
+        //
+        //                   title={<span style={{marginLeft: 15, fontSize: 16}}> {item.name} </span>}
+        //                 // title={item.name}
         //                   bordered={true}>
         //                 {
         //                     item.childrenMenu.map(function (item1, number) {
@@ -269,29 +257,69 @@ class EditRole extends Component {
         //         );
         //     }
         // )
+
         const setBlock = this.state.menuList.map(function (item, index) {
+                const _childList = item.childrenMenu
                 return (
-                    <Card bodyStyle={{padding: 0, margin: 0}}  key={index}
-
-
-                          title= {<span style={{marginLeft: 15,fontSize: 16}}> {item.name} </span>}
-                        // title={item.name}
+                    <Card bodyStyle={{padding: 0, margin: 0, marginLeft: 0}} style={{marginTop: 0}} key={index}
+                          title={<span style={{marginLeft: 0, fontSize: 14}}> {item.name} </span>}
                           bordered={true}>
                         {
-                            item.childrenMenu.map(function (item1, number) {
+                            _childList.map(function (item1, number) {
+                                // console.log('hcia item1', item1)
 
 
-                                // console.log('hcia item1' , item1)
                                 return (
+                                    <Card.Grid style={{flexWrap: 'wrap', display: 'flex'}}>
+                                        <Checkbox
+                                            style={{whiteSpace: 'nowrap'}}
+                                            onChange={(value) => {
+                                                item1.sscheck = value.target.checked
+                                            }}
+                                            key={number}
+                                            value={item1.id}
+                                            id={number}>{item1.name}</Checkbox>
 
 
-                                    <Card.Grid style={{maxWidth: 250, textAlign: 'center', display: 'flex'}}>
-                                        <Checkbox key={number} value={item1.id} id={number}>{item1.name}</Checkbox>
-                                        <Checkbox key={number} value={-item1.id} id={number}>可操作</Checkbox>
-                                        {/*<Switch checkedChildren="可操作" unCheckedChildren="只讀" defaultChecked />*/}
+                                        <br/>
+                                        <Checkbox
+                                            style={{display: item1.childrenMenu.length == 0 ? '' : 'none'}}
+                                            disabled={!item1.sscheck}
+                                            key={number}
+                                            value={-item1.id} id={number}>可操作</Checkbox>
+
+                                        <div
+                                            style={{display: (item1.sscheck || item1.childrenMenu.length == 0) ? 'none' : ''}}>
+
+                                            <Checkbox
+                                                disabled={true}
+                                                id={number}>特殊权限配置</Checkbox>
+                                        </div>
+
+                                        <div style={{marginLeft: 10, width: '100%'}}>
+                                            {
+                                                item1.childrenMenu.map((item2, num2) => {
+                                                    return (
+                                                        <Checkbox
+                                                            style={{
+                                                                whiteSpace: 'nowrap',
+                                                                display: item1.sscheck ? '' : 'none'
+                                                            }}
+                                                            disabled={!item1.sscheck}
+                                                            onChange={(value) => {
+                                                                item2.sscheck = value.target.checked
+                                                            }}
+                                                            key={number}
+                                                            value={item2.id}
+                                                            id={number}>{item2.name}</Checkbox>
+                                                    )
+                                                })
+                                            }
+
+                                        </div>
+
+
                                     </Card.Grid>
-
-
                                 );
                             })
                         }
@@ -337,7 +365,8 @@ class EditRole extends Component {
                     </Row>
                 </Card>
 
-                <Card bodyStyle={{padding: 0, margin: 0}} title={<span style={{fontSize: 18}}> 权限配置 </span>} bordered={true}
+                <Card bodyStyle={{padding: 0, margin: 0}} title={<span style={{fontSize: 18}}> 权限配置 </span>}
+                      bordered={true}
                       style={{marginTop: 15}}>
 
                     <Row gutter={8}>

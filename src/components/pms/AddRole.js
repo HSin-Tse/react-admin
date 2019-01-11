@@ -122,15 +122,16 @@ class AddRole extends Component {
             message.error('权限沒有配置')
             return
         }
-        // window.Axios.post('back/saveOrUpdateRole', {
-        //     name: self.state.name,
-        //     content: self.state.changeNoteV,
-        //     multilevelList: sorted,
-        //     password: self.state.realp,
-        // }).then(function (response) {
-        //     console.log('hcia response', response)
-        //     message.success('操作成功')
-        // });
+        var self = this
+        window.Axios.post('back/saveOrUpdateRole', {
+            name: self.state.name,
+            content: self.state.changeNoteV,
+            multilevelList: sorted,
+            password: self.state.realp,
+        }).then(function (response) {
+            console.log('hcia response', response)
+            message.success('操作成功')
+        });
 
     }
 
@@ -145,13 +146,9 @@ class AddRole extends Component {
 
     render() {
 
-        const self = this
         const {getFieldDecorator} = this.props.form;
-        // const {powerList} = this.state;
         const setingBlok = this.state.menuList.map(function (item, index) {
-                // console.log('hcia item', item)
-                var _childList = item.childrenMenu
-
+                 const _childList = item.childrenMenu
                 return (
                     <Card bodyStyle={{padding: 0, margin: 0, marginLeft: 0}} style={{marginTop: 0}} key={index}
                           title={<span style={{marginLeft: 0, fontSize: 14}}> {item.name} </span>}
@@ -188,7 +185,7 @@ class AddRole extends Component {
                                                 id={number}>特殊权限配置</Checkbox>
                                         </div>
 
-                                        <div style={{marginLeft: 10, width: '90%'}}>
+                                        <div style={{marginLeft: 10, width: '100%'}}>
                                             {
                                                 item1.childrenMenu.map((item2, num2) => {
                                                     return (
