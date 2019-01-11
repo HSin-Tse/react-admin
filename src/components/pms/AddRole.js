@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import spelist from './model/speList'
-import localmenuList from './model/localmenuList'
 import {
     Col,
     Card,
@@ -29,7 +27,6 @@ class AddRole extends Component {
             menuList: [],
             idList: [],
             powerList: [],
-            localmenuList: localmenuList,
             modal2Visible: false,
             operationDiaryHistory: [],
             anyThing: 'asdasd',
@@ -43,8 +40,6 @@ class AddRole extends Component {
     componentDidMount() {
 
 
-        console.log('hcia powList', localmenuList)
-        console.log('hcia spelist', spelist)
         var self = this;
         window.Axios.post('back/getMenuList', {}).then(function (response) {
             self.setState({
@@ -97,17 +92,6 @@ class AddRole extends Component {
 
     }
 
-    changeScret = (e) => {
-        this.setState({
-            realp: e.target.value,
-        });
-    }
-
-    changeName = (e) => {
-        this.setState({
-            name: e.target.value,
-        });
-    }
 
     changeNote = (e) => {
         this.setState({
@@ -115,25 +99,18 @@ class AddRole extends Component {
         });
 
     }
-    onChange = (checkedValues) => {
-        console.log('hcia checkedValues', checkedValues)
-        this.setState({
-            powerList: checkedValues,
-        });
-    }
 
 
     render() {
 
         const {getFieldDecorator} = this.props.form;
-        // const setingBlok = this.state.localmenuList.map(function (item, index) {
         const setingBlok = this.state.menuList.map(function (item, index) {
 
 
-                console.log('hcia item', item)
+                // console.log('hcia item', item)
 
                 var _childList = item.childrenMenu
-                
+
 
                 return (
                     <Card bodyStyle={{padding: 0, margin: 0, marginLeft: 10}} style={{marginTop: 15}} key={index}
@@ -142,18 +119,10 @@ class AddRole extends Component {
                           title={<span style={{marginLeft: 15, fontSize: 14}}> {item.name} </span>}
                         // title={item.name}
                           bordered={true}>
-
-
                         {
-
-
                             _childList.map(function (item1, number) {
-
-
                                 // console.log('hcia item1' , item1)
                                 return (
-
-
                                     <Card.Grid style={{maxWidth: 250, textAlign: 'center', display: 'flex'}}>
                                         <Checkbox key={number} value={item1.id} id={number}>{item1.name}</Checkbox>
                                         <Checkbox key={number} value={-item1.id} id={number}>可操作</Checkbox>
@@ -168,11 +137,7 @@ class AddRole extends Component {
                 );
             }
         )
-        const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
+
         return (
 
 
@@ -201,7 +166,11 @@ class AddRole extends Component {
                             <div style={{fontWeight: 'bold', fontSize: 16, display: 'flex', minHeight: 50}}>
                                 <span style={{width: 100}}>角色名称:</span>
                                 <Input
-                                    onChange={this.changeName}
+                                    onChange={(e) => {
+                                        this.setState({
+                                            name: e.target.value,
+                                        });
+                                    }}
                                     defaultValue={this.state.name}
                                     style={{width: 180}}/>
                             </div>
@@ -210,7 +179,12 @@ class AddRole extends Component {
                                 <TextArea
                                     style={{width: 180}}
                                     value={this.state.changeNoteV}
-                                    onChange={this.changeNote}
+                                    onChange={(e) => {
+                                        this.setState({
+                                            changeNoteV: e.target.value,
+                                        });
+
+                                    }}
                                     rows={4}/>
                             </div>
 
@@ -224,7 +198,12 @@ class AddRole extends Component {
                       style={{marginTop: 15}}>
 
                     <Row gutter={8}>
-                        <Checkbox.Group style={{width: '100%'}} onChange={this.onChange}>
+                        <Checkbox.Group style={{width: '100%'}} onChange={(checkedValues) => {
+                            console.log('hcia checkedValues', checkedValues)
+                            this.setState({
+                                powerList: checkedValues,
+                            });
+                        }}>
                             <Col md={24}>
                                 {setingBlok}
                             </Col>
@@ -329,7 +308,11 @@ class AddRole extends Component {
                                     }],
                                 })(
                                     <Input style={{width: 800}} addonAfter={<Icon style={{color: 'red'}} type="star"/>}
-                                           onChange={this.changeScret} placeholder="請輸入你的密碼加以驗證:" type="password"/>
+                                           onChange={(e) => {
+                                               this.setState({
+                                                   realp: e.target.value,
+                                               });
+                                           }} placeholder="請輸入你的密碼加以驗證:" type="password"/>
                                 )}
                             </div>
                         </Col>
