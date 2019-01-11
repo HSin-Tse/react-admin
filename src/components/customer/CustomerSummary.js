@@ -179,11 +179,11 @@ class CustomerSummary extends Component {
                         {/*<Button style={{marginLeft: 15}}>解绑</Button>*/}
 
 
-                        <Button style={{display: !record.belongUserId ? 'none' : '', marginLeft: 15}}
+                        <Button style={{display: !record.belongUserId ? 'none' : '', marginLeft: 5}}
                                 onClick={() => this.requestUnbindAccount(record)}>解绑</Button>
 
 
-                        <span style={{display: record.belongUserId ? 'none' : '', marginLeft: 15}}>未激活</span>
+                        <span style={{display: record.belongUserId ? 'none' : '', marginLeft: 5}}>未激活</span>
                     </div>
                 ),
             },
@@ -348,7 +348,7 @@ class CustomerSummary extends Component {
                     <Table
                         rowKey="id"
                         bordered
-                        scroll={{x: 2000}}
+                        scroll={{x: 1600}}
                         columns={this.columns}
                         dataSource={this.state.bklistA}
                         loading={this.state.loading}
