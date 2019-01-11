@@ -71,8 +71,55 @@ class Basic extends Component {
         document.removeEventListener("keydown", this.handleKeyPressOOP, false);
     }
 
-
+    timestampToTime = (timestamp) => {
+        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
+        const year = dateObj.getFullYear() // 获取年，
+        const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
+        const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
+        const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
+        const minutes = this.pad(dateObj.getMinutes()) // 获取分
+        const seconds = this.pad(dateObj.getSeconds()) // 获取秒
+        return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
+    };
+    pad = (str) => {
+        return +str >= 10 ? str : '0' + str
+    };
     componentDidMount() {
+
+
+        this.columnsLog =[
+            {
+                title: '时间',
+                dataIndex: 'createDate',
+                key: 'operationDiary_Date',
+                render: (text, record) => (
+                    <span>{
+                        this.timestampToTime(record.createDate)
+                    }</span>),
+
+
+
+            }, {
+                title: 'IP',
+                dataIndex: 'IP',
+                key: 'IP',
+                render: (text, record) => (
+                    <span>{record.ipAddress}</span>),
+            }, {
+                title: '操作人',
+                width: 130,
+                dataIndex: 'bkUserName',
+                key: 'operationDiary_User',
+                render: (text, record) => (
+                    <span>{record.bkUserName}</span>),
+            }, {
+                title: '操作',
+                dataIndex: 'comment',
+                key: 'operationDiary_Status',
+                render: (text, record) => (
+                    <span>{record.comment}</span>),
+            }]
+
         document.addEventListener("keydown", this.handleKeyPressOOP, false);
 
 
@@ -343,6 +390,8 @@ class Basic extends Component {
 
 
     render() {
+
+      var  self = this
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
@@ -537,33 +586,7 @@ class Basic extends Component {
                     width={600}
                     footer={null}>
                     <Table rowKey="id"
-                           columns={[
-                               {
-                                   title: '时间',
-                                   dataIndex: 'createDate',
-                                   key: 'operationDiary_Date',
-                                   render: (text, record) => (
-                                       <span>{record.createDate}</span>),
-                               }, {
-                                   title: 'IP',
-                                   dataIndex: 'IP',
-                                   key: 'IP',
-                                   render: (text, record) => (
-                                       <span>{record.ipAddress}</span>),
-                               }, {
-                                   title: '操作人',
-                                   width: 130,
-                                   dataIndex: 'bkUserName',
-                                   key: 'operationDiary_User',
-                                   render: (text, record) => (
-                                       <span>{record.bkUserName}</span>),
-                               }, {
-                                   title: '操作',
-                                   dataIndex: 'comment',
-                                   key: 'operationDiary_Status',
-                                   render: (text, record) => (
-                                       <span>{record.comment}</span>),
-                               }]}
+                           columns={this.columnsLog}
                            dataSource={this.state.operationDiaryHistory}
                            loading={this.state.loadingComment}
                            pagination={{
