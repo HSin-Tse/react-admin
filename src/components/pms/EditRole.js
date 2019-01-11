@@ -90,13 +90,8 @@ class EditRole extends Component {
                 changeNoteV: response.data.data.roleComment,
                 allMenu: response.data.data.allMenu,
             }, () => {
-
-
                 var sss = Object.keys(self.state.allMenu);
                 var ss = Object.keys(self.state.allMenu).map(Number);
-
-                console.log('hcia ss', ss)
-
 
                 sss.forEach(entry => {
 
@@ -134,14 +129,38 @@ class EditRole extends Component {
     confirmSave = () => {
 
 
-        var self = this;
-
-
-        var multilevelList = []
-
-
         let list = this.state.powerList;
-        // list.push(1)
+
+        var isOut1 = list.some(function (item, index, array) {
+            return item == 25
+        });
+        var isOut2 = list.some(function (item, index, array) {
+            return item == 41
+        });
+
+        if (!isOut1) {
+            // list.
+
+            list.remove(27)
+            list.remove(28)
+            list.remove(26)
+            list.remove(40)
+            // 27, 28, 26, 40
+
+        }
+        if (!isOut2) {
+            // list.
+
+            list.remove(23)
+            list.remove(22)
+            list.remove(36)
+            // 27, 28, 26, 40
+
+        }
+
+        console.log('hcia isOut1', isOut1)
+        console.log('hcia list', list)
+
 
         var groupBy = (array, f) => {
             let ansList = [];
@@ -151,10 +170,9 @@ class EditRole extends Component {
             var flasg = array.filter((item, index, array) => {
                 return item < 0;
             });
-
             ids.forEach((item) => {
                 var select = flasg.some(function (flagItem, index, array) {
-                    return ((flagItem + item) === 0) // 當全部 age 大於 10 才能回傳 true
+                    return ((flagItem + item) === 0)
                 });
                 ansList.push([item, select ? 1 : 0])
             });
@@ -169,22 +187,23 @@ class EditRole extends Component {
         console.log('hcia sorted', sorted)
 
 
+        if (sorted.length == 0) {
+            message.error('权限沒有配置')
+            return
+        }
+        var self = this
         window.Axios.post('back/saveOrUpdateRole', {
-            id: this.props.match.params.id,
             name: self.state.name,
             content: self.state.changeNoteV,
             multilevelList: sorted,
             password: self.state.realp,
         }).then(function (response) {
             console.log('hcia response', response)
-
-            if (response.data.code == 1) {
-                message.success('操作成功')
-
-            }
+            message.success('操作成功')
         });
 
     }
+
 
     changeName = (e) => {
         this.setState({
@@ -227,47 +246,24 @@ class EditRole extends Component {
     render() {
 
         const {getFieldDecorator} = this.props.form;
-        // const setBlock = this.state.menuList.map(function (item, index) {
-        //         return (
-        //             <Card bodyStyle={{padding: 0, margin: 0}} key={index}
-        //
-        //
-        //                   title={<span style={{marginLeft: 15, fontSize: 16}}> {item.name} </span>}
-        //                 // title={item.name}
-        //                   bordered={true}>
-        //                 {
-        //                     item.childrenMenu.map(function (item1, number) {
-        //
-        //
-        //                         // console.log('hcia item1' , item1)
-        //                         return (
-        //
-        //
-        //                             <Card.Grid style={{maxWidth: 250, textAlign: 'center', display: 'flex'}}>
-        //                                 <Checkbox key={number} value={item1.id} id={number}>{item1.name}</Checkbox>
-        //                                 <Checkbox key={number} value={-item1.id} id={number}>可操作</Checkbox>
-        //                                 {/*<Switch checkedChildren="可操作" unCheckedChildren="只讀" defaultChecked />*/}
-        //                             </Card.Grid>
-        //
-        //
-        //                         );
-        //                     })
-        //                 }
-        //             </Card>
-        //         );
-        //     }
-        // )
 
+        const self = this
         const setBlock = this.state.menuList.map(function (item, index) {
                 const _childList = item.childrenMenu
+
                 return (
                     <Card bodyStyle={{padding: 0, margin: 0, marginLeft: 0}} style={{marginTop: 0}} key={index}
                           title={<span style={{marginLeft: 0, fontSize: 14}}> {item.name} </span>}
                           bordered={true}>
                         {
                             _childList.map(function (item1, number) {
-                                // console.log('hcia item1', item1)
 
+                                var isOut2 = self.state.powerList.some(function (_item, index, array) {
+                                    return _item == item1.id
+                                });
+
+                                // console.log('hcia item1', item1)
+                                item1.sscheck = isOut2
 
                                 return (
                                     <Card.Grid style={{flexWrap: 'wrap', display: 'flex'}}>
@@ -279,7 +275,6 @@ class EditRole extends Component {
                                             key={number}
                                             value={item1.id}
                                             id={number}>{item1.name}</Checkbox>
-
 
                                         <br/>
                                         <Checkbox
@@ -331,6 +326,7 @@ class EditRole extends Component {
             <div>
                 <h2 style={{marginTop: 15}}>内部用户权限设置</h2>
                 {/*<div>name :{JSON.stringify(this.state.name)}</div>*/}
+                <div>powerList :{JSON.stringify(this.state.powerList)}</div>
 
 
                 <BreadcrumbCustom first="内部成员列表" second="内部人员配置"/>
