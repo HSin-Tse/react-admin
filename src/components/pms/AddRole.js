@@ -129,7 +129,7 @@ class AddRole extends Component {
 
 
                                 return (
-                                    <Card.Grid style={{textAlign: 'center', display: 'flex'}}>
+                                    <Card.Grid style={{flexWrap:'wrap',textAlign: 'center', display: 'flex'}}>
                                         <Checkbox
                                             style={{whiteSpace:'nowrap'}}
                                             onChange={(value) => {
@@ -146,11 +146,11 @@ class AddRole extends Component {
                                             key={number}
                                             value={-item1.id} id={number}>可操作</Checkbox>
 
-                                        <div style={{   display: item1.sscheck ? '' : 'none'}}>
                                             {
                                                 item1.childrenMenu.map((item2, num2) => {
                                                     return (
                                                         <Checkbox
+                                                            style={{  whiteSpace:'nowrap', display: item1.sscheck ? '' : 'none'}}
                                                             disabled={!item1.sscheck}
                                                             onChange={(value) => {
                                                                 item2.sscheck = value.target.checked
@@ -161,7 +161,6 @@ class AddRole extends Component {
                                                     )
                                                 })
                                             }
-                                        </div>
 
                                         <div
                                             style={{display: (item1.sscheck || item1.childrenMenu.length == 0) ? 'none' : ''}}>
