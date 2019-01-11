@@ -9,6 +9,7 @@ import {
     Icon,
     Checkbox,
     Popconfirm,
+    Select,
     message,
     Form
 } from 'antd';
@@ -18,6 +19,7 @@ import {setINFOR} from "../../action";
 import connect from "react-redux/es/connect/connect";
 
 const {TextArea} = Input;
+const Option = Select.Option;
 
 class AddRole extends Component {
 
@@ -110,36 +112,70 @@ class AddRole extends Component {
                 var _childList = item.childrenMenu
 
                 return (
-                    <Card bodyStyle={{padding: 0, margin: 0, marginLeft: 0}} style={{marginTop: 15}} key={index}
+                    <Card bodyStyle={{padding: 0, margin: 0, marginLeft: 0}} style={{marginTop: 0}} key={index}
                           title={<span style={{marginLeft: 0, fontSize: 14}}> {item.name} </span>}
                           bordered={true}>
                         {
                             _childList.map(function (item1, number) {
-                                // console.log('hcia item1' , item1)
-                                console.log('hcia powerList', powerList)
-                                // var isShow = powerList.some((_item, index, array) => {
-                                //     console.log('hcia isShow', _item.id, item1.id)
-                                //
-                                //     return item1.id == _item.id // 當全部 age 大於 10 才能回傳 true
-                                //
-                                // });
+                                console.log('hcia item1', item1)
 
-                                // console.log('hcia powerList' , powerList )
-                                // console.log('hcia isShow', isShow)
 
-                                var ss = false
                                 return (
-                                    <Card.Grid style={{maxWidth: 250, textAlign: 'center', display: 'flex'}}>
+                                    <Card.Grid style={{textAlign: 'center', display: 'flex'}}>
                                         <Checkbox onChange={(value) => {
-                                            console.log('hcia value', value.target.checked)
-                                            ss = value.target.checked
                                             item1.sscheck = value.target.checked
 
                                         }} key={number} value={item1.id} id={number}>{item1.name}</Checkbox>
+
+
                                         <Checkbox
+                                            style={{display: item1.childrenMenu.length == 0 ? '' : 'none'}}
                                             disabled={!item1.sscheck}
                                             key={number}
                                             value={-item1.id} id={number}>可操作</Checkbox>
+
+
+                                        <Select
+                                            disabled={!item1.sscheck}
+
+                                            onChange={(value)=>{
+                                                console.log('hcia value' , value)
+
+                                            }}
+                                            style={{width: '80%', display: item1.childrenMenu.length == 0 ? 'none' : ''}}
+                                            mode="tags"
+                                            // style={{ width: '100%' }}
+                                            placeholder="特殊权限配置"
+                                            // onChange={handleChange}
+                                        >
+                                            {
+                                                item1.childrenMenu.map((item2, num2) => {
+
+                                                    return (
+
+                                                        <Option
+                                                            key={item2.id}
+                                                            id={number}>{item2.name}
+                                                        </Option>
+                                                    )
+                                                })
+                                            }
+
+                                        </Select>
+                                        {/*{*/}
+                                        {/*item1.childrenMenu.map((item2,num2)=>{*/}
+
+                                        {/*return(*/}
+
+                                        {/*<Checkbox onChange={(value) => {*/}
+                                        {/*item2.sscheck = value.target.checked*/}
+
+                                        {/*}} key={number} value={item2.id} id={number}>{item2.name}</Checkbox>*/}
+                                        {/*)*/}
+                                        {/*})*/}
+                                        {/*}*/}
+
+
                                     </Card.Grid>
                                 );
                             })
