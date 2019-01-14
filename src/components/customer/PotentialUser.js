@@ -452,6 +452,8 @@ export default class PotentialUser extends Component {
             belongUserId: self.state.theBelongUserId,
         }).then(() => {
             message.success('提交成功')
+
+            self.reflesh()
         });
 
         this.setState({

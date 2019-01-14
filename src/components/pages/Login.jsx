@@ -26,7 +26,6 @@ class Login extends React.Component {
     componentDidUpdate(prevProps) { // React 16.3+弃用componentWillReceiveProps
 
 
-
     }
 
     handleSubmit = (e) => {
@@ -74,6 +73,15 @@ class Login extends React.Component {
                         }
                         // self.props.setUSER(response.data.data)
 
+                        window.Axios.post('back/addLogHistory', {
+                            'moduleLog': 'loging',
+                            'pageLog': 'loging',
+                            'commentLog': 'loging',
+                            'typeLog': 1,
+                        }).then(function (response) {
+
+
+                        });
 
                     }
 

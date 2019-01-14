@@ -213,6 +213,23 @@ export default class BlackList extends Component {
             });
 
         });
+
+
+
+        window.Axios.post('back/getLogHistoryListSize', {
+            pageNo: this.state.currentA,
+            'typeLog': 1,//1:合规 2:开户 3:交易
+        }).then((response) => {
+            self.setState({
+                totalpageA: response.data.data.totalPage,
+                bklistA: response.data.data.list,
+                loadingA: false
+            });
+
+        });
+
+
+
     }
     requestPageB = () => {
         let self = this
