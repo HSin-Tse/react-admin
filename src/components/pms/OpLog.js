@@ -35,6 +35,8 @@ export default class BlackList extends Component {
             currentC: 0,
             totalpageA: 0,
             totalpageAASIZE: 0,
+            totalpageBBSIZE: 0,
+            totalpageCCSIZE: 0,
             totalpageB: 0,
             totalpageC: 0,
             nowKey: "1",
@@ -300,24 +302,55 @@ export default class BlackList extends Component {
         self.setState({
             loadingB: true
         })
-        window.Axios.post('auth/getBlackList', {
+        // window.Axios.post('auth/getBlackList', {
+        //     pageNo: this.state.currentB,
+        //     'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易,
+        //     'listType': 2,//1:合规 2:开户 3:交易
+        //     email: this.state.selectMail,
+        //     mobile: this.state.selectPhoneF,
+        //     nationalId: this.state.selectID,
+        //     starClientAccount: this.state.starClientAccount,
+        //     startTime: this.state.selectTimeStart,
+        //     endTime: this.state.selectTimeEnd,
+        // }).then((response) => {
+        //     self.setState({
+        //         totalpageB: response.data.data.totalPage,
+        //         bklistB: response.data.data.list,
+        //         loadingB: false
+        //     });
+        //
+        // });
+
+
+
+        window.Axios.post('back/getLogHistoryListSize', {
             pageNo: this.state.currentB,
-            'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易,
-            'listType': 2,//1:合规 2:开户 3:交易
-            email: this.state.selectMail,
-            mobile: this.state.selectPhoneF,
-            nationalId: this.state.selectID,
-            starClientAccount: this.state.starClientAccount,
-            startTime: this.state.selectTimeStart,
-            endTime: this.state.selectTimeEnd,
+            'typeLog': 2,//1:登入紀錄 2:瀏覽紀錄 3:操作紀錄 99:API調用紀錄
         }).then((response) => {
             self.setState({
-                totalpageB: response.data.data.totalPage,
+                totalpageA: response.data.data.totalPage,
+                totalpageBBSIZE: response.data.data,
                 bklistB: response.data.data.list,
-                loadingB: false
+            }, () => {
+
+
+                window.Axios.post('back/getLogHistoryList', {
+                    'typeLog': 2,//1:合规 2:开户 3:交易
+                    size: this.state.pgsize,
+                    index: this.state.currentB*this.state.pgsize,
+                }).then((response) => {
+                    self.setState({
+                        bklistB: response.data.data,
+                        loadingB: false
+                    });
+
+                });
+
+
             });
 
         });
+
     }
     requestPageC = () => {
         let self = this
@@ -585,7 +618,7 @@ export default class BlackList extends Component {
                                        dataSource={this.state.bklistB}
                                        loading={this.state.loadingB}
                                        pagination={{  // 分页
-                                           total: this.state.totalpageB * this.state.pgsize,
+                                           total: this.state.totalpageBBSIZE,
                                            pageSize: this.state.pgsize,
                                            onChange: this.changePageB,
                                        }}
