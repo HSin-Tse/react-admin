@@ -109,7 +109,19 @@ export default class BlackList extends Component {
     componentWillUnmount() {
         document.removeEventListener("keydown", this.handleKeyPress, false);
     }
-
+    timestampToTime = (timestamp) => {
+        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
+        const year = dateObj.getFullYear() // 获取年，
+        const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
+        const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
+        const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
+        const minutes = this.pad(dateObj.getMinutes()) // 获取分
+        const seconds = this.pad(dateObj.getSeconds()) // 获取秒
+        return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
+    };
+    pad = (str) => {
+        return +str >= 10 ? str : '0' + str
+    };
     componentDidMount() {
         document.addEventListener("keydown", this.handleKeyPress, false);
 
@@ -120,6 +132,40 @@ export default class BlackList extends Component {
             nowKey: '1',
         })
 
+        this.columnsA = [
+            {
+                title: '日期/时间',
+                align: 'center',
+                dataIndex: '日期/时间',
+                key: '日期/时间',
+                render: (text, record) => (
+
+
+                    <span>{
+                        this.timestampToTime(record.date)}
+                    </span>
+                ),
+            }, {
+                title: '使用者',
+                align: 'center',
+                dataIndex: '使用者',
+                key: '使用者',
+                render: (text, record) => (
+                    <span>{record.id}</span>
+                ),
+            }, {
+                title: '项目',
+                align: 'center',
+                dataIndex: '项目',
+                key: '项目',
+                render: (text, record) => (<span>{record.page}</span>),
+            }, {
+                title: '详细内容',
+                align: 'center',
+                dataIndex: '详细内容',
+                key: '详细内容',
+                render: (text, record) => (<span>{record.typeDesc}</span>),
+            }];
 
         this.columns = [
             {
@@ -151,6 +197,8 @@ export default class BlackList extends Component {
                 key: '详细内容',
                 render: (text, record) => (<span>{record.typeDesc}</span>),
             }];
+
+
         this.requestPageA()//1:合规 2:开户 3:交易
         this.requestPageB()
         this.requestPageC()
@@ -513,7 +561,7 @@ export default class BlackList extends Component {
                                 <Table rowKey="id"
                                        bordered
                                     // rowSelection={rowSelection}
-                                       columns={this.columns}
+                                       columns={this.columnsA}
                                        dataSource={this.state.bklistA}
                                        loading={this.state.loadingA}
                                        pagination={{  // 分页
