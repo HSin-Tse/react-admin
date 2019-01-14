@@ -34,6 +34,7 @@ export default class BlackList extends Component {
             currentB: 0,
             currentC: 0,
             totalpageA: 0,
+            totalpageAASIZE: 0,
             totalpageB: 0,
             totalpageC: 0,
             nowKey: "1",
@@ -116,7 +117,7 @@ export default class BlackList extends Component {
         console.log('hcia  Black this.props', this.props.pg)
 
         this.setState({
-            nowKey: '3',
+            nowKey: '1',
         })
 
 
@@ -127,7 +128,7 @@ export default class BlackList extends Component {
                 dataIndex: '日期/时间',
                 key: '日期/时间',
                 render: (text, record) => (
-                    <span>{record.mobile}</span>
+                    <span>{record.date}</span>
                 ),
             }, {
                 title: '使用者',
@@ -135,20 +136,20 @@ export default class BlackList extends Component {
                 dataIndex: '使用者',
                 key: '使用者',
                 render: (text, record) => (
-                    <span>{record.name}</span>
+                    <span>{record.id}</span>
                 ),
             }, {
                 title: '模块',
                 align: 'center',
                 dataIndex: '模块',
                 key: '模块',
-                render: (text, record) => (<span>{record.email}</span>),
+                render: (text, record) => (<span>{record.page}</span>),
             }, {
                 title: '详细内容',
                 align: 'center',
                 dataIndex: '详细内容',
                 key: '详细内容',
-                render: (text, record) => (<span>{record.operator}</span>),
+                render: (text, record) => (<span>{record.typeDesc}</span>),
             }];
         this.requestPageA()//1:合规 2:开户 3:交易
         this.requestPageB()
@@ -195,25 +196,24 @@ export default class BlackList extends Component {
         self.setState({
             loadingA: true
         })
-        window.Axios.post('auth/getBlackList', {
-            pageNo: this.state.currentA,
-            'listType': 1,//1:合规 2:开户 3:交易
-            'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易,
-            email: this.state.selectMail,
-            mobile: this.state.selectPhoneF,
-            nationalId: this.state.selectID,
-            starClientAccount: this.state.starClientAccount,
-            startTime: this.state.selectTimeStart,
-            endTime: this.state.selectTimeEnd,
-        }).then((response) => {
-            self.setState({
-                totalpageA: response.data.data.totalPage,
-                bklistA: response.data.data.list,
-                loadingA: false
-            });
-
-        });
-
+        // window.Axios.post('auth/getBlackList', {
+        //     pageNo: this.state.currentA,
+        //     'listType': 1,//1:合规 2:开户 3:交易
+        //     'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易,
+        //     email: this.state.selectMail,
+        //     mobile: this.state.selectPhoneF,
+        //     nationalId: this.state.selectID,
+        //     starClientAccount: this.state.starClientAccount,
+        //     startTime: this.state.selectTimeStart,
+        //     endTime: this.state.selectTimeEnd,
+        // }).then((response) => {
+        //     self.setState({
+        //         totalpageA: response.data.data.totalPage,
+        //         bklistA: response.data.data.list,
+        //         loadingA: false
+        //     });
+        //
+        // });
 
 
         window.Axios.post('back/getLogHistoryListSize', {
@@ -222,12 +222,27 @@ export default class BlackList extends Component {
         }).then((response) => {
             self.setState({
                 totalpageA: response.data.data.totalPage,
+                totalpageAASIZE: response.data.data,
                 bklistA: response.data.data.list,
-                loadingA: false
+            }, () => {
+
+
+                window.Axios.post('back/getLogHistoryList', {
+                    'typeLog': 1,//1:合规 2:开户 3:交易
+                    size: this.state.pgsize,
+                    index: this.state.currentA,
+                }).then((response) => {
+                    self.setState({
+                        bklistA: response.data.data,
+                        loadingA: false
+                    });
+
+                });
+
+
             });
 
         });
-
 
 
     }
@@ -475,6 +490,10 @@ export default class BlackList extends Component {
                 <h2 style={{marginTop: 15}}>
                     操作日志
                 </h2>
+
+                <div>totalpageAASIZE :{JSON.stringify(this.state.totalpageAASIZE)}</div>
+                <div>bklistA :{JSON.stringify(this.state.bklistA)}</div>
+
                 <BreadcrumbCustom first="权限管理" second="操作日志"/>
 
                 <Card bodyStyle={{padding: 0, margin: 0}}>
@@ -499,7 +518,7 @@ export default class BlackList extends Component {
                                        loading={this.state.loadingA}
                                        pagination={{  // 分页
                                            // showQuickJumper:true,
-                                           total: this.state.totalpageA * this.state.pgsize,
+                                           total: this.state.totalpageAASIZE,
                                            pageSize: this.state.pgsize,
                                            onChange: this.changePageA,
                                        }}
