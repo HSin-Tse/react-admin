@@ -275,7 +275,7 @@ export default class PotentialUser extends Component {
                 dataIndex: '活跃程度',
                 key: '活跃程度',
 
-                render: (text, record) => (<span>{'ssssss'}</span>),
+                render: (text, record) => (<span>{record.activeFlag}</span>),
             }, {
                 title: '操作人',
 
