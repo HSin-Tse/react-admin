@@ -251,8 +251,18 @@ class SiderCustom extends Component {
         // document.removeEventListener("keyup", this.handleKeyPress, false);
     }
     componentDidMount() {
-        
-        
+
+        // this.context.router.history.listen((route) => {
+        //
+        //
+        //     console.log('hcia route.pathname' , route.pathname)
+        //
+        //     route.next()
+        //     // if(route.pathname === '/xxx') {
+        //     // }
+        // });
+
+
         // console.log('hcia window.location' , window.location.host)
         // console.log('hcia  this.props' ,  this.props)
         

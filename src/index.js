@@ -96,7 +96,7 @@ window.Axios.interceptors.response.use(function (response) {
     // localStorage.removeItem('displayName');
 
     
-    console.log('hcia location.host' , window.location.host)
+    // console.log('hcia location.host' , window.location.host)
     // window.location ='http://'+ window.location.host+"/#/login";
 
 
