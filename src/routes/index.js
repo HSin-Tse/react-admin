@@ -128,7 +128,7 @@ export default class CRouter extends Component {
             return <Redirect to={'/login'}/>;
         } else {
             // console.log('hcia requireLogin component', component)
-            console.log('hcia component ！！！', component)
+            // console.log('hcia component ！！！', component)
 
             return component
         }

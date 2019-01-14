@@ -113,6 +113,17 @@ export default class BlackList extends Component {
     }
 
     componentDidMount() {
+
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '用户管理',
+            'pageLog': '黑名單',
+            'commentLog': '查看了黑名單',
+            'typeLog': 2,
+        }).then(function (response) {
+
+
+        });
+
         document.addEventListener("keydown", this.handleKeyPress, false);
 
 
@@ -123,6 +134,72 @@ export default class BlackList extends Component {
         })
 
 
+        this.columnsA = [
+            {
+                title: '手机号',
+                align: 'center',
+
+                dataIndex: 'phoneNumber',
+                key: 'phoneNumber',
+                render: (text, record) => (
+                    <span>{record.mobile}</span>
+                ),
+            }, {
+                title: '姓名',
+                align: 'center',
+
+                dataIndex: 'name',
+                key: 'name',
+                render: (text, record) => (
+                    <span>{record.name}</span>
+                ),
+            }, {
+                title: '邮箱地址',
+                align: 'center',
+                dataIndex: '邮箱地址',
+                key: '邮箱地址',
+                render: (text, record) => (<span>{record.email}</span>),
+            }, {
+                title: '身份证号',
+                align: 'center',
+                dataIndex: '身份证号',
+                key: '身份证号',
+                render: (text, record) => (<span>{record.nationalId}</span>),
+            }, {
+                title: '操作时间',
+                align: 'center',
+
+                dataIndex: '操作时间',
+                key: '操作时间',
+                render: (text, record) => (<span>{record.date}</span>),
+            }, {
+                title: '操作人',
+                align: 'center',
+                dataIndex: '操作人',
+                key: '操作人',
+                render: (text, record) => (<span>{record.operator}</span>),
+            }, {
+                align: 'center',
+                title: '查看',
+                key: '查看',
+                render: (text, record) => (
+                    <div>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal3(record)}>备注</Button>
+                    </div>
+                ),
+            }, {
+                title: '操作',
+
+                align: 'center',
+                key: 'action',
+                render: (text, record) => (
+                    <div>
+                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record)}>日志</Button>
+
+                  
+                    </div>
+                ),
+            }];
         this.columns = [
             {
                 title: '手机号',
@@ -521,12 +598,14 @@ export default class BlackList extends Component {
                                     this.setState({
                                         showModaladdblack: true,
                                     });
-                                }}>添加黑名单</Button>}>
+                                }}>添加黑名单</Button>}
+
+                            >
 
                                 <Table rowKey="id"
                                        bordered
                                     // rowSelection={rowSelection}
-                                       columns={this.columns}
+                                       columns={this.columnsA}
                                        dataSource={this.state.bklistA}
                                        scroll={{x: 1300}}
                                        loading={this.state.loadingA}

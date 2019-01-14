@@ -35,7 +35,15 @@ class Basic extends Component {
 
 
     componentDidMount() {
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '权限管理',
+            'pageLog': '角色配置',
+            'commentLog': '查看了角色配置',
+            'typeLog': 2,
+        }).then(function (response) {
 
+
+        });
         let self = this;
         window.Axios.post('dict/openDict', {
             'keys': 'suspend_reason_type',

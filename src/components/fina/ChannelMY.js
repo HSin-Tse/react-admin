@@ -92,6 +92,17 @@ class Basic extends Component {
 
     componentDidMount() {
 
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '财务审核',
+            'pageLog': '渠道管理',
+            'commentLog': '查看了渠道管理',
+            'typeLog': 2,
+        }).then(function (response) {
+
+
+        });
+
+
         this.columns = [
             {
                 align: 'center',

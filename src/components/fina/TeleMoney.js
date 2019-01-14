@@ -36,7 +36,15 @@ class Basic extends Component {
 
 
     componentDidMount() {
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '财务管理',
+            'pageLog': '入金审核',
+            'commentLog': '查看了入金审核',
+            'typeLog': 2,
+        }).then(function (response) {
 
+
+        });
         let self = this;
         window.Axios.post('dict/openDict', {
             'keys': 'suspend_reason_type',
@@ -246,7 +254,7 @@ class Basic extends Component {
 
     render() {
         const steps = [{
-            title: '新增',
+            title: '入金审核',
             content: 'First-content',
         }, {
             title: '财务审核',

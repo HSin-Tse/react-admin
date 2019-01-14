@@ -57,6 +57,15 @@ class CustomerSummary extends Component {
 
     componentDidMount() {
 
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '用户管理',
+            'pageLog': 'Leads用戶總表',
+            'commentLog': '查看了Leads用戶總表',
+            'typeLog': 2,
+        }).then(function (response) {
+
+
+        });
 
         document.addEventListener("keydown", this.handleKeyPressOOP, false);
 

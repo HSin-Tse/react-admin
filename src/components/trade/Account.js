@@ -107,7 +107,15 @@ class Basic extends Component {
     };
 
     componentDidMount() {
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '交易管理',
+            'pageLog': '账户管理',
+            'commentLog': '查看了账户管理',
+            'typeLog': 2,
+        }).then(function (response) {
 
+
+        });
         let self = this;
         window.Axios.post('dict/openDict', {
             'keys': 'suspend_reason_type',

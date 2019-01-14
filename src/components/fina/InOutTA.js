@@ -132,6 +132,20 @@ class Basic extends Component {
 
     componentDidMount() {
 
+
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '交易管理',
+            'pageLog': '出入金报表',
+            'commentLog': '查看了出入金报表',
+            'typeLog': 2,
+        }).then(function (response) {
+
+
+        });
+
+        {/*<BreadcrumbCustom first="交易管理" second="出入金报表"/>*/}
+        //
+
         let self = this;
         window.Axios.post('dict/openDict', {
             'keys': 'suspend_reason_type',

@@ -65,6 +65,20 @@ export default class WhiteList extends Component {
     }
 
     componentDidMount() {
+
+
+
+
+
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '用户管理',
+            'pageLog': '白名单',
+            'commentLog': '查看了白名单',
+            'typeLog': 2,
+        }).then(function (response) {
+
+
+        });
         document.addEventListener("keydown", this.handleKeyPress, false);
         this.columns = [
             {

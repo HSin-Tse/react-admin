@@ -125,6 +125,19 @@ export default class BlackList extends Component {
         return +str >= 10 ? str : '0' + str
     };
     componentDidMount() {
+
+
+
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '权限管理',
+            'pageLog': '操作日志',
+            'commentLog': '查看了操作日志',
+            'typeLog': 2,
+        }).then(function (response) {
+
+
+        });
+
         document.addEventListener("keydown", this.handleKeyPress, false);
 
 
