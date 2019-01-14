@@ -278,7 +278,7 @@ export default class BlackList extends Component {
                 window.Axios.post('back/getLogHistoryList', {
                     'typeLog': 1,//1:合规 2:开户 3:交易
                     size: this.state.pgsize,
-                    index: this.state.currentA,
+                    index: this.state.currentA*this.state.pgsize,
                 }).then((response) => {
                     self.setState({
                         bklistA: response.data.data,
@@ -540,7 +540,7 @@ export default class BlackList extends Component {
                 </h2>
 
                 <div>totalpageAASIZE :{JSON.stringify(this.state.totalpageAASIZE)}</div>
-                <div>bklistA :{JSON.stringify(this.state.bklistA)}</div>
+                {/*<div>bklistA :{JSON.stringify(this.state.bklistA)}</div>*/}
 
                 <BreadcrumbCustom first="权限管理" second="操作日志"/>
 
