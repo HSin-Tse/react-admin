@@ -213,6 +213,18 @@ class SiderCustom extends Component {
         localStorage.removeItem('displayName');
 
         this.props.history.push('/login')
+
+
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': 'logout',
+            'pageLog': 'logout',
+            'commentLog': 'logout',
+            'typeLog': 1,
+        }).then(function (response) {
+
+
+        });
+
     };
     componentWillUnmount() {
         // console.log('hcia componentWillUnmount')
