@@ -196,7 +196,8 @@ export default class PotentialUser extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.shownoteModal(record.belongUserId)}>备注</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                onClick={() => this.shownoteModal(record.belongUserId)}>备注</Button>
                     </div>
                 )
             },
@@ -207,8 +208,10 @@ export default class PotentialUser extends Component {
                 render: (text, record) => (
 
                     <div>
-                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showAddbAckModal(record)}>添加回访</Button>
-                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record.belongUserId)}>日志</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                onClick={() => this.showAddbAckModal(record)}>添加回访</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                onClick={() => this.showOPDAyModal2(record.belongUserId)}>日志</Button>
                     </div>
                 ),
             }];
@@ -290,7 +293,8 @@ export default class PotentialUser extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.shownoteModal(record.belongUserId)}>备注</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                onClick={() => this.shownoteModal(record.belongUserId)}>备注</Button>
                     </div>
                 )
             }
@@ -302,13 +306,14 @@ export default class PotentialUser extends Component {
                     <div>
                         <Popconfirm title="延期申请？" onConfirm={() => this.handleDelay(record)} okText="Yes"
                                     cancelText="No">
-                            <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}}>延期</Button>
+                            <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}>延期</Button>
 
                         </Popconfirm>
 
-                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showAddbAckModal(record)}>添加回访</Button>
-                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                            onClick={() => this.showOPDAyModal2(record.belongUserId)}>操作日誌</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                onClick={() => this.showAddbAckModal(record)}>添加回访</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                onClick={() => this.showOPDAyModal2(record.belongUserId)}>操作日誌</Button>
                     </div>
                 ),
             }];
@@ -392,8 +397,10 @@ export default class PotentialUser extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.seeUSer(record)}>用户信息 </Button>
-                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.shownoteModal(record.belongUserId)}>备注</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                onClick={() => this.seeUSer(record)}>用户信息 </Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                onClick={() => this.shownoteModal(record.belongUserId)}>备注</Button>
                     </div>
                 )
             }, {
@@ -402,8 +409,10 @@ export default class PotentialUser extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showAddbAckModal(record)}>添加回访</Button>
-                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record.belongUserId)}>操作日誌</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                onClick={() => this.showAddbAckModal(record)}>添加回访</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                onClick={() => this.showOPDAyModal2(record.belongUserId)}>操作日誌</Button>
                     </div>
                 ),
             }];
