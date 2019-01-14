@@ -153,7 +153,7 @@ export default class BlackList extends Component {
                 dataIndex: '使用者',
                 key: '使用者',
                 render: (text, record) => (
-                    <span>{record.id}</span>
+                    <span>{record.loginName}</span>
                 ),
             }, {
                 title: '项目',
@@ -168,7 +168,46 @@ export default class BlackList extends Component {
                 key: '详细内容',
                 render: (text, record) => (<span>{record.typeDesc}</span>),
             }];
+        this.columnsB = [
+            {
+                title: '日期/时间',
+                align: 'center',
+                dataIndex: '日期/时间',
+                key: '日期/时间',
+                render: (text, record) => (
+                    <span>{
 
+                        this.timestampToTime(record.date)
+
+                        }</span>
+                ),
+            }, {
+                title: '使用者',
+                align: 'center',
+                dataIndex: '使用者',
+                key: '使用者',
+                render: (text, record) => (
+                    <span>{record.id}</span>
+                ),
+            }, {
+                title: '模块',
+                align: 'center',
+                dataIndex: '模块',
+                key: '模块',
+                render: (text, record) => (<span>{record.module}</span>),
+            }, {
+                title: '页面',
+                align: 'center',
+                dataIndex: '页面',
+                key: '页面',
+                render: (text, record) => (<span>{record.page}</span>),
+            }, {
+                title: '详细内容',
+                align: 'center',
+                dataIndex: '详细内容',
+                key: '详细内容',
+                render: (text, record) => (<span>{record.comment}</span>),
+            }];
         this.columns = [
             {
                 title: '日期/时间',
@@ -197,7 +236,7 @@ export default class BlackList extends Component {
                 align: 'center',
                 dataIndex: '详细内容',
                 key: '详细内容',
-                render: (text, record) => (<span>{record.typeDesc}</span>),
+                render: (text, record) => (<span>{record.comment}</span>),
             }];
 
 
@@ -614,7 +653,7 @@ export default class BlackList extends Component {
                             >
                                 <Table rowKey="id"
                                        bordered
-                                       columns={this.columns}
+                                       columns={this.columnsB}
                                        dataSource={this.state.bklistB}
                                        loading={this.state.loadingB}
                                        pagination={{  // 分页

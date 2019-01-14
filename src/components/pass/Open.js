@@ -87,6 +87,17 @@ class Basic extends Component {
 
     componentDidMount() {
 
+        {/*<BreadcrumbCustom first="审核管理" second="开户审核"/>*/}
+
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '审核管理',
+            'pageLog': '开户审核',
+            'commentLog': '查看了开户审核',
+            'typeLog': 2,
+        }).then(function (response) {
+
+
+        });
 
         this.columnsLog = [
             {
