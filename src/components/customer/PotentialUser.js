@@ -45,6 +45,17 @@ export default class PotentialUser extends Component {
     }
 
     componentDidMount() {
+
+
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '用户管理',
+            'pageLog': 'Leads管理',
+            'commentLog': '查看了Leads管理',
+            'typeLog': 2,
+        }).then(function (response) {
+
+
+        });
         document.addEventListener("keydown", this.handleKeyPress, false);
 
         this.requestPageA()

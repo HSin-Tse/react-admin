@@ -131,7 +131,7 @@ export default class BlackList extends Component {
         console.log('hcia  Black this.props', this.props.pg)
 
         this.setState({
-            nowKey: '1',
+            nowKey: '2',
         })
 
         this.columnsA = [
@@ -187,7 +187,7 @@ export default class BlackList extends Component {
                 dataIndex: '使用者',
                 key: '使用者',
                 render: (text, record) => (
-                    <span>{record.id}</span>
+                    <span>{record.loginName}</span>
                 ),
             }, {
                 title: '模块',
@@ -611,7 +611,7 @@ export default class BlackList extends Component {
                     操作日志
                 </h2>
 
-                <div>totalpageAASIZE :{JSON.stringify(this.state.totalpageAASIZE)}</div>
+                {/*<div>totalpageAASIZE :{JSON.stringify(this.state.totalpageAASIZE)}</div>*/}
                 {/*<div>bklistA :{JSON.stringify(this.state.bklistA)}</div>*/}
 
                 <BreadcrumbCustom first="权限管理" second="操作日志"/>
