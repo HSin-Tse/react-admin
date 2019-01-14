@@ -137,12 +137,15 @@ class InnerUserList extends Component {
             {
                 title: '邮箱',
                 width: 200,
+                align: 'center',
+
                 dataIndex: '邮箱',
                 key: '邮箱',
                 render: (text, record) => (<span>{record.email}</span>),
             }, {
                 title: '性别',
                 width: 70,
+
                 align: 'center',
                 dataIndex: '性别',
                 key: '性别',
@@ -153,8 +156,6 @@ class InnerUserList extends Component {
                 title: '手机号',
                 dataIndex: '手机号',
                 key: '手机号',
-                width: 150,
-
                 render: (text, record) => (
                     <span>{record.mobile}</span>),
             }, {
@@ -162,14 +163,14 @@ class InnerUserList extends Component {
                 dataIndex: '微信号',
                 key: '微信号',
                 align: 'center',
-                width: 120,
                 render: (text, record) => (
                     <span>{record.weChat ? record.weChat : 'testtest'}</span>)
             }, {
                 title: '最后登录',
                 dataIndex: '最后登录',
                 key: '最后登录',
-                width: 220,
+                align: 'center',
+
                 render: (text, record) => (
                     <span>{record.lastLoginTime}</span>),
             }, {
@@ -177,14 +178,12 @@ class InnerUserList extends Component {
                 dataIndex: '访问次数',
                 key: '访问次数',
                 align: 'center',
-                width: 100,
                 render: (text, record) => (
                     <span>{record.totalLoginNum == "null" ? 0 : record.totalLoginNum}</span>),
             }, {
                 title: '状态',
                 dataIndex: '状态',
                 key: '状态',
-                width: 100,
                 align: 'center',
                 render: (text, record) => (
                     <span>{record.blockFlag}</span>
@@ -194,7 +193,6 @@ class InnerUserList extends Component {
                 title: '日志',
                 dataIndex: '日志',
                 align: 'center',
-                width: 120,
                 key: '日志',
                 render: (text, record) => (
                     <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}} className="ant-dropdown-link"
@@ -204,7 +202,7 @@ class InnerUserList extends Component {
                 title: '操作',
                 key: 'action',
                 align: 'center',
-                width: 200,
+
                 render: (text, record) => (
 
                     <div>
