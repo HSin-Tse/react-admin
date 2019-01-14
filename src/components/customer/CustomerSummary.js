@@ -179,7 +179,7 @@ class CustomerSummary extends Component {
                         {/*<Button style={{marginLeft: 15}}>解绑</Button>*/}
 
 
-                        <Button style={{ background:'#FDD000', display: !record.belongUserId ? 'none' : '', marginLeft: 0}}
+                        <Button   size={'small'} style={{ background:'#FDD000', display: !record.belongUserId ? 'none' : '', marginLeft: 0}}
                                 onClick={() => this.requestUnbindAccount(record)}>解绑</Button>
 
 
@@ -194,9 +194,9 @@ class CustomerSummary extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button style={{background:'#FDD000'}}  onClick={() => this.justSeenote(record)}>备注</Button>
-                        <Button style={{background:'#FDD000'}} onClick={() => this.goToUserAccountInfo(record)}>開戶</Button>
-                        <Button style={{background:'#FDD000'}} onClick={() => this.goToUserInfo(record.belongUserId)}>行為</Button>
+                        <Button size={'small'} style={{background:'#FDD000'}}  onClick={() => this.justSeenote(record)}>备注</Button>
+                        <Button size={'small'} style={{background:'#FDD000'}} onClick={() => this.goToUserAccountInfo(record)}>開戶</Button>
+                        <Button size={'small'} style={{background:'#FDD000'}} onClick={() => this.goToUserInfo(record.belongUserId)}>行為</Button>
                     </div>
                 )
             }, {
@@ -210,10 +210,10 @@ class CustomerSummary extends Component {
                         <Popconfirm title={record.accountStatus === 1 ? '确认凍結' : '确认解冻'}
                                     onConfirm={() => this.forzenAccount(record)} okText="Yes"
                                     cancelText="No">
-                            <Button style={{background:'#FDD000'}}>{record.accountStatus === 1 ? '正常（可冻结)' : record.accountStatus === 2 ? '禁止登陆:解冻'
+                            <Button  size={'small'}style={{background:'#FDD000'}}>{record.accountStatus === 1 ? '正常（可冻结)' : record.accountStatus === 2 ? '禁止登陆:解冻'
                                 : record.accountStatus === 3 ? '禁止交易:解冻' : '-'}</Button>
                         </Popconfirm>
-                        <Button style={{background:'#FDD000'}} onClick={() => this.resetSeret(record)}>重置密码</Button>
+                        <Button size={'small'}style={{background:'#FDD000'}} onClick={() => this.resetSeret(record)}>重置密码</Button>
                     </div>
                 ),
             }, {
@@ -224,8 +224,8 @@ class CustomerSummary extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button style={{background:'#FDD000'}} onClick={() => this.showModalNote(record)}>添加备注</Button>
-                        <Button  style={{background:'#FDD000'}} onClick={() => this.showModalOPDAY(record)}>日志</Button>
+                        <Button size={'small'}style={{background:'#FDD000'}} onClick={() => this.showModalNote(record)}>添加备注</Button>
+                        <Button  size={'small'}style={{background:'#FDD000'}} onClick={() => this.showModalOPDAY(record)}>日志</Button>
                     </div>
                 ),
             }];
