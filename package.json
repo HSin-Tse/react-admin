@@ -95,6 +95,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
+    "bb": "yarn build && rm build/static/js/*.map",
     "nmbd": "nodemon scripts/build.js",
     "test": "node scripts/test.js",
     "docu": "open https://note.youdao.com/share/?id=28f19f75d6b6d7ae49c57a60be984f6b&type=note#/",
