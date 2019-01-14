@@ -7,7 +7,7 @@ export default {
             title: 'dev', icon: 'user', component: 'DEVhboard'
         }, {
             tk: 'dash', key: '/app/dashboard/index',
-            title: '歡迎', icon: 'user', component: 'Dashboard'
+            title: '欢迎', icon: 'user', component: 'Dashboard'
         },
         {
             tk: 'SERVICE_GROUP_MGMT', key: '/app/customer', title: '用户管理', icon: 'team',

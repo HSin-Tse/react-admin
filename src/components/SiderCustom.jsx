@@ -330,7 +330,7 @@ class SiderCustom extends Component {
 
         var aaaaa = [...bbRouter.menus]
         var nowRouter = aaaaa.filter((key, index, array) => {
-            if (key.title == '歡迎') {
+            if (key.title == '欢迎') {
                 return true
             }
             if (key.title == 'dev') {

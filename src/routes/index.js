@@ -82,7 +82,7 @@ export default class CRouter extends Component {
 
         var _menu = [...bbRouter.menus]
         var nowRouter = _menu.filter((key, index, array) => {
-            if (key.title == '歡迎') {
+            if (key.title == '欢迎') {
                 return true
             }
             if (key.title == 'dev') {
