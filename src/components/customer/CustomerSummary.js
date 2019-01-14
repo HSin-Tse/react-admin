@@ -203,9 +203,9 @@ class CustomerSummary extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button size={'small'} style={{background:'#FDD000'}}  onClick={() => this.justSeenote(record)}>备注</Button>
+                        <Button disabled={!record.belongUserId}  size={'small'} style={{background:'#FDD000'}}  onClick={() => this.justSeenote(record)}>备注</Button>
                         <Button size={'small'} style={{background:'#FDD000'}} onClick={() => this.goToUserAccountInfo(record)}>開戶</Button>
-                        <Button size={'small'} style={{background:'#FDD000'}} onClick={() => this.goToUserInfo(record.belongUserId)}>行為</Button>
+                        <Button disabled={!record.belongUserId}  size={'small'} style={{background:'#FDD000'}} onClick={() => this.goToUserInfo(record.belongUserId)}>行為</Button>
                     </div>
                 )
             }, {
@@ -219,10 +219,10 @@ class CustomerSummary extends Component {
                         <Popconfirm title={record.accountStatus === 1 ? '确认凍結' : '确认解冻'}
                                     onConfirm={() => this.forzenAccount(record)} okText="Yes"
                                     cancelText="No">
-                            <Button  size={'small'}style={{background: record.accountStatus === 1?'#FDD000':'OrangeRed'}}>{record.accountStatus === 1 ? '正常（可冻结)' : record.accountStatus === 2 ? '禁止登陆:解冻'
+                            <Button  disabled={!record.belongUserId} size={'small'}style={{background: record.accountStatus === 1?'#FDD000':'OrangeRed'}}>{record.accountStatus === 1 ? '正常（可冻结)' : record.accountStatus === 2 ? '禁止登陆:解冻'
                                 : record.accountStatus === 3 ? '禁止交易:解冻' : '-'}</Button>
                         </Popconfirm>
-                        <Button size={'small'}style={{background:'#FDD000'}} onClick={() => this.resetSeret(record)}>重置密码</Button>
+                        <Button disabled={!record.belongUserId}  size={'small'}style={{background:'#FDD000'}} onClick={() => this.resetSeret(record)}>重置密码</Button>
                     </div>
                 ),
             }, {
@@ -233,8 +233,8 @@ class CustomerSummary extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button size={'small'}style={{background:'#FDD000'}} onClick={() => this.showModalNote(record)}>添加备注</Button>
-                        <Button  size={'small'}style={{background:'#FDD000'}} onClick={() => this.showModalOPDAY(record)}>日志</Button>
+                        <Button disabled={!record.belongUserId} size={'small'}style={{background:'#FDD000'}} onClick={() => this.showModalNote(record)}>添加备注</Button>
+                        <Button disabled={!record.belongUserId} size={'small'}style={{background:'#FDD000'}} onClick={() => this.showModalOPDAY(record)}>日志</Button>
                     </div>
                 ),
             }];

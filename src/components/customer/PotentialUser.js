@@ -455,6 +455,9 @@ export default class PotentialUser extends Component {
 
     seeUSer = (record) => {
 
+        console.log('hcia record' , record)
+        console.log('hcia record' , record)
+
 
         this.props.history.push('/app/pass/passopen/user' + record.leadId)
     }
