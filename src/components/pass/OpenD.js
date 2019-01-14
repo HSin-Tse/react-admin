@@ -1222,13 +1222,30 @@ class PassOpenD extends Component {
         ;
     }
     saveReject = () => {
+
+        
+        
+        console.log('hcia me.state.changeNoteV' , this.state.changeNoteV)
+
+
+        if(!this.state.changeNoteV){
+            message.error('备注必填')
+
+            return
+
+        }
+
         this.setState({
             iconcanLoading: true,
         });
         var me = this;
 
 
+        
+        console.log('hcia this.state.mIsNeedAddBlack' , this.state.mIsNeedAddBlack)
         if (this.state.mIsNeedAddBlack) {
+            
+            
             this.addBlackRequest()
         }
 
@@ -1671,6 +1688,8 @@ class PassOpenD extends Component {
     }
 
     addBlackRequest() {
+
+        console.log('hcia addBlackRequest' )
         let me = this
         if (!me.state.changeNoteV) {
             message.error('備註必填')
@@ -1682,7 +1701,7 @@ class PassOpenD extends Component {
             'listType': 2,//1:合规 2:开户 3:交易
         }).then(function (response) {
             if (response.data.code === 1) {
-                message.success('added  open  black ')
+                message.success('加入开户黑名单成功')
             }
         });
     }
