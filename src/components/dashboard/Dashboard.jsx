@@ -6,7 +6,6 @@ import {Row, Col, Card, Button, Icon, Input, message} from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
 import EchartsViews from './EchartsViews';
 import EchartsProjects from './EchartsProjects';
-import b1 from '../../style/imgs/b1.jpg';
 import {bindActionCreators} from "redux";
 import {addTodo, setINFOR} from "../../action";
 import connect from "react-redux/es/connect/connect";

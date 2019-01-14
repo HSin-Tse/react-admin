@@ -4,7 +4,6 @@ import React, {Component} from 'react';
 import {Col, Card, Row, DatePicker, Input, Modal, Button, Table, Icon, Checkbox} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {parse} from 'querystring';
-import avater from "../../style/imgs/b1.jpg";
 const {Meta} = Card;
 
 class CustomerUserInfo extends Component {

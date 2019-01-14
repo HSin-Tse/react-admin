@@ -6,7 +6,7 @@ import {Menu, Icon, Layout, Badge, Popover} from 'antd';
 import screenfull from 'screenfull';
 import {gitOauthToken, gitOauthInfo} from '../axios';
 import {queryString} from '../utils';
-import avater from '../style/imgs/b1.jpg';
+import avater from '../style/imgs/b1.png';
 import SiderCustom from './SiderCustom';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
@@ -114,10 +114,13 @@ class HeaderCustom extends Component {
                     {/*</Badge>*/}
                     {/*</Menu.Item>*/}
                     <SubMenu title={
+
+
                         <span className="avatar">
                         <img src={avater} alt="头像"/>
 
-                        <i className="on bottom b-white"/></span>}>
+                        <i className="on bottom b-white"/>
+                        </span>}>
 
                         <MenuItemGroup title="用户中心">
                             <Menu.Item key="logout"><span onClick={this.logout}>退出登录</span></Menu.Item>
