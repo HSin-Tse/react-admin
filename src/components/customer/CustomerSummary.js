@@ -162,7 +162,7 @@ class CustomerSummary extends Component {
                 render: (text, record) => (
                     <span>{record.accountNo}</span>),
             }, {
-                width: 150,
+                width: 100,
                 align: 'center',
                 title: '最近登录时间',
                 dataIndex: '最近登录时间',
@@ -174,16 +174,16 @@ class CustomerSummary extends Component {
                 key: '激活绑定',
                 align: 'center',
                 render: (text, record) => (
-                    <div>
-                        <span>{!record.belongUserId ? '-' : record.mobile}</span>
+                    <div  style={{ align: 'center', display: record.belongUserId?'flex':'', justifyContent:   record.belongUserId?'space-between':''}}>
+                        <span  style={{ display: record.belongUserId ? '' : 'none',    marginLeft: 10}}>{!record.belongUserId ? '' : record.mobile}</span>
                         {/*<Button style={{marginLeft: 15}}>解绑</Button>*/}
 
 
-                        <Button style={{display: !record.belongUserId ? 'none' : '', marginLeft: 5}}
+                        <Button style={{display: !record.belongUserId ? 'none' : '', marginLeft: 0}}
                                 onClick={() => this.requestUnbindAccount(record)}>解绑</Button>
 
 
-                        <span style={{display: record.belongUserId ? 'none' : '', marginLeft: 5}}>未激活</span>
+                        <span style={{ display: record.belongUserId ? 'none' : '', marginLeft: 0,alignSelf:'center'}}>未激活</span>
                     </div>
                 ),
             },
@@ -488,8 +488,6 @@ class CustomerSummary extends Component {
                         dataSource={this.state.operationDiaryHistory}
                     />
                 </Modal>
-
-
 
 
                 <Modal

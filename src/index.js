@@ -90,10 +90,41 @@ window.Axios.interceptors.request.use(
 
 window.Axios.interceptors.response.use(function (response) {
 
+    // localStorage.removeItem('infor');
+    // localStorage.removeItem('user');
+    // localStorage.removeItem('too');
+    // localStorage.removeItem('displayName');
+
+    
+    console.log('hcia location.host' , window.location.host)
+    // window.location ='http://'+ window.location.host+"/#/login";
+
+
+    // this.props.history.push('/login')
+
     if (response.data.code != 1) {
         setTimeout(hideLoading, 0)
 
         message.error(response.data.msg)
+
+
+        //
+
+        if(response.data.msg == '无效的token'){
+            
+            
+            console.log('hcia response.data.msg' , response.data.msg)
+            // window.location ='http://'+ window.location.host+"/#/login";
+            // localStorage.removeItem('infor');
+            // localStorage.removeItem('user');
+            // localStorage.removeItem('too');
+            // localStorage.removeItem('displayName');
+
+
+
+            // this.props.history.push('/login')
+        }
+
         return Promise.reject(response)
     }
     setTimeout(hideLoading, 0)
