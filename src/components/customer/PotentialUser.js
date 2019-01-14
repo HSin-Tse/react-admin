@@ -805,7 +805,7 @@ export default class PotentialUser extends Component {
                         })
                     }}
                     type="card">
-                    <TabPane tab="潛在用戶" key="1">
+                    <TabPane tab="潜在用戶" key="1">
                         <Card bodyStyle={{padding: 0, margin: 0}}
                               title={'潜在用户信息表'}>
                             <Table rowKey="id"
@@ -825,7 +825,7 @@ export default class PotentialUser extends Component {
 
                     </TabPane>
 
-                    <TabPane tab="模擬用戶" key="2">
+                    <TabPane tab="模拟用戶" key="2">
                         <Card bodyStyle={{padding: 0, margin: 0}} title={'模拟用户信息表'}>
 
                             <Table rowKey="id"
