@@ -84,10 +84,11 @@ class Basic extends Component {
     pad = (str) => {
         return +str >= 10 ? str : '0' + str
     };
+
     componentDidMount() {
 
 
-        this.columnsLog =[
+        this.columnsLog = [
             {
                 title: '时间',
                 dataIndex: 'createDate',
@@ -96,7 +97,6 @@ class Basic extends Component {
                     <span>{
                         this.timestampToTime(record.createDate)
                     }</span>),
-
 
 
             }, {
@@ -252,12 +252,15 @@ class Basic extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.showOPDAyModal2(record)}>日志</Button>
+                        <Button size={'small'} style={{background: '#FDD000'}}
+                                onClick={() => this.showOPDAyModal2(record)}>日志</Button>
 
                         <Button
+                            size={'small'} style={{background: '#FDD000'}}
                             onClick={() => this.handleEdit(record)}>{record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'}
                         </Button>
-                        <Button onClick={() => this.handleAmStok(record)}>{record.displayStatus}</Button>
+                        <Button size={'small'} style={{background: '#FDD000'}}
+                                onClick={() => this.handleAmStok(record)}>{record.displayStatus}</Button>
                     </div>
                 ),
             }];
@@ -294,9 +297,6 @@ class Basic extends Component {
             this.props.history.push('/app/pass/passopen/detail' + record.id)
             return
         }
-
-
-
 
 
         var gogo = record.status === 0 ? 'detail' : (record.status === 1) ? 'user' : 'user'
@@ -391,7 +391,7 @@ class Basic extends Component {
 
     render() {
 
-      var  self = this
+        var self = this
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
@@ -530,9 +530,6 @@ class Basic extends Component {
                                     } else {
                                         var selectTimeStart = value[0].unix() + '000'
                                         var selectTimeEnd = value[1].unix() + '000'
-
-                                        console.log('hcia selectTimeStart', selectTimeStart)
-                                        console.log('hcia selectTimeEnd', selectTimeEnd)
 
 
                                         this.setState({
