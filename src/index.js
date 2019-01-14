@@ -115,10 +115,10 @@ window.Axios.interceptors.response.use(function (response) {
             
             console.log('hcia response.data.msg' , response.data.msg)
             // window.location ='http://'+ window.location.host+"/#/login";
-            // localStorage.removeItem('infor');
-            // localStorage.removeItem('user');
-            // localStorage.removeItem('too');
-            // localStorage.removeItem('displayName');
+            localStorage.removeItem('infor');
+            localStorage.removeItem('user');
+            localStorage.removeItem('too');
+            localStorage.removeItem('displayName');
 
 
 
