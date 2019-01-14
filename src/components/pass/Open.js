@@ -259,7 +259,7 @@ class Basic extends Component {
                         }}
                             onClick={() => this.handleEdit(record)}>{!this.state.availableFlag ? '查看' : record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'}
                         </Button>
-                        <Button disabled={!this.state.availableFlag} size={'small'}
+                        <Button disabled={!this.state.availableFlag  || record.displayStatus == '已授权'} size={'small'}
                                 style={{minWidth: 80, background: record.displayStatus == '已授权' ? '' : '#FDD000'}}
                                 onClick={() => this.handleAmStok(record)}>{record.displayStatus}</Button>
                     </div>
