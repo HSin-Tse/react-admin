@@ -496,6 +496,7 @@ export default class BlackList extends Component {
 
                             >
                                 <Table rowKey="id"
+                                       bordered
                                        columns={this.columns}
                                        dataSource={this.state.bklistB}
                                        loading={this.state.loadingB}
@@ -515,6 +516,7 @@ export default class BlackList extends Component {
 
                             >
                                 <Table rowKey="id"
+                                       bordered
                                        columns={this.columns}
                                        dataSource={this.state.bklistC}
                                        loading={this.state.loadingC}

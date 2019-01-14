@@ -807,7 +807,7 @@ class Basic extends Component {
                       bodyStyle={{padding: 0, margin: 0}}
                       extra={
                           <Button type="default" disabled={!hasSelected}
-                                  onClick={() => this.refleshNowpage()}>刷新当前页面
+                                  onClick={() => this.refleshNowpage()}>刷新
                           </Button>
                       }>
 
