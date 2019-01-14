@@ -85,7 +85,6 @@ class InnerUserList extends Component {
         this.columns = [
             {
                 title: '编号',
-                width: 70,
                 align: 'center',
                 dataIndex: '编号',
                 key: '编号',
@@ -94,7 +93,6 @@ class InnerUserList extends Component {
             },
             {
                 title: '真实姓名',
-                width: 100,
                 align: 'center',
                 dataIndex: '真实姓名',
                 key: '真实姓名',
@@ -103,7 +101,6 @@ class InnerUserList extends Component {
             },
             {
                 title: '登录名',
-                width: 100,
                 align: 'center',
                 dataIndex: '登录名',
                 key: '登录名',
@@ -112,7 +109,6 @@ class InnerUserList extends Component {
             },
             {
                 title: '角色',
-                width: 100,
                 dataIndex: '角色',
                 align: 'center',
                 key: '角色',
@@ -136,7 +132,6 @@ class InnerUserList extends Component {
             },
             {
                 title: '邮箱',
-                width: 200,
                 align: 'center',
 
                 dataIndex: '邮箱',
@@ -144,7 +139,6 @@ class InnerUserList extends Component {
                 render: (text, record) => (<span>{record.email}</span>),
             }, {
                 title: '性别',
-                width: 70,
 
                 align: 'center',
                 dataIndex: '性别',
