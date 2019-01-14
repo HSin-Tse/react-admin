@@ -815,7 +815,7 @@ class Basic extends Component {
                            rowSelection={rowSelection}
                            columns={this.columns}
                            dataSource={this.state.userList}
-                           scroll={{x: 2000}}
+                           scroll={{x: 1600}}
                            bordered
                            loading={this.state.loading}
                            pagination={{  // 分页
