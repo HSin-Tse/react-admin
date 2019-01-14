@@ -253,7 +253,7 @@ class Basic extends Component {
                         <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
                                 onClick={() => this.showOPDAyModal2(record)}>日志</Button>
                         <Button
-                            size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                            size={'small'} style={{minWidth: 80, background: !this.state.availableFlag?'':record.status ==   0?'#FDD000':''}}
                             onClick={() => this.handleEdit(record)}>{!this.state.availableFlag ? '查看' : record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'}
                         </Button>
                         <Button disabled={!this.state.availableFlag} size={'small'}
