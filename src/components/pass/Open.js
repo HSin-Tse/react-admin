@@ -281,7 +281,11 @@ class Basic extends Component {
             });
         });
     }
-
+    _switcherOn = () => {
+        this.setState({
+            switcherOn: !this.state.switcherOn
+        })
+    };
     showOPDAyModal2 = (recodrd) => {
         this.requestUserCommentList(recodrd)
         this.setState({
@@ -409,7 +413,7 @@ class Basic extends Component {
                 <h2 style={{marginTop: 15}}>
                     {/*开户审核{this.state.availableFlag}*/}
                     开户审核
-                    {this.state.availableFlag ? 'W' : 'R'}
+                    {/*{this.state.availableFlag ? 'W' : 'R'}*/}
                 </h2>
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
                 <Card bodyStyle={{padding: 0, margin: 0}}
