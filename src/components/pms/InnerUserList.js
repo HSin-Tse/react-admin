@@ -37,7 +37,7 @@ class InnerUserList extends Component {
             blockFlag: '',
             forbiddenValue: 0,
             current: 0,
-            pgsize: 10,
+            pgsize: 20,
             loadFor: false,
             suspend_reason_type: []
         };
