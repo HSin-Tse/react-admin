@@ -70,6 +70,15 @@ class HeaderCustom extends Component {
 
 
         this.props.history.push('/login')
+
+
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': 'Logout',
+            'pageLog': 'Logout',
+            'commentLog': '登出',
+            'typeLog': "1",
+        }).then(function (response) {
+        })
     };
     popoverHide = () => {
         this.setState({
