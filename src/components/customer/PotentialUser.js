@@ -27,7 +27,7 @@ export default class PotentialUser extends Component {
             totalpageC: 0,
             totalpageComments: 0,
             nowKey: '1',
-            pgsize: 10,
+            pgsize: 20,
             loadingA: false,
             loadingB: false,
             loadingC: false,

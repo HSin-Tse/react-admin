@@ -32,7 +32,7 @@ class Basic extends Component {
                 ben: false
             }
             , totalPage: 1
-            , pgsize: 10
+            , pgsize: 20
 
         };
         // console.log('hcia  this.props', this.props)

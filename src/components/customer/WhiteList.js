@@ -23,7 +23,7 @@ export default class WhiteList extends Component {
             totalpageA: 0,
             opDayRecord: {},
             currentComment: 0,
-            pgsize: 10,
+            pgsize: 20,
             loadingA: false,
             modal3OPDAYVisible: false,
             modal2OPDAYVisible: false,

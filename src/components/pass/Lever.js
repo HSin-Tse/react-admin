@@ -19,7 +19,7 @@ class Basic extends Component {
         this.state = {
             count: 0,
             current: 0,
-            pgsize: 10,
+            pgsize: 20,
             modal2OPDAYVisible: false,
             visibleA: false,
             visibleB: false,

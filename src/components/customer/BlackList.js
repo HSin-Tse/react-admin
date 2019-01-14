@@ -38,7 +38,7 @@ export default class BlackList extends Component {
             totalpageB: 0,
             totalpageC: 0,
             nowKey: "1",
-            pgsize: 10,
+            pgsize: 20,
             loadingA: false,
             showModaladdblack: false,
             modal2OPDAYVisible: false,
