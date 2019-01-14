@@ -6,7 +6,7 @@ import {Menu, Icon, Layout, Badge, Popover} from 'antd';
 import screenfull from 'screenfull';
 import {gitOauthToken, gitOauthInfo} from '../axios';
 import {queryString} from '../utils';
-import avater from '../style/imgs/b1.png';
+import avater from '../style/imgs/icon_admin_1.png';
 import SiderCustom from './SiderCustom';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
@@ -119,7 +119,7 @@ class HeaderCustom extends Component {
                         <span className="avatar">
                         <img src={avater} alt="头像"/>
 
-                        <i className="on bottom b-white"/>
+                        {/*<i className="on bottom b-white"> {this.state.displayName} </i>*/}
                         </span>}>
 
                         <MenuItemGroup title="用户中心">
