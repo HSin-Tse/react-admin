@@ -207,13 +207,8 @@ class SiderCustom extends Component {
         // localStorage.setItem('displayName', response.data.data.displayName);
         // localStorage.setItem('loginName', response.data.data.loginName);
         // localStorage.setItem('too', response.data.data.token);
-        localStorage.removeItem('infor');
-        localStorage.removeItem('user');
-        localStorage.removeItem('too');
-        localStorage.removeItem('displayName');
 
-        this.props.history.push('/login')
-
+        var self = this
 
         window.Axios.post('back/addLogHistory', {
             'moduleLog': 'logout',
@@ -221,9 +216,30 @@ class SiderCustom extends Component {
             'commentLog': 'logout',
             'typeLog': 1,
         }).then(function (response) {
+            localStorage.removeItem('infor');
+            localStorage.removeItem('user');
+            localStorage.removeItem('too');
+            localStorage.removeItem('displayName');
+
+            self.props.history.push('/login')
 
 
-        });
+        }).catch(error => {
+            localStorage.removeItem('infor');
+            localStorage.removeItem('user');
+            localStorage.removeItem('too');
+            localStorage.removeItem('displayName');
+
+            self.props.history.push('/login')
+
+            console.log('Error', error);
+        })
+
+
+
+
+
+
 
     };
     componentWillUnmount() {
