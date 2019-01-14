@@ -179,11 +179,11 @@ class Basic extends Component {
                 render: (text, record) => (
                     <div>
                         <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record)}>日志</Button>
-                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => {
+                        <Button size={'small'} style={{marginLeft: 12,minWidth: 80, background: '#FDD000'}} onClick={() => {
 
                             this.props.history.push('/app/fina/editcha' + record.id)
 
-                        }} style={{marginLeft: 12}}>渠道设置</Button>
+                        }} >渠道设置</Button>
                     </div>
                 ),
             }];

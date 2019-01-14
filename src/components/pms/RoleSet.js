@@ -108,6 +108,7 @@ class Basic extends Component {
                 render: (text, record) => (
                     <Button
                         // style={{ width: 200}}
+                        size={'small'} style={{minWidth: 80, background: '#FDD000'}}
                         className="ant-dropdown-link"
                         onClick={() => this.seeDetail(record)}>详情</Button>)
             }, {
@@ -119,14 +120,14 @@ class Basic extends Component {
                     <div
                         // style={{ width: 240}}
                     >
-                        <Button className="ant-dropdown-link"
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}} className="ant-dropdown-link"
                                 onClick={() => this.addRole(record)}>编辑</Button>
 
 
                         <Popconfirm title="删除"
                                     onConfirm={() => this.deleteRole(record)} okText="Yes"
                                     cancelText="No">
-                            <Button className="ant-dropdown-link"
+                            <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}}className="ant-dropdown-link"
                             >删除</Button>
                         </Popconfirm>
                     </div>
