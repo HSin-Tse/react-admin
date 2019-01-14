@@ -173,7 +173,7 @@ export default class BlackList extends Component {
                 key: '查看',
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.showOPDAyModal3(record)}>备注</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal3(record)}>备注</Button>
                     </div>
                 ),
             }, {
@@ -183,11 +183,11 @@ export default class BlackList extends Component {
                 key: 'action',
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.showOPDAyModal2(record)}>日志</Button>
+                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record)}>日志</Button>
 
                         <Popconfirm title="移除?" onConfirm={() => this.handleremove(record)} okText="Yes"
                                     cancelText="No">
-                            <Button>移除</Button>
+                            <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}}>移除</Button>
                         </Popconfirm>
                     </div>
                 ),
@@ -550,6 +550,9 @@ export default class BlackList extends Component {
                                 }}>添加黑名单</Button>}
                             >
                                 <Table rowKey="id"
+
+                                       bordered
+
                                        columns={this.columns}
                                        dataSource={this.state.bklistB}
                                        scroll={{x: 1300}}
@@ -574,6 +577,8 @@ export default class BlackList extends Component {
                                 }}>添加黑名单</Button>}
                             >
                                 <Table rowKey="id"
+                                       bordered
+
                                        columns={this.columns}
                                        dataSource={this.state.bklistC}
                                        scroll={{x: 1300}}

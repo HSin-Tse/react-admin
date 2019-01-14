@@ -184,7 +184,7 @@ class InnerUserList extends Component {
                 width: 120,
                 key: '日志',
                 render: (text, record) => (
-                    <Button className="ant-dropdown-link"
+                    <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}} className="ant-dropdown-link"
                             onClick={() => this.seeDetail(record)}>查看</Button>)
             }, {
 
@@ -196,10 +196,10 @@ class InnerUserList extends Component {
 
                     <div>
 
-                        <Button className="ant-dropdown-link" onClick={() => this.newUSer(record)}>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}} className="ant-dropdown-link" onClick={() => this.newUSer(record)}>
                             编辑</Button>
 
-                        <Button onClick={() => this.handleFreeze(record)} className="ant-dropdown-link">冻结</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.handleFreeze(record)} className="ant-dropdown-link">冻结</Button>
 
                     </div>
                 ),

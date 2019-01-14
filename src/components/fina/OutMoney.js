@@ -180,6 +180,7 @@ class Basic extends Component {
                 title: '申请时间',
                 dataIndex: '申请时间',
                 key: '申请时间',
+                width:100,
                 render: (text, record) => (
                     <span>{record.date}</span>),
             }, {
@@ -210,7 +211,7 @@ class Basic extends Component {
                 dataIndex: '经纪商',
                 key: '经纪商',
                 render: (text, record) => (
-                    <span>{record.lastUpdateDate}</span>),
+                    <span>{record.netEquity}</span>),
             }, {
                 align: 'center',
                 title: '执行金额',
@@ -275,12 +276,12 @@ class Basic extends Component {
                 key: '操作',
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => {
+                        <Button size={'small'} style={{minWidth: 70, background: '#FDD000'}} onClick={() => {
                             this.props.history.push('/app/fina/juoutm1')
 
 
                         }}>审核</Button>
-                        <Button onClick={() => this.showOPDAyModal2(record)}>已成功</Button>
+                        <Button size={'small'} style={{minWidth: 70, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record)}>已成功</Button>
 
                     </div>
                 ),
@@ -290,7 +291,7 @@ class Basic extends Component {
                 key: '异常备注',
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.showOPDAyModal2(record)}>添加</Button>
+                        <Button size={'small'} style={{minWidth: 70, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record)}>添加</Button>
 
                     </div>
                 ),
@@ -677,7 +678,7 @@ class Basic extends Component {
 
                            columns={this.columns}
                            dataSource={this.state.userList}
-                           scroll={{x: 2000}}
+                           scroll={{x: 1600}}
                            bordered
                            loading={this.state.loading}
                            pagination={{  // 分页

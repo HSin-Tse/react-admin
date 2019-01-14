@@ -250,15 +250,14 @@ class Basic extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div style={{}}>
-                        <Button size={'small'} style={{minWidth:80, background: '#FDD000'}}
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
                                 onClick={() => this.showOPDAyModal2(record)}>日志</Button>
-
                         <Button
-
-                            size={'small'} style={{minWidth:80,background: '#FDD000'}}
-                            onClick={() => this.handleEdit(record)}>{ !this.state.availableFlag?'查看':   record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'}
+                            size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                            onClick={() => this.handleEdit(record)}>{!this.state.availableFlag ? '查看' : record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'}
                         </Button>
-                        <Button  disabled={!this.state.availableFlag} size={'small'} style={{minWidth:80,background: '#FDD000'}}
+                        <Button disabled={!this.state.availableFlag} size={'small'}
+                                style={{minWidth: 80, background: '#FDD000'}}
                                 onClick={() => this.handleAmStok(record)}>{record.displayStatus}</Button>
                     </div>
                 ),
@@ -410,7 +409,7 @@ class Basic extends Component {
                 <h2 style={{marginTop: 15}}>
                     {/*开户审核{this.state.availableFlag}*/}
                     开户审核
-                    {this.state.availableFlag?'W':'R'}
+                    {this.state.availableFlag ? 'W' : 'R'}
                 </h2>
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
                 <Card bodyStyle={{padding: 0, margin: 0}}

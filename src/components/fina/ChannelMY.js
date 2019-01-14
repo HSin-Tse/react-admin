@@ -168,7 +168,7 @@ class Basic extends Component {
                 key: '查看',
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.showOPDAyModal3(record)}>备注</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal3(record)}>备注</Button>
                     </div>
                 ),
             }, {
@@ -178,8 +178,8 @@ class Basic extends Component {
                 key: '操作',
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.showOPDAyModal2(record)}>日志</Button>
-                        <Button onClick={() => {
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record)}>日志</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => {
 
                             this.props.history.push('/app/fina/editcha' + record.id)
 

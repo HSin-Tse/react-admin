@@ -30,7 +30,6 @@ class Basic extends Component {
                 "date": "",
                 "comment": null,
                 "status": 0,
-
                 "currentLeverage": "1 : 100",
                 "targetLeverage": "1 : 200",
                 "operator": null,
@@ -328,7 +327,7 @@ class Basic extends Component {
                 dataIndex: '审核日志',
                 key: '审核日志',
                 render: (text, record) => (
-                    <Button onClick={() => this.showModalB(record)}>详情</Button>
+                    <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}onClick={() => this.showModalB(record)}>详情</Button>
                 )
 
             }];
@@ -718,7 +717,7 @@ class Basic extends Component {
 
                            columns={this.columns}
                            dataSource={this.state.userList}
-                           scroll={{x: 2300}}
+                           scroll={{x: 1600}}
                            bordered
                            loading={this.state.loading}
                            pagination={{  // 分页

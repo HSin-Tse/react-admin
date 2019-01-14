@@ -138,7 +138,7 @@ export default class WhiteList extends Component {
                 key: '查看',
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.showOPDAyModal3(record)}>备注</Button>
+                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal3(record)}>备注</Button>
 
                     </div>
                 ),
@@ -149,14 +149,14 @@ export default class WhiteList extends Component {
                 render: (text, record) => (
                     <div>
                         {/*<Button>添加备注</Button>*/}
-                        <Button onClick={() => this.showModalNote(record)}>添加备注</Button>
+                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showModalNote(record)}>添加备注</Button>
 
                         <Popconfirm title="移除?"
                                     onConfirm={() => this.handleremove(record)} okText="Yes"
                                     cancelText="No">
-                            <Button>移除</Button>
+                            <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}}>移除</Button>
                         </Popconfirm>
-                        <Button onClick={() => this.showOPDAyModal2(record)}>日志</Button>
+                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record)}>日志</Button>
 
                         {/*<Button onClick={() => this.handleremove(record)}>操作日志</Button>*/}
                     </div>

@@ -205,7 +205,7 @@ class Basic extends Component {
                 key: 'action',
                 render: (text, record) => (
                     <div>
-                        <Button onClick={() => this.showOPDAyModal2(record)}>查看详情</Button>
+                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record)}>查看详情</Button>
                     </div>
                 ),
             }];
@@ -403,7 +403,7 @@ class Basic extends Component {
 
                            columns={this.columns}
                            dataSource={this.state.userList}
-                           scroll={{x: 2000}}
+                           scroll={{x: 1600}}
                            bordered
                            loading={this.state.loading}
                            pagination={{  // 分页

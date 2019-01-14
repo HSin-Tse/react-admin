@@ -231,7 +231,7 @@ class Basic extends Component {
                 key: '当前杠杆',
                 render: (text, record) => (
 
-                    <Button style={{display: record.displayStatus == '审核通过' ? 'none' : ''}}
+                    <Button  size={'small'}  style={{minWidth: 80, background: '#FDD000',display: record.displayStatus == '审核通过' ? 'none' : ''}}
                             onClick={() => this.showModalChangeLeavge(record)}>{record.displayLeverage}</Button>
                 )
 
@@ -241,7 +241,9 @@ class Basic extends Component {
                 key: 'action',
                 render: (text, record) => (
                     <div>
-                        <Select value={record.displayStatus} style={{width: 100}}
+                        <Select
+                            size={'small'}
+                            value={record.displayStatus} style={{width: 100}}
                                 onChange={(value) => this.handleChange(value, record)}
                         >
                             <Option key="1" value="正常">正常</Option>
@@ -253,9 +255,9 @@ class Basic extends Component {
                         {/*onClick={() => this.seeDetail(record)}>备注</Button>*/}
 
 
-                        <Button style={{marginLeft: 12}} onClick={() => this.showOPDAyModal3(record)}>备注</Button>
+                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000',marginLeft: 10}}  onClick={() => this.showOPDAyModal3(record)}>备注</Button>
 
-                        <Button onClick={() => this.showOPDAyModal2(record)}>日志</Button>
+                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record)}>日志</Button>
 
                     </div>
                 ),
