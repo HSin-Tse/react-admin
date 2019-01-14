@@ -120,14 +120,15 @@ export default class CRouter extends Component {
 
     requireLogin = (component) => {
 
-        console.log('hcia component ！！！', component)
 
         if (!localStorage.getItem('too')) { // 线上环境判断是否登录
+            console.log('hcia component ！！！', component)
 
             // console.log('hcia requireLogin localStorage.getItem too', localStorage.getItem('too'))
             return <Redirect to={'/login'}/>;
         } else {
             // console.log('hcia requireLogin component', component)
+            console.log('hcia component ！！！', component)
 
             return component
         }

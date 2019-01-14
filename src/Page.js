@@ -3,9 +3,15 @@ import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import NotFound from './components/pages/NotFound';
 import Login from './components/pages/Login';
 import App from './App';
+import createBrowserHistory from 'history/createBrowserHistory'
+const history = createBrowserHistory()
+
+history.listen((location, action) => {
+    console.log('hcia',action, location)  //  <=== Never happens
+})
 
 export default () => (
-    <Router>
+    <Router history={history}>
         <Switch>
             <Route exact path="/" render={() => <Redirect to="/app/dashboard/index" push />} />        
             <Route path="/app" component={App} />

@@ -266,11 +266,11 @@ class SiderCustom extends Component {
         // console.log('hcia window.location' , window.location.host)
         // console.log('hcia  this.props' ,  this.props)
         
-        console.log('hcia window.location.host' , window.location.host)
+        // console.log('hcia window.location.host' , window.location.host)
 
 
       var isme = window.location.host =='127.0.0.1:3006'
-        console.log('hcia isme' , isme)
+        // console.log('hcia isme' , isme)
         if(isme){
 
 

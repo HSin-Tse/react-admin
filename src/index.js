@@ -113,7 +113,7 @@ window.Axios.interceptors.response.use(function (response) {
         if(response.data.msg == '无效的token'){
             
             
-            console.log('hcia response.data.msg' , response.data.msg)
+            // console.log('hcia response.data.msg' , response.data.msg)
             // window.location ='http://'+ window.location.host+"/#/login";
             localStorage.removeItem('infor');
             localStorage.removeItem('user');

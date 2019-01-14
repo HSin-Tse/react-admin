@@ -191,11 +191,17 @@ class EditRole extends Component {
             message.error('权限沒有配置')
             return
         }
+        console.log('hcia AAA')
+        
+        console.log('hcia this.state.realp' , this.state.realp)
 
-        if (!this.state.realp) {
-            message.error('請輸入你的密碼')
+        
+        console.log('hcia this.state.realp.length' , this.state.realp.length)
+        if (this.state.realp.length<6) {
+            message.error('請輸入你的密碼六位以上')
             return
         }
+        console.log('hcia BBB')
 
         var self = this
         window.Axios.post('back/saveOrUpdateRole', {
@@ -431,22 +437,28 @@ class EditRole extends Component {
                     <Row gutter={8}>
                         <Col md={24}>
 
-                            <div style={{fontWeight: 'bold', fontSize: 16, display: 'flex', minHeight: 50}}>
+                            <div style={{
+                                fontWeight: 'bold',
+                                fontSize: 16,
+                                display: 'flex',
+                                minHeight: 50
+                            }}>
                                 <span style={{width: 200}}>請輸入你的密碼:</span>
-
-
-                                {getFieldDecorator('confirm', {
+                                {getFieldDecorator('password', {
                                     rules: [{
                                         required: true, message: 'Please input your password!',
                                     }, {
-                                        validator: this.compareToFirstPassword,
+                                        validator: this.validateToNextPassword,
                                     }],
                                 })(
-                                    <Input style={{width: 800}} addonAfter={<Icon type="star" theme="twoTone"/>}
-                                           onChange={this.changeScret} placeholder="請輸入你的密碼加以驗證:" type="password"/>
+                                    <Input style={{width: 800}}
+                                           addonAfter={<Icon style={{color: 'red'}} type="star"/>}
+                                           onChange={(e) => {
+                                               this.setState({
+                                                   realp: e.target.value,
+                                               });
+                                           }} placeholder="請輸入你的密碼加以驗證:" type="password"/>
                                 )}
-
-
                             </div>
 
 
