@@ -97,8 +97,6 @@ class Basic extends Component {
                     <span>{
                         this.timestampToTime(record.createDate)
                     }</span>),
-
-
             }, {
                 title: 'IP',
                 dataIndex: 'IP',
@@ -257,9 +255,9 @@ class Basic extends Component {
 
                         <Button
                             size={'small'} style={{background: '#FDD000'}}
-                            onClick={() => this.handleEdit(record)}>{record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'}
+                            onClick={() => this.handleEdit(record)}>{ !this.state.availableFlag?'查看':   record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'}
                         </Button>
-                        <Button size={'small'} style={{background: '#FDD000'}}
+                        <Button  disabled={!this.state.availableFlag} size={'small'} style={{background: '#FDD000'}}
                                 onClick={() => this.handleAmStok(record)}>{record.displayStatus}</Button>
                     </div>
                 ),
@@ -293,10 +291,19 @@ class Basic extends Component {
 
     handleEdit = (record) => {
 
-        if (this.state.availableFlag) {
-            this.props.history.push('/app/pass/passopen/detail' + record.id)
+        if (!this.state.availableFlag) {
+            this.props.history.push('/app/pass/passopen/user' + record.id)
             return
         }
+
+
+        // if (this.state.availableFlag) {
+        //     this.props.history.push('/app/pass/passopen/detail' + record.id)
+        //     return
+        // }
+
+
+        // !this.state.availableFlag?'查看'
 
 
         var gogo = record.status === 0 ? 'detail' : (record.status === 1) ? 'user' : 'user'
@@ -402,7 +409,7 @@ class Basic extends Component {
                 <h2 style={{marginTop: 15}}>
                     {/*开户审核{this.state.availableFlag}*/}
                     开户审核
-                    {/*{this.state.availableFlag?'W':'R'}*/}
+                    {this.state.availableFlag?'W':'R'}
                 </h2>
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
                 <Card bodyStyle={{padding: 0, margin: 0}}
@@ -445,6 +452,7 @@ class Basic extends Component {
                         <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
 
                             <Checkbox
+
                                 checked={this.state.mStockRecordBEn}
 
                                 onChange={(e) => {
