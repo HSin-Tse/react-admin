@@ -282,7 +282,6 @@ class Basic extends Component {
         ))
 
 
-
         return (
 
             <div>
@@ -296,20 +295,6 @@ class Basic extends Component {
                 <div>mExpectTime :{JSON.stringify(this.state.mExpectTime)}</div>
                 <div>mExecTxnAmt :{JSON.stringify(this.state.mExecTxnAmt)}</div>
                 <div>mRate :{JSON.stringify(this.state.mRate)}</div>
-
-                {/*<DatePicker onChange={(date, dateString) => {*/}
-
-                {/*var date = new Date(dateString + ' 00:00:00:000');*/}
-                {/*var time1 = date.getTime();*/}
-
-                {/*console.log('hcia time1', time1)*/}
-                {/*console.log('hcia date', date)*/}
-
-                {/*console.log('hcia ', date, dateString);*/}
-                {/*}}/>*/}
-                {/*<DatePicker value={moment(this.state.mExpectDate, dateFormat)}*/}
-                {/*onChange={this.onChangeBirth}*/}
-                {/*format={dateFormat}/>*/}
 
 
                 <h2 style={{marginTop: 15}}>新增电汇入金</h2>
@@ -367,7 +352,7 @@ class Basic extends Component {
 
                             style={{margin: '12px', background: '#F6D147', height: 40, width: 180}} block>创建 </Button>,
                             <Button
-                                onClick={()=>{
+                                onClick={() => {
 
                                     this.setState({
                                         mBelongBkUserId: undefined,
@@ -718,7 +703,12 @@ class Basic extends Component {
 
                                             <DatePicker
                                                 style={{width: '200px', height: '36px'}}
-
+                                                disabledDate={(current) => {
+                                                    
+                                                    
+                                                    console.log('hcia current.valueOf()' , current.valueOf(),Date.now())
+                                                    return  current.valueOf() < (Date.now()-86400000)
+                                                }}
 
                                                 value={moment(this.state.mExpectTime, dateFormat)}
                                                 onChange={(date, dateString) => {
@@ -891,7 +881,6 @@ class Basic extends Component {
                                     </Col>
 
                                     <Col style={{background: 'white'}} span={12}>
-
 
 
                                     </Col>

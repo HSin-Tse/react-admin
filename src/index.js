@@ -44,7 +44,7 @@ window.Axios.interceptors.request.use(
                 // console.log('hcia hideLoading' , hideLoading)
 
 
-                console.log('hcia config' , config)
+                // console.log('hcia config' , config)
                 if (hideLoading) {
 
                 } else {
