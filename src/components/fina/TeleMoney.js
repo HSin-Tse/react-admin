@@ -51,19 +51,18 @@ class Basic extends Component {
             },
             {
                 align: 'center',
-
                 title: '交易账号',
                 dataIndex: '交易账号',
                 key: '交易账号',
                 render: (text, record) => (
-                    <span>{record.name}</span>),
+                    <span>{record.accountNo}</span>),
             }, {
 
                 title: '姓名',
 
                 dataIndex: '姓名',
                 key: '姓名',
-                render: (text, record) => (<span>{record.accountNo}</span>),
+                render: (text, record) => (<span>{record.name}</span>),
                 align: 'center',
             }, {
                 title: '账户类型',
@@ -75,17 +74,18 @@ class Basic extends Component {
             }, {
                 title: '添加时间',
                 dataIndex: '添加时间',
+                align: 'center',
+
                 key: '添加时间',
                 render: (text, record) => (
-                    <span>{record.accountType}</span>),
-                align: 'center',
+                    <span>{this.timestampToTime(record.comment_step1.createDate)}</span>)
             }, {
                 align: 'center',
                 title: '入金金额（￥）',
                 dataIndex: '入金金额（￥）',
                 key: '入金金额（￥）',
                 render: (text, record) => (
-                    <span>{record.date}</span>),
+                    <span>{record.accountAmount}</span>),
             }, {
                 align: 'center',
 
@@ -93,7 +93,7 @@ class Basic extends Component {
                 dataIndex: '入金币种',
                 key: '入金币种',
                 render: (text, record) => (
-                    <span>{record.marginLevel}</span>)
+                    <span>{record.accountCurrency}</span>)
             }, {
                 align: 'center',
 
@@ -101,7 +101,7 @@ class Basic extends Component {
                 dataIndex: '执行金额（$)',
                 key: '执行金额（$)',
                 render: (text, record) => (
-                    <span>{record.cashBalance}</span>),
+                    <span>{record.execAmount}</span>),
             }, {
                 align: 'center',
 
@@ -110,7 +110,7 @@ class Basic extends Component {
                 key: '执行币种',
 
                 render: (text, record) => (
-                    <span>{record.netEquity}</span>),
+                    <span>{record.execCurrency}</span>),
             }, {
                 align: 'center',
 
@@ -119,7 +119,7 @@ class Basic extends Component {
                 key: '使用汇率',
 
                 render: (text, record) => (
-                    <span>{record.lastUpdateDate}</span>),
+                    <span>{record.rate}</span>),
             }, {
                 align: 'center',
 
@@ -127,7 +127,7 @@ class Basic extends Component {
                 dataIndex: '手续费',
                 key: '手续费',
                 render: (text, record) => (
-                    <span>{record.accountStatus == 1 ? '正常' : (record.accountStatus == 2) ? '禁止登陆' : '禁止交易'}</span>
+                    <span>{record.feeAmount}</span>
                 )
 
             }, {
@@ -136,7 +136,7 @@ class Basic extends Component {
                 dataIndex: '账户余额',
                 key: '账户余额',
                 render: (text, record) => (
-                    <span>{record.operator}</span>)
+                    <span>{record.cashBalance}</span>)
             }, {
                 align: 'center',
 
@@ -144,7 +144,7 @@ class Basic extends Component {
                 dataIndex: '期望到账时间',
                 key: '期望到账时间',
                 render: (text, record) => (
-                    <span>{record.operator}</span>)
+                    <span>{record.expectDate}</span>)
             }, {
                 align: 'center',
 
@@ -152,7 +152,7 @@ class Basic extends Component {
                 dataIndex: '创建人',
                 key: '创建人',
                 render: (text, record) => (
-                    <span>{record.operator}</span>)
+                    <span>{record.bkUserName}</span>)
             }, {
                 align: 'center',
                 title: '操作',
@@ -160,9 +160,11 @@ class Basic extends Component {
                 render: (text, record) => (
                     <div>
 
-                        <Button style={{marginLeft: 12}} onClick={() => this.showOPDAyModal3(record)}>取消</Button>
+                        <Button
+                            size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                            disabled={record.status == 3}
+                            onClick={() => this.showOPDAyModal3(record)}>{record.status == 2 ? '取消' : record.status == 3 ? '审核成功' : '已取消'}</Button>
 
-                        <Button onClick={() => this.showOPDAyModal2(record)}>已取消</Button>
 
                     </div>
                 ),
@@ -172,7 +174,19 @@ class Basic extends Component {
         this.requestPage()
     }
 
-
+    timestampToTime = (timestamp) => {
+        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
+        const year = dateObj.getFullYear() // 获取年，
+        const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
+        const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
+        const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
+        const minutes = this.pad(dateObj.getMinutes()) // 获取分
+        const seconds = this.pad(dateObj.getSeconds()) // 获取秒
+        return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
+    };
+    pad = (str) => {
+        return +str >= 10 ? str : '0' + str
+    };
     requestPage = () => {
 
         let self = this
@@ -709,7 +723,7 @@ class Basic extends Component {
                                     </Col>
                                     <Col style={{background: 'white'}} span={2}></Col>
                                 </Row>
-                                <Row style={{marginTop: '24px',marginBottom: '24px'}}>
+                                <Row style={{marginTop: '24px', marginBottom: '24px'}}>
                                     <Col style={{textAlign: 'right', align: 'center', background: 'white'}} span={12}>
 
 
@@ -865,9 +879,7 @@ class Basic extends Component {
                                     </Col>
 
 
-
                                 </Row>
-
 
 
                             </div>
