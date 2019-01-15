@@ -305,7 +305,7 @@ class Basic extends Component {
                     <div>
                         <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}  onClick={() => this.showOPDAyModal2(record)}>日志</Button>
                         <Button  size={'small'} style={{minWidth: 80, background: '#FDD000', display:record.displayStatus=='审核通过'?'none':''}}  onClick={() => this.showModalB(record)}>审核</Button>
-                        <Button  size={'small'}  style={{minWidth: 80, background: '#FDD000',display:!record.displayStatus=='审核通过'?'none':''}} onClick={() => this.showModalA(record)}>已审核</Button>
+                        <Button  size={'small'}  style={{minWidth: 80, background: '#FDD000',display:record.displayStatus!='审核通过'?'none':''}} onClick={() => this.showModalA(record)}>已审核</Button>
                     </div>
                 ),
             }];
