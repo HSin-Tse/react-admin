@@ -286,15 +286,15 @@ class Basic extends Component {
 
             <div>
 
-                <div>live931773069</div>
                 {/*<div>accrounRes :{JSON.stringify(this.state.accrounRes)}</div>*/}
-                <div>mBelongBkUserId :{JSON.stringify(this.state.mBelongBkUserId)}</div>
-                <div>mNetEquity :{JSON.stringify(this.state.mNetEquity)}</div>
-                <div>mNote :{JSON.stringify(this.state.mNote)}</div>
-                <div>mAccountTxnCurry :{JSON.stringify(this.state.mAccountTxnCurry)}</div>
-                <div>mExpectTime :{JSON.stringify(this.state.mExpectTime)}</div>
-                <div>mExecTxnAmt :{JSON.stringify(this.state.mExecTxnAmt)}</div>
-                <div>mRate :{JSON.stringify(this.state.mRate)}</div>
+                {/*<div>live931773069</div>*/}
+                {/*<div>mBelongBkUserId :{JSON.stringify(this.state.mBelongBkUserId)}</div>*/}
+                {/*<div>mNetEquity :{JSON.stringify(this.state.mNetEquity)}</div>*/}
+                {/*<div>mNote :{JSON.stringify(this.state.mNote)}</div>*/}
+                {/*<div>mAccountTxnCurry :{JSON.stringify(this.state.mAccountTxnCurry)}</div>*/}
+                {/*<div>mExpectTime :{JSON.stringify(this.state.mExpectTime)}</div>*/}
+                {/*<div>mExecTxnAmt :{JSON.stringify(this.state.mExecTxnAmt)}</div>*/}
+                {/*<div>mRate :{JSON.stringify(this.state.mRate)}</div>*/}
 
 
                 <h2 style={{marginTop: 15}}>新增电汇入金</h2>

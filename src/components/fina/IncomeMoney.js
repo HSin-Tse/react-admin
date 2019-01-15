@@ -269,7 +269,7 @@ class Basic extends Component {
 
         return (
             <div>
-                <div>depositDetail :{JSON.stringify(this.state.depositDetail)}</div>
+                {/*<div>depositDetail :{JSON.stringify(this.state.depositDetail)}</div>*/}
 
                 <h2 style={{marginTop: 15}}>
                     入金管理

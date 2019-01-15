@@ -179,7 +179,7 @@ export default class BlackList extends Component {
                 align: 'center',
                 dataIndex: '详细内容',
                 key: '详细内容',
-                render: (text, record) => (<span>{record.typeDesc}</span>),
+                render: (text, record) => (<span>{record.comment}</span>),
             }];
         this.columnsB = [
             {

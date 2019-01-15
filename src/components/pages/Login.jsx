@@ -76,11 +76,8 @@ class Login extends React.Component {
                         window.Axios.post('back/addLogHistory', {
                             'moduleLog': 'loging',
                             'pageLog': 'loging',
-                            'commentLog': 'loging',
+                            'commentLog': '登入',
                             'typeLog': 1,
-                        }).then(function (response) {
-
-
                         });
 
                     }
@@ -111,7 +108,7 @@ class Login extends React.Component {
                         <img style={{height: 35, width: 35}} src={avater} alt="头像"/>
                     </div>
                     {/*<div className="login-logo">*/}
-                        {/*<span>IX TRADER CRM</span>*/}
+                    {/*<span>IX TRADER CRM</span>*/}
                     {/*</div>*/}
                     <Form onSubmit={this.handleSubmit} style={{maxWidth: '300px'}}>
                         <FormItem>
