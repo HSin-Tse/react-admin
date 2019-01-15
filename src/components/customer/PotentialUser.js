@@ -52,10 +52,9 @@ export default class PotentialUser extends Component {
             'pageLog': 'Leads管理',
             'commentLog': '查看了Leads管理',
             'typeLog': 2,
-        }).then(function (response) {
+        })
 
 
-        });
         document.addEventListener("keydown", this.handleKeyPress, false);
 
         this.requestPageA()
@@ -443,6 +442,15 @@ export default class PotentialUser extends Component {
         let belongUserId = record.belongUserId
         let accountNo = record.accountNo
         let self = this;
+
+
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '用户管理',
+            'pageLog': 'Leads管理',
+            'commentLog': '延期申请',
+            'typeLog': 3,
+        });
+
         window.Axios.post('ixuser/delayDemoAccount', {
             "accountNo": accountNo,
             "belongUserId": belongUserId,
@@ -827,6 +835,8 @@ export default class PotentialUser extends Component {
                         </Card>
 
                     </TabPane>
+
+
 
                     <TabPane tab="模拟用戶" key="2">
                         <Card bodyStyle={{padding: 0, margin: 0}} title={'模拟用户信息表'}>
