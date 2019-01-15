@@ -16,22 +16,14 @@ class Basic extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedRowKeys: [],
-            visibleOpM: false,
             date: new Date(),
             userList: [],
-            leavgeList: [],
-            nodeList: [],
-
             loading: false,
             searchPhone: '',
             totalPage: 1,
-            modeState: 1,
-            forbiddenValue: 0,
             current: 0,
-            pgsize: 10,
+            pgsize: 20,
             loadFor: false,
-            suspend_reason_type: []
 
         };
     }
@@ -64,25 +56,6 @@ class Basic extends Component {
         }).then(function (response) {
 
 
-        });
-
-        let self = this;
-        window.Axios.post('dict/openDict', {
-            'keys': 'suspend_reason_type',
-        }).then(function (response) {
-            self.setState({
-                    suspend_reason_type: response.data.data.suspend_reason_type
-                }
-            );
-        })
-
-        window.Axios.post('dict/leverageList', {
-            'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
-        }).then((response) => {
-            console.log('hcia response', response)
-            self.setState({
-                leavgeList: response.data.data,
-            })
         });
 
 
@@ -214,97 +187,10 @@ class Basic extends Component {
                 ),
             }];
 
-        this.nodeColumns = [
-            {
-                align: 'center',
-                title: '日期',
-                width: 140,
-                dataIndex: '日期',
-                key: '日期',
-                render: (text, record) => (
-                    <span>{this.timestampToTime(record.createDate)}</span>)
-            },
-            {
-                align: 'center',
-
-                title: '备注',
-                dataIndex: '备注',
-                key: '备注',
-                width: 120,
-                render: (text, record) => (
-                    <span>{record.comment}</span>)
-            }, {
-                align: 'center',
-
-                title: '操作人',
-                dataIndex: '操作人',
-                width: 120,
-                key: '操作人',
-                render: (text, record) => (
-                    <span>{record.bkUserName}</span>)
-            }];
         this.requestPage()
     }
 
-    timestampToTime = (timestamp) => {
-        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
-        const year = dateObj.getFullYear() // 获取年，
-        const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
-        const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
-        const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
-        const minutes = this.pad(dateObj.getMinutes()) // 获取分
-        const seconds = this.pad(dateObj.getSeconds()) // 获取秒
-        return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
-    };
-    pad = (str) => {
-        return +str >= 10 ? str : '0' + str
-    };
-    seeDetail = (record) => {
 
-        console.log('hcia record', record)
-        let self = this
-        window.Axios.post('star/getStarLiveAccountCommentList', {
-            'pageSize': 100,
-            'id': record.id,
-        }).then(function (response) {
-            console.log(response);
-
-            self.setState({
-                    nodeList: response.data.data.list
-                }, () => {
-                    self.showModal()
-                }
-            );
-
-
-        })
-    };
-    handleChange = (value, record) => {
-        let self = this
-        self.setState({
-                modeState: value,
-                opRecord: record
-            }, () => {
-                self.showModalOP()
-            }
-        );
-
-    };
-    changePageComment = (page) => {
-        page = page - 1
-        this.setState({
-            currentComment: page,
-        }, () => {
-            this.requestUserCommentList()
-        })
-    }
-    forbitChange = (value) => {
-        let self = this
-        self.setState({
-                forbiddenValue: value,
-            }
-        );
-    };
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
         const year = dateObj.getFullYear() // 获取年，
@@ -350,48 +236,12 @@ class Basic extends Component {
     }
 
 
-    handleOk = () => {
-        var mStatus = this.state.modeState == '正常' ? 1 : this.state.modeState == '禁止登陆' ? 2 : 3;
-        // var reasonType = mStatus ==2?
-        let self = this;
-        self.setState({
-            loadFor: true
-        })
-        window.Axios.post('star/updateStarLiveAccount', {
-            'id': self.state.opRecord.id,
-            'status': mStatus,
-            'reasonType': self.state.forbiddenValue,
-        }).then(function (response) {
-            console.log(response);
-            self.setState({
-                visibleOpM: false,
-                loadFor: false,
-            }, () => {
-                self.state.forbiddenValue = 0
-                self.requestPage()
-            });
-            message.success('操作成功');
-
-        })
-    };
-
-    onSelectChange = (selectedRowKeys) => {
-        console.log('hcia', 'selectedRowKeys changed: ', selectedRowKeys);
-        this.setState({selectedRowKeys});
-    }
-
     render() {
-        const {selectedRowKeys} = this.state;
-        const hasSelected = selectedRowKeys.length > 0;
-        const rowSelection = {
-            selectedRowKeys,
-            onChange: this.onSelectChange,
-        };
+
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
-                {/*this.state.selectedRowKeys.length > 0*/}
 
                 <h2 style={{marginTop: 15}}>
                     入金管理
