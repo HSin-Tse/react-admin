@@ -347,7 +347,7 @@ class Basic extends Component {
                                     'execTxnCurry': 'CNY',
                                     'rate': this.state.mRate,
                                     'accountTxnCurry': 'USD',//this.state.mAccountTxnCurry
-                                    'expectTime': this.state.mExpectTime,
+                                    'expectTime': this.state.mExpectTime.getTime(),
                                     'content': this.state.mNote,
                                 }).then((response) => {
 
