@@ -183,16 +183,31 @@ class CustomerSummary extends Component {
                 key: '激活绑定',
                 align: 'center',
                 render: (text, record) => (
-                    <div  style={{ align: 'center', display: record.belongUserId?'flex':'', justifyContent:   record.belongUserId?'space-between':''}}>
-                        <span  style={{ display: record.belongUserId ? '' : 'none',    marginLeft: 10}}>{!record.belongUserId ? '' : record.mobile}</span>
+                    <div style={{
+                        align: 'center',
+                        display: record.belongUserId ? 'flex' : '',
+                        justifyContent: record.belongUserId ? 'space-between' : ''
+                    }}>
+                        <span style={{
+                            display: record.belongUserId ? '' : 'none',
+                            marginLeft: 10
+                        }}>{!record.belongUserId ? '' : record.mobile}</span>
                         {/*<Button style={{marginLeft: 15}}>解绑</Button>*/}
 
 
-                        <Button   size={'small'} style={{ background:'#FDD000', display: !record.belongUserId ? 'none' : '', marginLeft: 0}}
+                        <Button size={'small'} style={{
+                            background: '#FDD000',
+                            display: !record.belongUserId ? 'none' : '',
+                            marginLeft: 0
+                        }}
                                 onClick={() => this.requestUnbindAccount(record)}>解绑</Button>
 
 
-                        <span style={{ display: record.belongUserId ? 'none' : '', marginLeft: 0,alignSelf:'center'}}>未激活</span>
+                        <span style={{
+                            display: record.belongUserId ? 'none' : '',
+                            marginLeft: 0,
+                            alignSelf: 'center'
+                        }}>未激活</span>
                     </div>
                 ),
             },
@@ -203,9 +218,12 @@ class CustomerSummary extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button disabled={!record.belongUserId}  size={'small'} style={{background:'#FDD000'}}  onClick={() => this.justSeenote(record)}>备注</Button>
-                        <Button size={'small'} style={{background:'#FDD000'}} onClick={() => this.goToUserAccountInfo(record)}>開戶</Button>
-                        <Button disabled={!record.belongUserId}  size={'small'} style={{background:'#FDD000'}} onClick={() => this.goToUserInfo(record.belongUserId)}>行為</Button>
+                        <Button disabled={!record.belongUserId} size={'small'} style={{background: '#FDD000'}}
+                                onClick={() => this.justSeenote(record)}>备注</Button>
+                        <Button size={'small'} style={{background: '#FDD000'}}
+                                onClick={() => this.goToUserAccountInfo(record)}>開戶</Button>
+                        <Button disabled={!record.belongUserId} size={'small'} style={{background: '#FDD000'}}
+                                onClick={() => this.goToUserInfo(record.belongUserId)}>行為</Button>
                     </div>
                 )
             }, {
@@ -214,18 +232,24 @@ class CustomerSummary extends Component {
                 key: '业务操作',
                 align: 'center',
                 render: (text, record) => (
-                    <div>
+                    <div style={{display: 'flex'  ,justifyContent:'space-around'}}>
 
-                        {/*<Popconfirm title={record.accountStatus === 1 ? '确认凍結' : '确认解冻'}*/}
-                                    {/*onConfirm={() => this.forzenAccount(record)} okText="Yes"*/}
-                                    {/*cancelText="No">*/}
-                            {/*<Button  disabled={!record.belongUserId} size={'small'}style={{background: record.accountStatus === 1?'#FDD000':'OrangeRed'}}>{record.accountStatus === 1 ? '正常（可冻结)' : record.accountStatus === 2 ? '禁止登陆:解冻'*/}
-                                {/*: record.accountStatus === 3 ? '禁止交易:解冻' : '-'}</Button>*/}
-                        {/*</Popconfirm>*/}
+                        <Popconfirm style={{}} title={record.accountStatus === 1 ? '确认凍結' : '确认解冻'}
+                                    onConfirm={() => this.forzenAccount(record)} okText="Yes"
+                                    cancelText="No">
+                            <Button disabled={!record.belongUserId} size={'small'}
+                                    style={{ display:!record.belongUserId?'none':'',  background: record.accountStatus === 1 ? '#FDD000' : 'OrangeRed'}}>{record.accountStatus === 1 ? '正常（可冻结)' : record.accountStatus === 2 ? '禁止登陆:解冻'
+                                : record.accountStatus === 3 ? '禁止交易:解冻' : '-'}</Button>
+                        </Popconfirm>
 
-                        <Button  disabled={!record.belongUserId} size={'small'}style={{background: record.accountStatus === 1?'#FDD000':'OrangeRed'}}>{record.accountStatus === 1 ? '正常（可冻结)' : record.accountStatus === 2 ? '禁止登陆:解冻'
-                            : record.accountStatus === 3 ? '禁止交易:解冻' : '-'}</Button>
-                        <Button disabled={!record.belongUserId}  size={'small'}style={{background:'#FDD000'}} onClick={() => this.resetSeret(record)}>重置密码</Button>
+
+                            <Button disabled={!record.belongUserId} size={'small'}
+                                    style={{display:!record.belongUserId?'':'none',background: record.accountStatus === 1 ? '#FDD000' : 'OrangeRed'}}>{record.accountStatus === 1 ? '正常（可冻结)' : record.accountStatus === 2 ? '禁止登陆:解冻'
+                                : record.accountStatus === 3 ? '禁止交易:解冻' : '-'}</Button>
+
+
+                        <Button disabled={!record.belongUserId} size={'small'} style={{  background: '#FDD000'}}
+                                onClick={() => this.resetSeret(record)}>重置密码</Button>
                     </div>
                 ),
             }, {
@@ -236,8 +260,10 @@ class CustomerSummary extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button disabled={!record.belongUserId} size={'small'}style={{background:'#FDD000'}} onClick={() => this.showModalNote(record)}>添加备注</Button>
-                        <Button disabled={!record.belongUserId} size={'small'}style={{background:'#FDD000'}} onClick={() => this.showModalOPDAY(record)}>日志</Button>
+                        <Button disabled={!record.belongUserId} size={'small'} style={{background: '#FDD000'}}
+                                onClick={() => this.showModalNote(record)}>添加备注</Button>
+                        <Button disabled={!record.belongUserId} size={'small'} style={{background: '#FDD000'}}
+                                onClick={() => this.showModalOPDAY(record)}>日志</Button>
                     </div>
                 ),
             }];
