@@ -44,6 +44,7 @@
 }
 .toast-notice {
     background: #00000000;
+    z-index: 1000;
     /*padding: 40px 40px;*/
 
     margin: 0px auto;

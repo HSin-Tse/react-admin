@@ -248,6 +248,7 @@ export default class PotentialUser extends Component {
             }, {
                 title: '模拟账号',
                 dataIndex: '模拟账号',
+                align: 'center',
 
                 key: '模拟账号',
                 render: (text, record) => (
@@ -256,6 +257,7 @@ export default class PotentialUser extends Component {
                 title: '绑定时间',
                 dataIndex: '绑定时间',
                 width: 150,
+                align: 'center',
 
                 key: '绑定时间',
                 render: (text, record) => (<span>{record.date}</span>),
@@ -263,16 +265,19 @@ export default class PotentialUser extends Component {
                 title: '剩余天数',
                 dataIndex: '剩余天数',
                 key: '剩余天数',
+                align: 'center',
 
                 render: (text, record) => (<span>{record.remainDay}</span>),
             }, {
                 title: '模拟账户状态',
+                align: 'center',
 
                 dataIndex: '模拟账户状态',
                 key: '模拟账户状态',
                 render: (text, record) => (<span>{record.expireStatus}</span>),
             }, {
                 title: '延期次数',
+                align: 'center',
 
                 dataIndex: '延期次数',
                 key: '延期次数',
@@ -280,6 +285,7 @@ export default class PotentialUser extends Component {
             }, {
                 title: '回访状态',
                 dataIndex: '回访状态',
+                align: 'center',
 
                 key: '回访状态',
                 render: (text, record) => (<span>{record.feebackStatus}</span>),
@@ -287,10 +293,12 @@ export default class PotentialUser extends Component {
                 title: '活跃程度',
                 dataIndex: '活跃程度',
                 key: '活跃程度',
+                align: 'center',
 
                 render: (text, record) => (<span>{record.activeFlag}</span>),
             }, {
                 title: '操作人',
+                align: 'center',
 
                 dataIndex: '操作人',
                 key: '操作人',
@@ -439,6 +447,20 @@ export default class PotentialUser extends Component {
 
 
     handleDelay = (record) => {
+        
+        
+        console.log('hcia record.feebackStatus' , record.feebackStatus)
+
+
+
+
+
+        if(record.expireStatus=='未过期'){
+
+            message.info('未过期')
+            return
+        }
+
         let belongUserId = record.belongUserId
         let accountNo = record.accountNo
         let self = this;

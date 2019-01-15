@@ -23,7 +23,8 @@ class Basic extends Component {
             current: 0,
             pgsize: 20,
             loadFor: false,
-            detailMoVisible: true,
+            detailMoVisible: false,
+            depositDetail: {},
 
         };
     }
@@ -179,9 +180,26 @@ class Basic extends Component {
     showDetailM = (recodrd) => {
         console.log('hcia recodrd', recodrd)
 
-        this.setState({
-            detailMoVisible: true,
+
+
+        var self = this
+        window.Axios.post('/finance/getDepositDetail', {
+            id: recodrd.id,
+        }).then((response) => {
+
+            console.log('hcia response', response)
+            // self.setState({
+            //     totalpageComments: response.data.data.totalPage,
+            //     operationDiaryHistory: response.data.data.list,
+            // });
+
+            self.setState({
+                depositDetail: response.data.data,
+                detailMoVisible: true,
+            });
         });
+
+
     };
 
 
@@ -234,7 +252,7 @@ class Basic extends Component {
 
         return (
             <div>
-                {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
+                <div>depositDetail :{JSON.stringify(this.state.depositDetail)}</div>
 
                 <h2 style={{marginTop: 15}}>
                     入金管理
@@ -282,7 +300,7 @@ class Basic extends Component {
                             fontFamily: 'PingFangSC-Medium',
                             fontWeight: 500,
                             color: 'rgba(51,51,51,1)'
-                        }}>订单号：0000000001
+                        }}>订单号：{this.state.depositDetail.orderNo}
                         </p>
                     </div>
                     <div>
@@ -875,15 +893,27 @@ class Basic extends Component {
                     </div>
 
                     <div style={{padding: 48, textAlign: 'center', align: 'center', background: 'white'}}>
-                        <Button style={{
-                            width: '180px',
-                            height: '40px',
-                            borderRadius: 'px',
-                            background: '#FDD000',
-                            fontSize: '20px',
-                            fontWeight: '400px'
+                        <Button
+                            onClick={() => {
 
-                        }}>关闭
+                                console.log('hcia 关闭')
+
+
+                                this.setState({
+                                    detailMoVisible: false
+                                })
+
+                            }}
+
+                            style={{
+                                width: '180px',
+                                height: '40px',
+                                borderRadius: 'px',
+                                background: '#FDD000',
+                                fontSize: '20px',
+                                fontWeight: '400px'
+
+                            }}>关闭
                         </Button>
                     </div>
 
