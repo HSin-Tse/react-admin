@@ -59,8 +59,8 @@ class CustomerSummary extends Component {
 
         window.Axios.post('back/addLogHistory', {
             'moduleLog': '用户管理',
-            'pageLog': 'Leads用戶總表',
-            'commentLog': '查看了Leads用戶總表',
+            'pageLog': 'Leads用户总表',
+            'commentLog': '查看了Leads用户总表',
             'typeLog': 2,
         }).then(function (response) {
 
@@ -348,12 +348,12 @@ class CustomerSummary extends Component {
                     </div>
                 </div>
                 <h2 style={{marginTop: 15}}>
-                    用戶總表
+                    用户总表
                 </h2>
-                <BreadcrumbCustom first="用戶管理" second="用戶總表"/>
+                <BreadcrumbCustom first="用戶管理" second="用户总表"/>
                 <Card
                     bodyStyle={{padding: 0, margin: 0}}
-                    title="用戶總表">
+                    title="用户总表">
                     <Table
                         rowKey="id"
                         bordered
@@ -399,7 +399,7 @@ class CustomerSummary extends Component {
                     visible={this.state.modal2Visible1}
                     onOk={this.handleNOteOPOk}
                     onCancel={this.handleCancel}
-                    okText="確認"
+                    okText="确认"
                     cancelText="取消"
                 >
                     <Table rowKey="id"

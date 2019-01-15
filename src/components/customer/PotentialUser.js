@@ -871,7 +871,7 @@ export default class PotentialUser extends Component {
                     visible={this.state.visible}
                     onOk={this.handleAddComment}
                     onCancel={this.handleCancel}
-                    okText="確認"
+                    okText="确认"
                     cancelText="取消"
                     align={'center'}>
                     <TextArea

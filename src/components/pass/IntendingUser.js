@@ -208,7 +208,7 @@ class IntendingUser extends Component {
 				          visible={this.state.visible}
 				          onOk={this.handleOk}
 				          onCancel={this.handleCancel}
-									okText="確認"
+									okText="确认"
 									cancelText="取消"
 								>
 				          <p><DatePicker onChange={this.selectDate} /></p>
@@ -219,7 +219,7 @@ class IntendingUser extends Component {
 									visible={this.state.modal2Visible}
 									onOk={this.handleOk}
 									onCancel={this.handleCancel}
-									okText="確認"
+									okText="确认"
 									cancelText="取消"
 								>
 									<p>

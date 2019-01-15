@@ -206,7 +206,7 @@ class EditCha extends Component {
                             CommentViSible: false,
                         });
                     }}
-                    okText="確認"
+                    okText="确认"
                     cancelText="取消"
                     align={'center'}>
                     <TextArea
