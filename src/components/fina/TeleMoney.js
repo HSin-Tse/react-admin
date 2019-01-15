@@ -221,26 +221,7 @@ class Basic extends Component {
             this.requestPage()
         })
     }
-    refleshNowpage = () => {
 
-        let self = this;
-        var result = self.state.selectedRowKeys.map(Number);
-
-        window.Axios.post('star/refreshStarLiveAccount', {
-            idList: result,
-        }).then(function (response) {
-            console.log(response);
-            self.setState({
-                loadFor: false,
-            }, () => {
-                self.requestPage()
-            });
-            message.success('操作成功');
-
-        })
-
-
-    }
 
 
     render() {
@@ -287,7 +268,7 @@ class Basic extends Component {
                         title={null}
                         bordered={true}
                         headStyle={{textAlign: 'center', width: '100%'}}
-                        style={{marginLeft: '20%', width: '60%'}}>
+                        style={{marginLeft: '16%', width: '68%'}}>
 
 
                         <div>
