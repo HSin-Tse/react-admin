@@ -403,7 +403,6 @@ class Basic extends Component {
                 >
 
                     <Table rowKey="id"
-                           rowSelection={rowSelection}
 
                            columns={this.columns}
                            dataSource={this.state.userList}
