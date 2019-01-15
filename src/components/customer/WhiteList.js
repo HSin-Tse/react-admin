@@ -614,7 +614,7 @@ export default class WhiteList extends Component {
                 {/*filename="tablexls"*/}
                 {/*sheet="tablexls"*/}
                 {/*buttonText="Download as XLS"/>*/}
-                <BreadcrumbCustom first="用戶管理" second="白名單"/>
+                <BreadcrumbCustom first="用戶管理" second="白名单"/>
 
                 <Card
                     bodyStyle={{padding: 0, margin: 0}}

@@ -99,8 +99,8 @@ export default class BlackList extends Component {
 
         window.Axios.post('back/addLogHistory', {
             'moduleLog': '用户管理',
-            'pageLog': '黑名單',
-            'commentLog': '查看了黑名單备注',
+            'pageLog': '黑名单',
+            'commentLog': '查看了黑名单备注',
             'typeLog': 3,
         });
 
@@ -126,8 +126,8 @@ export default class BlackList extends Component {
 
         window.Axios.post('back/addLogHistory', {
             'moduleLog': '用户管理',
-            'pageLog': '黑名單',
-            'commentLog': '查看了黑名單',
+            'pageLog': '黑名单',
+            'commentLog': '查看了黑名单',
             'typeLog': 2,
         }).then(function (response) {
 
@@ -290,8 +290,8 @@ export default class BlackList extends Component {
 
         window.Axios.post('back/addLogHistory', {
             'moduleLog': '用户管理',
-            'pageLog': '黑名單',
-            'commentLog': '移除黑名單',
+            'pageLog': '黑名单',
+            'commentLog': '移除黑名单',
             'typeLog': 3,
         });
 
@@ -597,9 +597,9 @@ export default class BlackList extends Component {
                     </div>
                 </div>
                 <h2 style={{marginTop: 15}}>
-                    黑名單
+                    黑名单
                 </h2>
-                <BreadcrumbCustom first="用戶管理" second="黑名單"/>
+                <BreadcrumbCustom first="用戶管理" second="黑名单"/>
 
                 <Card bodyStyle={{padding: 0, margin: 0}}>
 
@@ -912,7 +912,7 @@ export default class BlackList extends Component {
 
         window.Axios.post('back/addLogHistory', {
             'moduleLog': '用户管理',
-            'pageLog': '黑名單',
+            'pageLog': '黑名单',
             'commentLog': '添加黑名单',
             'typeLog': 3,
         });
