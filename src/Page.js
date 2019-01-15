@@ -7,7 +7,7 @@ import createBrowserHistory from 'history/createBrowserHistory'
 const history = createBrowserHistory()
 
 history.listen((location, action) => {
-    console.log('hcia',action, location)  //  <=== Never happens
+    // console.log('hcia',action, location)  //  <=== Never happens
 })
 
 export default () => (

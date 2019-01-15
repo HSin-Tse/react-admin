@@ -137,7 +137,7 @@ export default class BlackList extends Component {
         document.addEventListener("keydown", this.handleKeyPress, false);
 
 
-        console.log('hcia  Black this.props', this.props.pg)
+        // console.log('hcia  Black this.props', this.props.pg)
 
         this.setState({
             nowKey: this.props.pg,

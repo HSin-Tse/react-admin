@@ -469,7 +469,6 @@ class PassOpenD extends Component {
                                         style={{marginLeft: 20, width: 120}}
                                     >
                                         <Option value="jack">服务器地址</Option>
-                                        <Option value="lucy">Lucy (101)</Option>
                                     </Select>
 
                                 </div>

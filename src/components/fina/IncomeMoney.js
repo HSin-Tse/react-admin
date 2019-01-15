@@ -25,19 +25,19 @@ class Basic extends Component {
             loadFor: false,
             detailMoVisible: false,
             depositDetail: {
-                comment_step1:{
+                comment_step1: {
 
-                    "id":311,
-                    "type":13,
-                    "belongUserId":"-1",
-                    "ipAddress":null,
-                    "delFlag":0,
-                    "bkUserName":null,
-                    "createDate":1547187714000,
-                    "bkUserId":null,
-                    "updateDate":null,
-                    "recordId":10,
-                    "comment":"????????"
+                    "id": 311,
+                    "type": 13,
+                    "belongUserId": "-1",
+                    "ipAddress": null,
+                    "delFlag": 0,
+                    "bkUserName": null,
+                    "createDate": 1547187714000,
+                    "bkUserId": null,
+                    "updateDate": null,
+                    "recordId": 10,
+                    "comment": "????????"
                 }
             },
 
@@ -65,29 +65,6 @@ class Basic extends Component {
 
     componentDidMount() {
 
-        // window.Axios.post('back/getBackUserList', {
-        //     'pageSize': self.state.pgsize,
-        //     'pageNo': self.state.current,
-        //     email: this.state.selectMail,
-        //     mobile: this.state.selectPhoneF,
-        //     nationalId: this.state.selectID,
-        //     starClientAccount: this.state.starClientAccount,
-        //     startTime: this.state.selectTimeStart,
-        //     endTime: this.state.selectTimeEnd,
-        // }).then(function (response) {
-        //     console.log(response);
-        //
-        //     self.setState({
-        //             totalPage: response.data.data.totalPage,
-        //             loading: false,
-        //             userList: response.data.data.list
-        //         }
-        //     );
-        //
-        //
-        // }).catch(function (error) {
-        //     console.log(error);
-        // });
 
 
         window.Axios.post('back/addLogHistory', {

@@ -847,7 +847,6 @@ class CustomerSummary extends Component {
 
         var gogo = 'detail'
         this.props.history.push('/app/pass/passopenrs/' + gogo + record.liveAccountId)
-        console.log('goToUserAccountInfo')
 
         // route: '/app/pass/passopenrs/detail:id',
 
