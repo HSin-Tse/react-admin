@@ -94,7 +94,7 @@ class Basic extends Component {
                 dataIndex: '订单编号',
                 key: '订单编号',
                 render: (text, record) => (
-                    <span>{record.name}</span>),
+                    <span>{record.orderNo}</span>),
             }, {
 
                 title: '用户账号',
@@ -104,19 +104,11 @@ class Basic extends Component {
                 align: 'center',
             }, {
 
-                title: '账户类型',
-                dataIndex: '账户类型',
-                key: '账户类型',
-                render: (text, record) => (
-                    <span>{record.broker}</span>),
-                align: 'center',
-            }, {
-
                 title: '用户姓名',
                 dataIndex: '用户姓名',
                 key: '用户姓名',
                 render: (text, record) => (
-                    <span>{record.accountType}</span>),
+                    <span>{record.name}</span>),
                 align: 'center',
             }, {
                 align: 'center',
@@ -125,14 +117,16 @@ class Basic extends Component {
                 key: '申请时间',
 
                 render: (text, record) => (
-                    <span>{record.date}</span>),
+
+                    <span>{this.timestampToTime(record.comment_step1.createDate)}</span>)
+
             }, {
                 align: 'center',
                 title: '转入金额',
                 dataIndex: '转入金额',
                 key: '转入金额',
                 render: (text, record) => (
-                    <span>{record.marginLevel}</span>)
+                    <span>{record.accountAmount}</span>)
             }, {
                 align: 'center',
 
@@ -140,7 +134,7 @@ class Basic extends Component {
                 dataIndex: '账户币种',
                 key: '账户币种',
                 render: (text, record) => (
-                    <span>{record.cashBalance}</span>),
+                    <span>{record.accountCurrency}</span>),
             }, {
                 align: 'center',
 
@@ -149,7 +143,7 @@ class Basic extends Component {
                 key: '执行金额',
 
                 render: (text, record) => (
-                    <span>{record.netEquity}</span>),
+                    <span>{record.execAmount}</span>),
             }, {
                 align: 'center',
 
@@ -158,63 +152,64 @@ class Basic extends Component {
                 key: '执行币种',
 
                 render: (text, record) => (
-                    <span>{record.lastUpdateDate}</span>),
+                    <span>{record.execCurrency}</span>),
             }, {
                 align: 'center',
                 title: '账号类型',
                 dataIndex: '账号类型',
                 key: '账号类型',
                 render: (text, record) => (
-                    <span>{record.operator}</span>)
+                    <span>{record.broker}</span>)
             }, {
                 align: 'center',
                 title: '使用汇率',
                 dataIndex: '使用汇率',
                 key: '使用汇率',
                 render: (text, record) => (
-                    <span>{record.operator}</span>)
+                    <span>{record.rate}</span>)
             }, {
                 align: 'center',
                 title: '手续费',
                 dataIndex: '手续费',
                 key: '手续费',
                 render: (text, record) => (
-                    <span>{record.operator}</span>)
+                    <span>{record.feeAmount}</span>)
             }, {
                 align: 'center',
                 title: '入金渠道',
                 dataIndex: '入金渠道',
                 key: '入金渠道',
                 render: (text, record) => (
-                    <span>{record.operator}</span>)
+                    <span>{record.channelName}</span>)
             }, {
                 align: 'center',
                 title: '支付通道',
                 dataIndex: '支付通道',
                 key: '支付通道',
                 render: (text, record) => (
-                    <span>{record.operator}</span>)
+                    <span>{record.tradeChannelName}</span>)
             }, {
                 align: 'center',
                 title: '状态',
                 dataIndex: '状态',
                 key: '状态',
                 render: (text, record) => (
-                    <span>{record.operator}</span>)
+                    <span>{record.displayStatus}</span>)
             }, {
                 align: 'center',
                 title: '处理人',
                 dataIndex: '处理人',
                 key: '处理人',
                 render: (text, record) => (
-                    <span>{record.operator}</span>)
+                    <span>{record.bkUserName}</span>)
             }, {
                 align: 'center',
                 title: '操作',
                 key: 'action',
                 render: (text, record) => (
                     <div>
-                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record)}>查看详情</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                onClick={() => this.showOPDAyModal2(record)}>查看详情</Button>
                     </div>
                 ),
             }];
@@ -330,7 +325,7 @@ class Basic extends Component {
                 loading: true,
             }
         );
-        window.Axios.post('star/getStarLiveAccountList', {
+        window.Axios.post('finance/getDepositHistory', {
             'pageSize': self.state.pgsize,
             'pageNo': self.state.current,
         }).then(function (response) {
