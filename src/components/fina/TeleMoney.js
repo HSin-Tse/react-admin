@@ -25,6 +25,9 @@ class Basic extends Component {
             current: 0,
             mBelongBkUserId: undefined,
             mStarClientAccount: undefined,
+            accrounRes: undefined,
+            mNetEquity: '',
+            mName: '',
             currentStep: 0,
             pgsize: 10,
             loadFor: false,
@@ -259,7 +262,11 @@ class Basic extends Component {
         return (
 
             <div>
+
+                <div>live931773069</div>
+                {/*<div>accrounRes :{JSON.stringify(this.state.accrounRes)}</div>*/}
                 <div>mBelongBkUserId :{JSON.stringify(this.state.mBelongBkUserId)}</div>
+                <div>mNetEquity :{JSON.stringify(this.state.mNetEquity)}</div>
 
                 <h2 style={{marginTop: 15}}>新增电汇入金</h2>
                 <BreadcrumbCustom first="财务管理" second="电汇入金" third="新增"/>
@@ -295,7 +302,7 @@ class Basic extends Component {
                                     'execTxnAmt': 1,
                                     'execTxnCurry': 1,
                                     'rate': 1,
-                                    'accountTxnCurry': 1,
+                                    'accountTxnCurry': 'USD',
                                     'expectTime': 1,
                                     'content': 1,
                                 }).then((response) => {
@@ -435,6 +442,21 @@ class Basic extends Component {
                                                                console.log('hcia response', response)
 
 
+                                                               if(response.data.data){
+                                                                   self.setState({
+                                                                       mNetEquity:response.data.data[0].netEquity,
+                                                                       mName:response.data.data[0].name
+                                                                   })
+                                                               }else{
+
+                                                                   self.setState({
+                                                                       mNetEquity:'',
+                                                                       mName:'',
+                                                                   })
+                                                               }
+
+
+
                                                            })
 
                                                        });
@@ -442,7 +464,7 @@ class Basic extends Component {
 
                                                    }}
                                                    style={{width: '200px', height: '36px'}}
-                                                   tagkey="lastNameCn"
+
                                             />
                                         </div>
                                         <div style={{
@@ -463,14 +485,9 @@ class Basic extends Component {
 
 
                                                     }}>账户余额</span>
-                                            <Input defaultValue={this.state.NameCn}
-                                                   onChange={(e) => {
-                                                       this.setState({
-                                                           NameCn: e.target.value,
-                                                       });
-                                                   }}
+                                            <Input value={this.state.mNetEquity}
+
                                                    style={{width: '200px', height: '36px'}}
-                                                   tagkey="lastNameCn"
                                             />
                                         </div>
                                         <div style={{
@@ -498,7 +515,7 @@ class Basic extends Component {
                                                        });
                                                    }}
                                                    style={{width: '200px', height: '36px'}}
-                                                   tagkey="lastNameCn"
+
                                             />
                                         </div>
                                         <div style={{
@@ -522,7 +539,7 @@ class Basic extends Component {
                                             <Input value={'1'}
 
                                                    style={{width: '200px', height: '36px'}}
-                                                   tagkey="lastNameCn"
+
                                             />
                                         </div>
 
@@ -568,7 +585,7 @@ class Basic extends Component {
                                                        });
                                                    }}
                                                    style={{width: '200px', height: '36px'}}
-                                                   tagkey="lastNameCn"
+
                                             />
                                         </div>
                                         <div style={{
@@ -613,7 +630,7 @@ class Basic extends Component {
                                                        });
                                                    }}
                                                    style={{width: '200px', height: '36px'}}
-                                                   tagkey="lastNameCn"
+
                                             />
                                         </div>
                                         <div style={{
@@ -650,7 +667,7 @@ class Basic extends Component {
                                                        });
                                                    }}
                                                    style={{width: '200px', height: '36px'}}
-                                                   tagkey="lastNameCn"
+
                                             />
                                         </div>
                                         <div style={{
@@ -675,19 +692,15 @@ class Basic extends Component {
                                                         fontSize: '14px'
 
 
-                                                    }}>账户币种</span>
+                                                    }}>账号币种</span>
 
                                             </div>
 
 
-                                            <Input defaultValue={this.state.NameCn}
-                                                   onChange={(e) => {
-                                                       this.setState({
-                                                           NameCn: e.target.value,
-                                                       });
-                                                   }}
+                                            <Input defaultValue={'USD'}
+
                                                    style={{width: '200px', height: '36px'}}
-                                                   tagkey="lastNameCn"
+
                                             />
                                         </div>
                                         <div style={{
@@ -717,14 +730,9 @@ class Basic extends Component {
                                             </div>
 
 
-                                            <Input defaultValue={this.state.NameCn}
-                                                   onChange={(e) => {
-                                                       this.setState({
-                                                           NameCn: e.target.value,
-                                                       });
-                                                   }}
+                                            <Input value={this.state.mName}
                                                    style={{width: '200px', height: '36px'}}
-                                                   tagkey="lastNameCn"
+
                                             />
                                         </div>
                                         <div style={{
@@ -761,7 +769,7 @@ class Basic extends Component {
                                                        });
                                                    }}
                                                    style={{width: '200px', height: '36px'}}
-                                                   tagkey="lastNameCn"
+
                                             />
                                         </div>
 
@@ -813,7 +821,7 @@ class Basic extends Component {
                                                        });
                                                    }}
                                                    style={{width: '200px', height: '36px'}}
-                                                   tagkey="lastNameCn"
+
                                             />
                                         </div>
 
@@ -855,7 +863,7 @@ class Basic extends Component {
                                                        });
                                                    }}
                                                    style={{width: '200px', height: '36px'}}
-                                                   tagkey="lastNameCn"
+
                                             />
                                         </div>
                                         <div style={{
@@ -892,7 +900,7 @@ class Basic extends Component {
                                                        });
                                                    }}
                                                    style={{width: '200px', height: '36px'}}
-                                                   tagkey="lastNameCn"
+
                                             />
                                         </div>
                                         <div style={{
@@ -929,7 +937,7 @@ class Basic extends Component {
                                                        });
                                                    }}
                                                    style={{width: '200px', height: '36px'}}
-                                                   tagkey="lastNameCn"
+
                                             />
                                         </div>
 

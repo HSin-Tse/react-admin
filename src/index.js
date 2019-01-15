@@ -43,6 +43,8 @@ window.Axios.interceptors.request.use(
 
                 // console.log('hcia hideLoading' , hideLoading)
 
+
+                console.log('hcia config' , config)
                 if (hideLoading) {
 
                 } else {
@@ -95,7 +97,7 @@ window.Axios.interceptors.response.use(function (response) {
     // localStorage.removeItem('too');
     // localStorage.removeItem('displayName');
 
-    
+
     // console.log('hcia location.host' , window.location.host)
     // window.location ='http://'+ window.location.host+"/#/login";
 
@@ -110,16 +112,16 @@ window.Axios.interceptors.response.use(function (response) {
 
         //
 
-        if(response.data.msg == '无效的token'){
-            
-            
+        if (response.data.msg == '无效的token') {
+
+
             // console.log('hcia response.data.msg' , response.data.msg)
             localStorage.removeItem('infor');
             localStorage.removeItem('user');
             localStorage.removeItem('too');
             localStorage.removeItem('displayName');
 
-            window.location ='http://'+ window.location.host+"/#/login";
+            window.location = 'http://' + window.location.host + "/#/login";
 
 
             // this.props.history.push('/login')
