@@ -52,8 +52,8 @@ window.Axios.interceptors.request.use(
                 }
 
                 message.config({
-                    top: '40%',
-                    maxCount: 3,
+                    top: '10%',
+                    maxCount: 1,
                 });
                 // ss=   message.loading('Action in progress..', 0)
                 // message.success('Loading finished', 2.5)
@@ -114,12 +114,12 @@ window.Axios.interceptors.response.use(function (response) {
             
             
             // console.log('hcia response.data.msg' , response.data.msg)
-            // window.location ='http://'+ window.location.host+"/#/login";
             localStorage.removeItem('infor');
             localStorage.removeItem('user');
             localStorage.removeItem('too');
             localStorage.removeItem('displayName');
 
+            window.location ='http://'+ window.location.host+"/#/login";
 
 
             // this.props.history.push('/login')

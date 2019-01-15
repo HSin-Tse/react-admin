@@ -24,6 +24,7 @@ class Basic extends Component {
             totalPage: 1,
             current: 0,
             mBelongBkUserId: undefined,
+            mStarClientAccount: undefined,
             currentStep: 0,
             pgsize: 10,
             loadFor: false,
@@ -179,12 +180,7 @@ class Basic extends Component {
             'pageNo': 0,
 
         }).then((response) => {
-
-            console.log('hcia response', response.data.data)
-
-
             self.setState({
-
                 bkroleList: response.data.data.list
             })
 
@@ -295,7 +291,7 @@ class Basic extends Component {
                                 window.Axios.post('finance/createDeposit', {
                                     'belongBkUserId': this.state.mBelongBkUserId,
                                     'accountFrom': 1,
-                                    'starClientAccount': 1,
+                                    'starClientAccount': this.state.mStarClientAccount,
                                     'execTxnAmt': 1,
                                     'execTxnCurry': 1,
                                     'rate': 1,
@@ -386,32 +382,22 @@ class Basic extends Component {
                                             alignItems: 'center',
                                             justifyContent: 'center'
                                         }}>
-                                                    <span style={{
-                                                        marginRight: '37px',
-                                                        fontFamily: 'PingFangSC-Medium',
-                                                        fontWeight: 500,
-                                                        color: '#292929',
-                                                        fontSize: '14px',
-                                                        width: '57px',
+                                            <span style={{
+                                                marginRight: '37px',
+                                                fontFamily: 'PingFangSC-Medium',
+                                                fontWeight: 500,
+                                                color: '#292929',
+                                                fontSize: '14px',
+                                                width: '57px',
 
 
-                                                    }}>交易平台</span>
-                                            {/*<Input value={'IXTrader'}*/}
+                                            }}>交易平台</span>
 
-                                                   {/*style={{width: '200px', height: '36px'}}*/}
-                                                   {/*tagkey="lastNameCn"*/}
-                                            {/*/>*/}
 
                                             <Select
-
                                                 defaultValue={1}
-
-
                                                 style={{width: '200px', height: '36px'}}>
-
                                                 <Option key={1} value={1}>{'IXTrader'}</Option>
-
-
                                             </Select>
 
                                         </div>
@@ -430,16 +416,30 @@ class Basic extends Component {
                                                         color: '#292929',
                                                         fontSize: '14px',
                                                         width: '57px',
-
-
                                                     }}>交易账号</span>
-                                            <Input defaultValue={this.state.NameCn}
+                                            <Input defaultValue={this.state.mStarClientAccount}
                                                    onChange={(e) => {
-                                                       
-                                                       console.log('hcia e.target.value' , e.target.value)
+
+
+                                                       var self = this
+                                                       console.log('hcia e.target.value', e.target.value)
                                                        this.setState({
-                                                           NameCn: e.target.value,
+                                                           mStarClientAccount: e.target.value,
+                                                       }, () => {
+
+                                                           window.Axios.post('star/getStarLiveAccountDetail', {
+                                                               'starClientAccount':self.state.mStarClientAccount,
+
+                                                           }).then((response) => {
+
+                                                               console.log('hcia response', response)
+
+
+                                                           })
+
                                                        });
+
+
                                                    }}
                                                    style={{width: '200px', height: '36px'}}
                                                    tagkey="lastNameCn"
