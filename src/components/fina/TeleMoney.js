@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, message, Select, Steps, Card, Col, Row, Input} from 'antd';
+import {Button, Table, message, Select, Steps, Card, Col, Row, Input, Modal} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
@@ -254,7 +254,7 @@ class Basic extends Component {
 
     render() {
         const steps = [{
-            title: '入金审核',
+            title: '新增',
             content: 'First-content',
         }, {
             title: '财务审核',
@@ -268,7 +268,9 @@ class Basic extends Component {
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
 
                 <h2 style={{marginTop: 15}}>新增电汇入金</h2>
-                <BreadcrumbCustom first="财务管理" second="电汇入金" third="入金审核"/>
+                <BreadcrumbCustom first="财务管理" second="电汇入金" third="新增"/>
+
+
 
 
 
@@ -277,7 +279,7 @@ class Basic extends Component {
 "
                       bodyStyle={{padding: 0, margin: 0}}>
 
-                    <div style={{transform: "scale(1.5,1.5)"}}>
+                    <div style={{transform: "scale(1.3,1.3)"}}>
 
                         <Steps
                             style={{marginLeft: "30%", marginBottom: "20px", marginTop: "40px", width: "40%", height: 80}}
@@ -289,115 +291,607 @@ class Basic extends Component {
                     <Card
                         actions={[<Button style={{height: 40, width: 200}} block>创建 </Button>,
                             <Button style={{height: 40, width: 200}} block>重新输入 </Button>]}
-                        title={<span>新增客户入金</span>}
+                        title={null}
                         bordered={true}
                         headStyle={{textAlign: 'center', width: '100%'}}
                         style={{marginLeft: '20%', width: '60%'}}>
 
-                        <Row gutter={8}>
-                            <Col md={12}>
-                                <Card bordered={false}>
-
-                                    <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{width: 120}}>客户归属:</span>
-
-                                        <Input defaultValue={this.state.country} disabled={true}
-                                               style={{width: 120}} placeholder=""/>
-                                    </div>
-                                    <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{width: 120}}>交易平台:</span>
-                                        <Input defaultValue={this.state.lastNameCn}
-                                               style={{width: 120}} placeholder=""/>
-                                    </div>
-                                    <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{width: 120}}>交易账号:</span>
-                                        <Input defaultValue={this.state.lastNameCn}
-                                               style={{width: 120}} placeholder=""/>
-                                    </div>
-                                    <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{width: 120}}>账户余额:</span>
-                                        <Input defaultValue={this.state.lastNameCn}
-                                               style={{width: 120}} placeholder=""/>
-                                    </div>
-                                    <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{width: 120}}>执行金额:</span>
-                                        <Input defaultValue={this.state.lastNameCn}
-                                               style={{width: 120}} placeholder=""/>
-                                    </div>
-                                    <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{width: 120}}>汇率:</span>
-                                        <Input defaultValue={this.state.lastNameCn}
-                                               style={{width: 120}} placeholder=""/>
-                                    </div>
-
-                                </Card>
 
 
-                            </Col>
-                            <Col md={12}>
-
-                                <Card bordered={false}>
-                                    <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{minWidth: 120}}>*入金渠道:</span>
-                                        <Select value={this.state.mAnnualIncome}
-                                                style={{width: 120}}>
-                                            {this.mIncomesOPS}
-                                        </Select>
-                                    </div>
-                                    <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{minWidth: 120}}>*支付通道:</span>
-                                        <Select value={this.state.mAnnualIncome}
-                                                style={{width: 120}}>
-                                            {this.mIncomesOPS}
-                                        </Select>
-                                    </div>
-
-                                    <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{minWidth: 120}}>期望到账时间:</span>
-                                        <Input defaultValue={this.state.accountPassword}
-                                               disabled={true}
-                                               style={{width: 120}} placeholder=""/>
-                                    </div>
-                                    <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{minWidth: 120}}>账号币种:</span>
-                                        <Input defaultValue={this.state.accountPassword}
-                                               disabled={true}
-                                               style={{width: 120}} placeholder=""/>
-                                    </div>
-                                    <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{minWidth: 120}}>账号所有人:</span>
-                                        <Input defaultValue={this.state.accountPassword}
-                                               disabled={true}
-                                               style={{width: 120}} placeholder=""/>
-                                    </div>
-                                    <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{minWidth: 120}}>支付币种:</span>
-                                        <Input defaultValue={this.state.accountPassword}
-                                               disabled={true}
-                                               style={{width: 120}} placeholder=""/>
-                                    </div>
-                                </Card>
-                            </Col>
-                        </Row>
-
-                        <Row gutter={8}>
-                            <Col md={24}>
-                                <Card bordered={true}>
-
-                                    <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{width: 120}}>创建备注:</span>
-
-                                        <Input defaultValue={this.state.country}
-                                               style={{width: 120}} placeholder=""/>
-                                    </div>
+                        <div>
+                            <div style={{padding: 12, textAlign: 'center', align: 'center', background: 'white'}}>
+                                <p style={{
+                                    fontSize: 18,
+                                    fontFamily: 'PingFangSC-Medium',
+                                    fontWeight: 500,
+                                    color: 'rgba(51,51,51,1)'
+                                }}>新增客户入金
+                                </p>
+                            </div>
+                            <div>
+                                <Row>
+                                    <Col style={{textAlign: 'right', align: 'center', background: 'white'}} span={12}>
 
 
-                                </Card>
+                                        <div style={{
+
+                                            textAlign: 'left',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+                                        <span style={{
+
+                                            textAlign: 'left',
+                                            marginRight: '37px',
 
 
-                            </Col>
+                                            width: '57px',
+                                            fontFamily: 'PingFangSC-Medium',
+                                            fontWeight: 500,
+                                            color: '#292929',
+                                            fontSize: '14px'
 
-                        </Row>
+
+                                        }}>客户归属</span>
+                                            <Input value={'1'}
+
+                                                   style={{width: '200px', height: '36px'}}
+                                            />
+                                        </div>
+                                        <div style={{
+                                            marginTop: '24px',
+                                            textAlign: 'right',
+                                            width: '100%',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+                                        <span style={{
+                                            marginRight: '37px',
+                                            fontFamily: 'PingFangSC-Medium',
+                                            fontWeight: 500,
+                                            color: '#292929',
+                                            fontSize: '14px',
+                                            width: '57px',
+
+
+                                        }}>交易平台</span>
+                                            <Input defaultValue={this.state.NameCn}
+                                                   onChange={(e) => {
+                                                       this.setState({
+                                                           NameCn: e.target.value,
+                                                       });
+                                                   }}
+                                                   style={{width: '200px', height: '36px'}}
+                                                   tagkey="lastNameCn"
+                                            />
+                                        </div>
+                                        <div style={{
+                                            marginTop: '24px',
+                                            textAlign: 'right',
+                                            width: '100%',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+                                        <span style={{
+                                            marginRight: '37px',
+                                            fontFamily: 'PingFangSC-Medium',
+                                            fontWeight: 500,
+                                            color: '#292929',
+                                            fontSize: '14px',
+                                            width: '57px',
+
+
+                                        }}>交易账号</span>
+                                            <Input defaultValue={this.state.NameCn}
+                                                   onChange={(e) => {
+                                                       this.setState({
+                                                           NameCn: e.target.value,
+                                                       });
+                                                   }}
+                                                   style={{width: '200px', height: '36px'}}
+                                                   tagkey="lastNameCn"
+                                            />
+                                        </div>
+                                        <div style={{
+                                            marginTop: '24px',
+                                            textAlign: 'right',
+                                            width: '100%',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+                                        <span style={{
+                                            marginRight: '37px',
+                                            fontFamily: 'PingFangSC-Medium',
+                                            fontWeight: 500,
+                                            color: '#292929',
+                                            fontSize: '14px',
+                                            width: '57px',
+
+
+                                        }}>账户余额</span>
+                                            <Input defaultValue={this.state.NameCn}
+                                                   onChange={(e) => {
+                                                       this.setState({
+                                                           NameCn: e.target.value,
+                                                       });
+                                                   }}
+                                                   style={{width: '200px', height: '36px'}}
+                                                   tagkey="lastNameCn"
+                                            />
+                                        </div>
+                                        <div style={{
+                                            marginTop: '24px',
+                                            textAlign: 'right',
+                                            width: '100%',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+                                        <span style={{
+                                            marginRight: '37px',
+                                            fontFamily: 'PingFangSC-Medium',
+                                            fontWeight: 500,
+                                            color: '#292929',
+                                            fontSize: '14px',
+                                            width: '57px',
+
+
+                                        }}>执行金额</span>
+                                            <Input defaultValue={this.state.NameCn}
+                                                   onChange={(e) => {
+                                                       this.setState({
+                                                           NameCn: e.target.value,
+                                                       });
+                                                   }}
+                                                   style={{width: '200px', height: '36px'}}
+                                                   tagkey="lastNameCn"
+                                            />
+                                        </div>
+                                        <div style={{
+                                            marginTop: '24px',
+                                            textAlign: 'right',
+                                            width: '100%',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+                                        <span style={{
+                                            marginRight: '37px',
+                                            fontFamily: 'PingFangSC-Medium',
+                                            fontWeight: 500,
+                                            color: '#292929',
+                                            fontSize: '14px',
+                                            width: '57px',
+
+
+                                        }}>汇率</span>
+                                            <Input value={'1'}
+
+                                                   style={{width: '200px', height: '36px'}}
+                                                   tagkey="lastNameCn"
+                                            />
+                                        </div>
+
+                                    </Col>
+
+                                    <Col style={{background: 'white'}} span={12}>
+
+                                        <div style={{
+                                            textAlign: 'right',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+
+                                            <div style={{
+                                                width: '87px',
+                                                marginRight: '37px',
+                                            }}>
+                                           <span style={{
+
+                                               marginRight: '5px',
+                                               fontFamily: 'PingFangSC-Medium',
+                                               fontWeight: 500,
+                                               color: '#FF4D4D',
+                                               fontSize: '14px'
+
+
+                                           }}>*</span>
+
+
+                                                <span style={{
+                                                    fontFamily: 'PingFangSC-Medium',
+                                                    fontWeight: 500,
+                                                    color: '#292929',
+                                                    fontSize: '14px'
+
+                                                }}>入金渠道</span>
+                                            </div>
+                                            <Input defaultValue={this.state.NameCn}
+                                                   onChange={(e) => {
+                                                       this.setState({
+                                                           NameCn: e.target.value,
+                                                       });
+                                                   }}
+                                                   style={{width: '200px', height: '36px'}}
+                                                   tagkey="lastNameCn"
+                                            />
+                                        </div>
+                                        <div style={{
+                                            marginTop: '24px',
+                                            textAlign: 'right',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+
+                                            <div style={{
+                                                width: '87px',
+                                                marginRight: '37px',
+                                            }}>
+                                           <span style={{
+
+                                               marginRight: '5px',
+                                               fontFamily: 'PingFangSC-Medium',
+                                               fontWeight: 500,
+                                               color: '#FF4D4D',
+                                               fontSize: '14px'
+
+
+                                           }}>*</span>
+
+
+                                                <span style={{
+                                                    fontFamily: 'PingFangSC-Medium',
+                                                    fontWeight: 500,
+                                                    color: '#292929',
+                                                    fontSize: '14px'
+
+
+                                                }}>支付通道</span>
+
+                                            </div>
+
+                                            <Input defaultValue={this.state.NameCn}
+                                                   onChange={(e) => {
+                                                       this.setState({
+                                                           NameCn: e.target.value,
+                                                       });
+                                                   }}
+                                                   style={{width: '200px', height: '36px'}}
+                                                   tagkey="lastNameCn"
+                                            />
+                                        </div>
+                                        <div style={{
+                                            marginTop: '24px',
+                                            textAlign: 'right',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+
+                                            <div style={{
+                                                width: '87px',
+                                                marginRight: '37px',
+                                            }}>
+                                        <span style={{
+                                            textAlign: 'left',
+                                            width: '87px',
+                                            height: '22px',
+                                            fontFamily: 'PingFangSC-Medium',
+                                            fontWeight: 500,
+                                            color: '#292929',
+                                            fontSize: '14px'
+
+
+                                        }}>期望到账时间</span>
+
+                                            </div>
+
+
+                                            <Input defaultValue={this.state.NameCn}
+                                                   onChange={(e) => {
+                                                       this.setState({
+                                                           NameCn: e.target.value,
+                                                       });
+                                                   }}
+                                                   style={{width: '200px', height: '36px'}}
+                                                   tagkey="lastNameCn"
+                                            />
+                                        </div>
+                                        <div style={{
+                                            marginTop: '24px',
+                                            textAlign: 'right',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+
+                                            <div style={{
+                                                width: '87px',
+                                                marginRight: '37px',
+                                            }}>
+                                        <span style={{
+                                            textAlign: 'left',
+                                            width: '87px',
+                                            height: '22px',
+                                            fontFamily: 'PingFangSC-Medium',
+                                            fontWeight: 500,
+                                            color: '#292929',
+                                            fontSize: '14px'
+
+
+                                        }}>账户币种</span>
+
+                                            </div>
+
+
+                                            <Input defaultValue={this.state.NameCn}
+                                                   onChange={(e) => {
+                                                       this.setState({
+                                                           NameCn: e.target.value,
+                                                       });
+                                                   }}
+                                                   style={{width: '200px', height: '36px'}}
+                                                   tagkey="lastNameCn"
+                                            />
+                                        </div>
+                                        <div style={{
+                                            marginTop: '24px',
+                                            textAlign: 'right',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+
+                                            <div style={{
+                                                width: '87px',
+                                                marginRight: '37px',
+                                            }}>
+                                        <span style={{
+                                            textAlign: 'left',
+                                            width: '87px',
+                                            height: '22px',
+                                            fontFamily: 'PingFangSC-Medium',
+                                            fontWeight: 500,
+                                            color: '#292929',
+                                            fontSize: '14px'
+
+
+                                        }}>账户所有人</span>
+
+                                            </div>
+
+
+                                            <Input defaultValue={this.state.NameCn}
+                                                   onChange={(e) => {
+                                                       this.setState({
+                                                           NameCn: e.target.value,
+                                                       });
+                                                   }}
+                                                   style={{width: '200px', height: '36px'}}
+                                                   tagkey="lastNameCn"
+                                            />
+                                        </div>
+                                        <div style={{
+                                            marginTop: '24px',
+                                            textAlign: 'right',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+
+                                            <div style={{
+                                                width: '87px',
+                                                marginRight: '37px',
+                                            }}>
+                                        <span style={{
+                                            textAlign: 'left',
+                                            width: '87px',
+                                            height: '22px',
+                                            fontFamily: 'PingFangSC-Medium',
+                                            fontWeight: 500,
+                                            color: '#292929',
+                                            fontSize: '14px'
+
+
+                                        }}>支付币种</span>
+
+                                            </div>
+
+
+                                            <Input defaultValue={this.state.NameCn}
+                                                   onChange={(e) => {
+                                                       this.setState({
+                                                           NameCn: e.target.value,
+                                                       });
+                                                   }}
+                                                   style={{width: '200px', height: '36px'}}
+                                                   tagkey="lastNameCn"
+                                            />
+                                        </div>
+
+
+                                    </Col>
+                                </Row>
+
+                                <Row>
+                                    <Col style={{background: 'white'}} span={2}></Col>
+                                    <Col span={20}>
+                                        <div style={{
+                                            marginTop: '24px',
+                                            width: '737px',
+                                            height: 1,
+                                            background: '#E6E6E6',
+                                        }}></div>
+                                    </Col>
+                                    <Col style={{background: 'white'}} span={2}></Col>
+                                </Row>
+                                <Row style={{marginTop: '24px'}}>
+                                    <Col style={{textAlign: 'right', align: 'center', background: 'white'}} span={12}>
+
+
+                                        <div style={{
+
+                                            textAlign: 'left',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+                                        <span style={{
+
+                                            textAlign: 'left',
+                                            marginRight: '37px',
+
+
+                                            width: '57px',
+                                            fontFamily: 'PingFangSC-Medium',
+                                            fontWeight: 500,
+                                            color: '#292929',
+                                            fontSize: '14px'
+
+
+                                        }}>客户备注</span>
+                                            <Input defaultValue={this.state.NameCn}
+                                                   onChange={(e) => {
+                                                       this.setState({
+                                                           NameCn: e.target.value,
+                                                       });
+                                                   }}
+                                                   style={{width: '200px', height: '36px'}}
+                                                   tagkey="lastNameCn"
+                                            />
+                                        </div>
+
+
+                                    </Col>
+
+                                    <Col style={{background: 'white'}} span={12}>
+
+                                        <div style={{
+                                            textAlign: 'right',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+
+                                            <div style={{
+                                                width: '87px',
+                                                marginRight: '37px',
+                                            }}>
+                                        <span style={{
+                                            textAlign: 'left',
+                                            width: '87px',
+                                            height: '22px',
+                                            fontFamily: 'PingFangSC-Medium',
+                                            fontWeight: 500,
+                                            color: '#292929',
+                                            fontSize: '14px'
+
+
+                                        }}>申请时间</span>
+
+                                            </div>
+
+
+                                            <Input defaultValue={this.state.NameCn}
+                                                   onChange={(e) => {
+                                                       this.setState({
+                                                           NameCn: e.target.value,
+                                                       });
+                                                   }}
+                                                   style={{width: '200px', height: '36px'}}
+                                                   tagkey="lastNameCn"
+                                            />
+                                        </div>
+                                        <div style={{
+                                            marginTop: '24px',
+                                            textAlign: 'right',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+
+                                            <div style={{
+                                                width: '87px',
+                                                marginRight: '37px',
+                                            }}>
+                                        <span style={{
+                                            textAlign: 'left',
+                                            width: '87px',
+                                            height: '22px',
+                                            fontFamily: 'PingFangSC-Medium',
+                                            fontWeight: 500,
+                                            color: '#292929',
+                                            fontSize: '14px'
+
+
+                                        }}>渠道处理时间</span>
+
+                                            </div>
+
+
+                                            <Input defaultValue={this.state.NameCn}
+                                                   onChange={(e) => {
+                                                       this.setState({
+                                                           NameCn: e.target.value,
+                                                       });
+                                                   }}
+                                                   style={{width: '200px', height: '36px'}}
+                                                   tagkey="lastNameCn"
+                                            />
+                                        </div>
+                                        <div style={{
+                                            marginTop: '24px',
+                                            textAlign: 'right',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center'
+                                        }}>
+
+                                            <div style={{
+                                                width: '87px',
+                                                marginRight: '37px',
+                                            }}>
+                                        <span style={{
+                                            textAlign: 'left',
+                                            width: '87px',
+                                            height: '22px',
+                                            fontFamily: 'PingFangSC-Medium',
+                                            fontWeight: 500,
+                                            color: '#292929',
+                                            fontSize: '14px'
+
+
+                                        }}>入金到账时间</span>
+
+                                            </div>
+
+
+                                            <Input defaultValue={this.state.NameCn}
+                                                   onChange={(e) => {
+                                                       this.setState({
+                                                           NameCn: e.target.value,
+                                                       });
+                                                   }}
+                                                   style={{width: '200px', height: '36px'}}
+                                                   tagkey="lastNameCn"
+                                            />
+                                        </div>
+
+
+                                    </Col>
+                                </Row>
+                            </div>
+                            {/*<div style={{padding: 48, textAlign: 'center', align: 'center', background: 'white'}}>*/}
+                               {/**/}
+                            {/*</div>*/}
+                        </div>
+
 
                     </Card>
                 </Card>

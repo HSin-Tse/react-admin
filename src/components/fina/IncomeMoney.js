@@ -919,7 +919,6 @@ class Basic extends Component {
                             </Col>
                         </Row>
                     </div>
-
                     <div style={{padding: 48, textAlign: 'center', align: 'center', background: 'white'}}>
                         <Button
                             onClick={() => {
