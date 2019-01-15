@@ -27,15 +27,15 @@ class Basic extends Component {
             loading: false,
             totalPage: 1,
             current: 0,
-            mBelongBkUserId: undefined,
             mStarClientAccount: undefined,
             accrounRes: undefined,
+            mBelongBkUserId: undefined,
             mNetEquity: '',
             mName: '',
             mRate: '',
             mNote: '',
             mAccountTxnCurry: '',
-            mExpectTime: '',
+            mExpectTime: moment(Date.now()),
             mExecTxnAmt: '',
             currentStep: 0,
             pgsize: 20,
@@ -366,7 +366,21 @@ class Basic extends Component {
                             }}
 
                             style={{margin: '12px', background: '#F6D147', height: 40, width: 180}} block>创建 </Button>,
-                            <Button style={{margin: '12px', height: 40, width: 180}} block>重新输入 </Button>]}
+                            <Button
+                                onClick={()=>{
+
+                                    this.setState({
+                                        mBelongBkUserId: undefined,
+                                        mNetEquity: '',
+                                        mName: '',
+                                        mRate: '',
+                                        mNote: '',
+                                        mAccountTxnCurry: '',
+                                        mExpectTime: moment(Date.now()),
+                                        mExecTxnAmt: '',
+                                    })
+                                }}
+                                style={{margin: '12px', height: 40, width: 180}} block>重新输入 </Button>]}
                         title={null}
                         bordered={true}
                         headStyle={{textAlign: 'center', width: '100%'}}
@@ -418,6 +432,7 @@ class Basic extends Component {
                                                     this.setState({mBelongBkUserId: value})
                                                     console.log('hcia value', value)
                                                 }}
+                                                value={this.state.mBelongBkUserId}
                                                 style={{width: '200px', height: '36px'}}>
 
                                                 {imgsTag}
@@ -553,7 +568,7 @@ class Basic extends Component {
 
 
                                                     }}>执行金额</span>
-                                            <Input defaultValue={this.state.mExecTxnAmt}
+                                            <Input value={this.state.mExecTxnAmt}
                                                    onChange={(e) => {
                                                        this.setState({
                                                            mExecTxnAmt: e.target.value,
@@ -581,7 +596,7 @@ class Basic extends Component {
 
 
                                                     }}>汇率</span>
-                                            <Input defaultValue={this.state.mRate}
+                                            <Input value={this.state.mRate}
                                                    onChange={(e) => {
                                                        this.setState({
                                                            mRate: e.target.value,
@@ -704,6 +719,8 @@ class Basic extends Component {
                                             <DatePicker
                                                 style={{width: '200px', height: '36px'}}
 
+
+                                                value={moment(this.state.mExpectTime, dateFormat)}
                                                 onChange={(date, dateString) => {
 
                                                     var date = new Date(dateString + ' 00:00:00:000');
@@ -711,7 +728,7 @@ class Basic extends Component {
 
                                                     console.log('hcia time1', time1)
 
-                                                    this.setState({mExpectTime: time1})
+                                                    this.setState({mExpectTime: date})
                                                     // console.log('hcia date' , date)
 
                                                     // console.log('hcia ',date, dateString);
@@ -859,7 +876,7 @@ class Basic extends Component {
 
 
                                                     }}>创建备注</span>
-                                            <Input defaultValue={this.state.mNote}
+                                            <Input value={this.state.mNote}
                                                    onChange={(e) => {
                                                        this.setState({
                                                            mNote: e.target.value,
