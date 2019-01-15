@@ -248,8 +248,7 @@ class Basic extends Component {
                 <BreadcrumbCustom first="财务管理" second="电汇入金" third="新增"/>
 
 
-                <Card style={{marginTop: 15}} title="入金审核
-"
+                <Card style={{marginTop: 15}} title={null}
                       bodyStyle={{padding: '0px', margin: '0px'}}>
 
                     <div style={{transform: "scale(1.3,1.3)"}}>
@@ -710,7 +709,7 @@ class Basic extends Component {
                                     </Col>
                                     <Col style={{background: 'white'}} span={2}></Col>
                                 </Row>
-                                <Row style={{marginTop: '24px'}}>
+                                <Row style={{marginTop: '24px',marginBottom: '24px'}}>
                                     <Col style={{textAlign: 'right', align: 'center', background: 'white'}} span={12}>
 
 
@@ -864,7 +863,13 @@ class Basic extends Component {
 
 
                                     </Col>
+
+
+
                                 </Row>
+
+
+
                             </div>
 
                         </div>
