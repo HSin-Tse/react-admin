@@ -110,15 +110,15 @@ class Login extends React.Component {
                     <div className="login-logoa">
                         <img style={{height: 35, width: 35}} src={avater} alt="头像"/>
                     </div>
-                    <div className="login-logo">
-                        <span>IX TRADER CRM</span>
-                    </div>
+                    {/*<div className="login-logo">*/}
+                        {/*<span>IX TRADER CRM</span>*/}
+                    {/*</div>*/}
                     <Form onSubmit={this.handleSubmit} style={{maxWidth: '300px'}}>
                         <FormItem>
                             {getFieldDecorator('userName', {
                                 rules: [{required: true, message: '请输入用户名!'}],
                             })(
-                                <Input prefix={<Icon type="user" style={{fontSize: 13}}/>} placeholder="--ad--"/>
+                                <Input prefix={<Icon type="user" style={{fontSize: 13}}/>} placeholder=""/>
                             )}
                         </FormItem>
                         <FormItem>
@@ -127,7 +127,7 @@ class Login extends React.Component {
                             })(
                                 <Input prefix={<Icon type="lock" style={{fontSize: 13}}/>}
                                        type="password"
-                                       placeholder="-- 123456 --"/>
+                                       placeholder=""/>
                             )}
                         </FormItem>
                         <FormItem>
