@@ -603,9 +603,7 @@ export default class WhiteList extends Component {
                     title={'白名单'}
                     extra={[
 
-                        <CSVLink filename={"白名單.csv"} data={this.state.bklistA} headers={this.columns}>
-                            <Button>csv</Button>
-                        </CSVLink>, <Button style={{marginLeft: 15}} onClick={() => this.showModal()}>新增白名单用户</Button>]}
+                         <Button style={{marginLeft: 15}} onClick={() => this.showModal()}>新增白名单用户</Button>]}
                 >
                     <Table
                         rowKey="id"
