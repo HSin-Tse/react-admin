@@ -2,11 +2,14 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, message, Select, Steps, Card, Col, Row, Input, Modal, Tooltip, Tag} from 'antd';
+import {Button, Table, message, Select, Steps, Card, Col, Row, Input, Modal, Tooltip, Tag, DatePicker} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
+import moment from 'moment';
+
+const dateFormat = 'YYYY-MM-DD';
 
 const Step = Steps.Step;
 const Option = Select.Option;
@@ -28,8 +31,12 @@ class Basic extends Component {
             accrounRes: undefined,
             mNetEquity: '',
             mName: '',
+            mRate: '',
+            mNote: '',
+            mExpectTime: '',
+            mExecTxnAmt: '',
             currentStep: 0,
-            pgsize: 10,
+            pgsize: 20,
             loadFor: false,
 
         };
@@ -191,6 +198,14 @@ class Basic extends Component {
 
     }
 
+    // onChangeBirth = (value, dateString) => {
+    //     var date = new Date(dateString + ' 00:00:00:000');
+    //     var time1 = date.getTime();
+    //     this.state.mExpectDate = time1;
+    //     this.setState({
+    //         mExpectDate: dateString,
+    //     });
+    // }
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
         const year = dateObj.getFullYear() // 获取年，
@@ -267,6 +282,25 @@ class Basic extends Component {
                 {/*<div>accrounRes :{JSON.stringify(this.state.accrounRes)}</div>*/}
                 <div>mBelongBkUserId :{JSON.stringify(this.state.mBelongBkUserId)}</div>
                 <div>mNetEquity :{JSON.stringify(this.state.mNetEquity)}</div>
+                <div>mNote :{JSON.stringify(this.state.mNote)}</div>
+                <div>mExpectTime :{JSON.stringify(this.state.mExpectTime)}</div>
+                <div>mExecTxnAmt :{JSON.stringify(this.state.mExecTxnAmt)}</div>
+                <div>mRate :{JSON.stringify(this.state.mRate)}</div>
+
+                {/*<DatePicker onChange={(date, dateString) => {*/}
+
+                {/*var date = new Date(dateString + ' 00:00:00:000');*/}
+                {/*var time1 = date.getTime();*/}
+
+                {/*console.log('hcia time1', time1)*/}
+                {/*console.log('hcia date', date)*/}
+
+                {/*console.log('hcia ', date, dateString);*/}
+                {/*}}/>*/}
+                {/*<DatePicker value={moment(this.state.mExpectDate, dateFormat)}*/}
+                {/*onChange={this.onChangeBirth}*/}
+                {/*format={dateFormat}/>*/}
+
 
                 <h2 style={{marginTop: 15}}>新增电汇入金</h2>
                 <BreadcrumbCustom first="财务管理" second="电汇入金" third="新增"/>
@@ -296,17 +330,19 @@ class Basic extends Component {
 
                             onClick={() => {
                                 window.Axios.post('finance/createDeposit', {
-                                    'belongBkUserId': this.state.mBelongBkUserId,
-                                    'accountFrom': 1,
-                                    'starClientAccount': this.state.mStarClientAccount,
-                                    'execTxnAmt': 1,
-                                    'execTxnCurry': 1,
-                                    'rate': 1,
+                                    'belongBkUserId': this.state.mBelongBkUserId,//
+                                    'accountFrom': 1,//
+                                    'starClientAccount': this.state.mStarClientAccount,//
+                                    'execTxnAmt': this.state.mExecTxnAmt,
+                                    'execTxnCurry': 'CNY',
+                                    'rate': this.state.mRate,
                                     'accountTxnCurry': 'USD',
-                                    'expectTime': 1,
-                                    'content': 1,
+                                    'expectTime': this.state.mExpectTime,
+                                    'content': this.state.mNote,
                                 }).then((response) => {
 
+
+                                    message.success('操作成功')
                                     // self.setState({
                                     //         totalPage: response.data.data.totalPage,
                                     //         loading: false,
@@ -435,26 +471,25 @@ class Basic extends Component {
                                                        }, () => {
 
                                                            window.Axios.post('star/getStarLiveAccountDetail', {
-                                                               'starClientAccount':self.state.mStarClientAccount,
+                                                               'starClientAccount': self.state.mStarClientAccount,
 
                                                            }).then((response) => {
 
                                                                console.log('hcia response', response)
 
 
-                                                               if(response.data.data){
+                                                               if (response.data.data) {
                                                                    self.setState({
-                                                                       mNetEquity:response.data.data[0].netEquity,
-                                                                       mName:response.data.data[0].name
+                                                                       mNetEquity: response.data.data[0].netEquity,
+                                                                       mName: response.data.data[0].name
                                                                    })
-                                                               }else{
+                                                               } else {
 
                                                                    self.setState({
-                                                                       mNetEquity:'',
-                                                                       mName:'',
+                                                                       mNetEquity: '',
+                                                                       mName: '',
                                                                    })
                                                                }
-
 
 
                                                            })
@@ -508,10 +543,10 @@ class Basic extends Component {
 
 
                                                     }}>执行金额</span>
-                                            <Input defaultValue={this.state.NameCn}
+                                            <Input defaultValue={this.state.mExecTxnAmt}
                                                    onChange={(e) => {
                                                        this.setState({
-                                                           NameCn: e.target.value,
+                                                           mExecTxnAmt: e.target.value,
                                                        });
                                                    }}
                                                    style={{width: '200px', height: '36px'}}
@@ -536,8 +571,12 @@ class Basic extends Component {
 
 
                                                     }}>汇率</span>
-                                            <Input value={'1'}
-
+                                            <Input defaultValue={this.state.mRate}
+                                                   onChange={(e) => {
+                                                       this.setState({
+                                                           mRate: e.target.value,
+                                                       });
+                                                   }}
                                                    style={{width: '200px', height: '36px'}}
 
                                             />
@@ -578,12 +617,8 @@ class Basic extends Component {
 
                                                 }}>入金渠道</span>
                                             </div>
-                                            <Input defaultValue={this.state.NameCn}
-                                                   onChange={(e) => {
-                                                       this.setState({
-                                                           NameCn: e.target.value,
-                                                       });
-                                                   }}
+                                            <Input value={'电汇'}
+
                                                    style={{width: '200px', height: '36px'}}
 
                                             />
@@ -623,12 +658,8 @@ class Basic extends Component {
 
                                             </div>
 
-                                            <Input defaultValue={this.state.NameCn}
-                                                   onChange={(e) => {
-                                                       this.setState({
-                                                           NameCn: e.target.value,
-                                                       });
-                                                   }}
+                                            <Input value={'电汇'}
+
                                                    style={{width: '200px', height: '36px'}}
 
                                             />
@@ -660,15 +691,23 @@ class Basic extends Component {
                                             </div>
 
 
-                                            <Input defaultValue={this.state.NameCn}
-                                                   onChange={(e) => {
-                                                       this.setState({
-                                                           NameCn: e.target.value,
-                                                       });
-                                                   }}
-                                                   style={{width: '200px', height: '36px'}}
+                                            <DatePicker
+                                                style={{width: '200px', height: '36px'}}
 
-                                            />
+                                                onChange={(date, dateString) => {
+
+                                                    var date = new Date(dateString + ' 00:00:00:000');
+                                                    var time1 = date.getTime();
+
+                                                    console.log('hcia time1', time1)
+
+                                                    this.setState({mExpectTime: time1})
+                                                    // console.log('hcia date' , date)
+
+                                                    // console.log('hcia ',date, dateString);
+                                                    // console.log('hcia',date, dateString);
+                                                }}/>
+
                                         </div>
                                         <div style={{
                                             marginTop: '24px',
@@ -697,7 +736,7 @@ class Basic extends Component {
                                             </div>
 
 
-                                            <Input defaultValue={'USD'}
+                                            <Input value={'USD'}
 
                                                    style={{width: '200px', height: '36px'}}
 
@@ -762,12 +801,8 @@ class Basic extends Component {
                                             </div>
 
 
-                                            <Input defaultValue={this.state.NameCn}
-                                                   onChange={(e) => {
-                                                       this.setState({
-                                                           NameCn: e.target.value,
-                                                       });
-                                                   }}
+                                            <Input value={'CNY'}
+
                                                    style={{width: '200px', height: '36px'}}
 
                                             />
@@ -813,11 +848,11 @@ class Basic extends Component {
                                                         fontSize: '14px'
 
 
-                                                    }}>客户备注</span>
-                                            <Input defaultValue={this.state.NameCn}
+                                                    }}>创建备注</span>
+                                            <Input defaultValue={this.state.mNote}
                                                    onChange={(e) => {
                                                        this.setState({
-                                                           NameCn: e.target.value,
+                                                           mNote: e.target.value,
                                                        });
                                                    }}
                                                    style={{width: '200px', height: '36px'}}
@@ -830,116 +865,6 @@ class Basic extends Component {
 
                                     <Col style={{background: 'white'}} span={12}>
 
-                                        <div style={{
-                                            textAlign: 'right',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center'
-                                        }}>
-
-                                            <div style={{
-                                                width: '87px',
-                                                marginRight: '37px',
-                                            }}>
-                                                    <span style={{
-                                                        textAlign: 'left',
-                                                        width: '87px',
-                                                        height: '22px',
-                                                        fontFamily: 'PingFangSC-Medium',
-                                                        fontWeight: 500,
-                                                        color: '#292929',
-                                                        fontSize: '14px'
-
-
-                                                    }}>申请时间</span>
-
-                                            </div>
-
-
-                                            <Input defaultValue={this.state.NameCn}
-                                                   onChange={(e) => {
-                                                       this.setState({
-                                                           NameCn: e.target.value,
-                                                       });
-                                                   }}
-                                                   style={{width: '200px', height: '36px'}}
-
-                                            />
-                                        </div>
-                                        <div style={{
-                                            marginTop: '24px',
-                                            textAlign: 'right',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center'
-                                        }}>
-
-                                            <div style={{
-                                                width: '87px',
-                                                marginRight: '37px',
-                                            }}>
-                                                    <span style={{
-                                                        textAlign: 'left',
-                                                        width: '87px',
-                                                        height: '22px',
-                                                        fontFamily: 'PingFangSC-Medium',
-                                                        fontWeight: 500,
-                                                        color: '#292929',
-                                                        fontSize: '14px'
-
-
-                                                    }}>渠道处理时间</span>
-
-                                            </div>
-
-
-                                            <Input defaultValue={this.state.NameCn}
-                                                   onChange={(e) => {
-                                                       this.setState({
-                                                           NameCn: e.target.value,
-                                                       });
-                                                   }}
-                                                   style={{width: '200px', height: '36px'}}
-
-                                            />
-                                        </div>
-                                        <div style={{
-                                            marginTop: '24px',
-                                            textAlign: 'right',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center'
-                                        }}>
-
-                                            <div style={{
-                                                width: '87px',
-                                                marginRight: '37px',
-                                            }}>
-                                                    <span style={{
-                                                        textAlign: 'left',
-                                                        width: '87px',
-                                                        height: '22px',
-                                                        fontFamily: 'PingFangSC-Medium',
-                                                        fontWeight: 500,
-                                                        color: '#292929',
-                                                        fontSize: '14px'
-
-
-                                                    }}>入金到账时间</span>
-
-                                            </div>
-
-
-                                            <Input defaultValue={this.state.NameCn}
-                                                   onChange={(e) => {
-                                                       this.setState({
-                                                           NameCn: e.target.value,
-                                                       });
-                                                   }}
-                                                   style={{width: '200px', height: '36px'}}
-
-                                            />
-                                        </div>
 
 
                                     </Col>

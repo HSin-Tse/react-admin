@@ -598,6 +598,7 @@ class PassOpenD extends Component {
                                                 onChange={this.onChangeBirth}
                                                 format={dateFormat}/>
 
+
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*性别</span>
