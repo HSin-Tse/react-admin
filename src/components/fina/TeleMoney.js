@@ -19,6 +19,7 @@ class Basic extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            accountTxnCurryList: [],
             bkroleList: [],
             selectedRowKeys: [],
             date: new Date(),
@@ -33,6 +34,7 @@ class Basic extends Component {
             mName: '',
             mRate: '',
             mNote: '',
+            mAccountTxnCurry: '',
             mExpectTime: '',
             mExecTxnAmt: '',
             currentStep: 0,
@@ -273,6 +275,13 @@ class Basic extends Component {
 
         ))
 
+        const accountTList = this.state.accountTxnCurryList.map(v1 => (
+
+            <Option key={v1.id} value={v1.id}>{v1.displayName ? v1.displayName : 'null'}</Option>
+
+        ))
+
+
 
         return (
 
@@ -283,6 +292,7 @@ class Basic extends Component {
                 <div>mBelongBkUserId :{JSON.stringify(this.state.mBelongBkUserId)}</div>
                 <div>mNetEquity :{JSON.stringify(this.state.mNetEquity)}</div>
                 <div>mNote :{JSON.stringify(this.state.mNote)}</div>
+                <div>mAccountTxnCurry :{JSON.stringify(this.state.mAccountTxnCurry)}</div>
                 <div>mExpectTime :{JSON.stringify(this.state.mExpectTime)}</div>
                 <div>mExecTxnAmt :{JSON.stringify(this.state.mExecTxnAmt)}</div>
                 <div>mRate :{JSON.stringify(this.state.mRate)}</div>
@@ -336,7 +346,7 @@ class Basic extends Component {
                                     'execTxnAmt': this.state.mExecTxnAmt,
                                     'execTxnCurry': 'CNY',
                                     'rate': this.state.mRate,
-                                    'accountTxnCurry': 'USD',
+                                    'accountTxnCurry': 'USD',//this.state.mAccountTxnCurry
                                     'expectTime': this.state.mExpectTime,
                                     'content': this.state.mNote,
                                 }).then((response) => {
@@ -736,7 +746,7 @@ class Basic extends Component {
                                             </div>
 
 
-                                            <Input value={'USD'}
+                                            <Input value={this.state.mAccountTxnCurry}
 
                                                    style={{width: '200px', height: '36px'}}
 
