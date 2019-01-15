@@ -18,18 +18,12 @@ class Basic extends Component {
             selectedRowKeys: [],
             date: new Date(),
             userList: [],
-            leavgeList: [],
-            nodeList: [],
             loading: false,
-            searchPhone: '',
             totalPage: 1,
-            modeState: 1,
-            forbiddenValue: 0,
             current: 0,
             currentStep: 0,
             pgsize: 10,
             loadFor: false,
-            suspend_reason_type: []
 
         };
     }
@@ -41,28 +35,8 @@ class Basic extends Component {
             'pageLog': '入金审核',
             'commentLog': '查看了入金审核',
             'typeLog': 2,
-        }).then(function (response) {
-
-
-        });
-        let self = this;
-        window.Axios.post('dict/openDict', {
-            'keys': 'suspend_reason_type',
-        }).then(function (response) {
-            self.setState({
-                    suspend_reason_type: response.data.data.suspend_reason_type
-                }
-            );
         })
-
-        window.Axios.post('dict/leverageList', {
-            'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
-        }).then((response) => {
-            console.log('hcia response', response)
-            self.setState({
-                leavgeList: response.data.data,
-            })
-        });
+        let self = this;
 
 
         this.columns = [
@@ -206,10 +180,13 @@ class Basic extends Component {
                 loading: true,
             }
         );
-        window.Axios.post('star/getStarLiveAccountList', {
+
+
+        window.Axios.post('finance/getDepositHistory', {
+            'listType': 1,
             'pageSize': self.state.pgsize,
             'pageNo': self.state.current,
-        }).then(function (response) {
+        }).then((response) => {
             console.log(response);
 
             self.setState({
@@ -271,31 +248,33 @@ class Basic extends Component {
                 <BreadcrumbCustom first="财务管理" second="电汇入金" third="新增"/>
 
 
-
-
-
-
                 <Card style={{marginTop: 15}} title="入金审核
 "
-                      bodyStyle={{padding: 0, margin: 0}}>
+                      bodyStyle={{padding: '0px', margin: '0px'}}>
 
                     <div style={{transform: "scale(1.3,1.3)"}}>
 
                         <Steps
-                            style={{marginLeft: "30%", marginBottom: "20px", marginTop: "40px", width: "40%", height: 80}}
+                            style={{
+                                marginLeft: "30%",
+                                marginBottom: "20px",
+                                marginTop: "40px",
+                                width: "40%",
+                                height: 80
+                            }}
                             labelPlacement={'vertical'} current={this.state.currentStep}>
                             {steps.map(item => <Step key={item.title} title={item.title}/>)}
                         </Steps>
 
                     </div>
                     <Card
+                        bodyStyle={{padding: '0px', margin: '0px'}}
                         actions={[<Button style={{height: 40, width: 200}} block>创建 </Button>,
                             <Button style={{height: 40, width: 200}} block>重新输入 </Button>]}
                         title={null}
                         bordered={true}
                         headStyle={{textAlign: 'center', width: '100%'}}
                         style={{marginLeft: '20%', width: '60%'}}>
-
 
 
                         <div>
@@ -887,9 +866,7 @@ class Basic extends Component {
                                     </Col>
                                 </Row>
                             </div>
-                            {/*<div style={{padding: 48, textAlign: 'center', align: 'center', background: 'white'}}>*/}
-                               {/**/}
-                            {/*</div>*/}
+
                         </div>
 
 
@@ -906,7 +883,7 @@ class Basic extends Component {
 
                            columns={this.columns}
                            dataSource={this.state.userList}
-                           scroll={{x: 2000}}
+                           scroll={{x: 1600}}
                            bordered
                            loading={this.state.loading}
                            pagination={{  // 分页
