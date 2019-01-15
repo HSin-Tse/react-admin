@@ -24,7 +24,22 @@ class Basic extends Component {
             pgsize: 20,
             loadFor: false,
             detailMoVisible: false,
-            depositDetail: {},
+            depositDetail: {
+                comment_step1:{
+
+                    "id":311,
+                    "type":13,
+                    "belongUserId":"-1",
+                    "ipAddress":null,
+                    "delFlag":0,
+                    "bkUserName":null,
+                    "createDate":1547187714000,
+                    "bkUserId":null,
+                    "updateDate":null,
+                    "recordId":10,
+                    "comment":"????????"
+                }
+            },
 
         };
     }
@@ -49,6 +64,32 @@ class Basic extends Component {
 
 
     componentDidMount() {
+
+        // window.Axios.post('back/getBackUserList', {
+        //     'pageSize': self.state.pgsize,
+        //     'pageNo': self.state.current,
+        //     email: this.state.selectMail,
+        //     mobile: this.state.selectPhoneF,
+        //     nationalId: this.state.selectID,
+        //     starClientAccount: this.state.starClientAccount,
+        //     startTime: this.state.selectTimeStart,
+        //     endTime: this.state.selectTimeEnd,
+        // }).then(function (response) {
+        //     console.log(response);
+        //
+        //     self.setState({
+        //             totalPage: response.data.data.totalPage,
+        //             loading: false,
+        //             userList: response.data.data.list
+        //         }
+        //     );
+        //
+        //
+        // }).catch(function (error) {
+        //     console.log(error);
+        // });
+
+
         window.Axios.post('back/addLogHistory', {
             'moduleLog': '财务管理',
             'pageLog': '入金管理',
@@ -181,7 +222,6 @@ class Basic extends Component {
         console.log('hcia recodrd', recodrd)
 
 
-
         var self = this
         window.Axios.post('/finance/getDepositDetail', {
             id: recodrd.id,
@@ -264,7 +304,6 @@ class Basic extends Component {
                 >
 
                     <Table rowKey="id"
-
                            columns={this.columns}
                            dataSource={this.state.userList}
                            scroll={{x: 1600}}
@@ -280,11 +319,9 @@ class Basic extends Component {
 
                 <Modal
                     bodyStyle={{
-
                         background: 'white',
                         padding: 0,
                         margin: 0,
-
                         width: 1000,
                         height: 780
                     }}
@@ -329,14 +366,9 @@ class Basic extends Component {
 
 
                                         }}>客户归属</span>
-                                    <Input defaultValue={this.state.NameCn}
-                                           onChange={(e) => {
-                                               this.setState({
-                                                   NameCn: e.target.value,
-                                               });
-                                           }}
+                                    <Input value={this.state.depositDetail.bkUserId}
+
                                            style={{width: '200px', height: '36px'}}
-                                           tagkey="lastNameCn"
                                     />
                                 </div>
                                 <div style={{
@@ -469,12 +501,8 @@ class Basic extends Component {
 
 
                                         }}>汇率</span>
-                                    <Input defaultValue={'1.1'}
-                                           onChange={(e) => {
-                                               this.setState({
-                                                   NameCn: e.target.value,
-                                               });
-                                           }}
+                                    <Input value={this.state.depositDetail.rate}
+
                                            style={{width: '200px', height: '36px'}}
                                            tagkey="lastNameCn"
                                     />
@@ -759,7 +787,7 @@ class Basic extends Component {
                                             fontSize: '14px'
 
 
-                                        }}>客户归属</span>
+                                        }}>客户备注</span>
                                     <Input defaultValue={this.state.NameCn}
                                            onChange={(e) => {
                                                this.setState({
@@ -797,7 +825,7 @@ class Basic extends Component {
                                             fontSize: '14px'
 
 
-                                        }}>期望到账时间</span>
+                                        }}>申请时间</span>
 
                                     </div>
 
@@ -834,7 +862,7 @@ class Basic extends Component {
                                             fontSize: '14px'
 
 
-                                        }}>账户所有人</span>
+                                        }}>渠道处理时间</span>
 
                                     </div>
 
@@ -871,7 +899,7 @@ class Basic extends Component {
                                             fontSize: '14px'
 
 
-                                        }}>支付币种</span>
+                                        }}>入金到账时间</span>
 
                                     </div>
 
