@@ -66,10 +66,10 @@ class CustomerUserInfo extends Component {
 
 
                 <h2 style={{marginTop: 15}}>
-                    行為信息
+                    行为信息
                 </h2>
 
-                <BreadcrumbCustom first="用户總表" second="行為信息"/>
+                <BreadcrumbCustom first="用户總表" second="行为信息"/>
                 <Card
                     type="inner"
                     title="基本信息"
@@ -100,7 +100,7 @@ class CustomerUserInfo extends Component {
                 <Card
                     style={{marginTop: 16}}
                     type="inner"
-                    title="行為信息"
+                    title="行为信息"
                 >
                     < Meta
                         title={this.state.userList.length == 0 ? 'APP版本:' : 'APP版本:' + this.state.userList.base.versionInfo}/>

@@ -223,7 +223,7 @@ class CustomerSummary extends Component {
                         <Button size={'small'} style={{background: '#FDD000'}}
                                 onClick={() => this.goToUserAccountInfo(record)}>開戶</Button>
                         <Button disabled={!record.belongUserId} size={'small'} style={{background: '#FDD000'}}
-                                onClick={() => this.goToUserInfo(record.belongUserId)}>行為</Button>
+                                onClick={() => this.goToUserInfo(record.belongUserId)}>行为</Button>
                     </div>
                 )
             }, {
@@ -451,6 +451,16 @@ class CustomerSummary extends Component {
                             message.error('dev log belongUserId :' + this.state.nowRECODE.belongUserId)
                             return
                         }
+
+
+                        window.Axios.post('back/addLogHistory', {
+                            'moduleLog': '用户管理',
+                            'pageLog': '用户总表',
+                            'commentLog': '重置交易密码',
+                            'typeLog': 3,
+                        });
+
+
                         window.Axios.post('star/updateStarLiveAccount', {
                             "id": this.state.nowRECODE.starAccountId,
                             "accountPassword": this.state.accountPassword,
@@ -541,6 +551,16 @@ class CustomerSummary extends Component {
                             message.error('dev log belongUserId :' + this.state.nowRECODE.belongUserId)
                             return
                         }
+
+
+                        window.Axios.post('back/addLogHistory', {
+                            'moduleLog': '用户管理',
+                            'pageLog': '用户总表',
+                            'commentLog': '解绑手机号',
+                            'typeLog': 3,
+                        });
+
+
                         window.Axios.post('star/unBindStarLiveAccount', {
                             "id": this.state.nowRECODE.starAccountId,
                             "belongUserId": this.state.nowRECODE.belongUserId,
@@ -619,6 +639,17 @@ class CustomerSummary extends Component {
         self.setState({
             opDayRecord: record,
         }, () => {
+
+
+
+
+            window.Axios.post('back/addLogHistory', {
+                'moduleLog': '用户管理',
+                'pageLog': '用户总表',
+                'commentLog': '查看备注',
+                'typeLog': 3,
+            });
+
             window.Axios.post('auth/getUserCommentList', {
                 'belongUserId': this.state.opDayRecord.belongUserId,
             }).then(function (response) {
@@ -655,6 +686,15 @@ class CustomerSummary extends Component {
             opDayRecord: record,
             theComment: ''
         }, () => {
+
+
+            window.Axios.post('back/addLogHistory', {
+                'moduleLog': '用户管理',
+                'pageLog': '用户总表',
+                'commentLog': '查看备注',
+                'typeLog': 3,
+            });
+
             window.Axios.post('auth/getUserCommentList', {
                 'belongUserId': this.state.opDayRecord.belongUserId,
             }).then(function (response) {
@@ -671,6 +711,15 @@ class CustomerSummary extends Component {
     }
     handleAddComment = (e) => {
         let self = this;
+
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '用户管理',
+            'pageLog': '用户总表',
+            'commentLog': '添加备注',
+            'typeLog': 3,
+        });
+
+
         window.Axios.post('auth/addUserComment', {
             content: self.state.theComment,
             belongUserId: self.state.theBelongUserId,
@@ -702,6 +751,15 @@ class CustomerSummary extends Component {
         let belongUserId = record.belongUserId
 
         var self = this
+
+
+
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '用户管理',
+            'pageLog': '用户总表',
+            'commentLog': '解绑',
+            'typeLog': 3,
+        });
 
 
         window.Axios.post('auth/getUserCommentList', {

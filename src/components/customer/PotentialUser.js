@@ -464,7 +464,12 @@ export default class PotentialUser extends Component {
     seeUSer = (record) => {
 
         console.log('hcia record' , record)
-        console.log('hcia record' , record)
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '用户管理',
+            'pageLog': 'Leads管理',
+            'commentLog': '查看用户',
+            'typeLog': 3,
+        });
 
 
         this.props.history.push('/app/pass/passopen/user' + record.leadId)
@@ -478,6 +483,14 @@ export default class PotentialUser extends Component {
     }
     handleAddComment = (e) => {
         let self = this;
+
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '用户管理',
+            'pageLog': 'Leads管理',
+            'commentLog': '添加回访',
+            'typeLog': 3,
+        });
+
         window.Axios.post('auth/addUserComment', {
             content: self.state.theComment,
             belongUserId: self.state.theBelongUserId,
@@ -496,6 +509,14 @@ export default class PotentialUser extends Component {
 
     requestUserCommentList = (record) => {
         var self = this;
+
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '用户管理',
+            'pageLog': 'Leads管理',
+            'commentLog': '查看备注',
+            'typeLog': 3,
+        });
+
         window.Axios.post('/auth/getUserCommentList', {
             belongUserId: record,
             pageNo: this.state.currentComment,
