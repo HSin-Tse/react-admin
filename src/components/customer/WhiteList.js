@@ -195,7 +195,15 @@ export default class WhiteList extends Component {
     };
     requestUserCommentList = (record) => {
 
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '用户管理',
+            'pageLog': '白名单',
+            'commentLog': '查看了备注',
+            'typeLog': 3,
+        }).then(function (response) {
 
+
+        });
         var self = this;
         window.Axios.post('/auth/getRecordCommentList', {
             id: record.id,
@@ -210,6 +218,16 @@ export default class WhiteList extends Component {
         });
     }
     handleremove = (record) => {
+
+
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '用户管理',
+            'pageLog': '白名单',
+            'commentLog': '操作移除',
+            'typeLog': 3,
+        });
+
+
         window.Axios.post('auth/removeWhiteUser', {
             'id': record.id//
         }).then(() => {

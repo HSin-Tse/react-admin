@@ -94,6 +94,16 @@ export default class BlackList extends Component {
         })
     }
     requestUserCommentList = (record) => {
+
+
+
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '用户管理',
+            'pageLog': '黑名單',
+            'commentLog': '查看了黑名單备注',
+            'typeLog': 3,
+        });
+
         var self = this;
         window.Axios.post('/auth/getRecordCommentList', {
             id: record.id,
@@ -275,6 +285,15 @@ export default class BlackList extends Component {
     }
 
     handleremove = (record) => {
+
+
+
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '用户管理',
+            'pageLog': '黑名單',
+            'commentLog': '移除黑名單',
+            'typeLog': 3,
+        });
 
         let self = this
         window.Axios.post('auth/removeBlackUser', {
@@ -889,6 +908,14 @@ export default class BlackList extends Component {
             message.error('備註必填 ex:信息不真实')
             return
         }
+
+
+        window.Axios.post('back/addLogHistory', {
+            'moduleLog': '用户管理',
+            'pageLog': '黑名單',
+            'commentLog': '添加黑名单',
+            'typeLog': 3,
+        });
 
         window.Axios.post('auth/addBlackUser', {
             'listType': me.state.addBlackType,//1:合规 2:开户 3:交易,
