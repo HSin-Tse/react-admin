@@ -289,7 +289,7 @@ class Basic extends Component {
 
         const accountTList = this.state.accountTxnCurryList.map(v1 => (
 
-            <Option key={v1.key} value={v1.key}>{v1.name ? v1.name : 'null'}</Option>
+            <Option key={v1.value} value={v1.value}>{v1.name ? v1.name : 'null'}</Option>
 
         ))
 
