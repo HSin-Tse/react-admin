@@ -69,6 +69,20 @@ class PassOpenD extends Component {
 
         };
     }
+
+    timestampToTime = (timestamp) => {
+        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
+        const year = dateObj.getFullYear() // 获取年，
+        const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
+        const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
+        const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
+        const minutes = this.pad(dateObj.getMinutes()) // 获取分
+        const seconds = this.pad(dateObj.getSeconds()) // 获取秒
+        return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
+    };
+    pad = (str) => {
+        return +str >= 10 ? str : '0' + str
+    };
     requestUserCommentList = (iidd) => {
 
 
@@ -85,6 +99,7 @@ class PassOpenD extends Component {
             });
         });
     }
+
     componentDidMount() {
         var self = this;
 
@@ -188,6 +203,8 @@ class PassOpenD extends Component {
     }
 
     render() {
+
+        var self = this
 
 
         this.mIncomesOPS = this.state.IXIncomeList.map(d => <Option key={d.name}>{d.name}</Option>);
@@ -631,13 +648,13 @@ class PassOpenD extends Component {
                                            dataIndex: 'createDate',
                                            key: 'operationDiary_Date',
                                            render: (text, record) => (
-                                               <span>{record.createDate}</span>),
+                                               <span>{record.bkUserName}</span>),
                                        }, {
                                            title: '操作时间',
                                            dataIndex: '操作时间',
                                            key: '操作时间',
                                            render: (text, record) => (
-                                               <span>{record.ipAddress}</span>),
+                                               <span>{self.timestampToTime(record.createDate)}</span>),
                                        }, {
                                            title: '操作',
                                            width: 130,
@@ -845,16 +862,16 @@ class PassOpenD extends Component {
     };
 
 
-    timestampToTime = (timestamp) => {
-        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
-        const year = dateObj.getFullYear() // 获取年，
-        const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
-        const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
-        return year + '-' + month + '-' + date
-    };
-    pad = (str) => {
-        return +str >= 10 ? str : '0' + str
-    };
+    // timestampToTime = (timestamp) => {
+    //     const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
+    //     const year = dateObj.getFullYear() // 获取年，
+    //     const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
+    //     const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
+    //     return year + '-' + month + '-' + date
+    // };
+    // pad = (str) => {
+    //     return +str >= 10 ? str : '0' + str
+    // };
     openOK = () => {
 
         this.setState({

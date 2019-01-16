@@ -79,6 +79,20 @@ Array.prototype.remove = function(val) {
         this.splice(index, 1);
     }
 };
-add(); // 6
-// var aaaa = '1'
+add(); //
+
+
+// timestampToTime = (timestamp) => {
+//     const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
+//     const year = dateObj.getFullYear() // 获取年，
+//     const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
+//     const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
+//     const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
+//     const minutes = this.pad(dateObj.getMinutes()) // 获取分
+//     const seconds = this.pad(dateObj.getSeconds()) // 获取秒
+//     return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
+// };
+// pad = (str) => {
+//     return +str >= 10 ? str : '0' + str
+// };
 // export default aaaa
