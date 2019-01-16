@@ -182,9 +182,9 @@ class SimulatorUser extends Component {
 
                 <div>
 
-                    <Button onClick={() => this.goToPotential()} type="primary">潛在用戶</Button>
-                    <Button  type="primary">模擬用戶</Button>
-                    <Button onClick={() => this.goToIntend()} type="primary">意向用戶</Button>
+                    <Button onClick={() => this.goToPotential()} type="primary">潛在用户</Button>
+                    <Button  type="primary">模擬用户</Button>
+                    <Button onClick={() => this.goToIntend()} type="primary">意向用户</Button>
                 </div>
 
                 <Table rowKey="id"

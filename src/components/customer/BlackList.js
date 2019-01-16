@@ -610,7 +610,7 @@ export default class BlackList extends Component {
                 <h2 style={{marginTop: 15}}>
                     黑名单
                 </h2>
-                <BreadcrumbCustom first="用戶管理" second="黑名单"/>
+                <BreadcrumbCustom first="用户管理" second="黑名单"/>
 
                 <Card bodyStyle={{padding: 0, margin: 0}}>
 

@@ -1096,7 +1096,7 @@ class PassOpenD extends Component {
             me.setState({
                 iconLoading: false,
             });
-            message.success('開戶通過')
+            message.success('開户通過')
             me.props.history.goBack()
         }).catch(() => {
             me.setState({

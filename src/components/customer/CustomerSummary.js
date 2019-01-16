@@ -221,7 +221,7 @@ class CustomerSummary extends Component {
                         <Button disabled={!record.belongUserId} size={'small'} style={{background: '#FDD000'}}
                                 onClick={() => this.justSeenote(record)}>备注</Button>
                         <Button size={'small'} style={{background: '#FDD000'}}
-                                onClick={() => this.goToUserAccountInfo(record)}>開戶</Button>
+                                onClick={() => this.goToUserAccountInfo(record)}>開户</Button>
                         <Button disabled={!record.belongUserId} size={'small'} style={{background: '#FDD000'}}
                                 onClick={() => this.goToUserInfo(record.belongUserId)}>行为</Button>
                     </div>
@@ -379,7 +379,7 @@ class CustomerSummary extends Component {
                 <h2 style={{marginTop: 15}}>
                     用户总表
                 </h2>
-                <BreadcrumbCustom first="用戶管理" second="用户总表"/>
+                <BreadcrumbCustom first="用户管理" second="用户总表"/>
                 <Card
                     bodyStyle={{padding: 0, margin: 0}}
                     title="用户总表">

@@ -175,15 +175,15 @@ class IntendingUser extends Component {
         return(
              <div>
                 <div>log: {this.state.anyThing}</div>
-                <div>yyxLog log: 意向用戶</div>
+                <div>yyxLog log: 意向用户</div>
 								<div />
                 <BreadcrumbCustom first="用户管理" second="Leads管理" />
 
                 <div>
 
-                    <Button onClick={() => this.goToPotential()} type="primary">潛在用戶</Button>
-                    <Button onClick={() => this.goToSimulator()} type="primary">模擬用戶</Button>
-                    <Button  type="primary">意向用戶</Button>
+                    <Button onClick={() => this.goToPotential()} type="primary">潛在用户</Button>
+                    <Button onClick={() => this.goToSimulator()} type="primary">模擬用户</Button>
+                    <Button  type="primary">意向用户</Button>
                 </div>
 
                 <Table rowKey="id"

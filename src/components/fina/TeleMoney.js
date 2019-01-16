@@ -374,6 +374,7 @@ class Basic extends Component {
                                 onClick={() => {
 
                                     this.setState({
+                                        mStarClientAccount: undefined,
                                         mBelongBkUserId: undefined,
                                         mNetEquity: '',
                                         mName: '',
@@ -490,7 +491,7 @@ class Basic extends Component {
                                                         fontSize: '14px',
                                                         width: '57px',
                                                     }}>交易账号</span>
-                                            <Input defaultValue={this.state.mStarClientAccount}
+                                            <Input value={this.state.mStarClientAccount}
                                                    onChange={(e) => {
 
 
