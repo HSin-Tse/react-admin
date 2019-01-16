@@ -179,7 +179,14 @@ class Basic extends Component {
                         <Button
                             size={'small'} style={{minWidth: 80, background: '#FDD000'}}
                             disabled={record.status == 3}
-                            onClick={() => this.showOPDAyModal3(record)}>{record.status == 2 ? '取消' : record.status == 3 ? '审核成功' : '已取消'}</Button>
+
+
+                            onClick={
+                                () => this.showOPDAyModal3(record)
+                            }>{record.status == 2 ? '取消' : record.status == 3 ? '审核成功' : '已取消'}
+
+
+                        </Button>
 
 
                     </div>
@@ -220,6 +227,20 @@ class Basic extends Component {
     //         mExpectDate: dateString,
     //     });
     // }
+
+    showOPDAyModal3 = (recodrd) => {
+
+        console.log('hcia recodrd', recodrd)
+
+
+        // this.requestUserCommentList(recodrd)
+        // this.setState({
+        //     modal3OPDAYVisible: true,
+        //     visible: false,
+        // });
+
+
+    };
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
         const year = dateObj.getFullYear() // 获取年，
