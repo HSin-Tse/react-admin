@@ -875,19 +875,31 @@ class PassOpenD extends Component {
                                 <Tooltip placement="top"
                                          title={!isSetL ? '需要添加杠杆组' : this.state.isNeedSave ? '保存信息' : ''}>
 
-                                    <Popconfirm disabled={this.state.isNeedSave || !isSetL} title="确认当前用户开户申请通过"
-                                                onConfirm={this.confirmOpen} okText="Yes"
-                                                cancelText="No">
+                                    <Popconfirm
+
+                                        disabled={this.state.isNeedSave || !isSetL} title="确认当前用户开户申请通过"
+                                        onConfirm={this.confirmOpen} okText="Yes"
+                                        cancelText="No">
 
 
                                         <Button
+                                            style={{display: ( this.state.isNeedSave|| !isSetL)  ? 'none' : ''}}
                                             disabled={this.state.isNeedSave || !isSetL}
                                             loading={this.state.iconLoading}>
                                             开户通过
                                         </Button>
+
                                     </Popconfirm>
+
+
                                 </Tooltip>
 
+                                <Button
+                                    style={{display:( this.state.isNeedSave|| !isSetL) ? '' : 'none'}}
+                                    disabled={this.state.isNeedSave || !isSetL}
+                                    loading={this.state.iconLoading}>
+                                    开户通过
+                                </Button>
 
                                 <Button
                                     disabled={!this.state.isNeedSave}
@@ -1223,12 +1235,11 @@ class PassOpenD extends Component {
     }
     saveReject = () => {
 
-        
-        
-        console.log('hcia me.state.changeNoteV' , this.state.changeNoteV)
+
+        console.log('hcia me.state.changeNoteV', this.state.changeNoteV)
 
 
-        if(!this.state.changeNoteV){
+        if (!this.state.changeNoteV) {
             message.error('备注必填')
 
             return
@@ -1241,11 +1252,10 @@ class PassOpenD extends Component {
         var me = this;
 
 
-        
-        console.log('hcia this.state.mIsNeedAddBlack' , this.state.mIsNeedAddBlack)
+        console.log('hcia this.state.mIsNeedAddBlack', this.state.mIsNeedAddBlack)
         if (this.state.mIsNeedAddBlack) {
-            
-            
+
+
             this.addBlackRequest()
         }
 
@@ -1689,7 +1699,7 @@ class PassOpenD extends Component {
 
     addBlackRequest() {
 
-        console.log('hcia addBlackRequest' )
+        console.log('hcia addBlackRequest')
         let me = this
         if (!me.state.changeNoteV) {
             message.error('備註必填')
