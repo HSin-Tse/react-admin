@@ -86,12 +86,12 @@ class SiderCustom extends Component {
         return cloneObj;
     }
     handleKeyPress = (event) => {
-        
+
         // console.log('hcia event' , event)
 
         var self = this
 
-        if(event.metaKey  || event.ctrlKey){
+        if (event.metaKey || event.ctrlKey) {
             if (event.key === '1') {
                 this.setState({
                     openKey: '/app/customer',
@@ -198,9 +198,6 @@ class SiderCustom extends Component {
         // console.log('hcia event' , event)
 
 
-
-
-
     }
     logout = () => {
         // localStorage.setItem('infor', JSON.stringify(response.data.data));
@@ -236,12 +233,8 @@ class SiderCustom extends Component {
         })
 
 
-
-
-
-
-
     };
+
     componentWillUnmount() {
         // console.log('hcia componentWillUnmount')
         document.removeEventListener("keydown", this.handleKeyPress, false);
@@ -250,6 +243,7 @@ class SiderCustom extends Component {
         this.props.history.push('/login')
         // document.removeEventListener("keyup", this.handleKeyPress, false);
     }
+
     componentDidMount() {
 
         // this.context.router.history.listen((route) => {
@@ -263,18 +257,12 @@ class SiderCustom extends Component {
         // });
 
 
-        // console.log('hcia window.location' , window.location.host)
-        // console.log('hcia  this.props' ,  this.props)
-        
-        // console.log('hcia window.location.host' , window.location.host)
 
 
-      var isme = window.location.host =='127.0.0.1:3006'
+        var isme = window.location.host == '127.0.0.1:3006'
         // console.log('hcia isme' , isme)
-        if(isme){
-
-
-        }else{
+        if (isme) {
+        } else {
             // window.addEventListener("beforeunload", (ev) =>
             // {
             //
@@ -292,9 +280,6 @@ class SiderCustom extends Component {
             //     })
             // });
         }
-
-
-
 
 
         document.addEventListener("keydown", this.handleKeyPress, false);
@@ -365,7 +350,6 @@ class SiderCustom extends Component {
     menuClick = e => {
 
 
-
         this.setState({
             selectedKey: e.key
         });
@@ -391,8 +375,9 @@ class SiderCustom extends Component {
                 {/*<div><h1>{this.state.openKey}</h1></div>*/}
 
                 <div className="logo">
-                    <img style={{height: 18*1.3, width: 130*  (this.props.collapsed?  0:  1.3) }} src={   avater} alt="头像"/>
-                    <img style={{height: 45, width: 45*  (this.props.collapsed?  1:  0) }} src={   avaters} alt="头像"/>
+                    <img style={{height: 18 * 1.3, width: 130 * (this.props.collapsed ? 0 : 1.3)}} src={avater}
+                         alt="头像"/>
+                    <img style={{height: 45, width: 45 * (this.props.collapsed ? 1 : 0)}} src={avaters} alt="头像"/>
 
                     {/*{this.state.openKey}*/}
                     {this.props.collapsed ? '' : ''}

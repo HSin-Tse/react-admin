@@ -65,6 +65,17 @@ class HeaderCustom extends Component {
 
 
         var self = this
+        window.Axios.post('auth/logout', {
+        }).then(function (response) {
+            localStorage.removeItem('infor');
+            localStorage.removeItem('user');
+            localStorage.removeItem('too');
+            localStorage.removeItem('displayName');
+            self.props.history.push('/login')
+
+        })
+
+
         window.Axios.post('back/addLogHistory', {
             'moduleLog': 'Logout',
             'pageLog': 'Logout',
