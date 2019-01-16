@@ -813,46 +813,6 @@ class PassOpenRS extends Component {
 
 
     };
-    searchFromOtherDB = () => {
-        this.setState({
-            icondbALoadingA: true,
-        });
-        var me = this;
-
-        if (this.state.checkfromdbTypeV == 0) {
-            window.Axios.post('open/remoteExistOpenAccount', {
-                'phoneNumber': me.state.checkfromdbName,
-            }).then(function (response) {
-                // console.log('hcia response', response)
-                me.setState({
-                    icondbALoadingA: false,
-                    checkderesa: response.data.data.isExist
-
-                });
-            });
-        } else if (this.state.checkfromdbTypeV == 1) {
-            window.Axios.post('open/remoteExistOpenAccount', {
-                'nationalId': me.state.checkfromdbName,
-            }).then(function (response) {
-                // console.log('hcia response', response)
-                me.setState({
-                    icondbALoadingA: false,
-                    checkderesa: response.data.data.isExist
-                });
-            });
-        } else if (this.state.checkfromdbTypeV == 2) {
-            window.Axios.post('open/remoteExistOpenAccount', {
-                'email': me.state.checkfromdbName,
-            }).then(function (response) {
-                // console.log('hcia response', response.data.data.isExist)
-                me.setState({
-                    checkderesa: response.data.data.isExist,
-                    icondbALoadingA: false,
-                });
-            });
-        }
-
-    };
     saveData = () => {
         this.showModal()
     };
