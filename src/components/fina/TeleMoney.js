@@ -36,7 +36,7 @@ class Basic extends Component {
             mExecTxnCurry: '',
             mNote: '',
             mAccountTxnCurry: '',
-            mExpectTime: moment(Date.now()),
+            mExpectTime: null,
             mExecTxnAmt: '',
             currentStep: 0,
             pgsize: 20,
@@ -294,8 +294,6 @@ class Basic extends Component {
         ))
 
 
-
-
         return (
 
             <div>
@@ -306,7 +304,7 @@ class Basic extends Component {
                 {/*<div>mNetEquity :{JSON.stringify(this.state.mNetEquity)}</div>*/}
                 {/*<div>mNote :{JSON.stringify(this.state.mNote)}</div>*/}
                 {/*<div>mAccountTxnCurry :{JSON.stringify(this.state.mAccountTxnCurry)}</div>*/}
-                {/*<div>mExpectTime :{JSON.stringify(this.state.mExpectTime)}</div>*/}
+                <div>mExpectTime :{JSON.stringify(this.state.mExpectTime)}</div>
                 {/*<div>mExecTxnAmt :{JSON.stringify(this.state.mExecTxnAmt)}</div>*/}
                 {/*<div>mRate :{JSON.stringify(this.state.mRate)}</div>*/}
                 <div>mExecTxnCurry :{JSON.stringify(this.state.mExecTxnCurry)}</div>
@@ -340,6 +338,9 @@ class Basic extends Component {
                         actions={[<Button
 
                             onClick={() => {
+
+                                console.log('hcia this.state.mExpectTime', this.state.mExpectTime ? this.state.mExpectTime.getTime() : undefined)
+
                                 window.Axios.post('finance/createDeposit', {
                                     'belongBkUserId': this.state.mBelongBkUserId,//
                                     'accountFrom': 1,//1 IXtrader
@@ -348,7 +349,7 @@ class Basic extends Component {
                                     'execTxnCurry': this.state.mExecTxnCurry,
                                     'rate': this.state.mRate,
                                     'accountTxnCurry': this.state.mAccountTxnCurry,//this.state.mAccountTxnCurry
-                                    'expectTime': this.state.mExpectTime.getTime(),
+                                    'expectTime': this.state.mExpectTime ? this.state.mExpectTime.getTime() : undefined,
                                     'content': this.state.mNote,
                                 }).then((response) => {
 
@@ -379,7 +380,8 @@ class Basic extends Component {
                                         mRate: '',
                                         mNote: '',
                                         mAccountTxnCurry: '',
-                                        mExpectTime: moment(Date.now()),
+                                        mExecTxnCurry: '',
+                                        mExpectTime: null,
                                         mExecTxnAmt: '',
                                     })
                                 }}
@@ -442,8 +444,6 @@ class Basic extends Component {
 
 
                                             </Select>
-
-
 
 
                                         </div>
@@ -724,19 +724,28 @@ class Basic extends Component {
                                             <DatePicker
                                                 style={{width: '200px', height: '36px'}}
                                                 disabledDate={(current) => {
-
-
-                                                    console.log('hcia current.valueOf()', current.valueOf(), Date.now())
                                                     return current.valueOf() < (Date.now() - 86400000)
                                                 }}
 
-                                                value={moment(this.state.mExpectTime, dateFormat)}
+                                                value={this.state.mExpectTime ? moment(this.state.mExpectTime, dateFormat) : null}
+
+                                                // value={this.state.mExpectTime}
                                                 onChange={(date, dateString) => {
 
+                                                    console.log('hcia date', date)
+                                                    console.log('hcia dateString', dateString)
+
+
+                                                    if (!date) {
+                                                        this.setState({mExpectTime: null})
+                                                        return
+
+                                                    }
                                                     var date = new Date(dateString + ' 00:00:00:000');
+                                                    console.log('hcia date', date)
                                                     var time1 = date.getTime();
 
-                                                    console.log('hcia time1', time1)
+                                                    // console.log('hcia time1', time1)
 
                                                     this.setState({mExpectTime: date})
                                                     // console.log('hcia date' , date)
@@ -863,7 +872,7 @@ class Basic extends Component {
                                             </Select>
                                             {/*<Input value={'CNY'}*/}
 
-                                                   {/*style={{width: '200px', height: '36px'}}*/}
+                                            {/*style={{width: '200px', height: '36px'}}*/}
 
                                             {/*/>*/}
                                         </div>
