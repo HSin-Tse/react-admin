@@ -275,22 +275,22 @@ class SiderCustom extends Component {
 
 
         }else{
-            window.addEventListener("beforeunload", (ev) =>
-            {
-
-                localStorage.removeItem('infor');
-                localStorage.removeItem('user');
-                localStorage.removeItem('too');
-                localStorage.removeItem('displayName');
-
-                window.Axios.post('back/addLogHistory', {
-                    'moduleLog': 'Logout',
-                    'pageLog': 'Logout',
-                    'commentLog': '登出',
-                    'typeLog': "1",
-                }).then(function (response) {
-                })
-            });
+            // window.addEventListener("beforeunload", (ev) =>
+            // {
+            //
+            //     localStorage.removeItem('infor');
+            //     localStorage.removeItem('user');
+            //     localStorage.removeItem('too');
+            //     localStorage.removeItem('displayName');
+            //
+            //     window.Axios.post('back/addLogHistory', {
+            //         'moduleLog': 'Logout',
+            //         'pageLog': 'Logout',
+            //         'commentLog': '登出',
+            //         'typeLog': "1",
+            //     }).then(function (response) {
+            //     })
+            // });
         }
 
 
