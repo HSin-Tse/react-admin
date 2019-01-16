@@ -33,6 +33,7 @@ class Basic extends Component {
             mNetEquity: '',
             mName: '',
             mRate: '',
+            mExecTxnCurry: '',
             mNote: '',
             mAccountTxnCurry: '',
             mExpectTime: moment(Date.now()),
@@ -187,6 +188,17 @@ class Basic extends Component {
         this.requestPage()
 
 
+        window.Axios.post('dict/openDict', {
+            'keys': 'finance_currency',
+
+        }).then((response) => {
+            self.setState({
+                accountTxnCurryList: response.data.data.finance_currency
+            })
+
+        })
+
+
         window.Axios.post('back/getBackUserList', {
             'pageSize': 1000,
             'pageNo': 0,
@@ -277,9 +289,11 @@ class Basic extends Component {
 
         const accountTList = this.state.accountTxnCurryList.map(v1 => (
 
-            <Option key={v1.id} value={v1.id}>{v1.displayName ? v1.displayName : 'null'}</Option>
+            <Option key={v1.key} value={v1.key}>{v1.name ? v1.name : 'null'}</Option>
 
         ))
+
+
 
 
         return (
@@ -295,6 +309,8 @@ class Basic extends Component {
                 {/*<div>mExpectTime :{JSON.stringify(this.state.mExpectTime)}</div>*/}
                 {/*<div>mExecTxnAmt :{JSON.stringify(this.state.mExecTxnAmt)}</div>*/}
                 {/*<div>mRate :{JSON.stringify(this.state.mRate)}</div>*/}
+                <div>mExecTxnCurry :{JSON.stringify(this.state.mExecTxnCurry)}</div>
+                <div>mAccountTxnCurry :{JSON.stringify(this.state.mAccountTxnCurry)}</div>
 
 
                 <h2 style={{marginTop: 15}}>新增电汇入金</h2>
@@ -326,18 +342,20 @@ class Basic extends Component {
                             onClick={() => {
                                 window.Axios.post('finance/createDeposit', {
                                     'belongBkUserId': this.state.mBelongBkUserId,//
-                                    'accountFrom': 1,//
+                                    'accountFrom': 1,//1 IXtrader
                                     'starClientAccount': this.state.mStarClientAccount,//
                                     'execTxnAmt': this.state.mExecTxnAmt,
-                                    'execTxnCurry': 'CNY',
+                                    'execTxnCurry': this.state.mExecTxnCurry,
                                     'rate': this.state.mRate,
-                                    'accountTxnCurry': 'USD',//this.state.mAccountTxnCurry
+                                    'accountTxnCurry': this.state.mAccountTxnCurry,//this.state.mAccountTxnCurry
                                     'expectTime': this.state.mExpectTime.getTime(),
                                     'content': this.state.mNote,
                                 }).then((response) => {
 
 
                                     message.success('操作成功')
+
+                                    this.requestPage()
                                     // self.setState({
                                     //         totalPage: response.data.data.totalPage,
                                     //         loading: false,
@@ -424,6 +442,8 @@ class Basic extends Component {
 
 
                                             </Select>
+
+
 
 
                                         </div>
@@ -704,10 +724,10 @@ class Basic extends Component {
                                             <DatePicker
                                                 style={{width: '200px', height: '36px'}}
                                                 disabledDate={(current) => {
-                                                    
-                                                    
-                                                    console.log('hcia current.valueOf()' , current.valueOf(),Date.now())
-                                                    return  current.valueOf() < (Date.now()-86400000)
+
+
+                                                    console.log('hcia current.valueOf()', current.valueOf(), Date.now())
+                                                    return current.valueOf() < (Date.now() - 86400000)
                                                 }}
 
                                                 value={moment(this.state.mExpectTime, dateFormat)}
@@ -752,12 +772,21 @@ class Basic extends Component {
 
                                             </div>
 
+                                            <Select
 
-                                            <Input value={this.state.mAccountTxnCurry}
+                                                onChange={(value) => {
 
-                                                   style={{width: '200px', height: '36px'}}
 
-                                            />
+                                                    this.setState({mAccountTxnCurry: value})
+                                                    console.log('hcia value', value)
+                                                }}
+                                                value={this.state.mAccountTxnCurry}
+                                                style={{width: '200px', height: '36px'}}>
+
+                                                {accountTList}
+
+
+                                            </Select>
                                         </div>
                                         <div style={{
                                             marginTop: '24px',
@@ -817,12 +846,26 @@ class Basic extends Component {
 
                                             </div>
 
+                                            <Select
 
-                                            <Input value={'CNY'}
+                                                onChange={(value) => {
 
-                                                   style={{width: '200px', height: '36px'}}
 
-                                            />
+                                                    this.setState({mExecTxnCurry: value})
+                                                    console.log('hcia value', value)
+                                                }}
+                                                value={this.state.mExecTxnCurry}
+                                                style={{width: '200px', height: '36px'}}>
+
+                                                {accountTList}
+
+
+                                            </Select>
+                                            {/*<Input value={'CNY'}*/}
+
+                                                   {/*style={{width: '200px', height: '36px'}}*/}
+
+                                            {/*/>*/}
                                         </div>
 
 
