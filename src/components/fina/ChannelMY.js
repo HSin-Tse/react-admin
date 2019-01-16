@@ -261,19 +261,7 @@ class Basic extends Component {
             }
         );
     };
-    timestampToTime = (timestamp) => {
-        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
-        const year = dateObj.getFullYear() // 获取年，
-        const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
-        const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
-        const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
-        const minutes = this.pad(dateObj.getMinutes()) // 获取分
-        const seconds = this.pad(dateObj.getSeconds()) // 获取秒
-        return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
-    };
-    pad = (str) => {
-        return +str >= 10 ? str : '0' + str
-    };
+
     requestPage = () => {
 
         let self = this
@@ -373,6 +361,8 @@ class Basic extends Component {
     }
 
     render() {
+
+        var self = this
         const {selectedRowKeys} = this.state;
         const hasSelected = selectedRowKeys.length > 0;
         const rowSelection = {
@@ -486,7 +476,7 @@ class Basic extends Component {
                             modal3OPDAYVisible: false,
                         });
                     }}
-                    width={600}
+                    width={1200}
                     footer={null}
                 >
                     <Table rowKey="id"
@@ -504,7 +494,7 @@ class Basic extends Component {
                                    dataIndex: 'createDate',
                                    key: 'operationDiary_Date',
                                    render: (text, record) => (
-                                       <span>{record.createDate}</span>),
+                                       <span>{self.timestampToTime(record.createDate)}</span>),
                                }, {
                                    title: '备注',
                                    dataIndex: 'comment',

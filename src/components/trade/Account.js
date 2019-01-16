@@ -618,7 +618,8 @@ class Basic extends Component {
                                            dataIndex: 'createDate',
                                            key: 'operationDiary_Date',
                                            render: (text, record) => (
-                                               <span>{record.createDate}</span>),
+
+                                               <span>{this.timestampToTime(record.createDate)}</span>),
                                        }, {
                                            title: '备注',
                                            dataIndex: 'comment',
@@ -910,7 +911,7 @@ class Basic extends Component {
                                    dataIndex: 'createDate',
                                    key: 'operationDiary_Date',
                                    render: (text, record) => (
-                                       <span>{record.createDate}</span>),
+                                       <span>{this.timestampToTime(record.createDate)}</span>),
                                }, {
                                    title: '备注',
                                    dataIndex: 'comment',
