@@ -69,11 +69,26 @@ class PassOpenD extends Component {
 
         };
     }
+    requestUserCommentList = (iidd) => {
 
+
+        var self = this;
+        window.Axios.post('/auth/getRecordCommentList', {
+            id: iidd,
+            commentType: 2,
+            pageNo: this.state.currentComment,
+            pageSize: this.state.pgsize,
+        }).then(function (response) {
+            self.setState({
+                totalpageComments: response.data.data.totalPage,
+                operationDiaryHistory: response.data.data.list,
+            });
+        });
+    }
     componentDidMount() {
         var self = this;
 
-
+        this.requestUserCommentList(self.props.match.params.id)
         window.Axios.post('dict/leverageList', {
             'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
         }).then((response) => {

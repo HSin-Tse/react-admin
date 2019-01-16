@@ -92,9 +92,25 @@ class PassOpenRS extends Component {
 
         };
     }
+    requestUserCommentList = (iidd) => {
 
+
+        var self = this;
+        window.Axios.post('/auth/getRecordCommentList', {
+            id: iidd,
+            commentType: 2,
+            pageNo: this.state.currentComment,
+            pageSize: this.state.pgsize,
+        }).then(function (response) {
+            self.setState({
+                totalpageComments: response.data.data.totalPage,
+                operationDiaryHistory: response.data.data.list,
+            });
+        });
+    }
     componentDidMount() {
         var self = this;
+        this.requestUserCommentList(self.props.match.params.id)
 
 
         // if (localStorage.getItem('infor')) {
