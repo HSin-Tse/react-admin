@@ -26,6 +26,10 @@ class App extends Component {
     }
 
     componentDidMount() {
+
+
+
+
         const openNotification = () => {
             localStorage.setItem('isFirst', JSON.stringify(true));
         };

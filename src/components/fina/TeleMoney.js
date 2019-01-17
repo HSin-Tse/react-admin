@@ -325,11 +325,11 @@ class Basic extends Component {
                 {/*<div>mNetEquity :{JSON.stringify(this.state.mNetEquity)}</div>*/}
                 {/*<div>mNote :{JSON.stringify(this.state.mNote)}</div>*/}
                 {/*<div>mAccountTxnCurry :{JSON.stringify(this.state.mAccountTxnCurry)}</div>*/}
-                <div>mExpectTime :{JSON.stringify(this.state.mExpectTime)}</div>
+                {/*<div>mExpectTime :{JSON.stringify(this.state.mExpectTime)}</div>*/}
                 {/*<div>mExecTxnAmt :{JSON.stringify(this.state.mExecTxnAmt)}</div>*/}
                 {/*<div>mRate :{JSON.stringify(this.state.mRate)}</div>*/}
-                <div>mExecTxnCurry :{JSON.stringify(this.state.mExecTxnCurry)}</div>
-                <div>mAccountTxnCurry :{JSON.stringify(this.state.mAccountTxnCurry)}</div>
+                {/*<div>mExecTxnCurry :{JSON.stringify(this.state.mExecTxnCurry)}</div>*/}
+                {/*<div>mAccountTxnCurry :{JSON.stringify(this.state.mAccountTxnCurry)}</div>*/}
 
 
                 <h2 style={{marginTop: 15}}>新增电汇入金</h2>
