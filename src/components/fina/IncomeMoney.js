@@ -7,6 +7,7 @@ import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
+import Toast from "../widget/toast";
 
 const Option = Select.Option;
 const {TextArea} = Input;
@@ -253,7 +254,9 @@ class Basic extends Component {
                 }
             );
 
-
+            Toast.loading('加载中...', 0, () => {
+                // Toast.success('加载完成')
+            })
         })
     }
     changePage = (page) => {

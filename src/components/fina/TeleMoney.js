@@ -41,6 +41,8 @@ class Basic extends Component {
             currentStep: 0,
             pgsize: 20,
             loadFor: false,
+            dismissModal: true,
+            dissmissRecodrd: true,
 
         };
     }
@@ -219,14 +221,6 @@ class Basic extends Component {
 
     }
 
-    // onChangeBirth = (value, dateString) => {
-    //     var date = new Date(dateString + ' 00:00:00:000');
-    //     var time1 = date.getTime();
-    //     this.state.mExpectDate = time1;
-    //     this.setState({
-    //         mExpectDate: dateString,
-    //     });
-    // }
 
     showOPDAyModal3 = (recodrd) => {
 
@@ -234,10 +228,10 @@ class Basic extends Component {
 
 
         // this.requestUserCommentList(recodrd)
-        // this.setState({
-        //     modal3OPDAYVisible: true,
-        //     visible: false,
-        // });
+        this.setState({
+            dissmissRecodrd: recodrd,
+            dismissModal: true,
+        });
 
 
     };
@@ -991,7 +985,21 @@ class Basic extends Component {
                            }}
                     />
                 </Card>
-
+                <Modal
+                    title="是否取消本次入金"
+                    visible={this.state.dismissModal}
+                    onOk={this.handleOk}
+                    onCancel={(e) => {
+                        console.log(e);
+                        this.setState({
+                            dismissModal: false,
+                        });
+                    }}
+                >
+                    <p>Some contents...</p>
+                    <p>Some contents...</p>
+                    <p>Some contents...</p>
+                </Modal>
             </div>
 
         )

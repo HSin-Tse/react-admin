@@ -8,6 +8,7 @@ import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import {CSVLink} from "react-csv";
+import Toast from "../widget/toast";
 
 const Option = Select.Option;
 const {TextArea} = Input;
@@ -132,7 +133,9 @@ class Basic extends Component {
 
     componentDidMount() {
 
-
+        // Toast.loading('加载中...', 0, () => {
+        //     // Toast.success('加载完成')
+        // })
         window.Axios.post('back/addLogHistory', {
             'moduleLog': '交易管理',
             'pageLog': '出入金报表',

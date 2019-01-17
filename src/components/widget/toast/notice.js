@@ -40,7 +40,7 @@ class Notice extends Component {
 
 
 
-            <div  style={{}} className={`bounce circle  animated infinite toast-notice ${type}`}>
+            <div  style={{}} className={`fadeOut  circle  animated infinite toast-notice ${type}`}>
                 {/*<svg className="icon" aria-hidden="true">*/}
                     {/*<use xlinkHref={`#${icons[type]}`}/>*/}
                 {/*</svg>*/}
@@ -49,6 +49,8 @@ class Notice extends Component {
                 <Image
 
 
+
+                    className={`bounce`}
                 src={avater}
                  width={153} height={148}
                 style={{background: '#00000000'}} // Style your <img>
