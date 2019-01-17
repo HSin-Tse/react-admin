@@ -9,6 +9,8 @@ import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import moment from 'moment';
 
+const {TextArea} = Input;
+
 const dateFormat = 'YYYY-MM-DD';
 
 const Step = Steps.Step;
@@ -986,19 +988,68 @@ class Basic extends Component {
                     />
                 </Card>
                 <Modal
-                    title="是否取消本次入金"
-                    visible={this.state.dismissModal}
-                    onOk={this.handleOk}
-                    onCancel={(e) => {
-                        console.log(e);
-                        this.setState({
-                            dismissModal: false,
-                        });
+                    bodyStyle={{
+                        background: 'white',
+                        padding: 0,
+                        margin: 0,
+                        width: 600,
+                        height: 317
                     }}
+                    title={null}
+                    closable={false}
+                    footer={null}
+                    visible={this.state.dismissModal}
+                    // onOk={this.handleOk}
+                    // onCancel={(e) => {
+                    //     console.log(e);
+                    //     this.setState({
+                    //         dismissModal: false,
+                    //     });
+                    // }}
                 >
-                    <p>Some contents...</p>
-                    <p>Some contents...</p>
-                    <p>Some contents...</p>
+                    <div style={{lineHeight: '48px', textAlign: 'center', background: '#FDD000', height: '48px'}}>
+                        <span style={{
+                            fontSize: '18px',
+                            fontFamily: 'PingFangSC-Medium',
+                            fontWeight: '500px',
+                            color: 'rgba(51,51,51,1)'
+                        }}>是否取消本次入金</span>
+
+                    </div>
+                    <div style={{marginTop: '48px', textAlign: 'center'}}>
+                        <span style={{
+                            fontSize: '14px',
+                            fontFamily: 'PingFangSC-Medium',
+                            fontWeight: '500px',
+                            color: 'rgba(41,41,41,1)'
+                        }}>请输入原因</span>
+                    </div>
+                    <div style={{
+                        marginTop: '12px',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        width: '600px',
+                        display: 'flex'
+                    }}>
+                        <TextArea style={{marginLeft: '80px', marginRight: '80px'}}
+
+
+                                  value={this.state.changeNoteV} rows={3}/>
+                    </div>
+                    <div style={{
+                        marginLeft:'45px',
+                        marginRight:'45px',
+                        height: '120px', justifyContent: 'space-around',
+                        alignItems: 'center', display: 'flex'
+                    }}>
+
+                        <Button style={{background: '#F6D147', width: 180, height: 40}}> 确定</Button>
+                        <Button style={{background: 'rgba(255,255,255,1)', width: 180, height: 40}}> 取消</Button>
+
+
+                    </div>
+
+
                 </Modal>
             </div>
 

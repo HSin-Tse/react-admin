@@ -254,9 +254,9 @@ class Basic extends Component {
                 }
             );
 
-            Toast.loading('加载中...', 0, () => {
-                // Toast.success('加载完成')
-            })
+            // Toast.loading('加载中...', 0, () => {
+            //     // Toast.success('加载完成')
+            // })
         })
     }
     changePage = (page) => {
