@@ -193,7 +193,7 @@ class Basic extends Component {
 
                         <Button
                             size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                            disabled={record.status == 3}
+                            disabled={record.status == 3 || record.status == 4 }
 
 
                             onClick={
@@ -938,8 +938,6 @@ class Basic extends Component {
 
                                                         textAlign: 'left',
                                                         marginRight: '37px',
-
-
                                                         width: '57px',
                                                         fontFamily: 'PingFangSC-Medium',
                                                         fontWeight: 500,
