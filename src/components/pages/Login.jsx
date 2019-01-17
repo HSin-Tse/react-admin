@@ -48,6 +48,7 @@ class Login extends React.Component {
                     'password': values.password,
                     'language': "zh-CN"
                 }).then(function (response) {
+                    localStorage.setItem('logint', new Date().getTime());
                     localStorage.setItem('liveecho', new Date().getTime());
 
                     if ((response.data.code == 1) && response.data.data.token) {

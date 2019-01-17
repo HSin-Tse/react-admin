@@ -200,7 +200,7 @@ class SiderCustom extends Component {
 
     }
     sda = setInterval(() => {
-        console.log('hcia setInterval' + new Date().getTime())
+        // console.log('hcia setInterval' + new Date().getTime())
         // this.requestData()
         // this.requestPageWinoRe()
 
@@ -208,7 +208,26 @@ class SiderCustom extends Component {
         // localStorage.removeItem('infor');
 
         localStorage.setItem('liveecho', new Date().getTime());
+        var lastLoginTime=localStorage.getItem('logint');
 
+
+        var loginDura = new Date().getTime() - lastLoginTime
+      // var loginDura=  nowTime-lastLoginTime
+        
+        console.log('hcia loginDura' , loginDura)
+
+
+
+        if(loginDura>86400000){
+            localStorage.removeItem('infor');
+            localStorage.removeItem('user');
+            localStorage.removeItem('too');
+            localStorage.removeItem('displayName');
+            this.props.history.push('/login')
+
+        }
+
+        // if()
 
     }, 1000)
 
