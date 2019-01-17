@@ -9,12 +9,13 @@
 //     console.log(`hcia ${key} is ${value}`)
 // })
 
-function *foo() {
+function* foo() {
     for (let i = 1; i <= 3; i++) {
         // let x = yield `hcia 再等一下，i = ${i}`;
         // console.log(x);
     }
 }
+
 // console.log('hcia 終於輪到我了 A');
 
 setTimeout(() => {
@@ -37,25 +38,22 @@ var e = a.next();
 console.log(e);
 
 
-
-
-
 function getA() {
-    return new Promise(function(resolve, reject) {
-        setTimeout(function() {
+    return new Promise(function (resolve, reject) {
+        setTimeout(function () {
             resolve(1);
         }, 1000);
     })
 }
 
 function getB() {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         resolve(2);
     });
 }
 
 function getC() {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         resolve(3);
     });
 }
@@ -67,13 +65,14 @@ async function add() {
 
     // console.log('hcia',x + y + z);
 }
-Array.prototype.indexOf = function(val) {
+
+Array.prototype.indexOf = function (val) {
     for (var i = 0; i < this.length; i++) {
         if (this[i] == val) return i;
     }
     return -1;
 };
-Array.prototype.remove = function(val) {
+Array.prototype.remove = function (val) {
     var index = this.indexOf(val);
     if (index > -1) {
         this.splice(index, 1);
@@ -81,43 +80,90 @@ Array.prototype.remove = function(val) {
 };
 add(); //
 
-window.onbeforeunload=function(e){
 
+var _beforeUnload_time = 0;
+var _gap_time = 0;
+var is_fireFox = navigator.userAgent.indexOf("Firefox") > -1;//是否是火狐浏览器
+window.onunload = function () {
+    _gap_time = new Date().getTime() - _beforeUnload_time;
+    if (_gap_time <= 5) {
+        // localStorage.removeItem('infor');
+        // localStorage.removeItem('user');
+        // localStorage.removeItem('too');
+        // localStorage.removeItem('displayName');
+        //
+        // window.Axios.post('auth/logout', {
+        // }).then(function (response) {
+        //     localStorage.removeItem('infor');
+        //     localStorage.removeItem('user');
+        //     localStorage.removeItem('too');
+        //     localStorage.removeItem('displayName');
+        //
+        // })
 
+    } else {
+        window.Axios.post('test/reflesh', {})
 
-
-    // alert('onbeforeunload');
-
-    // return (e||window.event).returnValue='确认离开？！'
+    }
+}
+window.onbeforeunload = function () {
+    _beforeUnload_time = new Date().getTime();
+    if (is_fireFox)
+    {
+        // localStorage.removeItem('infor');
+        // localStorage.removeItem('user');
+        // localStorage.removeItem('too');
+        // localStorage.removeItem('displayName');
+        //
+        // window.Axios.post('auth/logout', {
+        // }).then(function (response) {
+        //     localStorage.removeItem('infor');
+        //     localStorage.removeItem('user');
+        //     localStorage.removeItem('too');
+        //     localStorage.removeItem('displayName');
+        //
+        // })
+    }
 
 }
 
-window.onunload=function(){
-    // alert(msg);
-    window.Axios.post('test/onunload', {})
+// window.onbeforeunload=function(e){
+//
+//
+//
+//
+//     // alert('onbeforeunload');
+//
+//     // return (e||window.event).returnValue='确认离开？！'
+//
+// }
+//
+// window.onunload=function(){
+//     // alert(msg);
+//     window.Axios.post('test/onunload', {})
+//
+//     // alert('onunload');
+//
+//
+//
+// }
 
-    // alert('onunload');
-
-
-
-}
-
-window.onscroll = function(){
+window.onscroll = function () {
     var msg = "nwindow.onscroll 事件：nn";
     // msg += "用户拖动了滚动条：";
     // alert(msg);
 }
-window.onload = function(){
+window.onload = function () {
     var msg = "nwindow.onload 事件：nn";
     // msg += "浏览器载入了文档：";
     // alert(msg);
 }
-window.onfocus = function(){
+window.onfocus = function () {
     var msg = "nwindow.onfocus 事件：nn";
     msg += "浏览器取得了焦点：";
     // alert(msg);
 }
-window.onblur = function(){
+window.onblur = function () {
     var msg = "nwindow.onblur 事件：nn";
     msg += "浏览器失去焦点：";
     // alert(msg);
