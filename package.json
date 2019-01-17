@@ -77,7 +77,6 @@
     "react-qmap": "^0.1.5",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
-    "react-shimmer": "^1.0.2",
     "recharts": "^1.3.3",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",

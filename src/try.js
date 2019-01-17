@@ -81,7 +81,47 @@ Array.prototype.remove = function(val) {
 };
 add(); //
 
+window.onbeforeunload=function(e){
 
+
+
+
+    // alert('onbeforeunload');
+
+    // return (e||window.event).returnValue='确认离开？！'
+
+}
+
+window.onunload=function(){
+    // alert(msg);
+    window.Axios.post('test/onunload', {})
+
+    // alert('onunload');
+
+
+
+}
+
+window.onscroll = function(){
+    var msg = "nwindow.onscroll 事件：nn";
+    // msg += "用户拖动了滚动条：";
+    // alert(msg);
+}
+window.onload = function(){
+    var msg = "nwindow.onload 事件：nn";
+    // msg += "浏览器载入了文档：";
+    // alert(msg);
+}
+window.onfocus = function(){
+    var msg = "nwindow.onfocus 事件：nn";
+    msg += "浏览器取得了焦点：";
+    // alert(msg);
+}
+window.onblur = function(){
+    var msg = "nwindow.onblur 事件：nn";
+    msg += "浏览器失去焦点：";
+    // alert(msg);
+}
 // timestampToTime = (timestamp) => {
 //     const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
 //     const year = dateObj.getFullYear() // 获取年，
