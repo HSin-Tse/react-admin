@@ -17,7 +17,17 @@ const Step = Steps.Step;
 const Option = Select.Option;
 
 class Basic extends Component {
+    changeNote = (e) => {
+        
+        
+        console.log('hcia e.target.value' , e.target.value)
 
+
+        this.setState({
+            changeNoteV:e.target.value
+        })
+        // this.state.changeNoteV = e.target.value
+    }
     constructor(props) {
         super(props);
         this.state = {
@@ -43,8 +53,9 @@ class Basic extends Component {
             currentStep: 0,
             pgsize: 20,
             loadFor: false,
-            dismissModal: true,
-            dissmissRecodrd: true,
+            dismissModal: false,
+            dissmissRecodrdID: '',
+            changeNoteV: '',
 
         };
     }
@@ -227,12 +238,13 @@ class Basic extends Component {
     showOPDAyModal3 = (recodrd) => {
 
         console.log('hcia recodrd', recodrd)
-
+        var self = this
 
         // this.requestUserCommentList(recodrd)
         this.setState({
-            dissmissRecodrd: recodrd,
-            dismissModal: true,
+            dissmissRecodrdID: recodrd.id,
+        }, () => {
+            self.setState({dismissModal: true})
         });
 
 
@@ -988,6 +1000,7 @@ class Basic extends Component {
                     />
                 </Card>
                 <Modal
+                    style={{borderRadius: '4px 4px 0px 0px'}}
                     bodyStyle={{
                         background: 'white',
                         padding: 0,
@@ -1031,20 +1044,52 @@ class Basic extends Component {
                         width: '600px',
                         display: 'flex'
                     }}>
-                        <TextArea style={{marginLeft: '80px', marginRight: '80px'}}
+                        <TextArea
+
+                            onChange={this.changeNote}
+                            style={{minHeight: '60px', maxHeight: '60px', marginLeft: '80px', marginRight: '80px'}}
 
 
-                                  value={this.state.changeNoteV} rows={3}/>
+                            value={this.state.changeNoteV}/>
                     </div>
                     <div style={{
-                        marginLeft:'45px',
-                        marginRight:'45px',
+                        marginLeft: '45px',
+                        marginRight: '45px',
                         height: '120px', justifyContent: 'space-around',
                         alignItems: 'center', display: 'flex'
                     }}>
 
-                        <Button style={{background: '#F6D147', width: 180, height: 40}}> 确定</Button>
-                        <Button style={{background: 'rgba(255,255,255,1)', width: 180, height: 40}}> 取消</Button>
+                        <Button onClick={() => {
+
+
+                            if(!this.state.changeNoteV){
+
+                                message.error('备注必填')
+                            }
+
+                            var self = this
+                            window.Axios.post('finance/updateDeposit', {
+                                'id': this.state.dissmissRecodrdID,
+                                'content': this.state.changeNoteV,
+                                'status': '4',
+
+                            }).then((response) => {
+
+                                message.success('操作成功')
+                                this.requestPage()
+
+                                self.setState({dissmissRecodrdID:'', changeNoteV:'',dismissModal: false})
+
+
+                            })
+
+
+                        }} style={{background: '#F6D147', width: 180, height: 40}}> 确定</Button>
+                        <Button onClick={() => {
+                            this.setState({
+                                dismissModal: false,
+                            });
+                        }} style={{background: 'rgba(255,255,255,1)', width: 180, height: 40}}> 取消</Button>
 
 
                     </div>
