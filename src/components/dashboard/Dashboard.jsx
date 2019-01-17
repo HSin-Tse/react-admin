@@ -38,6 +38,7 @@ class Dashboard extends React.Component {
 
 
     componentDidMount() {
+        
         this.setState({displayName: localStorage.getItem('loginName')});
 
 
