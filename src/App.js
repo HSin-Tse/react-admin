@@ -19,10 +19,10 @@ class App extends Component {
         // const {receiveData} = this.props;
 
         this.getClientWidth();
-        window.onresize = () => {
-            // console.log('屏幕变化了');
-            this.getClientWidth();
-        }
+        // window.onresize = () => {
+        //     // console.log('屏幕变化了');
+        //     this.getClientWidth();
+        // }
     }
 
     componentDidMount() {

@@ -48,6 +48,7 @@ class Login extends React.Component {
                     'password': values.password,
                     'language': "zh-CN"
                 }).then(function (response) {
+                    localStorage.setItem('liveecho', new Date().getTime());
 
                     if ((response.data.code == 1) && response.data.data.token) {
                         // 判断是否登陆
@@ -62,6 +63,8 @@ class Login extends React.Component {
 
 
                         const ssss = localStorage.getItem('too');
+                        
+                        console.log('hcia ssss' , ssss)
 
                         if (ssss) {
 

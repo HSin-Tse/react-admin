@@ -199,6 +199,41 @@ class SiderCustom extends Component {
 
 
     }
+    sda = setInterval(() => {
+        console.log('hcia setInterval' + new Date().getTime())
+        // this.requestData()
+        // this.requestPageWinoRe()
+
+
+        // localStorage.removeItem('infor');
+
+        localStorage.setItem('liveecho', new Date().getTime());
+
+
+    }, 1000)
+
+    jugeTime = setInterval(() => {
+        //   console.log('hcia setInterval'+new Date().getTime())
+        //   // this.requestData()
+        //   // this.requestPageWinoRe()
+        //
+        //
+        //   // localStorage.removeItem('infor');
+        //
+        //   // localStorage.setItem('liveecho', new Date().getTime()-);
+        //
+        // var  liveTag=localStorage.getItem('liveecho')
+        //
+        // var inttevar = new Date().getTime()-liveTag
+        //
+        //   console.log('hcia inttevar' , inttevar)
+
+
+    }, 1000)
+
+    // componentWillUnmount() {
+    // document.removeEventListener("keydown", this.handleKeyPressOOP, false);
+    // }
     logout = () => {
         // localStorage.setItem('infor', JSON.stringify(response.data.data));
         // localStorage.setItem('displayName', response.data.data.displayName);
@@ -237,6 +272,9 @@ class SiderCustom extends Component {
 
     componentWillUnmount() {
         // console.log('hcia componentWillUnmount')
+        clearInterval(this.sda);
+        clearInterval(this.jugeTime);
+
         document.removeEventListener("keydown", this.handleKeyPress, false);
 
 
@@ -245,6 +283,28 @@ class SiderCustom extends Component {
     }
 
     componentDidMount() {
+
+        var liveTag = localStorage.getItem('liveecho')
+
+        var inttevar = new Date().getTime() - liveTag
+
+        console.log('hcia inttevar', inttevar)
+
+
+        if (inttevar > 3 * 1000) {
+
+            console.log('hcia inttevar', inttevar)
+
+            localStorage.removeItem('infor');
+            localStorage.removeItem('user');
+            localStorage.removeItem('too');
+            localStorage.removeItem('displayName');
+            // self.props.history.push('/login')
+
+        } else {
+            console.log('hcia inttevar', inttevar)
+
+        }
 
         // this.context.router.history.listen((route) => {
         //
@@ -255,8 +315,6 @@ class SiderCustom extends Component {
         //     // if(route.pathname === '/xxx') {
         //     // }
         // });
-
-
 
 
         var isme = window.location.host == '127.0.0.1:3006'
