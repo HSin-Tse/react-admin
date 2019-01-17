@@ -196,7 +196,7 @@ export default class PotentialUser extends Component {
                 key: 'IP',
                 align: 'center',
                 render: (text, record) => (
-                    <span>{record.ipAddress}</span>),
+                    <span>{record.lastLoginIP}</span>),
             }, {
                 title: '回访状态',
                 dataIndex: '回访状态',
