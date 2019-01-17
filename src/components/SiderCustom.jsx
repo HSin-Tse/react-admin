@@ -213,9 +213,8 @@ class SiderCustom extends Component {
 
         var loginDura = new Date().getTime() - lastLoginTime
       // var loginDura=  nowTime-lastLoginTime
-        console.log('hcia window.location.host' , window.location.host)
-
-        console.log('hcia loginDura' , loginDura)
+      //   console.log('hcia window.location.host' , window.location.host)
+      //   console.log('hcia loginDura' , loginDura)
 
 
 

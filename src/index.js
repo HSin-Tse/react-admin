@@ -121,7 +121,7 @@ window.Axios.interceptors.response.use(function (response) {
             localStorage.removeItem('too');
             localStorage.removeItem('displayName');
 
-            // window.location = 'http://' + window.location.host + "/build/#/login";
+            window.location = 'http://' + window.location.host + "/build/#/login";
 
 
             // this.props.history.push('/login')
