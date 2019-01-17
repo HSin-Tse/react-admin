@@ -21,7 +21,10 @@ const store = createStore(reducer, applyMiddleware(...middleware));
 var Axios = axios.create({
     baseURL: 'http://mobile.nooko.cn:8090/'
 });
-
+message.config({
+    top: '10%',
+    maxCount: 1,
+});
 window.Axios = Axios;
 
 var hideLoading
@@ -53,10 +56,7 @@ window.Axios.interceptors.request.use(
                     })
                 }
 
-                message.config({
-                    top: '10%',
-                    maxCount: 1,
-                });
+
                 // ss=   message.loading('Action in progress..', 0)
                 // message.success('Loading finished', 2.5)
                 config.data = {
