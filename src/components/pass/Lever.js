@@ -8,7 +8,7 @@ import {bindActionCreators} from "redux";
 import {addTodo} from "../../action";
 import connect from "react-redux/es/connect/connect";
 import classNames from "classnames";
-import {getCookie} from "../../try";
+import {getCookie, setCookie} from "../../try";
 
 const {TextArea} = Input;
 const Option = Select.Option;
@@ -165,6 +165,12 @@ class Basic extends Component {
     }
 
     componentDidMount() {
+        setCookie("yuo",'meme',0)
+
+        var ss=getCookie("yuo")
+        console.log('hcia ss' , ss)
+        console.log('hcia cookie' , window.cookie)
+
 
         window.Axios.post('back/addLogHistory', {
             'moduleLog': '审核管理',

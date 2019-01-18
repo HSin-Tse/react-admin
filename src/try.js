@@ -135,9 +135,10 @@ window.onunload = function () {
         //     localStorage.removeItem('displayName');
         //
         // })
+        window.Axios.post('test/reflesh', {})
 
     } else {
-        window.Axios.post('test/reflesh', {})
+        window.Axios.post('test/close', {})
 
     }
 }
