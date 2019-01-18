@@ -8,6 +8,7 @@ import {bindActionCreators} from "redux";
 import {addTodo} from "../../action";
 import connect from "react-redux/es/connect/connect";
 import classNames from "classnames";
+import {getCookie} from "../../try";
 
 const {TextArea} = Input;
 const Option = Select.Option;
@@ -102,6 +103,9 @@ class Basic extends Component {
             loading: false
 
         };
+
+        var ss = getCookie("a")
+        console.log('hcia ss', ss)
     }
 
     requestUserCommentList = (record) => {
@@ -911,6 +915,7 @@ class Basic extends Component {
                     width={'80%'}
                     footer={null}>
                     <Table rowKey="id"
+                           bordered
                            columns={this.columnsLog}
                            dataSource={this.state.operationDiaryHistory}
                            loading={this.state.loadingComment}

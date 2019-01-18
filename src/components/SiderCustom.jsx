@@ -314,10 +314,10 @@ class SiderCustom extends Component {
 
         var inttevar = new Date().getTime() - liveTag
 
-        // console.log('hcia inttevar', inttevar)
+        console.log('hcia inttevar', inttevar)
 
 
-        if (inttevar > 4 * 1000) {
+        if (inttevar > 3 * 1000) {
 
             // console.log('hcia inttevar', inttevar)
 

@@ -10,6 +10,7 @@ import {message} from 'antd';
 import {addTodo, setINFOR} from "../../action";
 import avater from '@/style/imgs/ixlogo.png';
 import ReactCanvasNest from 'react-canvas-nest';
+import {setCookie,getCookie} from "../../try";
 
 const FormItem = Form.Item;
 
@@ -66,7 +67,9 @@ class Login extends React.Component {
 
 
                         const ssss = localStorage.getItem('too');
-                        
+                        // setCookie("a",ssss,0)
+                        var ss=getCookie("a")
+                        console.log('hcia ss' , ss)
                         console.log('hcia ssss' , ssss)
 
                         if (ssss) {
