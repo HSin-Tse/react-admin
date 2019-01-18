@@ -439,6 +439,8 @@ class Basic extends Component {
                            bordered
                            loading={this.state.loading}
                            pagination={{
+                               showQuickJumper:true,
+
                                total: this.state.pgsize * this.state.totalPage,
                                pageSize: this.state.pgsize,
                                onChange: this.changePage,
