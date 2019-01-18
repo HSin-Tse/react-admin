@@ -29,6 +29,7 @@ import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
 import moment from 'moment';
 import axios from "axios";
+import Toast from "../widget/toast";
 
 const Search = Input.Search;
 const {TextArea} = Input;
@@ -91,6 +92,68 @@ class PassOpenD extends Component {
     }
 
     componentDidMount() {
+
+        aaxios.interceptors.request.use(
+            config => {
+                var xtoken = localStorage.getItem('too')
+                var loginName = localStorage.getItem('loginName')
+
+                loginName = encodeURI(loginName)
+
+                // console.log('hcia loginName' , loginName)
+                // console.log('hcia xtoken' , xtoken)
+
+                if (xtoken != null) {
+                    config.headers['X-Token'] = xtoken
+                    if (config.method == 'post') {
+
+                        // Toast.success('加载完成')
+
+                        // console.log('hcia hideLoading' , hideLoading)
+
+
+                        // console.log('hcia config' , config)
+                        // if (hideLoading) {
+                        //
+                        // } else {
+                        //     hideLoading = Toast.loading('加载中...', 0, () => {
+                        //         // Toast.success('加载完成')
+                        //     })
+                        // }
+
+
+                        // ss=   message.loading('Action in progress..', 0)
+                        // message.success('Loading finished', 2.5)
+                        // config.data = {
+                        //     ...config.data,
+                        //     'token': xtoken,
+                        //     'loginName': loginName,
+                        //     'language': 'zh-CN',
+                        //
+                        // }
+
+                        config.timeout = 30 * 1000
+
+                        config.headers = {
+                            'token': xtoken,
+                            'loginName': loginName,
+                        }
+
+                    } else if (config.method == 'get') {
+                        config.params = {
+                            _t: Date.parse(new Date()) / 1000,
+                            ...config.params
+                        }
+                    }
+                }
+
+                return config
+            }, function (error) {
+
+                console.log('hcia error', error)
+                return Promise.reject(error)
+            })
+
         var self = this;
 
 
@@ -312,7 +375,7 @@ class PassOpenD extends Component {
                         })
                     })
                     .catch(error => {
-                        // console.log('hcia error', error)
+                        console.log('hcia error', error)
                     });
 
 
