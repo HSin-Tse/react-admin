@@ -602,42 +602,48 @@ class Basic extends Component {
                 </div>
                 {/*{JSON.stringify(this.props.todps)}*/}
                 <Modal
-                    title={this.state.modeState == '正常' ? '恢复正常' : this.state.modeState}
+
+
+                    bodyStyle={{
+                        background: 'white',
+                        padding: 0,
+                        margin: 0,
+                        width: 600
+                    }}
+                    closable={false}
+                    footer={null}
                     onCancel={this.handleCancel}
                     visible={this.state.visibleB}
 
-                    footer={[
-                        <Popconfirm title="确认？" onConfirm={this.handleOk}
-                                    okText="Yes"
-                                    cancelText="No">
-                            <Button type="normal" key="submit">通過</Button>
-                        </Popconfirm>,
-                        <Popconfirm title="拒绝？"
-                                    onConfirm={this.handleReject} e
-                                    okText="Yes"
-                                    cancelText="No">
-                            <Button type="normal" key="back">拒絕</Button>
-                        </Popconfirm>
-                    ]}
+
                 >
-                    <Card
 
-                        title={'账户：' + this.state.detail.accountNo}
-                        bordered={true}>
-
+                    <div>
+                        <div style={{
+                            alignItems: 'center',
+                            justifyContent: 'center', height: 48, display: 'flex', padding: 0, background: '#FDD000'
+                        }}>
+                            <span style={{
+                                fontSize: 18,
+                                fontFamily: 'PingFangSC-Medium',
+                                fontWeight: 500,
+                                color: 'rgba(51,51,51,1)'
+                            }}>{'账户：' + this.state.detail.accountNo}
+                            </span>
+                        </div>
                         <div>
-                            <Row style={{marginTop: 20}}>
-                                <Col style={{textAlign: 'right'}} span={10}>当前杠杆:</Col>
-                                <Col style={{textAlign: 'center'}} span={14}>{this.state.detail.targetLeverage}</Col>
+                            <Row style={{marginTop: "24px"}}>
+                                <Col style={{textAlign: 'right'}} span={9}>当前杠杆:</Col>
+                                <Col style={{textAlign: 'center'}} span={11}>{this.state.detail.targetLeverage}</Col>
                             </Row>
-                            <Row style={{marginTop: 20}}>
-                                <Col style={{textAlign: 'right'}} span={10}>余额:</Col>
-                                <Col style={{textAlign: 'center'}} span={14}>{this.state.detail.cashBalance}</Col>
+                            <Row style={{marginTop: "24px"}}>
+                                <Col style={{textAlign: 'right'}} span={9}>余额:</Col>
+                                <Col style={{textAlign: 'center'}} span={11}>{this.state.detail.cashBalance}</Col>
                             </Row>
 
-                            <Row style={{marginTop: 20}}>
-                                <Col style={{textAlign: 'right'}} span={10}>杠杆修改:</Col>
-                                <Col style={{textAlign: 'center'}} span={14}>
+                            <Row style={{marginTop: "24px"}}>
+                                <Col style={{textAlign: 'right'}} span={9}>杠杆修改:</Col>
+                                <Col style={{textAlign: 'center'}} span={11}>
                                     <Select
                                         onChange={this.onChangeLe}
                                         defaultValue={this.state.detail.targetLeverage}
@@ -647,12 +653,12 @@ class Basic extends Component {
                                     </Select>
                                 </Col>
                             </Row>
-                            <Row style={{marginTop: 20}}>
-                                <Col style={{textAlign: 'right'}} span={10}>保证金占比:</Col>
-                                <Col style={{textAlign: 'center'}} span={14}>{this.state.detail.marginLevel}</Col>
+                            <Row style={{marginTop: "24px"}}>
+                                <Col style={{textAlign: 'right'}} span={9}>保证金占比:</Col>
+                                <Col style={{textAlign: 'center'}} span={11}>{this.state.detail.marginLevel}</Col>
                             </Row>
-                            <Row style={{marginTop: 20}}>
-                                <Col span={24}>处理备注：</Col>
+                            <Row style={{marginTop: "24px", marginRight: "80px", marginLeft: "80px"}}>
+                                <Col style={{textAlign: 'center'}} span={24}>处理备注</Col>
                                 <Col style={{marginTop: 20}} span={24}>
                                 <TextArea value={this.state.detail.comment}
                                           onChange={this.changeNote}
@@ -660,47 +666,98 @@ class Basic extends Component {
                                 </Col>
                             </Row>
 
-                            <Table rowKey="id"
-                                   columns={[
-                                       {
-                                           title: '时间',
-                                           dataIndex: 'createDate',
-                                           key: 'operationDiary_Date',
-                                           render: (text, record) => (
+                            <Table
+                                style={{marginTop: "20px", marginLeft: "80px", marginRight: "80px"}}
+                                rowKey="id"
+                                bordered
+
+                                columns={[
+                                    {
+                                        title: '操作人',
+                                        width: 130,
+                                        align: 'center',
+                                        dataIndex: 'bkUserName',
+                                        key: 'operationDiary_User',
+
+                                        render: (text, record) => (
+                                            <span>{record.bkUserName}</span>),
+                                    },
+                                    {
+                                        title: '操作时间',
+                                        align: 'center',
+
+                                        dataIndex: 'createDate',
+                                        key: 'operationDiary_Date',
+                                        render: (text, record) => (
 
 
-                                               <span>{this.timestampToTime(record.createDate)}</span>),
-                                       }, {
-                                           title: 'IP',
-                                           dataIndex: 'IP',
-                                           key: 'IP',
-                                           render: (text, record) => (
-                                               <span>{record.ipAddress}</span>),
-                                       }, {
-                                           title: '操作人',
-                                           width: 130,
-                                           align: 'center',
-                                           dataIndex: 'bkUserName',
-                                           key: 'operationDiary_User',
-                                           render: (text, record) => (
-                                               <span>{record.bkUserName}</span>),
-                                       }, {
-                                           title: '操作',
-                                           dataIndex: 'comment',
-                                           key: 'operationDiary_Status',
-                                           render: (text, record) => (
-                                               <span>{record.comment}</span>),
-                                       }]}
-                                   dataSource={this.state.operationDiaryHistory}
-                                   loading={this.state.loadingComment}
-                                   pagination={{
-                                       total: this.state.totalpageComments * this.state.pgsize,
-                                       pageSize: this.state.pgsize,
-                                       onChange: this.changePageComment,
-                                   }}
+                                            <span>{this.timestampToTime(record.createDate)}</span>),
+                                    }, {
+                                        title: '备注',
+                                        align: 'center',
+
+                                        dataIndex: 'comment',
+                                        key: 'operationDiary_Status',
+                                        render: (text, record) => (
+                                            <span>{record.comment}</span>),
+                                    }]}
+                                dataSource={this.state.operationDiaryHistory}
+                                loading={this.state.loadingComment}
+                                pagination={{
+                                    total: this.state.totalpageComments * this.state.pgsize,
+                                    pageSize: this.state.pgsize,
+                                    onChange: this.changePageComment,
+                                }}
                             />
+
+
                         </div>
-                    </Card>
+                        <div style={{
+                            marginLeft: "80px",
+                            marginRight: "80px",
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            paddingBottom: "48px",
+                            paddingTop: "48px",
+                        }}>
+                            <Popconfirm title="确认？" onConfirm={this.handleOk}
+                                        okText="Yes"
+                                        cancelText="No">
+                                <Button style={{
+                                    width: "120px",
+                                    height: "40px",
+                                    borderRadius: "4px", background: '#F6D147'
+                                }} type="normal" key="submit">通過</Button>
+                            </Popconfirm>
+                            <Popconfirm title="拒绝？"
+                                        onConfirm={this.handleReject} e
+                                        okText="Yes"
+                                        cancelText="No">
+                                <Button style={{
+                                    width: "120px",
+                                    height: "40px",
+                                    borderRadius: "4px", background: '#FF6666'
+                                }} type="normal" key="back">拒絕</Button>
+                            </Popconfirm>
+
+
+                            <Button
+
+                                style={{
+                                    width: "120px",
+                                    height: "40px",
+                                    borderRadius: "4px"
+                                }}
+                                onClick={() => {
+
+                                    this.setState({visibleB: false})
+
+                                }} type="normal" key="back">取消</Button>
+
+                        </div>
+
+                    </div>
 
 
                 </Modal>
@@ -778,7 +835,7 @@ class Basic extends Component {
                            bordered
                            loading={this.state.loading}
                            pagination={{
-                               showQuickJumper:true,
+                               showQuickJumper: true,
                                total: this.state.pgsize * this.state.totalPage,
                                pageSize: this.state.pgsize,
                                onChange: this.changePage,
