@@ -285,8 +285,8 @@ class Basic extends Component {
                         <Button size={'small'} style={{minWidth: 80, background: '#FDD000', marginLeft: 10}}
                                 onClick={() => this.showOPDAyModal3(record)}>备注</Button>
 
-                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                                onClick={() => this.showOPDAyModal2(record)}>日志</Button>
+                        {/*<Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}*/}
+                                {/*onClick={() => this.showOPDAyModal2(record)}>日志</Button>*/}
 
                     </div>
                 ),

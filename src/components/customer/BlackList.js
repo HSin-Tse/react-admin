@@ -208,19 +208,25 @@ export default class BlackList extends Component {
                         <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal3(record)}>备注</Button>
                     </div>
                 ),
-            }, {
-                title: '操作',
+            }
 
-                align: 'center',
-                key: 'action',
-                render: (text, record) => (
-                    <div>
-                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record)}>日志</Button>
+            // , {
+            //
+            //
+            //     title: '操作',
+            //
+            //     align: 'center',
+            //     key: 'action',
+            //     render: (text, record) => (
+            //         <div>
+            //             <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record)}>日志</Button>
+            //
+            //
+            //         </div>
+            //     ),
+            // }
 
-                  
-                    </div>
-                ),
-            }];
+            ];
         this.columns = [
             {
                 title: '手机号',
@@ -281,7 +287,7 @@ export default class BlackList extends Component {
                 key: 'action',
                 render: (text, record) => (
                     <div>
-                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record)}>日志</Button>
+                        {/*<Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record)}>日志</Button>*/}
 
                         <Popconfirm title="移除?" onConfirm={() => this.handleremove(record)} okText="Yes"
                                     cancelText="No">
@@ -839,13 +845,17 @@ export default class BlackList extends Component {
                                    key: 'operationDiary_User',
                                    render: (text, record) => (
                                        <span>{record.bkUserName}</span>),
-                               }, {
+                               }
+
+                               , {
                                    title: '操作',
                                    dataIndex: 'comment',
                                    key: 'operationDiary_Status',
                                    render: (text, record) => (
                                        <span>{record.comment}</span>),
-                               }]}
+                               }]
+
+                           }
                            dataSource={this.state.operationDiaryHistory}
                            loading={this.state.loadingComment}
                            pagination={{

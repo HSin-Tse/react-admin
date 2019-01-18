@@ -596,7 +596,6 @@ class Basic extends Component {
                 </div>
                 {/*{JSON.stringify(this.props.todps)}*/}
                 <Modal
-                    width={500}
                     title={this.state.modeState == '正常' ? '恢复正常' : this.state.modeState}
                     onCancel={this.handleCancel}
                     visible={this.state.visibleB}
@@ -662,7 +661,9 @@ class Basic extends Component {
                                            dataIndex: 'createDate',
                                            key: 'operationDiary_Date',
                                            render: (text, record) => (
-                                               <span>{record.createDate}</span>),
+
+
+                                               <span>{this.timestampToTime(record.createDate)}</span>),
                                        }, {
                                            title: 'IP',
                                            dataIndex: 'IP',
@@ -672,6 +673,7 @@ class Basic extends Component {
                                        }, {
                                            title: '操作人',
                                            width: 130,
+                                           align:'center',
                                            dataIndex: 'bkUserName',
                                            key: 'operationDiary_User',
                                            render: (text, record) => (
@@ -721,7 +723,7 @@ class Basic extends Component {
                                    dataIndex: 'createDate',
                                    key: 'operationDiary_Date',
                                    render: (text, record) => (
-                                       <span>{record.createDate}</span>),
+                                       <span>{this.timestampToTime(record.createDate)}</span>),
                                }, {
                                    title: 'IP',
                                    dataIndex: 'IP',
@@ -785,7 +787,7 @@ class Basic extends Component {
                             modal2OPDAYVisible: false,
                         });
                     }}
-                    width={800}
+                    width={'80%'}
                     footer={null}>
                     <Table rowKey="id"
                            columns={this.columnsLog}
