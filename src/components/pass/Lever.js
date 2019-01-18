@@ -173,37 +173,36 @@ class Basic extends Component {
         });
 
 
-        this.columnsLog =[
+        this.columnsLog = [
             {
                 title: '时间',
                 dataIndex: 'createDate',
                 key: 'operationDiary_Date',
-                align:'center',
+                align: 'center',
                 render: (text, record) => (
                     <span>{
                         this.timestampToTime(record.createDate)
                     }</span>),
 
 
-
             }, {
                 title: 'IP',
                 dataIndex: 'IP',
                 key: 'IP',
-                align:'center',
+                align: 'center',
 
                 render: (text, record) => (
                     <span>{record.ipAddress}</span>),
             }, {
                 title: '操作人',
-                align:'center',
+                align: 'center',
                 dataIndex: 'bkUserName',
                 key: 'operationDiary_User',
                 render: (text, record) => (
                     <span>{record.bkUserName}</span>),
             }, {
                 title: '操作',
-                align:'center',
+                align: 'center',
                 dataIndex: 'comment',
                 key: 'operationDiary_Status',
                 render: (text, record) => (
@@ -307,9 +306,17 @@ class Basic extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div>
-                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}  onClick={() => this.showOPDAyModal2(record)}>日志</Button>
-                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000', display:record.displayStatus=='审核通过'?'none':''}}  onClick={() => this.showModalB(record)}>审核</Button>
-                        <Button  size={'small'}  style={{minWidth: 80, background: '#FDD000',display:record.displayStatus!='审核通过'?'none':''}} onClick={() => this.showModalA(record)}>已审核</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                onClick={() => this.showOPDAyModal2(record)}>日志</Button>
+                        <Button size={'small'} style={{
+                            minWidth: 80,
+                            background: '#FDD000',
+                            display: record.displayStatus == '审核通过' ? 'none' : ''
+                        }} onClick={() => this.showModalB(record)}>审核</Button>
+                        <Button size={'small'} style={{
+                            minWidth: 80,
+                            display: record.displayStatus != '审核通过' ? 'none' : ''
+                        }} onClick={() => this.showModalA(record)}>查看</Button>
                     </div>
                 ),
             }];
@@ -673,7 +680,7 @@ class Basic extends Component {
                                        }, {
                                            title: '操作人',
                                            width: 130,
-                                           align:'center',
+                                           align: 'center',
                                            dataIndex: 'bkUserName',
                                            key: 'operationDiary_User',
                                            render: (text, record) => (
