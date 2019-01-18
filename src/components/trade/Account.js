@@ -465,6 +465,9 @@ class Basic extends Component {
         });
     }
     handleOk = () => {
+
+
+
         var mStatus = this.state.modeState == '正常' ? 1 : this.state.modeState == '禁止登陆' ? 2 : 3;
         // var reasonType = mStatus ==2?
         let self = this;
@@ -478,17 +481,65 @@ class Basic extends Component {
             'reasonType': self.state.forbiddenValue,
             'content': self.state.mChLeadComment,
         }).then(function (response) {
-            self.setState({
-                visibleOpM: false,
-                loadFor: false,
-                mChLeadComment: undefined,
-            }, () => {
-                self.state.forbiddenValue = 0
-                self.requestPage()
-            });
+
             message.success('操作成功');
 
+
+
+            if(mStatus!==1){
+                // window.Axios.post('auth/addBlackUser', {
+                //     'content': self.state.mChLeadComment,
+                //     'id': self.state.opRecord.id,
+                //     'listType': 3,//1:合规 2:开户 3:交易
+                // }).then(function (response) {
+                //     if (response.data.code === 1) {
+                //         message.success('加入交易黑名单成功')
+                //     }
+                //
+                //     self.setState({
+                //         visibleOpM: false,
+                //         loadFor: false,
+                //         mChLeadComment: undefined,
+                //     }, () => {
+                //         self.state.forbiddenValue = 0
+                //         self.requestPage()
+                //     });
+                // });
+
+                self.setState({
+                    visibleOpM: false,
+                    loadFor: false,
+                    mChLeadComment: undefined,
+                }, () => {
+                    self.state.forbiddenValue = 0
+                    self.requestPage()
+                });
+            }else{
+                self.setState({
+                    visibleOpM: false,
+                    loadFor: false,
+                    mChLeadComment: undefined,
+                }, () => {
+                    self.state.forbiddenValue = 0
+                    self.requestPage()
+                });
+
+
+                // window.Axios.post('auth/removeBlackUser', {
+                //     'id':self.state.opRecord.id//1:合规 2:开户 3:交易
+                // }).then((response) => {
+                //     message.success('移除交易黑名单')
+                //     // self.searchSelect()
+                // });
+
+            }
+
+
+
         })
+
+
+
     };
     handleCancel = (e) => {
         this.setState({
