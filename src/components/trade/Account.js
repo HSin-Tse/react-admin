@@ -62,6 +62,21 @@ class Basic extends Component {
             suspend_reason_type: []
 
         };
+
+        // document.cookie="username=John Doe; expires=Thu, 18 Dec 2043 12:00:00 GMT; path=/";
+
+        // document.cookie1="testcoookie1"
+        var x = document.cookie;
+        var xxxx = document.cookie1;
+        var yyyy = document.cookie;
+
+        // console.log('hcia x' , x)
+        // console.log('hcia x' , x)
+        // console.log('hcia x' , x)
+        
+        console.log('hcia xxxx' , xxxx)
+
+        console.log('hcia yyyy' , yyyy)
     }
 
     showOPDAyModal3 = (recodrd) => {
@@ -239,7 +254,11 @@ class Basic extends Component {
                 key: '当前杠杆',
                 render: (text, record) => (
 
-                    <Button  size={'small'}  style={{minWidth: 80, background: '#FDD000',display: record.displayStatus == '审核通过' ? 'none' : ''}}
+                    <Button size={'small'} style={{
+                        minWidth: 80,
+                        background: '#FDD000',
+                        display: record.displayStatus == '审核通过' ? 'none' : ''
+                    }}
                             onClick={() => this.showModalChangeLeavge(record)}>{record.displayLeverage}</Button>
                 )
 
@@ -252,7 +271,7 @@ class Basic extends Component {
                         <Select
                             size={'small'}
                             value={record.displayStatus} style={{width: 100}}
-                                onChange={(value) => this.handleChange(value, record)}
+                            onChange={(value) => this.handleChange(value, record)}
                         >
                             <Option key="1" value="正常">正常</Option>
                             <Option key="2" value="禁止登陆">禁止登陆</Option>
@@ -263,9 +282,11 @@ class Basic extends Component {
                         {/*onClick={() => this.seeDetail(record)}>备注</Button>*/}
 
 
-                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000',marginLeft: 10}}  onClick={() => this.showOPDAyModal3(record)}>备注</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000', marginLeft: 10}}
+                                onClick={() => this.showOPDAyModal3(record)}>备注</Button>
 
-                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record)}>日志</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                onClick={() => this.showOPDAyModal2(record)}>日志</Button>
 
                     </div>
                 ),

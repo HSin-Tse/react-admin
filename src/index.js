@@ -121,7 +121,24 @@ window.Axios.interceptors.response.use(function (response) {
             localStorage.removeItem('too');
             localStorage.removeItem('displayName');
 
-            window.location = 'http://' + window.location.host + "/build/#/login";
+
+            // var isMe =window.location.port== ''
+
+            var isTESTServer = window.location.port == '8090'
+
+            var pasub = ''
+            if (isTESTServer) {
+                pasub = '/build'
+
+            } else {
+                pasub = ''
+
+            }
+
+            var gogogo = window.location.protocol + '//' + window.location.host + pasub + "/#/login"
+
+            console.log('hcia gogogo', gogogo)
+            window.location = gogogo;
 
 
             // this.props.history.push('/login')

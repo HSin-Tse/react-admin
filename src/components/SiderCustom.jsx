@@ -303,16 +303,23 @@ class SiderCustom extends Component {
 
     componentDidMount() {
 
+
+        var gogogo = window.location.protocol+'//' + window.location.host + "/build/#/login"
+        // http://localhost:3006/build/NaN/build/localhost:3006/build/#/login
+
+
+        console.log('hcia gogogo' , gogogo)
+        // window.location = gogogo;
         var liveTag = localStorage.getItem('liveecho')
 
         var inttevar = new Date().getTime() - liveTag
 
-        console.log('hcia inttevar', inttevar)
+        // console.log('hcia inttevar', inttevar)
 
 
         if (inttevar > 3 * 1000) {
 
-            console.log('hcia inttevar', inttevar)
+            // console.log('hcia inttevar', inttevar)
 
             localStorage.removeItem('infor');
             localStorage.removeItem('user');
@@ -321,7 +328,7 @@ class SiderCustom extends Component {
             // self.props.history.push('/login')
 
         } else {
-            console.log('hcia inttevar', inttevar)
+            // console.log('hcia inttevar', inttevar)
 
         }
 

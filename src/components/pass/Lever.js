@@ -178,6 +178,7 @@ class Basic extends Component {
                 title: '时间',
                 dataIndex: 'createDate',
                 key: 'operationDiary_Date',
+                align:'center',
                 render: (text, record) => (
                     <span>{
                         this.timestampToTime(record.createDate)
@@ -189,17 +190,20 @@ class Basic extends Component {
                 title: 'IP',
                 dataIndex: 'IP',
                 key: 'IP',
+                align:'center',
+
                 render: (text, record) => (
                     <span>{record.ipAddress}</span>),
             }, {
                 title: '操作人',
-                width: 130,
+                align:'center',
                 dataIndex: 'bkUserName',
                 key: 'operationDiary_User',
                 render: (text, record) => (
                     <span>{record.bkUserName}</span>),
             }, {
                 title: '操作',
+                align:'center',
                 dataIndex: 'comment',
                 key: 'operationDiary_Status',
                 render: (text, record) => (
@@ -781,7 +785,7 @@ class Basic extends Component {
                             modal2OPDAYVisible: false,
                         });
                     }}
-                    width={600}
+                    width={800}
                     footer={null}>
                     <Table rowKey="id"
                            columns={this.columnsLog}
