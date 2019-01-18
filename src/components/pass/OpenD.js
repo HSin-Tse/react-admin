@@ -783,8 +783,8 @@ class PassOpenD extends Component {
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*风险承受力</span>
                                     <Select
-                                        dropdownStyle={{wordWrap:'break-word'}}
-                                        style={{wordWrap:'break-word'}}
+                                        dropdownStyle={{wordWrap: 'break-word'}}
+                                        style={{wordWrap: 'break-word'}}
                                         onChange={this.onChangemriskTolerance}
                                         value={this.state.mriskTolerance}>
                                         {this.mIXRisk_Tolerance}
@@ -947,7 +947,7 @@ class PassOpenD extends Component {
 
 
                                         <Button
-                                            style={{display: ( this.state.isNeedSave|| !isSetL)  ? 'none' : ''}}
+                                            style={{display: (this.state.isNeedSave || !isSetL) ? 'none' : ''}}
                                             disabled={this.state.isNeedSave || !isSetL}
                                             loading={this.state.iconLoading}>
                                             开户通过
@@ -959,7 +959,7 @@ class PassOpenD extends Component {
                                 </Tooltip>
 
                                 <Button
-                                    style={{display:( this.state.isNeedSave|| !isSetL) ? '' : 'none'}}
+                                    style={{display: (this.state.isNeedSave || !isSetL) ? '' : 'none'}}
                                     disabled={this.state.isNeedSave || !isSetL}
                                     loading={this.state.iconLoading}>
                                     开户通过
