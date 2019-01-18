@@ -720,7 +720,8 @@ class PassOpenD extends Component {
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*风险承受力</span>
                                     <Select
-                                        // style={{maxWidth: 220}}
+                                        dropdownStyle={{wordWrap:'break-word'}}
+                                        style={{wordWrap:'break-word'}}
                                         onChange={this.onChangemriskTolerance}
                                         value={this.state.mriskTolerance}>
                                         {this.mIXRisk_Tolerance}

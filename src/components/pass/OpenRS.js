@@ -466,7 +466,7 @@ class PassOpenRS extends Component {
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*风险承受力</span>
                                     <Select
-                                        style={{maxWidth: 220}}
+                                        // style={{maxWidth: 220}}
                                         onChange={this.onChangemriskTolerance}
                                         value={this.state.mriskTolerance}>
                                         {this.mIXRisk_Tolerance}
@@ -550,6 +550,7 @@ class PassOpenRS extends Component {
 
                         <Col md={24}>
                             <Table rowKey="id"
+                                   bordered
                                    columns={[
                                        {
                                            title: '操作人',

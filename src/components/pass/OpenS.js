@@ -509,7 +509,7 @@ class PassOpenD extends Component {
                                     <span style={{minWidth: 120}}>*风险承受力</span>
                                     <Select
                                         disabled={true}
-                                        style={{maxWidth: 220}}
+                                        // style={{maxWidth: 220}}
                                         onChange={this.onChangemriskTolerance}
                                         value={this.state.mriskTolerance}>
                                         {this.mIXRisk_Tolerance}
@@ -642,6 +642,7 @@ class PassOpenD extends Component {
 
 
                             <Table rowKey="id"
+                                   bordered
                                    columns={[
                                        {
                                            title: '操作人',
