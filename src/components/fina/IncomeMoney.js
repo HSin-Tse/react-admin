@@ -102,6 +102,7 @@ class Basic extends Component {
                 title: '申请时间',
                 dataIndex: '申请时间',
                 key: '申请时间',
+                width:'100px',
                 render: (text, record) => (
                     <span>{this.timestampToTime(record.comment_step1.createDate)}</span>)
             }, {
