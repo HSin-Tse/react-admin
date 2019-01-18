@@ -602,8 +602,6 @@ class Basic extends Component {
                 </div>
                 {/*{JSON.stringify(this.props.todps)}*/}
                 <Modal
-
-
                     bodyStyle={{
                         background: 'white',
                         padding: 0,
@@ -762,61 +760,120 @@ class Basic extends Component {
 
                 </Modal>
                 <Modal
-                    title="详情查看"
+                    bodyStyle={{
+                        background: 'white',
+                        padding: 0,
+                        margin: 0,
+                        width: 600
+                    }}
+                    closable={false}
+                    footer={null}
                     onCancel={this.handleCancel}
                     visible={this.state.visibleA}
-                    footer=''
+
+
                 >
 
-                    <Card bordered={false}>
-                        <h3>当前杠杆 :{this.state.detail.currentLeverage}</h3>
-                        <h3>余额 :{this.state.detail.cashBalance}</h3>
-                        <h3>杠杆修改 :{this.state.detail.targetLeverage}</h3>
-                        <h3>保证金占比:{this.state.detail.marginLevel}</h3>
-                        <div>
-                            <h3>处理备注：</h3>
-                            <TextArea value={this.state.detail.comment} rows={4}></TextArea>
+                    <div>
+                        <div style={{
+                            alignItems: 'center',
+                            justifyContent: 'center', height: 48, display: 'flex', padding: 0, background: '#FDD000'
+                        }}>
+                            <span style={{
+                                fontSize: 18,
+                                fontFamily: 'PingFangSC-Medium',
+                                fontWeight: 500,
+                                color: 'rgba(51,51,51,1)'
+                            }}>{'详情查看：' + this.state.detail.accountNo}
+                            </span>
                         </div>
-                    </Card>
+                        <div>
+                            <Row style={{marginTop: "24px"}}>
+                                <Col style={{textAlign: 'right'}} span={9}>当前杠杆:</Col>
+                                <Col style={{textAlign: 'center'}} span={11}>{this.state.detail.targetLeverage}</Col>
+                            </Row>
+                            <Row style={{marginTop: "24px"}}>
+                                <Col style={{textAlign: 'right'}} span={9}>余额:</Col>
+                                <Col style={{textAlign: 'center'}} span={11}>{this.state.detail.cashBalance}</Col>
+                            </Row>
 
-                    <Table rowKey="id"
-                           columns={[
-                               {
-                                   title: '时间',
-                                   dataIndex: 'createDate',
-                                   key: 'operationDiary_Date',
-                                   render: (text, record) => (
-                                       <span>{this.timestampToTime(record.createDate)}</span>),
-                               }, {
-                                   title: 'IP',
-                                   dataIndex: 'IP',
-                                   key: 'IP',
-                                   render: (text, record) => (
-                                       <span>{record.ipAddress}</span>),
-                               }, {
-                                   title: '操作人',
-                                   width: 130,
-                                   dataIndex: 'bkUserName',
-                                   key: 'operationDiary_User',
-                                   render: (text, record) => (
-                                       <span>{record.bkUserName}</span>),
-                               }, {
-                                   title: '操作',
-                                   dataIndex: 'comment',
-                                   key: 'operationDiary_Status',
-                                   render: (text, record) => (
-                                       <span>{record.comment}</span>),
-                               }]}
-                           dataSource={this.state.operationDiaryHistory}
-                           loading={this.state.loadingComment}
-                           pagination={{
-                               total: this.state.totalpageComments * this.state.pgsize,
-                               pageSize: this.state.pgsize,
-                               onChange: this.changePageComment,
-                           }}
-                    />
+                            <Row style={{marginTop: "24px"}}>
+                                <Col style={{textAlign: 'right'}} span={9}>杠杆修改:</Col>
+                                <Col style={{textAlign: 'center'}} span={11}>
+                                    <Select
+                                        onChange={this.onChangeLe}
+                                        defaultValue={this.state.detail.targetLeverage}
+                                        style={{width: 100, marginLeft: 0}}>
+                                        {this.state.leavgeList.map(ccty => <Option
+                                            value={ccty.id} key={ccty.leverage}>1:{ccty.leverage}</Option>)}
+                                    </Select>
+                                </Col>
+                            </Row>
+                            <Row style={{marginTop: "24px"}}>
+                                <Col style={{textAlign: 'right'}} span={9}>保证金占比:</Col>
+                                <Col style={{textAlign: 'center'}} span={11}>{this.state.detail.marginLevel}</Col>
+                            </Row>
+                            <Row style={{marginTop: "24px", marginRight: "80px", marginLeft: "80px"}}>
+                                <Col style={{textAlign: 'center'}} span={24}>处理备注</Col>
+                                <Col style={{marginTop: 20}} span={24}>
+                                <TextArea value={this.state.detail.comment}
+                                          onChange={this.changeNote}
+                                          rows={4}></TextArea>
+                                </Col>
+                            </Row>
+
+                            <Table
+                                style={{marginTop: "20px", marginLeft: "80px", marginRight: "80px"}}
+                                rowKey="id"
+                                bordered
+
+                                columns={[
+                                    {
+                                        title: '操作人',
+                                        width: 130,
+                                        align: 'center',
+                                        dataIndex: 'bkUserName',
+                                        key: 'operationDiary_User',
+
+                                        render: (text, record) => (
+                                            <span>{record.bkUserName}</span>),
+                                    },
+                                    {
+                                        title: '操作时间',
+                                        align: 'center',
+
+                                        dataIndex: 'createDate',
+                                        key: 'operationDiary_Date',
+                                        render: (text, record) => (
+
+
+                                            <span>{this.timestampToTime(record.createDate)}</span>),
+                                    }, {
+                                        title: '备注',
+                                        align: 'center',
+
+                                        dataIndex: 'comment',
+                                        key: 'operationDiary_Status',
+                                        render: (text, record) => (
+                                            <span>{record.comment}</span>),
+                                    }]}
+                                dataSource={this.state.operationDiaryHistory}
+                                loading={this.state.loadingComment}
+                                pagination={{
+                                    total: this.state.totalpageComments * this.state.pgsize,
+                                    pageSize: this.state.pgsize,
+                                    onChange: this.changePageComment,
+                                }}
+                            />
+
+
+                        </div>
+
+                    </div>
+
 
                 </Modal>
+
                 <h2 style={{marginTop: 15}}>
                     杠杆审核
                 </h2>
