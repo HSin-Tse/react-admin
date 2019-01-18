@@ -642,7 +642,7 @@ class Basic extends Component {
                         <div>
                             <Row style={{marginTop: "24px"}}>
                                 <Col style={{textAlign: 'right'}} span={9}>当前杠杆:</Col>
-                                <Col style={{textAlign: 'center'}} span={11}>{this.state.detail.targetLeverage}</Col>
+                                <Col style={{textAlign: 'center'}} span={11}>{this.state.detail.currentLeverage}</Col>
                             </Row>
                             <Row style={{marginTop: "24px"}}>
                                 <Col style={{textAlign: 'right'}} span={9}>余额:</Col>
@@ -800,7 +800,7 @@ class Basic extends Component {
                         <div>
                             <Row style={{marginTop: "24px"}}>
                                 <Col style={{textAlign: 'right'}} span={9}>当前杠杆:</Col>
-                                <Col style={{textAlign: 'center'}} span={11}>{this.state.detail.targetLeverage}</Col>
+                                <Col style={{textAlign: 'center'}} span={11}>{this.state.detail.currentLeverage}</Col>
                             </Row>
                             <Row style={{marginTop: "24px"}}>
                                 <Col style={{textAlign: 'right'}} span={9}>余额:</Col>
