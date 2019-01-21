@@ -1155,6 +1155,13 @@ class PassOpenD extends Component {
     };
     openOK = () => {
 
+
+        // if (!this.state.changeNoteV) {
+        //     message.error('备注必填')
+        //     return
+        // }
+
+
         this.setState({
             iconLoading: true,
         });
