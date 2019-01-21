@@ -88,7 +88,8 @@ class Basic extends Component {
 
     componentDidMount() {
 
-        {/*<BreadcrumbCustom first="审核管理" second="开户审核"/>*/}
+        {/*<BreadcrumbCustom first="审核管理" second="开户审核"/>*/
+        }
 
         window.Axios.post('back/addLogHistory', {
             'moduleLog': '审核管理',
@@ -104,7 +105,7 @@ class Basic extends Component {
             {
                 title: '时间',
                 dataIndex: 'createDate',
-                align:'center',
+                align: 'center',
                 key: 'operationDiary_Date',
                 render: (text, record) => (
                     <span>{
@@ -113,20 +114,20 @@ class Basic extends Component {
             }, {
                 title: 'IP',
                 dataIndex: 'IP',
-                align:'center',
+                align: 'center',
                 key: 'IP',
                 render: (text, record) => (
                     <span>{record.userIP}</span>),
             }, {
                 title: '操作人',
-                align:'center',
+                align: 'center',
                 dataIndex: 'bkUserName',
                 key: 'operationDiary_User',
                 render: (text, record) => (
                     <span>{record.loginName}</span>),
             }, {
                 title: '操作',
-                align:'center',
+                align: 'center',
                 dataIndex: 'comment',
                 key: 'operationDiary_Status',
                 render: (text, record) => (
@@ -274,7 +275,7 @@ class Basic extends Component {
                         }}
                             onClick={() => this.handleEdit(record)}>{!this.state.availableFlag ? '查看' : record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'}
                         </Button>
-                        <Button disabled={!this.state.availableFlag  || record.displayStatus == '已授权'} size={'small'}
+                        <Button disabled={!this.state.availableFlag || record.displayStatus == '已授权'} size={'small'}
                                 style={{minWidth: 80, background: record.displayStatus == '已授权' ? '' : '#FDD000'}}
                                 onClick={() => this.handleAmStok(record)}>{record.displayStatus}</Button>
                     </div>
@@ -323,7 +324,7 @@ class Basic extends Component {
             currentComment: 0,
             modal2OPDAYVisible: true,
             refID: recodrd.id,
-        },()=>{
+        }, () => {
             this.requestUserCommentList(recodrd)
 
         });
@@ -332,8 +333,7 @@ class Basic extends Component {
     handleEdit = (record) => {
 
 
-
-        var op=!this.state.availableFlag ? '查看' : record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'
+        var op = !this.state.availableFlag ? '查看' : record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'
         window.Axios.post('back/addLogOpenAccountAudit', {
             referKey: record.id,
             commentLog: op,
@@ -373,8 +373,6 @@ class Basic extends Component {
         })
 
 
-
-
         let self = this
         self.setState({
 
@@ -390,7 +388,6 @@ class Basic extends Component {
 
             }
         );
-
 
 
     };
@@ -467,6 +464,7 @@ class Basic extends Component {
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 {/*<div>this.state.availableFlag :{JSON.stringify(this.state.availableFlag)}</div>*/}
+                {/*<div>this.state.currentComment :{JSON.stringify(this.state.currentComment)}</div>*/}
                 {/*<div>isCanOP :{this.state.isCanOP}</div>*/}
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
                 {/*{JSON.stringify(this.props.todps)}*/}
@@ -485,8 +483,7 @@ class Basic extends Component {
                            bordered
                            loading={this.state.loading}
                            pagination={{
-                               showQuickJumper:true,
-
+                               showQuickJumper: true,
                                total: this.state.pgsize * this.state.totalPage,
                                pageSize: this.state.pgsize,
                                onChange: this.changePage,
@@ -661,6 +658,7 @@ class Basic extends Component {
                            dataSource={this.state.operationDiaryHistory}
                            loading={this.state.loadingComment}
                            pagination={{
+                               current: this.state.currentComment,
                                total: this.state.totalpageComments * this.state.pgsize,
                                pageSize: this.state.pgsize,
                                onChange: this.changePageComment,

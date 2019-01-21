@@ -45,6 +45,7 @@ export default class PotentialUser extends Component {
             operationLogHistory: [],
         };
     }
+
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
         const year = dateObj.getFullYear() // 获取年，
@@ -58,13 +59,14 @@ export default class PotentialUser extends Component {
     pad = (str) => {
         return +str >= 10 ? str : '0' + str
     };
+
     componentDidMount() {
 
         this.columnsLog = [
             {
                 title: '时间',
                 dataIndex: 'createDate',
-                align:'center',
+                align: 'center',
                 key: 'operationDiary_Date',
                 render: (text, record) => (
                     <span>{
@@ -73,20 +75,20 @@ export default class PotentialUser extends Component {
             }, {
                 title: 'IP',
                 dataIndex: 'IP',
-                align:'center',
+                align: 'center',
                 key: 'IP',
                 render: (text, record) => (
                     <span>{record.userIP}</span>),
             }, {
                 title: '操作人',
-                align:'center',
+                align: 'center',
                 dataIndex: 'bkUserName',
                 key: 'operationDiary_User',
                 render: (text, record) => (
                     <span>{record.loginName}</span>),
             }, {
                 title: '操作',
-                align:'center',
+                align: 'center',
                 dataIndex: 'comment',
                 key: 'operationDiary_Status',
                 render: (text, record) => (
@@ -116,13 +118,17 @@ export default class PotentialUser extends Component {
 
 
 
+        var self = this
         this.setState({
             currentComment: 0,
-            modal2OPDAYVisible: true,
             refID: belongUserId
-        },()=>{
+        }, () => {
             this.requestUserLogList(belongUserId)
+            self.setState({
+                modal2OPDAYVisible: true,
 
+
+            })
         });
 
         // this.requestUserCommentList(belongUserId)
@@ -132,17 +138,34 @@ export default class PotentialUser extends Component {
         // });
     };
     shownoteModal = (belongUserId) => {
-        this.requestUserCommentList(belongUserId)
         this.setState({
+            currentComment: 0,
             modal3NoteVisible: true,
             visible: false,
+        },()=>{
+            this.requestUserCommentList(belongUserId)
+
         });
     };
 
     showAddbAckModal = (record) => {
 
 
-        window.Axios.post('back/addLogPotentialUser', {
+        var logRouter = ''
+
+        if (this.state.nowKey === '1') {
+            logRouter='/back/addLogPotentialUser'
+        }
+        if (this.state.nowKey === '2') {
+            logRouter='/back/addLogDemoUser'
+
+        }
+        if (this.state.nowKey === '3') {
+            logRouter='/back/addLogIntentUser'
+        }
+
+
+        window.Axios.post(logRouter, {
             referKey: record.belongUserId,
             commentLog: '添加回访',
             // mobile: this.state.phoneCn,
@@ -515,10 +538,21 @@ export default class PotentialUser extends Component {
 
 
     handleDelay = (record) => {
-        
-        
+
+        var logRouter = ''
+
+        if (this.state.nowKey === '1') {
+            logRouter='back/addLogPotentialUser'
+        }
+        if (this.state.nowKey === '2') {
+            logRouter='back/addLogDemoUser'
+
+        }
+        if (this.state.nowKey === '3') {
+            logRouter='back/addLogIntentUser'
+        }
         // console.log('hcia record.feebackStatus' , record.feebackStatus)
-        window.Axios.post('back/addLogPotentialUser', {
+        window.Axios.post(logRouter, {
             referKey: record.belongUserId,
             commentLog: '延期申请',
             // mobile: this.state.phoneCn,
@@ -526,9 +560,7 @@ export default class PotentialUser extends Component {
         })
 
 
-
-
-        if(record.expireStatus=='未过期'){
+        if (record.expireStatus == '未过期') {
 
             message.info('未过期')
             return
@@ -558,7 +590,7 @@ export default class PotentialUser extends Component {
 
     seeUSer = (record) => {
 
-        console.log('hcia record' , record)
+        console.log('hcia record', record)
         window.Axios.post('back/addLogHistory', {
             'moduleLog': '用户管理',
             'pageLog': 'Leads管理',
@@ -605,7 +637,21 @@ export default class PotentialUser extends Component {
     requestUserLogList = (record) => {
         var self = this;
 
-        window.Axios.post('/back/getLogPotentialUser', {
+
+        var logRouter = ''
+
+        if (this.state.nowKey === '1') {
+            logRouter='/back/getLogPotentialUser'
+        }
+        if (this.state.nowKey === '2') {
+            logRouter='/back/getLogDemoUser'
+
+        }
+        if (this.state.nowKey === '3') {
+            logRouter='/back/getLogIntentUser'
+        }
+
+        window.Axios.post(logRouter, {
             referKey: this.state.refID,
             pageNo: this.state.currentComment,
             pageSize: this.state.pgsize,
@@ -615,8 +661,6 @@ export default class PotentialUser extends Component {
                 operationLogHistory: response.data.data.list,
             });
         });
-
-
 
 
     }
@@ -750,6 +794,16 @@ export default class PotentialUser extends Component {
             this.requestPageC()
         })
     }
+
+    changePageLog = (page) => {
+        page = page - 1
+        this.setState({
+            currentComment: page,
+        }, () => {
+            this.requestUserLogList()
+        })
+    }
+
     changePageComment = (page) => {
         page = page - 1
         this.setState({
@@ -823,6 +877,8 @@ export default class PotentialUser extends Component {
 
 
             <div>
+                <div>this.state.currentComment :{JSON.stringify(this.state.currentComment)}</div>
+
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 {/*<div>PotentialUser</div>*/}
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
@@ -973,7 +1029,6 @@ export default class PotentialUser extends Component {
                     </TabPane>
 
 
-
                     <TabPane tab="模拟用户" key="2">
                         <Card bodyStyle={{padding: 0, margin: 0}} title={'模拟用户信息表'}>
 
@@ -1051,9 +1106,11 @@ export default class PotentialUser extends Component {
                            dataSource={this.state.operationLogHistory}
                            loading={this.state.loadingComment}
                            pagination={{
+                               current: this.state.currentComment,
+
                                total: this.state.totalpageComments * this.state.pgsize,
                                pageSize: this.state.pgsize,
-                               onChange: this.changePageComment,
+                               onChange: this.changePageLog,
                            }}
                     />
 
