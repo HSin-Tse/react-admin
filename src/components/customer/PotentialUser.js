@@ -1098,6 +1098,8 @@ export default class PotentialUser extends Component {
                     visible={this.state.modal2OPDAYVisible}
                     onCancel={this.handleCancel}
                     width={600}
+                    bodyStyle={{padding: 0, margin: 0}}
+                    bordered
                     footer={null}
                 >
                     <Table rowKey="id"

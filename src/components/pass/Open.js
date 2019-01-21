@@ -654,6 +654,7 @@ class Basic extends Component {
                     width={600}
                     footer={null}>
                     <Table rowKey="id"
+                           bordered
                            columns={this.columnsLog}
                            dataSource={this.state.operationDiaryHistory}
                            loading={this.state.loadingComment}
