@@ -1016,7 +1016,7 @@ export default class PotentialUser extends Component {
                                 // rowSelection={rowSelection}
                                    columns={this.pageAColumns()}
                                    dataSource={this.state.bklistA}
-                                   scroll={{x: 1500}}
+                                   scroll={{x: 1600}}
                                    loading={this.state.loadingA}
                                    pagination={{
                                        total: this.state.totalpageA * this.state.pgsize,
@@ -1055,7 +1055,7 @@ export default class PotentialUser extends Component {
                                    bordered
                                    columns={this.pageCColumns()}
                                    dataSource={this.state.bklistC}
-                                   scroll={{x: 1500}}
+                                   scroll={{x: 1600}}
                                    loading={this.state.loading}
                                    pagination={{
                                        total: this.state.totalpageC * this.state.pgsize,
