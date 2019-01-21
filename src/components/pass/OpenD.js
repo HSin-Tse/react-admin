@@ -1141,6 +1141,8 @@ class PassOpenD extends Component {
                     checkderesb: response.data.data.isExist
 
                 });
+                message.info(response.data.data.isExist ? '手机号有重合' : '手机号無重合')
+
             });
         } else if (this.state.checkfromdbTypeV == 1) {
             window.Axios.post('open/localExistOpenAccount', {
@@ -1150,6 +1152,8 @@ class PassOpenD extends Component {
                     icondbALoading: false,
                     checkderesb: response.data.data.isExist
                 });
+                message.info(response.data.data.isExist ? '身份证有重合' : '身份证無重合')
+
             });
         } else if (this.state.checkfromdbTypeV == 2) {
             window.Axios.post('open/localExistOpenAccount', {
@@ -1160,6 +1164,8 @@ class PassOpenD extends Component {
                     checkderesb: response.data.data.isExist
 
                 });
+
+                message.info(response.data.data.isExist ? '邮箱有重合' : '邮箱無重合')
             });
         }
 
@@ -1181,6 +1187,9 @@ class PassOpenD extends Component {
                     checkderesa: response.data.data.isExist
 
                 });
+
+                message.info(response.data.data.isExist ? '手机号有重合' : '手机号無重合')
+
             });
         } else if (this.state.checkfromdbTypeV == 1) {
             window.Axios.post('open/remoteExistOpenAccount', {
@@ -1191,6 +1200,8 @@ class PassOpenD extends Component {
                     icondbALoadingA: false,
                     checkderesa: response.data.data.isExist
                 });
+                message.info(response.data.data.isExist ? '身份证有重合' : '身份证無重合')
+
             });
         } else if (this.state.checkfromdbTypeV == 2) {
             window.Axios.post('open/remoteExistOpenAccount', {
@@ -1201,6 +1212,8 @@ class PassOpenD extends Component {
                     checkderesa: response.data.data.isExist,
                     icondbALoadingA: false,
                 });
+                message.info(response.data.data.isExist ? '邮箱有重合' : '邮箱無重合')
+
             });
         }
 
