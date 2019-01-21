@@ -192,7 +192,67 @@ class DEVhboard extends React.Component {
                                                 message.error(error.toString())
                                                 return Promise.reject(error)
                                             })
+
+
+                                            var aaaxios = axios.create({
+                                                baseURL: self.state.HOST
+                                            });
+
+                                            window.PAxios=aaaxios
+                                            window.PAxios.interceptors.request.use(
+                                                config => {
+                                                    var xtoken = localStorage.getItem('too')
+                                                    var loginName = localStorage.getItem('loginName')
+
+                                                    loginName = encodeURI(loginName)
+
+                                                    // console.log('hcia loginName' , loginName)
+                                                    // console.log('hcia xtoken' , xtoken)
+
+                                                    if (xtoken != null) {
+                                                        config.headers['X-Token'] = xtoken
+                                                        if (config.method == 'post') {
+
+
+                                                            // config.data = {
+                                                            //     ...config.data,
+                                                            //     'token': xtoken,
+                                                            //     'loginName': loginName,
+                                                            //     'language': 'zh-CN',
+                                                            //
+                                                            // }
+
+                                                            // config.timeout = 30 * 1000
+
+                                                            config.headers = {
+                                                                'Content-Type': 'multipart/form-data',
+                                                                'token': xtoken,
+                                                                'loginName': loginName,
+                                                            }
+
+                                                        } else if (config.method == 'get') {
+                                                            config.params = {
+                                                                _t: Date.parse(new Date()) / 1000,
+                                                                ...config.params
+                                                            }
+                                                        }
+                                                    }
+
+                                                    return config
+                                                }, function (error) {
+
+                                                    console.log('hcia error', error)
+                                                    return Promise.reject(error)
+                                                })
+
+
+
                                         });
+
+
+
+
+
 
 
                                     }}
