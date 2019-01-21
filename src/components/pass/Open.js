@@ -325,6 +325,16 @@ class Basic extends Component {
 
     handleEdit = (record) => {
 
+
+
+        var op=!this.state.availableFlag ? '查看' : record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'
+        window.Axios.post('back/addLogOpenAccountAudit', {
+            referKey: record.id,
+            commentLog: op,
+            // mobile: this.state.phoneCn,
+            // content: this.state.changeNoteV,
+        })
+
         if (!this.state.availableFlag) {
             this.props.history.push('/app/pass/passopen/user' + record.id)
             return
@@ -354,9 +364,7 @@ class Basic extends Component {
             commentLog: "美股授权",
             // mobile: this.state.phoneCn,
             // content: this.state.changeNoteV,
-        }).then((response) => {
-            // message.success('操作成功')
-        });
+        })
 
 
 
@@ -646,11 +654,11 @@ class Basic extends Component {
                            columns={this.columnsLog}
                            dataSource={this.state.operationDiaryHistory}
                            loading={this.state.loadingComment}
-                           pagination={{
-                               total: this.state.totalpageComments * this.state.pgsize,
-                               pageSize: this.state.pgsize,
-                               onChange: this.changePageComment,
-                           }}
+                           // pagination={{
+                           //     total: this.state.totalpageComments * this.state.pgsize,
+                           //     pageSize: this.state.pgsize,
+                           //     onChange: this.changePageComment,
+                           // }}
                     />
 
                 </Modal>

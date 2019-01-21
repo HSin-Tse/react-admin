@@ -187,6 +187,8 @@ export default class PotentialUser extends Component {
                 title: '地理位置',
                 dataIndex: '地理位置',
                 key: '地理位置',
+                width: 150,
+
                 align: 'center',
                 render: (text, record) => (
                     <span>{record.location}</span>),
