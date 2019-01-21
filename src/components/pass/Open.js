@@ -103,26 +103,29 @@ class Basic extends Component {
             {
                 title: '时间',
                 dataIndex: 'createDate',
+                align:'center',
                 key: 'operationDiary_Date',
                 render: (text, record) => (
                     <span>{
-                        this.timestampToTime(record.createDate)
+                        this.timestampToTime(record.date)
                     }</span>),
             }, {
                 title: 'IP',
                 dataIndex: 'IP',
+                align:'center',
                 key: 'IP',
                 render: (text, record) => (
-                    <span>{record.ipAddress}</span>),
+                    <span>{record.userIP}</span>),
             }, {
                 title: '操作人',
-                width: 130,
+                align:'center',
                 dataIndex: 'bkUserName',
                 key: 'operationDiary_User',
                 render: (text, record) => (
-                    <span>{record.bkUserName}</span>),
+                    <span>{record.loginName}</span>),
             }, {
                 title: '操作',
+                align:'center',
                 dataIndex: 'comment',
                 key: 'operationDiary_Status',
                 render: (text, record) => (
@@ -283,8 +286,20 @@ class Basic extends Component {
 
 
         var self = this;
-        window.Axios.post('/auth/getRecordCommentList', {
-            id: record.id,
+        // window.Axios.post('/auth/getRecordCommentList', {
+        //     id: record.id,
+        //     commentType: 2,
+        //     pageNo: this.state.currentComment,
+        //     pageSize: this.state.pgsize,
+        // }).then(function (response) {
+        //     self.setState({
+        //         totalpageComments: response.data.data.totalPage,
+        //         operationDiaryHistory: response.data.data.list,
+        //     });
+        // });
+
+        window.Axios.post('/back/getLogOpenAccountAudit', {
+            referKey: record.id,
             commentType: 2,
             pageNo: this.state.currentComment,
             pageSize: this.state.pgsize,
@@ -294,6 +309,7 @@ class Basic extends Component {
                 operationDiaryHistory: response.data.data.list,
             });
         });
+
     }
     _switcherOn = () => {
         this.setState({
@@ -332,6 +348,19 @@ class Basic extends Component {
 
 
     handleAmStok = (record) => {
+
+        window.Axios.post('back/addLogOpenAccountAudit', {
+            referKey: record.id,
+            commentLog: "美股授权",
+            // mobile: this.state.phoneCn,
+            // content: this.state.changeNoteV,
+        }).then((response) => {
+            // message.success('操作成功')
+        });
+
+
+
+
         let self = this
         self.setState({
 
@@ -347,6 +376,9 @@ class Basic extends Component {
 
             }
         );
+
+
+
     };
 
 
