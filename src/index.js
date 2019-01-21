@@ -21,11 +21,20 @@ const store = createStore(reducer, applyMiddleware(...middleware));
 var Axios = axios.create({
     baseURL: 'http://mobile.nooko.cn:8090/'
 });
+
+var aaxios = axios.create({
+    baseURL: 'http://mobile.nooko.cn:8090/'
+});
+
+
+
+
 message.config({
     top: '10%',
     maxCount: 1,
 });
 window.Axios = Axios;
+window.PAxios = aaxios;
 
 var hideLoading
 
@@ -34,6 +43,54 @@ const requestList = []
 // 取消列表
 const CancelToken = axios.CancelToken
 let sources = []
+
+
+
+window.PAxios.interceptors.request.use(
+    config => {
+        var xtoken = localStorage.getItem('too')
+        var loginName = localStorage.getItem('loginName')
+
+        loginName = encodeURI(loginName)
+
+        // console.log('hcia loginName' , loginName)
+        // console.log('hcia xtoken' , xtoken)
+
+        if (xtoken != null) {
+            config.headers['X-Token'] = xtoken
+            if (config.method == 'post') {
+
+
+                // config.data = {
+                //     ...config.data,
+                //     'token': xtoken,
+                //     'loginName': loginName,
+                //     'language': 'zh-CN',
+                //
+                // }
+
+                // config.timeout = 30 * 1000
+
+                config.headers = {
+                    'Content-Type': 'multipart/form-data',
+                    'token': xtoken,
+                    'loginName': loginName,
+                }
+
+            } else if (config.method == 'get') {
+                config.params = {
+                    _t: Date.parse(new Date()) / 1000,
+                    ...config.params
+                }
+            }
+        }
+
+        return config
+    }, function (error) {
+
+        console.log('hcia error', error)
+        return Promise.reject(error)
+    })
 
 
 let pending = []; //声明一个数组用于存储每个ajax请求的取消函数和ajax标识
