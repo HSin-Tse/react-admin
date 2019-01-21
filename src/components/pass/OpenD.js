@@ -107,23 +107,7 @@ class PassOpenD extends Component {
                     config.headers['X-Token'] = xtoken
                     if (config.method == 'post') {
 
-                        // Toast.success('加载完成')
 
-                        // console.log('hcia hideLoading' , hideLoading)
-
-
-                        // console.log('hcia config' , config)
-                        // if (hideLoading) {
-                        //
-                        // } else {
-                        //     hideLoading = Toast.loading('加载中...', 0, () => {
-                        //         // Toast.success('加载完成')
-                        //     })
-                        // }
-
-
-                        // ss=   message.loading('Action in progress..', 0)
-                        // message.success('Loading finished', 2.5)
                         // config.data = {
                         //     ...config.data,
                         //     'token': xtoken,
@@ -132,9 +116,10 @@ class PassOpenD extends Component {
                         //
                         // }
 
-                        config.timeout = 30 * 1000
+                        // config.timeout = 30 * 1000
 
                         config.headers = {
+                            'Content-Type': 'multipart/form-data',
                             'token': xtoken,
                             'loginName': loginName,
                         }

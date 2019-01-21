@@ -8893,6 +8893,11 @@ react-router@^4.3.1:
     prop-types "^15.6.1"
     warning "^4.0.1"
 
+react-shimmer@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-shimmer/-/react-shimmer-1.0.2.tgz#16bb71769ddacf25901ac1e8cd5266c58aee51ba"
+  integrity sha512-L4zN1ERKyxLVSfX1/1kMlcL4MhIGD2X4K0AdMJikKX84d24FduzzS9EMMeiu30m1q2HRorJ0bAa3uqjT9wmxWA==
+
 react-slick@~0.23.2:
   version "0.23.2"
   resolved "https://registry.yarnpkg.com/react-slick/-/react-slick-0.23.2.tgz#8d8bdbc77a6678e8ad36f50c32578c7c0f1c54f6"
