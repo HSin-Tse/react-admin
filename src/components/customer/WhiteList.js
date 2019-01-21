@@ -495,7 +495,7 @@ export default class WhiteList extends Component {
                     <div style={{width: 270}}>
 
                         <Card
-                            title="當前表搜索"
+                            title="当前表搜索"
                             extra={<Button type="primary" onClick={() => {
                                 let self = this
                                 this.setState({
@@ -511,7 +511,7 @@ export default class WhiteList extends Component {
                                     self.requestPageA()
                                 })
                             }}
-                            >清除條件</Button>}
+                            >清除条件</Button>}
                         >
                             <Input value={this.state.selectMail} onChange={(e) => {
                                 this.setState({selectMail: e.target.value})
