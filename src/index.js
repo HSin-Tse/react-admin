@@ -40,7 +40,9 @@ let pending = []; //声明一个数组用于存储每个ajax请求的取消函�
 let cancelToken = axios.CancelToken;
 let removePending = (config) => {
     for(let p in pending){
-        if(pending[p].u === config.url + '&' + config.method) { //当当前请求在数组中存在时执行函数体
+
+
+        if(pending[p].u === JSON.stringify(config.url) + JSON.stringify(config.data)) { //当当前请求在数组中存在时执行函数体
             pending[p].f(); //执行取消操作
             pending.splice(p, 1); //把这条记录从数组中移除
         }
@@ -50,10 +52,13 @@ let removePending = (config) => {
 
 window.Axios.interceptors.request.use(
     config => {
+
+        const request = JSON.stringify(config.url) + JSON.stringify(config.data)
+
         removePending(config); //在一个ajax发送前执行一下取消操作
         config.cancelToken = new cancelToken((c)=>{
             // 这里的ajax标识我是用请求地址&请求方式拼接的字符串，当然你可以选择其他的一些方式
-            pending.push({ u: config.url + '&' + config.method, f: c });
+            pending.push({ u: request, f: c });
         });
 
         // const request = JSON.stringify(config.url) + JSON.stringify(config.data)

@@ -228,7 +228,30 @@ class Basic extends Component {
                 leavgeList: response.data.data,
             })
         });
-
+        window.Axios.post('dict/leverageList', {
+            'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
+        }).then((response) => {
+            console.log('hcia response', response)
+            self.setState({
+                leavgeList: response.data.data,
+            })
+        });
+        window.Axios.post('dict/leverageList', {
+            'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
+        }).then((response) => {
+            console.log('hcia response', response)
+            self.setState({
+                leavgeList: response.data.data,
+            })
+        });
+        window.Axios.post('dict/leverageList', {
+            'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
+        }).then((response) => {
+            // console.log('hcia response', response)
+            self.setState({
+                leavgeList: response.data.data,
+            })
+        });
 
         this.columns = [
             {
