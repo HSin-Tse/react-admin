@@ -877,7 +877,7 @@ export default class PotentialUser extends Component {
 
 
             <div>
-                <div>this.state.currentComment :{JSON.stringify(this.state.currentComment)}</div>
+                {/*<div>this.state.currentComment :{JSON.stringify(this.state.currentComment)}</div>*/}
 
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 {/*<div>PotentialUser</div>*/}
