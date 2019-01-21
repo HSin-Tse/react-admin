@@ -308,7 +308,7 @@ class SiderCustom extends Component {
         // http://localhost:3006/build/NaN/build/localhost:3006/build/#/login
 
 
-        console.log('hcia gogogo' , gogogo)
+        // console.log('hcia gogogo' , gogogo)
         // window.location = gogogo;
         var liveTag = localStorage.getItem('liveecho')
 

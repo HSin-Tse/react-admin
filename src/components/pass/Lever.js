@@ -25,6 +25,7 @@ class Basic extends Component {
             visibleA: false,
             visibleB: false,
             user: '',
+            mLeverageId: '',
             userList: [],
             leavgeList: [{
                 "id": 21,
@@ -105,7 +106,7 @@ class Basic extends Component {
         };
 
         var ss = getCookie("a")
-        console.log('hcia ss', ss)
+        // console.log('hcia ss', ss)
     }
 
     requestUserCommentList = (record) => {
@@ -165,12 +166,12 @@ class Basic extends Component {
     }
 
     componentDidMount() {
-        setCookie("yuo",'meme',0)
+        setCookie("yuo", 'meme', 0)
 
-        var ss=getCookie("yuo")
-        console.log('hcia ss' , ss)
-        console.log('hcia cookie' , window.cookie)
-
+        var ss = getCookie("yuo")
+        // console.log('hcia ss', ss)
+        // console.log('hcia cookie', window.cookie)
+        //
 
         window.Axios.post('back/addLogHistory', {
             'moduleLog': '审核管理',
@@ -227,6 +228,7 @@ class Basic extends Component {
                 leavgeList: response.data.data,
             })
         });
+
 
         this.columns = [
             {
@@ -396,19 +398,60 @@ class Basic extends Component {
 
     }
 
+    // targetLeverage
+    onChangeLe = (value) => {
+        // updateLeverageApply
+        let self = this
+
+        this.setState({
+            detail: {...this.state.detail, targetLeverage: value},
+        });
+        self.setState({
+            mLeverageId: value,
+        });
+        console.log('hcia value', value)
+        // window.Axios.post('finance/updateLeverageApply', {
+        //     id: this.state.detail.id,
+        //     leverageId: value,
+        // }).then((response) => {
+        //     message.success('操作成功')
+        //
+        //     console.log('hcia response', response)
+        //     // self.setState({
+        //     //     leavgeList: response.data.data,
+        //     // })
+        // });
+
+
+    }
 
     handleOk = () => {
         let self = this
+
+
+        if (!this.state.detail) {
+            window.Axios.post('finance/updateLeverageApply', {
+                id: this.state.detail.id,
+                leverageId: this.state.detail.targetLeverage,
+            }).then((response) => {
+                message.success('操作成功')
+
+                console.log('hcia response', response)
+                // self.setState({
+                //     leavgeList: response.data.data,
+                // })
+            });
+        }
+
+
         window.Axios.post('finance/passLeverageApply', {
             'id': this.state.detail.id,
             'content': this.state.detail.comment,
         }).then(function (response) {
 
 
-            if (response.data.code == 1) {
-                message.success('操作成功')
-                self.requestPage()
-            }
+            message.success('操作成功')
+            self.requestPage()
             self.setState({
                 visibleB: false,
             });
@@ -449,23 +492,7 @@ class Basic extends Component {
         });
 
     }
-    onChangeLe = (value) => {
-        // updateLeverageApply
-        let self = this
 
-        console.log('hcia value', value)
-        window.Axios.post('finance/updateLeverageApply', {
-            id: this.state.detail.id,
-            leverageId: value,
-        }).then((response) => {
-            console.log('hcia response', response)
-            // self.setState({
-            //     leavgeList: response.data.data,
-            // })
-        });
-
-
-    }
     _switcherOn = () => {
         this.setState({
             switcherOn: !this.state.switcherOn
@@ -654,7 +681,7 @@ class Basic extends Component {
                                 <Col style={{textAlign: 'center'}} span={11}>
                                     <Select
                                         onChange={this.onChangeLe}
-                                        defaultValue={this.state.detail.targetLeverage}
+                                        value={this.state.detail.targetLeverage}
                                         style={{width: 100, marginLeft: 0}}>
                                         {this.state.leavgeList.map(ccty => <Option
                                             value={ccty.id} key={ccty.leverage}>1:{ccty.leverage}</Option>)}
@@ -887,6 +914,8 @@ class Basic extends Component {
                 <h2 style={{marginTop: 15}}>
                     杠杆审核
                 </h2>
+                <div>this.state.leavgeList :{JSON.stringify(this.state.leavgeList)}</div>
+
                 <BreadcrumbCustom first="审核管理" second="杠杆审核"/>
 
 
