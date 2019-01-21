@@ -937,7 +937,7 @@ class Basic extends Component {
                 <h2 style={{marginTop: 15}}>
                     杠杆审核
                 </h2>
-                <div>this.state.leavgeList :{JSON.stringify(this.state.leavgeList)}</div>
+                {/*<div>this.state.leavgeList :{JSON.stringify(this.state.leavgeList)}</div>*/}
 
                 <BreadcrumbCustom first="审核管理" second="杠杆审核"/>
 

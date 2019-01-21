@@ -105,7 +105,7 @@ class DEVhboard extends React.Component {
 
                 <Row gutter={1}>
                     <Col md={24}>
-                        <div style={{display: this.state.displayName == 'admin' ? '' : 'none'}}>
+                        <div >
                             <h4>{localStorage.getItem('loginName')} tokon:</h4>
                             <TextArea style={{width: '100%'}}
                                       value={this.state.too}
