@@ -27,6 +27,7 @@ class Basic extends Component {
             , isCanOP: 0
             , current: 0
             , searchPhone: ''
+            , refID: ''
             , mStockRecord: {
                 status: 1,
                 ben: false
@@ -299,7 +300,7 @@ class Basic extends Component {
         // });
 
         window.Axios.post('/back/getLogOpenAccountAudit', {
-            referKey: record.id,
+            referKey: this.state.refID,
             commentType: 2,
             pageNo: this.state.currentComment,
             pageSize: this.state.pgsize,
@@ -317,9 +318,14 @@ class Basic extends Component {
         })
     };
     showOPDAyModal2 = (recodrd) => {
-        this.requestUserCommentList(recodrd)
+
+
         this.setState({
             modal2OPDAYVisible: true,
+            refID: recodrd.id,
+        },()=>{
+            this.requestUserCommentList(recodrd)
+
         });
     };
 
@@ -654,11 +660,11 @@ class Basic extends Component {
                            columns={this.columnsLog}
                            dataSource={this.state.operationDiaryHistory}
                            loading={this.state.loadingComment}
-                           // pagination={{
-                           //     total: this.state.totalpageComments * this.state.pgsize,
-                           //     pageSize: this.state.pgsize,
-                           //     onChange: this.changePageComment,
-                           // }}
+                           pagination={{
+                               total: this.state.totalpageComments * this.state.pgsize,
+                               pageSize: this.state.pgsize,
+                               onChange: this.changePageComment,
+                           }}
                     />
 
                 </Modal>
