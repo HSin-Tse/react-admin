@@ -7,6 +7,7 @@ import {CSVLink, CSVDownload} from "react-csv";
 import ExportJsonExcel from "js-export-excel";
 // import ReactHTMLTableToExcel from 'react-html-table-to-excel'
 import * as ReactDOM from "react-dom";
+import {FormattedMessage} from 'react-intl';
 
 const {RangePicker} = DatePicker;
 const {TextArea} = Input;
@@ -17,6 +18,9 @@ export default class WhiteList extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            name       : 'Eric',
+            unreadCount: 1000,
+
             selectedRowKeys: [],
             bklistA: [],
             currentA: 0,
@@ -387,11 +391,21 @@ export default class WhiteList extends Component {
     };
 
     render() {
+        const {name, unreadCount} = this.state;
 
         return (
 
             <div id="whiteL">
-
+                {/*<p>*/}
+                    {/*<FormattedMessage*/}
+                        {/*id="welcome"*/}
+                        {/*defaultMessage={`Hello {hello}, you have {unreadCount, number} {unreadCount, plural,*/}
+                      {/*one {message}*/}
+                      {/*other {messages}*/}
+                    {/*}`}*/}
+                        {/*values={{name: <b>{name}</b>, unreadCount}}*/}
+                    {/*/>*/}
+                {/*</p>*/}
 
                 <Modal
                     width={370}

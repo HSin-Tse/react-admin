@@ -333,7 +333,7 @@ class Basic extends Component {
     handleEdit = (record) => {
 
 
-        var op = !this.state.availableFlag ? '查看' : record.status == 0 ? '审核' : (record.status == 1) ? '查看' : '查看'
+        var op = !this.state.availableFlag ? '点击查看' : record.status == 0 ? '点击审核' : (record.status == 1) ? '点击查看' : '点击查看'
         window.Axios.post('back/addLogOpenAccountAudit', {
             referKey: record.id,
             commentLog: op,
