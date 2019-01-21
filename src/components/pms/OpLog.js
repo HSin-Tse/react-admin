@@ -111,6 +111,7 @@ export default class BlackList extends Component {
     componentWillUnmount() {
         document.removeEventListener("keydown", this.handleKeyPress, false);
     }
+
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
         const year = dateObj.getFullYear() // 获取年，
@@ -124,8 +125,8 @@ export default class BlackList extends Component {
     pad = (str) => {
         return +str >= 10 ? str : '0' + str
     };
-    componentDidMount() {
 
+    componentDidMount() {
 
 
         window.Axios.post('back/addLogHistory', {
@@ -192,7 +193,7 @@ export default class BlackList extends Component {
 
                         this.timestampToTime(record.date)
 
-                        }</span>
+                    }</span>
                 ),
             }, {
                 title: '使用者',
@@ -332,7 +333,7 @@ export default class BlackList extends Component {
                 window.Axios.post('back/getLogHistoryList', {
                     'typeLog': 1,//1:合规 2:开户 3:交易
                     size: this.state.pgsize,
-                    index: this.state.currentA*this.state.pgsize,
+                    index: this.state.currentA * this.state.pgsize,
                 }).then((response) => {
                     self.setState({
                         bklistA: response.data.data,
@@ -374,7 +375,6 @@ export default class BlackList extends Component {
         // });
 
 
-
         window.Axios.post('back/getLogHistoryListSize', {
             pageNo: this.state.currentB,
             'typeLog': 2,//1:登入紀錄 2:瀏覽紀錄 3:操作紀錄 99:API調用紀錄
@@ -389,7 +389,7 @@ export default class BlackList extends Component {
                 window.Axios.post('back/getLogHistoryList', {
                     'typeLog': 2,//1:合规 2:开户 3:交易
                     size: this.state.pgsize,
-                    index: this.state.currentB*this.state.pgsize,
+                    index: this.state.currentB * this.state.pgsize,
                 }).then((response) => {
                     self.setState({
                         bklistB: response.data.data,
@@ -429,7 +429,6 @@ export default class BlackList extends Component {
         // });
 
 
-
         window.Axios.post('back/getLogHistoryListSize', {
             pageNo: this.state.currentC,
             'typeLog': 3,//1:登入紀錄 2:瀏覽紀錄 3:操作紀錄 99:API調用紀錄
@@ -444,7 +443,7 @@ export default class BlackList extends Component {
                 window.Axios.post('back/getLogHistoryList', {
                     'typeLog': 3,//1:合规 2:开户 3:交易
                     size: this.state.pgsize,
-                    index: this.state.currentC*this.state.pgsize,
+                    index: this.state.currentC * this.state.pgsize,
                 }).then((response) => {
                     self.setState({
                         bklistC: response.data.data,
@@ -588,7 +587,7 @@ export default class BlackList extends Component {
                                 style={{width: '100%'}}
                                 showTime={{format: 'YYYY-MM-DD HH:mm:ss'}}
                                 format="YYYY-MM-DD HH:mm:ss fff"
-                                placeholder={['開始時間', '結束時間']}
+                                placeholder={['开始时间', '结束时间']}
                                 onChange={(value, dateString) => {
 
 
