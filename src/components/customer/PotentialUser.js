@@ -34,6 +34,7 @@ export default class PotentialUser extends Component {
             loadingComment: false,
             selectMail: "",
             selectPhone: "",
+            refID: "",
             selectID: "",
             selectTimeStart: "",
             selectTimeEnd: "",
@@ -41,6 +42,7 @@ export default class PotentialUser extends Component {
             modal3NoteVisible: false,
             visible: false,
             operationDiaryHistory: [],
+            operationLogHistory: [],
         };
     }
     timestampToTime = (timestamp) => {
@@ -58,7 +60,38 @@ export default class PotentialUser extends Component {
     };
     componentDidMount() {
 
-
+        this.columnsLog = [
+            {
+                title: '时间',
+                dataIndex: 'createDate',
+                align:'center',
+                key: 'operationDiary_Date',
+                render: (text, record) => (
+                    <span>{
+                        this.timestampToTime(record.date)
+                    }</span>),
+            }, {
+                title: 'IP',
+                dataIndex: 'IP',
+                align:'center',
+                key: 'IP',
+                render: (text, record) => (
+                    <span>{record.userIP}</span>),
+            }, {
+                title: '操作人',
+                align:'center',
+                dataIndex: 'bkUserName',
+                key: 'operationDiary_User',
+                render: (text, record) => (
+                    <span>{record.loginName}</span>),
+            }, {
+                title: '操作',
+                align:'center',
+                dataIndex: 'comment',
+                key: 'operationDiary_Status',
+                render: (text, record) => (
+                    <span>{record.comment}</span>),
+            }]
         window.Axios.post('back/addLogHistory', {
             'moduleLog': '用户管理',
             'pageLog': 'Leads管理',
@@ -80,11 +113,23 @@ export default class PotentialUser extends Component {
 
 
     showOPDAyModal2 = (belongUserId) => {
-        this.requestUserCommentList(belongUserId)
+
+
+
         this.setState({
+            currentComment: 0,
             modal2OPDAYVisible: true,
-            visible: false,
+            refID: belongUserId
+        },()=>{
+            this.requestUserLogList(belongUserId)
+
         });
+
+        // this.requestUserCommentList(belongUserId)
+        // this.setState({
+        //     modal2OPDAYVisible: true,
+        //     visible: false,
+        // });
     };
     shownoteModal = (belongUserId) => {
         this.requestUserCommentList(belongUserId)
@@ -95,6 +140,15 @@ export default class PotentialUser extends Component {
     };
 
     showAddbAckModal = (record) => {
+
+
+        window.Axios.post('back/addLogPotentialUser', {
+            referKey: record.belongUserId,
+            commentLog: '添加回访',
+            // mobile: this.state.phoneCn,
+            // content: this.state.changeNoteV,
+        })
+
         this.requestUserCommentList(record.belongUserId)
         this.setState({
             theBelongUserId: record.belongUserId,
@@ -463,8 +517,13 @@ export default class PotentialUser extends Component {
     handleDelay = (record) => {
         
         
-        console.log('hcia record.feebackStatus' , record.feebackStatus)
-
+        // console.log('hcia record.feebackStatus' , record.feebackStatus)
+        window.Axios.post('back/addLogPotentialUser', {
+            referKey: record.belongUserId,
+            commentLog: '延期申请',
+            // mobile: this.state.phoneCn,
+            // content: this.state.changeNoteV,
+        })
 
 
 
@@ -542,6 +601,26 @@ export default class PotentialUser extends Component {
             modal2OPDAYVisible: false,
         });
     }
+
+    requestUserLogList = (record) => {
+        var self = this;
+
+        window.Axios.post('/back/getLogPotentialUser', {
+            referKey: this.state.refID,
+            pageNo: this.state.currentComment,
+            pageSize: this.state.pgsize,
+        }).then(function (response) {
+            self.setState({
+                totalpageComments: response.data.data.totalPage,
+                operationLogHistory: response.data.data.list,
+            });
+        });
+
+
+
+
+    }
+
 
     requestUserCommentList = (record) => {
         var self = this;
@@ -967,34 +1046,9 @@ export default class PotentialUser extends Component {
                     footer={null}
                 >
                     <Table rowKey="id"
-                           columns={[
-                               {
-                                   title: '时间',
-                                   dataIndex: 'createDate',
-                                   key: 'operationDiary_Date',
-                                   render: (text, record) => (
-                                       <span>{record.createDate}</span>),
-                               }, {
-                                   title: 'IP',
-                                   dataIndex: 'IP',
-                                   key: 'IP',
-                                   render: (text, record) => (
-                                       <span>{record.ipAddress}</span>),
-                               }, {
-                                   title: '操作人',
-                                   width: 130,
-                                   dataIndex: 'bkUserName',
-                                   key: 'operationDiary_User',
-                                   render: (text, record) => (
-                                       <span>{record.bkUserName}</span>),
-                               }, {
-                                   title: '操作',
-                                   dataIndex: 'comment',
-                                   key: 'operationDiary_Status',
-                                   render: (text, record) => (
-                                       <span>{record.comment}</span>),
-                               }]}
-                           dataSource={this.state.operationDiaryHistory}
+                           columns={this.columnsLog}
+
+                           dataSource={this.state.operationLogHistory}
                            loading={this.state.loadingComment}
                            pagination={{
                                total: this.state.totalpageComments * this.state.pgsize,

@@ -286,7 +286,6 @@ class Basic extends Component {
     requestUserCommentList = (record) => {
 
 
-        var self = this;
         // window.Axios.post('/auth/getRecordCommentList', {
         //     id: record.id,
         //     commentType: 2,
@@ -298,10 +297,10 @@ class Basic extends Component {
         //         operationDiaryHistory: response.data.data.list,
         //     });
         // });
+        var self = this;
 
         window.Axios.post('/back/getLogOpenAccountAudit', {
             referKey: this.state.refID,
-            commentType: 2,
             pageNo: this.state.currentComment,
             pageSize: this.state.pgsize,
         }).then(function (response) {
@@ -321,6 +320,7 @@ class Basic extends Component {
 
 
         this.setState({
+            currentComment: 0,
             modal2OPDAYVisible: true,
             refID: recodrd.id,
         },()=>{
