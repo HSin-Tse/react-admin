@@ -209,7 +209,6 @@ class Basic extends Component {
         window.Axios.post('dict/leverageList', {
             'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
         }).then((response) => {
-            console.log('hcia response', response)
             self.setState({
                 leavgeList: response.data.data,
             })
@@ -348,7 +347,6 @@ class Basic extends Component {
         window.Axios.post('finance/getLeverageApplyDetail', {
             'id': recodrd.id,
         }).then(function (response) {
-            console.log('hcia response', response)
 
             self.setState({
                 detail: response.data.data,
@@ -366,12 +364,13 @@ class Basic extends Component {
         let self = this
         self.setState({
             loading: true,
+            mComment: '',
+
         });
 
         window.Axios.post('finance/getLeverageApplyDetail', {
             'id': recodrd.id,
         }).then(function (response) {
-            console.log('hcia response', response)
 
             self.setState({
                 detail: response.data.data,
@@ -398,6 +397,12 @@ class Basic extends Component {
         let self = this
 
 
+        
+        console.log('hcia this.state.detail.targetLeverage' , this.state.detail.targetLeverage)
+        console.log('hcia this.state.mLeverageId' , this.state.mLeverageId)
+
+
+        // return
         window.Axios.post('finance/updateLeverageApply', {
             id: this.state.detail.id,
             leverageId: this.state.detail.targetLeverage,
@@ -435,10 +440,9 @@ class Basic extends Component {
         }).then(function (response) {
 
 
-            if (response.data.code == 1) {
-                message.success('操作成功')
-                self.requestPage()
-            }
+            message.success('操作成功')
+            self.requestPage()
+
             self.setState({
                 visibleB: false,
             });

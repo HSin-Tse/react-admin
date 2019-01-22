@@ -178,7 +178,7 @@ window.Axios.interceptors.request.use(
 
                 }
 
-                config.timeout = 30 * 1000
+                config.timeout = 10 * 1000
 
                 config.headers = {
                     'token': xtoken,
