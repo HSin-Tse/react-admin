@@ -258,12 +258,13 @@ window.Axios.interceptors.response.use(function (response) {
 
     return response
 }, function (error) {
-    setTimeout(hideLoading, 0)
     console.log('hcia error.toString()', error.toString())
 
     if (error.toString() == 'Cancel') {
         // message.error(error.toString()+'TEST')
     } else {
+        setTimeout(hideLoading, 0)
+
         message.error(error.toString())
     }
     return Promise.reject(error)

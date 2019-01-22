@@ -333,12 +333,10 @@ class Basic extends Component {
         })
     }
     showModalA = (recodrd) => {
-        this.requestUserCommentList(recodrd)
 
         let self = this
 
         self.setState({
-            loading: true,
             mComment: '',
 
         });
@@ -353,6 +351,9 @@ class Basic extends Component {
                 visibleA: true,
                 loading: false,
             });
+
+            self.requestUserCommentList(recodrd)
+
 
         });
 
