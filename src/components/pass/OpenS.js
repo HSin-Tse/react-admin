@@ -173,17 +173,33 @@ class PassOpenD extends Component {
                             return item.value == self.state.mState;
                         });
 
-                        window.Axios.post('dict/openDict', {
-                            'keys': 'div_type',
-                            'division': 'city',
-                            'code': nowCity[0].code
-                        }).then((ress) => {
+                        if(!nowCity){
 
-                            // console.log('hcia ress', ress)
-                            self.setState({
-                                cityDatAarra: ress.data.data.div_type
-                            })
-                        });
+                            window.Axios.post('dict/openDict', {
+                                'keys': 'div_type',
+                                'division': 'city',
+                                'code': nowCity[0].code
+                            }).then((ress) => {
+
+                                // console.log('hcia ress', ress)
+                                self.setState({
+                                    cityDatAarra: ress.data.data.div_type
+                                })
+                            });
+                        }
+
+
+                        // window.Axios.post('dict/openDict', {
+                        //     'keys': 'div_type',
+                        //     'division': 'city',
+                        //     'code': nowCity[0].code
+                        // }).then((ress) => {
+                        //
+                        //     // console.log('hcia ress', ress)
+                        //     self.setState({
+                        //         cityDatAarra: ress.data.data.div_type
+                        //     })
+                        // });
                     });
 
 
