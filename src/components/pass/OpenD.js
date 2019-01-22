@@ -1536,13 +1536,13 @@ class PassOpenD extends Component {
                             </Col>
                             <Col md={4}>
                                 <div style={{display: 'flex', minHeight: 40}}>
-                                    <Button loading={this.state.icondbALoading}
+                                    <Button style={{background: '#F6D147', width: '120px',height:'36px'}}  loading={this.state.icondbALoading}
                                             onClick={() => this.searchFromLocalDB()}>本库查询</Button>
                                 </div>
                             </Col>
                             <Col md={4}>
                                 <div style={{display: 'flex', minHeight: 40}}>
-                                    <Button loading={this.state.icondbALoadingA}
+                                    <Button style={{background: '#F6D147', width: '120px',height:'36px'}}  loading={this.state.icondbALoadingA}
                                             onClick={() => this.searchFromOtherDB()}>异库查询</Button>
 
                                 </div>
