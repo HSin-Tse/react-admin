@@ -383,6 +383,9 @@ class CustomerSummary extends Component {
                 </h2>
                 <BreadcrumbCustom first="用户管理" second="用户总表"/>
                 <Card
+                    extra={[
+
+                        <Button style={{marginLeft: 15}} onClick={() => this.requestData()}>刷新</Button>]}
                     bodyStyle={{padding: 0, margin: 0}}
                     title="用户总表">
                     <Table
