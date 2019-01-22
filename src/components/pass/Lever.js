@@ -308,12 +308,16 @@ class Basic extends Component {
                         <Button size={'small'} style={{
                             minWidth: 80,
                             background: '#FDD000',
-                            display: record.displayStatus == '审核通过' ? 'none' : ''
+                            display: record.displayStatus == '待审核' ? '' : 'none'
                         }} onClick={() => this.showModalB(record)}>审核</Button>
+
+
                         <Button size={'small'} style={{
                             minWidth: 80,
-                            display: record.displayStatus != '审核通过' ? 'none' : ''
+                            display: record.displayStatus != '待审核' ? '' : 'none'
                         }} onClick={() => this.showModalA(record)}>查看</Button>
+
+
                     </div>
                 ),
             }];
