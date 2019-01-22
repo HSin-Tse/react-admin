@@ -37,6 +37,7 @@ const Option = Select.Option;
 const FormItem = Form.Item;
 
 const dateFormat = 'YYYY-MM-DD';
+
 // var window.PAxios = window.PAxios
 
 class PassOpenD extends Component {
@@ -90,7 +91,6 @@ class PassOpenD extends Component {
     }
 
     componentDidMount() {
-
 
 
         var self = this;
@@ -166,7 +166,7 @@ class PassOpenD extends Component {
                         });
 
 
-                        if(!nowCity){
+                        if (!nowCity) {
 
                             window.Axios.post('dict/openDict', {
                                 'keys': 'div_type',
@@ -180,8 +180,6 @@ class PassOpenD extends Component {
                                 })
                             });
                         }
-
-
 
 
                     });
@@ -662,7 +660,7 @@ class PassOpenD extends Component {
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*邮箱地址</span>
                                     <Input defaultValue={this.state.recordData.email} onChange={this.onChangeemail}
-                                            placeholder=""/>
+                                           placeholder=""/>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40}}>
                                     <span style={{minWidth: 120}}>*邮编</span>
@@ -1047,8 +1045,9 @@ class PassOpenD extends Component {
                     <p>*名 :{this.state.recordData.firstName}-->{this.state.waitUpdate.firstName}</p>
                     <p>*名 :{this.state.recordData.lastName}-->{this.state.waitUpdate.lastName}</p>
                     <p>出生日期
-                        :{this.timestampToTime(this.state.recordData.dateOfBirth)}-->{this.state.waitUpdate.dateOfBirth? this.timestampToTime(this.state.waitUpdate.dateOfBirth):''}</p>
-                    <p>性别 :{this.state.recordData.gender}-->{this.state.waitUpdate.gender!=null ? (this.state.waitUpdate.gender === 0 ? 'Female' : 'Male')  :''}</p>
+                        :{this.timestampToTime(this.state.recordData.dateOfBirth)}-->{this.state.waitUpdate.dateOfBirth ? this.timestampToTime(this.state.waitUpdate.dateOfBirth) : ''}</p>
+                    <p>性别
+                        :{this.state.recordData.gender}-->{this.state.waitUpdate.gender != null ? (this.state.waitUpdate.gender === 0 ? 'Female' : 'Male') : ''}</p>
                     <p>身份证号码 :{this.state.recordData.nationalID}-->{this.state.waitUpdate.nationalId}</p>
                     <p>城市 省:{this.state.recordData.state}-->{this.state.waitUpdate.state}</p>
                     <p>城市 市:{this.state.recordData.city}-->{this.state.waitUpdate.city}</p>
