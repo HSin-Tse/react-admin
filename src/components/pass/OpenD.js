@@ -1047,8 +1047,8 @@ class PassOpenD extends Component {
                     <p>*名 :{this.state.recordData.firstName}-->{this.state.waitUpdate.firstName}</p>
                     <p>*名 :{this.state.recordData.lastName}-->{this.state.waitUpdate.lastName}</p>
                     <p>出生日期
-                        :{this.timestampToTime(this.state.recordData.dateOfBirth)}-->{this.timestampToTime(this.state.waitUpdate.dateOfBirth)}</p>
-                    <p>性别 :{this.state.recordData.gender}-->{this.state.waitUpdate.gender == 0 ? 'Female' : 'Male'}</p>
+                        :{this.timestampToTime(this.state.recordData.dateOfBirth)}-->{this.state.waitUpdate.dateOfBirth? this.timestampToTime(this.state.waitUpdate.dateOfBirth):''}</p>
+                    <p>性别 :{this.state.recordData.gender}-->{this.state.waitUpdate.gender!=null ? (this.state.waitUpdate.gender === 0 ? 'Female' : 'Male')  :''}</p>
                     <p>身份证号码 :{this.state.recordData.nationalID}-->{this.state.waitUpdate.nationalId}</p>
                     <p>城市 省:{this.state.recordData.state}-->{this.state.waitUpdate.state}</p>
                     <p>城市 市:{this.state.recordData.city}-->{this.state.waitUpdate.city}</p>
@@ -1065,9 +1065,9 @@ class PassOpenD extends Component {
                     <p>*交易目的
                         :{this.state.recordData.tradingObjectives}-->{this.state.ix_Trading_ObjectivesNAME}:{this.state.waitUpdate.ix_Trading_Objectives}</p>
                     <p>*风险承受力
-                        :{this.state.recordData.riskTolerance}-->{this.state.ix_Risk_ToleranceNAME}:{this.state.waitUpdate.ix_Risk_Tolerance}</p>
+                        :{this.state.recordData.riskTolerance}-->{this.state.ix_Risk_ToleranceNAME}({this.state.waitUpdate.ix_Risk_Tolerance})</p>
                     <p>*外汇杠杆ID(操作人員必填寫)
-                        :{this.state.leverageName}{this.state.leverageId}</p>
+                        :{this.state.leverageName}({this.state.leverageId})</p>
                     <p>*账户类型
                         :{this.state.recordData.accountType}</p>
                 </Modal>
