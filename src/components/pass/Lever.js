@@ -325,11 +325,13 @@ class Basic extends Component {
     }
 
     changePageComment = (page) => {
+        let self = this
+
         page = page - 1
         this.setState({
             currentComment: page,
         }, () => {
-            this.requestUserCommentList()
+            self.requestUserCommentList()
         })
     }
     showModalA = (recodrd) => {
@@ -376,7 +378,7 @@ class Basic extends Component {
                 loading: false,
 
             });
-            this.requestUserCommentList(recodrd)
+            self.requestUserCommentList(recodrd)
 
 
         });
@@ -387,7 +389,7 @@ class Basic extends Component {
     // targetLeverage
     onChangeLe = (value) => {
         this.setState({
-            detail: {...this.state.detail, targetLeverage: value},
+            detail: {...this.state.detail, targetLeverageId: value},
             mLeverageId: value,
 
         });
@@ -405,7 +407,7 @@ class Basic extends Component {
         // return
         window.Axios.post('finance/updateLeverageApply', {
             id: this.state.detail.id,
-            leverageId: this.state.detail.targetLeverage,
+            leverageId: this.state.detail.targetLeverageId,
         }).then((response) => {
             message.success('杠杆修改操作成功')
             window.Axios.post('finance/passLeverageApply', {
@@ -545,7 +547,6 @@ class Basic extends Component {
                                 onChange={(value, dateString) => {
 
 
-                                    console.log('hcia value', value)
 
 
                                     if (value.length === 0) {
@@ -582,8 +583,6 @@ class Basic extends Component {
                                     var selectTimeStart = value[0].unix() + '000'
                                     var selectTimeEnd = value[1].unix() + '000'
 
-                                    console.log('hcia selectTimeStart', selectTimeStart)
-                                    console.log('hcia selectTimeEnd', selectTimeEnd)
 
 
                                     this.setState({
@@ -641,19 +640,30 @@ class Basic extends Component {
                                 <Col style={{textAlign: 'right'}} span={9}>余额:</Col>
                                 <Col style={{textAlign: 'center'}} span={11}>{this.state.detail.cashBalance}</Col>
                             </Row>
-
                             <Row style={{marginTop: "24px"}}>
                                 <Col style={{textAlign: 'right'}} span={9}>杠杆修改:</Col>
                                 <Col style={{textAlign: 'center'}} span={11}>
                                     <Select
                                         onChange={this.onChangeLe}
-                                        value={this.state.detail.targetLeverageID}
+                                        value={this.state.detail.targetLeverageId}
                                         style={{width: 100, marginLeft: 0}}>
                                         {this.state.leavgeList.map(ccty => <Option
                                             value={ccty.id} key={ccty.leverage}>1:{ccty.leverage}</Option>)}
                                     </Select>
                                 </Col>
                             </Row>
+                            {/*<Row style={{marginTop: "24px"}}>*/}
+                                {/*<Col style={{textAlign: 'right'}} span={9}>杠杆修改:</Col>*/}
+                                {/*<Col style={{textAlign: 'center'}} span={11}>*/}
+                                    {/*<Select*/}
+                                        {/*onChange={this.onChangeLe}*/}
+                                        {/*value={this.state.detail.targetLeverageID}*/}
+                                        {/*style={{width: 100, marginLeft: 0}}>*/}
+                                        {/*{this.state.leavgeList.map(ccty => <Option*/}
+                                            {/*value={ccty.id} key={ccty.leverage}>1:{ccty.leverage}</Option>)}*/}
+                                    {/*</Select>*/}
+                                {/*</Col>*/}
+                            {/*</Row>*/}
                             <Row style={{marginTop: "24px"}}>
                                 <Col style={{textAlign: 'right'}} span={9}>保证金占比:</Col>
                                 <Col style={{textAlign: 'center'}} span={11}>{this.state.detail.marginLevel}</Col>
@@ -804,7 +814,7 @@ class Basic extends Component {
                                 <Col style={{textAlign: 'right'}} span={9}>杠杆修改:</Col>
                                 <Col style={{textAlign: 'center'}} span={11}>
                                     <Select
-                                        // onChange={this.onChangeLe}
+                                        onChange={this.onChangeLe}
                                         value={this.state.detail.targetLeverageId}
                                         style={{width: 100, marginLeft: 0}}>
                                         {this.state.leavgeList.map(ccty => <Option

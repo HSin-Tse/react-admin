@@ -1381,7 +1381,6 @@ class PassOpenD extends Component {
                                         <span style={{minWidth: 120}}>*风险承受力</span>
                                         <Select
 
-                                            style={{width: '256px'}}
                                             dropdownStyle={{wordWrap: 'break-word'}}
                                             onChange={this.onChangemriskTolerance}
                                             value={this.state.mriskTolerance}>
