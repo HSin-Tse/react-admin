@@ -804,7 +804,7 @@ class Basic extends Component {
                                 <Col style={{textAlign: 'right'}} span={9}>杠杆修改:</Col>
                                 <Col style={{textAlign: 'center'}} span={11}>
                                     <Select
-                                        onChange={this.onChangeLe}
+                                        // onChange={this.onChangeLe}
                                         value={this.state.detail.targetLeverageId}
                                         style={{width: 100, marginLeft: 0}}>
                                         {this.state.leavgeList.map(ccty => <Option
@@ -816,14 +816,14 @@ class Basic extends Component {
                                 <Col style={{textAlign: 'right'}} span={9}>保证金占比:</Col>
                                 <Col style={{textAlign: 'center'}} span={11}>{this.state.detail.marginLevel}</Col>
                             </Row>
-                            <Row style={{marginTop: "24px", marginRight: "80px", marginLeft: "80px"}}>
-                                <Col style={{textAlign: 'center'}} span={24}>处理备注</Col>
-                                <Col style={{marginTop: 20}} span={24}>
-                                <TextArea value={this.state.mComment}
-                                          onChange={this.changeNote}
-                                          rows={4}></TextArea>
-                                </Col>
-                            </Row>
+                            {/*<Row style={{marginTop: "24px", marginRight: "80px", marginLeft: "80px"}}>*/}
+                                {/*<Col style={{textAlign: 'center'}} span={24}>处理备注</Col>*/}
+                                {/*<Col style={{marginTop: 20}} span={24}>*/}
+                                {/*<TextArea value={this.state.mComment}*/}
+                                          {/*onChange={this.changeNote}*/}
+                                          {/*rows={4}></TextArea>*/}
+                                {/*</Col>*/}
+                            {/*</Row>*/}
 
                             <Table
                                 style={{marginTop: "20px", marginLeft: "80px", marginRight: "80px"}}
