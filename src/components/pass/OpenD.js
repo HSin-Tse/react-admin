@@ -1536,13 +1536,15 @@ class PassOpenD extends Component {
                             </Col>
                             <Col md={4}>
                                 <div style={{display: 'flex', minHeight: 40}}>
-                                    <Button style={{background: '#F6D147', width: '120px',height:'36px'}}  loading={this.state.icondbALoading}
+                                    <Button style={{background: '#F6D147', width: '120px', height: '36px'}}
+                                            loading={this.state.icondbALoading}
                                             onClick={() => this.searchFromLocalDB()}>本库查询</Button>
                                 </div>
                             </Col>
                             <Col md={4}>
                                 <div style={{display: 'flex', minHeight: 40}}>
-                                    <Button style={{background: '#F6D147', width: '120px',height:'36px'}}  loading={this.state.icondbALoadingA}
+                                    <Button style={{background: '#F6D147', width: '120px', height: '36px'}}
+                                            loading={this.state.icondbALoadingA}
                                             onClick={() => this.searchFromOtherDB()}>异库查询</Button>
 
                                 </div>
@@ -1590,58 +1592,78 @@ class PassOpenD extends Component {
 
                         </Row>
                         <Row style={{margin: '20px'}} gutter={12}>
-                            <Card style={{marginTop: 10}}>
 
-                                <div>
-                                    <Tooltip placement="top"
-                                             title={!isSetL ? '需要添加杠杆组' : this.state.isNeedSave ? '保存信息' : ''}>
+                            <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+                                <Tooltip placement="top"
+                                         title={!isSetL ? '需要添加杠杆组' : this.state.isNeedSave ? '保存信息' : ''}>
 
-                                        <Popconfirm
+                                    <Popconfirm
 
-                                            disabled={this.state.isNeedSave || !isSetL} title="确认当前用户开户申请通过"
-                                            onConfirm={this.confirmOpen} okText="Yes"
-                                            cancelText="No">
-
-
-                                            <Button
-                                                style={{display: (this.state.isNeedSave || !isSetL) ? 'none' : ''}}
-                                                disabled={this.state.isNeedSave || !isSetL}
-                                                loading={this.state.iconLoading}>
-                                                开户通过
-                                            </Button>
-
-                                        </Popconfirm>
+                                        disabled={this.state.isNeedSave || !isSetL} title="确认当前用户开户申请通过"
+                                        onConfirm={this.confirmOpen} okText="Yes"
+                                        cancelText="No">
 
 
-                                    </Tooltip>
+                                        <Button
+                                            style={{
+                                                borderRadius: '4px',
+                                                width: '200px',
+                                                height: '40px',
+                                                background: '#F6D147',
+                                                display: (this.state.isNeedSave || !isSetL) ? 'none' : ''
+                                            }}
+                                            disabled={this.state.isNeedSave || !isSetL}
+                                            loading={this.state.iconLoading}>
+                                            开户通过
+                                        </Button>
 
-                                    <Button
-                                        style={{display: (this.state.isNeedSave || !isSetL) ? '' : 'none'}}
-                                        disabled={this.state.isNeedSave || !isSetL}
-                                        loading={this.state.iconLoading}>
-                                        开户通过
-                                    </Button>
-
-                                    <Button
-                                        disabled={!this.state.isNeedSave}
-                                        onClick={() => this.saveData()}>更新客户资料</Button>
-
-
-                                    <Button onClick={() => this.saveNote()}>下载</Button>
-
-                                    {/*<Popconfirm title="是否确认拒绝当前用户的开户申请？" onConfirm={this.saveReject} okText="Yes"*/}
-                                    {/*cancelText="No">*/}
+                                    </Popconfirm>
 
 
-                                    {/*</Popconfirm>*/}
-                                    <Button onClick={() => {
-                                        this.setState({
-                                            showREJECTmodel: true,
-                                        });
-                                    }} loading={this.state.iconcanLoading}>拒绝</Button>
+                                </Tooltip>
 
-                                </div>
-                            </Card>
+                                <Button
+                                    style={{ borderRadius: '4px',
+                                        width: '200px',
+                                        height: '40px',
+                                        display: (this.state.isNeedSave || !isSetL) ? '' : 'none'}}
+                                    disabled={this.state.isNeedSave || !isSetL}
+                                    loading={this.state.iconLoading}>
+                                    开户通过
+                                </Button>
+
+                                <Button
+                                    style={{
+                                        width: '200px',
+                                        height: '40px',
+                                    }}
+                                    disabled={!this.state.isNeedSave}
+                                    onClick={() => this.saveData()}>更新客户资料</Button>
+
+
+                                <Button
+                                    style={{
+                                        width: '200px',
+                                        height: '40px',
+                                    }}
+                                    onClick={() => this.saveNote()}>保存下载客户资料</Button>
+
+
+                                <Button
+
+                                    style={{
+                                        width: '200px',
+                                        height: '40px',
+                                        background:'#FF6666',
+                                        color:'#FFFFFF'
+                                    }}
+                                    onClick={() => {
+                                    this.setState({
+                                        showREJECTmodel: true,
+                                    });
+                                }} loading={this.state.iconcanLoading}>拒绝</Button>
+
+                            </div>
                             {/*disabled={!this.state.isNeedSave || this.state.recordData.status != 0}*/}
                         </Row>
 
