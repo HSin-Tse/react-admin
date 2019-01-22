@@ -647,7 +647,7 @@ class Basic extends Component {
                                 <Col style={{textAlign: 'center'}} span={11}>
                                     <Select
                                         onChange={this.onChangeLe}
-                                        value={this.state.detail.targetLeverage}
+                                        value={this.state.detail.targetLeverageID}
                                         style={{width: 100, marginLeft: 0}}>
                                         {this.state.leavgeList.map(ccty => <Option
                                             value={ccty.id} key={ccty.leverage}>1:{ccty.leverage}</Option>)}
@@ -805,7 +805,7 @@ class Basic extends Component {
                                 <Col style={{textAlign: 'center'}} span={11}>
                                     <Select
                                         onChange={this.onChangeLe}
-                                        value={this.state.detail.targetLeverage}
+                                        value={this.state.detail.targetLeverageId}
                                         style={{width: 100, marginLeft: 0}}>
                                         {this.state.leavgeList.map(ccty => <Option
                                             value={ccty.id} key={ccty.leverage}>1:{ccty.leverage}</Option>)}
@@ -878,7 +878,7 @@ class Basic extends Component {
                 </Modal>
 
                 <h2 style={{marginTop: 15}}>杠杆审核</h2>
-                <div>this.state.detail :{JSON.stringify(this.state.detail)}</div>
+                {/*<div>this.state.detail :{JSON.stringify(this.state.detail)}</div>*/}
 
                 <BreadcrumbCustom first="审核管理" second="杠杆审核"/>
 

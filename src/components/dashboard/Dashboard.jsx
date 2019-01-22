@@ -28,6 +28,8 @@ class Dashboard extends React.Component {
             menuList: [],
             resp: undefined,
             displayName: '',
+            lastLoginIP: '',
+            lastLoginTime: '',
             requestBody: '{"a":1,"b":"aa"}',
             HOST: 'http://mobile.nooko.cn:8090/',
 
@@ -38,8 +40,22 @@ class Dashboard extends React.Component {
 
 
     componentDidMount() {
-        
-        this.setState({displayName: localStorage.getItem('loginName')});
+
+        this.setState(
+            {
+                displayName: localStorage.getItem('loginName')
+            });
+
+        // var mImfor = localStorage.getItem('infor')
+
+
+        var mImfor = JSON.parse(localStorage.getItem('infor')),
+
+            // console.log('hcia mImfor', mImfor)
+            console
+
+        this.setState({lastLoginIP: mImfor.lastLoginIP});
+        this.setState({lastLoginTime: mImfor.lastLoginTime});
 
 
         // console.log('hcia window.Axios.baseURL' , window.Axios.config.baseURL)
@@ -56,7 +72,6 @@ class Dashboard extends React.Component {
                 {/*{JSON.stringify(this.props.todps)}*/}
                 {/*{JSON.stringify(this.props.infor)}*/}
                 {/*{JSON.stringify(localStorage.getItem('infor'))}*/}
-
 
 
                 <h2 style={{marginTop: 15}}>
@@ -99,12 +114,18 @@ class Dashboard extends React.Component {
                             <p>上次访问时间:</p>
                         </Col>
 
+                        <Col md={6}>
+                            <p>{this.state.lastLoginTime}</p>
+                        </Col>
+
                     </Row>
                     <Row gutter={1}>
                         <Col md={6}>
                             <p>上次访问IP</p>
                         </Col>
-
+                        <Col md={6}>
+                            <p>{this.state.lastLoginIP}</p>
+                        </Col>
                     </Row>
                     <Row gutter={1}>
                         <Col md={6}>
