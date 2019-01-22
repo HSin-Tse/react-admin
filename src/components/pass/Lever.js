@@ -25,6 +25,7 @@ class Basic extends Component {
             visibleA: false,
             visibleB: false,
             user: '',
+            mComment: '',
             mLeverageId: '',
             userList: [],
             leavgeList: [{
@@ -87,7 +88,7 @@ class Basic extends Component {
                 "name": null,
                 "id": "27",
                 "date": "",
-                "comment": null,
+                "comment": '',
                 "status": 0,
                 "currentLeverage": "1 : 100",
                 "targetLeverage": "1 : 200",
@@ -104,14 +105,9 @@ class Basic extends Component {
             loading: false
 
         };
-
-        var ss = getCookie("a")
-        // console.log('hcia ss', ss)
     }
 
     requestUserCommentList = (record) => {
-
-
         var self = this;
         window.Axios.post('/auth/getRecordCommentList', {
             id: record.id,
@@ -132,7 +128,6 @@ class Basic extends Component {
         });
     };
     requestPage = () => {
-
         let self = this
         self.setState({
                 loading: true,
@@ -166,22 +161,13 @@ class Basic extends Component {
     }
 
     componentDidMount() {
-        setCookie("yuo", 'meme', 0)
-
-        var ss = getCookie("yuo")
-        // console.log('hcia ss', ss)
-        // console.log('hcia cookie', window.cookie)
-        //
 
         window.Axios.post('back/addLogHistory', {
             'moduleLog': '审核管理',
             'pageLog': '杠杆审核',
             'commentLog': '查看了杠杆审核',
             'typeLog': 2,
-        }).then(function (response) {
-
-
-        });
+        })
 
 
         this.columnsLog = [
@@ -228,30 +214,7 @@ class Basic extends Component {
                 leavgeList: response.data.data,
             })
         });
-        window.Axios.post('dict/leverageList', {
-            'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
-        }).then((response) => {
-            console.log('hcia response', response)
-            self.setState({
-                leavgeList: response.data.data,
-            })
-        });
-        window.Axios.post('dict/leverageList', {
-            'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
-        }).then((response) => {
-            console.log('hcia response', response)
-            self.setState({
-                leavgeList: response.data.data,
-            })
-        });
-        window.Axios.post('dict/leverageList', {
-            'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
-        }).then((response) => {
-            // console.log('hcia response', response)
-            self.setState({
-                leavgeList: response.data.data,
-            })
-        });
+
 
         this.columns = [
             {
@@ -366,12 +329,6 @@ class Basic extends Component {
             this.requestUserCommentList()
         })
     }
-    seeDetail = () => {
-        const {addTodo} = this.props;
-        console.log('hcia seeDetail')
-        addTodo('a')
-
-    }
     showModalA = (recodrd) => {
         this.requestUserCommentList(recodrd)
 
@@ -379,7 +336,10 @@ class Basic extends Component {
 
         self.setState({
             loading: true,
+            mComment: '',
+
         });
+
 
         window.Axios.post('finance/getLeverageApplyDetail', {
             'id': recodrd.id,
@@ -423,62 +383,36 @@ class Basic extends Component {
 
     // targetLeverage
     onChangeLe = (value) => {
-        // updateLeverageApply
-        let self = this
-
         this.setState({
             detail: {...this.state.detail, targetLeverage: value},
-        });
-        self.setState({
             mLeverageId: value,
+
         });
-        console.log('hcia value', value)
-        // window.Axios.post('finance/updateLeverageApply', {
-        //     id: this.state.detail.id,
-        //     leverageId: value,
-        // }).then((response) => {
-        //     message.success('操作成功')
-        //
-        //     console.log('hcia response', response)
-        //     // self.setState({
-        //     //     leavgeList: response.data.data,
-        //     // })
-        // });
-
-
     }
 
     handleOk = () => {
         let self = this
 
 
-        if (!this.state.detail) {
-            window.Axios.post('finance/updateLeverageApply', {
-                id: this.state.detail.id,
-                leverageId: this.state.detail.targetLeverage,
-            }).then((response) => {
-                message.success('操作成功')
+        window.Axios.post('finance/updateLeverageApply', {
+            id: this.state.detail.id,
+            leverageId: this.state.detail.targetLeverage,
+        }).then((response) => {
+            message.success('杠杆修改操作成功')
+            window.Axios.post('finance/passLeverageApply', {
+                'id': this.state.detail.id,
+                'content': this.state.mComment,
+            }).then(() => {
 
-                console.log('hcia response', response)
-                // self.setState({
-                //     leavgeList: response.data.data,
-                // })
-            });
-        }
-
-
-        window.Axios.post('finance/passLeverageApply', {
-            'id': this.state.detail.id,
-            'content': this.state.detail.comment,
-        }).then(function (response) {
-
-
-            message.success('操作成功')
-            self.requestPage()
-            self.setState({
-                visibleB: false,
+                message.success('审核通过杠杆申请操作成功')
+                self.requestPage()
+                self.setState({
+                    visibleB: false,
+                });
             });
         });
+
+
     }
 
     handleCancel = (e) => {
@@ -511,6 +445,7 @@ class Basic extends Component {
 
     changeNote = (e) => {
         this.setState({
+            mComment: e.target.value,
             detail: {...this.state.detail, comment: e.target.value},
         });
 
@@ -660,7 +595,7 @@ class Basic extends Component {
 
                     </div>
                 </div>
-                {/*{JSON.stringify(this.props.todps)}*/}
+
                 <Modal
                     bodyStyle={{
                         background: 'white',
@@ -718,7 +653,7 @@ class Basic extends Component {
                             <Row style={{marginTop: "24px", marginRight: "80px", marginLeft: "80px"}}>
                                 <Col style={{textAlign: 'center'}} span={24}>处理备注</Col>
                                 <Col style={{marginTop: 20}} span={24}>
-                                <TextArea value={this.state.detail.comment}
+                                <TextArea value={this.state.mComment}
                                           onChange={this.changeNote}
                                           rows={4}></TextArea>
                                 </Col>
@@ -862,7 +797,7 @@ class Basic extends Component {
                                 <Col style={{textAlign: 'center'}} span={11}>
                                     <Select
                                         onChange={this.onChangeLe}
-                                        defaultValue={this.state.detail.targetLeverage}
+                                        value={this.state.detail.targetLeverage}
                                         style={{width: 100, marginLeft: 0}}>
                                         {this.state.leavgeList.map(ccty => <Option
                                             value={ccty.id} key={ccty.leverage}>1:{ccty.leverage}</Option>)}
@@ -876,7 +811,7 @@ class Basic extends Component {
                             <Row style={{marginTop: "24px", marginRight: "80px", marginLeft: "80px"}}>
                                 <Col style={{textAlign: 'center'}} span={24}>处理备注</Col>
                                 <Col style={{marginTop: 20}} span={24}>
-                                <TextArea value={this.state.detail.comment}
+                                <TextArea value={this.state.mComment}
                                           onChange={this.changeNote}
                                           rows={4}></TextArea>
                                 </Col>
@@ -934,10 +869,8 @@ class Basic extends Component {
 
                 </Modal>
 
-                <h2 style={{marginTop: 15}}>
-                    杠杆审核
-                </h2>
-                {/*<div>this.state.leavgeList :{JSON.stringify(this.state.leavgeList)}</div>*/}
+                <h2 style={{marginTop: 15}}>杠杆审核</h2>
+                <div>this.state.detail :{JSON.stringify(this.state.detail)}</div>
 
                 <BreadcrumbCustom first="审核管理" second="杠杆审核"/>
 
