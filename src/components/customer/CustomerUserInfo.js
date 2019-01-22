@@ -78,7 +78,7 @@ class CustomerUserInfo extends Component {
                     {/*<img style={{width: 100}} src={avater} alt="头像"/>*/}
                     < Meta title={this.state.userList.length == 0 ? '姓名：' : '姓名：' + this.state.userList.base.name}/>
                     < Meta
-                        title={this.state.userList.length == 0 ? '手机：' : '手机：' + this.state.userList.base.cellphone}/>
+                        title={this.state.userList.length == 0 ? '手机：' : '手机：' + this.state.userList.base.mobile}/>
                     < Meta
                         title={this.state.userList.length == 0 ? '邮箱：' : '邮箱：' + this.state.userList.base.email}/>
                 </Card>
@@ -88,9 +88,9 @@ class CustomerUserInfo extends Component {
                     title="數據信息"
                 >
                     < Meta
-                        title={this.state.userList.length == 0 ? '注册时间：' : '注册时间：' + this.timestampToTime(this.state.userList.base.regDate)}/>
+                        title={this.state.userList.length == 0 ? '注册时间：' : '注册时间：' + this.state.userList.base.date}/>
                     < Meta
-                        title={this.state.userList.length == 0 ? '上次访问时间：' : '上次访问时间：' + this.timestampToTime(this.state.userList.base.lastLoginTime)}/>
+                        title={this.state.userList.length == 0 ? '上次访问时间：' : '上次访问时间：' + this.state.userList.base.lastLoginTime}/>
                     < Meta
                         title={this.state.userList.length == 0 ? '上次访问IP：' : '上次访问IP：' + this.state.userList.base.lastLoginIP}/>
                     < Meta

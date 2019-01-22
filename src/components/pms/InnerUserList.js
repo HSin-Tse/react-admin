@@ -158,7 +158,7 @@ class InnerUserList extends Component {
                 key: '微信号',
                 align: 'center',
                 render: (text, record) => (
-                    <span>{record.weChat ? record.weChat : 'testtest'}</span>)
+                    <span>{record.weChat ? record.weChat : ''}</span>)
             }, {
                 title: '最后登录',
                 dataIndex: '最后登录',
