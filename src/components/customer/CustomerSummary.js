@@ -188,7 +188,7 @@ class CustomerSummary extends Component {
                     <div style={{
                         align: 'center',
                         display: record.bindedStatus==1 ? 'flex' : '',
-                        justifyContent: record.bindedStatus==1 ? 'space-between' : ''
+                        justifyContent: record.bindedStatus==1 ? 'space-around' : ''
                     }}>
                         <span style={{
                             display: record.bindedStatus==1 ? '' : 'none',
