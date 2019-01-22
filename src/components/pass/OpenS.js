@@ -3,7 +3,21 @@
  */
 import React, {Component} from 'react';
 import {
-    Tooltip, Popconfirm, Col, Card, Row, Button, Modal, Select, Input, Checkbox, DatePicker, notification, Table
+    Tooltip,
+    Popconfirm,
+    Col,
+    Card,
+    Row,
+    Button,
+    Modal,
+    Select,
+    Input,
+    Checkbox,
+    DatePicker,
+    notification,
+    Table,
+    Form,
+    Upload, Icon
 } from 'antd';
 import {message} from 'antd';
 import html2canvas from 'html2canvas';
@@ -19,6 +33,7 @@ const Search = Input.Search;
 const Option = Select.Option;
 
 const dateFormat = 'YYYY-MM-DD';
+const FormItem = Form.Item;
 
 class PassOpenD extends Component {
 
@@ -230,8 +245,10 @@ class PassOpenD extends Component {
         this.mIXTradingExperience = this.state.IXTradingExperience.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXTradingObjectives = this.state.IXTradingObjectives.map(d => <Option key={d.name}>{d.name}</Option>);
         this.mIXRisk_Tolerance = this.state.IXRisk_Tolerance.map(d => <Option key={d.name}>{d.name}</Option>);
+        const {getFieldDecorator} = this.props.form;
 
         return (
+
             <div id="openD">
 
                 {/*<div>id: {this.state.recordData.id}</div>*/}
@@ -243,485 +260,693 @@ class PassOpenD extends Component {
                     开户信息
                 </h2>
                 <BreadcrumbCustom first="审核管理" second="用户开户信息"/>
-                <Card disabled={true} title="IX账户审核 " bordered={true}>
+                <div style={{
+                    padding: '22px',
+                    background: 'rgba(255,255,255,1)',
+                    boxShadow: '0px 0px 20px 0px rgba(123,123,123,0.1)',
+                    borderRadius: '4px',
+                }}>
+                    <Button
 
-                    <Row gutter={1}>
-                        <Col md={8}>
-                            <p>客户姓名:{this.state.recordData.cnName}</p>
-                        </Col>
-                        <Col md={8}>
-                            <p>客户邮箱：{this.state.recordData.email}</p>
-                        </Col>
-                        <Col md={8}>
-                            <p>手机号码：{this.state.recordData.phoneNumber} </p>
-                        </Col>
-                    </Row>
-                </Card>
-                <Card title="IX账户设置" bordered={true} style={{marginTop: 15}}>
-                    <Row>
-                        <Col>
-                            <Card bordered={false}>
-                                <div>
-                                    账户类型:
-                                    <Checkbox style={{marginLeft: 20}} checked={this.state.recordData.applyMT4}
-                                              disabled={true}>MT4</Checkbox>
-                                    <Checkbox checked={this.state.recordData.applyMT5} disabled={true}>MT5</Checkbox>
-                                    <Checkbox checked={this.state.recordData.applySTAR}
-                                              disabled={true}>IX-TRADER</Checkbox>
+                        onClick={() => this.saveNote()}
+                        style={{
+                        borderRadius: '4px',
+                        fontSize: '12px',
+                        width: '136px', height: '30px', marginTop: '8px', background: '#FDD000'
+                    }}>下载当前客户资料</Button>
 
-                                </div>
-                            </Card>
+                    <div style={{
+                        borderRadius: '4px',
+                        fontSize: '20px',
+                        width: '100%',
+                        height: '48px',
+                        marginTop: '24px',
+                        background: '#F6D147',
+                        textAlign: 'left',
+                        lineHeight: '48px'
+                    }}>
+
+                        <p style={{marginLeft: '21px'}}>IX账户审核</p>
+
+                    </div>
+                    <div style={{
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        height: '85px',
+                        display: 'flex',
+                        fontSize: '14px',
+                    }}>
 
 
-                        </Col>
-                        <Col md={8}>
-                            <Card bordered={false}>
-                                <div>
-                                    服务器 :
-                                    <Select
-                                        disabled={true}
-                                        labelInValue defaultValue={{key: 'jack'}}
-                                        style={{marginLeft: 20, width: 120}}
-                                    >
-                                        <Option value="jack">服务器地址</Option>
-                                        <Option value="lucy">Lucy (101)</Option>
-                                    </Select>
+                        <p style={{marginLeft: '21px'}}>客户姓名:{this.state.recordData.cnName}</p>
+                        <p style={{marginLeft: '21px'}}>客户邮箱：{this.state.recordData.email}</p>
+                        <p style={{marginLeft: '21px'}}>手机号码：{this.state.recordData.phoneNumber} </p>
 
-                                </div>
-                            </Card>
-                        </Col>
-                        <Col md={8}>
-                            <Card bordered={false}>
-                                <div>
-                                    交易组 :
-                                    <Select
-                                        disabled={true}
-                                        value={this.state.recordData.accountType}
-                                        style={{marginLeft: 20, width: 120}}
-                                        onChange={(v, key) => this.handleACType(v, key)}>
-                                        {this.state.accountType.map(acType => <Option
-                                            key={acType.name} kk={acType.id}>{acType.name}</Option>)}
-                                    </Select>
 
-                                </div>
-                            </Card>
-                        </Col>
-                    </Row>
-                    <Row gutter={16}>
+                    </div>
+                    <div style={{
+                        borderRadius: '4px',
+                        fontSize: '20px',
+                        width: '100%',
+                        height: '48px',
+                        marginTop: '24px',
+                        background: '#F6D147',
+                        textAlign: 'left',
+                        lineHeight: '48px'
+                    }}>
+                        <p style={{marginLeft: '21px'}}>IX账户设置</p>
+                    </div>
+                    <div style={{
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        height: '265px',
+                        fontSize: '14px',
+                    }}>
 
-                        <Col md={8}>
-                            <Card bordered={false}>
-                                <div>
-                                    杠杆组 :
-                                    <Select
-                                        disabled={true}
-                                        value={this.state.leverageId}
-                                        style={{marginLeft: 20, width: 120}}
-                                        onChange={(v, key) => this.handleChangeLeavage(v, key)}>
-                                        {this.state.leverageList.map(leaf => <Option
-                                            key={leaf.id}>{leaf.clientGroupName}</Option>)}
+                        <Row>
+                            <Col>
+                                <Card bordered={false}>
+                                    <div>
+                                        账户类型:
+                                        <Checkbox style={{marginLeft: 20}} checked={this.state.recordData.applyMT4}
+                                                  disabled={true}>MT4</Checkbox>
+                                        <Checkbox checked={this.state.recordData.applyMT5}
+                                                  disabled={true}>MT5</Checkbox>
+                                        <Checkbox checked={this.state.recordData.applySTAR}
+                                                  disabled={true}>IX-TRADER</Checkbox>
 
-                                    </Select>
-                                </div>
-                            </Card>
-                        </Col>
+                                    </div>
+                                </Card>
 
-                    </Row>
-                </Card>
-                <Card title="IX账户申请表单" bordered={true} style={{marginTop: 15}}>
 
-                    <Row gutter={8}>
-                        <Col md={12}>
-                            <h2> 基本信息 </h2>
-                            <Card bordered={true}>
-
-                                <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{width: 120}}>国家</span>
-
-                                    <Input defaultValue={this.state.recordData.country} disabled={true}
-                                           style={{width: 120}} placeholder=""
-                                           disabled={true}
-                                    />
-                                </div>
-                                <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{width: 120}}>*姓（中文）</span>
-                                    <Input defaultValue={this.state.recordData.lastNameCn}
-                                           onChange={this.onChangelastNameCn}
-                                           style={{width: 120}} placeholder=""
-                                           disabled={true}
-                                           tagkey="lastNameCn"
-                                           sdsd={'dd'}/>
-                                </div>
-                                <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{width: 120}}>*名（中文）</span>
-                                    <Input defaultValue={this.state.recordData.firstNameCn}
-                                           onChange={this.onChangefirstNameCn}
-                                           style={{width: 120}} placeholder=""
-                                           disabled={true}
-                                    />
-                                </div>
-                                <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{width: 120}}>*姓</span>
-                                    <Input defaultValue={this.state.recordData.lastName}
-                                           onChange={this.onChangelastName}
-                                           style={{width: 120}} placeholder=""
-                                           disabled={true}
-                                    />
-                                </div>
-                                <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{minWidth: 120}}> *名</span>
-                                    <Input defaultValue={this.state.recordData.firstName}
-                                           onChange={this.onChangefirstName}
-                                           style={{width: 120}} placeholder=""
-                                           disabled={true}
-                                    />
-                                </div>
-                                <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{minWidth: 120}}>*出生日期</span>
-                                    <DatePicker
-                                        disabled={true}
-                                        value={moment(this.state.testeee, dateFormat)}
-                                        onChange={this.onChangeBirth}
-                                        format={dateFormat}/>
-
-                                </div>
-                                <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{minWidth: 120}}>*性别</span>
-                                    <Select value={this.state.mGender}
+                            </Col>
+                            <Col md={8}>
+                                <Card bordered={false}>
+                                    <div>
+                                        服务器 :
+                                        <Select
                                             disabled={true}
-                                            onChange={this.onChangegender}
-                                            style={{width: 120}}>
-                                        <Option value="Male">男</Option>
-                                        <Option value="Female">女</Option>
-                                    </Select>
-                                </div>
-                                <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{minWidth: 120}}>*身份证号码</span>
-                                    <Input defaultValue={this.state.recordData.nationalID}
-                                           onChange={this.onChangenationalId}
-                                           style={{width: 120}} placeholder=""
-                                           disabled={true}
-                                    />
-                                </div>
+                                            labelInValue defaultValue={{key: 'jack'}}
+                                            style={{marginLeft: 20, width: 120}}
+                                        >
+                                            <Option value="jack">服务器地址</Option>
+                                        </Select>
 
-                                <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{minWidth: 120}}>*城市</span>
-
-                                    <Select
-                                        disabled={true}
-                                        value={this.state.mState}
-                                        style={{width: 120}}
-                                        onChange={this.handleProvinceChange}
-                                    >
-                                        {this.state.provinceDatAarra.map(province => <Option
-                                            key={province.name}>{province.name}</Option>)}
-
-                                    </Select>
-                                    <Select
-                                        disabled={true}
-                                        style={{width: 120}}
-                                        value={this.state.mCity}
-                                        onChange={this.onSecondCityChange}
-                                    >
-                                        {this.state.cityDatAarra.map(ccty => <Option
-                                            key={ccty.name}>{ccty.name}</Option>)}
-                                    </Select>
-                                </div>
-
-
-                                <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{minWidth: 120}}>*详细地址</span>
-                                    <Input defaultValue={this.state.recordData.street} onChange={this.onChangestreet}
-                                           style={{width: 120}} placeholder=""
-                                           disabled={true}
-                                    />
-                                </div>
-                                <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{minWidth: 120}}>*联系电话</span>
-                                    <Input defaultValue={this.state.recordData.phoneNumber} disabled={true}
-                                           style={{width: 130}} placeholder=""
-                                           disabled={true}
-                                    />
-                                </div>
-                                <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{minWidth: 120}}>*邮箱地址</span>
-                                    <Input defaultValue={this.state.recordData.email} onChange={this.onChangeemail}
-                                           style={{width: 120}} placeholder=""
-                                           disabled={true}
-                                    />
-                                </div>
-                                <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{minWidth: 120}}>*邮编</span>
-                                    <Input defaultValue={this.state.recordData.postalCode}
-                                           onChange={this.onChangepostalCode}
-                                           style={{width: 120}} placeholder=""
-                                           disabled={true}
-                                    />
-                                </div>
-                            </Card>
-
-
-                        </Col>
-                        <Col md={12}>
-                            <h2> 资产&风险审核 </h2>
-
-                            <Card bordered={true}>
-                                <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{minWidth: 120}}>当前年收入</span>
-                                    <Select value={this.state.mAnnualIncome}
+                                    </div>
+                                </Card>
+                            </Col>
+                            <Col md={8}>
+                                <Card bordered={false}>
+                                    <div>
+                                        交易组 :
+                                        <Select
                                             disabled={true}
-                                            onChange={this.onChangeannualIncome}
-                                            style={{width: 120}}>
-                                        {this.mIncomesOPS}
-                                    </Select>
-                                </div>
-                                <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{minWidth: 120}}>初始入金金额占比</span>
-                                    <Select value={this.state.mInitialDepositToYourNetLiquidAssets}
+                                            value={this.state.recordData.accountType}
+                                                style={{marginLeft: 20, width: 120}}
+                                                onChange={(v, key) => this.handleACType(v, key)}>
+                                            {this.state.accountType.map(acType => <Option
+                                                key={acType.name} kk={acType.id}>{acType.name}</Option>)}
+                                        </Select>
+
+                                    </div>
+                                </Card>
+                            </Col>
+                        </Row>
+                        <Row gutter={16}>
+
+                            <Col md={8}>
+                                <Card bordered={false}>
+                                    <div>
+                                        杠杆组 :
+                                        <Select
                                             disabled={true}
+                                            value={this.state.leverageId}
+                                            style={{marginLeft: 20, width: 120}}
+                                            onChange={(v, key) => this.handleChangeLeavage(v, key)}>
+                                            {this.state.leverageList.map(leaf => <Option
+                                                key={leaf.id}>{leaf.clientGroupName}</Option>)}
+
+                                        </Select>
+                                    </div>
+                                </Card>
+                            </Col>
+
+                        </Row>
+
+                    </div>
+                    <div style={{
+                        borderRadius: '4px',
+                        fontSize: '20px',
+                        width: '100%',
+                        height: '48px',
+                        marginTop: '24px',
+                        background: '#F6D147',
+                        textAlign: 'left',
+                        lineHeight: '48px'
+                    }}>
+
+                        <p style={{marginLeft: '21px'}}>IX账户申请表单</p>
+
+                    </div>
+                    <div style={{
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        fontSize: '14px',
+                    }}>
+
+                        <Row gutter={8}>
+
+
+                            <Col md={12}>
+                                <div style={{
+                                    padding: '24px',
+                                    fontSize: '20px',
+                                    textAlign: 'center',
+                                    width: '100%'
+                                }}> 基本信息
+                                </div>
+
+
+                                <Card style={{display: 'flex', justifyContent: 'center'}} bordered={false}>
+
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{width: 120}}>国家:</span>
+
+                                        <Input defaultValue={this.state.recordData.country} disabled={true}
+                                               style={{width: '256px'}} placeholder=""/>
+                                    </div>
+
+
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{width: 120}}>*姓（中文）</span>
+                                        <Form layout="vertical">
+                                            <FormItem
+
+                                                id="control-mention"
+                                                labelCol={{span: 6}}
+                                                wrapperCol={{span: 16}}
+                                            >
+                                                {getFieldDecorator('mention2', {
+                                                    required: true,
+                                                    rules: [
+                                                        {validator: this.checkMention},
+                                                    ],
+                                                    initialValue: this.state.recordData.lastNameCn,
+
+                                                })(
+                                                    <Input
+                                                        disabled={true}
+                                                        defaultValue={this.state.recordData.lastNameCn}
+                                                        // onChange={this.onChangelastNameCn}
+                                                           style={{width: '256px'}} placeholder="" tagkey="lastNameCn"
+                                                           sdsd={'dd'}/>
+                                                )}
+                                            </FormItem>
+
+                                        </Form>
+
+                                    </div>
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{width: 120}}>*名（中文）</span>
+                                        <Form layout="vertical">
+                                            <FormItem
+                                                id="control-mention2"
+                                                labelCol={{span: 6}}
+                                                wrapperCol={{span: 16}}
+                                            >
+                                                {getFieldDecorator('mention', {
+                                                    rules: [
+                                                        {validator: this.checkMention2},
+                                                    ],
+                                                    initialValue: this.state.recordData.firstNameCn,
+                                                })(
+                                                    <Input defaultValue={this.state.recordData.firstNameCn}
+                                                        // onChange={this.onChangefirstNameCn}
+                                                           disabled={true}
+                                                           style={{width: '256px'}} placeholder="" tagkey="lastNameCn"
+                                                           sdsd={'dd'}/>
+                                                )}
+                                            </FormItem>
+
+                                        </Form>
+                                    </div>
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{width: 120}}>*姓</span>
+                                        <Input disabled={true} value={this.state.recordData.lastName}
+                                               onChange={this.onChangelastName}
+                                               style={{width: '256px'}} placeholder=""/>
+                                    </div>
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{minWidth: 120}}> *名</span>
+                                        <Input disabled={true} value={this.state.recordData.firstName}
+                                               onChange={this.onChangefirstName}
+                                               style={{width: '256px'}} placeholder=""/>
+                                    </div>
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{minWidth: 120}}>*出生日期</span>
+                                        <DatePicker
+                                            disabled={true}
+                                            style={{width: '256px'}}
+                                            value={moment(this.state.testeee, 'YYYY-MM-DD')}
+                                            onChange={this.onChangeBirth}
+                                            format={'YYYY-MM-DD'}/>
+
+
+                                    </div>
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{minWidth: 120}}>*性别</span>
+                                        <Select
+                                            disabled={true}
+                                            value={this.state.mGender}
+                                                onChange={this.onChangegender}
+                                                style={{width: '256px'}}>
+                                            <Option value="Male">男</Option>
+                                            <Option value="Female">女</Option>
+                                        </Select>
+                                    </div>
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{minWidth: 120}}>*身份证号码</span>
+                                        <Input
+                                            disabled={true}
+                                            value={this.state.recordData.nationalID}
+                                               onChange={this.onChangenationalId}
+                                               style={{width: '256px'}} placeholder=""/>
+                                    </div>
+
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{minWidth: 120}}>*城市</span>
+
+                                        <Select
+                                            disabled={true}
+                                            value={this.state.mState}
+                                            style={{width: '128px'}}
+                                            onChange={this.handleProvinceChange}
+                                        >
+                                            {this.state.provinceDatAarra.map(province => <Option
+                                                key={province.name}>{province.name}</Option>)}
+
+                                        </Select>
+                                        <Select
+                                            disabled={true}
+                                            style={{width: '128px'}}
+                                            value={this.state.mCity}
+                                            onChange={this.onSecondCityChange}
+                                        >
+                                            {this.state.cityDatAarra.map(ccty => <Option
+                                                key={ccty.name}>{ccty.name}</Option>)}
+                                        </Select>
+                                    </div>
+
+
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{minWidth: 120}}>*详细地址</span>
+                                        <Input disabled={true} defaultValue={this.state.recordData.street}
+                                               onChange={this.onChangestreet}
+                                               style={{width: '256px'}} placeholder=""/>
+                                    </div>
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{minWidth: 120}}>*联系电话</span>
+                                        <Input disabled={true} defaultValue={this.state.recordData.phoneNumber} disabled={true}
+                                               style={{width: '256px'}} placeholder=""/>
+                                    </div>
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{minWidth: 120}}>*邮箱地址</span>
+                                        <Input disabled={true}
+
+                                            style={{width: '256px'}}
+                                            defaultValue={this.state.recordData.email} onChange={this.onChangeemail}
+                                            placeholder=""/>
+                                    </div>
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{minWidth: 120}}>*邮编</span>
+                                        <Input
+                                            disabled={true}
+                                            value={this.state.recordData.postalCode}
+                                               onChange={this.onChangepostalCode}
+                                               style={{width: '256px'}} placeholder="邮编"/>
+                                    </div>
+                                </Card>
+
+
+                            </Col>
+                            <Col md={12}>
+                                <div style={{
+                                    padding: '24px',
+                                    fontSize: '20px',
+                                    textAlign: 'center',
+                                    width: '100%'
+                                }}> 资产&风险审核
+                                </div>
+
+                                <Card style={{display: 'flex', justifyContent: 'center'}} bordered={false}>
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{minWidth: 120}}>当前年收入</span>
+                                        <Select
+                                            disabled={true}
+                                            value={this.state.mAnnualIncome}
+                                                onChange={this.onChangeannualIncome}
+                                                style={{width: '256px'}}>
+                                            {this.mIncomesOPS}
+                                        </Select>
+                                    </div>
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{minWidth: 120}}>初始入金金额占比</span>
+                                        <Select
+                                            disabled={true}
+                                            style={{width: '256px'}}
+                                            value={this.state.mInitialDepositToYourNetLiquidAssets}
                                             onChange={this.onChangemInitialDepositToYourNetLiquidAssets}
-                                    >
-                                        {this.mIXPercentage}
-                                    </Select>
-                                </div>
-                                <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{minWidth: 120}}>交易本金来源</span>
-                                    <Select value={this.state.mfundsSource}
+                                        >
+                                            {this.mIXPercentage}
+                                        </Select>
+                                    </div>
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{minWidth: 120}}>交易本金来源</span>
+                                        <Select
                                             disabled={true}
+
+                                            style={{width: '256px'}}
+                                            value={this.state.mfundsSource}
                                             onChange={this.onChangemfundsSource}
-                                    >
-                                        {this.mIXFundsSource}
-                                    </Select>
-                                </div>
-                                <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{minWidth: 120}}>*是否美国公民</span>
-                                    <Select value={this.state.musCitizenOrResidentForTaxPurpposes}
+                                        >
+                                            {this.mIXFundsSource}
+                                        </Select>
+                                    </div>
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{minWidth: 120}}>*是否美国公民</span>
+                                        <Select
                                             disabled={true}
+                                            style={{width: '256px'}}
+                                            value={this.state.musCitizenOrResidentForTaxPurpposes}
                                             onChange={this.onChangemusCitizenOrResidentForTaxPurpposes}
-                                    >
-                                        {this.mIXUStax}
-                                    </Select>
-                                </div>
-                                <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{minWidth: 120}}>交易经验</span>
-                                    <Select value={this.state.myearsTrading}
+                                        >
+                                            {this.mIXUStax}
+                                        </Select>
+                                    </div>
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{minWidth: 120}}>交易经验</span>
+                                        <Select
                                             disabled={true}
+                                            style={{width: '256px'}}
+                                            value={this.state.myearsTrading}
                                             onChange={this.onChangemyearsTrading}
 
-                                    >
-                                        {this.mIXTradingExperience}
-                                    </Select>
-                                </div>
+                                        >
+                                            {this.mIXTradingExperience}
+                                        </Select>
+                                    </div>
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{minWidth: 120}}>交易目的</span>
+                                        <Select
+                                            disabled={true}
+                                            style={{width: '256px'}}
+                                            onChange={this.onChangemtradingObjectives}
+                                            value={this.state.mtradingObjectives}>
+                                            {this.mIXTradingObjectives}
+                                        </Select>
+                                    </div>
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{minWidth: 120}}>*风险承受力</span>
+                                        <Select
+                                            disabled={true}
+                                            dropdownStyle={{wordWrap: 'break-word'}}
+                                            onChange={this.onChangemriskTolerance}
+                                            value={this.state.mriskTolerance}>
+                                            {this.mIXRisk_Tolerance}
+                                        </Select>
+                                    </div>
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{width: 120}}>交易类型</span>
+                                        <Input disabled={true} defaultValue={this.state.recordData.accountType} disabled={true}
+                                               style={{width: '256px'}} placeholder=""/>
+                                    </div>
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{width: 120}}>交易货币</span>
+                                        <Input disabled={true} defaultValue={this.state.recordData.currency} disabled={true}
+                                               style={{width: '256px'}} placeholder=""/>
+                                    </div>
+                                    <div style={{display: 'flex', minHeight: 40}}>
+                                        <span style={{minWidth: 120}}>*交易密码</span>
+                                        <Input disabled={true} defaultValue={this.state.recordData.accountPassword}
+                                               disabled={true}
+                                               style={{width: '256px'}} placeholder=""/>
+                                    </div>
+                                </Card>
+                            </Col>
+                        </Row>
+
+
+                    </div>
+                    <div style={{
+                        borderRadius: '4px',
+                        fontSize: '20px',
+                        width: '100%',
+                        height: '48px',
+                        marginTop: '24px',
+                        background: '#F6D147',
+                        textAlign: 'left',
+                        lineHeight: '48px'
+                    }}>
+
+                        <p style={{marginLeft: '21px'}}>IX账户身份信息</p>
+
+                    </div>
+                    <div style={{
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        fontSize: '14px',
+                    }}>
+
+
+
+                        <Row style={{margin: '18px'}} gutter={16}>
+
+                            <Col md={8}>
+                                <Card bordered={true} bodyStyle={{padding: 10}}
+                                      actions={[
+                                          <h3 className="pa-m">
+                                              <a href={this.state.recordData.idcard_0}
+                                                 target="_blank"
+                                                 rel="noopener noreferrer">身份证反面照片</a>
+                                          </h3>]
+                                      }>
+                                    <img
+                                        onClick={() => this.openGallery(this.state.recordData.idcard_0)}
+                                        alt="example" width="100%"
+                                        src={this.state.recordData.idcard_0}/>
+                                </Card>
+                            </Col>
+                            <Col md={8}>
+                                <Card bordered={true} bodyStyle={{padding: 10}}
+                                      actions={[
+                                          <h3 className="pa-m">
+                                              <a href={this.state.recordData.idcard_1}
+                                                 target="_blank"
+                                                 rel="noopener noreferrer">身份证反面照片</a>
+                                          </h3>]
+                                      }>
+                                    <img
+                                        onClick={() => this.openGallery(this.state.recordData.idcard_1)}
+                                        alt="example" width="100%"
+                                        src={this.state.recordData.idcard_1}/>
+                                </Card>
+                            </Col>
+                            <Col md={8}>
+                                <Card bordered={true} bodyStyle={{padding: 10}}
+                                      actions={[
+                                          <h3 className="pa-m">
+                                              <a href={this.state.recordData.idcard_2}
+                                                 target="_blank"
+                                                 rel="noopener noreferrer">身份证反面照片</a>
+                                          </h3>]
+                                      }>
+                                    <img
+                                        onClick={() => this.openGallery(this.state.recordData.idcard_2)}
+                                        alt="example" width="100%"
+                                        src={this.state.recordData.idcard_2}/>
+                                </Card>
+                            </Col>
+                        </Row>
+
+
+                    </div>
+                    <div style={{
+                        borderRadius: '4px',
+                        fontSize: '20px',
+                        width: '100%',
+                        height: '48px',
+                        marginTop: '24px',
+                        background: '#F6D147',
+                        textAlign: 'left',
+                        lineHeight: '48px'
+                    }}>
+
+                        <p style={{marginLeft: '21px'}}>IX账户身份查重</p>
+
+                    </div>
+                    <div style={{
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        fontSize: '14px',
+                    }}>
+
+                        <Row style={{margin: '20px'}} gutter={12}>
+                            <Col md={4}>
                                 <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{minWidth: 120}}>交易目的</span>
                                     <Select
-                                        disabled={true}
-                                        onChange={this.onChangemtradingObjectives}
-                                        value={this.state.mtradingObjectives}>
-                                        {this.mIXTradingObjectives}
+                                        onChange={this.checkfromdbType}
+                                        defaultValue="0"
+                                        style={{width: 120}}>
+                                        <Option value="0">手机号</Option>
+                                        <Option value="1">身份证</Option>
+                                        <Option value="2">邮箱</Option>
                                     </Select>
                                 </div>
-                                <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{minWidth: 120}}>*风险承受力</span>
-                                    <Select
-                                        disabled={true}
-                                        // style={{maxWidth: 220}}
-                                        onChange={this.onChangemriskTolerance}
-                                        value={this.state.mriskTolerance}>
-                                        {this.mIXRisk_Tolerance}
-                                    </Select>
+
+                            </Col>
+                            <Col md={8}>
+                                <div style={{display: 'flex', maxHeight: 40}}>
+                                    <Search
+                                        value={this.state.checkfromdbName}
+                                        onChange={e => this.onTodoChange(e.target.value)}
+                                        style={{width: 220}} placeholder="输入要查询的内容"/>
                                 </div>
+                            </Col>
+                            <Col md={4}>
                                 <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{width: 120}}>交易类型</span>
-                                    <Input defaultValue={this.state.recordData.accountType} disabled={true}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                    <Button style={{background: '#F6D147', width: '120px', height: '36px'}}
+                                            loading={this.state.icondbALoading}
+                                            onClick={() => this.searchFromLocalDB()}>本库查询</Button>
                                 </div>
+                            </Col>
+                            <Col md={4}>
                                 <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{width: 120}}>交易货币</span>
-                                    <Input defaultValue={this.state.recordData.currency} disabled={true}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                    <Button style={{background: '#F6D147', width: '120px', height: '36px'}}
+                                            loading={this.state.icondbALoadingA}
+                                            onClick={() => this.searchFromOtherDB()}>异库查询</Button>
+
                                 </div>
+                            </Col>
+                            <Col md={24}>
                                 <div style={{display: 'flex', minHeight: 40}}>
-                                    <span style={{minWidth: 120}}>*交易密码</span>
-                                    <Input defaultValue={this.state.recordData.accountPassword}
-                                           disabled={true}
-                                           style={{width: 120}} placeholder="Basic usage"/>
+                                    {this.state.checkderesb == null ? null :
+                                        <h3 style={{margin: 'auto'}}>本库查询结果：{this.state.checkderesb ? '有' : '無'}重合</h3>}
+                                    {this.state.checkderesa == null ? null :
+                                        <h3 style={{margin: 'auto'}}>异库查询结果：{this.state.checkderesa ? '有' : '無'}重合</h3>}
                                 </div>
-                            </Card>
-                        </Col>
-                    </Row>
-                </Card>
-                <Card title="IX账户身份信息" bordered={true} style={{marginTop: 15}}>
-                    <Row gutter={16}>
+                            </Col>
+                        </Row>
 
-                        <Col md={8}>
-                            <Card bordered={true} bodyStyle={{padding: 10}}
-                                  actions={[
-                                      <h3 className="pa-m">
-                                          <a href={this.state.recordData.idcard_0}
-                                             target="_blank"
-                                             rel="noopener noreferrer">身份证反面照片</a>
-                                      </h3>]
-                                  }>
-                                <img
-                                    onClick={() => this.openGallery(this.state.recordData.idcard_0)}
-                                    alt="example" width="100%"
-                                    src={this.state.recordData.idcard_0}/>
-                            </Card>
-                        </Col>
-                        <Col md={8}>
-                            <Card bordered={true} bodyStyle={{padding: 10}}
-                                  actions={[
-                                      <h3 className="pa-m">
-                                          <a href={this.state.recordData.idcard_1}
-                                             target="_blank"
-                                             rel="noopener noreferrer">身份证反面照片</a>
-                                      </h3>]
-                                  }>
-                                <img
-                                    onClick={() => this.openGallery(this.state.recordData.idcard_1)}
-                                    alt="example" width="100%"
-                                    src={this.state.recordData.idcard_1}/>
-                            </Card>
-                        </Col>
-                        <Col md={8}>
-                            <Card bordered={true} bodyStyle={{padding: 10}}
-                                  actions={[
-                                      <h3 className="pa-m">
-                                          <a href={this.state.recordData.idcard_2}
-                                             target="_blank"
-                                             rel="noopener noreferrer">身份证反面照片</a>
-                                      </h3>]
-                                  }>
-                                <img
-                                    onClick={() => this.openGallery(this.state.recordData.idcard_2)}
-                                    alt="example" width="100%"
-                                    src={this.state.recordData.idcard_2}/>
-                            </Card>
-                        </Col>
-                    </Row>
+                    </div>
+                    <div style={{
+                        borderRadius: '4px',
+                        fontSize: '20px',
+                        width: '100%',
+                        height: '48px',
+                        marginTop: '24px',
+                        background: '#F6D147',
+                        textAlign: 'left',
+                        lineHeight: '48px'
+                    }}>
 
-                </Card>
+                        <p style={{marginLeft: '21px'}}>IX账户开户备注</p>
+
+                    </div>
+                    <div style={{
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        fontSize: '14px',
+                    }}>
+
+                        <Row  style={{margin: '20px'}} gutter={12}>
+
+                            <Col md={24}>
 
 
-                <Card title="IX账户身份查重" bordered={true} style={{marginTop: 15}}>
-
-                    <Row gutter={12}>
-                        <Col md={4}>
-                            <div style={{display: 'flex', minHeight: 40}}>
-                                <Select
-                                    onChange={this.checkfromdbType}
-                                    defaultValue="0"
-                                    style={{width: 120}}>
-                                    <Option value="0">手机号</Option>
-                                    <Option value="1">身份证</Option>
-                                    <Option value="2">邮箱</Option>
-                                </Select>
-                            </div>
-
-                        </Col>
-                        <Col md={8}>
-                            <div style={{display: 'flex', maxHeight: 40}}>
-                                <Search
-                                    value={this.state.checkfromdbName}
-                                    onChange={e => this.onTodoChange(e.target.value)}
-                                    style={{width: 220}} placeholder="输入要查询的内容"/>
-                            </div>
-                        </Col>
-                        <Col md={4}>
-                            <div style={{display: 'flex', minHeight: 40}}>
-                                <Button loading={this.state.icondbALoading}
-                                        onClick={() => this.searchFromLocalDB()}>本库查询</Button>
-                            </div>
-                        </Col>
-                        <Col md={4}>
-                            <div style={{display: 'flex', minHeight: 40}}>
-                                <Button loading={this.state.icondbALoadingA}
-                                        onClick={() => this.searchFromOtherDB()}>异库查询</Button>
-
-                            </div>
-                        </Col>
-                        <Col md={24}>
-                            <div style={{display: 'flex', minHeight: 40}}>
-                                {this.state.checkderesb == null ? null :
-                                    <h3 style={{margin: 'auto'}}>本库查询结果：{this.state.checkderesb ? '有' : '無'}重合</h3>}
-                                {this.state.checkderesa == null ? null :
-                                    <h3 style={{margin: 'auto'}}>异库查询结果：{this.state.checkderesa ? '有' : '無'}重合</h3>}
-                            </div>
-                        </Col>
-                    </Row>
-                </Card>
-                <Card title="IX账户开户备注" bordered={true} style={{marginTop: 15}}>
-                    <Row gutter={12}>
-
-                        <Col md={24}>
+                                <Table rowKey="id"
+                                       bordered
+                                       columns={[
+                                           {
+                                               title: '操作人',
+                                               dataIndex: 'createDate',
+                                               key: 'operationDiary_Date',
+                                               render: (text, record) => (
+                                                   <span>{record.bkUserName}</span>),
+                                           }, {
+                                               title: '操作时间',
+                                               dataIndex: '操作时间',
+                                               key: '操作时间',
+                                               render: (text, record) => (
+                                                   <span>{self.timestampToTime(record.createDate)}</span>),
+                                           }, {
+                                               title: '操作',
+                                               width: 130,
+                                               dataIndex: 'bkUserName',
+                                               key: 'operationDiary_User',
+                                               render: (text, record) => (
+                                                   <span>{record.bkUserName}</span>),
+                                           }, {
+                                               title: '备注内容',
+                                               dataIndex: 'comment',
+                                               key: 'operationDiary_Status',
+                                               render: (text, record) => (
+                                                   <span>{record.comment}</span>),
+                                           }]}
+                                       dataSource={this.state.operationDiaryHistory}
+                                       loading={this.state.loadingComment}
+                                       pagination={{
+                                           total: this.state.totalpageComments * this.state.pgsize,
+                                           pageSize: this.state.pgsize,
+                                           onChange: this.changePageComment,
+                                       }}
+                                />
+                                {/*<div style={{display: 'flex', minHeight: 40}}>*/}
+                                {/*<TextArea value={this.state.changeNoteV} rows={4} onChange={this.changeNote}/>*/}
+                                {/*</div>*/}
+                            </Col>
 
 
-                            <Table rowKey="id"
-                                   bordered
-                                   columns={[
-                                       {
-                                           title: '操作人',
-                                           dataIndex: 'createDate',
-                                           key: 'operationDiary_Date',
-                                           render: (text, record) => (
-                                               <span>{record.bkUserName}</span>),
-                                       }, {
-                                           title: '操作时间',
-                                           dataIndex: '操作时间',
-                                           key: '操作时间',
-                                           render: (text, record) => (
-                                               <span>{self.timestampToTime(record.createDate)}</span>),
-                                       }, {
-                                           title: '操作',
-                                           width: 130,
-                                           dataIndex: 'bkUserName',
-                                           key: 'operationDiary_User',
-                                           render: (text, record) => (
-                                               <span>{record.bkUserName}</span>),
-                                       }, {
-                                           title: '备注内容',
-                                           dataIndex: 'comment',
-                                           key: 'operationDiary_Status',
-                                           render: (text, record) => (
-                                               <span>{record.comment}</span>),
-                                       }]}
-                                   dataSource={this.state.operationDiaryHistory}
-                                   loading={this.state.loadingComment}
-                                   pagination={{
-                                       total: this.state.totalpageComments * this.state.pgsize,
-                                       pageSize: this.state.pgsize,
-                                       onChange: this.changePageComment,
-                                   }}
-                            />
-                            {/*<div style={{display: 'flex', minHeight: 40}}>*/}
-                            {/*<TextArea value={this.state.changeNoteV} rows={4} onChange={this.changeNote}/>*/}
-                            {/*</div>*/}
-                        </Col>
+                        </Row>
 
 
-                    </Row>
-                    <Row gutter={12}>
-                        <Card style={{marginTop: 10}}>
+                        <Row style={{margin: '20px'}} gutter={12}>
 
-                            <div>
+                            <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
+
                                 <Button
+                                    style={{ borderRadius: '4px',
+                                        width: '200px',
+                                        height: '40px',
+                                        }}
                                     disabled={true}
-                                >
+                                    loading={this.state.iconLoading}>
                                     开户通过
                                 </Button>
 
                                 <Button
-                                    disabled={!this.state.isNeedSave}
+                                    style={{
+                                        width: '200px',
+                                        height: '40px',
+                                    }}
+                                    disabled={true}
                                     onClick={() => this.saveData()}>更新客户资料</Button>
 
 
-                                <Button onClick={() => this.saveNote()}>下载</Button>
+                                <Button
+                                    style={{
+                                        width: '200px',
+                                        height: '40px',
+                                    }}
+                                    onClick={() => this.saveNote()}>保存下载客户资料</Button>
+
 
                                 <Button
-
                                     disabled={true}
 
+                                    style={{
+                                        width: '200px',
+                                        height: '40px',
+                                    }}
                                     onClick={() => {
                                         this.setState({
                                             showREJECTmodel: true,
@@ -729,10 +954,16 @@ class PassOpenD extends Component {
                                     }} loading={this.state.iconcanLoading}>拒绝</Button>
 
                             </div>
-                        </Card>
-                    </Row>
+                        </Row>
 
-                </Card>
+                    </div>
+
+
+                </div>
+
+
+
+
 
                 <div className="gutter-example button-demo">
 
@@ -878,19 +1109,7 @@ class PassOpenD extends Component {
         this.openOK()
     };
 
-
-    // timestampToTime = (timestamp) => {
-    //     const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
-    //     const year = dateObj.getFullYear() // 获取年，
-    //     const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
-    //     const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
-    //     return year + '-' + month + '-' + date
-    // };
-    // pad = (str) => {
-    //     return +str >= 10 ? str : '0' + str
-    // };
     openOK = () => {
-
         this.setState({
             iconLoading: true,
         });
@@ -1427,5 +1646,6 @@ class PassOpenD extends Component {
 
     }
 }
+const PassOpenDForm = Form.create()(PassOpenD);
 
-export default PassOpenD;
+export default PassOpenDForm;

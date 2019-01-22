@@ -1002,7 +1002,9 @@ class PassOpenD extends Component {
                     boxShadow: '0px 0px 20px 0px rgba(123,123,123,0.1)',
                     borderRadius: '4px',
                 }}>
-                    <Button style={{
+                    <Button
+                        onClick={() => this.saveNote()}
+                        style={{
                         borderRadius: '4px',
                         fontSize: '12px',
                         width: '136px', height: '30px', marginTop: '8px', background: '#FDD000'
