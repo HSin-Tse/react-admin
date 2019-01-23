@@ -704,9 +704,64 @@ class Basic extends Component {
 
                 </Modal>
 
+
+                <Modal
+                    bodyStyle={{
+                        background: 'white',
+                        padding: 0,
+                        margin: 0,
+                    }}
+                    onCancel={() => {
+                        this.setState({
+                            visible: false,
+                            modal2OPDAYVisible: false,
+                        });
+                    }}
+                    closable={false}
+                    footer={null}
+                    // onCancel={this.handleCancel}
+                    visible={this.state.modal2OPDAYVisible}
+
+
+                >
+
+                    <div style={{borderRadius: '4px'}}>
+                        <div style={{
+                            alignItems: 'center',
+                            justifyContent: 'center', height: 48, display: 'flex', padding: 0, background: '#FDD000'
+                        }}>
+                            <span style={{
+                                fontSize: 18,
+                                fontFamily: 'PingFangSC-Medium',
+                                fontWeight: 500,
+                                color: 'rgba(51,51,51,1)'
+                            }}>{'查看操作日志'}
+                            </span>
+                        </div>
+                        <Table
+                            style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}
+                            rowKey="id"
+                            bordered
+                            columns={this.columnsLog}
+                            dataSource={this.state.operationDiaryHistory}
+                            loading={this.state.loadingComment}
+                            pagination={{
+                                current: this.state.currentComment,
+                                total: this.state.totalpageComments * this.state.pgsize,
+                                pageSize: this.state.pgsize,
+                                onChange: this.changePageComment,
+                            }}
+                        />
+
+
+                    </div>
+
+
+                </Modal>
+
                 <Modal
                     title="查看操作日志"
-                    visible={this.state.modal2OPDAYVisible}
+                    visible={false}
                     onCancel={() => {
                         this.setState({
                             visible: false,
