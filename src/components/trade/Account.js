@@ -73,10 +73,10 @@ class Basic extends Component {
         // console.log('hcia x' , x)
         // console.log('hcia x' , x)
         // console.log('hcia x' , x)
-        
-        console.log('hcia xxxx' , xxxx)
 
-        console.log('hcia yyyy' , yyyy)
+        console.log('hcia xxxx', xxxx)
+
+        console.log('hcia yyyy', yyyy)
     }
 
     showOPDAyModal3 = (recodrd) => {
@@ -101,19 +101,23 @@ class Basic extends Component {
             });
         });
     }
-    showModalChangeLeavge = (recodrd) => {
 
-        // console.log('hcia recodrd', recodrd)
+    showModalChangeLeavgeV2 = (recodrd) => {
         this.requestUserCommentList(recodrd)
+        this.setState({
+            detail: recodrd,
+            visibleB: true,
+        });
+    }
 
-
+    showModalChangeLeavge = (recodrd) => {
+        this.requestUserCommentList(recodrd)
         this.setState({
             detail: recodrd,
             visibleChangeLeavgeModal: true,
         });
-
-
     }
+
     showOPDAyModal2 = (recodrd) => {
         this.requestUserCommentList(recodrd)
         this.setState({
@@ -246,7 +250,9 @@ class Basic extends Component {
                 key: '操作人',
                 render: (text, record) => (
                     <span>{record.operator}</span>)
-            }, {
+            }
+
+            , {
                 align: 'center',
 
                 title: '当前杠杆',
@@ -258,11 +264,11 @@ class Basic extends Component {
                         minWidth: 80,
                         background: '#FDD000',
                         display: record.displayStatus == '审核通过' ? 'none' : ''
-                    }}
-                            onClick={() => this.showModalChangeLeavge(record)}>{record.displayLeverage}</Button>
+                    }} onClick={() => this.showModalChangeLeavgeV2(record)}>{record.displayLeverage}</Button>
                 )
 
-            }, {
+            }
+            , {
                 align: 'center',
                 title: '操作',
                 key: 'action',
@@ -286,7 +292,7 @@ class Basic extends Component {
                                 onClick={() => this.showOPDAyModal3(record)}>备注</Button>
 
                         {/*<Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}*/}
-                                {/*onClick={() => this.showOPDAyModal2(record)}>日志</Button>*/}
+                        {/*onClick={() => this.showOPDAyModal2(record)}>日志</Button>*/}
 
                     </div>
                 ),
@@ -467,7 +473,6 @@ class Basic extends Component {
     handleOk = () => {
 
 
-
         var mStatus = this.state.modeState == '正常' ? 1 : this.state.modeState == '禁止登陆' ? 2 : 3;
         // var reasonType = mStatus ==2?
         let self = this;
@@ -485,8 +490,7 @@ class Basic extends Component {
             message.success('操作成功');
 
 
-
-            if(mStatus!==1){
+            if (mStatus !== 1) {
                 // window.Axios.post('auth/addBlackUser', {
                 //     'content': self.state.mChLeadComment,
                 //     'id': self.state.opRecord.id,
@@ -514,7 +518,7 @@ class Basic extends Component {
                     self.state.forbiddenValue = 0
                     self.requestPage()
                 });
-            }else{
+            } else {
                 self.setState({
                     visibleOpM: false,
                     loadFor: false,
@@ -535,9 +539,7 @@ class Basic extends Component {
             }
 
 
-
         })
-
 
 
     };
@@ -564,81 +566,186 @@ class Basic extends Component {
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
                 {/*this.state.selectedRowKeys.length > 0*/}
+                {/*<Modal*/}
+                {/*width={'700px'}*/}
+                {/*onCancel={(e) => {*/}
+                {/*this.setState({*/}
+                {/*visibleChangeLeavgeModal: false,*/}
+                {/*});*/}
+                {/*}}*/}
+                {/*visible={this.state.visibleChangeLeavgeModal}*/}
+                {/*footer={[*/}
+                {/*<Popconfirm title="确认？" onConfirm={*/}
+
+                {/*() => {*/}
+                {/*if (!this.state.mLeverageId) {*/}
+                {/*message.error('no change')*/}
+                {/*return*/}
+                {/*}*/}
+                {/*var self = this*/}
+                {/*self.setState({*/}
+                {/*loading: true,*/}
+                {/*}*/}
+                {/*);*/}
+                {/*window.Axios.post('open/prestoreLiveAccount', {*/}
+                {/*"id": this.state.detail.liveAccountId,*/}
+                {/*"leverageId": this.state.mLeverageId,*/}
+                {/*"content": this.state.mChLeadComment,*/}
+                {/*}).then(() => {*/}
+                {/*message.success('操作成功')*/}
+                {/*self.setState({*/}
+                {/*mChLeadComment: undefined,*/}
+                {/*visibleChangeLeavgeModal: false,*/}
+                {/*loading: false,*/}
+                {/*}*/}
+                {/*);*/}
+                {/*self.requestPage()*/}
+                {/*})*/}
+
+
+                {/*}*/}
+
+
+                {/*}*/}
+                {/*okText="Yes"*/}
+                {/*cancelText="No">*/}
+                {/*<Button loading={this.state.loading} type="normal" key="submit">通過</Button>*/}
+                {/*</Popconfirm>,*/}
+                {/*]}*/}
+                {/*>*/}
+                {/*<Card*/}
+                {/*// bodyStyle={{padding: 0, margin: 0}}*/}
+                {/*title={'账户123：' + this.state.detail.accountNo}*/}
+                {/*bordered={true}>*/}
+
+                {/*<div>*/}
+                {/*<Row style={{marginTop: 20}}>*/}
+                {/*<Col style={{textAlign: 'right'}} span={10}>当前杠杆:</Col>*/}
+                {/*<Col style={{textAlign: 'center'}} span={14}>{this.state.detail.displayLeverage}</Col>*/}
+                {/*</Row>*/}
+                {/*<Row style={{marginTop: 20}}>*/}
+                {/*<Col style={{textAlign: 'right'}} span={10}>余额:</Col>*/}
+                {/*<Col style={{textAlign: 'center'}} span={14}>{this.state.detail.cashBalance}</Col>*/}
+                {/*</Row>*/}
+                {/*<Row style={{marginTop: 20}}>*/}
+                {/*<Col style={{textAlign: 'right'}} span={10}>杠杆修改:</Col>*/}
+                {/*<Col style={{textAlign: 'center'}} span={14}>*/}
+                {/*<Select*/}
+                {/*onChange={(value) => {*/}
+
+                {/*// console.log('hcia value', value)*/}
+                {/*// updateLeverageApply*/}
+                {/*this.setState({*/}
+                {/*mLeverageId: value,*/}
+                {/*detail: {...this.state.detail, leverageId: value}*/}
+                {/*})*/}
+
+
+                {/*}}*/}
+                {/*value={this.state.detail.leverageId}*/}
+                {/*style={{width: 100, marginLeft: 0}}>*/}
+                {/*{this.state.leavgeList.map(ccty => <Option*/}
+                {/*value={ccty.id} key={ccty.leverage}>1:{ccty.leverage}</Option>)}*/}
+                {/*</Select>*/}
+                {/*</Col>*/}
+                {/*</Row>*/}
+                {/*<Row style={{marginTop: 20}}>*/}
+                {/*<Col style={{textAlign: 'right'}} span={10}>保证金占比:</Col>*/}
+                {/*<Col style={{textAlign: 'center'}} span={14}>{this.state.detail.marginLevel}</Col>*/}
+                {/*</Row>*/}
+                {/*<Row style={{marginTop: 20}}>*/}
+                {/*<Col span={24}>处理备注：</Col>*/}
+                {/*<Col style={{marginTop: 20}} span={24}>*/}
+                {/*<TextArea defaultValue={this.state.mChLeadComment}*/}
+                {/*onChange={(e) => {*/}
+                {/*this.setState({*/}
+                {/*mChLeadComment: e.target.value,*/}
+                {/*});*/}
+
+                {/*}}*/}
+                {/*rows={4}/>*/}
+                {/*</Col>*/}
+                {/*</Row>*/}
+                {/*<Table rowKey="id"*/}
+                {/*columns={[*/}
+                {/*{*/}
+                {/*title: '操作人',*/}
+                {/*width: 130,*/}
+                {/*dataIndex: 'bkUserName',*/}
+                {/*key: 'operationDiary_User',*/}
+                {/*render: (text, record) => (*/}
+                {/*<span>{record.bkUserName}</span>),*/}
+                {/*},*/}
+                {/*{*/}
+                {/*title: '操作时间',*/}
+                {/*dataIndex: 'createDate',*/}
+                {/*key: 'operationDiary_Date',*/}
+                {/*render: (text, record) => (*/}
+
+                {/*<span>{this.timestampToTime(record.createDate)}</span>),*/}
+                {/*}, {*/}
+                {/*title: '备注',*/}
+                {/*dataIndex: 'comment',*/}
+                {/*key: 'operationDiary_Status',*/}
+                {/*render: (text, record) => (*/}
+                {/*<span>{record.comment}</span>),*/}
+                {/*}]}*/}
+                {/*dataSource={this.state.operationDiaryHistory}*/}
+                {/*loading={this.state.loadingComment}*/}
+                {/*pagination={{*/}
+                {/*total: this.state.totalpageComments * this.state.pgsize,*/}
+                {/*pageSize: this.state.pgsize,*/}
+                {/*onChange: this.changePageComment,*/}
+                {/*}}*/}
+                {/*/>*/}
+                {/*</div>*/}
+                {/*</Card>*/}
+
+
+                {/*</Modal>*/}
+
+
+                ///
                 <Modal
-                    width={'700px'}
-                    onCancel={(e) => {
-                        this.setState({
-                            visibleChangeLeavgeModal: false,
-                        });
+                    bodyStyle={{
+                        background: 'white',
+                        padding: 0,
+                        margin: 0,
+                        width: 600
                     }}
-                    visible={this.state.visibleChangeLeavgeModal}
-                    footer={[
-                        <Popconfirm title="确认？" onConfirm={() => {
+                    closable={false}
+                    footer={null}
+                    onCancel={this.handleCancel}
+                    visible={this.state.visibleB}
 
 
-                            if (!this.state.mLeverageId) {
-                                message.error('no change')
-                                return
-                            }
-
-                            var self = this
-                            self.setState({
-                                    loading: true,
-                                }
-                            );
-                            window.Axios.post('open/prestoreLiveAccount', {
-                                "id": this.state.detail.liveAccountId,
-                                "leverageId": this.state.mLeverageId,
-                                "content": this.state.mChLeadComment,
-                            }).then(() => {
-
-                                message.success('操作成功')
-                                self.setState({
-                                        mChLeadComment: undefined,
-                                        visibleChangeLeavgeModal: false,
-                                        loading: false,
-                                    }
-                                );
-                                self.requestPage()
-
-
-                            })
-
-
-                        }}
-                                    okText="Yes"
-                                    cancelText="No">
-                            <Button loading={this.state.loading} type="normal" key="submit">通過</Button>
-                        </Popconfirm>,
-                        <Popconfirm title="拒绝？"
-                                    onConfirm={(e) => {
-                                        this.setState({
-                                            visibleChangeLeavgeModal: false,
-                                        });
-                                    }}
-                                    okText="Yes"
-                                    cancelText="No">
-                            <Button type="normal" key="back">拒絕</Button>
-                        </Popconfirm>
-                    ]}
                 >
-                    <Card
-                        // bodyStyle={{padding: 0, margin: 0}}
-                        title={'账户：' + this.state.detail.accountNo}
-                        bordered={true}>
 
+                    <div>
+                        <div style={{
+                            alignItems: 'center',
+                            justifyContent: 'center', height: 48, display: 'flex', padding: 0, background: '#FDD000'
+                        }}>
+                            <span style={{
+                                fontSize: 18,
+                                fontFamily: 'PingFangSC-Medium',
+                                fontWeight: 500,
+                                color: 'rgba(51,51,51,1)'
+                            }}>{'账户：' + this.state.detail.accountNo}
+                            </span>
+                        </div>
                         <div>
-                            <Row style={{marginTop: 20}}>
-                                <Col style={{textAlign: 'right'}} span={10}>当前杠杆:</Col>
-                                <Col style={{textAlign: 'center'}} span={14}>{this.state.detail.displayLeverage}</Col>
+                            <Row style={{marginTop: "24px"}}>
+                                <Col style={{textAlign: 'right'}} span={9}>当前杠杆:</Col>
+                                <Col style={{textAlign: 'center'}} span={11}>{this.state.detail.displayLeverage}</Col>
                             </Row>
-                            <Row style={{marginTop: 20}}>
-                                <Col style={{textAlign: 'right'}} span={10}>余额:</Col>
-                                <Col style={{textAlign: 'center'}} span={14}>{this.state.detail.cashBalance}</Col>
+                            <Row style={{marginTop: "24px"}}>
+                                <Col style={{textAlign: 'right'}} span={9}>余额:</Col>
+                                <Col style={{textAlign: 'center'}} span={11}>{this.state.detail.cashBalance}</Col>
                             </Row>
-                            <Row style={{marginTop: 20}}>
-                                <Col style={{textAlign: 'right'}} span={10}>杠杆修改:</Col>
-                                <Col style={{textAlign: 'center'}} span={14}>
+                            <Row style={{marginTop: "24px"}}>
+                                <Col style={{textAlign: 'right'}} span={9}>杠杆修改:</Col>
+                                <Col style={{textAlign: 'center'}} span={11}>
                                     <Select
                                         onChange={(value) => {
 
@@ -658,60 +765,135 @@ class Basic extends Component {
                                     </Select>
                                 </Col>
                             </Row>
-                            <Row style={{marginTop: 20}}>
-                                <Col style={{textAlign: 'right'}} span={10}>保证金占比:</Col>
-                                <Col style={{textAlign: 'center'}} span={14}>{this.state.detail.marginLevel}</Col>
-                            </Row>
-                            <Row style={{marginTop: 20}}>
-                                <Col span={24}>处理备注：</Col>
-                                <Col style={{marginTop: 20}} span={24}>
-                                <TextArea defaultValue={this.state.mChLeadComment}
-                                          onChange={(e) => {
-                                              this.setState({
-                                                  mChLeadComment: e.target.value,
-                                              });
 
-                                          }}
-                                          rows={4}/>
+                            <Row style={{marginTop: "24px"}}>
+                                <Col style={{textAlign: 'right'}} span={9}>保证金占比:</Col>
+                                <Col style={{textAlign: 'center'}} span={11}>{this.state.detail.marginLevel}</Col>
+                            </Row>
+                            <Row style={{marginTop: "24px", marginRight: "80px", marginLeft: "80px"}}>
+                                <Col style={{textAlign: 'center'}} span={24}>处理备注</Col>
+                                <Col style={{marginTop: 20}} span={24}>
+                                <TextArea
+
+                                    defaultValue={this.state.mChLeadComment}
+                                    onChange={(e) => {
+                                        this.setState({
+                                            mChLeadComment: e.target.value,
+                                        });
+
+                                    }}
+                                    rows={4}></TextArea>
                                 </Col>
                             </Row>
-                            <Table rowKey="id"
-                                   columns={[
-                                       {
-                                           title: '操作人',
-                                           width: 130,
-                                           dataIndex: 'bkUserName',
-                                           key: 'operationDiary_User',
-                                           render: (text, record) => (
-                                               <span>{record.bkUserName}</span>),
-                                       },
-                                       {
-                                           title: '操作时间',
-                                           dataIndex: 'createDate',
-                                           key: 'operationDiary_Date',
-                                           render: (text, record) => (
 
-                                               <span>{this.timestampToTime(record.createDate)}</span>),
-                                       }, {
-                                           title: '备注',
-                                           dataIndex: 'comment',
-                                           key: 'operationDiary_Status',
-                                           render: (text, record) => (
-                                               <span>{record.comment}</span>),
-                                       }]}
-                                   dataSource={this.state.operationDiaryHistory}
-                                   loading={this.state.loadingComment}
-                                   pagination={{
-                                       total: this.state.totalpageComments * this.state.pgsize,
-                                       pageSize: this.state.pgsize,
-                                       onChange: this.changePageComment,
-                                   }}
+                            <Table
+                                style={{marginTop: "20px", marginLeft: "80px", marginRight: "80px"}}
+                                rowKey="id"
+                                columns={[
+                                    {
+                                        title: '操作人',
+                                        width: 130,
+                                        dataIndex: 'bkUserName',
+                                        key: 'operationDiary_User',
+                                        render: (text, record) => (
+                                            <span>{record.bkUserName}</span>),
+                                    },
+                                    {
+                                        title: '操作时间',
+                                        dataIndex: 'createDate',
+                                        key: 'operationDiary_Date',
+                                        render: (text, record) => (
+
+                                            <span>{this.timestampToTime(record.createDate)}</span>),
+                                    }, {
+                                        title: '备注',
+                                        dataIndex: 'comment',
+                                        key: 'operationDiary_Status',
+                                        render: (text, record) => (
+                                            <span>{record.comment}</span>),
+                                    }]}
+                                dataSource={this.state.operationDiaryHistory}
+                                loading={this.state.loadingComment}
+                                pagination={{
+                                    total: this.state.totalpageComments * this.state.pgsize,
+                                    pageSize: this.state.pgsize,
+                                    onChange: this.changePageComment,
+                                }}
                             />
+
+
                         </div>
-                    </Card>
+                        <div style={{
+                            marginLeft: "80px",
+                            marginRight: "80px",
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            paddingBottom: "48px",
+                            paddingTop: "48px",
+                        }}>
+                            <Popconfirm title="确认？" onConfirm={() => {
+                                if (!this.state.mLeverageId) {
+                                    message.error('no change')
+                                    return
+                                }
+                                var self = this
+                                self.setState({
+                                        loading: true,
+                                    }
+                                );
+                                window.Axios.post('open/prestoreLiveAccount', {
+                                    "id": this.state.detail.liveAccountId,
+                                    "leverageId": this.state.mLeverageId,
+                                    "content": this.state.mChLeadComment,
+                                }).then(() => {
+                                    message.success('操作成功')
+                                    self.setState({
+                                            mChLeadComment: undefined,
+                                            visibleChangeLeavgeModal: false,
+                                            visibleB: false,
+                                            loading: false,
+                                        }
+                                    );
+                                    self.requestPage()
+                                })
+
+
+                            }}
+                                        okText="Yes"
+                                        cancelText="No">
+                                <Button
+                                    loading={this.state.loading}
+                                    style={{
+                                        width: "120px",
+                                        height: "40px",
+                                        borderRadius: "4px", background: '#F6D147'
+                                    }} type="normal" key="submit">通過</Button>
+                            </Popconfirm>
+
+
+                            <Button
+
+                                style={{
+                                    width: "120px",
+                                    height: "40px",
+                                    borderRadius: "4px"
+                                }}
+                                onClick={() => {
+
+                                    this.setState({visibleB: false})
+
+                                }} type="normal" key="back">取消</Button>
+
+                        </div>
+
+                    </div>
 
 
                 </Modal>
+
+
+                ////
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
                     <span className="sw-btn dark-white" onClick={() => {
                         this.setState({
