@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, Input, Card, Modal, Checkbox, message, Icon, DatePicker} from 'antd';
+import {Button, Table, Input, Card, Modal, Checkbox, message, Icon, DatePicker, Row, Col} from 'antd';
 
 
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
@@ -502,34 +502,23 @@ class Basic extends Component {
                         });
                     }}
                 >
-
                     <Card bordered={true}>
-                        {/*record.status*/}
                         <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
-
-
                             <Checkbox checked={this.state.mStockRecordStatus == 1}>已确认可以已正常开户</Checkbox>
-
-
                         </div>
                         <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
-
                             <Checkbox
-
                                 checked={this.state.mStockRecordBEn}
-
                                 onChange={(e) => {
-
-                                    console.log('hcia e.target.checked', e.target.checked)
                                     this.setState({
                                         mStockRecordBEn: e.target.checked,
                                     });
                                 }}>已审核客户回传的W-8BEN表单</Checkbox>
                         </div>
-
-
                     </Card>
                 </Modal>
+
+
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
                     <span className="sw-btn dark-white" onClick={this._switcherOn}>
                      <Icon type="setting" className="text-dark"/>
@@ -642,6 +631,68 @@ class Basic extends Component {
 
                     </div>
                 </div>
+
+                <Modal
+                    bodyStyle={{
+                        background: 'white',
+                        padding: 0,
+                        margin: 0,
+                    }}
+
+                    closable={false}
+                    footer={null}
+                    onCancel={this.handleCancel}
+                    visible={this.state.visibleA  || false}
+
+
+                >
+
+                    <div style={{borderRadius: '4px'}}>
+                        <div style={{
+                            alignItems: 'center',
+                            justifyContent: 'center', height: 48, display: 'flex', padding: 0, background: '#FDD000'
+                        }}>
+                            <span style={{
+                                fontSize: 18,
+                                fontFamily: 'PingFangSC-Medium',
+                                fontWeight: 500,
+                                color: 'rgba(51,51,51,1)'
+                            }}>{'美股权限审核'}
+                            </span>
+                        </div>
+                        <div style={{flexWrap:'wrap', display:'flex'}}>
+                            <div style={{marginTop:'25px',  width: 600,display: 'flex',  justifyContent: 'center'}}>
+                                <Checkbox
+                                    style={{width: 250}}
+                                    checked={this.state.mStockRecordStatus == 1}>已确认可以已正常开户</Checkbox>
+                            </div>
+                            <div style={{marginTop:'15px', width: 600,display: 'flex',  justifyContent: 'center'}}>
+                                <Checkbox
+                                    style={{width: 250}}
+                                    checked={this.state.mStockRecordBEn}
+                                    onChange={(e) => {
+                                        this.setState({
+                                            mStockRecordBEn: e.target.checked,
+                                        });
+                                    }}>已审核客户回传的W-8BEN表单</Checkbox>
+                            </div>
+
+
+                        </div>
+                        <div style={{  paddingBottom:'48px',paddingTop:'48px', justifyContent: 'space-around', display:'flex'}}>
+
+                            <Button style={{background:'#F6D147', width:'180px',height:'40px'}}> 确认 </Button>
+                            <Button style={{width:'180px',height:'40px'}}> 取消 </Button>
+
+                        </div>
+
+
+
+                    </div>
+
+
+                </Modal>
+
                 <Modal
                     title="查看操作日志"
                     visible={this.state.modal2OPDAYVisible}

@@ -1,6 +1,20 @@
 import React, {Component} from 'react';
 import PopupContainer from './hoc/PopupContainer';
-import {DatePicker, Input, Modal, Button, Table, message, Card, Icon, Popconfirm, Checkbox} from 'antd';
+import {
+    DatePicker,
+    Input,
+    Modal,
+    Button,
+    Table,
+    message,
+    Card,
+    Icon,
+    Popconfirm,
+    Checkbox,
+    Row,
+    Col,
+    Select
+} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 
 import classNames from "classnames";
@@ -187,26 +201,26 @@ class CustomerSummary extends Component {
 
                     <div style={{
                         align: 'center',
-                        display: record.bindedStatus==1 ? 'flex' : '',
-                        justifyContent: record.bindedStatus==1 ? 'space-around' : ''
+                        display: record.bindedStatus == 1 ? 'flex' : '',
+                        justifyContent: record.bindedStatus == 1 ? 'space-around' : ''
                     }}>
                         <span style={{
-                            display: record.bindedStatus==1 ? '' : 'none',
+                            display: record.bindedStatus == 1 ? '' : 'none',
                             marginLeft: 10
-                        }}>{record.bindedStatus!=1 ? '' : record.mobile}</span>
+                        }}>{record.bindedStatus != 1 ? '' : record.mobile}</span>
                         {/*<Button style={{marginLeft: 15}}>解绑</Button>*/}
 
 
                         <Button size={'small'} style={{
                             background: '#FDD000',
-                            display: record.bindedStatus!=1 ? 'none' : '',
+                            display: record.bindedStatus != 1 ? 'none' : '',
                             marginLeft: 0
                         }}
                                 onClick={() => this.requestUnbindAccount(record)}>解绑</Button>
 
 
                         <span style={{
-                            display: record.bindedStatus==1 ? 'none' : '',
+                            display: record.bindedStatus == 1 ? 'none' : '',
                             marginLeft: 0,
                             alignSelf: 'center'
                         }}>未激活</span>
@@ -234,23 +248,29 @@ class CustomerSummary extends Component {
                 key: '业务操作',
                 align: 'center',
                 render: (text, record) => (
-                    <div style={{display: 'flex'  ,justifyContent:'space-around'}}>
+                    <div style={{display: 'flex', justifyContent: 'space-around'}}>
 
                         <Popconfirm style={{}} title={record.accountStatus === 1 ? '确认凍結' : '确认解冻'}
                                     onConfirm={() => this.forzenAccount(record)} okText="Yes"
                                     cancelText="No">
                             <Button disabled={!record.belongUserId} size={'small'}
-                                    style={{ display:!record.belongUserId?'none':'',  background: record.accountStatus === 1 ? '#FDD000' : 'OrangeRed'}}>{record.accountStatus === 1 ? '正常（可冻结)' : record.accountStatus === 2 ? '禁止登陆:解冻'
+                                    style={{
+                                        display: !record.belongUserId ? 'none' : '',
+                                        background: record.accountStatus === 1 ? '#FDD000' : 'OrangeRed'
+                                    }}>{record.accountStatus === 1 ? '正常（可冻结)' : record.accountStatus === 2 ? '禁止登陆:解冻'
                                 : record.accountStatus === 3 ? '禁止交易:解冻' : '-'}</Button>
                         </Popconfirm>
 
 
-                            <Button disabled={!record.belongUserId} size={'small'}
-                                    style={{display:!record.belongUserId?'':'none',background: record.accountStatus === 1 ? '#FDD000' : 'OrangeRed'}}>{record.accountStatus === 1 ? '正常（可冻结)' : record.accountStatus === 2 ? '禁止登陆:解冻'
-                                : record.accountStatus === 3 ? '禁止交易:解冻' : '-'}</Button>
+                        <Button disabled={!record.belongUserId} size={'small'}
+                                style={{
+                                    display: !record.belongUserId ? '' : 'none',
+                                    background: record.accountStatus === 1 ? '#FDD000' : 'OrangeRed'
+                                }}>{record.accountStatus === 1 ? '正常（可冻结)' : record.accountStatus === 2 ? '禁止登陆:解冻'
+                            : record.accountStatus === 3 ? '禁止交易:解冻' : '-'}</Button>
 
 
-                        <Button disabled={!record.belongUserId} size={'small'} style={{  background: '#FDD000'}}
+                        <Button disabled={!record.belongUserId} size={'small'} style={{background: '#FDD000'}}
                                 onClick={() => this.resetSeret(record)}>重置密码</Button>
                     </div>
                 ),
@@ -402,6 +422,10 @@ class CustomerSummary extends Component {
                         }}
                     />
                 </Card>
+
+
+
+
                 <Modal
                     // width={'100%'}
                     title="添加备注"
@@ -441,8 +465,6 @@ class CustomerSummary extends Component {
                            dataSource={this.state.operationDiaryHistory}
                     />
                 </Modal>
-
-
                 <Modal
                     bodyStyle={{padding: 0, margin: 15}}
                     title="重置交易密码"
@@ -541,8 +563,6 @@ class CustomerSummary extends Component {
                         dataSource={this.state.operationDiaryHistory}
                     />
                 </Modal>
-
-
                 <Modal
                     bodyStyle={{padding: 0, margin: 15}}
                     title="解绑手机号"
@@ -644,8 +664,6 @@ class CustomerSummary extends Component {
         self.setState({
             opDayRecord: record,
         }, () => {
-
-
 
 
             window.Axios.post('back/addLogHistory', {
@@ -758,7 +776,6 @@ class CustomerSummary extends Component {
         var self = this
 
 
-
         window.Axios.post('back/addLogHistory', {
             'moduleLog': '用户管理',
             'pageLog': '用户总表',
@@ -814,7 +831,7 @@ class CustomerSummary extends Component {
 
 
     changePageA = (page) => {
-        page=page-1
+        page = page - 1
         this.setState({
             currentA: page,
         }, () => {
