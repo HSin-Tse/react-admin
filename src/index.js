@@ -14,9 +14,9 @@ import './style/index.less';
 import axios from "axios";
 import {message} from 'antd';
 import Toast from './components/widget/toast'
-import {IntlProvider,addLocaleData} from 'react-intl';
-import en from  './locale/en_US'
-import zh from  './locale/zh_CN'
+import {IntlProvider, addLocaleData} from 'react-intl';
+import en from './locale/en_US'
+import zh from './locale/zh_CN'
 
 // redux 注入操作
 const middleware = [thunk];
@@ -42,7 +42,6 @@ window.PAxios = aaxios;
 var hideLoading
 
 // 请求列表
-const requestList = []
 // 取消列表
 const CancelToken = axios.CancelToken
 let sources = []
