@@ -491,32 +491,32 @@ class Basic extends Component {
                     />
                 </Card>
 
-                <Modal
-                    title="美股授权审核"
-                    visible={this.state.showAmeStockModla}
-                    onOk={this.handleOk}
-                    okType={((this.state.mStockRecordStatus == 1) && this.state.mStockRecordBEn) ? 'primary' : 'dashed'}
-                    onCancel={(e) => {
-                        this.setState({
-                            showAmeStockModla: false,
-                        });
-                    }}
-                >
-                    <Card bordered={true}>
-                        <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
-                            <Checkbox checked={this.state.mStockRecordStatus == 1}>已确认可以已正常开户</Checkbox>
-                        </div>
-                        <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
-                            <Checkbox
-                                checked={this.state.mStockRecordBEn}
-                                onChange={(e) => {
-                                    this.setState({
-                                        mStockRecordBEn: e.target.checked,
-                                    });
-                                }}>已审核客户回传的W-8BEN表单</Checkbox>
-                        </div>
-                    </Card>
-                </Modal>
+                {/*<Modal*/}
+                    {/*title="美股权限审核"*/}
+                    {/*visible={this.state.showAmeStockModla || false}*/}
+                    {/*onOk={this.handleOk}*/}
+                    {/*okType={((this.state.mStockRecordStatus == 1) && this.state.mStockRecordBEn) ? 'primary' : 'dashed'}*/}
+                    {/*onCancel={(e) => {*/}
+                        {/*this.setState({*/}
+                            {/*showAmeStockModla: false,*/}
+                        {/*});*/}
+                    {/*}}*/}
+                {/*>*/}
+                    {/*<Card bordered={true}>*/}
+                        {/*<div style={{display: 'flex', minHeight: 40, align: 'center'}}>*/}
+                            {/*<Checkbox checked={this.state.mStockRecordStatus == 1}>已确认可以已正常开户</Checkbox>*/}
+                        {/*</div>*/}
+                        {/*<div style={{display: 'flex', minHeight: 40, align: 'center'}}>*/}
+                            {/*<Checkbox*/}
+                                {/*checked={this.state.mStockRecordBEn}*/}
+                                {/*onChange={(e) => {*/}
+                                    {/*this.setState({*/}
+                                        {/*mStockRecordBEn: e.target.checked,*/}
+                                    {/*});*/}
+                                {/*}}>已审核客户回传的W-8BEN表单</Checkbox>*/}
+                        {/*</div>*/}
+                    {/*</Card>*/}
+                {/*</Modal>*/}
 
 
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
@@ -642,7 +642,7 @@ class Basic extends Component {
                     closable={false}
                     footer={null}
                     onCancel={this.handleCancel}
-                    visible={this.state.visibleA  || false}
+                    visible={this.state.showAmeStockModla  }
 
 
                 >
@@ -681,8 +681,14 @@ class Basic extends Component {
                         </div>
                         <div style={{  paddingBottom:'48px',paddingTop:'48px', justifyContent: 'space-around', display:'flex'}}>
 
-                            <Button style={{background:'#F6D147', width:'180px',height:'40px'}}> 确认 </Button>
-                            <Button style={{width:'180px',height:'40px'}}> 取消 </Button>
+                            <Button
+                                disabled={!((this.state.mStockRecordStatus == 1) && this.state.mStockRecordBEn) }
+                                onClick={this.handleOk} style={{background:'#F6D147', width:'180px',height:'40px'}}> 确认 </Button>
+                            <Button  onClick={(e) => {
+                                this.setState({
+                                    showAmeStockModla: false,
+                                });
+                            }} style={{width:'180px',height:'40px'}}> 取消 </Button>
 
                         </div>
 
