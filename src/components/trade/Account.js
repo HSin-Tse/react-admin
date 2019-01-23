@@ -705,7 +705,7 @@ class Basic extends Component {
                 {/*</Modal>*/}
 
 
-                ///
+
                 <Modal
                     bodyStyle={{
                         background: 'white',
@@ -893,7 +893,7 @@ class Basic extends Component {
                 </Modal>
 
 
-                ////
+
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
                     <span className="sw-btn dark-white" onClick={() => {
                         this.setState({
