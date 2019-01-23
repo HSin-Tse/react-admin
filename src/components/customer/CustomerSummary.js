@@ -851,10 +851,12 @@ class CustomerSummary extends Component {
     goToUserAccountInfo = (record) => {
         console.log('hcia record', record)
 
-        var gogo = 'detail'
-        this.props.history.push('/app/pass/passopenrs/' + gogo + record.liveAccountId)
+        var gogo = 'user'
+        this.props.history.push('/app/pass/passopen/' + gogo + record.leadId)
 
         // route: '/app/pass/passopenrs/detail:id',
+        // var gogo = record.status === 0 ? 'detail' : (record.status === 1) ? 'user' : 'user'
+        // this.props.history.push('/app/pass/passopen/' + gogo + record.id)
 
     }
 
