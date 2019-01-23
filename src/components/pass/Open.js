@@ -739,7 +739,7 @@ class Basic extends Component {
                             </span>
                         </div>
                         <Table
-                            style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}
+                            style={{marginTop: "20px", marginLeft: "2 0px", marginRight: "2 0px"}}
                             rowKey="id"
                             bordered
                             columns={this.columnsLog}
