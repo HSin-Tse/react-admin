@@ -9,6 +9,7 @@ import {addTodo} from "../../action";
 import connect from "react-redux/es/connect/connect";
 import classNames from "classnames";
 import {getCookie, setCookie} from "../../try";
+import { useState } from 'react';
 
 const {TextArea} = Input;
 const Option = Select.Option;
@@ -334,6 +335,7 @@ class Basic extends Component {
             self.requestUserCommentList()
         })
     }
+
     showModalA = (recodrd) => {
 
         let self = this
@@ -481,7 +483,19 @@ class Basic extends Component {
     pad = (str) => {
         return +str >= 10 ? str : '0' + str
     };
+     Example=()=> {
+        // Declare a new state variable, which we'll call "count"
+        const [count, setCount] = useState(0);
 
+        return (
+            <div>
+                <p>You clicked {count} times</p>
+                <button onClick={() => setCount(count + 1)}>
+                    Click me
+                </button>
+            </div>
+        );
+    }
     render() {
         const gridStyle = {
             width: '50%',
@@ -890,7 +904,9 @@ class Basic extends Component {
                 <h2 style={{marginTop: 15}}>杠杆审核</h2>
                 {/*<div>this.state.detail :{JSON.stringify(this.state.detail)}</div>*/}
 
+
                 <BreadcrumbCustom first="审核管理" second="杠杆审核"/>
+
 
 
                 <Card title="杠杆审核"
