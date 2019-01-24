@@ -1001,12 +1001,14 @@ export default class PotentialUser extends Component {
 
 
                 <Tabs
+                    tabBarGutter={0}
                     onChange={(key) => {
 
                         this.setState({
                             nowKey: key,
                         })
                     }}
+                    tabBarStyle={{}}
                     type="card">
                     <TabPane tab="潜在用户" key="1">
                         <Card bodyStyle={{padding: 0, margin: 0}}
