@@ -121,6 +121,7 @@ class CustomerSummary extends Component {
                 title: '操作人',
                 dataIndex: 'comment',
                 key: 'operationDiary_Status',
+                align: 'center',
 
                 render: (text, record) => (
                     <span>{record.bkUserName}</span>),
@@ -128,6 +129,7 @@ class CustomerSummary extends Component {
                 title: '操作時間',
                 dataIndex: 'bkUserName',
                 key: 'operationDiary_User',
+                align: 'center',
 
                 render: (text, record) => (
                     <span>{this.timestampToTime(record.createDate)}</span>),
@@ -135,6 +137,7 @@ class CustomerSummary extends Component {
                 title: '备注',
                 dataIndex: 'comment',
                 key: 'operationDiary_Status',
+                align: 'center',
 
                 render: (text, record) => (
                     <span>{record.comment}</span>),
@@ -428,46 +431,119 @@ class CustomerSummary extends Component {
                 </Card>
 
 
-                <Modal
-                    // width={'100%'}
-                    title="添加备注"
-                    visible={this.state.NoteModalVisible2}
-                    onOk={this.handleAddComment}
-                    onCancel={this.handleCancel}
-                    okText="提交"
-                    cancelText="取消">
-                    <TextArea rows={4}
-                              value={this.state.theComment}
-                              onChange={(e) => {
-                                  let comment = e.target.value;
-                                  this.setState({
-                                      theComment: comment
-                                  });
-                              }}
-                              placeholder="在这里填写回访次数以及备注信息"/>
-                    <Table
-                        style={{marginTop: 15}}
-                        bordered
-                        rowKey="id"
-                        columns={this.modalOPDayL2}
-                        dataSource={this.state.operationDiaryHistory}
-                    />
-                </Modal>
                 {/*<Modal*/}
-                {/*// width={'100%'}*/}
-                {/*title="查看操作日志!!!"*/}
-                {/*visible={this.state.modal2Visible1}*/}
-                {/*onOk={this.handleNOteOPOk}*/}
-                {/*onCancel={this.handleCancel}*/}
-                {/*okText="确认"*/}
-                {/*cancelText="取消"*/}
-                {/*>*/}
-                {/*<Table rowKey="id"*/}
-                {/*bordered*/}
-                {/*columns={this.modalOPDayColumns}*/}
-                {/*dataSource={this.state.operationDiaryHistory}*/}
-                {/*/>*/}
+                    {/*// width={'100%'}*/}
+                    {/*title="添加备注"*/}
+                    {/*visible={this.state.NoteModalVisible2}*/}
+                    {/*onOk={this.handleAddComment}*/}
+                    {/*onCancel={this.handleCancel}*/}
+                    {/*okText="提交"*/}
+                    {/*cancelText="取消">*/}
+                    {/*<TextArea rows={4}*/}
+                              {/*value={this.state.theComment}*/}
+                              {/*onChange={(e) => {*/}
+                                  {/*let comment = e.target.value;*/}
+                                  {/*this.setState({*/}
+                                      {/*theComment: comment*/}
+                                  {/*});*/}
+                              {/*}}*/}
+                              {/*placeholder="在这里填写回访次数以及备注信息"/>*/}
+                    {/*<Table*/}
+                        {/*style={{marginTop: 15}}*/}
+                        {/*bordered*/}
+                        {/*rowKey="id"*/}
+                        {/*columns={this.modalOPDayL2}*/}
+                        {/*dataSource={this.state.operationDiaryHistory}*/}
+                    {/*/>*/}
                 {/*</Modal>*/}
+
+                <Modal
+                    bodyStyle={{
+                        width: '600px',
+
+                        background: 'white',
+                        padding: 0,
+                        margin: 0,
+                    }}
+                    onCancel={() => {
+                        this.setState({
+                            visible: false,
+                            NoteModalVisible2: false,
+                        });
+                    }}
+                    closable={false}
+                    footer={null}
+                    // onCancel={this.handleCancel}
+                    visible={this.state.NoteModalVisible2}
+
+
+                >
+
+                    <div style={{borderRadius: '4px'}}>
+                        <div style={{
+                            alignItems: 'center',
+                            justifyContent: 'center', height: 48, display: 'flex', padding: 0, background: '#FDD000'
+                        }}>
+                            <span style={{
+                                fontSize: 18,
+                                fontFamily: 'PingFangSC-Medium',
+                                fontWeight: 500,
+                                color: 'rgba(51,51,51,1)'
+                            }}>{'添加备注'}
+                            </span>
+                        </div>
+
+                        <TextArea
+                            style={{marginTop: "20px", width:'560px',marginLeft: "20px", marginRight: "20px"}}
+
+                            rows={4}
+                                  value={this.state.theComment}
+                                  onChange={(e) => {
+                                      let comment = e.target.value;
+                                      this.setState({
+                                          theComment: comment
+                                      });
+                                  }}
+                                  placeholder="在这里填写回访次数以及备注信息"/>
+                        <Table
+                            style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}
+                            bordered
+                            rowKey="id"
+                            columns={this.modalOPDayL2}
+                            dataSource={this.state.operationDiaryHistory}
+                        />
+
+                        <div style={{
+                            marginLeft: "80px", marginRight: "80px",
+                            paddingBottom: '48px',
+                            paddingTop: '48px',
+                            justifyContent: 'space-between',
+                            display: 'flex'
+                        }}>
+
+                            <Button
+
+                                onClick={
+                                    this.handleAddComment
+                                }
+                                style={{
+                                    borderRadius: '4px',
+                                    background: '#F6D147',
+                                    width: '180px',
+                                    height: '40px'
+                                }}> 提交 </Button>
+                            <Button onClick={(e) => {
+                                this.setState({
+                                    NoteModalVisible2: false,
+                                });
+                            }} style={{borderRadius: '4px', width: '180px', height: '40px'}}> 取消 </Button>
+
+                        </div>
+
+                    </div>
+
+
+                </Modal>
                 <Modal
                     bodyStyle={{
                         background: 'white',
@@ -516,119 +592,6 @@ class CustomerSummary extends Component {
 
                 </Modal>
 
-                {/*<Modal*/}
-                {/*bodyStyle={{padding: 0, margin: 15}}*/}
-                {/*title="重置交易密码"*/}
-                {/*visible={this.state.resetSeretModal5}*/}
-                {/*onOk={*/}
-
-                {/*() => {*/}
-
-
-                {/*if (!this.state.accountPassword) {*/}
-
-                {/*message.error("密码?")*/}
-                {/*return*/}
-                {/*}*/}
-
-
-                {/*var self = this*/}
-                {/*if (this.state.otherComment) {*/}
-                {/*this.state.checkedValues.push('其他:' + this.state.otherComment)*/}
-                {/*}*/}
-                {/*if (!this.state.nowRECODE.belongUserId) {*/}
-                {/*message.error('dev log belongUserId :' + this.state.nowRECODE.belongUserId)*/}
-                {/*return*/}
-                {/*}*/}
-
-
-                {/*window.Axios.post('back/addLogHistory', {*/}
-                {/*'moduleLog': '用户管理',*/}
-                {/*'pageLog': '用户总表',*/}
-                {/*'commentLog': '重置交易密码',*/}
-                {/*'typeLog': 3,*/}
-                {/*});*/}
-
-
-                {/*window.Axios.post('star/updateStarLiveAccount', {*/}
-                {/*"id": this.state.nowRECODE.starAccountId,*/}
-                {/*"accountPassword": this.state.accountPassword,*/}
-                {/*// "belongUserId": this.state.nowRECODE.belongUserId,*/}
-                {/*"content": this.state.checkedValues.toString(),*/}
-                {/*}).then(() => {*/}
-                {/*message.success('操作成功')*/}
-                {/*self.setState({*/}
-                {/*resetSeretModal5: false,*/}
-                {/*otherComment: '',*/}
-                {/*accountPassword: ''*/}
-                {/*})*/}
-                {/*this.state.checkedValues.length = 0*/}
-                {/*self.requestData()*/}
-                {/*})*/}
-                {/*}*/}
-
-
-                {/*}*/}
-                {/*okType={((this.state.mStockRecordStatus == 1) && this.state.mStockRecordBEn) ? 'primary' : 'dashed'}*/}
-                {/*onCancel={(e) => {*/}
-                {/*this.setState({*/}
-                {/*resetSeretModal5: false,*/}
-                {/*});*/}
-                {/*}}*/}
-                {/*>*/}
-
-                {/*<Card title={'请确认客户信息：'} bordered={true}>*/}
-
-                {/*<Checkbox.Group style={{width: '100%'}} value={this.state.checkedValues}*/}
-                {/*onChange={(checkedValues) => {*/}
-
-                {/*this.setState({*/}
-                {/*checkedValues: checkedValues,*/}
-                {/*otherCommentChecks: checkedValues.toString(),*/}
-                {/*});*/}
-
-                {/*}}>*/}
-
-                {/*<div style={{display: 'flex', minHeight: 40, align: 'center'}}>*/}
-                {/*<Checkbox value={"手机号"}>手机号</Checkbox>*/}
-                {/*<Checkbox value={"邮箱"}>邮箱</Checkbox>*/}
-                {/*<Checkbox value={"账号"}>账号</Checkbox>*/}
-                {/*<Checkbox value={"地址"}>地址</Checkbox>*/}
-                {/*<Checkbox value={"身份证号"}>身份证号</Checkbox>*/}
-                {/*</div>*/}
-                {/*<div style={{display: 'flex', minHeight: 40, align: 'center'}}>*/}
-                {/*<Checkbox value={"身份证正本"}>身份证正本</Checkbox>*/}
-                {/*</div>*/}
-
-                {/*</Checkbox.Group>*/}
-                {/*<div style={{display: 'flex', minHeight: 40, align: 'center'}}>*/}
-                {/*<span style={{minWidth: 80}}>其他：</span>*/}
-                {/*<Input value={this.state.otherComment}*/}
-                {/*onChange={(e) => {*/}
-                {/*this.setState({*/}
-                {/*otherComment: e.target.value,*/}
-                {/*});*/}
-                {/*}} style={{marginBottom: 10}} placeholder=""/>*/}
-                {/*</div>*/}
-                {/*<div style={{display: 'flex', minHeight: 40, align: 'center'}}>*/}
-                {/*<span style={{minWidth: 80}}>交易密码：</span>*/}
-                {/*<Input value={this.state.accountPassword}*/}
-                {/*onChange={(e) => {*/}
-                {/*this.setState({*/}
-                {/*accountPassword: e.target.value,*/}
-                {/*});*/}
-                {/*}} style={{marginBottom: 10}} placeholder=""/>*/}
-                {/*</div>*/}
-                {/*</Card>*/}
-
-                {/*<Table*/}
-                {/*style={{marginTop: 15}}*/}
-                {/*rowKey="id"*/}
-                {/*bordered*/}
-                {/*columns={this.modalOPDayColumns}*/}
-                {/*dataSource={this.state.operationDiaryHistory}*/}
-                {/*/>*/}
-                {/*</Modal>*/}
 
 
                 <Modal
@@ -709,13 +672,6 @@ class CustomerSummary extends Component {
                             </Checkbox.Group>
 
                         </Card>
-                        {/*<Table*/}
-                        {/*style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}*/}
-                        {/*rowKey="id"*/}
-                        {/*bordered*/}
-                        {/*columns={this.modalOPDayColumns}*/}
-                        {/*dataSource={this.state.operationDiaryHistory}*/}
-                        {/*/>*/}
                         <Table
                             style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}
                             bordered
