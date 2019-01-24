@@ -144,8 +144,8 @@ class Login extends React.Component {
                                 <Checkbox>记住我</Checkbox>
                             )}
                             <span className="login-form-forgot" href="" style={{float: 'right'}}></span>
-                            <Button type="primary" htmlType="submit" className="login-form-button"
-                                    style={{width: '100%'}}>
+                            <Button   htmlType="submit" className="login-form-button"
+                                    style={{background:'#FDD000',width: '100%'}}>
                                 登录
                             </Button>
 
