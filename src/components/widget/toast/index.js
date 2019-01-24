@@ -1,4 +1,4 @@
 import Toast from './toast'
-import './icons'
+// import './icons'
 
 export default Toast
