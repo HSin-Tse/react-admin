@@ -1005,10 +1005,10 @@ class PassOpenD extends Component {
                     <Button
                         onClick={() => this.saveNote()}
                         style={{
-                        borderRadius: '4px',
-                        fontSize: '12px',
-                        width: '136px', height: '30px', marginTop: '8px', background: '#FDD000'
-                    }}>下载当前客户资料</Button>
+                            borderRadius: '4px',
+                            fontSize: '12px',
+                            width: '136px', height: '30px', marginTop: '8px', background: '#FDD000'
+                        }}>下载当前客户资料</Button>
 
                     <div style={{
                         borderRadius: '4px',
@@ -1141,6 +1141,8 @@ class PassOpenD extends Component {
 
                     </div>
                     <div style={{
+
+                        width:1200,
                         justifyContent: 'flex-start',
                         alignItems: 'center',
                         fontSize: '14px',
@@ -1382,7 +1384,6 @@ class PassOpenD extends Component {
                                     <div style={{display: 'flex', minHeight: 40}}>
                                         <span style={{minWidth: 120}}>*风险承受力</span>
                                         <Select
-
                                             dropdownStyle={{wordWrap: 'break-word'}}
                                             onChange={this.onChangemriskTolerance}
                                             value={this.state.mriskTolerance}>
@@ -1624,10 +1625,12 @@ class PassOpenD extends Component {
                                 </Tooltip>
 
                                 <Button
-                                    style={{ borderRadius: '4px',
+                                    style={{
+                                        borderRadius: '4px',
                                         width: '200px',
                                         height: '40px',
-                                        display: (this.state.isNeedSave || !isSetL) ? '' : 'none'}}
+                                        display: (this.state.isNeedSave || !isSetL) ? '' : 'none'
+                                    }}
                                     disabled={this.state.isNeedSave || !isSetL}
                                     loading={this.state.iconLoading}>
                                     开户通过
@@ -1655,14 +1658,14 @@ class PassOpenD extends Component {
                                     style={{
                                         width: '200px',
                                         height: '40px',
-                                        background:'#FF6666',
-                                        color:'#FFFFFF'
+                                        background: '#FF6666',
+                                        color: '#FFFFFF'
                                     }}
                                     onClick={() => {
-                                    this.setState({
-                                        showREJECTmodel: true,
-                                    });
-                                }} loading={this.state.iconcanLoading}>拒绝</Button>
+                                        this.setState({
+                                            showREJECTmodel: true,
+                                        });
+                                    }} loading={this.state.iconcanLoading}>拒绝</Button>
 
                             </div>
                             {/*disabled={!this.state.isNeedSave || this.state.recordData.status != 0}*/}
