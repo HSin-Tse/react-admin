@@ -455,21 +455,69 @@ class CustomerSummary extends Component {
                         dataSource={this.state.operationDiaryHistory}
                     />
                 </Modal>
+                {/*<Modal*/}
+                    {/*// width={'100%'}*/}
+                    {/*title="查看操作日志!!!"*/}
+                    {/*visible={this.state.modal2Visible1}*/}
+                    {/*onOk={this.handleNOteOPOk}*/}
+                    {/*onCancel={this.handleCancel}*/}
+                    {/*okText="确认"*/}
+                    {/*cancelText="取消"*/}
+                {/*>*/}
+                    {/*<Table rowKey="id"*/}
+                           {/*bordered*/}
+                           {/*columns={this.modalOPDayColumns}*/}
+                           {/*dataSource={this.state.operationDiaryHistory}*/}
+                    {/*/>*/}
+                {/*</Modal>*/}
                 <Modal
-                    // width={'100%'}
-                    title="查看操作日志"
+                    bodyStyle={{
+                        background: 'white',
+                        padding: 0,
+                        margin: 0,
+                    }}
+                    onCancel={() => {
+                        this.setState({
+                            visible: false,
+                            modal2Visible1: false,
+                        });
+                    }}
+                    closable={false}
+                    footer={null}
+                    // onCancel={this.handleCancel}
                     visible={this.state.modal2Visible1}
-                    onOk={this.handleNOteOPOk}
-                    onCancel={this.handleCancel}
-                    okText="确认"
-                    cancelText="取消"
+
+
                 >
-                    <Table rowKey="id"
-                           bordered
-                           columns={this.modalOPDayColumns}
-                           dataSource={this.state.operationDiaryHistory}
-                    />
+
+                    <div style={{borderRadius: '4px'}}>
+                        <div style={{
+                            alignItems: 'center',
+                            justifyContent: 'center', height: 48, display: 'flex', padding: 0, background: '#FDD000'
+                        }}>
+                            <span style={{
+                                fontSize: 18,
+                                fontFamily: 'PingFangSC-Medium',
+                                fontWeight: 500,
+                                color: 'rgba(51,51,51,1)'
+                            }}>{'查看操作日志'}
+                            </span>
+                        </div>
+                        <Table
+                            style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}
+
+                            rowKey="id"
+                               bordered
+                               columns={this.modalOPDayColumns}
+                               dataSource={this.state.operationDiaryHistory}
+                        />
+
+
+                    </div>
+
+
                 </Modal>
+
                 <Modal
                     bodyStyle={{padding: 0, margin: 15}}
                     title="重置交易密码"
