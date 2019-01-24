@@ -384,11 +384,17 @@ class Basic extends Component {
                 <Card title="渠道管理"
                       bodyStyle={{padding: 0, margin: 0}}
                       extra={[
-                          <Button type="primary" onClick={() => {
+
+                          <Button
+                              style={{background:'#F6D147'}}
+
+                              onClick={() => {
                               this.props.history.push('/app/fina/editexrate')
 
 
                           }}>汇率调整</Button>,
+
+
                           <Button
 
                               disabled='true'
