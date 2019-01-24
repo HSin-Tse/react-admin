@@ -491,33 +491,6 @@ class Basic extends Component {
                     />
                 </Card>
 
-                {/*<Modal*/}
-                {/*title="美股权限审核"*/}
-                {/*visible={this.state.showAmeStockModla || false}*/}
-                {/*onOk={this.handleOk}*/}
-                {/*okType={((this.state.mStockRecordStatus == 1) && this.state.mStockRecordBEn) ? 'primary' : 'dashed'}*/}
-                {/*onCancel={(e) => {*/}
-                {/*this.setState({*/}
-                {/*showAmeStockModla: false,*/}
-                {/*});*/}
-                {/*}}*/}
-                {/*>*/}
-                {/*<Card bordered={true}>*/}
-                {/*<div style={{display: 'flex', minHeight: 40, align: 'center'}}>*/}
-                {/*<Checkbox checked={this.state.mStockRecordStatus == 1}>已确认可以已正常开户</Checkbox>*/}
-                {/*</div>*/}
-                {/*<div style={{display: 'flex', minHeight: 40, align: 'center'}}>*/}
-                {/*<Checkbox*/}
-                {/*checked={this.state.mStockRecordBEn}*/}
-                {/*onChange={(e) => {*/}
-                {/*this.setState({*/}
-                {/*mStockRecordBEn: e.target.checked,*/}
-                {/*});*/}
-                {/*}}>已审核客户回传的W-8BEN表单</Checkbox>*/}
-                {/*</div>*/}
-                {/*</Card>*/}
-                {/*</Modal>*/}
-
 
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
                     <span className="sw-btn dark-white" onClick={this._switcherOn}>
@@ -758,7 +731,6 @@ class Basic extends Component {
 
 
                 </Modal>
-
 
 
             </div>

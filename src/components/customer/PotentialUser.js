@@ -166,10 +166,9 @@ export default class PotentialUser extends Component {
 
     modalColums = () => {
         return [
-
             {
                 title: '操作人',
-                width: 130,
+                align: 'center',
                 dataIndex: 'bkUserName',
                 key: 'operationDiary_User',
                 render: (text, record) => (
@@ -179,11 +178,15 @@ export default class PotentialUser extends Component {
                 title: '操作时间',
                 dataIndex: 'createDate',
                 key: 'operationDiary_Date',
+                align: 'center',
+
                 render: (text, record) => (
                     <span>{this.timestampToTime(record.createDate)}</span>),
             }, {
                 title: '备注',
                 dataIndex: 'comment',
+                align: 'center',
+
                 key: 'operationDiary_Status',
                 render: (text, record) => (
                     <span>{record.comment}</span>),
@@ -1035,7 +1038,7 @@ export default class PotentialUser extends Component {
 
                 <Modal
                     title="添加回访"
-                    visible={this.state.visible}
+                    visible={false}
                     onOk={this.handleAddComment}
                     onCancel={this.handleCancel}
                     okText="确认"
@@ -1049,6 +1052,7 @@ export default class PotentialUser extends Component {
 
                     <Table style={{marginTop: 15}}
                            rowKey="id"
+                           bordered
                            columns={this.modalColums()} dataSource={this.state.operationDiaryHistory}
                            loading={this.state.loadingComment}
                            pagination={{
@@ -1145,7 +1149,7 @@ export default class PotentialUser extends Component {
 
                         <Table
 
-                            style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}
+                            style={{paddingBottom: "20px", marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}
                             bordered
                             rowKey="id"
                             columns={[
@@ -1186,52 +1190,114 @@ export default class PotentialUser extends Component {
 
                     </div>
                 </Modal>
+                <Modal
+                    bodyStyle={{
+                        background: 'white',
+                        padding: 0,
+                        width: '600px',
+                        margin: 0,
+                    }}
+                    onCancel={() => {
+                        this.setState({
+                            visible: false,
+                            modal3NoteVisible: false,
+                        });
+                    }}
+                    closable={false}
+                    footer={null}
+                    visible={this.state.visible}
+                >
+                    <div style={{borderRadius: '4px'}}>
+                        <div style={{
+                            alignItems: 'center',
+                            justifyContent: 'center', height: 48, display: 'flex', padding: 0, background: '#FDD000'
+                        }}>
+                            <span style={{
+                                fontSize: 18,
+                                fontFamily: 'PingFangSC-Medium',
+                                fontWeight: 500,
+                                color: 'rgba(51,51,51,1)'
+                            }}>{'添加回访'}
+                            </span>
+                        </div>
 
-                {/*<Modal*/}
-                {/*title="查看备注"*/}
-                {/*visible={this.state.modal3NoteVisible}*/}
-                {/*onCancel={(e) => {*/}
-                {/*this.setState({*/}
-                {/*modal3NoteVisible: false,*/}
-                {/*});*/}
-                {/*}}*/}
-                {/*width={600}*/}
-                {/*footer={null}*/}
-                {/*>*/}
-                {/*<Table rowKey="id"*/}
-                {/*columns={[*/}
+                        <TextArea
+                            style={{width: '440px', marginTop: "20px", marginLeft: "80px", marginRight: "20px"}}
 
-                {/*{*/}
-                {/*title: '操作人',*/}
-                {/*width: 130,*/}
+                            value={this.state.theComment}
+                            placeholder="在这里填写回访次数以及备注信息"
+                            onChange={this.addComment}
+                            rows={4}/>
 
-                {/*dataIndex: 'bkUserName',*/}
-                {/*key: 'operationDiary_User',*/}
-                {/*render: (text, record) => (*/}
-                {/*<span>{record.bkUserName}</span>),*/}
-                {/*},*/}
-                {/*{*/}
-                {/*title: '操作时间',*/}
-                {/*dataIndex: 'createDate',*/}
-                {/*key: 'operationDiary_Date',*/}
-                {/*render: (text, record) => (*/}
-                {/*<span>{this.timestampToTime(record.createDate)}</span>),*/}
-                {/*}, {*/}
-                {/*title: '备注',*/}
-                {/*dataIndex: 'comment',*/}
-                {/*key: 'operationDiary_Status',*/}
-                {/*render: (text, record) => (*/}
-                {/*<span>{record.comment}</span>),*/}
-                {/*}]} dataSource={this.state.operationDiaryHistory}*/}
-                {/*loading={this.state.loadingComment}*/}
-                {/*pagination={{*/}
-                {/*total: this.state.totalpageComments * this.state.pgsize,*/}
-                {/*pageSize: this.state.pgsize,*/}
-                {/*onChange: this.changePageComment,*/}
-                {/*}}*/}
-                {/*/>*/}
+                        <Table
 
-                {/*</Modal>*/}
+                            style={{marginTop: "20px", marginLeft: "80px", marginRight: "80px"}}
+                            bordered
+                            rowKey="id"
+                            columns={[
+
+                                {
+                                    title: '操作人',
+                                    width: 130,
+                                    align: 'center',
+
+                                    dataIndex: 'bkUserName',
+                                    key: 'operationDiary_User',
+                                    render: (text, record) => (
+                                        <span>{record.bkUserName}</span>),
+                                },
+                                {
+                                    title: '操作时间',
+                                    align: 'center',
+                                    dataIndex: 'createDate',
+                                    key: 'operationDiary_Date',
+                                    render: (text, record) => (
+                                        <span>{this.timestampToTime(record.createDate)}</span>),
+                                }, {
+                                    title: '备注',
+                                    align: 'center',
+                                    dataIndex: 'comment',
+                                    key: 'operationDiary_Status',
+                                    render: (text, record) => (
+                                        <span>{record.comment}</span>),
+                                }]} dataSource={this.state.operationDiaryHistory}
+                            loading={this.state.loadingComment}
+                            pagination={{
+                                total: this.state.totalpageComments * this.state.pgsize,
+                                pageSize: this.state.pgsize,
+                                onChange: this.changePageComment,
+                            }}
+                        />
+
+
+                        <div style={{
+                            marginLeft: "80px", marginRight: "80px",
+                            paddingBottom: '48px',
+                            paddingTop: '48px',
+                            justifyContent: 'space-between',
+                            display: 'flex'
+                        }}>
+
+                            <Button
+                                onClick={this.handleAddComment}
+                                style={{
+                                    borderRadius: '4px',
+                                    background: '#F6D147',
+                                    width: '180px',
+                                    height: '40px'
+                                }}> 提交 </Button>
+                            <Button onClick={(e) => {
+                                this.setState({
+                                    visible: false,
+                                });
+                            }} style={{borderRadius: '4px', width: '180px', height: '40px'}}> 取消 </Button>
+
+                        </div>
+
+                    </div>
+                </Modal>
+
+
             </div>
 
         )
