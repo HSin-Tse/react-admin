@@ -403,8 +403,8 @@ class CustomerSummary extends Component {
                 </h2>
                 <BreadcrumbCustom first="用户管理" second="用户总表"/>
 
-                <div>this.state.checkedValues :{JSON.stringify(this.state.checkedValues)}</div>
-                <div>this.state.checkedValues :{JSON.stringify(this.state.checkedValues.length)}</div>
+                {/*<div>this.state.checkedValues :{JSON.stringify(this.state.checkedValues)}</div>*/}
+                {/*<div>this.state.checkedValues :{JSON.stringify(this.state.checkedValues.length)}</div>*/}
 
                 <Card
                     extra={[
