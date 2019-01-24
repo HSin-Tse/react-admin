@@ -242,14 +242,11 @@ export default class PotentialUser extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <span>{record.channelInfo}</span>),
-            }
-
-            , {
+            }, {
                 title: '地理位置',
                 dataIndex: '地理位置',
                 key: '地理位置',
                 width: 150,
-
                 align: 'center',
                 render: (text, record) => (
                     <span>{record.location}</span>),
@@ -285,8 +282,7 @@ export default class PotentialUser extends Component {
                                 onClick={() => this.shownoteModal(record.belongUserId)}>备注</Button>
                     </div>
                 )
-            },
-            {
+            }, {
                 title: '操作',
                 key: 'action',
                 align: 'center',
@@ -361,7 +357,6 @@ export default class PotentialUser extends Component {
                 title: '回访状态',
                 dataIndex: '回访状态',
                 align: 'center',
-
                 key: '回访状态',
                 render: (text, record) => (<span>{record.feebackStatus}</span>),
             }, {
@@ -369,12 +364,10 @@ export default class PotentialUser extends Component {
                 dataIndex: '活跃程度',
                 key: '活跃程度',
                 align: 'center',
-
                 render: (text, record) => (<span>{record.activeFlag}</span>),
             }, {
                 title: '操作人',
                 align: 'center',
-
                 dataIndex: '操作人',
                 key: '操作人',
                 render: (text, record) => (<span>{record.operator}</span>),
@@ -400,9 +393,7 @@ export default class PotentialUser extends Component {
                         <Popconfirm title="延期申请？" onConfirm={() => this.handleDelay(record)} okText="Yes"
                                     cancelText="No">
                             <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}>延期</Button>
-
                         </Popconfirm>
-
                         <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
                                 onClick={() => this.showAddbAckModal(record)}>添加回访</Button>
                         <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
@@ -1068,31 +1059,6 @@ export default class PotentialUser extends Component {
                     />
 
                 </Modal>
-                {/*<Modal*/}
-                    {/*title="查看操作日志"*/}
-                    {/*visible={this.state.modal2OPDAYVisible}*/}
-                    {/*onCancel={this.handleCancel}*/}
-                    {/*width={600}*/}
-                    {/*bodyStyle={{padding: 0, margin: 0}}*/}
-                    {/*bordered*/}
-                    {/*footer={null}*/}
-                {/*>*/}
-                    {/*<Table rowKey="id"*/}
-                           {/*columns={this.columnsLog}*/}
-
-                           {/*dataSource={this.state.operationLogHistory}*/}
-                           {/*loading={this.state.loadingComment}*/}
-                           {/*pagination={{*/}
-                               {/*current: this.state.currentComment,*/}
-
-                               {/*total: this.state.totalpageComments * this.state.pgsize,*/}
-                               {/*pageSize: this.state.pgsize,*/}
-                               {/*onChange: this.changePageLog,*/}
-                           {/*}}*/}
-                    {/*/>*/}
-
-                {/*</Modal>*/}
-
 
 
                 <Modal
@@ -1109,12 +1075,8 @@ export default class PotentialUser extends Component {
                     }}
                     closable={false}
                     footer={null}
-                    // onCancel={this.handleCancel}
                     visible={this.state.modal2OPDAYVisible}
-
-
                 >
-
                     <div style={{borderRadius: '4px'}}>
                         <div style={{
                             alignItems: 'center',
@@ -1128,87 +1090,148 @@ export default class PotentialUser extends Component {
                             }}>{'查看操作日志'}
                             </span>
                         </div>
-                        {/*<Table*/}
-                            {/*rowKey="id"*/}
-                            {/*bordered*/}
-                            {/*columns={this.columnsLog}*/}
-                            {/*dataSource={this.state.operationDiaryHistory}*/}
-                            {/*loading={this.state.loadingComment}*/}
-                            {/*pagination={{*/}
-                                {/*current: this.state.currentComment,*/}
-                                {/*total: this.state.totalpageComments * this.state.pgsize,*/}
-                                {/*pageSize: this.state.pgsize,*/}
-                                {/*onChange: this.changePageComment,*/}
-                            {/*}}*/}
-                        {/*/>*/}
+
                         <Table
                             style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}
                             bordered
                             rowKey="id"
-                               columns={this.columnsLog}
+                            columns={this.columnsLog}
 
-                               dataSource={this.state.operationLogHistory}
-                               loading={this.state.loadingComment}
-                               pagination={{
-                                   current: this.state.currentComment,
+                            dataSource={this.state.operationLogHistory}
+                            loading={this.state.loadingComment}
+                            pagination={{
+                                current: this.state.currentComment,
 
-                                   total: this.state.totalpageComments * this.state.pgsize,
-                                   pageSize: this.state.pgsize,
-                                   onChange: this.changePageLog,
-                               }}
+                                total: this.state.totalpageComments * this.state.pgsize,
+                                pageSize: this.state.pgsize,
+                                onChange: this.changePageLog,
+                            }}
                         />
 
 
                     </div>
-
-
                 </Modal>
 
+
                 <Modal
-                    title="查看备注"
-                    visible={this.state.modal3NoteVisible}
-                    onCancel={(e) => {
+                    bodyStyle={{
+                        background: 'white',
+                        padding: 0,
+                        margin: 0,
+                    }}
+                    onCancel={() => {
                         this.setState({
+                            visible: false,
                             modal3NoteVisible: false,
                         });
                     }}
-                    width={600}
+                    closable={false}
                     footer={null}
+                    visible={this.state.modal3NoteVisible}
                 >
-                    <Table rowKey="id"
-                           columns={[
+                    <div style={{borderRadius: '4px'}}>
+                        <div style={{
+                            alignItems: 'center',
+                            justifyContent: 'center', height: 48, display: 'flex', padding: 0, background: '#FDD000'
+                        }}>
+                            <span style={{
+                                fontSize: 18,
+                                fontFamily: 'PingFangSC-Medium',
+                                fontWeight: 500,
+                                color: 'rgba(51,51,51,1)'
+                            }}>{'查看备注'}
+                            </span>
+                        </div>
 
-                               {
-                                   title: '操作人',
-                                   width: 130,
+                        <Table
 
-                                   dataIndex: 'bkUserName',
-                                   key: 'operationDiary_User',
-                                   render: (text, record) => (
-                                       <span>{record.bkUserName}</span>),
-                               },
-                               {
-                                   title: '操作时间',
-                                   dataIndex: 'createDate',
-                                   key: 'operationDiary_Date',
-                                   render: (text, record) => (
-                                       <span>{this.timestampToTime(record.createDate)}</span>),
-                               }, {
-                                   title: '备注',
-                                   dataIndex: 'comment',
-                                   key: 'operationDiary_Status',
-                                   render: (text, record) => (
-                                       <span>{record.comment}</span>),
-                               }]} dataSource={this.state.operationDiaryHistory}
-                           loading={this.state.loadingComment}
-                           pagination={{
-                               total: this.state.totalpageComments * this.state.pgsize,
-                               pageSize: this.state.pgsize,
-                               onChange: this.changePageComment,
-                           }}
-                    />
+                            style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}
+                            bordered
+                            rowKey="id"
+                            columns={[
 
+                                {
+                                    title: '操作人',
+                                    width: 130,
+                                    align: 'center',
+
+                                    dataIndex: 'bkUserName',
+                                    key: 'operationDiary_User',
+                                    render: (text, record) => (
+                                        <span>{record.bkUserName}</span>),
+                                },
+                                {
+                                    title: '操作时间',
+                                    align: 'center',
+                                    dataIndex: 'createDate',
+                                    key: 'operationDiary_Date',
+                                    render: (text, record) => (
+                                        <span>{this.timestampToTime(record.createDate)}</span>),
+                                }, {
+                                    title: '备注',
+                                    align: 'center',
+                                    dataIndex: 'comment',
+                                    key: 'operationDiary_Status',
+                                    render: (text, record) => (
+                                        <span>{record.comment}</span>),
+                                }]} dataSource={this.state.operationDiaryHistory}
+                            loading={this.state.loadingComment}
+                            pagination={{
+                                total: this.state.totalpageComments * this.state.pgsize,
+                                pageSize: this.state.pgsize,
+                                onChange: this.changePageComment,
+                            }}
+                        />
+
+
+                    </div>
                 </Modal>
+
+                {/*<Modal*/}
+                {/*title="查看备注"*/}
+                {/*visible={this.state.modal3NoteVisible}*/}
+                {/*onCancel={(e) => {*/}
+                {/*this.setState({*/}
+                {/*modal3NoteVisible: false,*/}
+                {/*});*/}
+                {/*}}*/}
+                {/*width={600}*/}
+                {/*footer={null}*/}
+                {/*>*/}
+                {/*<Table rowKey="id"*/}
+                {/*columns={[*/}
+
+                {/*{*/}
+                {/*title: '操作人',*/}
+                {/*width: 130,*/}
+
+                {/*dataIndex: 'bkUserName',*/}
+                {/*key: 'operationDiary_User',*/}
+                {/*render: (text, record) => (*/}
+                {/*<span>{record.bkUserName}</span>),*/}
+                {/*},*/}
+                {/*{*/}
+                {/*title: '操作时间',*/}
+                {/*dataIndex: 'createDate',*/}
+                {/*key: 'operationDiary_Date',*/}
+                {/*render: (text, record) => (*/}
+                {/*<span>{this.timestampToTime(record.createDate)}</span>),*/}
+                {/*}, {*/}
+                {/*title: '备注',*/}
+                {/*dataIndex: 'comment',*/}
+                {/*key: 'operationDiary_Status',*/}
+                {/*render: (text, record) => (*/}
+                {/*<span>{record.comment}</span>),*/}
+                {/*}]} dataSource={this.state.operationDiaryHistory}*/}
+                {/*loading={this.state.loadingComment}*/}
+                {/*pagination={{*/}
+                {/*total: this.state.totalpageComments * this.state.pgsize,*/}
+                {/*pageSize: this.state.pgsize,*/}
+                {/*onChange: this.changePageComment,*/}
+                {/*}}*/}
+                {/*/>*/}
+
+                {/*</Modal>*/}
             </div>
 
         )
