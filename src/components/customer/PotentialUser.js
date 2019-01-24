@@ -1036,33 +1036,6 @@ export default class PotentialUser extends Component {
                     </TabPane>
                 </Tabs>
 
-                <Modal
-                    title="添加回访"
-                    visible={false}
-                    onOk={this.handleAddComment}
-                    onCancel={this.handleCancel}
-                    okText="确认"
-                    cancelText="取消"
-                    align={'center'}>
-                    <TextArea
-                        value={this.state.theComment}
-                        placeholder="填写回访次数以及结果"
-                        onChange={this.addComment}
-                        rows={4}/>
-
-                    <Table style={{marginTop: 15}}
-                           rowKey="id"
-                           bordered
-                           columns={this.modalColums()} dataSource={this.state.operationDiaryHistory}
-                           loading={this.state.loadingComment}
-                           pagination={{
-                               total: this.state.totalpageComments * this.state.pgsize,
-                               pageSize: this.state.pgsize,
-                               onChange: this.changePageComment,
-                           }}
-                    />
-
-                </Modal>
 
 
                 <Modal
