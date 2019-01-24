@@ -428,8 +428,6 @@ class CustomerSummary extends Component {
                 </Card>
 
 
-
-
                 <Modal
                     // width={'100%'}
                     title="添加备注"
@@ -456,19 +454,19 @@ class CustomerSummary extends Component {
                     />
                 </Modal>
                 {/*<Modal*/}
-                    {/*// width={'100%'}*/}
-                    {/*title="查看操作日志!!!"*/}
-                    {/*visible={this.state.modal2Visible1}*/}
-                    {/*onOk={this.handleNOteOPOk}*/}
-                    {/*onCancel={this.handleCancel}*/}
-                    {/*okText="确认"*/}
-                    {/*cancelText="取消"*/}
+                {/*// width={'100%'}*/}
+                {/*title="查看操作日志!!!"*/}
+                {/*visible={this.state.modal2Visible1}*/}
+                {/*onOk={this.handleNOteOPOk}*/}
+                {/*onCancel={this.handleCancel}*/}
+                {/*okText="确认"*/}
+                {/*cancelText="取消"*/}
                 {/*>*/}
-                    {/*<Table rowKey="id"*/}
-                           {/*bordered*/}
-                           {/*columns={this.modalOPDayColumns}*/}
-                           {/*dataSource={this.state.operationDiaryHistory}*/}
-                    {/*/>*/}
+                {/*<Table rowKey="id"*/}
+                {/*bordered*/}
+                {/*columns={this.modalOPDayColumns}*/}
+                {/*dataSource={this.state.operationDiaryHistory}*/}
+                {/*/>*/}
                 {/*</Modal>*/}
                 <Modal
                     bodyStyle={{
@@ -507,9 +505,9 @@ class CustomerSummary extends Component {
                             style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}
 
                             rowKey="id"
-                               bordered
-                               columns={this.modalOPDayColumns}
-                               dataSource={this.state.operationDiaryHistory}
+                            bordered
+                            columns={this.modalOPDayColumns}
+                            dataSource={this.state.operationDiaryHistory}
                         />
 
 
@@ -518,107 +516,288 @@ class CustomerSummary extends Component {
 
                 </Modal>
 
+                {/*<Modal*/}
+                {/*bodyStyle={{padding: 0, margin: 15}}*/}
+                {/*title="重置交易密码"*/}
+                {/*visible={this.state.resetSeretModal5}*/}
+                {/*onOk={*/}
+
+                {/*() => {*/}
+
+
+                {/*if (!this.state.accountPassword) {*/}
+
+                {/*message.error("密码?")*/}
+                {/*return*/}
+                {/*}*/}
+
+
+                {/*var self = this*/}
+                {/*if (this.state.otherComment) {*/}
+                {/*this.state.checkedValues.push('其他:' + this.state.otherComment)*/}
+                {/*}*/}
+                {/*if (!this.state.nowRECODE.belongUserId) {*/}
+                {/*message.error('dev log belongUserId :' + this.state.nowRECODE.belongUserId)*/}
+                {/*return*/}
+                {/*}*/}
+
+
+                {/*window.Axios.post('back/addLogHistory', {*/}
+                {/*'moduleLog': '用户管理',*/}
+                {/*'pageLog': '用户总表',*/}
+                {/*'commentLog': '重置交易密码',*/}
+                {/*'typeLog': 3,*/}
+                {/*});*/}
+
+
+                {/*window.Axios.post('star/updateStarLiveAccount', {*/}
+                {/*"id": this.state.nowRECODE.starAccountId,*/}
+                {/*"accountPassword": this.state.accountPassword,*/}
+                {/*// "belongUserId": this.state.nowRECODE.belongUserId,*/}
+                {/*"content": this.state.checkedValues.toString(),*/}
+                {/*}).then(() => {*/}
+                {/*message.success('操作成功')*/}
+                {/*self.setState({*/}
+                {/*resetSeretModal5: false,*/}
+                {/*otherComment: '',*/}
+                {/*accountPassword: ''*/}
+                {/*})*/}
+                {/*this.state.checkedValues.length = 0*/}
+                {/*self.requestData()*/}
+                {/*})*/}
+                {/*}*/}
+
+
+                {/*}*/}
+                {/*okType={((this.state.mStockRecordStatus == 1) && this.state.mStockRecordBEn) ? 'primary' : 'dashed'}*/}
+                {/*onCancel={(e) => {*/}
+                {/*this.setState({*/}
+                {/*resetSeretModal5: false,*/}
+                {/*});*/}
+                {/*}}*/}
+                {/*>*/}
+
+                {/*<Card title={'请确认客户信息：'} bordered={true}>*/}
+
+                {/*<Checkbox.Group style={{width: '100%'}} value={this.state.checkedValues}*/}
+                {/*onChange={(checkedValues) => {*/}
+
+                {/*this.setState({*/}
+                {/*checkedValues: checkedValues,*/}
+                {/*otherCommentChecks: checkedValues.toString(),*/}
+                {/*});*/}
+
+                {/*}}>*/}
+
+                {/*<div style={{display: 'flex', minHeight: 40, align: 'center'}}>*/}
+                {/*<Checkbox value={"手机号"}>手机号</Checkbox>*/}
+                {/*<Checkbox value={"邮箱"}>邮箱</Checkbox>*/}
+                {/*<Checkbox value={"账号"}>账号</Checkbox>*/}
+                {/*<Checkbox value={"地址"}>地址</Checkbox>*/}
+                {/*<Checkbox value={"身份证号"}>身份证号</Checkbox>*/}
+                {/*</div>*/}
+                {/*<div style={{display: 'flex', minHeight: 40, align: 'center'}}>*/}
+                {/*<Checkbox value={"身份证正本"}>身份证正本</Checkbox>*/}
+                {/*</div>*/}
+
+                {/*</Checkbox.Group>*/}
+                {/*<div style={{display: 'flex', minHeight: 40, align: 'center'}}>*/}
+                {/*<span style={{minWidth: 80}}>其他：</span>*/}
+                {/*<Input value={this.state.otherComment}*/}
+                {/*onChange={(e) => {*/}
+                {/*this.setState({*/}
+                {/*otherComment: e.target.value,*/}
+                {/*});*/}
+                {/*}} style={{marginBottom: 10}} placeholder=""/>*/}
+                {/*</div>*/}
+                {/*<div style={{display: 'flex', minHeight: 40, align: 'center'}}>*/}
+                {/*<span style={{minWidth: 80}}>交易密码：</span>*/}
+                {/*<Input value={this.state.accountPassword}*/}
+                {/*onChange={(e) => {*/}
+                {/*this.setState({*/}
+                {/*accountPassword: e.target.value,*/}
+                {/*});*/}
+                {/*}} style={{marginBottom: 10}} placeholder=""/>*/}
+                {/*</div>*/}
+                {/*</Card>*/}
+
+                {/*<Table*/}
+                {/*style={{marginTop: 15}}*/}
+                {/*rowKey="id"*/}
+                {/*bordered*/}
+                {/*columns={this.modalOPDayColumns}*/}
+                {/*dataSource={this.state.operationDiaryHistory}*/}
+                {/*/>*/}
+                {/*</Modal>*/}
+
+
                 <Modal
-                    bodyStyle={{padding: 0, margin: 15}}
-                    title="重置交易密码"
-                    visible={this.state.resetSeretModal5}
-                    onOk={() => {
-                        var self = this
-                        if (this.state.otherComment) {
-                            this.state.checkedValues.push('其他:' + this.state.otherComment)
-                        }
-                        if (!this.state.nowRECODE.belongUserId) {
-                            message.error('dev log belongUserId :' + this.state.nowRECODE.belongUserId)
-                            return
-                        }
-
-
-                        window.Axios.post('back/addLogHistory', {
-                            'moduleLog': '用户管理',
-                            'pageLog': '用户总表',
-                            'commentLog': '重置交易密码',
-                            'typeLog': 3,
-                        });
-
-
-                        window.Axios.post('star/updateStarLiveAccount', {
-                            "id": this.state.nowRECODE.starAccountId,
-                            "accountPassword": this.state.accountPassword,
-                            // "belongUserId": this.state.nowRECODE.belongUserId,
-                            "content": this.state.checkedValues.toString(),
-                        }).then(() => {
-                            message.success('操作成功')
-                            self.setState({
-                                resetSeretModal5: false,
-                                otherComment: '',
-                                accountPassword: ''
-                            })
-                            this.state.checkedValues.length = 0
-                            self.requestData()
-                        })
+                    bodyStyle={{
+                        background: 'white',
+                        padding: 0,
+                        width: '600px',
+                        margin: 0,
                     }}
-                    okType={((this.state.mStockRecordStatus == 1) && this.state.mStockRecordBEn) ? 'primary' : 'dashed'}
-                    onCancel={(e) => {
+                    onCancel={() => {
                         this.setState({
+                            visible: false,
                             resetSeretModal5: false,
                         });
                     }}
+                    closable={false}
+                    footer={null}
+                    visible={this.state.resetSeretModal5}
                 >
-
-                    <Card title={'请确认客户信息：'} bordered={true}>
-
-                        <Checkbox.Group style={{width: '100%'}} value={this.state.checkedValues}
-                                        onChange={(checkedValues) => {
-
-                                            this.setState({
-                                                checkedValues: checkedValues,
-                                                otherCommentChecks: checkedValues.toString(),
-                                            });
-
-                                        }}>
-
-                            <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
-                                <Checkbox value={"手机号"}>手机号</Checkbox>
-                                <Checkbox value={"邮箱"}>邮箱</Checkbox>
-                                <Checkbox value={"账号"}>账号</Checkbox>
-                                <Checkbox value={"地址"}>地址</Checkbox>
-                                <Checkbox value={"身份证号"}>身份证号</Checkbox>
-                            </div>
-                            <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
-                                <Checkbox value={"身份证正本"}>身份证正本</Checkbox>
-                            </div>
-
-                        </Checkbox.Group>
-                        <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
-                            <span style={{minWidth: 80}}>其他：</span>
-                            <Input value={this.state.otherComment}
-                                   onChange={(e) => {
-                                       this.setState({
-                                           otherComment: e.target.value,
-                                       });
-                                   }} style={{marginBottom: 10}} placeholder=""/>
+                    <div style={{borderRadius: '4px'}}>
+                        <div style={{
+                            alignItems: 'center',
+                            justifyContent: 'center', height: 48, display: 'flex', padding: 0, background: '#FDD000'
+                        }}>
+                            <span style={{
+                                fontSize: 18,
+                                fontFamily: 'PingFangSC-Medium',
+                                fontWeight: 500,
+                                color: 'rgba(51,51,51,1)'
+                            }}>{'重置交易密码'}
+                            </span>
                         </div>
-                        <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
-                            <span style={{minWidth: 80}}>交易密码：</span>
-                            <Input value={this.state.accountPassword}
-                                   onChange={(e) => {
-                                       this.setState({
-                                           accountPassword: e.target.value,
-                                       });
-                                   }} style={{marginBottom: 10}} placeholder=""/>
-                        </div>
-                    </Card>
 
-                    <Table
-                        style={{marginTop: 15}}
-                        rowKey="id"
-                        bordered
-                        columns={this.modalOPDayColumns}
-                        dataSource={this.state.operationDiaryHistory}
-                    />
+
+                        <Card
+
+                            style={{margin: '20px'}}
+                            title={'请确认客户信息：'} bordered={true}>
+
+                            <Checkbox.Group style={{width: '100%'}} value={this.state.checkedValues}
+                                            onChange={(checkedValues) => {
+
+                                                this.setState({
+                                                    checkedValues: checkedValues,
+                                                    otherCommentChecks: checkedValues.toString(),
+                                                });
+
+                                            }}>
+
+                                <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
+                                    <Checkbox value={"手机号"}>手机号</Checkbox>
+                                    <Checkbox value={"邮箱"}>邮箱</Checkbox>
+                                    <Checkbox value={"账号"}>账号</Checkbox>
+                                    <Checkbox value={"地址"}>地址</Checkbox>
+                                    <Checkbox value={"身份证号"}>身份证号</Checkbox>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
+                                    <Checkbox value={"身份证正本"}>身份证正本</Checkbox>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
+                                    <span style={{minWidth: 80}}>其他：</span>
+                                    <Input value={this.state.otherComment}
+                                           onChange={(e) => {
+                                               this.setState({
+                                                   otherComment: e.target.value,
+                                               });
+                                           }} style={{marginBottom: 10}} placeholder=""/>
+                                </div>
+                                <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
+                                    <span style={{minWidth: 80}}>交易密码：</span>
+                                    <Input value={this.state.accountPassword}
+                                           onChange={(e) => {
+                                               this.setState({
+                                                   accountPassword: e.target.value,
+                                               });
+                                           }} style={{marginBottom: 10}} placeholder=""/>
+                                </div>
+                            </Checkbox.Group>
+
+                        </Card>
+                        {/*<Table*/}
+                        {/*style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}*/}
+                        {/*rowKey="id"*/}
+                        {/*bordered*/}
+                        {/*columns={this.modalOPDayColumns}*/}
+                        {/*dataSource={this.state.operationDiaryHistory}*/}
+                        {/*/>*/}
+                        <Table
+                            style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}
+                            bordered
+                            rowKey="id"
+                            columns={this.modalOPDayColumns}
+                            dataSource={this.state.operationDiaryHistory}
+                        />
+
+
+                        <div style={{
+                            marginLeft: "80px", marginRight: "80px",
+                            paddingBottom: '48px',
+                            paddingTop: '48px',
+                            justifyContent: 'space-between',
+                            display: 'flex'
+                        }}>
+
+                            <Button
+
+                                disabled={this.state.checkedValues.length < 6}
+                                onClick={
+                                    () => {
+
+
+                                        if (!this.state.accountPassword) {
+
+                                            message.error("密码?")
+                                            return
+                                        }
+
+
+                                        var self = this
+                                        if (this.state.otherComment) {
+                                            this.state.checkedValues.push('其他:' + this.state.otherComment)
+                                        }
+                                        if (!this.state.nowRECODE.belongUserId) {
+                                            message.error('dev log belongUserId :' + this.state.nowRECODE.belongUserId)
+                                            return
+                                        }
+
+
+                                        window.Axios.post('back/addLogHistory', {
+                                            'moduleLog': '用户管理',
+                                            'pageLog': '用户总表',
+                                            'commentLog': '重置交易密码',
+                                            'typeLog': 3,
+                                        });
+
+
+                                        window.Axios.post('star/updateStarLiveAccount', {
+                                            "id": this.state.nowRECODE.starAccountId,
+                                            "accountPassword": this.state.accountPassword,
+                                            // "belongUserId": this.state.nowRECODE.belongUserId,
+                                            "content": this.state.checkedValues.toString(),
+                                        }).then(() => {
+                                            message.success('操作成功')
+                                            self.setState({
+                                                resetSeretModal5: false,
+                                                otherComment: '',
+                                                accountPassword: ''
+                                            })
+                                            this.state.checkedValues.length = 0
+                                            self.requestData()
+                                        })
+                                    }
+                                }
+                                style={{
+                                    borderRadius: '4px',
+                                    background: '#F6D147',
+                                    width: '180px',
+                                    height: '40px'
+                                }}> 提交 </Button>
+                            <Button onClick={(e) => {
+                                this.setState({
+                                    resetSeretModal5: false,
+                                });
+                            }} style={{borderRadius: '4px', width: '180px', height: '40px'}}> 取消 </Button>
+
+                        </div>
+
+                    </div>
                 </Modal>
-
-
 
                 <Modal
                     bodyStyle={{
@@ -635,7 +814,7 @@ class CustomerSummary extends Component {
                     }}
                     closable={false}
                     footer={null}
-                    visible={this.state.showUnBindPhoneModal4  }
+                    visible={this.state.showUnBindPhoneModal4}
                 >
                     <div style={{borderRadius: '4px'}}>
                         <div style={{
@@ -654,7 +833,7 @@ class CustomerSummary extends Component {
 
                         <Card
 
-                            style={{margin:'20px'}}
+                            style={{margin: '20px'}}
                             title={'请确认客户信息：'} bordered={true}>
 
                             <Checkbox.Group style={{width: '100%'}} value={this.state.checkedValues}
@@ -699,8 +878,6 @@ class CustomerSummary extends Component {
                         />
 
 
-
-
                         <div style={{
                             marginLeft: "80px", marginRight: "80px",
                             paddingBottom: '48px',
@@ -711,7 +888,7 @@ class CustomerSummary extends Component {
 
                             <Button
 
-                                disabled={this.state.checkedValues.length<6}
+                                disabled={this.state.checkedValues.length < 6}
                                 onClick={() => {
                                     var self = this
                                     if (this.state.otherComment) {
@@ -721,7 +898,6 @@ class CustomerSummary extends Component {
                                         message.error('dev log belongUserId :' + this.state.nowRECODE.belongUserId)
                                         return
                                     }
-
 
 
                                     // return ;
@@ -764,103 +940,6 @@ class CustomerSummary extends Component {
 
                     </div>
                 </Modal>
-
-
-                {/*<Modal*/}
-                    {/*bodyStyle={{padding: 0, margin: 15}}*/}
-                    {/*title="解绑手机号"*/}
-                    {/*visible={false}*/}
-                    {/*onOk={*/}
-                        {/*() => {*/}
-                        {/*var self = this*/}
-                        {/*if (this.state.otherComment) {*/}
-                            {/*this.state.checkedValues.push('其他:' + this.state.otherComment)*/}
-                        {/*}*/}
-                        {/*if (!this.state.nowRECODE.belongUserId) {*/}
-                            {/*message.error('dev log belongUserId :' + this.state.nowRECODE.belongUserId)*/}
-                            {/*return*/}
-                        {/*}*/}
-
-
-
-                        {/*return ;*/}
-
-                        {/*window.Axios.post('back/addLogHistory', {*/}
-                            {/*'moduleLog': '用户管理',*/}
-                            {/*'pageLog': '用户总表',*/}
-                            {/*'commentLog': '解绑手机号',*/}
-                            {/*'typeLog': 3,*/}
-                        {/*});*/}
-
-
-                        {/*window.Axios.post('star/unBindStarLiveAccount', {*/}
-                            {/*"id": this.state.nowRECODE.starAccountId,*/}
-                            {/*"belongUserId": this.state.nowRECODE.belongUserId,*/}
-                            {/*"content": this.state.checkedValues.toString(),*/}
-                        {/*}).then(() => {*/}
-                            {/*message.success('操作成功')*/}
-                            {/*self.setState({*/}
-                                {/*showUnBindPhoneModal4: false,*/}
-                                {/*otherComment: ''*/}
-                            {/*})*/}
-                            {/*this.state.checkedValues.length = 0*/}
-                            {/*self.requestData()*/}
-                        {/*})*/}
-                    {/*}*/}
-
-                    {/*}*/}
-                    {/*okType={((this.state.mStockRecordStatus == 1) && this.state.mStockRecordBEn) ? 'primary' : 'dashed'}*/}
-                    {/*onCancel={(e) => {*/}
-                        {/*this.setState({*/}
-                            {/*showUnBindPhoneModal4: false,*/}
-                        {/*});*/}
-                    {/*}}*/}
-                {/*>*/}
-
-                    {/*<Card title={'请确认客户信息：'} bordered={true}>*/}
-
-                        {/*<Checkbox.Group style={{width: '100%'}} value={this.state.checkedValues}*/}
-                                        {/*onChange={(checkedValues) => {*/}
-
-                                            {/*this.setState({*/}
-                                                {/*checkedValues: checkedValues,*/}
-                                                {/*otherCommentChecks: checkedValues.toString(),*/}
-                                            {/*});*/}
-
-                                        {/*}}>*/}
-
-                            {/*<div style={{display: 'flex', minHeight: 40, align: 'center'}}>*/}
-                                {/*<Checkbox value={"手机号"}>手机号</Checkbox>*/}
-                                {/*<Checkbox value={"邮箱"}>邮箱</Checkbox>*/}
-                                {/*<Checkbox value={"账号"}>账号</Checkbox>*/}
-                                {/*<Checkbox value={"地址"}>地址</Checkbox>*/}
-                                {/*<Checkbox value={"身份证号"}>身份证号</Checkbox>*/}
-                            {/*</div>*/}
-                            {/*<div style={{display: 'flex', minHeight: 40, align: 'center'}}>*/}
-                                {/*<Checkbox value={"身份证正本"}>身份证正本</Checkbox>*/}
-                            {/*</div>*/}
-
-                        {/*</Checkbox.Group>*/}
-                        {/*<div style={{display: 'flex', minHeight: 40, align: 'center'}}>*/}
-                            {/*<span style={{minWidth: 60}}>其他：</span>*/}
-                            {/*<Input value={this.state.otherComment}*/}
-                                   {/*onChange={(e) => {*/}
-                                       {/*this.setState({*/}
-                                           {/*otherComment: e.target.value,*/}
-                                       {/*});*/}
-                                   {/*}} style={{marginBottom: 10}} placeholder=""/>*/}
-                        {/*</div>*/}
-                    {/*</Card>*/}
-
-                    {/*<Table*/}
-
-                        {/*bordered*/}
-                        {/*style={{marginTop: 15}}*/}
-                        {/*rowKey="id"*/}
-                        {/*columns={this.modalOPDayColumns}*/}
-                        {/*dataSource={this.state.operationDiaryHistory}*/}
-                    {/*/>*/}
-                {/*</Modal>*/}
 
 
             </div>
