@@ -54,7 +54,10 @@ class Dashboard extends React.Component {
             // console.log('hcia mImfor', mImfor)
             console
 
-        this.setState({lastLoginIP: mImfor.lastLoginIP});
+
+        // if()
+
+        this.setState({lastLoginIP: mImfor.lastLoginIP ? mImfor.lastLoginIP : ''});
         this.setState({lastLoginTime: mImfor.lastLoginTime});
 
 

@@ -658,78 +658,75 @@ export default class BlackList extends Component {
 
                 <BreadcrumbCustom first="权限管理" second="操作日志"/>
 
-                <Card bodyStyle={{padding: 0, margin: 0}}>
-
-                    <Tabs
-                        activeKey={this.state.nowKey}
-                        onChange={this.callback}
-                        type="card">
-                        <TabPane tab="登录记录" key="1">
+                <Tabs
+                    activeKey={this.state.nowKey}
+                    onChange={this.callback}
+                    type="card">
+                    <TabPane tab="登录记录" key="1">
 
 
-                            <Card
-                                bodyStyle={{padding: 0, margin: 0}}
-                                title={'登录记录'}
-                            >
+                        <Card
+                            bodyStyle={{padding: 0, margin: 0}}
+                            title={'登录记录'}
+                        >
 
-                                <Table rowKey="id"
-                                       bordered
-                                    // rowSelection={rowSelection}
-                                       columns={this.columnsA}
-                                       dataSource={this.state.bklistA}
-                                       loading={this.state.loadingA}
-                                       pagination={{  // 分页
-                                           // showQuickJumper:true,
-                                           total: this.state.totalpageAASIZE,
-                                           pageSize: this.state.pgsize,
-                                           onChange: this.changePageA,
-                                       }}
-                                />
-                            </Card>
-                        </TabPane>
-                        <TabPane tab="浏览记录" key="2">
-                            <Card
-                                bodyStyle={{padding: 0, margin: 0}}
-                                title={'浏览记录'}
+                            <Table rowKey="id"
+                                   bordered
+                                // rowSelection={rowSelection}
+                                   columns={this.columnsA}
+                                   dataSource={this.state.bklistA}
+                                   loading={this.state.loadingA}
+                                   pagination={{  // 分页
+                                       // showQuickJumper:true,
+                                       total: this.state.totalpageAASIZE,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePageA,
+                                   }}
+                            />
+                        </Card>
+                    </TabPane>
+                    <TabPane tab="浏览记录" key="2">
+                        <Card
+                            bodyStyle={{padding: 0, margin: 0}}
+                            title={'浏览记录'}
 
-                            >
-                                <Table rowKey="id"
-                                       bordered
-                                       columns={this.columnsB}
-                                       dataSource={this.state.bklistB}
-                                       loading={this.state.loadingB}
-                                       pagination={{  // 分页
-                                           total: this.state.totalpageBBSIZE,
-                                           pageSize: this.state.pgsize,
-                                           onChange: this.changePageB,
-                                       }}
-                                />
-                            </Card>
+                        >
+                            <Table rowKey="id"
+                                   bordered
+                                   columns={this.columnsB}
+                                   dataSource={this.state.bklistB}
+                                   loading={this.state.loadingB}
+                                   pagination={{  // 分页
+                                       total: this.state.totalpageBBSIZE,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePageB,
+                                   }}
+                            />
+                        </Card>
 
-                        </TabPane>
-                        <TabPane tab="操作记录" key="3">
-                            <Card
-                                bodyStyle={{padding: 0, margin: 0}}
-                                title={'操作记录'}
+                    </TabPane>
+                    <TabPane tab="操作记录" key="3">
+                        <Card
+                            bodyStyle={{padding: 0, margin: 0}}
+                            title={'操作记录'}
 
-                            >
+                        >
 
-                                <Table rowKey="id"
-                                       bordered
-                                       columns={this.columnsB}
-                                       dataSource={this.state.bklistC}
-                                       loading={this.state.loadingC}
-                                       pagination={{  // 分页
-                                           total: this.state.totalpageCCSIZE,
-                                           pageSize: this.state.pgsize,
-                                           onChange: this.changePageC,
-                                       }}
-                                />
-                            </Card>
+                            <Table rowKey="id"
+                                   bordered
+                                   columns={this.columnsB}
+                                   dataSource={this.state.bklistC}
+                                   loading={this.state.loadingC}
+                                   pagination={{  // 分页
+                                       total: this.state.totalpageCCSIZE,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePageC,
+                                   }}
+                            />
+                        </Card>
 
-                        </TabPane>
-                    </Tabs>
-                </Card>
+                    </TabPane>
+                </Tabs>
                 <Modal
                     width={370}
                     title="添加黑名单"
