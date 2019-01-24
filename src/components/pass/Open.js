@@ -759,31 +759,7 @@ class Basic extends Component {
 
                 </Modal>
 
-                <Modal
-                    title="查看操作日志"
-                    visible={false}
-                    onCancel={() => {
-                        this.setState({
-                            visible: false,
-                            modal2OPDAYVisible: false,
-                        });
-                    }}
-                    width={600}
-                    footer={null}>
-                    <Table rowKey="id"
-                           bordered
-                           columns={this.columnsLog}
-                           dataSource={this.state.operationDiaryHistory}
-                           loading={this.state.loadingComment}
-                           pagination={{
-                               current: this.state.currentComment,
-                               total: this.state.totalpageComments * this.state.pgsize,
-                               pageSize: this.state.pgsize,
-                               onChange: this.changePageComment,
-                           }}
-                    />
 
-                </Modal>
 
             </div>
 

@@ -461,6 +461,7 @@ class CustomerSummary extends Component {
                     cancelText="取消"
                 >
                     <Table rowKey="id"
+                           bordered
                            columns={this.modalOPDayColumns}
                            dataSource={this.state.operationDiaryHistory}
                     />
@@ -559,6 +560,7 @@ class CustomerSummary extends Component {
                     <Table
                         style={{marginTop: 15}}
                         rowKey="id"
+                        bordered
                         columns={this.modalOPDayColumns}
                         dataSource={this.state.operationDiaryHistory}
                     />
@@ -644,6 +646,8 @@ class CustomerSummary extends Component {
                     </Card>
 
                     <Table
+
+                        bordered
                         style={{marginTop: 15}}
                         rowKey="id"
                         columns={this.modalOPDayColumns}

@@ -115,9 +115,6 @@ export default class PotentialUser extends Component {
 
 
     showOPDAyModal2 = (belongUserId) => {
-
-
-
         var self = this
         this.setState({
             currentComment: 0,
@@ -131,45 +128,32 @@ export default class PotentialUser extends Component {
             })
         });
 
-        // this.requestUserCommentList(belongUserId)
-        // this.setState({
-        //     modal2OPDAYVisible: true,
-        //     visible: false,
-        // });
     };
     shownoteModal = (belongUserId) => {
         this.setState({
             currentComment: 0,
             modal3NoteVisible: true,
             visible: false,
-        },()=>{
+        }, () => {
             this.requestUserCommentList(belongUserId)
-
         });
     };
 
     showAddbAckModal = (record) => {
-
-
         var logRouter = ''
-
         if (this.state.nowKey === '1') {
-            logRouter='/back/addLogPotentialUser'
+            logRouter = '/back/addLogPotentialUser'
         }
         if (this.state.nowKey === '2') {
-            logRouter='/back/addLogDemoUser'
-
+            logRouter = '/back/addLogDemoUser'
         }
         if (this.state.nowKey === '3') {
-            logRouter='/back/addLogIntentUser'
+            logRouter = '/back/addLogIntentUser'
         }
-
 
         window.Axios.post(logRouter, {
             referKey: record.belongUserId,
             commentLog: '添加回访',
-            // mobile: this.state.phoneCn,
-            // content: this.state.changeNoteV,
         })
 
         this.requestUserCommentList(record.belongUserId)
@@ -535,21 +519,19 @@ export default class PotentialUser extends Component {
             }
         }
     }
-
-
     handleDelay = (record) => {
 
         var logRouter = ''
 
         if (this.state.nowKey === '1') {
-            logRouter='back/addLogPotentialUser'
+            logRouter = 'back/addLogPotentialUser'
         }
         if (this.state.nowKey === '2') {
-            logRouter='back/addLogDemoUser'
+            logRouter = 'back/addLogDemoUser'
 
         }
         if (this.state.nowKey === '3') {
-            logRouter='back/addLogIntentUser'
+            logRouter = 'back/addLogIntentUser'
         }
         // console.log('hcia record.feebackStatus' , record.feebackStatus)
         window.Axios.post(logRouter, {
@@ -587,21 +569,15 @@ export default class PotentialUser extends Component {
         })
 
     }
-
     seeUSer = (record) => {
-
-        console.log('hcia record', record)
         window.Axios.post('back/addLogHistory', {
             'moduleLog': '用户管理',
             'pageLog': 'Leads管理',
             'commentLog': '查看用户',
             'typeLog': 3,
         });
-
-
         this.props.history.push('/app/pass/passopen/user' + record.leadId)
     }
-
     handleCancel = (e) => {
         this.setState({
             visible: false,
@@ -633,7 +609,6 @@ export default class PotentialUser extends Component {
             modal2OPDAYVisible: false,
         });
     }
-
     requestUserLogList = (record) => {
         var self = this;
 
@@ -641,14 +616,14 @@ export default class PotentialUser extends Component {
         var logRouter = ''
 
         if (this.state.nowKey === '1') {
-            logRouter='/back/getLogPotentialUser'
+            logRouter = '/back/getLogPotentialUser'
         }
         if (this.state.nowKey === '2') {
-            logRouter='/back/getLogDemoUser'
+            logRouter = '/back/getLogDemoUser'
 
         }
         if (this.state.nowKey === '3') {
-            logRouter='/back/getLogIntentUser'
+            logRouter = '/back/getLogIntentUser'
         }
 
         window.Axios.post(logRouter, {
@@ -664,8 +639,6 @@ export default class PotentialUser extends Component {
 
 
     }
-
-
     requestUserCommentList = (record) => {
         var self = this;
 
@@ -1095,30 +1068,102 @@ export default class PotentialUser extends Component {
                     />
 
                 </Modal>
+                {/*<Modal*/}
+                    {/*title="查看操作日志"*/}
+                    {/*visible={this.state.modal2OPDAYVisible}*/}
+                    {/*onCancel={this.handleCancel}*/}
+                    {/*width={600}*/}
+                    {/*bodyStyle={{padding: 0, margin: 0}}*/}
+                    {/*bordered*/}
+                    {/*footer={null}*/}
+                {/*>*/}
+                    {/*<Table rowKey="id"*/}
+                           {/*columns={this.columnsLog}*/}
+
+                           {/*dataSource={this.state.operationLogHistory}*/}
+                           {/*loading={this.state.loadingComment}*/}
+                           {/*pagination={{*/}
+                               {/*current: this.state.currentComment,*/}
+
+                               {/*total: this.state.totalpageComments * this.state.pgsize,*/}
+                               {/*pageSize: this.state.pgsize,*/}
+                               {/*onChange: this.changePageLog,*/}
+                           {/*}}*/}
+                    {/*/>*/}
+
+                {/*</Modal>*/}
+
+
+
                 <Modal
-                    title="查看操作日志"
-                    visible={this.state.modal2OPDAYVisible}
-                    onCancel={this.handleCancel}
-                    width={600}
-                    bodyStyle={{padding: 0, margin: 0}}
-                    bordered
+                    bodyStyle={{
+                        background: 'white',
+                        padding: 0,
+                        margin: 0,
+                    }}
+                    onCancel={() => {
+                        this.setState({
+                            visible: false,
+                            modal2OPDAYVisible: false,
+                        });
+                    }}
+                    closable={false}
                     footer={null}
+                    // onCancel={this.handleCancel}
+                    visible={this.state.modal2OPDAYVisible}
+
+
                 >
-                    <Table rowKey="id"
-                           columns={this.columnsLog}
 
-                           dataSource={this.state.operationLogHistory}
-                           loading={this.state.loadingComment}
-                           pagination={{
-                               current: this.state.currentComment,
+                    <div style={{borderRadius: '4px'}}>
+                        <div style={{
+                            alignItems: 'center',
+                            justifyContent: 'center', height: 48, display: 'flex', padding: 0, background: '#FDD000'
+                        }}>
+                            <span style={{
+                                fontSize: 18,
+                                fontFamily: 'PingFangSC-Medium',
+                                fontWeight: 500,
+                                color: 'rgba(51,51,51,1)'
+                            }}>{'查看操作日志'}
+                            </span>
+                        </div>
+                        {/*<Table*/}
+                            {/*rowKey="id"*/}
+                            {/*bordered*/}
+                            {/*columns={this.columnsLog}*/}
+                            {/*dataSource={this.state.operationDiaryHistory}*/}
+                            {/*loading={this.state.loadingComment}*/}
+                            {/*pagination={{*/}
+                                {/*current: this.state.currentComment,*/}
+                                {/*total: this.state.totalpageComments * this.state.pgsize,*/}
+                                {/*pageSize: this.state.pgsize,*/}
+                                {/*onChange: this.changePageComment,*/}
+                            {/*}}*/}
+                        {/*/>*/}
+                        <Table
+                            style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}
+                            bordered
+                            rowKey="id"
+                               columns={this.columnsLog}
 
-                               total: this.state.totalpageComments * this.state.pgsize,
-                               pageSize: this.state.pgsize,
-                               onChange: this.changePageLog,
-                           }}
-                    />
+                               dataSource={this.state.operationLogHistory}
+                               loading={this.state.loadingComment}
+                               pagination={{
+                                   current: this.state.currentComment,
+
+                                   total: this.state.totalpageComments * this.state.pgsize,
+                                   pageSize: this.state.pgsize,
+                                   onChange: this.changePageLog,
+                               }}
+                        />
+
+
+                    </div>
+
 
                 </Modal>
+
                 <Modal
                     title="查看备注"
                     visible={this.state.modal3NoteVisible}
