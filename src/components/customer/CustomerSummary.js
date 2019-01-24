@@ -691,7 +691,7 @@ class CustomerSummary extends Component {
 
                             <Button
 
-                                disabled={this.state.checkedValues.length < 6}
+                                disabled={this.state.checkedValues.length < 6   ||  !this.state.accountPassword}
                                 onClick={
                                     () => {
 
