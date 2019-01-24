@@ -617,98 +617,95 @@ export default class BlackList extends Component {
                     黑名单
                 </h2>
                 <BreadcrumbCustom first="用户管理" second="黑名单"/>
-
-                <Card bodyStyle={{padding: 0, margin: 0}}>
-
-                    <Tabs
-                        activeKey={this.state.nowKey}
-                        onChange={this.callback}
-                        type="card">
-                        <TabPane type={'primary'} tab="合规黑名单" key="1">
+                <Tabs
+                    activeKey={this.state.nowKey}
+                    onChange={this.callback}
+                    type="card">
+                    <TabPane type={'primary'} tab="合规黑名单" key="1">
 
 
-                            <Card
-                                bodyStyle={{padding: 0, margin: 0}}
-                                title={'合规黑名单'}
-                                extra={<Button onClick={() => {
-                                    this.setState({
-                                        showModaladdblack: true,
-                                    });
-                                }}>添加黑名单</Button>}
+                        <Card
+                            bodyStyle={{padding: 0, margin: 0}}
+                            title={'合规黑名单'}
+                            extra={<Button onClick={() => {
+                                this.setState({
+                                    showModaladdblack: true,
+                                });
+                            }}>添加黑名单</Button>}
 
-                            >
+                        >
 
-                                <Table rowKey="id"
-                                       bordered
-                                    // rowSelection={rowSelection}
-                                       columns={this.columnsA}
-                                       dataSource={this.state.bklistA}
-                                       scroll={{x: 1300}}
-                                       loading={this.state.loadingA}
-                                       pagination={{  // 分页
-                                           // showQuickJumper:true,
-                                           total: this.state.totalpageA * this.state.pgsize,
-                                           pageSize: this.state.pgsize,
-                                           onChange: this.changePageA,
-                                       }}
-                                />
-                            </Card>
-                        </TabPane>
-                        <TabPane tab="开户黑名单" key="2">
-                            <Card
-                                bodyStyle={{padding: 0, margin: 0}}
-                                title={'开户黑名单'}
-                                extra={<Button onClick={() => {
-                                    this.setState({
-                                        showModaladdblack: true,
-                                    });
-                                }}>添加黑名单</Button>}
-                            >
-                                <Table rowKey="id"
+                            <Table rowKey="id"
+                                   bordered
+                                // rowSelection={rowSelection}
+                                   columns={this.columnsA}
+                                   dataSource={this.state.bklistA}
+                                   scroll={{x: 1300}}
+                                   loading={this.state.loadingA}
+                                   pagination={{  // 分页
+                                       // showQuickJumper:true,
+                                       total: this.state.totalpageA * this.state.pgsize,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePageA,
+                                   }}
+                            />
+                        </Card>
+                    </TabPane>
+                    <TabPane tab="开户黑名单" key="2">
+                        <Card
+                            bodyStyle={{padding: 0, margin: 0}}
+                            title={'开户黑名单'}
+                            extra={<Button onClick={() => {
+                                this.setState({
+                                    showModaladdblack: true,
+                                });
+                            }}>添加黑名单</Button>}
+                        >
+                            <Table rowKey="id"
 
-                                       bordered
+                                   bordered
 
-                                       columns={this.columns}
-                                       dataSource={this.state.bklistB}
-                                       scroll={{x: 1300}}
-                                       loading={this.state.loadingB}
-                                       pagination={{  // 分页
-                                           total: this.state.totalpageB * this.state.pgsize,
-                                           pageSize: this.state.pgsize,
-                                           onChange: this.changePageB,
-                                       }}
-                                />
-                            </Card>
+                                   columns={this.columns}
+                                   dataSource={this.state.bklistB}
+                                   scroll={{x: 1300}}
+                                   loading={this.state.loadingB}
+                                   pagination={{  // 分页
+                                       total: this.state.totalpageB * this.state.pgsize,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePageB,
+                                   }}
+                            />
+                        </Card>
 
-                        </TabPane>
-                        <TabPane tab="交易黑名单" key="3">
-                            <Card
-                                bodyStyle={{padding: 0, margin: 0}}
-                                title={'交易黑名单'}
-                                extra={<Button onClick={() => {
-                                    this.setState({
-                                        showModaladdblack: true,
-                                    });
-                                }}>添加黑名单</Button>}
-                            >
-                                <Table rowKey="id"
-                                       bordered
+                    </TabPane>
+                    <TabPane tab="交易黑名单" key="3">
+                        <Card
+                            bodyStyle={{padding: 0, margin: 0}}
+                            title={'交易黑名单'}
+                            extra={<Button onClick={() => {
+                                this.setState({
+                                    showModaladdblack: true,
+                                });
+                            }}>添加黑名单</Button>}
+                        >
+                            <Table rowKey="id"
+                                   bordered
 
-                                       columns={this.columns}
-                                       dataSource={this.state.bklistC}
-                                       scroll={{x: 1300}}
-                                       loading={this.state.loadingC}
-                                       pagination={{  // 分页
-                                           total: this.state.totalpageC * this.state.pgsize,
-                                           pageSize: this.state.pgsize,
-                                           onChange: this.changePageC,
-                                       }}
-                                />
-                            </Card>
+                                   columns={this.columns}
+                                   dataSource={this.state.bklistC}
+                                   scroll={{x: 1300}}
+                                   loading={this.state.loadingC}
+                                   pagination={{  // 分页
+                                       total: this.state.totalpageC * this.state.pgsize,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePageC,
+                                   }}
+                            />
+                        </Card>
 
-                        </TabPane>
-                    </Tabs>
-                </Card>
+                    </TabPane>
+                </Tabs>
+
                 <Modal
                     width={370}
                     title="添加黑名单"

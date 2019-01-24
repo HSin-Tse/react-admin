@@ -1001,7 +1001,7 @@ export default class PotentialUser extends Component {
 
 
                 <Tabs
-                    tabBarGutter={0}
+                    // tabBarGutter={0}
                     onChange={(key) => {
 
                         this.setState({
