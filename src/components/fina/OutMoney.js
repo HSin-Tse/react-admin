@@ -308,7 +308,7 @@ class Basic extends Component {
                         <Button size={'small'} style={{width: 70, background: '#FDD000'}}
                                 onClick={() => {
 
-                                    console.log('hcia 出金完成 go' , )
+                                    console.log('hcia 出金完成 go',)
 
                                     this.props.history.push('/app/fina/juoutmd1')
                                 }}>出金完成
@@ -450,7 +450,6 @@ class Basic extends Component {
             'pageNo': self.state.current,
         }).then(function (response) {
             console.log(response);
-
 
 
         })
@@ -725,18 +724,18 @@ class Basic extends Component {
                         titleStyle={{whiteSpace: 'nowrap'}}
                         style={{whiteSpace: 'nowrap'}}
                         rowKey="id"
-                           rowSelection={rowSelection}
+                        rowSelection={rowSelection}
 
-                           columns={this.columns}
-                           dataSource={this.state.userList}
-                           scroll={{x: 1600}}
-                           bordered
-                           loading={this.state.loading}
-                           pagination={{  // 分页
-                               total: this.state.pgsize * this.state.totalPage,
-                               pageSize: this.state.pgsize,
-                               onChange: this.changePage,
-                           }}
+                        columns={this.columns}
+                        dataSource={this.state.userList}
+                        scroll={{x: 1600}}
+                        bordered
+                        loading={this.state.loading}
+                        pagination={{  // 分页
+                            total: this.state.pgsize * this.state.totalPage,
+                            pageSize: this.state.pgsize,
+                            onChange: this.changePage,
+                        }}
                     />
                 </Card>
 

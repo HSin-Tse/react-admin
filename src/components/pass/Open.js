@@ -476,18 +476,21 @@ class Basic extends Component {
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
                 <Card bodyStyle={{padding: 0, margin: 0}}
                       title={'开户审核'}>
-                    <Table rowKey="id"
-                           columns={this.columns}
-                           dataSource={this.state.userList}
-                           scroll={{x: 1500}}
-                           bordered
-                           loading={this.state.loading}
-                           pagination={{
-                               showQuickJumper: true,
-                               total: this.state.pgsize * this.state.totalPage,
-                               pageSize: this.state.pgsize,
-                               onChange: this.changePage,
-                           }}
+                    <Table
+                        titleStyle={{whiteSpace: 'nowrap'}}
+                        style={{whiteSpace: 'nowrap'}}
+                        rowKey="id"
+                        columns={this.columns}
+                        dataSource={this.state.userList}
+                        scroll={{x: 1500}}
+                        bordered
+                        loading={this.state.loading}
+                        pagination={{
+                            showQuickJumper: true,
+                            total: this.state.pgsize * this.state.totalPage,
+                            pageSize: this.state.pgsize,
+                            onChange: this.changePage,
+                        }}
                     />
                 </Card>
 

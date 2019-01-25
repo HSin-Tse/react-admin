@@ -416,9 +416,12 @@ class CustomerSummary extends Component {
                     bodyStyle={{padding: 0, margin: 0}}
                     title="用户总表">
                     <Table
+                        scroll={{x: 1600}}
+
+                        titleStyle={{whiteSpace: 'nowrap'}}
+                        style={{whiteSpace: 'nowrap'}}
                         rowKey="id"
                         bordered
-                        scroll={{x: 1600}}
                         columns={this.columns}
                         dataSource={this.state.bklistA}
                         loading={this.state.loading}
