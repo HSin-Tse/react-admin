@@ -63,15 +63,17 @@ class Basic extends Component {
 
 
         var ssdds = {
+
             paddingLeft: 15,
             paddingRight: 15,
             alignItems: 'center',
             justifyContent: 'space-between',
             display: 'flex',
-            minHeight: 30
+            height: '40px',
+            borderRadius: '40px 40px 40px 40px'
         }
         return (
-            <div style={{overflow:'auto'}}>
+            <div style={{overflow: 'auto'}}>
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
 
                 <h2 style={{marginTop: 15}}>
@@ -82,7 +84,7 @@ class Basic extends Component {
 
                 <div style={{
 
-                    minWidth:'1200px',
+                    minWidth: '1200px',
                     background: "white",
                     boxShadow: '0px 0px 20px 0px rgba(123,123,123,0.1)',
                     borderRadius: '4px',
@@ -253,21 +255,27 @@ class Basic extends Component {
                     </div>
 
                     <Row
-                        style={{margin:'20px'}}
+                        style={{margin: '20px'}}
 
                         gutter={32}>
                         <Col span={12}>
-                            <Card
-                                bodyStyle={{padding: 0, margin: 0}}
-                                bordered={false}>
+                            <div
+
+                                style={{
+                                    background: 'rgba(255,255,255,1)',
+                                    boxShadow: '20px 20px 20px 20px rgba(123,123,123,0.1)',
+                                    borderRadius: '4px 4px'
+                                }}
+                            >
                                 <div style={{
+                                    borderRadius: '4px 4px 0px 0px',
                                     padding: 15,
                                     color: 'white',
                                     background: '#F6D147',
                                     alignItems: 'center',
                                     justifyContent: 'space-between',
                                     display: 'flex',
-                                    minHeight: 40
+                                    minHeight: 48
                                 }}>
                                     <span style={{fontSize: '15px'}}>可用余额</span>
                                     <span style={{fontSize: '15px'}}>00.00</span>
@@ -293,7 +301,9 @@ class Basic extends Component {
                                     <span style={{fontSize: '13px'}}>出金:</span>
                                     <span style={{fontSize: '13px'}}>00.00</span>
                                 </div>
-                            </Card>
+                            </div>
+
+
                             <Card
                                 style={{marginTop: 15}}
                                 bodyStyle={{padding: 0, margin: 0}}
@@ -452,7 +462,7 @@ class Basic extends Component {
                                 </div>
                                 <div>
                                     <Tabs justify tabBarGutter={'0%'} tabBarStyle={{width: '100%'}} type="card">
-                                        <TabPane tab={steps[0].title} key="1">
+                                        <TabPane tab={'客维审核'} key="1">
 
 
                                             <Card>
@@ -574,8 +584,6 @@ class Basic extends Component {
 
 
                     </Row>
-
-
 
 
                 </div>
