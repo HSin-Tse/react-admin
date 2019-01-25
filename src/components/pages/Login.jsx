@@ -124,7 +124,7 @@ class Login extends React.Component {
                             {getFieldDecorator('userName', {
                                 rules: [{required: true, message: '请输入用户名!'}],
                             })(
-                                <Input prefix={<Icon type="user" style={{fontSize: 13}}/>} placeholder=""/>
+                                <Input prefix={<Icon type="user" style={{fontSize: 13}}/>} placeholder="请输入用户名"/>
                             )}
                         </FormItem>
                         <FormItem>
@@ -133,16 +133,16 @@ class Login extends React.Component {
                             })(
                                 <Input prefix={<Icon type="lock" style={{fontSize: 13}}/>}
                                        type="password"
-                                       placeholder=""/>
+                                       placeholder="请输入密码"/>
                             )}
                         </FormItem>
                         <FormItem>
-                            {getFieldDecorator('remember', {
-                                valuePropName: 'checked',
-                                initialValue: true,
-                            })(
-                                <Checkbox>记住我</Checkbox>
-                            )}
+                            {/*{getFieldDecorator('remember', {*/}
+                                {/*valuePropName: 'checked',*/}
+                                {/*initialValue: true,*/}
+                            {/*})(*/}
+                                {/*<Checkbox>记住我</Checkbox>*/}
+                            {/*)}*/}
                             <span className="login-form-forgot" href="" style={{float: 'right'}}></span>
                             <Button   htmlType="submit" className="login-form-button"
                                     style={{background:'#FDD000',width: '100%'}}>
