@@ -41,6 +41,9 @@ import EditCha from './fina/EditCha'
 import EditExRate from './fina/EditExRate'
 import TeleMoney from './fina/TeleMoney'
 import OutMoneyJU from './fina/OutMoneyJU'
+import OutMoneyJUB from './fina/OutMoneyJUB'
+import OutMoneyJUC from './fina/OutMoneyJUC'
+import OutMoneyJUD from './fina/OutMoneyJUD'
 import OutMoney from './fina/OutMoney'
 import InOutTA from './fina/InOutTA'
 import ChannelMY from './fina/ChannelMY'
@@ -97,6 +100,9 @@ export default {
     PassOpenRS,
     EditRole,
     OutMoneyJU,
+    OutMoneyJUB,
+    OutMoneyJUC,
+    OutMoneyJUD,
     TradeAccount,
     InComeMoney,
     TeleMoney,

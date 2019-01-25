@@ -141,10 +141,25 @@ export default {
             icon: 'star',
             component: 'EditRole'
         }, {
-            route: '/app/fina/juoutm:id',
+            route: '/app/fina/juoutma:id',
             tk: 'tk', title: 'JUOutM',
             icon: 'star',
             component: 'OutMoneyJU'
+        }, {
+            route: '/app/fina/juoutmb:id',
+            tk: 'tk', title: 'JUOutM',
+            icon: 'star',
+            component: 'OutMoneyJUB'
+        }, {
+            route: '/app/fina/juoutmc:id',
+            tk: 'tk', title: 'JUOutM',
+            icon: 'star',
+            component: 'OutMoneyJUC'
+        }, {
+            route: '/app/fina/juoutmd:id',
+            tk: 'tk', title: 'JUOutM',
+            icon: 'star',
+            component: 'OutMoneyJUD'
         }, {
             route: '/app/fina/editcha:id',
             tk: 'tk', title: 'EditCha',

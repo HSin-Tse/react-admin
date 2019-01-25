@@ -36,7 +36,7 @@ class Dashboard extends React.Component {
         };
     }
 
-    // Request URL: http://127.0.0.1:8080/open/getOpenApplyList
+    // Request URL: http://127.0.0.1:8080/open/getOpenApplyList60
 
 
     componentDidMount() {
@@ -57,7 +57,13 @@ class Dashboard extends React.Component {
 
         // if()
 
-        this.setState({lastLoginIP: mImfor.lastLoginIP ? mImfor.lastLoginIP : ''});
+
+        if(mImfor){
+            this.setState({lastLoginIP: mImfor.lastLoginIP ? mImfor.lastLoginIP : ''});
+
+        }
+        // this.setState({lastLoginIP: mImfor.lastLoginIP ? mImfor.lastLoginIP : ''});
+
         this.setState({lastLoginTime: mImfor.lastLoginTime});
 
 

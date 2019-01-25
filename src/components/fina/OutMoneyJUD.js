@@ -32,7 +32,7 @@ class Basic extends Component {
             modeState: 1,
             forbiddenValue: 0,
             current: 0,
-            currentStep: 0,
+            currentStep: 3,
             pgsize: 10,
             loadFor: false,
             suspend_reason_type: []
@@ -43,7 +43,7 @@ class Basic extends Component {
 
     componentDidMount() {
 
-        console.log('hcia componentDidMount AA'  , )
+        console.log('hcia componentDidMount  DDD' ,)
 
         let self = this;
         window.Axios.post('dict/openDict', {
@@ -79,7 +79,7 @@ class Basic extends Component {
                 <h2 style={{marginTop: 15}}>
                     {steps[0].title}
                 </h2>
-                <BreadcrumbCustom first="财务管理" second="出金管理" third={steps[0].title}/>
+                <BreadcrumbCustom first="财务管理" second="出金管理" third={steps[this.state.currentStep].title}/>
 
                 <div style={{transform: "scale(1.3,1.3)"}}>
 

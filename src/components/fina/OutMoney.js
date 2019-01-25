@@ -288,26 +288,29 @@ class Basic extends Component {
                 render: (text, record) => (
                     <div style={{whiteSpace: 'nowrap'}}>
                         <Button size={'small'} style={{width: 70, background: '#FDD000'}} onClick={() => {
-                            this.props.history.push('/app/fina/juoutm1')
+                            this.props.history.push('/app/fina/juoutma1')
                         }}>结算审核
 
                         </Button>
                         <Button size={'small'} style={{width: 70, background: '#FDD000'}}
                                 onClick={() => {
-                                    this.props.history.push('/app/fina/juoutm1')
+                                    this.props.history.push('/app/fina/juoutmb1')
                                 }}>风险审核
 
                         </Button>
 
                         <Button size={'small'} style={{width: 70, background: '#FDD000'}}
                                 onClick={() => {
-                                    this.props.history.push('/app/fina/juoutm1')
+                                    this.props.history.push('/app/fina/juoutmc1')
                                 }}>渠道下发
 
                         </Button>
                         <Button size={'small'} style={{width: 70, background: '#FDD000'}}
                                 onClick={() => {
-                                    this.props.history.push('/app/fina/juoutm1')
+
+                                    console.log('hcia 出金完成 go' , )
+
+                                    this.props.history.push('/app/fina/juoutmd1')
                                 }}>出金完成
 
                         </Button>
@@ -441,6 +444,17 @@ class Basic extends Component {
                 loading: true,
             }
         );
+
+        window.Axios.post('finance/getWithdrawHistory', {
+            'pageSize': self.state.pgsize,
+            'pageNo': self.state.current,
+        }).then(function (response) {
+            console.log(response);
+
+
+
+        })
+
         window.Axios.post('star/getStarLiveAccountList', {
             'pageSize': self.state.pgsize,
             'pageNo': self.state.current,
