@@ -297,29 +297,7 @@ class AddRole extends Component {
                     </Row>
                 </Card>
 
-                {/*<Card bodyStyle={{padding: 0, margin: 0}}*/}
-                {/*title={<span style={{fontSize: 18}}> 特殊权限配置 </span>} bordered={true}*/}
-                {/*style={{marginTop: 15}}>*/}
 
-
-                {/*<Card bodyStyle={{marginLeft: 15}}*/}
-                {/*title={<span style={{marginLeft: 15, fontSize: 14}}> 电汇入金 </span>}*/}
-                {/*bordered={true}>*/}
-
-                {/*<Checkbox>创建</Checkbox>*/}
-                {/*<Checkbox>财务审核</Checkbox>*/}
-                {/*<Checkbox>入金完成（只读）</Checkbox>*/}
-                {/*</Card>*/}
-                {/*<Card bodyStyle={{marginLeft: 15}}*/}
-                {/*title={<span style={{marginLeft: 15, fontSize: 14}}> 出金管理</span>}*/}
-                {/*bordered={true}>*/}
-
-                {/*<Checkbox>客维审核</Checkbox>*/}
-                {/*<Checkbox>后台审核</Checkbox>*/}
-                {/*<Checkbox>银行放款</Checkbox>*/}
-                {/*<Checkbox>入金完成（只读）</Checkbox>*/}
-                {/*</Card>*/}
-                {/*</Card>*/}
 
 
                 <Card bodyStyle={{marginLeft: 10}} title={<span style={{fontSize: 18}}> 操作日志 </span>}

@@ -189,7 +189,7 @@ class Basic extends Component {
                 title: '申请时间',
                 dataIndex: '申请时间',
                 key: '申请时间',
-                width:100,
+                width: 100,
                 render: (text, record) => (
                     <span>{record.date}</span>),
             }, {
@@ -280,17 +280,40 @@ class Basic extends Component {
                 render: (text, record) => (
                     <span>{record.operator}</span>)
             }, {
-                align: 'center',
                 title: '操作',
                 key: '操作',
+                align: 'center',
+
+
                 render: (text, record) => (
-                    <div>
-                        <Button size={'small'} style={{minWidth: 70, background: '#FDD000'}} onClick={() => {
+                    <div style={{whiteSpace: 'nowrap'}}>
+                        <Button size={'small'} style={{width: 70, background: '#FDD000'}} onClick={() => {
                             this.props.history.push('/app/fina/juoutm1')
+                        }}>结算审核
 
+                        </Button>
+                        <Button size={'small'} style={{width: 70, background: '#FDD000'}}
+                                onClick={() => {
+                                    this.props.history.push('/app/fina/juoutm1')
+                                }}>风险审核
 
-                        }}>审核</Button>
-                        <Button size={'small'} style={{minWidth: 70, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record)}>已成功</Button>
+                        </Button>
+
+                        <Button size={'small'} style={{width: 70, background: '#FDD000'}}
+                                onClick={() => {
+                                    this.props.history.push('/app/fina/juoutm1')
+                                }}>渠道下发
+
+                        </Button>
+                        <Button size={'small'} style={{width: 70, background: '#FDD000'}}
+                                onClick={() => {
+                                    this.props.history.push('/app/fina/juoutm1')
+                                }}>出金完成
+
+                        </Button>
+                        <Button size={'small'} style={{width: 70, background: '#FDD000'}}
+                                onClick={() => this.showOPDAyModal2(record)}>已成功
+                        </Button>
 
                     </div>
                 ),
@@ -300,7 +323,8 @@ class Basic extends Component {
                 key: '异常备注',
                 render: (text, record) => (
                     <div>
-                        <Button size={'small'} style={{minWidth: 70, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record)}>添加</Button>
+                        <Button size={'small'} style={{minWidth: 70, background: '#FDD000'}}
+                                onClick={() => this.showOPDAyModal2(record)}>添加</Button>
 
                     </div>
                 ),
@@ -682,7 +706,11 @@ class Basic extends Component {
                           </Button>
                       }>
 
-                    <Table rowKey="id"
+                    <Table
+
+                        titleStyle={{whiteSpace: 'nowrap'}}
+                        style={{whiteSpace: 'nowrap'}}
+                        rowKey="id"
                            rowSelection={rowSelection}
 
                            columns={this.columns}

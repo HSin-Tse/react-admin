@@ -217,7 +217,7 @@ class Basic extends Component {
                     <span>{record.displayApplyType}</span>),
             }, {
                 align: 'center',
-                width: 150,
+                width: 80,
                 title: '申请时间',
                 dataIndex: '申请时间',
                 key: '申请时间',

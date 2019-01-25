@@ -1,11 +1,11 @@
 export const steps = [{
-    title: '客维审核',
+    title: '结算审核',
     content: 'First-content',
 }, {
-    title: '后台审核',
+    title: '风险审核',
     content: 'Second-content',
 }, {
-    title: '银行放款',
+    title: '渠道下发',
     content: 'Last-content',
 }, {
     title: '出金完成',
