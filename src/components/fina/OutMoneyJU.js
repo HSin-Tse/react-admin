@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Tabs, Checkbox, Select, Steps, Card, Col, Divider, Row, Input, Table} from 'antd';
+import {Icon, Button, Tabs, Checkbox, Select, Steps, Card, Col, Divider, Row, Input, Table} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
@@ -43,7 +43,7 @@ class Basic extends Component {
 
     componentDidMount() {
 
-        console.log('hcia componentDidMount AA'  , )
+        console.log('hcia componentDidMount AA',)
 
         let self = this;
         window.Axios.post('dict/openDict', {
@@ -71,34 +71,189 @@ class Basic extends Component {
             minHeight: 30
         }
         return (
-            <div>
-                {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
+            <div style={{overflow:'auto'}}>
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
-                {/*this.state.selectedRowKeys.length > 0*/}
 
                 <h2 style={{marginTop: 15}}>
                     {steps[0].title}
                 </h2>
                 <BreadcrumbCustom first="财务管理" second="出金管理" third={steps[0].title}/>
 
-                <div style={{transform: "scale(1.3,1.3)"}}>
 
-                    <Steps
-                        style={{marginLeft: "15%", marginBottom: "20px", marginTop: "40px", width: "70%", height: 90}}
-                        labelPlacement={'vertical'} current={this.state.currentStep}>
-                        {steps.map(item => <Step key={item.title} title={item.title}/>)}
-                    </Steps>
+                <div style={{
 
-                </div>
-                {/*<div style="text-align:center;background-color:pink;width:200px;height:60">這裡是文字</div>*/}
+                    minWidth:'1200px',
+                    background: "white",
+                    boxShadow: '0px 0px 20px 0px rgba(123,123,123,0.1)',
+                    borderRadius: '4px',
 
-                <Card
-                    title={<h1>TOM WANG</h1>}
-                    bordered={true}
-                    bodyStyle={{padding: 0, margin: 0}}
-                    headStyle={{textAlign: 'center', width: '100%'}}
-                    style={{marginLeft: '0%', width: '100%'}}>
+
+                }}>
+
+                    <div style={{paddingTop: '36px', marginLeft: '145px', marginRight: '145px'}}>
+
+
+                        <div style={{
+                            justifyContent: 'space-around',
+                            display: "flex",
+                            alignItems: 'center',
+                            background: 'white'
+                        }}>
+
+                            <div style={{
+                                marginLeft: '16px',
+                                display: "flex",
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                width: '40px',
+                                height: '40px',
+                                background: 'rgba(246,209,71,1)',
+                                borderRadius: '50%'
+                            }}>
+                        <span style={{
+                            fontSize: '20px',
+                            fontFamily: 'PingFang-HK-Medium',
+                            fontWeight: 'bold',
+                            color: 'rgba(33,33,33,1)'
+                        }}>
+                            1
+                        </span>
+                            </div>
+                            <div style={{
+                                flexGrow: '1',
+                                height: '2px',
+                                background: 'rgba(246,209,71,1)'
+                            }}></div>
+                            <div style={{
+                                display: "flex",
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                width: '40px',
+                                height: '40px',
+                                background: 'rgba(246,209,71,1)',
+                                borderRadius: '50%'
+                            }}>
+                        <span style={{
+                            fontSize: '20px',
+                            fontFamily: 'PingFang-HK-Medium',
+                            fontWeight: 'bold',
+                            color: 'rgba(33,33,33,1)'
+                        }}>
+                            2
+                        </span>
+                            </div>
+                            <div style={{
+                                flexGrow: '1',
+
+                                height: '2px',
+                                background: 'rgba(246,209,71,1)'
+                            }}></div>
+                            <div style={{
+                                display: "flex",
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                width: '40px',
+                                height: '40px',
+                                background: 'rgba(246,209,71,1)',
+                                borderRadius: '50%'
+                            }}>
+                        <span style={{
+                            fontSize: '20px',
+                            fontFamily: 'PingFang-HK-Medium',
+                            fontWeight: 'bold',
+                            color: 'rgba(33,33,33,1)'
+                        }}>
+                            3
+                        </span>
+                            </div>
+                            <div style={{
+
+                                flexGrow: '1',
+                                height: '2px',
+                                background: '#CCCCCC'
+                            }}></div>
+                            <div style={{
+                                marginRight: '16px',
+                                display: "flex",
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                width: '40px',
+                                height: '40px',
+                                background: '#CCCCCC',
+                                borderRadius: '50%'
+                            }}>
+                        <span style={{
+                            fontSize: '20px',
+                            fontFamily: 'PingFang-HK-Medium',
+                            fontWeight: 'bold',
+                            color: 'white'
+                        }}>
+                            4
+                        </span>
+
+
+                            </div>
+
+                        </div>
+
+                        <div style={{
+                            justifyContent: 'space-around',
+                            display: "flex",
+                            alignItems: 'center',
+                            background: 'white'
+                        }}>
+                    <span style={{
+                        fontSize: '18px',
+                        fontFamily: 'PingFang-HK-Medium',
+                        fontWeight: 'bold',
+                        color: '#7B7B7B'
+                    }}>
+                        {steps[0].title}
+                        </span>
+                            <div style={{
+                                flexGrow: '1',
+                                height: '2px',
+                                background: '#00000000'
+                            }}/>
+                            <span style={{
+                                fontSize: '18px',
+                                fontFamily: 'PingFang-HK-Medium',
+                                fontWeight: 'bold',
+                                color: '#7B7B7B'
+                            }}>
+                            {steps[1].title}
+                        </span>
+                            <div style={{
+                                flexGrow: '1',
+                                height: '2px',
+                                background: '#00000000'
+                            }}/>
+                            <span style={{
+                                fontSize: '18px',
+                                fontFamily: 'PingFang-HK-Medium',
+                                fontWeight: 'bold',
+                                color: '#7B7B7B'
+                            }}>
+                            {steps[2].title}
+                        </span>
+                            <div style={{
+                                flexGrow: '1',
+                                height: '2px',
+                                background: '#00000000'
+                            }}/>
+                            <span style={{
+                                fontSize: '18px',
+                                fontFamily: 'PingFang-HK-Medium',
+                                fontWeight: 'bold',
+                                color: '#7B7B7B'
+                            }}>
+                            {steps[3].title}
+                        </span>
+                        </div>
+                    </div>
+
                     <Row
+                        style={{margin:'20px'}}
 
                         gutter={32}>
                         <Col span={12}>
@@ -108,7 +263,7 @@ class Basic extends Component {
                                 <div style={{
                                     padding: 15,
                                     color: 'white',
-                                    background: '#FF8800',
+                                    background: '#F6D147',
                                     alignItems: 'center',
                                     justifyContent: 'space-between',
                                     display: 'flex',
@@ -146,7 +301,7 @@ class Basic extends Component {
                                 <div style={{
                                     padding: 15,
                                     color: 'white',
-                                    background: '#FF8800',
+                                    background: '#F6D147',
                                     alignItems: 'center',
                                     justifyContent: 'space-between',
                                     display: 'flex',
@@ -204,7 +359,7 @@ class Basic extends Component {
                                 <div style={{
                                     padding: 15,
                                     color: 'white',
-                                    background: '#FF8800',
+                                    background: '#F6D147',
                                     alignItems: 'center',
                                     justifyContent: 'space-between',
                                     display: 'flex',
@@ -218,8 +373,10 @@ class Basic extends Component {
                                     <span style={{fontSize: '13px'}}>00.00</span>
                                 </div>
                                 <div style={ssdds}>
-                                    <span style={{fontSize: '13px'}}><span style={{color: 'red'}}>*</span>出金金额:</span>
-                                    <span style={{fontSize: '13px'}}><Input style={{width: 220}} placeholder="100.00"/>USD</span>
+                                        <span style={{fontSize: '13px'}}><span
+                                            style={{color: 'red'}}>*</span>出金金额:</span>
+                                    <span style={{fontSize: '13px'}}><Input style={{width: 220}}
+                                                                            placeholder="100.00"/>USD</span>
                                 </div>
                                 <div style={ssdds}>
                                     <span style={{fontSize: '13px'}}>出金日期</span>
@@ -248,7 +405,8 @@ class Basic extends Component {
 
                                 </div>
                                 <div style={ssdds}>
-                                    <span style={{fontSize: '13px'}}><span style={{color: 'red'}}>*</span>银行名称</span>
+                                        <span style={{fontSize: '13px'}}><span
+                                            style={{color: 'red'}}>*</span>银行名称</span>
                                     <span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}
                                                                             placeholder=""/></span>
                                 </div>
@@ -270,17 +428,20 @@ class Basic extends Component {
                                 </div>
 
                                 <div style={ssdds}>
-                                    <span style={{fontSize: '13px'}}><span style={{color: 'red'}}>*</span>支行名称</span>
+                                        <span style={{fontSize: '13px'}}><span
+                                            style={{color: 'red'}}>*</span>支行名称</span>
                                     <span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}
                                                                             placeholder=""/></span>
                                 </div>
                                 <div style={ssdds}>
-                                    <span style={{fontSize: '13px'}}><span style={{color: 'red'}}>*</span>收款人姓名</span>
+                                        <span style={{fontSize: '13px'}}><span
+                                            style={{color: 'red'}}>*</span>收款人姓名</span>
                                     <span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}
                                                                             placeholder=""/></span>
                                 </div>
                                 <div style={ssdds}>
-                                    <span style={{fontSize: '13px'}}><span style={{color: 'red'}}>*</span>收款银行账户</span>
+                                        <span style={{fontSize: '13px'}}><span
+                                            style={{color: 'red'}}>*</span>收款银行账户</span>
                                     <span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}
                                                                             placeholder=""/></span>
                                 </div>
@@ -303,7 +464,8 @@ class Basic extends Component {
                                                 <div style={{
                                                     marginTop: 10,
                                                     marginBottom: 10,
-                                                }}>请注意：</div>
+                                                }}>请注意：
+                                                </div>
                                                 <div>
                                                     1.只有在提交此请求后才能将钱汇到客户银行账户。
 
@@ -321,14 +483,14 @@ class Basic extends Component {
                                                         marginBottom: 10,
                                                     }}
                                                     rows={4}
-                                                          value={this.state.theComment}
-                                                          onChange={(e) => {
-                                                              let comment = e.target.value;
-                                                              this.setState({
-                                                                  theComment: comment
-                                                              });
-                                                          }}
-                                                          placeholder="备注"/>
+                                                    value={this.state.theComment}
+                                                    onChange={(e) => {
+                                                        let comment = e.target.value;
+                                                        this.setState({
+                                                            theComment: comment
+                                                        });
+                                                    }}
+                                                    placeholder="备注"/>
 
                                                 <div style={{
                                                     margin: 5,
@@ -337,13 +499,13 @@ class Basic extends Component {
                                                 }}>
 
                                                     <Button style={{
-                                                        margin: 10,width:150
+                                                        margin: 10, width: 150
                                                     }}>确认扣款</Button>
                                                     <Button style={{
-                                                        margin: 10,width:150
+                                                        margin: 10, width: 150
                                                     }}>挂起待确认</Button>
                                                     <Button style={{
-                                                        margin: 10,width:150
+                                                        margin: 10, width: 150
                                                     }}>取消</Button>
 
 
@@ -414,7 +576,9 @@ class Basic extends Component {
                     </Row>
 
 
-                </Card>
+
+
+                </div>
 
 
             </div>
