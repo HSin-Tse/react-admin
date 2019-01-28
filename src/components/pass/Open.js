@@ -476,11 +476,12 @@ class Basic extends Component {
                       title={'开户审核'}>
                     <Table
                         titleStyle={{whiteSpace: 'nowrap'}}
+                        bodyStyle={{whiteSpace: 'nowrap'}}
                         style={{whiteSpace: 'nowrap'}}
                         rowKey="id"
                         columns={this.columns}
                         dataSource={this.state.userList}
-                        scroll={{x: 1500}}
+                        scroll={{x: 1600}}
                         bordered
                         loading={this.state.loading}
                         pagination={{
