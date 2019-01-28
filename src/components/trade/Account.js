@@ -158,7 +158,6 @@ class Basic extends Component {
         this.columns = [
             {
                 align: 'center',
-
                 title: '客户姓名',
                 dataIndex: 'name',
                 key: 'name',
@@ -646,6 +645,8 @@ class Basic extends Component {
                             </Row>
 
                             <Table
+
+
                                 style={{marginTop: "20px", marginLeft: "80px", marginRight: "80px"}}
                                 rowKey="id"
                                 columns={[
@@ -932,7 +933,10 @@ class Basic extends Component {
                           </Button>
                       }>
 
-                    <Table rowKey="id"
+                    <Table
+                        titleStyle={{whiteSpace: 'nowrap'}}
+                        style={{whiteSpace: 'nowrap'}}
+                        rowKey="id"
                            rowSelection={rowSelection}
                            columns={this.columns}
                            dataSource={this.state.userList}

@@ -620,6 +620,8 @@ class InnerUserList extends Component {
                       }>
 
                     <Table rowKey="id"
+                           titleStyle={{whiteSpace: 'nowrap'}}
+                           style={{whiteSpace: 'nowrap'}}
 
                            columns={this.columns}
                            dataSource={this.state.userList}

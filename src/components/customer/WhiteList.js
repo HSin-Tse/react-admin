@@ -638,6 +638,8 @@ export default class WhiteList extends Component {
                          <Button style={{marginLeft: 15}} onClick={() => this.showModal()}>新增白名单用户</Button>]}
                 >
                     <Table
+                        titleStyle={{whiteSpace: 'nowrap'}}
+                        style={{whiteSpace: 'nowrap'}}
                         rowKey="id"
                         bordered
                         columns={this.columns}

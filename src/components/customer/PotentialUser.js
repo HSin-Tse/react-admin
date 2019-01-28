@@ -980,7 +980,10 @@ export default class PotentialUser extends Component {
                     <TabPane tab="潜在用户" key="1">
                         <Card bodyStyle={{padding: 0, margin: 0}}
                               title={'潜在用户信息表'}>
-                            <Table rowKey="id"
+                            <Table
+                                titleStyle={{whiteSpace: 'nowrap'}}
+                                style={{whiteSpace: 'nowrap'}}
+                                rowKey="id"
                                    bordered
                                 // rowSelection={rowSelection}
                                    columns={this.pageAColumns()}
@@ -1003,6 +1006,8 @@ export default class PotentialUser extends Component {
 
                             <Table rowKey="id"
                                    bordered
+                                   titleStyle={{whiteSpace: 'nowrap'}}
+                                   style={{whiteSpace: 'nowrap'}}
 
                                 // rowSelection={rowSelection}
                                    columns={this.pageBColumns()}
@@ -1021,6 +1026,8 @@ export default class PotentialUser extends Component {
                     <TabPane tab="意向用户" key="3">
                         <Card bodyStyle={{padding: 0, margin: 0}} title={'意向用户信息表'}>
                             <Table rowKey="id"
+                                   titleStyle={{whiteSpace: 'nowrap'}}
+                                   style={{whiteSpace: 'nowrap'}}
                                    bordered
                                    columns={this.pageCColumns()}
                                    dataSource={this.state.bklistC}
