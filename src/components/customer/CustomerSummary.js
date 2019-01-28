@@ -259,7 +259,7 @@ class CustomerSummary extends Component {
                             <Button disabled={!record.belongUserId} size={'small'}
                                     style={{
                                         display: !record.belongUserId ? 'none' : '',
-                                        background: record.accountStatus === 1 ? '#FDD000' : 'OrangeRed'
+                                        background: record.accountStatus === 1 ? '#FDD000' : '#FF6666'
                                     }}>{record.accountStatus === 1 ? '正常（可冻结)' : record.accountStatus === 2 ? '禁止登陆:解冻'
                                 : record.accountStatus === 3 ? '禁止交易:解冻' : '-'}</Button>
                         </Popconfirm>
