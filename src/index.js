@@ -224,7 +224,7 @@ window.Axios.interceptors.response.use(function (response) {
         setTimeout(hideLoading, 0)
         message.error(response.data.msg)
 
-        if (response.data.msg == '无效的token') {
+        if (response.data.errorCode == 'ERROR_022') {
 
             // console.log('hcia response.data.msg' , response.data.msg)
             localStorage.removeItem('infor');
