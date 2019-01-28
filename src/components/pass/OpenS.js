@@ -587,7 +587,7 @@ class PassOpenD extends Component {
                                             value={this.state.recordData.email} onChange={this.onChangeemail}
                                             placeholder=""/>
                                     </div>
-                                    <div style={{display: 'flex', minHeight: 40}}>
+                                    <div style={{marginTop:'10px',display: 'flex', minHeight: 40}}>
                                         <span style={{minWidth: 120}}>*邮编</span>
                                         <Input
                                             disabled={true}
