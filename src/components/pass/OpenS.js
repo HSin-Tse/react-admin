@@ -412,6 +412,7 @@ class PassOpenD extends Component {
 
                     </div>
                     <div style={{
+                        width:1200,
                         justifyContent: 'flex-start',
                         alignItems: 'center',
                         fontSize: '14px',
