@@ -2,6 +2,8 @@
  * Created by tse on 2018/1/12
  */
 import React, {Component} from 'react';
+import Zmage from 'react-zmage'
+
 import {
     Tooltip,
     Popconfirm,
@@ -995,6 +997,9 @@ class PassOpenD extends Component {
 
                 {/*<div>waitUpdate :{JSON.stringify(this.state.waitUpdate)}</div>*/}
                 <h2 style={{marginTop: 15}}>开户信息详情</h2>
+                {/*<Zmage*/}
+                    {/*alt="example"*/}
+                    {/*src={this.state.recordData.idcard_1?'this.state.recordData.idcard_1':""}/>*/}
                 <BreadcrumbCustom first="审核管理" second="开户信息详情"/>
                 <div style={{
                     padding: '22px',
@@ -1447,9 +1452,8 @@ class PassOpenD extends Component {
                                                   点击上传可修改照片<Icon type="upload"/>
                                               </h3>
                                           </Upload>]}>
-                                    <img
-                                        onClick={() => this.openGallery(this.state.recordData.idcard_0)}
-                                        alt="example" width="100%"
+                                    <Zmage
+                                        alt="" width="100%"
                                         src={this.state.recordData.idcard_0}/>
                                 </Card>
                             </Col>
@@ -1466,12 +1470,12 @@ class PassOpenD extends Component {
                                                   点击上传可修改照片<Icon type="upload"/>
                                               </h3>
                                           </Upload>]}>
-                                    <img
-                                        onClick={() => this.openGallery(this.state.recordData.idcard_1)}
-                                        alt="example" width="100%"
+                                    <Zmage
+                                        alt="" width="100%"
                                         src={this.state.recordData.idcard_1}/>
                                 </Card>
                             </Col>
+
                             <Col md={8}>
                                 <Card bordered={true} bodyStyle={{padding: 10}}
                                       actions={[
@@ -1485,9 +1489,8 @@ class PassOpenD extends Component {
                                                   点击上传可修改照片<Icon type="upload"/>
                                               </h3>
                                           </Upload>]}>
-                                    <img
-                                        onClick={() => this.openGallery(this.state.recordData.idcard_2)}
-                                        alt="example" width="100%"
+                                    <Zmage
+                                        alt="" width="100%"
                                         src={this.state.recordData.idcard_2}/>
                                 </Card>
                             </Col>

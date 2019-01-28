@@ -2,6 +2,7 @@
  * Created by tse on 2018/1/12
  */
 import React, {Component} from 'react';
+import Zmage from 'react-zmage'
 import {
     Tooltip,
     Popconfirm,
@@ -17,7 +18,6 @@ import {
     notification,
     Table,
     Form,
-    Upload, Icon
 } from 'antd';
 import {message} from 'antd';
 import html2canvas from 'html2canvas';
@@ -39,6 +39,7 @@ class PassOpenD extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             isNeedSave: false
             , provinceDatAarra: []
@@ -737,10 +738,15 @@ class PassOpenD extends Component {
                                                  rel="noopener noreferrer">身份证反面照片</a>
                                           </h3>]
                                       }>
-                                    <img
-                                        onClick={() => this.openGallery(this.state.recordData.idcard_0)}
-                                        alt="example" width="100%"
-                                        src={this.state.recordData.idcard_0}/>
+                                    <Zmage
+
+                                        // onClick={() => self.openGallery(self.state.recordData.idcard_0)}
+                                        alt=""
+                                        width="100%"
+                                        // src={'https://cloudfrontcdn.waca.ec/uploads/shops/506/products/ba/ba9bc814e27553aa75ef3fedecf34b4a.jpg'}
+                                        src={this.state.recordData.idcard_0?this.state.recordData.idcard_0:''}
+
+                                    />
                                 </Card>
                             </Col>
                             <Col md={8}>
@@ -752,9 +758,9 @@ class PassOpenD extends Component {
                                                  rel="noopener noreferrer">身份证反面照片</a>
                                           </h3>]
                                       }>
-                                    <img
-                                        onClick={() => this.openGallery(this.state.recordData.idcard_1)}
-                                        alt="example" width="100%"
+                                    <Zmage
+                                        // onClick={() => this.openGallery(this.state.recordData.idcard_1)}
+                                        alt="" width="100%"
                                         src={this.state.recordData.idcard_1}/>
                                 </Card>
                             </Col>
@@ -767,9 +773,9 @@ class PassOpenD extends Component {
                                                  rel="noopener noreferrer">身份证反面照片</a>
                                           </h3>]
                                       }>
-                                    <img
-                                        onClick={() => this.openGallery(this.state.recordData.idcard_2)}
-                                        alt="example" width="100%"
+                                    <Zmage
+                                        // onClick={() => this.openGallery(this.state.recordData.idcard_2)}
+                                        alt="" width="100%"
                                         src={this.state.recordData.idcard_2}/>
                                 </Card>
                             </Col>
