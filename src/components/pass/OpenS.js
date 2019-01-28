@@ -188,7 +188,7 @@ class PassOpenD extends Component {
                             return item.value == self.state.mState;
                         });
 
-                        if(!nowCity){
+                        if (!nowCity) {
 
                             window.Axios.post('dict/openDict', {
                                 'keys': 'div_type',
@@ -215,6 +215,8 @@ class PassOpenD extends Component {
                         //         cityDatAarra: ress.data.data.div_type
                         //     })
                         // });
+
+
                     });
 
 
@@ -270,10 +272,10 @@ class PassOpenD extends Component {
 
                         onClick={() => this.saveNote()}
                         style={{
-                        borderRadius: '4px',
-                        fontSize: '12px',
-                        width: '136px', height: '30px', marginTop: '8px', background: '#FDD000'
-                    }}>下载当前客户资料</Button>
+                            borderRadius: '4px',
+                            fontSize: '12px',
+                            width: '136px', height: '30px', marginTop: '8px', background: '#FDD000'
+                        }}>下载当前客户资料</Button>
 
                     <div style={{
                         borderRadius: '4px',
@@ -362,8 +364,8 @@ class PassOpenD extends Component {
                                         <Select
                                             disabled={true}
                                             value={this.state.recordData.accountType}
-                                                style={{marginLeft: 20, width: 120}}
-                                                onChange={(v, key) => this.handleACType(v, key)}>
+                                            style={{marginLeft: 20, width: 120}}
+                                            onChange={(v, key) => this.handleACType(v, key)}>
                                             {this.state.accountType.map(acType => <Option
                                                 key={acType.name} kk={acType.id}>{acType.name}</Option>)}
                                         </Select>
@@ -458,8 +460,8 @@ class PassOpenD extends Component {
                                                         disabled={true}
                                                         defaultValue={this.state.recordData.lastNameCn}
                                                         // onChange={this.onChangelastNameCn}
-                                                           style={{width: '256px'}} placeholder="" tagkey="lastNameCn"
-                                                           sdsd={'dd'}/>
+                                                        style={{width: '256px'}} placeholder="" tagkey="lastNameCn"
+                                                        sdsd={'dd'}/>
                                                 )}
                                             </FormItem>
 
@@ -518,8 +520,8 @@ class PassOpenD extends Component {
                                         <Select
                                             disabled={true}
                                             value={this.state.mGender}
-                                                onChange={this.onChangegender}
-                                                style={{width: '256px'}}>
+                                            onChange={this.onChangegender}
+                                            style={{width: '256px'}}>
                                             <Option value="Male">男</Option>
                                             <Option value="Female">女</Option>
                                         </Select>
@@ -529,8 +531,8 @@ class PassOpenD extends Component {
                                         <Input
                                             disabled={true}
                                             value={this.state.recordData.nationalID}
-                                               onChange={this.onChangenationalId}
-                                               style={{width: '256px'}} placeholder=""/>
+                                            onChange={this.onChangenationalId}
+                                            style={{width: '256px'}} placeholder=""/>
                                     </div>
 
                                     <div style={{display: 'flex', minHeight: 40}}>
@@ -560,21 +562,27 @@ class PassOpenD extends Component {
 
                                     <div style={{display: 'flex', minHeight: 40}}>
                                         <span style={{minWidth: 120}}>*详细地址</span>
-                                        <Input disabled={true} defaultValue={this.state.recordData.street}
-                                               onChange={this.onChangestreet}
-                                               style={{width: '256px'}} placeholder=""/>
+                                        <Input.TextArea
+                                            autosize={true}
+                                            disabled={true}
+                                            value={this.state.recordData.street}
+                                            placeholder=""/>
                                     </div>
-                                    <div style={{display: 'flex', minHeight: 40}}>
+                                    <div style={{marginTop:'10px',display: 'flex', minHeight: 40}}>
                                         <span style={{minWidth: 120}}>*联系电话</span>
-                                        <Input disabled={true} defaultValue={this.state.recordData.phoneNumber} disabled={true}
-                                               style={{width: '256px'}} placeholder=""/>
+                                        <Input
+                                            autosize={true}
+                                            disabled={true} defaultValue={this.state.recordData.phoneNumber}
+                                            disabled={true}
+                                            placeholder=""/>
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
                                         <span style={{minWidth: 120}}>*邮箱地址</span>
-                                        <Input disabled={true}
-
+                                        <Input.TextArea
+                                            disabled={true}
+                                            autosize={true}
                                             style={{width: '256px'}}
-                                            defaultValue={this.state.recordData.email} onChange={this.onChangeemail}
+                                            value={this.state.recordData.email} onChange={this.onChangeemail}
                                             placeholder=""/>
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
@@ -582,8 +590,8 @@ class PassOpenD extends Component {
                                         <Input
                                             disabled={true}
                                             value={this.state.recordData.postalCode}
-                                               onChange={this.onChangepostalCode}
-                                               style={{width: '256px'}} placeholder="邮编"/>
+                                            onChange={this.onChangepostalCode}
+                                            style={{width: '256px'}} placeholder="邮编"/>
                                     </div>
                                 </Card>
 
@@ -604,8 +612,8 @@ class PassOpenD extends Component {
                                         <Select
                                             disabled={true}
                                             value={this.state.mAnnualIncome}
-                                                onChange={this.onChangeannualIncome}
-                                                style={{width: '256px'}}>
+                                            onChange={this.onChangeannualIncome}
+                                            style={{width: '256px'}}>
                                             {this.mIncomesOPS}
                                         </Select>
                                     </div>
@@ -668,6 +676,7 @@ class PassOpenD extends Component {
                                     <div style={{display: 'flex', minHeight: 40}}>
                                         <span style={{minWidth: 120}}>*风险承受力</span>
                                         <Select
+                                            style={{width: 'auto',wordWrap: 'break-word'}}
                                             disabled={true}
                                             dropdownStyle={{wordWrap: 'break-word'}}
                                             onChange={this.onChangemriskTolerance}
@@ -677,18 +686,17 @@ class PassOpenD extends Component {
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
                                         <span style={{width: 120}}>交易类型</span>
-                                        <Input disabled={true} defaultValue={this.state.recordData.accountType} disabled={true}
+                                        <Input disabled={true} defaultValue={this.state.recordData.accountType}
                                                style={{width: '256px'}} placeholder=""/>
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
                                         <span style={{width: 120}}>交易货币</span>
-                                        <Input disabled={true} defaultValue={this.state.recordData.currency} disabled={true}
+                                        <Input disabled={true} defaultValue={this.state.recordData.currency}
                                                style={{width: '256px'}} placeholder=""/>
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
                                         <span style={{minWidth: 120}}>*交易密码</span>
                                         <Input disabled={true} defaultValue={this.state.recordData.accountPassword}
-                                               disabled={true}
                                                style={{width: '256px'}} placeholder=""/>
                                     </div>
                                 </Card>
@@ -716,7 +724,6 @@ class PassOpenD extends Component {
                         alignItems: 'center',
                         fontSize: '14px',
                     }}>
-
 
 
                         <Row style={{margin: '18px'}} gutter={16}>
@@ -858,7 +865,7 @@ class PassOpenD extends Component {
                         fontSize: '14px',
                     }}>
 
-                        <Row  style={{margin: '20px'}} gutter={12}>
+                        <Row style={{margin: '20px'}} gutter={12}>
 
                             <Col md={24}>
 
@@ -914,10 +921,11 @@ class PassOpenD extends Component {
                             <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center'}}>
 
                                 <Button
-                                    style={{ borderRadius: '4px',
+                                    style={{
+                                        borderRadius: '4px',
                                         width: '200px',
                                         height: '40px',
-                                        }}
+                                    }}
                                     disabled={true}
                                     loading={this.state.iconLoading}>
                                     开户通过
@@ -960,9 +968,6 @@ class PassOpenD extends Component {
 
 
                 </div>
-
-
-
 
 
                 <div className="gutter-example button-demo">
@@ -1646,6 +1651,7 @@ class PassOpenD extends Component {
 
     }
 }
+
 const PassOpenDForm = Form.create()(PassOpenD);
 
 export default PassOpenDForm;
