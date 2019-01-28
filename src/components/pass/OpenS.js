@@ -1142,7 +1142,7 @@ class PassOpenD extends Component {
 
         if (this.state.checkfromdbTypeV == 0) {
             window.Axios.post('open/localExistOpenAccount', {
-                'phoneNumber': me.state.checkfromdbName,
+                'mobile': me.state.checkfromdbName,
             }).then(function (response) {
                 // console.log('hcia response', response)
                 me.setState({
@@ -1182,7 +1182,7 @@ class PassOpenD extends Component {
 
         if (this.state.checkfromdbTypeV == 0) {
             window.Axios.post('open/remoteExistOpenAccount', {
-                'phoneNumber': me.state.checkfromdbName,
+                'mobile': me.state.checkfromdbName,
             }).then(function (response) {
                 // console.log('hcia response', response)
                 me.setState({
