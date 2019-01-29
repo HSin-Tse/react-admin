@@ -473,6 +473,11 @@ class Basic extends Component {
                 </h2>
                 <BreadcrumbCustom first="审核管理" second="开户审核"/>
                 <Card bodyStyle={{padding: 0, margin: 0}}
+                      extra={
+                          <Button type="default"
+                                  onClick={() => this.requestPage()}>刷新
+                          </Button>
+                      }
                       title={'开户审核'}>
                     <Table
                         titleStyle={{whiteSpace: 'nowrap'}}

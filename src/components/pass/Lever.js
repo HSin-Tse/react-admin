@@ -910,10 +910,18 @@ class Basic extends Component {
 
 
                 <Card title="杠杆审核"
+                      extra={
+                          <Button type="default"
+                                  onClick={() => this.requestPage()}>刷新
+                          </Button>
+                      }
                       bodyStyle={{padding: 0, margin: 0}}
                 >
 
-                    <Table rowKey="id"
+                    <Table
+
+
+                        rowKey="id"
 
                            columns={this.columns}
                            dataSource={this.state.userList}

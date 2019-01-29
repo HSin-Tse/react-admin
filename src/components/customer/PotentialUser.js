@@ -978,7 +978,14 @@ export default class PotentialUser extends Component {
                     tabBarStyle={{}}
                     type="card">
                     <TabPane tab="潜在用户" key="1">
-                        <Card bodyStyle={{padding: 0, margin: 0}}
+                        <Card
+
+                            extra={
+                                <Button type="default"
+                                        onClick={() => this.requestPageA()}>刷新
+                                </Button>
+                            }
+                            bodyStyle={{padding: 0, margin: 0}}
                               title={'潜在用户信息表'}>
                             <Table
                                 titleStyle={{whiteSpace: 'nowrap'}}
@@ -1002,7 +1009,14 @@ export default class PotentialUser extends Component {
 
 
                     <TabPane tab="模拟用户" key="2">
-                        <Card bodyStyle={{padding: 0, margin: 0}} title={'模拟用户信息表'}>
+                        <Card
+
+                            extra={
+                                <Button type="default"
+                                        onClick={() => this.requestPageB()}>刷新
+                                </Button>
+                            }
+                            bodyStyle={{padding: 0, margin: 0}} title={'模拟用户信息表'}>
 
                             <Table rowKey="id"
                                    bordered
@@ -1024,7 +1038,14 @@ export default class PotentialUser extends Component {
 
                     </TabPane>
                     <TabPane tab="意向用户" key="3">
-                        <Card bodyStyle={{padding: 0, margin: 0}} title={'意向用户信息表'}>
+                        <Card
+
+                            extra={
+                                <Button type="default"
+                                        onClick={() => this.requestPageC()}>刷新
+                                </Button>
+                            }
+                            bodyStyle={{padding: 0, margin: 0}} title={'意向用户信息表'}>
                             <Table rowKey="id"
                                    titleStyle={{whiteSpace: 'nowrap'}}
                                    style={{whiteSpace: 'nowrap'}}
