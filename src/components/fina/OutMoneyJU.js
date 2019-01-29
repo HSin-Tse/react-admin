@@ -576,7 +576,7 @@ class Basic extends Component {
                                         </TabPane>
                                     </Tabs>
                                 </div>
-                            </Card>
+                            </Card>P
                         </Col>
                         <Col span={12}>
 

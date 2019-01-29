@@ -317,7 +317,7 @@ class SiderCustom extends Component {
         console.log('hcia inttevar', inttevar)
 
 
-        if (inttevar > 5 * 1000) {
+        if (inttevar > 7 * 1000) {
 
             // console.log('hcia inttevar', inttevar)
 
