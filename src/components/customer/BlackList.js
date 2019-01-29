@@ -371,6 +371,29 @@ export default class BlackList extends Component {
 
         });
     }
+    requestPageAS = () => {
+        let self = this;
+        self.setState({
+            loadingA: true
+        })
+        window.Axios.post('auth/getBlackList', {
+            'listType': 1,//1:合规 2:开户 3:交易
+            'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易,
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            starClientAccount: this.state.starClientAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
+        }).then((response) => {
+            self.setState({
+                totalpageA: response.data.data.totalPage,
+                bklistA: response.data.data.list,
+                loadingA: false
+            });
+
+        });
+    }
     requestPageB = () => {
         let self = this
 
@@ -396,6 +419,30 @@ export default class BlackList extends Component {
 
         });
     }
+    requestPageBS = () => {
+        let self = this
+
+        self.setState({
+            loadingB: true
+        })
+        window.Axios.post('auth/getBlackList', {
+            'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易,
+            'listType': 2,//1:合规 2:开户 3:交易
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            starClientAccount: this.state.starClientAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
+        }).then((response) => {
+            self.setState({
+                totalpageB: response.data.data.totalPage,
+                bklistB: response.data.data.list,
+                loadingB: false
+            });
+
+        });
+    }
     requestPageC = () => {
         let self = this
         self.setState({
@@ -403,6 +450,29 @@ export default class BlackList extends Component {
         })
         window.Axios.post('auth/getBlackList', {
             pageNo: this.state.currentC,
+            'listType': 3,//1:合规 2:开户 3:交易
+            'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易,
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            starClientAccount: this.state.starClientAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
+        }).then((response) => {
+
+            self.setState({
+                totalpageC: response.data.data.totalPage,
+                bklistC: response.data.data.list,
+                loadingC: false
+            });
+        });
+    }
+    requestPageCS = () => {
+        let self = this
+        self.setState({
+            loadingC: true
+        })
+        window.Axios.post('auth/getBlackList', {
             'listType': 3,//1:合规 2:开户 3:交易
             'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易,
             email: this.state.selectMail,
@@ -469,6 +539,20 @@ export default class BlackList extends Component {
     };
 
 
+
+    searchSelectS = () => {
+
+        let self = this
+        if (self.state.nowKey === '1') {
+            this.requestPageAS()//1:合规 2:开户 3:交易
+        }
+        if (self.state.nowKey === '2') {
+            this.requestPageBS()//1:合规 2:开户 3:交易
+        }
+        if (self.state.nowKey === '3') {
+            this.requestPageCS()//1:合规 2:开户 3:交易
+        }
+    }
     searchSelect = () => {
 
         let self = this
@@ -605,7 +689,7 @@ export default class BlackList extends Component {
                                 }}
                             />
 
-                            <Button onClick={() => this.searchSelect()} style={{marginTop: 15}} type="primary"
+                            <Button onClick={() => this.searchSelectS()} style={{marginTop: 15}} type="primary"
                                     icon="search">Search</Button>
 
                         </Card>
