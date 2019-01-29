@@ -1453,14 +1453,16 @@ class PassOpenD extends Component {
                                               </h3>
                                           </Upload>]}>
                                     <Zmage
-
+                                        preset="desktop"
                                         style={{
                                             display: 'block',
                                             margin: 'auto',
                                             width: 'auto',
-                                            height: '300px',
+                                            // height: '300px',
                                             maxWidth: '100%',
                                             maxHeight: '300px',
+                                            minHeight: '0px',
+
                                         }}
                                         alt=""
                                         // width="100%"
@@ -1483,13 +1485,16 @@ class PassOpenD extends Component {
                                               </h3>
                                           </Upload>]}>
                                     <Zmage
+                                        preset="desktop"
                                         alt="" style={{
                                         display: 'block',
                                         margin: 'auto',
                                         width: 'auto',
-                                        height: '300px',
+                                        // height: '300px',
                                         maxWidth: '100%',
                                         maxHeight: '300px',
+                                        minHeight: '0px',
+
                                     }}
                                         src={this.state.recordData.idcard_1}/>
                                 </Card>
@@ -1509,15 +1514,20 @@ class PassOpenD extends Component {
                                               </h3>
                                           </Upload>]}>
                                     <Zmage
-                                        alt="" style={{
+
+
+                                        preset="desktop"
+                                        style={{
+
                                         display: 'block',
                                         margin: 'auto',
                                         width: 'auto',
-                                        height: '300px',
+                                        // height: '300px',
                                         maxWidth: '100%',
                                         maxHeight: '300px',
+                                        minHeight: '0px',
                                     }}
-                                        src={this.state.recordData.idcard_2}/>
+                                        src={ this.state.recordData.idcard_2}/>
                                 </Card>
                             </Col>
                         </Row>
