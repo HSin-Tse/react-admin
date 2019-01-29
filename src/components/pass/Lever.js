@@ -828,7 +828,8 @@ class Basic extends Component {
                                 <Col style={{textAlign: 'right'}} span={9}>杠杆修改:</Col>
                                 <Col style={{textAlign: 'center'}} span={11}>
                                     <Select
-                                        onChange={this.onChangeLe}
+                                        disabled={true}
+                                        // onChange={this.onChangeLe}
                                         value={this.state.detail.targetLeverageId}
                                         style={{width: 100, marginLeft: 0}}>
                                         {this.state.leavgeList.map(ccty => <Option
