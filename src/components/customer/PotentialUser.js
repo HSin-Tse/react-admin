@@ -563,9 +563,7 @@ export default class PotentialUser extends Component {
         // console.log('hcia record.feebackStatus' , record.feebackStatus)
         window.Axios.post(logRouter, {
             referKey: record.belongUserId,
-            commentLog: '点击延期申请',
-            // mobile: this.state.phoneCn,
-            // content: this.state.changeNoteV,
+            commentLog: '操作延期申请',
         })
 
 
@@ -580,12 +578,7 @@ export default class PotentialUser extends Component {
         let self = this;
 
 
-        window.Axios.post('back/addLogHistory', {
-            'moduleLog': '用户管理',
-            'pageLog': 'Leads管理',
-            'commentLog': '延期申请',
-            'typeLog': 3,
-        });
+
 
         window.Axios.post('ixuser/delayDemoAccount', {
             "accountNo": accountNo,
@@ -593,7 +586,55 @@ export default class PotentialUser extends Component {
         }).then((response) => {
             message.success('操作成功')
             self.reflesh()
-        })
+
+
+            if (this.state.nowKey === '1') {
+                logRouter = 'back/addLogPotentialUser'
+            }
+            if (this.state.nowKey === '2') {
+                logRouter = 'back/addLogDemoUser'
+
+            }
+            if (this.state.nowKey === '3') {
+                logRouter = 'back/addLogIntentUser'
+            }
+            // console.log('hcia record.feebackStatus' , record.feebackStatus)
+            window.Axios.post(logRouter, {
+                referKey: record.belongUserId,
+                commentLog: '操作延期申请',
+            })
+
+            // window.Axios.post('back/addLogHistory', {
+            //     'moduleLog': '用户管理',
+            //     'pageLog': 'Leads管理',
+            //     'commentLog': '操作延期申请',
+            //     'typeLog': 3,
+            // });
+        }).catch(error => {
+            
+            
+            console.log('hcia error' , error)
+
+
+
+            var logRouter = ''
+
+            if (this.state.nowKey === '1') {
+                logRouter = 'back/addLogPotentialUser'
+            }
+            if (this.state.nowKey === '2') {
+                logRouter = 'back/addLogDemoUser'
+
+            }
+            if (this.state.nowKey === '3') {
+                logRouter = 'back/addLogIntentUser'
+            }
+            // console.log('hcia record.feebackStatus' , record.feebackStatus)
+            window.Axios.post(logRouter, {
+                referKey: record.belongUserId,
+                commentLog: '延期申请失败',
+            })
+        });
 
     }
     seeUSer = (record) => {
@@ -687,6 +728,10 @@ export default class PotentialUser extends Component {
                 totalpageComments: response.data.data.totalPage,
                 operationDiaryHistory: response.data.data.list,
             });
+
+
+
+
         });
     }
 
@@ -744,7 +789,6 @@ export default class PotentialUser extends Component {
 
     requestPageBS = () => {
 
-        console.log('hcia requestPageB')
         let self = this
 
         self.setState({
@@ -773,7 +817,6 @@ export default class PotentialUser extends Component {
     }
     requestPageB = () => {
 
-        console.log('hcia requestPageB')
         let self = this
 
         self.setState({
