@@ -563,7 +563,7 @@ export default class PotentialUser extends Component {
         // console.log('hcia record.feebackStatus' , record.feebackStatus)
         window.Axios.post(logRouter, {
             referKey: record.belongUserId,
-            commentLog: '延期申请',
+            commentLog: '点击延期申请',
             // mobile: this.state.phoneCn,
             // content: this.state.changeNoteV,
         })
