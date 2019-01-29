@@ -657,6 +657,31 @@ export default class PotentialUser extends Component {
         });
     }
 
+    requestPageAS = () => {
+        let self = this
+        self.setState({
+            loadingA: true
+        })
+        window.Axios.post('ixuser/getUserList', {
+            'listType': 1,
+            'pageSize': this.state.pgsize,
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            starClientAccount: this.state.starClientAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
+
+        }).then((response) => {
+            self.setState({
+                totalpageA: response.data.data.totalPage,
+                bklistA: response.data.data.list,
+                loadingA: false
+
+            });
+
+        })
+    }
     requestPageA = () => {
         let self = this
         self.setState({
@@ -680,6 +705,36 @@ export default class PotentialUser extends Component {
                 loadingA: false
 
             });
+
+        })
+    }
+
+    requestPageBS = () => {
+
+        console.log('hcia requestPageB')
+        let self = this
+
+        self.setState({
+            loadingB: true
+        })
+        window.Axios.post('ixuser / getUserList', {
+            'pageSize': this.state.pgsize,
+            'listType': 2,
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            starClientAccount: this.state.starClientAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
+
+        }).then((response) => {
+            console.log('kkk', response.data.data);
+            self.setState({
+                totalpageB: response.data.data.totalPage,
+                bklistB: response.data.data.list,
+                loadingB: false
+            });
+
 
         })
     }
@@ -713,6 +768,31 @@ export default class PotentialUser extends Component {
 
         })
     }
+
+    requestPageCS = () => {
+        let self = this
+
+        self.setState({
+            loadingC: true
+        })
+        window.Axios.post('ixuser/getUserList', {
+            'listType': 3,
+            'pageSize': this.state.pgsize,
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            starClientAccount: this.state.starClientAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
+
+        }).then((response) => {
+            self.setState({
+                totalpageC: response.data.data.totalPage,
+                bklistC: response.data.data.list,
+                loadingC: false
+            });
+        })
+    }
     requestPageC = () => {
         let self = this
 
@@ -738,6 +818,7 @@ export default class PotentialUser extends Component {
             });
         })
     }
+
 
 
     changePageA = (page) => {
@@ -811,6 +892,21 @@ export default class PotentialUser extends Component {
         this.setState({
             selectID: e.target.value,
         });
+    }
+
+
+    refleshS = () => {
+
+
+        if (this.state.nowKey === '1') {
+            this.requestPageAS()//1:Potential 2:simulator 3:intend
+        }
+        if (this.state.nowKey === '2') {
+            this.requestPageBS()
+        }
+        if (this.state.nowKey === '3') {
+            this.requestPageCS()
+        }
     }
 
     reflesh = () => {
@@ -955,7 +1051,7 @@ export default class PotentialUser extends Component {
                                 }}
                             />
 
-                            <Button onClick={() => this.reflesh()} style={{marginTop: 15}} type="primary"
+                            <Button onClick={() => this.refleshS()} style={{marginTop: 15}} type="primary"
                                     icon="search">Search</Button>
 
                         </Card>

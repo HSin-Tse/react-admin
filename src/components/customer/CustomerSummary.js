@@ -395,7 +395,7 @@ class CustomerSummary extends Component {
                                 }}
                             />
 
-                            <Button onClick={() => this.requestData()} style={{marginTop: 15}} type="primary"
+                            <Button onClick={() => this.requestDataS()} style={{marginTop: 15}} type="primary"
                                     icon="search">Search</Button>
 
                         </Card>
@@ -1054,6 +1054,29 @@ class CustomerSummary extends Component {
 
     }
 
+
+
+    requestDataS = () => {
+        let self = this
+        window.Axios.post('ixuser/getUserList', {
+            'listType': 4,
+            'pageSize': this.state.pgsize,
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            starClientAccount: this.state.starClientAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
+        }).then((response) => {
+            self.setState({
+                totalpageA: response.data.data.totalPage,
+                bklistA: response.data.data.list,
+                loadingA: false
+
+            });
+        })
+
+    }
 
     requestData = () => {
         let self = this
