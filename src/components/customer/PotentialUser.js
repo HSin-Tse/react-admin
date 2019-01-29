@@ -115,6 +115,22 @@ export default class PotentialUser extends Component {
 
 
     showOPDAyModal2 = (belongUserId) => {
+
+        var logRouter = ''
+        if (this.state.nowKey === '1') {
+            logRouter = '/back/addLogPotentialUser'
+        }
+        if (this.state.nowKey === '2') {
+            logRouter = '/back/addLogDemoUser'
+        }
+        if (this.state.nowKey === '3') {
+            logRouter = '/back/addLogIntentUser'
+        }
+
+        window.Axios.post(logRouter, {
+            referKey: belongUserId,
+            commentLog: '点击日志',
+        })
         var self = this
         this.setState({
             currentComment: 0,
@@ -130,6 +146,23 @@ export default class PotentialUser extends Component {
 
     };
     shownoteModal = (belongUserId) => {
+
+        var logRouter = ''
+        if (this.state.nowKey === '1') {
+            logRouter = '/back/addLogPotentialUser'
+        }
+        if (this.state.nowKey === '2') {
+            logRouter = '/back/addLogDemoUser'
+        }
+        if (this.state.nowKey === '3') {
+            logRouter = '/back/addLogIntentUser'
+        }
+
+        window.Axios.post(logRouter, {
+            referKey: belongUserId,
+            commentLog: '点击备注',
+        })
+
         this.setState({
             currentComment: 0,
             modal3NoteVisible: true,
@@ -153,7 +186,7 @@ export default class PotentialUser extends Component {
 
         window.Axios.post(logRouter, {
             referKey: record.belongUserId,
-            commentLog: '添加回访',
+            commentLog: '点击添加回访',
         })
 
         this.requestUserCommentList(record.belongUserId)
