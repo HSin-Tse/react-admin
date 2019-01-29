@@ -414,6 +414,32 @@ class Basic extends Component {
         })
     }
 
+    requestPageS = () => {
+        let self = this
+        self.setState({
+                loading: true,
+                showAmeStockModla: false,
+            }
+        );
+        window.Axios.post('open/getOpenApplyList', {
+            'pageSize': this.state.pgsize,
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            starClientAccount: this.state.starClientAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
+        }).then((response) => {
+
+            self.setState({
+                    totalPage: response.data.data.totalPage,
+                    loading: false,
+                    userList: response.data.data.list
+                }
+            );
+
+        })
+    }
     requestPage = () => {
         let self = this
         self.setState({
@@ -603,7 +629,7 @@ class Basic extends Component {
                                 }}
                             />
 
-                            <Button onClick={() => this.requestPage()} style={{marginTop: 15}} type="primary"
+                            <Button onClick={() => this.requestPageS()} style={{marginTop: 15}} type="primary"
                                     icon="search">Search</Button>
 
                         </Card>
