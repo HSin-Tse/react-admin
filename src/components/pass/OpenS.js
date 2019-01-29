@@ -747,9 +747,11 @@ class PassOpenD extends Component {
                                             display: 'block',
                                             margin: 'auto',
                                             width: 'auto',
-                                            height: '300px',
+                                            // height: '300px',
                                             maxWidth: '100%',
                                             maxHeight: '300px',
+                                            minHeight: '0px',
+
                                         }}
                                         // src={'https://cloudfrontcdn.waca.ec/uploads/shops/506/products/ba/ba9bc814e27553aa75ef3fedecf34b4a.jpg'}
                                         src={this.state.recordData.idcard_0 ? this.state.recordData.idcard_0 : ''}
@@ -772,9 +774,11 @@ class PassOpenD extends Component {
                                         display: 'block',
                                         margin: 'auto',
                                         width: 'auto',
-                                        height: '300px',
+                                        // height: '300px',
                                         maxWidth: '100%',
                                         maxHeight: '300px',
+                                        minHeight: '0px',
+
                                     }}
                                         src={this.state.recordData.idcard_1}/>
                                 </Card>
@@ -794,9 +798,11 @@ class PassOpenD extends Component {
                                         display: 'block',
                                         margin: 'auto',
                                         width: 'auto',
-                                        height: '300px',
+                                        // height: '300px',
                                         maxWidth: '100%',
                                         maxHeight: '300px',
+                                        minHeight: '0px',
+
                                     }}
                                         src={this.state.recordData.idcard_2}/>
                                 </Card>
