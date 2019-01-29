@@ -998,8 +998,8 @@ class PassOpenD extends Component {
                 {/*<div>waitUpdate :{JSON.stringify(this.state.waitUpdate)}</div>*/}
                 <h2 style={{marginTop: 15}}>开户信息详情</h2>
                 {/*<Zmage*/}
-                    {/*alt="example"*/}
-                    {/*src={this.state.recordData.idcard_1?'this.state.recordData.idcard_1':""}/>*/}
+                {/*alt="example"*/}
+                {/*src={this.state.recordData.idcard_1?'this.state.recordData.idcard_1':""}/>*/}
                 <BreadcrumbCustom first="审核管理" second="开户信息详情"/>
                 <div style={{
                     padding: '22px',
@@ -1147,7 +1147,7 @@ class PassOpenD extends Component {
                     </div>
                     <div style={{
 
-                        width:1200,
+                        width: 1200,
                         justifyContent: 'flex-start',
                         alignItems: 'center',
                         fontSize: '14px',
@@ -1453,7 +1453,19 @@ class PassOpenD extends Component {
                                               </h3>
                                           </Upload>]}>
                                     <Zmage
-                                        alt="" width="100%"
+
+                                        style={{
+                                            display: 'block',
+                                            margin: 'auto',
+                                            width: 'auto',
+                                            height: '300px',
+                                            maxWidth: '100%',
+                                            maxHeight: '300px',
+                                        }}
+                                        alt=""
+                                        // width="100%"
+                                        // height="100px"
+
                                         src={this.state.recordData.idcard_0}/>
                                 </Card>
                             </Col>
@@ -1471,7 +1483,14 @@ class PassOpenD extends Component {
                                               </h3>
                                           </Upload>]}>
                                     <Zmage
-                                        alt="" width="100%"
+                                        alt="" style={{
+                                        display: 'block',
+                                        margin: 'auto',
+                                        width: 'auto',
+                                        height: '300px',
+                                        maxWidth: '100%',
+                                        maxHeight: '300px',
+                                    }}
                                         src={this.state.recordData.idcard_1}/>
                                 </Card>
                             </Col>
@@ -1490,7 +1509,14 @@ class PassOpenD extends Component {
                                               </h3>
                                           </Upload>]}>
                                     <Zmage
-                                        alt="" width="100%"
+                                        alt="" style={{
+                                        display: 'block',
+                                        margin: 'auto',
+                                        width: 'auto',
+                                        height: '300px',
+                                        maxWidth: '100%',
+                                        maxHeight: '300px',
+                                    }}
                                         src={this.state.recordData.idcard_2}/>
                                 </Card>
                             </Col>

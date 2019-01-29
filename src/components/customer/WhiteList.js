@@ -8,6 +8,7 @@ import ExportJsonExcel from "js-export-excel";
 // import ReactHTMLTableToExcel from 'react-html-table-to-excel'
 import * as ReactDOM from "react-dom";
 import {FormattedMessage} from 'react-intl';
+import {addLogWhite} from '@/axios/logs';
 
 const {RangePicker} = DatePicker;
 const {TextArea} = Input;
@@ -18,7 +19,7 @@ export default class WhiteList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name       : 'Eric',
+            name: 'Eric',
             unreadCount: 1000,
 
             selectedRowKeys: [],
@@ -71,18 +72,15 @@ export default class WhiteList extends Component {
     componentDidMount() {
 
 
+        addLogWhite()
+        // window.Axios.post('back/addLogHistory', {
+        //     'moduleLog': '用户管理',
+        //     'pageLog': '白名单',
+        //     'commentLog': '查看了白名单',
+        //     'typeLog': 2,
+        // })
 
 
-
-        window.Axios.post('back/addLogHistory', {
-            'moduleLog': '用户管理',
-            'pageLog': '白名单',
-            'commentLog': '查看了白名单',
-            'typeLog': 2,
-        }).then(function (response) {
-
-
-        });
         document.addEventListener("keydown", this.handleKeyPress, false);
         this.columns = [
             {
@@ -156,7 +154,8 @@ export default class WhiteList extends Component {
                 key: '查看',
                 render: (text, record) => (
                     <div>
-                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal3(record)}>备注</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                onClick={() => this.showOPDAyModal3(record)}>备注</Button>
 
                     </div>
                 ),
@@ -167,14 +166,16 @@ export default class WhiteList extends Component {
                 render: (text, record) => (
                     <div>
                         {/*<Button>添加备注</Button>*/}
-                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showModalNote(record)}>添加备注</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                onClick={() => this.showModalNote(record)}>添加备注</Button>
 
                         <Popconfirm title="移除?"
                                     onConfirm={() => this.handleremove(record)} okText="Yes"
                                     cancelText="No">
-                            <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}}>移除</Button>
+                            <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}>移除</Button>
                         </Popconfirm>
-                        <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record)}>日志</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                onClick={() => this.showOPDAyModal2(record)}>日志</Button>
 
                         {/*<Button onClick={() => this.handleremove(record)}>操作日志</Button>*/}
                     </div>
@@ -397,14 +398,14 @@ export default class WhiteList extends Component {
 
             <div id="whiteL">
                 {/*<p>*/}
-                    {/*<FormattedMessage*/}
-                        {/*id="welcome"*/}
-                        {/*defaultMessage={`Hello {hello}, you have {unreadCount, number} {unreadCount, plural,*/}
-                      {/*one {message}*/}
-                      {/*other {messages}*/}
-                    {/*}`}*/}
-                        {/*values={{name: <b>{name}</b>, unreadCount}}*/}
-                    {/*/>*/}
+                {/*<FormattedMessage*/}
+                {/*id="welcome"*/}
+                {/*defaultMessage={`Hello {hello}, you have {unreadCount, number} {unreadCount, plural,*/}
+                {/*one {message}*/}
+                {/*other {messages}*/}
+                {/*}`}*/}
+                {/*values={{name: <b>{name}</b>, unreadCount}}*/}
+                {/*/>*/}
                 {/*</p>*/}
 
                 <Modal
@@ -635,7 +636,7 @@ export default class WhiteList extends Component {
                     title={'白名单'}
                     extra={[
 
-                         <Button style={{marginLeft: 15}} onClick={() => this.showModal()}>新增白名单用户</Button>]}
+                        <Button style={{marginLeft: 15}} onClick={() => this.showModal()}>新增白名单用户</Button>]}
                 >
                     <Table
                         titleStyle={{whiteSpace: 'nowrap'}}

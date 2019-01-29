@@ -412,7 +412,7 @@ class PassOpenD extends Component {
 
                     </div>
                     <div style={{
-                        width:1200,
+                        width: 1200,
                         justifyContent: 'flex-start',
                         alignItems: 'center',
                         fontSize: '14px',
@@ -570,7 +570,7 @@ class PassOpenD extends Component {
                                             value={this.state.recordData.street}
                                             placeholder=""/>
                                     </div>
-                                    <div style={{marginTop:'10px',display: 'flex', minHeight: 40}}>
+                                    <div style={{marginTop: '10px', display: 'flex', minHeight: 40}}>
                                         <span style={{minWidth: 120}}>*联系电话</span>
                                         <Input
                                             autosize={true}
@@ -587,7 +587,7 @@ class PassOpenD extends Component {
                                             value={this.state.recordData.email} onChange={this.onChangeemail}
                                             placeholder=""/>
                                     </div>
-                                    <div style={{marginTop:'10px',display: 'flex', minHeight: 40}}>
+                                    <div style={{marginTop: '10px', display: 'flex', minHeight: 40}}>
                                         <span style={{minWidth: 120}}>*邮编</span>
                                         <Input
                                             disabled={true}
@@ -678,7 +678,7 @@ class PassOpenD extends Component {
                                     <div style={{display: 'flex', minHeight: 40}}>
                                         <span style={{minWidth: 120}}>*风险承受力</span>
                                         <Select
-                                            style={{width: 'auto',wordWrap: 'break-word'}}
+                                            style={{width: 'auto', wordWrap: 'break-word'}}
                                             disabled={true}
                                             dropdownStyle={{wordWrap: 'break-word'}}
                                             onChange={this.onChangemriskTolerance}
@@ -743,9 +743,16 @@ class PassOpenD extends Component {
 
                                         // onClick={() => self.openGallery(self.state.recordData.idcard_0)}
                                         alt=""
-                                        width="100%"
+                                        style={{
+                                            display: 'block',
+                                            margin: 'auto',
+                                            width: 'auto',
+                                            height: '300px',
+                                            maxWidth: '100%',
+                                            maxHeight: '300px',
+                                        }}
                                         // src={'https://cloudfrontcdn.waca.ec/uploads/shops/506/products/ba/ba9bc814e27553aa75ef3fedecf34b4a.jpg'}
-                                        src={this.state.recordData.idcard_0?this.state.recordData.idcard_0:''}
+                                        src={this.state.recordData.idcard_0 ? this.state.recordData.idcard_0 : ''}
 
                                     />
                                 </Card>
@@ -761,7 +768,14 @@ class PassOpenD extends Component {
                                       }>
                                     <Zmage
                                         // onClick={() => this.openGallery(this.state.recordData.idcard_1)}
-                                        alt="" width="100%"
+                                        alt="" style={{
+                                        display: 'block',
+                                        margin: 'auto',
+                                        width: 'auto',
+                                        height: '300px',
+                                        maxWidth: '100%',
+                                        maxHeight: '300px',
+                                    }}
                                         src={this.state.recordData.idcard_1}/>
                                 </Card>
                             </Col>
@@ -776,7 +790,14 @@ class PassOpenD extends Component {
                                       }>
                                     <Zmage
                                         // onClick={() => this.openGallery(this.state.recordData.idcard_2)}
-                                        alt="" width="100%"
+                                        alt="" style={{
+                                        display: 'block',
+                                        margin: 'auto',
+                                        width: 'auto',
+                                        height: '300px',
+                                        maxWidth: '100%',
+                                        maxHeight: '300px',
+                                    }}
                                         src={this.state.recordData.idcard_2}/>
                                 </Card>
                             </Col>
