@@ -48,10 +48,7 @@ export default class WhiteList extends Component {
     }
 
     showModalNote = (record) => {
-
-
         this.requestUserCommentList(record)
-
         let id = record.id
         var self = this
 
@@ -249,6 +246,29 @@ export default class WhiteList extends Component {
         var param = {}
         window.Axios.post('auth/getWhiteList', {
             'pageNo': this.state.current,
+            'pageSize': this.state.pgsize,
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            starClientAccount: this.state.starClientAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
+        }).then((response) => {
+            self.setState({
+                totalpageA: response.data.data.totalPage,
+                bklistA: response.data.data.list,
+                loadingA: false
+            });
+        });
+    }
+    requestPageAS = () => {
+        let self = this
+        self.setState({
+            loadingA: true
+        })
+
+        var param = {}
+        window.Axios.post('auth/getWhiteList', {
             'pageSize': this.state.pgsize,
             email: this.state.selectMail,
             mobile: this.state.selectPhoneF,
@@ -610,7 +630,7 @@ export default class WhiteList extends Component {
                                 }}
                             />
 
-                            <Button onClick={() => this.requestPageA()} style={{marginTop: 15}} type="primary"
+                            <Button onClick={() => this.requestPageAS()} style={{marginTop: 15}} type="primary"
                                     icon="search">Search</Button>
 
                         </Card>
