@@ -40,6 +40,7 @@ import InComeMoney from './fina/IncomeMoney'
 import EditCha from './fina/EditCha'
 import EditExRate from './fina/EditExRate'
 import TeleMoney from './fina/TeleMoney'
+import TeleMoneySecond from './fina/TeleMoneySecond'
 import OutMoneyJU from './fina/OutMoneyJU'
 import OutMoneyJUB from './fina/OutMoneyJUB'
 import OutMoneyJUC from './fina/OutMoneyJUC'
@@ -106,6 +107,7 @@ export default {
     TradeAccount,
     InComeMoney,
     TeleMoney,
+    TeleMoneySecond,
     OutMoney,
     InOutTA,
     ChannelMY,
