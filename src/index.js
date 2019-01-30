@@ -22,14 +22,14 @@ import zh from './locale/zh_CN'
 const middleware = [thunk];
 const store = createStore(reducer, applyMiddleware(...middleware));
 var Axios = axios.create({
-    baseURL: 'http://mobile.nooko.cn:8090/'
+    baseURL:  window.location.protocol+'//mobile.nooko.cn:8090/'
 });
 
 var aaxios = axios.create({
-    baseURL: 'http://mobile.nooko.cn:8090/'
+    baseURL:  window.location.protocol+  '//mobile.nooko.cn:8090/'
 });
 
-
+// location.protocolは「http:」
 // addLocaleData([...en, ...zh]);
 
 message.config({
