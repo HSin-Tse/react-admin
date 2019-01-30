@@ -392,7 +392,8 @@ class Basic extends Component {
 
                 <div style={{
 
-                    minWidth: '1200px',
+                    // width: '1200px',
+                    // marginLeft: '200px',
                     background: "white",
                     boxShadow: '0px 0px 20px 0px rgba(123,123,123,0.1)',
                     borderRadius: '4px',
@@ -400,7 +401,10 @@ class Basic extends Component {
 
                 }}>
 
-                    <div style={{paddingTop: '36px', marginLeft: '145px', marginRight: '145px'}}>
+                    <div style={{
+                        minWidth: '800px',
+                        paddingTop: '36px', marginLeft: '150px', marginRight: '150px'
+                    }}>
 
 
                         <div style={{
@@ -497,363 +501,569 @@ class Basic extends Component {
                         </div>
                     </div>
 
-
-                    {/*<Row*/}
-                    {/*style={{margin: '20px'}}*/}
-
-                    {/*gutter={32}>*/}
-                    {/*<Col span={12}>*/}
-                    {/*<div*/}
-
-                    {/*style={{*/}
-                    {/*background: 'rgba(255,255,255,1)',*/}
-                    {/*boxShadow: '20px 20px 20px 20px rgba(123,123,123,0.1)',*/}
-                    {/*borderRadius: '4px 4px'*/}
-                    {/*}}*/}
-                    {/*>*/}
-                    {/*<div style={{*/}
-                    {/*borderRadius: '4px 4px 0px 0px',*/}
-                    {/*padding: 15,*/}
-                    {/*color: 'white',*/}
-                    {/*background: '#F6D147',*/}
-                    {/*alignItems: 'center',*/}
-                    {/*justifyContent: 'space-between',*/}
-                    {/*display: 'flex',*/}
-                    {/*minHeight: 48*/}
-                    {/*}}>*/}
-                    {/*<span style={{fontSize: '15px'}}>可用余额</span>*/}
-                    {/*<span style={{fontSize: '15px'}}>00.00</span>*/}
-                    {/*</div>*/}
-                    {/*<div style={ssdds}>*/}
-                    {/*<span style={{fontSize: '13px'}}>余额:</span>*/}
-                    {/*<span style={{fontSize: '13px'}}>00.00</span>*/}
-                    {/*</div>*/}
-                    {/*<div style={ssdds}>*/}
-                    {/*<span style={{fontSize: '13px'}}>奖励金:</span>*/}
-                    {/*<span style={{fontSize: '13px'}}>00.00</span>*/}
-                    {/*</div>*/}
-                    {/*<div style={ssdds}>*/}
-                    {/*<span style={{fontSize: '13px'}}>出金待审核:</span>*/}
-                    {/*<span style={{fontSize: '13px'}}>00.00</span>*/}
-                    {/*</div>*/}
-                    {/*<Divider style={{paddingLeft: 15, paddingRight: 15}}/>*/}
-                    {/*<div style={ssdds}>*/}
-                    {/*<span style={{fontSize: '13px'}}>总入金:</span>*/}
-                    {/*<span style={{fontSize: '13px'}}>00.00</span>*/}
-                    {/*</div>*/}
-                    {/*<div style={ssdds}>*/}
-                    {/*<span style={{fontSize: '13px'}}>出金:</span>*/}
-                    {/*<span style={{fontSize: '13px'}}>00.00</span>*/}
-                    {/*</div>*/}
-                    {/*</div>*/}
+                    <div style={{
+                        minWidth: '800px',
+                        marginLeft: '150px',
+                        marginRight: '150px',
+                        padding: 12,
+                        textAlign: 'center',
+                        align: 'center',
+                        background: 'white'
+                    }}>
+                        <p style={{
+                            fontSize: 18,
+                            fontFamily: 'PingFangSC-Medium',
+                            fontWeight: 500,
+                            color: 'rgba(51,51,51,1)'
+                        }}>新增客户入金
+                        </p>
+                    </div>
+                    <div style={{minWidth: '800px', marginLeft: '150px', marginRight: '150px', paddingBottom: '10px'}}>
+                        <Row>
+                            <Col style={{textAlign: 'right', align: 'center', background: 'white'}} span={12}>
 
 
-                    {/*<Card*/}
-                    {/*style={{marginTop: 15}}*/}
-                    {/*bodyStyle={{padding: 0, margin: 0}}*/}
-                    {/*bordered={false}>*/}
-                    {/*<div style={{*/}
-                    {/*padding: 15,*/}
-                    {/*color: 'white',*/}
-                    {/*background: '#F6D147',*/}
-                    {/*alignItems: 'center',*/}
-                    {/*justifyContent: 'space-between',*/}
-                    {/*display: 'flex',*/}
-                    {/*minHeight: 40*/}
-                    {/*}}>*/}
-                    {/*<span style={{fontSize: '15px'}}>成功交易</span>*/}
-                    {/*<span style={{fontSize: '15px'}}></span>*/}
-                    {/*</div>*/}
-                    {/*<Table rowKey="id"*/}
-                    {/*columns={[*/}
+                                <div style={{
 
-                    {/*{*/}
-                    {/*title: '交易',*/}
-                    {/*align: 'center',*/}
-                    {/*dataIndex: 'bkUserName',*/}
-                    {/*key: 'operationDiary_User',*/}
-                    {/*render: (text, record) => (*/}
-                    {/*<div>{record.bkUserName}</div>),*/}
-                    {/*}, {*/}
-                    {/*title: '入',*/}
-                    {/*align: 'center',*/}
-                    {/*dataIndex: 'createDate',*/}
-                    {/*key: 'operationDiary_Date',*/}
-                    {/*render: (text, record) => (*/}
-                    {/*<span>{record.createDate}</span>),*/}
-                    {/*}, {*/}
-                    {/*title: '出',*/}
-                    {/*align: 'center',*/}
-                    {/*dataIndex: 'comment',*/}
-                    {/*key: 'operationDiary_Status',*/}
-                    {/*render: (text, record) => (*/}
-                    {/*<span>{record.comment}</span>),*/}
-                    {/*}]}*/}
-                    {/*dataSource={this.state.operationDiaryHistory}*/}
-                    {/*loading={this.state.loadingComment}*/}
-                    {/*pagination={{*/}
-                    {/*total: this.state.totalpageComments * this.state.pgsize,*/}
-                    {/*pageSize: this.state.pgsize,*/}
-                    {/*onChange: this.changePageComment,*/}
-                    {/*}}*/}
-                    {/*/>*/}
-                    {/*<div>*/}
-                    {/*<span>显示第1条到第5条，共10条</span>*/}
-                    {/*</div>*/}
-                    {/*</Card>*/}
+                                    textAlign: 'left',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                        <span style={{
 
-                    {/*</Col>*/}
-                    {/*<Col span={12}>*/}
-
-                    {/*<Card*/}
-                    {/*bodyStyle={{padding: 0, margin: 0}}*/}
-                    {/*bordered={false}>*/}
+                                            textAlign: 'left',
+                                            marginRight: '37px',
 
 
-                    {/*<div style={{*/}
-                    {/*padding: 15,*/}
-                    {/*color: 'white',*/}
-                    {/*background: '#F6D147',*/}
-                    {/*alignItems: 'center',*/}
-                    {/*justifyContent: 'space-between',*/}
-                    {/*display: 'flex',*/}
-                    {/*minHeight: 40*/}
-                    {/*}}>*/}
-                    {/*<span style={{fontSize: '15px'}}>出金申请详情</span>*/}
-                    {/*<span style={{fontSize: '15px'}}>00.00</span>*/}
-                    {/*</div>*/}
-                    {/*<div style={ssdds}>*/}
-                    {/*<span style={{fontSize: '13px'}}>请求出金金额:</span>*/}
-                    {/*<span style={{fontSize: '13px'}}>00.00</span>*/}
-                    {/*</div>*/}
-                    {/*<div style={ssdds}>*/}
-                    {/*<span style={{fontSize: '13px'}}><span*/}
-                    {/*style={{color: 'red'}}>*</span>出金金额:</span>*/}
-                    {/*<span style={{fontSize: '13px'}}><Input style={{width: 220}}*/}
-                    {/*placeholder="100.00"/>USD</span>*/}
-                    {/*</div>*/}
-                    {/*<div style={ssdds}>*/}
-                    {/*<span style={{fontSize: '13px'}}>出金日期</span>*/}
-                    {/*<span style={{fontSize: '13px'}}>1900-10-10 10:10:10</span>*/}
-                    {/*</div>*/}
-
-                    {/*<div style={ssdds}>*/}
-                    {/*<span style={{fontSize: '13px'}}>用户名/帐号</span>*/}
-                    {/*<span style={{fontSize: '13px'}}>1900-10-10 10:10:10</span>*/}
-                    {/*</div>*/}
-                    {/*<div style={ssdds}>*/}
-                    {/*<span style={{fontSize: '13px'}}>订单号</span>*/}
-                    {/*<span style={{fontSize: '13px'}}>0001</span>*/}
-                    {/*</div>*/}
-                    {/*<div style={ssdds}>*/}
-                    {/*<span style={{fontSize: '13px'}}>经济商</span>*/}
-                    {/*<span style={{fontSize: '13px'}}>BBIX</span>*/}
-                    {/*</div>*/}
-                    {/*<div style={ssdds}>*/}
-                    {/*<span style={{fontSize: '13px'}}>支付方式</span>*/}
-
-                    {/*<Select defaultValue="lucy" style={{margin: 5, width: 220}}>*/}
-                    {/*<Option value="jack">001</Option>*/}
-                    {/*<Option value="lucy">002</Option>*/}
-                    {/*</Select>*/}
-
-                    {/*</div>*/}
-                    {/*<div style={ssdds}>*/}
-                    {/*<span style={{fontSize: '13px'}}><span*/}
-                    {/*style={{color: 'red'}}>*</span>银行名称</span>*/}
-                    {/*<span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}*/}
-                    {/*placeholder=""/></span>*/}
-                    {/*</div>*/}
-                    {/*<div style={ssdds}>*/}
-                    {/*<span style={{fontSize: '13px'}}>收款银行预留手机号</span>*/}
-                    {/*<span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}*/}
-                    {/*placeholder=""/></span>*/}
-                    {/*</div>*/}
-
-                    {/*<div style={ssdds}>*/}
-                    {/*<span style={{fontSize: '13px'}}><span style={{color: 'red'}}>*</span> 省</span>*/}
-                    {/*<span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}*/}
-                    {/*placeholder=""/></span>*/}
-                    {/*</div>*/}
-                    {/*<div style={ssdds}>*/}
-                    {/*<span style={{fontSize: '13px'}}><span style={{color: 'red'}}>*</span>城市</span>*/}
-                    {/*<span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}*/}
-                    {/*placeholder=""/></span>*/}
-                    {/*</div>*/}
-
-                    {/*<div style={ssdds}>*/}
-                    {/*<span style={{fontSize: '13px'}}><span*/}
-                    {/*style={{color: 'red'}}>*</span>支行名称</span>*/}
-                    {/*<span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}*/}
-                    {/*placeholder=""/></span>*/}
-                    {/*</div>*/}
-                    {/*<div style={ssdds}>*/}
-                    {/*<span style={{fontSize: '13px'}}><span*/}
-                    {/*style={{color: 'red'}}>*</span>收款人姓名</span>*/}
-                    {/*<span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}*/}
-                    {/*placeholder=""/></span>*/}
-                    {/*</div>*/}
-                    {/*<div style={ssdds}>*/}
-                    {/*<span style={{fontSize: '13px'}}><span*/}
-                    {/*style={{color: 'red'}}>*</span>收款银行账户</span>*/}
-                    {/*<span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}*/}
-                    {/*placeholder=""/></span>*/}
-                    {/*</div>*/}
-                    {/*<div style={ssdds}>*/}
-                    {/*<span style={{fontSize: '13px'}}>备注:</span>*/}
-                    {/*<span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}*/}
-                    {/*placeholder=""/></span>*/}
-                    {/*</div>*/}
-                    {/*<div>*/}
-                    {/*<Tabs justify tabBarGutter={'0%'} tabBarStyle={{width: '100%'}} type="card">*/}
-                    {/*<TabPane tab={'客维审核'} key="1">*/}
+                                            width: '57px',
+                                            fontFamily: 'PingFangSC-Medium',
+                                            fontWeight: 500,
+                                            color: '#292929',
+                                            fontSize: '14px'
 
 
-                    {/*<Card>*/}
-                    {/*<div><Checkbox>没有第三方资金</Checkbox></div>*/}
-                    {/*<div><Checkbox>没有未批准的信用金／奖励金</Checkbox></div>*/}
-                    {/*<div><Checkbox>初始入金至原始入金渠道</Checkbox></div>*/}
-                    {/*<div><Checkbox>盈利通过银行转账到同名交易账号</Checkbox></div>*/}
+                                        }}>客户归属</span>
 
-                    {/*<div style={{*/}
-                    {/*marginTop: 10,*/}
-                    {/*marginBottom: 10,*/}
-                    {/*}}>请注意：*/}
-                    {/*</div>*/}
-                    {/*<div>*/}
-                    {/*1.只有在提交此请求后才能将钱汇到客户银行账户。*/}
+                                    <Select
 
-                    {/*</div>*/}
-                    {/*<div>*/}
-                    {/*2.当按下“批准出金”按钮时，出金金额将从客户的交易账户中自动扣除。*/}
-                    {/*</div>*/}
-                    {/*<div>*/}
-                    {/*此请求将被关闭并可在归档中查看。*/}
-                    {/*</div>*/}
-
-                    {/*<TextArea*/}
-                    {/*style={{*/}
-                    {/*marginTop: 10,*/}
-                    {/*marginBottom: 10,*/}
-                    {/*}}*/}
-                    {/*rows={4}*/}
-                    {/*value={this.state.theComment}*/}
-                    {/*onChange={(e) => {*/}
-                    {/*let comment = e.target.value;*/}
-                    {/*this.setState({*/}
-                    {/*theComment: comment*/}
-                    {/*});*/}
-                    {/*}}*/}
-                    {/*placeholder="备注"/>*/}
-
-                    {/*<div style={{*/}
-                    {/*margin: 5,*/}
-                    {/*justifyContent: "space-around",*/}
-                    {/*display: 'flex'*/}
-                    {/*}}>*/}
-
-                    {/*<Button style={{*/}
-                    {/*margin: 10, width: 150*/}
-                    {/*}}>确认扣款</Button>*/}
-                    {/*<Button style={{*/}
-                    {/*margin: 10, width: 150*/}
-                    {/*}}>挂起待确认</Button>*/}
-                    {/*<Button style={{*/}
-                    {/*margin: 10, width: 150*/}
-                    {/*}}>取消</Button>*/}
+                                        onChange={(value) => {
 
 
-                    {/*</div>*/}
-                    {/*<Table rowKey="id"*/}
-                    {/*columns={[*/}
+                                            this.setState({mBelongBkUserId: value})
+                                            console.log('hcia value', value)
+                                        }}
+                                        value={this.state.mBelongBkUserId}
+                                        style={{width: '200px', height: '36px'}}>
 
-                    {/*{*/}
-                    {/*title: '日期',*/}
-                    {/*align: 'center',*/}
-                    {/*dataIndex: 'bkUserName',*/}
-                    {/*key: 'operationDiary_User',*/}
-                    {/*render: (text, record) => (*/}
-                    {/*<div>{record.bkUserName}</div>),*/}
-                    {/*}, {*/}
-                    {/*title: '备注',*/}
-                    {/*align: 'center',*/}
-                    {/*dataIndex: 'createDate',*/}
-                    {/*key: 'operationDiary_Date',*/}
-                    {/*render: (text, record) => (*/}
-                    {/*<span>{record.createDate}</span>),*/}
-                    {/*}, {*/}
-                    {/*title: '审核类型',*/}
-                    {/*align: 'center',*/}
-                    {/*dataIndex: 'comment',*/}
-                    {/*key: 'operationDiary_Status',*/}
-                    {/*render: (text, record) => (*/}
-                    {/*<span>{record.comment}</span>),*/}
-                    {/*}, {*/}
-                    {/*title: '操作人',*/}
-                    {/*align: 'center',*/}
-                    {/*dataIndex: 'comment',*/}
-                    {/*key: 'operationDiary_Status',*/}
-                    {/*render: (text, record) => (*/}
-                    {/*<span>{record.comment}</span>),*/}
-                    {/*}]}*/}
-                    {/*dataSource={this.state.operationDiaryHistory}*/}
-                    {/*loading={this.state.loadingComment}*/}
-                    {/*pagination={{*/}
-                    {/*total: this.state.totalpageComments * this.state.pgsize,*/}
-                    {/*pageSize: this.state.pgsize,*/}
-                    {/*onChange: this.changePageComment,*/}
-                    {/*}}*/}
-                    {/*/>*/}
-                    {/*</Card>*/}
+                                        {imgsTag}
 
 
-                    {/*</TabPane>*/}
-                    {/*<TabPane tab={steps[1].title} key="2">*/}
-                    {/*<p>Content of Tab Pane 2</p>*/}
-                    {/*<p>Content of Tab Pane 2</p>*/}
-                    {/*<p>Content of Tab Pane 2</p>*/}
-                    {/*</TabPane>*/}
-                    {/*<TabPane tab={steps[2].title} key="3">*/}
-                    {/*<p>Content of Tab Pane 3</p>*/}
-                    {/*<p>Content of Tab Pane 3</p>*/}
-                    {/*<p>Content of Tab Pane 3</p>*/}
-                    {/*</TabPane>*/}
-                    {/*</Tabs>*/}
-                    {/*</div>*/}
-                    {/*</Card>*/}
-                    {/*</Col>*/}
-                    {/*<Col span={12}>*/}
-
-                    {/*</Col>*/}
+                                    </Select>
 
 
-                    {/*</Row>*/}
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    width: '100%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                            <span style={{
+                                                marginRight: '37px',
+                                                fontFamily: 'PingFangSC-Medium',
+                                                fontWeight: 500,
+                                                color: '#292929',
+                                                fontSize: '14px',
+                                                width: '57px',
 
 
-                </div>
+                                            }}>交易平台</span>
 
-                <Card style={{marginTop: 15}} title={null}
-                      bodyStyle={{padding: '0px', margin: '0px'}}>
 
-                    <div style={{transform: "scale(1.3,1.3)"}}>
+                                    <Select
+                                        defaultValue={1}
+                                        style={{width: '200px', height: '36px'}}>
+                                        <Option key={1} value={1}>{'IXTrader'}</Option>
+                                    </Select>
 
-                        <Steps
-                            style={{
-                                marginLeft: "30%",
-                                marginBottom: "20px",
-                                marginTop: "40px",
-                                width: "40%",
-                                height: 80
-                            }}
-                            labelPlacement={'vertical'} current={this.state.currentStep}>
-                            {steps.map(item => <Step key={item.title} title={item.title}/>)}
-                        </Steps>
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    width: '100%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                                    <span style={{
+                                                        marginRight: '37px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px',
+                                                        width: '57px',
+                                                    }}>交易账号</span>
+                                    <Input value={this.state.mStarClientAccount}
+                                           onChange={(e) => {
+
+
+                                               var self = this
+                                               console.log('hcia e.target.value', e.target.value)
+                                               this.setState({
+                                                   mStarClientAccount: e.target.value,
+                                               }, () => {
+
+                                                   window.Axios.post('star/getStarLiveAccountDetail', {
+                                                       'starClientAccount': self.state.mStarClientAccount,
+
+                                                   }).then((response) => {
+
+                                                       console.log('hcia response', response)
+
+
+                                                       if (response.data.data) {
+                                                           self.setState({
+                                                               mNetEquity: response.data.data[0].netEquity,
+                                                               mName: response.data.data[0].name
+                                                           })
+                                                       } else {
+
+                                                           self.setState({
+                                                               mNetEquity: '',
+                                                               mName: '',
+                                                           })
+                                                       }
+
+
+                                                   })
+
+                                               });
+
+
+                                           }}
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    width: '100%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                                    <span style={{
+                                                        marginRight: '37px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px',
+                                                        width: '57px',
+
+
+                                                    }}>账户余额</span>
+                                    <Input value={this.state.mNetEquity}
+
+                                           style={{width: '200px', height: '36px'}}
+                                    />
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    width: '100%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                                    <span style={{
+                                                        marginRight: '37px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px',
+                                                        width: '57px',
+
+
+                                                    }}>执行金额</span>
+                                    <Input value={this.state.mExecTxnAmt}
+                                           onChange={(e) => {
+                                               this.setState({
+                                                   mExecTxnAmt: e.target.value,
+                                               });
+                                           }}
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    width: '100%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                                    <span style={{
+                                                        marginRight: '37px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px',
+                                                        width: '57px',
+
+
+                                                    }}>汇率</span>
+                                    <Input value={this.state.mRate}
+                                           onChange={(e) => {
+                                               this.setState({
+                                                   mRate: e.target.value,
+                                               });
+                                           }}
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+                                </div>
+
+                            </Col>
+
+                            <Col style={{background: 'white'}} span={12}>
+
+                                <div style={{
+                                    textAlign: 'right',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+
+                                    <div style={{
+                                        width: '87px',
+                                        marginRight: '37px',
+                                    }}>
+                                                    <span style={{
+
+                                                        marginRight: '5px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#FF4D4D',
+                                                        fontSize: '14px'
+
+
+                                                    }}>*</span>
+
+
+                                        <span style={{
+                                            fontFamily: 'PingFangSC-Medium',
+                                            fontWeight: 500,
+                                            color: '#292929',
+                                            fontSize: '14px'
+
+                                        }}>入金渠道</span>
+                                    </div>
+                                    <Input value={'电汇'}
+
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+
+                                    <div style={{
+                                        width: '87px',
+                                        marginRight: '37px',
+                                    }}>
+                                                    <span style={{
+
+                                                        marginRight: '5px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#FF4D4D',
+                                                        fontSize: '14px'
+
+
+                                                    }}>*</span>
+
+
+                                        <span style={{
+                                            fontFamily: 'PingFangSC-Medium',
+                                            fontWeight: 500,
+                                            color: '#292929',
+                                            fontSize: '14px'
+
+
+                                        }}>支付通道</span>
+
+                                    </div>
+
+                                    <Input value={'电汇'}
+
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+
+                                    <div style={{
+                                        width: '87px',
+                                        marginRight: '37px',
+                                    }}>
+                                                    <span style={{
+                                                        textAlign: 'left',
+                                                        width: '87px',
+                                                        height: '22px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px'
+
+
+                                                    }}>期望到账时间</span>
+
+                                    </div>
+
+
+                                    <DatePicker
+                                        style={{width: '200px', height: '36px'}}
+                                        disabledDate={(current) => {
+                                            return current.valueOf() < (Date.now() - 86400000)
+                                        }}
+
+                                        value={this.state.mExpectTime ? moment(this.state.mExpectTime, dateFormat) : null}
+
+                                        // value={this.state.mExpectTime}
+                                        onChange={(date, dateString) => {
+
+                                            console.log('hcia date', date)
+                                            console.log('hcia dateString', dateString)
+
+
+                                            if (!date) {
+                                                this.setState({mExpectTime: null})
+                                                return
+
+                                            }
+                                            var date = new Date(dateString + ' 00:00:00:000');
+                                            console.log('hcia date', date)
+                                            var time1 = date.getTime();
+
+                                            // console.log('hcia time1', time1)
+
+                                            this.setState({mExpectTime: date})
+                                            // console.log('hcia date' , date)
+
+                                            // console.log('hcia ',date, dateString);
+                                            // console.log('hcia',date, dateString);
+                                        }}/>
+
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+
+                                    <div style={{
+                                        width: '87px',
+                                        marginRight: '37px',
+                                    }}>
+                                                    <span style={{
+                                                        textAlign: 'left',
+                                                        width: '87px',
+                                                        height: '22px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px'
+
+
+                                                    }}>账号币种</span>
+
+                                    </div>
+
+                                    <Select
+
+                                        onChange={(value) => {
+
+
+                                            this.setState({mAccountTxnCurry: value})
+                                            console.log('hcia value', value)
+                                        }}
+                                        value={this.state.mAccountTxnCurry}
+                                        style={{width: '200px', height: '36px'}}>
+
+                                        {accountTList}
+
+
+                                    </Select>
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+
+                                    <div style={{
+                                        width: '87px',
+                                        marginRight: '37px',
+                                    }}>
+                                                    <span style={{
+                                                        textAlign: 'left',
+                                                        width: '87px',
+                                                        height: '22px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px'
+
+
+                                                    }}>账户所有人</span>
+
+                                    </div>
+
+
+                                    <Input value={this.state.mName}
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+
+                                    <div style={{
+                                        width: '87px',
+                                        marginRight: '37px',
+                                    }}>
+                                                    <span style={{
+                                                        textAlign: 'left',
+                                                        width: '87px',
+                                                        height: '22px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px'
+
+
+                                                    }}>支付币种</span>
+
+                                    </div>
+
+                                    <Select
+
+                                        onChange={(value) => {
+
+
+                                            this.setState({mExecTxnCurry: value})
+                                            console.log('hcia value', value)
+                                        }}
+                                        value={this.state.mExecTxnCurry}
+                                        style={{width: '200px', height: '36px'}}>
+
+                                        {accountTList}
+
+
+                                    </Select>
+                                    {/*<Input value={'CNY'}*/}
+
+                                    {/*style={{width: '200px', height: '36px'}}*/}
+
+                                    {/*/>*/}
+                                </div>
+
+
+                            </Col>
+
+
+                        </Row>
+
+
+                        <div style={{
+                            marginTop:'24px',
+                            height: '1px',
+                            background: 'rgba(230,230,230,1)'
+                        }}>
+                        </div>
+
+
+                        <Row style={{marginTop: '24px', marginBottom: '24px'}}>
+                            <Col style={{textAlign: 'right', align: 'center', background: 'white'}} span={12}>
+
+
+                                <div style={{
+
+                                    textAlign: 'left',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                                    <span style={{
+
+                                                        textAlign: 'left',
+                                                        marginRight: '37px',
+                                                        width: '57px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px'
+
+
+                                                    }}>创建备注</span>
+                                    <Input value={this.state.mNote}
+                                           onChange={(e) => {
+                                               this.setState({
+                                                   mNote: e.target.value,
+                                               });
+                                           }}
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+                                </div>
+
+
+                            </Col>
+
+                            <Col style={{background: 'white'}} span={12}>
+
+
+                            </Col>
+
+
+                        </Row>
+
 
                     </div>
-                    <Card
-                        bodyStyle={{padding: '0px', margin: '0px'}}
-                        actions={[<Button
+                    <div style={{
+                        minWidth: '800px', marginLeft: '150px', marginRight: '150px',
+                        paddingBottom: '48px',
+                        paddingTop: '48px',
+                        justifyContent: 'space-around',
+                        display: 'flex'
+                    }}>
 
+                        <Button
                             onClick={() => {
 
                                 console.log('hcia this.state.mExpectTime', this.state.mExpectTime ? this.state.mExpectTime.getTime() : undefined)
@@ -885,585 +1095,31 @@ class Basic extends Component {
                                 })
 
                             }}
-
-                            style={{margin: '12px', background: '#F6D147', height: 40, width: 180}} block>创建 </Button>,
-                            <Button
-                                onClick={() => {
-
-                                    this.setState({
-                                        mStarClientAccount: undefined,
-                                        mBelongBkUserId: undefined,
-                                        mNetEquity: '',
-                                        mName: '',
-                                        mRate: '',
-                                        mNote: '',
-                                        mAccountTxnCurry: '',
-                                        mExecTxnCurry: '',
-                                        mExpectTime: null,
-                                        mExecTxnAmt: '',
-                                    })
-                                }}
-                                style={{margin: '12px', height: 40, width: 180}} block>重新输入 </Button>]}
-                        title={null}
-                        bordered={true}
-                        headStyle={{textAlign: 'center', width: '100%'}}
-                        style={{marginLeft: '16%', width: '68%'}}>
-
-
-                        <div>
-                            <div style={{padding: 12, textAlign: 'center', align: 'center', background: 'white'}}>
-                                <p style={{
-                                    fontSize: 18,
-                                    fontFamily: 'PingFangSC-Medium',
-                                    fontWeight: 500,
-                                    color: 'rgba(51,51,51,1)'
-                                }}>新增客户入金
-                                </p>
-                            </div>
-                            <div>
-                                <Row>
-                                    <Col style={{textAlign: 'right', align: 'center', background: 'white'}} span={12}>
-
-
-                                        <div style={{
-
-                                            textAlign: 'left',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center'
-                                        }}>
-                                        <span style={{
-
-                                            textAlign: 'left',
-                                            marginRight: '37px',
-
-
-                                            width: '57px',
-                                            fontFamily: 'PingFangSC-Medium',
-                                            fontWeight: 500,
-                                            color: '#292929',
-                                            fontSize: '14px'
-
-
-                                        }}>客户归属</span>
-
-                                            <Select
-
-                                                onChange={(value) => {
-
-
-                                                    this.setState({mBelongBkUserId: value})
-                                                    console.log('hcia value', value)
-                                                }}
-                                                value={this.state.mBelongBkUserId}
-                                                style={{width: '200px', height: '36px'}}>
-
-                                                {imgsTag}
-
-
-                                            </Select>
-
-
-                                        </div>
-                                        <div style={{
-                                            marginTop: '24px',
-                                            textAlign: 'right',
-                                            width: '100%',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center'
-                                        }}>
-                                            <span style={{
-                                                marginRight: '37px',
-                                                fontFamily: 'PingFangSC-Medium',
-                                                fontWeight: 500,
-                                                color: '#292929',
-                                                fontSize: '14px',
-                                                width: '57px',
-
-
-                                            }}>交易平台</span>
-
-
-                                            <Select
-                                                defaultValue={1}
-                                                style={{width: '200px', height: '36px'}}>
-                                                <Option key={1} value={1}>{'IXTrader'}</Option>
-                                            </Select>
-
-                                        </div>
-                                        <div style={{
-                                            marginTop: '24px',
-                                            textAlign: 'right',
-                                            width: '100%',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center'
-                                        }}>
-                                                    <span style={{
-                                                        marginRight: '37px',
-                                                        fontFamily: 'PingFangSC-Medium',
-                                                        fontWeight: 500,
-                                                        color: '#292929',
-                                                        fontSize: '14px',
-                                                        width: '57px',
-                                                    }}>交易账号</span>
-                                            <Input value={this.state.mStarClientAccount}
-                                                   onChange={(e) => {
-
-
-                                                       var self = this
-                                                       console.log('hcia e.target.value', e.target.value)
-                                                       this.setState({
-                                                           mStarClientAccount: e.target.value,
-                                                       }, () => {
-
-                                                           window.Axios.post('star/getStarLiveAccountDetail', {
-                                                               'starClientAccount': self.state.mStarClientAccount,
-
-                                                           }).then((response) => {
-
-                                                               console.log('hcia response', response)
-
-
-                                                               if (response.data.data) {
-                                                                   self.setState({
-                                                                       mNetEquity: response.data.data[0].netEquity,
-                                                                       mName: response.data.data[0].name
-                                                                   })
-                                                               } else {
-
-                                                                   self.setState({
-                                                                       mNetEquity: '',
-                                                                       mName: '',
-                                                                   })
-                                                               }
-
-
-                                                           })
-
-                                                       });
-
-
-                                                   }}
-                                                   style={{width: '200px', height: '36px'}}
-
-                                            />
-                                        </div>
-                                        <div style={{
-                                            marginTop: '24px',
-                                            textAlign: 'right',
-                                            width: '100%',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center'
-                                        }}>
-                                                    <span style={{
-                                                        marginRight: '37px',
-                                                        fontFamily: 'PingFangSC-Medium',
-                                                        fontWeight: 500,
-                                                        color: '#292929',
-                                                        fontSize: '14px',
-                                                        width: '57px',
-
-
-                                                    }}>账户余额</span>
-                                            <Input value={this.state.mNetEquity}
-
-                                                   style={{width: '200px', height: '36px'}}
-                                            />
-                                        </div>
-                                        <div style={{
-                                            marginTop: '24px',
-                                            textAlign: 'right',
-                                            width: '100%',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center'
-                                        }}>
-                                                    <span style={{
-                                                        marginRight: '37px',
-                                                        fontFamily: 'PingFangSC-Medium',
-                                                        fontWeight: 500,
-                                                        color: '#292929',
-                                                        fontSize: '14px',
-                                                        width: '57px',
-
-
-                                                    }}>执行金额</span>
-                                            <Input value={this.state.mExecTxnAmt}
-                                                   onChange={(e) => {
-                                                       this.setState({
-                                                           mExecTxnAmt: e.target.value,
-                                                       });
-                                                   }}
-                                                   style={{width: '200px', height: '36px'}}
-
-                                            />
-                                        </div>
-                                        <div style={{
-                                            marginTop: '24px',
-                                            textAlign: 'right',
-                                            width: '100%',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center'
-                                        }}>
-                                                    <span style={{
-                                                        marginRight: '37px',
-                                                        fontFamily: 'PingFangSC-Medium',
-                                                        fontWeight: 500,
-                                                        color: '#292929',
-                                                        fontSize: '14px',
-                                                        width: '57px',
-
-
-                                                    }}>汇率</span>
-                                            <Input value={this.state.mRate}
-                                                   onChange={(e) => {
-                                                       this.setState({
-                                                           mRate: e.target.value,
-                                                       });
-                                                   }}
-                                                   style={{width: '200px', height: '36px'}}
-
-                                            />
-                                        </div>
-
-                                    </Col>
-
-                                    <Col style={{background: 'white'}} span={12}>
-
-                                        <div style={{
-                                            textAlign: 'right',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center'
-                                        }}>
-
-                                            <div style={{
-                                                width: '87px',
-                                                marginRight: '37px',
-                                            }}>
-                                                    <span style={{
-
-                                                        marginRight: '5px',
-                                                        fontFamily: 'PingFangSC-Medium',
-                                                        fontWeight: 500,
-                                                        color: '#FF4D4D',
-                                                        fontSize: '14px'
-
-
-                                                    }}>*</span>
-
-
-                                                <span style={{
-                                                    fontFamily: 'PingFangSC-Medium',
-                                                    fontWeight: 500,
-                                                    color: '#292929',
-                                                    fontSize: '14px'
-
-                                                }}>入金渠道</span>
-                                            </div>
-                                            <Input value={'电汇'}
-
-                                                   style={{width: '200px', height: '36px'}}
-
-                                            />
-                                        </div>
-                                        <div style={{
-                                            marginTop: '24px',
-                                            textAlign: 'right',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center'
-                                        }}>
-
-                                            <div style={{
-                                                width: '87px',
-                                                marginRight: '37px',
-                                            }}>
-                                                    <span style={{
-
-                                                        marginRight: '5px',
-                                                        fontFamily: 'PingFangSC-Medium',
-                                                        fontWeight: 500,
-                                                        color: '#FF4D4D',
-                                                        fontSize: '14px'
-
-
-                                                    }}>*</span>
-
-
-                                                <span style={{
-                                                    fontFamily: 'PingFangSC-Medium',
-                                                    fontWeight: 500,
-                                                    color: '#292929',
-                                                    fontSize: '14px'
-
-
-                                                }}>支付通道</span>
-
-                                            </div>
-
-                                            <Input value={'电汇'}
-
-                                                   style={{width: '200px', height: '36px'}}
-
-                                            />
-                                        </div>
-                                        <div style={{
-                                            marginTop: '24px',
-                                            textAlign: 'right',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center'
-                                        }}>
-
-                                            <div style={{
-                                                width: '87px',
-                                                marginRight: '37px',
-                                            }}>
-                                                    <span style={{
-                                                        textAlign: 'left',
-                                                        width: '87px',
-                                                        height: '22px',
-                                                        fontFamily: 'PingFangSC-Medium',
-                                                        fontWeight: 500,
-                                                        color: '#292929',
-                                                        fontSize: '14px'
-
-
-                                                    }}>期望到账时间</span>
-
-                                            </div>
-
-
-                                            <DatePicker
-                                                style={{width: '200px', height: '36px'}}
-                                                disabledDate={(current) => {
-                                                    return current.valueOf() < (Date.now() - 86400000)
-                                                }}
-
-                                                value={this.state.mExpectTime ? moment(this.state.mExpectTime, dateFormat) : null}
-
-                                                // value={this.state.mExpectTime}
-                                                onChange={(date, dateString) => {
-
-                                                    console.log('hcia date', date)
-                                                    console.log('hcia dateString', dateString)
-
-
-                                                    if (!date) {
-                                                        this.setState({mExpectTime: null})
-                                                        return
-
-                                                    }
-                                                    var date = new Date(dateString + ' 00:00:00:000');
-                                                    console.log('hcia date', date)
-                                                    var time1 = date.getTime();
-
-                                                    // console.log('hcia time1', time1)
-
-                                                    this.setState({mExpectTime: date})
-                                                    // console.log('hcia date' , date)
-
-                                                    // console.log('hcia ',date, dateString);
-                                                    // console.log('hcia',date, dateString);
-                                                }}/>
-
-                                        </div>
-                                        <div style={{
-                                            marginTop: '24px',
-                                            textAlign: 'right',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center'
-                                        }}>
-
-                                            <div style={{
-                                                width: '87px',
-                                                marginRight: '37px',
-                                            }}>
-                                                    <span style={{
-                                                        textAlign: 'left',
-                                                        width: '87px',
-                                                        height: '22px',
-                                                        fontFamily: 'PingFangSC-Medium',
-                                                        fontWeight: 500,
-                                                        color: '#292929',
-                                                        fontSize: '14px'
-
-
-                                                    }}>账号币种</span>
-
-                                            </div>
-
-                                            <Select
-
-                                                onChange={(value) => {
-
-
-                                                    this.setState({mAccountTxnCurry: value})
-                                                    console.log('hcia value', value)
-                                                }}
-                                                value={this.state.mAccountTxnCurry}
-                                                style={{width: '200px', height: '36px'}}>
-
-                                                {accountTList}
-
-
-                                            </Select>
-                                        </div>
-                                        <div style={{
-                                            marginTop: '24px',
-                                            textAlign: 'right',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center'
-                                        }}>
-
-                                            <div style={{
-                                                width: '87px',
-                                                marginRight: '37px',
-                                            }}>
-                                                    <span style={{
-                                                        textAlign: 'left',
-                                                        width: '87px',
-                                                        height: '22px',
-                                                        fontFamily: 'PingFangSC-Medium',
-                                                        fontWeight: 500,
-                                                        color: '#292929',
-                                                        fontSize: '14px'
-
-
-                                                    }}>账户所有人</span>
-
-                                            </div>
-
-
-                                            <Input value={this.state.mName}
-                                                   style={{width: '200px', height: '36px'}}
-
-                                            />
-                                        </div>
-                                        <div style={{
-                                            marginTop: '24px',
-                                            textAlign: 'right',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center'
-                                        }}>
-
-                                            <div style={{
-                                                width: '87px',
-                                                marginRight: '37px',
-                                            }}>
-                                                    <span style={{
-                                                        textAlign: 'left',
-                                                        width: '87px',
-                                                        height: '22px',
-                                                        fontFamily: 'PingFangSC-Medium',
-                                                        fontWeight: 500,
-                                                        color: '#292929',
-                                                        fontSize: '14px'
-
-
-                                                    }}>支付币种</span>
-
-                                            </div>
-
-                                            <Select
-
-                                                onChange={(value) => {
-
-
-                                                    this.setState({mExecTxnCurry: value})
-                                                    console.log('hcia value', value)
-                                                }}
-                                                value={this.state.mExecTxnCurry}
-                                                style={{width: '200px', height: '36px'}}>
-
-                                                {accountTList}
-
-
-                                            </Select>
-                                            {/*<Input value={'CNY'}*/}
-
-                                            {/*style={{width: '200px', height: '36px'}}*/}
-
-                                            {/*/>*/}
-                                        </div>
-
-
-                                    </Col>
-                                </Row>
-
-                                <Row>
-                                    <Col style={{background: 'white'}} span={2}></Col>
-                                    <Col span={20}>
-                                        <div style={{
-                                            marginTop: '24px',
-                                            width: '737px',
-                                            height: 1,
-                                            background: '#E6E6E6',
-                                        }}></div>
-                                    </Col>
-                                    <Col style={{background: 'white'}} span={2}></Col>
-                                </Row>
-                                <Row style={{marginTop: '24px', marginBottom: '24px'}}>
-                                    <Col style={{textAlign: 'right', align: 'center', background: 'white'}} span={12}>
-
-
-                                        <div style={{
-
-                                            textAlign: 'left',
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'center'
-                                        }}>
-                                                    <span style={{
-
-                                                        textAlign: 'left',
-                                                        marginRight: '37px',
-                                                        width: '57px',
-                                                        fontFamily: 'PingFangSC-Medium',
-                                                        fontWeight: 500,
-                                                        color: '#292929',
-                                                        fontSize: '14px'
-
-
-                                                    }}>创建备注</span>
-                                            <Input value={this.state.mNote}
-                                                   onChange={(e) => {
-                                                       this.setState({
-                                                           mNote: e.target.value,
-                                                       });
-                                                   }}
-                                                   style={{width: '200px', height: '36px'}}
-
-                                            />
-                                        </div>
-
-
-                                    </Col>
-
-                                    <Col style={{background: 'white'}} span={12}>
-
-
-                                    </Col>
-
-
-                                </Row>
-
-
-                            </div>
-
-                        </div>
-
-
-                    </Card>
-                </Card>
+                            style={{background: '#F6D147', width: '180px', height: '40px'}}> 创建 </Button>
+                        <Button
+
+                            onClick={() => {
+
+                                this.setState({
+                                    mStarClientAccount: undefined,
+                                    mBelongBkUserId: undefined,
+                                    mNetEquity: '',
+                                    mName: '',
+                                    mRate: '',
+                                    mNote: '',
+                                    mAccountTxnCurry: '',
+                                    mExecTxnCurry: '',
+                                    mExpectTime: null,
+                                    mExecTxnAmt: '',
+                                })
+                            }}
+
+
+                            style={{width: '180px', height: '40px'}}> 重新输入 </Button>
+
+                    </div>
+
+                </div>
 
 
                 <Card style={{marginTop: 15}} title="电汇入金列表"

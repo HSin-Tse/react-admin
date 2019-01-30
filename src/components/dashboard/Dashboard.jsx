@@ -60,11 +60,11 @@ class Dashboard extends React.Component {
 
         if(mImfor){
             this.setState({lastLoginIP: mImfor.lastLoginIP ? mImfor.lastLoginIP : ''});
+            this.setState({lastLoginTime: mImfor.lastLoginTime});
 
         }
         // this.setState({lastLoginIP: mImfor.lastLoginIP ? mImfor.lastLoginIP : ''});
 
-        this.setState({lastLoginTime: mImfor.lastLoginTime});
 
 
         // console.log('hcia window.Axios.baseURL' , window.Axios.config.baseURL)
