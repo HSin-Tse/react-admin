@@ -322,7 +322,7 @@ class Basic extends Component {
             fontSize: '20px',
             fontFamily: 'PingFang-HK-Medium',
             fontWeight: 'bold',
-            color: 'rgba(33,33,33,1)'
+            color: 'fff'
         }
 
         var titleCo = {
@@ -430,7 +430,7 @@ class Basic extends Component {
 
                                 flexGrow: '1',
                                 height: '2px',
-                                background: 'rgba(246,209,71,1)'
+                                background: '#CCCCCC'
                             }}>
 
                             </div>
@@ -441,10 +441,11 @@ class Basic extends Component {
                                 justifyContent: 'center',
                                 width: '40px',
                                 height: '40px',
-                                background: 'rgba(246,209,71,1)',
+                                background: '#CCCCCC',
+                                color:'white',
                                 borderRadius: '50%'
                             }}>
-                                <span style={titleStule}>3</span>
+                                <span style={titleStule}>2</span>
                             </div>
                             <div style={{
 
@@ -462,9 +463,11 @@ class Basic extends Component {
                                 width: '40px',
                                 height: '40px',
                                 background: '#CCCCCC',
+                                color:'white',
+
                                 borderRadius: '50%'
                             }}>
-                                <span style={titleStule}>4</span>
+                                <span style={titleStule}>3</span>
 
                             </div>
 
@@ -490,6 +493,7 @@ class Basic extends Component {
                                 fontSize: '18px',
                                 fontFamily: 'PingFang-HK-Medium',
                                 fontWeight: 'bold',
+
                                 color: '#7B7B7B'
                             }}>{steps[1].title}</span>
                             <div style={{
