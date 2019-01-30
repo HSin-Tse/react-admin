@@ -39,9 +39,6 @@ const RadioGroup = Radio.Group;
 const Option = Select.Option;
 
 const dateFormat = 'YYYY-MM-DD';
-var aaxios = axios.create({
-    baseURL: 'http://mobile.nooko.cn:8090/'
-});
 
 class PassOpenRS extends Component {
 
