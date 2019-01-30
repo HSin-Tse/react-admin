@@ -65,6 +65,7 @@ export default {
                 {tk: 'DEPOSIT_LIST', key: '/app/fina/in', title: '入金管理', component: 'InComeMoney'},
                 {tk: 'DEPOSIT_MANNUAL', key: '/app/fina/tel', title: '电汇入金', component: 'TeleMoney'},
                 {tk: 'DEPOSIT_MANNUAL', key: '/app/fina/tes', title: '入金审核', component: 'TeleMoneySecond'},
+                {tk: 'DEPOSIT_MANNUAL', key: '/app/fina/ter', title: '入金完成', component: 'TeleMoneyThird'},
                 {tk: 'WITHDRAW_LIST', key: '/app/fina/out', title: '出金管理', component: 'OutMoney'},
                 {tk: 'DEPOSIT_WITHDRAW_REPORT', key: '/app/fina/inout', title: '出入金报表', component: 'InOutTA'},
                 {tk: 'CHANNEL_MGMT', key: '/app/fina/cha', title: '渠道管理', component: 'ChannelMY'},
