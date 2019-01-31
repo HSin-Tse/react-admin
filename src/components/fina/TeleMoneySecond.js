@@ -29,21 +29,11 @@ const {TextArea} = Input;
 
 const dateFormat = 'YYYY-MM-DD';
 
-const Step = Steps.Step;
 const Option = Select.Option;
-const TabPane = Tabs.TabPane;
 
 class Basic extends Component {
     changeNote = (e) => {
-
-
-        console.log('hcia e.target.value', e.target.value)
-
-
-        this.setState({
-            changeNoteV: e.target.value
-        })
-        // this.state.changeNoteV = e.target.value
+        this.setState({changeNoteV: e.target.value})
     }
 
     constructor(props) {
