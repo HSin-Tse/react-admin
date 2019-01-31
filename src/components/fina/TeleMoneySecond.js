@@ -7,28 +7,21 @@ import {
     Table,
     message,
     Select,
-    Steps,
     Card,
     Col,
     Row,
     Input,
     Modal,
-    Tooltip,
-    Tag,
     DatePicker,
-    Divider, Tabs, Checkbox
 } from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import moment from 'moment';
-import {steps} from "./model/Steps";
 
 const {TextArea} = Input;
-
 const dateFormat = 'YYYY-MM-DD';
-
 const Option = Select.Option;
 
 class Basic extends Component {
@@ -217,38 +210,27 @@ class Basic extends Component {
             }];
         this.requestPage()
 
-
         window.Axios.post('dict/openDict', {
             'keys': 'finance_currency',
-
         }).then((response) => {
             self.setState({
                 accountTxnCurryList: response.data.data.finance_currency
             })
-
         })
 
 
         window.Axios.post('back/getBackUserList', {
             'pageSize': 1000,
             'pageNo': 0,
-
         }).then((response) => {
             self.setState({
                 bkroleList: response.data.data.list
             })
-
         })
-
     }
 
-
     showOPDAyModal3 = (recodrd) => {
-
-        console.log('hcia recodrd', recodrd)
         var self = this
-
-        // this.requestUserCommentList(recodrd)
         this.setState({
             dissmissRecodrdID: recodrd.id,
         }, () => {
@@ -271,14 +253,11 @@ class Basic extends Component {
         return +str >= 10 ? str : '0' + str
     };
     requestPage = () => {
-
         let self = this
         self.setState({
                 loading: true,
             }
         );
-
-
         window.Axios.post('finance/getDepositHistory', {
             'listType': 1,
             'pageSize': self.state.pgsize,
@@ -292,8 +271,6 @@ class Basic extends Component {
                     userList: response.data.data.list
                 }
             );
-
-
         })
     }
     changePage = (page) => {
@@ -326,16 +303,6 @@ class Basic extends Component {
         }
 
 
-        var ssdds = {
-
-            paddingLeft: 15,
-            paddingRight: 15,
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            display: 'flex',
-            height: '40px',
-            borderRadius: '40px 40px 40px 40px'
-        }
         const steps = [{
             title: '新增',
             content: 'First-content',
@@ -365,30 +332,15 @@ class Basic extends Component {
             <div>
 
                 {/*<div>accrounRes :{JSON.stringify(this.state.accrounRes)}</div>*/}
-                {/*<div>live931773069</div>*/}
-                {/*<div>mBelongBkUserId :{JSON.stringify(this.state.mBelongBkUserId)}</div>*/}
-                {/*<div>mNetEquity :{JSON.stringify(this.state.mNetEquity)}</div>*/}
-                {/*<div>mNote :{JSON.stringify(this.state.mNote)}</div>*/}
-                {/*<div>mAccountTxnCurry :{JSON.stringify(this.state.mAccountTxnCurry)}</div>*/}
-                {/*<div>mExpectTime :{JSON.stringify(this.state.mExpectTime)}</div>*/}
-                {/*<div>mExecTxnAmt :{JSON.stringify(this.state.mExecTxnAmt)}</div>*/}
-                {/*<div>mRate :{JSON.stringify(this.state.mRate)}</div>*/}
-                {/*<div>mExecTxnCurry :{JSON.stringify(this.state.mExecTxnCurry)}</div>*/}
-                {/*<div>mAccountTxnCurry :{JSON.stringify(this.state.mAccountTxnCurry)}</div>*/}
 
 
                 <h2 style={{marginTop: 15}}>入金审核</h2>
                 <BreadcrumbCustom first="财务管理" second="电汇入金" third="入金审核"/>
 
                 <div style={{
-
-                    // width: '1200px',
-                    // marginLeft: '200px',
                     background: "white",
                     boxShadow: '0px 0px 20px 0px rgba(123,123,123,0.1)',
                     borderRadius: '4px',
-
-
                 }}>
 
                     <div style={{
@@ -420,7 +372,7 @@ class Basic extends Component {
 
                                 flexGrow: '1',
                                 height: '2px',
-                                background: '#CCCCCC'
+                                background: 'rgba(246,209,71,1)'
                             }}>
 
                             </div>
@@ -431,8 +383,7 @@ class Basic extends Component {
                                 justifyContent: 'center',
                                 width: '40px',
                                 height: '40px',
-                                background: '#CCCCCC',
-                                color:'white',
+                                background: 'rgba(246,209,71,1)',
                                 borderRadius: '50%'
                             }}>
                                 <span style={titleStule}>2</span>
@@ -453,7 +404,7 @@ class Basic extends Component {
                                 width: '40px',
                                 height: '40px',
                                 background: '#CCCCCC',
-                                color:'white',
+                                color: 'white',
 
                                 borderRadius: '50%'
                             }}>
@@ -995,7 +946,7 @@ class Basic extends Component {
 
 
                         <div style={{
-                            marginTop:'24px',
+                            marginTop: '24px',
                             height: '1px',
                             background: 'rgba(230,230,230,1)'
                         }}>
