@@ -33,10 +33,10 @@ const Option = Select.Option;
 // First, you need to create the `numberMask` with your desired configurations
 const numberMask = createNumberMask({
     includeThousandsSeparator: false,
-    integerLimit: true,
     allowLeadingZeroes: true,
     requireDecimal: true,
-    decimalLimit: 9,
+    decimalLimit: 6,
+    integerLimit: 5,
     prefix: '',
     // suffix: ' $' // This will put the dollar sign at the end, with a space.
 })
