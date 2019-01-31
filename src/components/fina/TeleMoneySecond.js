@@ -78,14 +78,18 @@ class Basic extends Component {
 
 
     componentDidMount() {
-
         var self = this
-        window.Axios.post('back/addLogHistory', {
-            'moduleLog': '财务管理',
-            'pageLog': '入金审核',
-            'commentLog': '查看了入金审核',
-            'typeLog': 2,
+
+
+        window.Axios.post('finance/getDepositDetail', {
+            'id': self.props.match.params.id
+        }).then((response) => {
+            // self.setState({
+            //     accountTxnCurryList: response.data.data.finance_currency
+            // })
         })
+
+
         this.columns = [
             {
                 title: '序号',
@@ -214,7 +218,7 @@ class Basic extends Component {
 
                             onClick={
                                 () => this.showOPDAyModal3(record)
-                            }>{record.status == 1 ?'支付成功':record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
+                            }>{record.status == 1 ? '支付成功' : record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
 
                         </Button>
 
