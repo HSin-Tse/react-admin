@@ -216,8 +216,7 @@ class Basic extends Component {
 
                             onClick={
                                 () => this.showOPDAyModal3(record)
-                            }>{record.status == 2 ? '取消' : record.status == 3 ? '审核成功' : '已取消'}
-
+                            }>{record.status == 1 ?'支付成功':record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
 
                         </Button>
 
