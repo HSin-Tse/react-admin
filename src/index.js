@@ -18,17 +18,15 @@ import {IntlProvider, addLocaleData} from 'react-intl';
 import en from './locale/en_US'
 import zh from './locale/zh_CN'
 
-// redux 注入操作
 const middleware = [thunk];
 const store = createStore(reducer, applyMiddleware(...middleware));
 var Axios = axios.create({
-    baseURL:  window.location.protocol+'//mobile.nooko.cn:8090/'
+    baseURL: window.location.protocol + '//mobile.nooko.cn:8090/'
 });
 
 var aaxios = axios.create({
-    baseURL:  window.location.protocol+  '//mobile.nooko.cn:8090/'
+    baseURL: window.location.protocol + '//mobile.nooko.cn:8090/'
 });
-
 
 
 message.config({
@@ -118,56 +116,26 @@ window.Axios.interceptors.request.use(
             pending.push({u: request, f: c});
         });
 
-        // const request = JSON.stringify(config.url) + JSON.stringify(config.data)
-
-        // config.cancelToken = new CancelToken((cancel) => {
-        //     sources[request] = cancel
-        // })
-
-        //1.判断请求是否已存在请求列表，避免重复请求，将当前请求添加进请求列表数组；
-        // if(requestList.includes(request)){
-        //
-        //     // sources[request]('取消重复请求'+config.url)
-        //
-        //     // sources.remove(request)
-        // }else{
-        //     //2.请求开始，改变loading状态供加载动画使用
-        //     // store.dispatch('changeGlobalState', {loading: true})
-        // }
-        //
-        // requestList.push(request)
 
         var xtoken = localStorage.getItem('too')
         var loginName = localStorage.getItem('loginName')
 
         loginName = encodeURI(loginName)
 
-        // console.log('hcia loginName' , loginName)
-        // console.log('hcia xtoken' , xtoken)
-
 
         if (xtoken != null) {
             config.headers['X-Token'] = xtoken
             if (config.method == 'post') {
 
-                // Toast.success('加载完成')
-
-                // console.log('hcia hideLoading' , hideLoading)
-
-
-                // console.log('hcia config' , config)
 
                 if (hideLoading) {
 
                 } else {
                     hideLoading = Toast.loading('加载中...', 0, () => {
-                        // Toast.success('加载完成')
                     })
                 }
 
 
-                // ss=   message.loading('Action in progress..', 0)
-                // message.success('Loading finished', 2.5)
                 config.data = {
                     ...config.data,
                     'token': xtoken,
@@ -201,23 +169,6 @@ window.Axios.interceptors.request.use(
 
 window.Axios.interceptors.response.use(function (response) {
 
-    // localStorage.removeItem('infor');
-    // localStorage.removeItem('user');
-    // localStorage.removeItem('too');
-    // localStorage.removeItem('displayName');
-
-
-    // console.log('hcia location.host' , window.location.host)
-    // window.location ='http://'+ window.location.host+"/#/login";
-
-
-    // this.props.history.push('/login')
-
-    // const request = JSON.stringify(response.url) + JSON.stringify(response.data)
-
-    // console.log('hcia request' , request)
-
-    // sources.remove(request)
     removePending(response.config);
     if (response.data.code != 1) {
         setTimeout(hideLoading, 0)
@@ -231,8 +182,6 @@ window.Axios.interceptors.response.use(function (response) {
             localStorage.removeItem('too');
             localStorage.removeItem('displayName');
 
-
-            // var isMe =window.location.port== ''
 
             var isTESTServer = window.location.port == '8090'
 
