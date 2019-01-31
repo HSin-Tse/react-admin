@@ -6,10 +6,19 @@ import {message} from 'antd';
 
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {parse} from 'querystring';
+import MaskedInput from 'react-text-mask'
+import createNumberMask from 'text-mask-addons/dist/createNumberMask'
 
-const Option = Select.Option;
 const {TextArea} = Input;
-
+const numberMask = createNumberMask({
+    includeThousandsSeparator: false,
+    allowLeadingZeroes: true,
+    requireDecimal: true,
+    decimalLimit: 6,
+    integerLimit: 5,
+    prefix: '',
+    // suffix: ' $' // This will put the dollar sign at the end, with a space.
+})
 class EditCha extends Component {
 
     constructor(props) {
@@ -58,10 +67,28 @@ class EditCha extends Component {
                                 <div>
 
                                     <h3>{pay.resourceCurrency}</h3>
-                                    <Input
+                                    {/*<Input*/}
 
-                                        value={pay.rate}
+                                        {/*value={pay.rate}*/}
 
+                                        {/*onChange={(changeValue) => {*/}
+
+                                            {/*console.log('hcia changeValue', changeValue)*/}
+                                            {/*pay.rate = changeValue.target.value*/}
+                                            {/*this.state.mMultiMap[pay.id] = pay.rate*/}
+
+                                            {/*this.setState({})*/}
+                                        {/*}} style={{}} placeholder=""/>*/}
+
+                                    <MaskedInput
+                                        defaultValue={pay.rate}
+                                        // style={{width: '200px', height: '36px'}}
+                                        mask={numberMask}
+
+                                        className="ant-input"
+                                        placeholder="汇率"
+                                        guide={true}
+                                        // id="my-input-id"
                                         onChange={(changeValue) => {
 
                                             console.log('hcia changeValue', changeValue)
@@ -69,7 +96,11 @@ class EditCha extends Component {
                                             this.state.mMultiMap[pay.id] = pay.rate
 
                                             this.setState({})
-                                        }} style={{}} placeholder=""/>
+                                        }}
+
+                                        // onBlur={() => {}}
+                                        // onChange={() => {}}
+                                    />
                                 </div>
                             </Card.Grid>)}
 

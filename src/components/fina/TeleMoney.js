@@ -26,15 +26,12 @@ import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import moment from 'moment';
-import {steps} from "./model/Steps";
 
 const {TextArea} = Input;
 
 const dateFormat = 'YYYY-MM-DD';
 
-const Step = Steps.Step;
 const Option = Select.Option;
-const TabPane = Tabs.TabPane;
 const numberMask = createNumberMask({
     includeThousandsSeparator: false,
     allowLeadingZeroes: true,
@@ -226,12 +223,27 @@ class Basic extends Component {
 
 
                             onClick={
-                                () => this.showOPDAyModal3(record)
-                            }>{record.status == 2 ? '取消' : record.status == 3 ? '审核成功' : '已取消'}
 
+
+
+                                () => {
+
+                                    this.props.history.push('/app/fina/d/tes' + record.id)
+
+                                }
+                            }>{record.status == 1 ?'支付成功':record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
 
                         </Button>
+                        <Button
+                            size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                            disabled={record.status == 3 || record.status == 4  || record.status == 1}
 
+
+                            onClick={
+                                () => this.showOPDAyModal3(record)
+                            }>取消
+
+                        </Button>
 
                     </div>
                 ),
