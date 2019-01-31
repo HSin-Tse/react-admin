@@ -58,6 +58,7 @@ class Basic extends Component {
             mStarClientAccount: undefined,
             accrounRes: undefined,
             mBelongBkUserId: undefined,
+            mBelongBkUserName: undefined,
             mNetEquity: '',
             mName: '',
             mRate: '',
@@ -84,9 +85,10 @@ class Basic extends Component {
         window.Axios.post('finance/getDepositDetail', {
             'id': self.props.match.params.id
         }).then((response) => {
-            // self.setState({
-            //     accountTxnCurryList: response.data.data.finance_currency
-            // })
+
+            self.setState({
+                mBelongBkUserName: response.data.data.bkUserName
+            })
         })
 
 
@@ -511,21 +513,35 @@ class Basic extends Component {
 
                                         }}>客户归属</span>
 
-                                    <Select
 
-                                        onChange={(value) => {
+                                    <Input value={this.state.mBelongBkUserName}
+                                           // onChange={(e) => {
+                                           //
+                                           //
+                                           //     var self = this
+                                           //     console.log('hcia e.target.value', e.target.value)
+                                           //
+                                           //
+                                           // }}
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+
+                                    {/*<Select*/}
+
+                                        {/*onChange={(value) => {*/}
 
 
-                                            this.setState({mBelongBkUserId: value})
-                                            console.log('hcia value', value)
-                                        }}
-                                        value={this.state.mBelongBkUserId}
-                                        style={{width: '200px', height: '36px'}}>
+                                            {/*this.setState({mBelongBkUserId: value})*/}
+                                            {/*console.log('hcia value', value)*/}
+                                        {/*}}*/}
+                                        {/*value={this.state.mBelongBkUserId}*/}
+                                        {/*style={{width: '200px', height: '36px'}}>*/}
 
-                                        {imgsTag}
+                                        {/*{imgsTag}*/}
 
 
-                                    </Select>
+                                    {/*</Select>*/}
 
 
                                 </div>
@@ -683,15 +699,15 @@ class Basic extends Component {
 
 
                                                     }}>汇率</span>
-                                    <Input value={this.state.mRate}
-                                           onChange={(e) => {
-                                               this.setState({
-                                                   mRate: e.target.value,
-                                               });
-                                           }}
-                                           style={{width: '200px', height: '36px'}}
+                                    {/*<Input value={this.state.mRate}*/}
+                                           {/*onChange={(e) => {*/}
+                                               {/*this.setState({*/}
+                                                   {/*mRate: e.target.value,*/}
+                                               {/*});*/}
+                                           {/*}}*/}
+                                           {/*style={{width: '200px', height: '36px'}}*/}
 
-                                    />
+                                    {/*/>*/}
                                     <MaskedInput
                                         style={{width: '200px', height: '36px'}}
                                         mask={numberMask}
