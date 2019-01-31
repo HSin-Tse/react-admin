@@ -694,8 +694,9 @@ class Basic extends Component {
                                     <MaskedInput
                                         style={{width: '200px', height: '36px'}}
                                         mask={numberMask}
+
                                         className="ant-input"
-                                        placeholder="Enter a phone number"
+                                        placeholder="汇率"
                                         guide={true}
                                         id="my-input-id"
                                         onChange={(e) => {
@@ -703,6 +704,7 @@ class Basic extends Component {
                                                 mRate: e.target.value,
                                             });
                                         }}
+
                                         // onBlur={() => {}}
                                         // onChange={() => {}}
                                     />
