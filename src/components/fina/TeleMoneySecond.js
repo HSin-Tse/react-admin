@@ -4,8 +4,6 @@
 import React, {Component} from 'react';
 
 import MaskedInput from 'react-text-mask'
-
-import emailMask from 'text-mask-addons/dist/emailMask'
 import createNumberMask from 'text-mask-addons/dist/createNumberMask'
 
 

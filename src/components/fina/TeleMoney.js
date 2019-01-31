@@ -2,6 +2,9 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
+import MaskedInput from 'react-text-mask'
+import createNumberMask from 'text-mask-addons/dist/createNumberMask'
+
 import {
     Button,
     Table,
@@ -32,7 +35,15 @@ const dateFormat = 'YYYY-MM-DD';
 const Step = Steps.Step;
 const Option = Select.Option;
 const TabPane = Tabs.TabPane;
-
+const numberMask = createNumberMask({
+    includeThousandsSeparator: false,
+    allowLeadingZeroes: true,
+    requireDecimal: true,
+    decimalLimit: 6,
+    integerLimit: 5,
+    prefix: '',
+    // suffix: ' $' // This will put the dollar sign at the end, with a space.
+})
 class Basic extends Component {
     changeNote = (e) => {
 
@@ -721,14 +732,31 @@ class Basic extends Component {
 
 
                                                     }}>汇率</span>
-                                    <Input value={this.state.mRate}
-                                           onChange={(e) => {
-                                               this.setState({
-                                                   mRate: e.target.value,
-                                               });
-                                           }}
-                                           style={{width: '200px', height: '36px'}}
+                                    {/*<Input value={this.state.mRate}*/}
+                                           {/*onChange={(e) => {*/}
+                                               {/*this.setState({*/}
+                                                   {/*mRate: e.target.value,*/}
+                                               {/*});*/}
+                                           {/*}}*/}
+                                           {/*style={{width: '200px', height: '36px'}}*/}
 
+                                    {/*/>*/}
+                                    <MaskedInput
+                                        style={{width: '200px', height: '36px'}}
+                                        mask={numberMask}
+
+                                        className="ant-input"
+                                        placeholder="汇率"
+                                        guide={true}
+                                        id="my-input-id"
+                                        onChange={(e) => {
+                                            this.setState({
+                                                mRate: e.target.value,
+                                            });
+                                        }}
+
+                                        // onBlur={() => {}}
+                                        // onChange={() => {}}
                                     />
                                 </div>
 
@@ -772,6 +800,8 @@ class Basic extends Component {
                                            style={{width: '200px', height: '36px'}}
 
                                     />
+
+
                                 </div>
                                 <div style={{
                                     marginTop: '24px',
