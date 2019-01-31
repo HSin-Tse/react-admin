@@ -30,6 +30,8 @@ import PhotoswipeUIDefault from "photoswipe/dist/photoswipe-ui-default";
 import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
 import moment from 'moment';
+import MaskedInput from "react-text-mask";
+import emailMask from "text-mask-addons/dist/emailMask";
 
 const Search = Input.Search;
 const {TextArea} = Input;
@@ -632,7 +634,10 @@ class PassOpenD extends Component {
         });
     }
     onChangeemail = (e) => {
+        
+        
         this.state.waitUpdate.email = e.target.value
+        console.log('hcia this.state.waitUpdate.email' , this.state.waitUpdate.email)
         this.setState({
             isNeedSave: true,
         });
@@ -1300,11 +1305,26 @@ class PassOpenD extends Component {
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
                                         <span style={{minWidth: 120}}>*邮箱地址</span>
-                                        <Input
+                                        {/*<Input*/}
+
+                                            {/*style={{width: '256px'}}*/}
+                                            {/*defaultValue={this.state.recordData.email}*/}
+                                            {/*onChange={this.onChangeemail}*/}
+                                            {/*placeholder=""/>*/}
+
+                                        <MaskedInput
+                                            defaultValue={this.state.recordData.email}
 
                                             style={{width: '256px'}}
-                                            defaultValue={this.state.recordData.email} onChange={this.onChangeemail}
-                                            placeholder=""/>
+                                            mask={emailMask}
+                                            className="ant-input"
+                                            placeholder="邮箱地址"
+                                            guide={true}
+                                            id="my-input-id"
+                                            onChange={this.onChangeemail}
+                                            // onBlur={() => {}}
+                                            // onChange={() => {}}
+                                        />
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
                                         <span style={{minWidth: 120}}>*邮编</span>

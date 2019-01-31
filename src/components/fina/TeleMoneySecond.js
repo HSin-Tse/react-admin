@@ -2,6 +2,9 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
+
+import MaskedInput from 'react-text-mask'
+import emailMask from 'text-mask-addons/dist/emailMask'
 import {
     Button,
     Table,
@@ -285,6 +288,9 @@ class Basic extends Component {
 
     render() {
 
+
+
+
         var titleStule = {
             fontSize: '20px',
             fontFamily: 'PingFang-HK-Medium',
@@ -335,6 +341,10 @@ class Basic extends Component {
 
 
                 <h2 style={{marginTop: 15}}>入金审核</h2>
+
+
+
+
                 <BreadcrumbCustom first="财务管理" second="电汇入金" third="入金审核"/>
 
                 <div style={{
@@ -507,6 +517,8 @@ class Basic extends Component {
                                     </Select>
 
 
+
+
                                 </div>
                                 <div style={{
                                     marginTop: '24px',
@@ -670,6 +682,16 @@ class Basic extends Component {
                                            }}
                                            style={{width: '200px', height: '36px'}}
 
+                                    />
+                                    <MaskedInput
+                                        style={{width: '200px', height: '36px'}}
+                                                  mask={emailMask}
+                                                  className="ant-input"
+                                                  placeholder="Enter a phone number"
+                                                  guide={true}
+                                                  id="my-input-id"
+                                                  // onBlur={() => {}}
+                                                  // onChange={() => {}}
                                     />
                                 </div>
 

@@ -210,7 +210,7 @@ class CustomerSummary extends Component {
                         <span style={{
                             display: record.bindedStatus == 1 ? '' : 'none',
                             marginLeft: 10
-                        }}>{record.bindedStatus != 1 ? '' : record.mobile}</span>
+                        }}>{record.bindedStatus != 1 ? '' : record.bindedPhoneNumber}</span>
                         {/*<Button style={{marginLeft: 15}}>解绑</Button>*/}
 
 
