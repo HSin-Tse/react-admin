@@ -29,15 +29,14 @@ var aaxios = axios.create({
     baseURL:  window.location.protocol+  '//mobile.nooko.cn:8090/'
 });
 
-// location.protocolは「http:」
-// addLocaleData([...en, ...zh]);
+
 
 message.config({
     top: '10%',
     maxCount: 1,
 });
 window.Axios = Axios;
-window.PAxios = aaxios;
+window.PAxios = aaxios;// は「http:」
 
 var hideLoading
 
