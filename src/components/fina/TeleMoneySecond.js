@@ -4,7 +4,11 @@
 import React, {Component} from 'react';
 
 import MaskedInput from 'react-text-mask'
+
 import emailMask from 'text-mask-addons/dist/emailMask'
+import createNumberMask from 'text-mask-addons/dist/createNumberMask'
+
+
 import {
     Button,
     Table,
@@ -26,6 +30,16 @@ import moment from 'moment';
 const {TextArea} = Input;
 const dateFormat = 'YYYY-MM-DD';
 const Option = Select.Option;
+// First, you need to create the `numberMask` with your desired configurations
+const numberMask = createNumberMask({
+    includeThousandsSeparator: false,
+    integerLimit: true,
+    allowLeadingZeroes: true,
+    requireDecimal: true,
+    decimalLimit: 9,
+    prefix: '',
+    // suffix: ' $' // This will put the dollar sign at the end, with a space.
+})
 
 class Basic extends Component {
     changeNote = (e) => {
@@ -289,8 +303,6 @@ class Basic extends Component {
     render() {
 
 
-
-
         var titleStule = {
             fontSize: '20px',
             fontFamily: 'PingFang-HK-Medium',
@@ -341,8 +353,6 @@ class Basic extends Component {
 
 
                 <h2 style={{marginTop: 15}}>入金审核</h2>
-
-
 
 
                 <BreadcrumbCustom first="财务管理" second="电汇入金" third="入金审核"/>
@@ -517,8 +527,6 @@ class Basic extends Component {
                                     </Select>
 
 
-
-
                                 </div>
                                 <div style={{
                                     marginTop: '24px',
@@ -685,13 +693,18 @@ class Basic extends Component {
                                     />
                                     <MaskedInput
                                         style={{width: '200px', height: '36px'}}
-                                                  mask={emailMask}
-                                                  className="ant-input"
-                                                  placeholder="Enter a phone number"
-                                                  guide={true}
-                                                  id="my-input-id"
-                                                  // onBlur={() => {}}
-                                                  // onChange={() => {}}
+                                        mask={numberMask}
+                                        className="ant-input"
+                                        placeholder="Enter a phone number"
+                                        guide={true}
+                                        id="my-input-id"
+                                        onChange={(e) => {
+                                            this.setState({
+                                                mRate: e.target.value,
+                                            });
+                                        }}
+                                        // onBlur={() => {}}
+                                        // onChange={() => {}}
                                     />
                                 </div>
 
