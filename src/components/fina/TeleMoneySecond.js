@@ -62,6 +62,7 @@ class Basic extends Component {
             dismissModal: false,
             dissmissRecodrdID: '',
             changeNoteV: '',
+            opname: localStorage.getItem('displayName'),
 
         };
     }
@@ -76,6 +77,7 @@ class Basic extends Component {
         }).then((response) => {
 
             self.setState({
+                mID: response.data.data.id,
                 mBelongBkUserName: response.data.data.bkUserName,
                 mStarClientAccount: response.data.data.accountNo,
                 mNetEquity: response.data.data.netEquity,
@@ -505,7 +507,7 @@ class Basic extends Component {
                             fontFamily: 'PingFangSC-Medium',
                             fontWeight: 500,
                             color: 'rgba(51,51,51,1)'
-                        }}>新增客户入金
+                        }}>订单号：{this.state.mID}
                         </p>
                     </div>
                     <div style={{minWidth: '800px', marginLeft: '150px', marginRight: '150px', paddingBottom: '10px'}}>
@@ -962,7 +964,12 @@ class Basic extends Component {
 
 
                                                     }}>打款备注</span>
-                                    <Input value={this.state.mExecTxnAmt}
+                                    <Input value={this.state.mNote}
+                                           onChange={(e) => {
+                                               this.setState({
+                                                   mNote: e.target.value,
+                                               });
+                                           }}
                                            style={{width: '200px', height: '36px'}}
 
                                     />
@@ -971,7 +978,31 @@ class Basic extends Component {
                             </Col>
 
                             <Col style={{background: 'white'}} span={12}>
+                                <div style={{
 
+                                    textAlign: 'left',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                                    <span style={{
+
+                                                        textAlign: 'left',
+                                                        marginRight: '37px',
+                                                        width: '57px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px'
+
+
+                                                    }}>操作人</span>
+                                    <Input value={this.state.opname}
+
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+                                </div>
 
                             </Col>
 
@@ -991,36 +1022,38 @@ class Basic extends Component {
                         <Button
                             onClick={() => {
 
-                                console.log('hcia this.state.mExpectTime', this.state.mExpectTime ? this.state.mExpectTime.getTime() : undefined)
+                                // console.log('hcia this.state.mExpectTime', this.state.mExpectTime ? this.state.mExpectTime.getTime() : undefined)
 
-                                window.Axios.post('finance/createDeposit', {
-                                    'belongBkUserId': this.state.mBelongBkUserId,//
-                                    'accountFrom': 1,//1 IXtrader
-                                    'starClientAccount': this.state.mStarClientAccount,//
-                                    'execTxnAmt': this.state.mExecTxnAmt,
-                                    'execTxnCurry': this.state.mExecTxnCurry,
-                                    'rate': this.state.mRate,
-                                    'accountTxnCurry': this.state.mAccountTxnCurry,//this.state.mAccountTxnCurry
-                                    'expectTime': this.state.mExpectTime ? this.state.mExpectTime.getTime() : undefined,
-                                    'content': this.state.mNote,
+
+                                
+                                console.log('hcia this.state.mNote' , this.state.mNote)
+
+                                if (this.state.mNote.length==0) {
+
+                                    message.error('备注必填')
+                                    return
+                                }
+
+                                var self = this
+                                window.Axios.post('finance/updateDeposit', {
+                                    'id': self.props.match.params.id,
+                                    'content': self.state.mNote,
+                                    'status': '3',
+
                                 }).then((response) => {
 
-
                                     message.success('操作成功')
-
                                     this.requestPage()
-                                    // self.setState({
-                                    //         totalPage: response.data.data.totalPage,
-                                    //         loading: false,
-                                    //         userList: response.data.data.list
-                                    //     }
-                                    // );
+
+                                    self.setState({dissmissRecodrdID: '', changeNoteV: '', dismissModal: false})
 
 
                                 })
 
+
+
                             }}
-                            style={{background: '#F6D147', width: '180px', height: '40px'}}> 创建 </Button>
+                            style={{background: '#F6D147', width: '180px', height: '40px'}}> 确定并打款 </Button>
                         <Button
 
                             onClick={() => {
@@ -1040,8 +1073,27 @@ class Basic extends Component {
                             }}
 
 
-                            style={{width: '180px', height: '40px'}}> 重新输入 </Button>
+                            style={{width: '180px', height: '40px'}}> 更新信息 </Button>
+                        <Button
 
+                            onClick={() => {
+
+                                this.setState({
+                                    mStarClientAccount: undefined,
+                                    mBelongBkUserId: undefined,
+                                    mNetEquity: '',
+                                    mName: '',
+                                    mRate: '',
+                                    mNote: '',
+                                    mAccountTxnCurry: '',
+                                    mExecTxnCurry: '',
+                                    mExpectTime: null,
+                                    mExecTxnAmt: '',
+                                })
+                            }}
+
+
+                            style={{width: '180px', height: '40px'}}> 取消入金 </Button>
                     </div>
 
                 </div>
@@ -1079,13 +1131,6 @@ class Basic extends Component {
                     closable={false}
                     footer={null}
                     visible={this.state.dismissModal}
-                    // onOk={this.handleOk}
-                    // onCancel={(e) => {
-                    //     console.log(e);
-                    //     this.setState({
-                    //         dismissModal: false,
-                    //     });
-                    // }}
                 >
                     <div style={{lineHeight: '48px', textAlign: 'center', background: '#FDD000', height: '48px'}}>
                         <span style={{
