@@ -3,9 +3,6 @@
  */
 import React, {Component} from 'react';
 
-import MaskedInput from 'react-text-mask'
-import createNumberMask from 'text-mask-addons/dist/createNumberMask'
-
 
 import {
     Button,
@@ -17,27 +14,16 @@ import {
     Row,
     Input,
     Modal,
-    DatePicker,
 } from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
-import moment from 'moment';
 
 const {TextArea} = Input;
-const dateFormat = 'YYYY-MM-DD';
 const Option = Select.Option;
+
 // First, you need to create the `numberMask` with your desired configurations
-const numberMask = createNumberMask({
-    includeThousandsSeparator: false,
-    allowLeadingZeroes: true,
-    requireDecimal: true,
-    decimalLimit: 6,
-    integerLimit: 5,
-    prefix: '',
-    // suffix: ' $' // This will put the dollar sign at the end, with a space.
-})
 
 class Basic extends Component {
     changeNote = (e) => {
@@ -59,8 +45,10 @@ class Basic extends Component {
             accrounRes: undefined,
             mBelongBkUserId: undefined,
             mBelongBkUserName: undefined,
+            mAccountCurrency: '',
             mNetEquity: '',
             mName: '',
+            mExpectDate: '',
             mRate: '',
             mExecTxnCurry: '',
             mNote: '',
@@ -92,7 +80,9 @@ class Basic extends Component {
                 mNetEquity: response.data.data.netEquity,
                 mExecTxnAmt: response.data.data.execAmount,
                 mRate: response.data.data.rate,
-            },()=>{
+                mExpectDate: response.data.data.expectDate,
+                mAccountCurrency: response.data.data.accountCurrency,
+            }, () => {
                 window.Axios.post('star/getStarLiveAccountDetail', {
                     'starClientAccount': self.state.mStarClientAccount,
 
@@ -799,39 +789,12 @@ class Basic extends Component {
 
                                     </div>
 
+                                    <Input value={this.state.mExpectDate}
 
-                                    <DatePicker
-                                        style={{width: '200px', height: '36px'}}
-                                        disabledDate={(current) => {
-                                            return current.valueOf() < (Date.now() - 86400000)
-                                        }}
+                                           style={{width: '200px', height: '36px'}}
 
-                                        value={this.state.mExpectTime ? moment(this.state.mExpectTime, dateFormat) : null}
+                                    />
 
-                                        // value={this.state.mExpectTime}
-                                        onChange={(date, dateString) => {
-
-                                            console.log('hcia date', date)
-                                            console.log('hcia dateString', dateString)
-
-
-                                            if (!date) {
-                                                this.setState({mExpectTime: null})
-                                                return
-
-                                            }
-                                            var date = new Date(dateString + ' 00:00:00:000');
-                                            console.log('hcia date', date)
-                                            var time1 = date.getTime();
-
-                                            // console.log('hcia time1', time1)
-
-                                            this.setState({mExpectTime: date})
-                                            // console.log('hcia date' , date)
-
-                                            // console.log('hcia ',date, dateString);
-                                            // console.log('hcia',date, dateString);
-                                        }}/>
 
                                 </div>
                                 <div style={{
@@ -860,21 +823,10 @@ class Basic extends Component {
 
                                     </div>
 
-                                    <Select
+                                    <Input value={this.state.mA}
+                                           style={{width: '200px', height: '36px'}}
 
-                                        onChange={(value) => {
-
-
-                                            this.setState({mAccountTxnCurry: value})
-                                            console.log('hcia value', value)
-                                        }}
-                                        value={this.state.mAccountTxnCurry}
-                                        style={{width: '200px', height: '36px'}}>
-
-                                        {accountTList}
-
-
-                                    </Select>
+                                    />
                                 </div>
                                 <div style={{
                                     marginTop: '24px',
