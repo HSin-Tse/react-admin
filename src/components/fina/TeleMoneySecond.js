@@ -1079,17 +1079,8 @@ class Basic extends Component {
                             onClick={() => {
 
                                 this.setState({
-                                    mStarClientAccount: undefined,
-                                    mBelongBkUserId: undefined,
-                                    mNetEquity: '',
-                                    mName: '',
-                                    mRate: '',
-                                    mNote: '',
-                                    mAccountTxnCurry: '',
-                                    mExecTxnCurry: '',
-                                    mExpectTime: null,
-                                    mExecTxnAmt: '',
-                                })
+                                    dismissModal: true,
+                                });
                             }}
 
 
@@ -1181,7 +1172,7 @@ class Basic extends Component {
 
                             var self = this
                             window.Axios.post('finance/updateDeposit', {
-                                'id': this.state.dissmissRecodrdID,
+                                'id': this.state.mID,
                                 'content': this.state.changeNoteV,
                                 'status': '4',
 
