@@ -78,7 +78,7 @@ class Basic extends Component {
 
             self.setState({
                 mID: response.data.data.id,
-                mBelongBkUserName: response.data.data.bkUserName,
+                mBelongBkUserId: response.data.data.belongBkUserId,
                 mStarClientAccount: response.data.data.accountNo,
                 mNetEquity: response.data.data.netEquity,
                 mExecTxnAmt: response.data.data.execAmount,
@@ -538,11 +538,25 @@ class Basic extends Component {
                                         }}>客户归属</span>
 
 
-                                    <Input value={this.state.mBelongBkUserName}
-                                           style={{width: '200px', height: '36px'}}
+                                    {/*<Input value={this.state.mBelongBkUserName}*/}
+                                           {/*style={{width: '200px', height: '36px'}}*/}
 
-                                    />
+                                    {/*/>*/}
+                                    <Select
 
+                                        onChange={(value) => {
+
+
+                                            this.setState({mBelongBkUserId: value})
+                                            console.log('hcia value', value)
+                                        }}
+                                        value={this.state.mBelongBkUserId}
+                                        style={{width: '200px', height: '36px'}}>
+
+                                        {imgsTag}
+
+
+                                    </Select>
 
                                 </div>
                                 <div style={{
