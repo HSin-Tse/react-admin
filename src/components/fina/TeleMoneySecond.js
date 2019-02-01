@@ -49,12 +49,13 @@ class Basic extends Component {
             mNetEquity: '',
             mName: '',
             mExpectDate: '',
+            commenS1: '',
             mRate: '',
             mExecTxnCurry: '',
+            mExecTxnAmt: '',
             mNote: '',
             mAccountTxnCurry: '',
             mExpectTime: null,
-            mExecTxnAmt: '',
             currentStep: 0,
             pgsize: 20,
             loadFor: false,
@@ -79,8 +80,10 @@ class Basic extends Component {
                 mStarClientAccount: response.data.data.accountNo,
                 mNetEquity: response.data.data.netEquity,
                 mExecTxnAmt: response.data.data.execAmount,
+                mExecTxnCurry: response.data.data.execCurrency,
                 mRate: response.data.data.rate,
                 mExpectDate: response.data.data.expectDate,
+                commenS1: response.data.data.comment_step1.comment,
                 mAccountCurrency: response.data.data.accountCurrency,
             }, () => {
                 window.Axios.post('star/getStarLiveAccountDetail', {
@@ -823,7 +826,7 @@ class Basic extends Component {
 
                                     </div>
 
-                                    <Input value={this.state.mA}
+                                    <Input value={this.state.mAccountCurrency}
                                            style={{width: '200px', height: '36px'}}
 
                                     />
@@ -886,21 +889,10 @@ class Basic extends Component {
 
                                     </div>
 
-                                    <Select
+                                    <Input value={this.state.mExecTxnCurry}
+                                           style={{width: '200px', height: '36px'}}
 
-                                        onChange={(value) => {
-
-
-                                            this.setState({mExecTxnCurry: value})
-                                            console.log('hcia value', value)
-                                        }}
-                                        value={this.state.mExecTxnCurry}
-                                        style={{width: '200px', height: '36px'}}>
-
-                                        {accountTList}
-
-
-                                    </Select>
+                                    />
                                     {/*<Input value={'CNY'}*/}
 
                                     {/*style={{width: '200px', height: '36px'}}*/}
@@ -946,17 +938,35 @@ class Basic extends Component {
 
 
                                                     }}>创建备注</span>
-                                    <Input value={this.state.mNote}
-                                           onChange={(e) => {
-                                               this.setState({
-                                                   mNote: e.target.value,
-                                               });
-                                           }}
+                                    <Input value={this.state.commenS1}
+
                                            style={{width: '200px', height: '36px'}}
 
                                     />
                                 </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    width: '100%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                                    <span style={{
+                                                        marginRight: '37px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px',
+                                                        width: '57px',
 
+
+                                                    }}>打款备注</span>
+                                    <Input value={this.state.mExecTxnAmt}
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+                                </div>
 
                             </Col>
 
