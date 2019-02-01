@@ -13,7 +13,7 @@ import {
     Col,
     Row,
     Input,
-    Modal, DatePicker,
+    Modal, DatePicker, Popconfirm,
 } from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
@@ -1102,26 +1102,37 @@ class Basic extends Component {
 
                             }}
                             style={{background: '#F6D147', width: '180px', height: '40px'}}> 确定并打款 </Button>
-                        <Button
 
-                            onClick={() => {
 
-                                this.setState({
-                                    mStarClientAccount: undefined,
-                                    mBelongBkUserId: undefined,
-                                    mNetEquity: '',
-                                    mName: '',
-                                    mRate: '',
-                                    mNote: '',
-                                    mAccountTxnCurry: '',
-                                    mExecTxnCurry: '',
-                                    mExpectTime: null,
-                                    mExecTxnAmt: '',
-                                })
+
+                        <Popconfirm
+                            title="更新信息?"
+                            onConfirm={() => {
+
+
                             }}
+                        >
+                            <Button
+
+                                // onClick={() => {
+                                //
+                                //     this.setState({
+                                //         mStarClientAccount: undefined,
+                                //         mBelongBkUserId: undefined,
+                                //         mNetEquity: '',
+                                //         mName: '',
+                                //         mRate: '',
+                                //         mNote: '',
+                                //         mAccountTxnCurry: '',
+                                //         mExecTxnCurry: '',
+                                //         mExpectTime: null,
+                                //         mExecTxnAmt: '',
+                                //     })
+                                // }}
 
 
-                            style={{width: '180px', height: '40px'}}> 更新信息 </Button>
+                                style={{width: '180px', height: '40px'}}> 更新信息 </Button>
+                        </Popconfirm>
                         <Button
 
                             onClick={() => {
