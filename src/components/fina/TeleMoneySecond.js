@@ -87,7 +87,36 @@ class Basic extends Component {
         }).then((response) => {
 
             self.setState({
-                mBelongBkUserName: response.data.data.bkUserName
+                mBelongBkUserName: response.data.data.bkUserName,
+                mStarClientAccount: response.data.data.accountNo,
+                mNetEquity: response.data.data.netEquity,
+                mExecTxnAmt: response.data.data.execAmount,
+                mRate: response.data.data.rate,
+            },()=>{
+                window.Axios.post('star/getStarLiveAccountDetail', {
+                    'starClientAccount': self.state.mStarClientAccount,
+
+                }).then((response) => {
+
+                    console.log('hcia response', response)
+
+
+                    if (response.data.data) {
+                        self.setState({
+                            mNetEquity: response.data.data[0].netEquity,
+                            mName: response.data.data[0].name
+                        })
+                    } else {
+
+                        self.setState({
+                            mNetEquity: '',
+                            mName: '',
+                        })
+                    }
+
+
+                })
+
             })
         })
 
@@ -515,33 +544,9 @@ class Basic extends Component {
 
 
                                     <Input value={this.state.mBelongBkUserName}
-                                           // onChange={(e) => {
-                                           //
-                                           //
-                                           //     var self = this
-                                           //     console.log('hcia e.target.value', e.target.value)
-                                           //
-                                           //
-                                           // }}
                                            style={{width: '200px', height: '36px'}}
 
                                     />
-
-                                    {/*<Select*/}
-
-                                        {/*onChange={(value) => {*/}
-
-
-                                            {/*this.setState({mBelongBkUserId: value})*/}
-                                            {/*console.log('hcia value', value)*/}
-                                        {/*}}*/}
-                                        {/*value={this.state.mBelongBkUserId}*/}
-                                        {/*style={{width: '200px', height: '36px'}}>*/}
-
-                                        {/*{imgsTag}*/}
-
-
-                                    {/*</Select>*/}
 
 
                                 </div>
@@ -566,7 +571,7 @@ class Basic extends Component {
 
 
                                     <Select
-                                        defaultValue={1}
+                                        value={1}
                                         style={{width: '200px', height: '36px'}}>
                                         <Option key={1} value={1}>{'IXTrader'}</Option>
                                     </Select>
@@ -589,43 +594,6 @@ class Basic extends Component {
                                                         width: '57px',
                                                     }}>交易账号</span>
                                     <Input value={this.state.mStarClientAccount}
-                                           onChange={(e) => {
-
-
-                                               var self = this
-                                               console.log('hcia e.target.value', e.target.value)
-                                               this.setState({
-                                                   mStarClientAccount: e.target.value,
-                                               }, () => {
-
-                                                   window.Axios.post('star/getStarLiveAccountDetail', {
-                                                       'starClientAccount': self.state.mStarClientAccount,
-
-                                                   }).then((response) => {
-
-                                                       console.log('hcia response', response)
-
-
-                                                       if (response.data.data) {
-                                                           self.setState({
-                                                               mNetEquity: response.data.data[0].netEquity,
-                                                               mName: response.data.data[0].name
-                                                           })
-                                                       } else {
-
-                                                           self.setState({
-                                                               mNetEquity: '',
-                                                               mName: '',
-                                                           })
-                                                       }
-
-
-                                                   })
-
-                                               });
-
-
-                                           }}
                                            style={{width: '200px', height: '36px'}}
 
                                     />
@@ -672,11 +640,6 @@ class Basic extends Component {
 
                                                     }}>执行金额</span>
                                     <Input value={this.state.mExecTxnAmt}
-                                           onChange={(e) => {
-                                               this.setState({
-                                                   mExecTxnAmt: e.target.value,
-                                               });
-                                           }}
                                            style={{width: '200px', height: '36px'}}
 
                                     />
@@ -700,27 +663,28 @@ class Basic extends Component {
 
                                                     }}>汇率</span>
                                     {/*<Input value={this.state.mRate}*/}
-                                           {/*onChange={(e) => {*/}
-                                               {/*this.setState({*/}
-                                                   {/*mRate: e.target.value,*/}
-                                               {/*});*/}
-                                           {/*}}*/}
-                                           {/*style={{width: '200px', height: '36px'}}*/}
+                                    {/*onChange={(e) => {*/}
+                                    {/*this.setState({*/}
+                                    {/*mRate: e.target.value,*/}
+                                    {/*});*/}
+                                    {/*}}*/}
+                                    {/*style={{width: '200px', height: '36px'}}*/}
 
                                     {/*/>*/}
-                                    <MaskedInput
+                                    <Input
+                                        value={this.state.mRate}
                                         style={{width: '200px', height: '36px'}}
-                                        mask={numberMask}
+                                        // mask={numberMask}
 
                                         className="ant-input"
                                         placeholder="汇率"
                                         guide={true}
                                         id="my-input-id"
-                                        onChange={(e) => {
-                                            this.setState({
-                                                mRate: e.target.value,
-                                            });
-                                        }}
+                                        // onChange={(e) => {
+                                        //     this.setState({
+                                        //         mRate: e.target.value,
+                                        //     });
+                                        // }}
 
                                         // onBlur={() => {}}
                                         // onChange={() => {}}
