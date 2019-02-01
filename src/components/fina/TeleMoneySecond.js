@@ -13,12 +13,14 @@ import {
     Col,
     Row,
     Input,
-    Modal,
+    Modal, DatePicker,
 } from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
+import moment from 'moment';
+const dateFormat = 'YYYY/MM/DD';
 
 const {TextArea} = Input;
 const Option = Select.Option;
@@ -808,11 +810,43 @@ class Basic extends Component {
 
                                     </div>
 
-                                    <Input value={this.state.mExpectDate}
+                                    {/*<Input value={this.state.mExpectDate}*/}
 
-                                           style={{width: '200px', height: '36px'}}
+                                           {/*style={{width: '200px', height: '36px'}}*/}
 
-                                    />
+                                    {/*/>*/}
+                                    <DatePicker
+                                        style={{width: '200px', height: '36px'}}
+                                        disabledDate={(current) => {
+                                            return current.valueOf() < (Date.now() - 86400000)
+                                        }}
+
+                                        value={this.state.mExpectDate ? moment(this.state.mExpectDate, dateFormat) : null}
+
+                                        // value={this.state.mExpectTime}
+                                        onChange={(date, dateString) => {
+
+                                            console.log('hcia date', date)
+                                            console.log('hcia dateString', dateString)
+
+
+                                            if (!date) {
+                                                this.setState({mExpectDate: null})
+                                                return
+
+                                            }
+                                            var date = new Date(dateString + ' 00:00:00:000');
+                                            console.log('hcia date', date)
+                                            var time1 = date.getTime();
+
+                                            // console.log('hcia time1', time1)
+
+                                            this.setState({mExpectDate: date})
+                                            // console.log('hcia date' , date)
+
+                                            // console.log('hcia ',date, dateString);
+                                            // console.log('hcia',date, dateString);
+                                        }}/>
 
 
                                 </div>
