@@ -41,6 +41,7 @@ const numberMask = createNumberMask({
     prefix: '',
     // suffix: ' $' // This will put the dollar sign at the end, with a space.
 })
+
 class Basic extends Component {
     changeNote = (e) => {
 
@@ -161,32 +162,26 @@ class Basic extends Component {
                     <span>{record.execAmount}</span>),
             }, {
                 align: 'center',
-
                 title: '执行币种',
                 dataIndex: '执行币种',
                 key: '执行币种',
-
                 render: (text, record) => (
                     <span>{record.execCurrency}</span>),
             }, {
                 align: 'center',
-
                 title: '使用汇率',
                 dataIndex: '使用汇率',
                 key: '使用汇率',
-
                 render: (text, record) => (
                     <span>{record.rate}</span>),
             }, {
                 align: 'center',
-
                 title: '手续费',
                 dataIndex: '手续费',
                 key: '手续费',
                 render: (text, record) => (
                     <span>{record.feeAmount}</span>
                 )
-
             }, {
                 align: 'center',
                 title: '账户余额',
@@ -196,7 +191,6 @@ class Basic extends Component {
                     <span>{record.cashBalance}</span>)
             }, {
                 align: 'center',
-
                 title: '期望到账时间',
                 dataIndex: '期望到账时间',
                 key: '期望到账时间',
@@ -204,7 +198,6 @@ class Basic extends Component {
                     <span>{record.expectDate}</span>)
             }, {
                 align: 'center',
-
                 title: '创建人',
                 dataIndex: '创建人',
                 key: '创建人',
@@ -216,27 +209,19 @@ class Basic extends Component {
                 key: 'action',
                 render: (text, record) => (
                     <div>
-
                         <Button
                             size={'small'} style={{minWidth: 80, background: '#FDD000'}}
                             disabled={record.status == 3 || record.status == 4}
-
-
                             onClick={
-
-
-
                                 () => {
-
                                     this.props.history.push('/app/fina/d/tes' + record.id)
-
                                 }
-                            }>{record.status == 1 ?'支付成功':record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
+                            }>{record.status == 1 ? '支付成功' : record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
 
                         </Button>
                         <Button
                             size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                            disabled={record.status == 3 || record.status == 4  || record.status == 1}
+                            disabled={record.status == 3 || record.status == 4 || record.status == 1}
 
 
                             onClick={
@@ -465,7 +450,7 @@ class Basic extends Component {
                                 width: '40px',
                                 height: '40px',
                                 background: '#CCCCCC',
-                                color:'white',
+                                color: 'white',
                                 borderRadius: '50%'
                             }}>
                                 <span style={titleStule}>2</span>
@@ -486,7 +471,7 @@ class Basic extends Component {
                                 width: '40px',
                                 height: '40px',
                                 background: '#CCCCCC',
-                                color:'white',
+                                color: 'white',
 
                                 borderRadius: '50%'
                             }}>
@@ -745,12 +730,12 @@ class Basic extends Component {
 
                                                     }}>汇率</span>
                                     {/*<Input value={this.state.mRate}*/}
-                                           {/*onChange={(e) => {*/}
-                                               {/*this.setState({*/}
-                                                   {/*mRate: e.target.value,*/}
-                                               {/*});*/}
-                                           {/*}}*/}
-                                           {/*style={{width: '200px', height: '36px'}}*/}
+                                    {/*onChange={(e) => {*/}
+                                    {/*this.setState({*/}
+                                    {/*mRate: e.target.value,*/}
+                                    {/*});*/}
+                                    {/*}}*/}
+                                    {/*style={{width: '200px', height: '36px'}}*/}
 
                                     {/*/>*/}
                                     <MaskedInput
@@ -1047,7 +1032,7 @@ class Basic extends Component {
 
 
                         <div style={{
-                            marginTop:'24px',
+                            marginTop: '24px',
                             height: '1px',
                             background: 'rgba(230,230,230,1)'
                         }}>
@@ -1112,7 +1097,10 @@ class Basic extends Component {
                         <Button
                             onClick={() => {
 
-                                console.log('hcia this.state.mExpectTime', this.state.mExpectTime ? this.state.mExpectTime.getTime() : undefined)
+                                if (!this.state.mNote) {
+                                    message.error('备注必填')
+                                    return;
+                                }
 
                                 window.Axios.post('finance/createDeposit', {
                                     'belongBkUserId': this.state.mBelongBkUserId,//
@@ -1128,14 +1116,7 @@ class Basic extends Component {
 
 
                                     message.success('操作成功')
-
                                     this.requestPage()
-                                    // self.setState({
-                                    //         totalPage: response.data.data.totalPage,
-                                    //         loading: false,
-                                    //         userList: response.data.data.list
-                                    //     }
-                                    // );
 
 
                                 })

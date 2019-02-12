@@ -50,11 +50,12 @@ class Basic extends Component {
             mAccountCurrency: '',
             mNetEquity: '',
             mName: '',
-            mExpectDate: '',
+            mExpectDate: null,
             commenS1: '',
             mRate: '',
             mExecTxnCurry: '',
             mExecTxnAmt: '',
+            mNoteUP: '',
             mNote: '',
             mAccountTxnCurry: '',
             mExpectTime: null,
@@ -989,7 +990,11 @@ class Basic extends Component {
 
                                                     }}>创建备注</span>
                                     <Input value={this.state.commenS1}
-
+                                           onChange={(e) => {
+                                               this.setState({
+                                                   commenS1: e.target.value,
+                                               });
+                                           }}
                                            style={{width: '200px', height: '36px'}}
 
                                     />
@@ -1110,6 +1115,28 @@ class Basic extends Component {
                             onConfirm={() => {
 
 
+                                message.error('wait check')
+
+                                return
+
+                                var self = this
+                                window.Axios.post('finance/updateDeposit', {
+                                    'id': this.state.mID,
+                                    'content': this.state.changeNoteV,
+                                    // 'content': this.state.mBelongBkUserId,
+                                    // 'expectTime': this.state.mExpectDate ? this.state.mExpectDate.getTime() : undefined,
+
+                                    'status': '1',
+
+                                }).then((response) => {
+
+                                    message.success('操作成功')
+                                    this.requestPage()
+
+                                    // self.setState({id: self.state.mID, content: self.state.commenS1, dismissModal: false})
+
+
+                                })
                             }}
                         >
                             <Button
