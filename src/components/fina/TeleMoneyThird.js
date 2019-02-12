@@ -320,6 +320,7 @@ class Basic extends Component {
         var titleCo = {
             align: 'center',
             textAlign: 'center',
+            width: '72px',
 
             fontSize: '18px',
             fontFamily: 'PingFang-HK-Medium',
@@ -372,12 +373,18 @@ class Basic extends Component {
                 }}>
 
                     <div style={{
-                        width: '620px',
+                        display: "flex",
+                        justifyContent: 'center',
+                        flexWrap: 'wrap',
+
+                        width: '100%',
                         paddingTop: '36px'
                     }}>
 
 
                         <div style={{
+
+                            width: '600px',
                             justifyContent: 'space-around',
                             display: "flex",
                             alignItems: 'center',
@@ -435,6 +442,47 @@ class Basic extends Component {
                                 <span style={titleStule}>3</span>
                             </div>
 
+                        </div>
+
+                    </div>
+                    <div style={{
+                        display: "flex",
+                        justifyContent: 'center',
+                        flexWrap: 'wrap',
+
+                        width: '100%',
+                        paddingTop: '6px'
+                    }}>
+
+
+                        <div style={{
+                            width: '630px',
+
+                            justifyContent: 'space-around',
+                            display: "flex",
+                            alignItems: 'center',
+                            background: 'white'
+                        }}>
+                            <span style={titleCo}>{steps[0].title}</span>
+                            <div style={{
+                                flexGrow: '1',
+                                height: '2px',
+                                background: '#00000000'
+                            }}/>
+                            <span style={{
+                                align: 'center',
+                                textAlign: 'center',
+                                fontSize: '18px',
+                                fontFamily: 'PingFang-HK-Medium',
+                                fontWeight: 'bold',
+                                color: '#7B7B7B'
+                            }}>{steps[1].title}</span>
+                            <div style={{
+                                flexGrow: '1',
+                                height: '2px',
+                                background: '#00000000'
+                            }}/>
+                            <span style={titleCo}>{steps[2].title}</span>
                         </div>
 
 
