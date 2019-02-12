@@ -731,7 +731,9 @@ class Basic extends Component {
                       }>
 
                     <Table rowKey="id"
-
+                           titleStyle={{whiteSpace: 'nowrap'}}
+                           bodyStyle={{whiteSpace: 'nowrap'}}
+                           style={{whiteSpace: 'nowrap'}}
                            columns={this.columns}
                            dataSource={this.state.userList}
                            scroll={{x: 1600}}
