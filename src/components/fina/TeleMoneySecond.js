@@ -477,6 +477,9 @@ class Basic extends Component {
                 <BreadcrumbCustom first="财务管理" second="电汇入金" third="入金审核"/>
 
                 <div style={{
+                    display: "flex",
+                    justifyContent: 'center',
+                    flexWrap: 'wrap',
                     background: "white",
                     boxShadow: '0px 0px 20px 0px rgba(123,123,123,0.1)',
                     borderRadius: '4px',

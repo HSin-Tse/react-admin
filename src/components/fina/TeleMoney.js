@@ -488,7 +488,9 @@ class Basic extends Component {
                 <BreadcrumbCustom first="财务管理" second="电汇入金" third="新增"/>
 
                 <div style={{
-
+                    display: "flex",
+                    justifyContent: 'center',
+                    flexWrap: 'wrap',
                     // width: '1200px',
                     // marginLeft: '200px',
                     background: "white",

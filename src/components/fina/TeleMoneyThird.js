@@ -33,7 +33,6 @@ class Basic extends Component {
             changeNoteV: e.target.value
         })
     }
-
     constructor(props) {
         super(props);
         this.state = {
@@ -65,8 +64,6 @@ class Basic extends Component {
 
         };
     }
-
-
     componentDidMount() {
 
         var self = this
@@ -309,7 +306,6 @@ class Basic extends Component {
         ];
         this.requestPage()
 
-
         window.Axios.post('back/getBackUserList', {
             'pageSize': 1000,
             'pageNo': 0,
@@ -322,8 +318,6 @@ class Basic extends Component {
         })
 
     }
-
-
     showOPDAyModal3 = (recodrd) => {
 
         console.log('hcia recodrd', recodrd)
@@ -351,7 +345,6 @@ class Basic extends Component {
     pad = (str) => {
         return +str >= 10 ? str : '0' + str
     };
-
     requestStart = () => {
         let self = this
 
@@ -410,8 +403,6 @@ class Basic extends Component {
             this.requestPage()
         })
     }
-
-
     render() {
 
         var titleStule = {
