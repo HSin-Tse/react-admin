@@ -1088,7 +1088,7 @@ class Basic extends Component {
                                     />
                                 </div>
                                 <div style={{
-                                    // marginTop: '11px',
+                                    marginTop: '3px',
 
                                     textAlign: 'right',
                                     display: 'flex',
@@ -1125,7 +1125,7 @@ class Basic extends Component {
                                             height: '36px'
                                         }}
 
-                                    >{this.state.commenDate1?this.timestampToTime(this.state.commenDate1):''}</span>
+                                    >{this.state.commenDate1 ? this.timestampToTime(this.state.commenDate1) : ''}</span>
                                 </div>
                                 <div style={{
                                     // marginTop: '24px',
@@ -1160,7 +1160,7 @@ class Basic extends Component {
                                     />
                                 </div>
                                 <div style={{
-                                    // marginTop: '11px',
+                                    marginTop: '3px',
 
                                     textAlign: 'right',
                                     display: 'flex',
@@ -1197,7 +1197,7 @@ class Basic extends Component {
                                             height: '36px'
                                         }}
 
-                                    >{this.state.commenDate1?this.timestampToTime(this.state.commenDate2):''}</span>
+                                    >{this.state.commenDate1 ? this.timestampToTime(this.state.commenDate2) : ''}</span>
                                 </div>
 
                                 <div style={{
