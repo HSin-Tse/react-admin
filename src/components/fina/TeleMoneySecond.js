@@ -20,6 +20,7 @@ import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import moment from 'moment';
+
 const dateFormat = 'YYYY/MM/DD';
 
 const {TextArea} = Input;
@@ -233,28 +234,116 @@ class Basic extends Component {
                 key: '创建人',
                 render: (text, record) => (
                     <span>{record.bkUserName}</span>)
-            }, {
+            },
+
+            // , {
+            //     align: 'center',
+            //     title: '操作',
+            //     key: 'action',
+            //     render: (text, record) => (
+            //         <div>
+            //
+            //             <Button
+            //                 size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+            //                 disabled={record.status == 3 || record.status == 4}
+            //
+            //
+            //                 onClick={
+            //                     () => this.showOPDAyModal3(record)
+            //                 }>{record.status == 1 ? '支付成功' : record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
+            //
+            //             </Button>
+            //
+            //
+            //         </div>
+            //     ),
+            // }
+
+            {
                 align: 'center',
-                title: '操作',
+                title: '财务审核',
                 key: 'action',
                 render: (text, record) => (
                     <div>
 
                         <Button
                             size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                            disabled={record.status == 3 || record.status == 4}
+                            disabled={record.status == 4}
 
 
+                            // onClick={
+                            //
+                            //
+                            //
+                            //     () => this.showOPDAyModal3(record)
+                            // }
                             onClick={
-                                () => this.showOPDAyModal3(record)
-                            }>{record.status == 1 ? '支付成功' : record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
+                                () => {
+
+
+                                    if (record.status == 3) {
+                                        // this.props.history.pop()
+                                        this.props.history.push('/app/fina/d/ter' + record.id)
+
+                                        this.componentDidMount()
+
+                                    } else if (record.status == 2) {
+                                        this.props.history.push('/app/fina/d/tes' + record.id)
+                                        this.componentDidMount()
+
+                                    }
+
+                                }
+                            }
+
+
+                        >{record.status == 1 ? '支付成功' : record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
+
 
                         </Button>
 
 
                     </div>
                 ),
-            }];
+            },
+            {
+                align: 'center',
+                title: '入金完成',
+                key: 'action',
+                render: (text, record) => (
+                    <div>
+
+                        <Button
+                            size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                            disabled={record.status == 4}
+                            onClick={
+                                () => {
+
+
+                                    if (record.status == 3) {
+                                        // this.props.history.pop()
+                                        this.props.history.push('/app/fina/d/ter' + record.id)
+
+                                        this.componentDidMount()
+
+                                    } else if (record.status == 2) {
+                                        this.props.history.push('/app/fina/d/tes' + record.id)
+                                        this.componentDidMount()
+
+                                    }
+
+                                }
+                            }
+                        >{record.status == 1 ? '支付成功' : record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
+
+                        </Button>
+
+
+                    </div>
+                ),
+            },
+
+        ];
         this.requestPage()
 
         // window.Axios.post('dict/openDict', {
@@ -542,7 +631,7 @@ class Basic extends Component {
 
 
                                     {/*<Input value={this.state.mBelongBkUserName}*/}
-                                           {/*style={{width: '200px', height: '36px'}}*/}
+                                    {/*style={{width: '200px', height: '36px'}}*/}
 
                                     {/*/>*/}
                                     <Select
@@ -813,7 +902,7 @@ class Basic extends Component {
 
                                     {/*<Input value={this.state.mExpectDate}*/}
 
-                                           {/*style={{width: '200px', height: '36px'}}*/}
+                                    {/*style={{width: '200px', height: '36px'}}*/}
 
                                     {/*/>*/}
                                     <DatePicker
@@ -1078,10 +1167,9 @@ class Basic extends Component {
                                 // console.log('hcia this.state.mExpectTime', this.state.mExpectTime ? this.state.mExpectTime.getTime() : undefined)
 
 
-                                
-                                console.log('hcia this.state.mNote' , this.state.mNote)
+                                console.log('hcia this.state.mNote', this.state.mNote)
 
-                                if (this.state.mNote.length==0) {
+                                if (this.state.mNote.length == 0) {
 
                                     message.error('备注必填')
                                     return
@@ -1104,10 +1192,8 @@ class Basic extends Component {
                                 })
 
 
-
                             }}
                             style={{background: '#F6D147', width: '180px', height: '40px'}}> 确定并打款 </Button>
-
 
 
                         <Popconfirm

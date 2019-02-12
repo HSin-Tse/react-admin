@@ -198,44 +198,130 @@ class Basic extends Component {
                 key: '创建人',
                 render: (text, record) => (
                     <span>{record.bkUserName}</span>)
-            }, {
+            },
+
+            {
                 align: 'center',
-                title: '操作',
+                title: '财务审核',
                 key: 'action',
                 render: (text, record) => (
                     <div>
+
                         <Button
                             size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                            disabled={ record.status == 4}
+                            disabled={record.status == 4}
+
+
+                            // onClick={
+                            //
+                            //
+                            //
+                            //     () => this.showOPDAyModal3(record)
+                            // }
                             onClick={
                                 () => {
 
 
-                                    if(record.status==3){
+                                    if (record.status == 3) {
+                                        // this.props.history.pop()
                                         this.props.history.push('/app/fina/d/ter' + record.id)
 
-                                    }else if(record.status==2){
+                                        this.componentDidMount()
+
+                                    } else if (record.status == 2) {
                                         this.props.history.push('/app/fina/d/tes' + record.id)
+                                        this.componentDidMount()
 
                                     }
 
                                 }
-                            }>{record.status == 1 ? '支付成功' : record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
+                            }
+
+
+                        >{record.status == 1 ? '支付成功' : record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
+
 
                         </Button>
-                        <Button
-                            size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                            disabled={record.status == 3 || record.status == 4 || record.status == 1}
 
-                            onClick={
-                                () => this.showOPDAyModal3(record)
-                            }>取消
-
-                        </Button>
 
                     </div>
                 ),
-            }];
+            },
+            {
+                align: 'center',
+                title: '入金完成',
+                key: 'action',
+                render: (text, record) => (
+                    <div>
+
+                        <Button
+                            size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                            disabled={record.status == 4}
+                            onClick={
+                                () => {
+
+
+                                    if (record.status == 3) {
+                                        // this.props.history.pop()
+                                        this.props.history.push('/app/fina/d/ter' + record.id)
+
+                                        this.componentDidMount()
+
+                                    } else if (record.status == 2) {
+                                        this.props.history.push('/app/fina/d/tes' + record.id)
+                                        this.componentDidMount()
+
+                                    }
+
+                                }
+                            }
+                        >{record.status == 1 ? '支付成功' : record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
+
+                        </Button>
+
+
+                    </div>
+                ),
+            },
+            // {
+            //     align: 'center',
+            //     title: '操作',
+            //     key: 'action',
+            //     render: (text, record) => (
+            //         <div>
+            //             <Button
+            //                 size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+            //                 disabled={ record.status == 4}
+            //                 onClick={
+            //                     () => {
+            //
+            //
+            //                         if(record.status==3){
+            //                             this.props.history.push('/app/fina/d/ter' + record.id)
+            //
+            //                         }else if(record.status==2){
+            //                             this.props.history.push('/app/fina/d/tes' + record.id)
+            //
+            //                         }
+            //
+            //                     }
+            //                 }>{record.status == 1 ? '支付成功' : record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
+            //
+            //             </Button>
+            //             <Button
+            //                 size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+            //                 disabled={record.status == 3 || record.status == 4 || record.status == 1}
+            //
+            //                 onClick={
+            //                     () => this.showOPDAyModal3(record)
+            //                 }>取消
+            //
+            //             </Button>
+            //
+            //         </div>
+            //     ),
+            // }
+            ];
         this.requestPage()
 
 

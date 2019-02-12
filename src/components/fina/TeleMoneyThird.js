@@ -291,6 +291,7 @@ class Basic extends Component {
 
                                     }else if(record.status==2){
                                         this.props.history.push('/app/fina/d/tes' + record.id)
+                                        this.componentDidMount()
 
                                     }
 
