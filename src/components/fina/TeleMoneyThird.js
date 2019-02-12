@@ -37,7 +37,6 @@ class Basic extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            accountTxnCurryList: [],
             bkroleList: [],
             selectedRowKeys: [],
             date: new Date(),
@@ -79,6 +78,7 @@ class Basic extends Component {
 
             self.setState({
                 mID: response.data.data.id,
+                mNote: response.data.data.comment_step2.comment,
                 mBelongBkUserId: response.data.data.belongBkUserId,
                 mStarClientAccount: response.data.data.accountNo,
                 mNetEquity: response.data.data.netEquity,
@@ -89,38 +89,19 @@ class Basic extends Component {
                 commenS1: response.data.data.comment_step1.comment,
                 mAccountCurrency: response.data.data.accountCurrency,
             }, () => {
+
                 console.log('hcia response', response)
 
 
-                window.Axios.post('star/getStarLiveAccountDetail', {
-                    'starClientAccount': self.state.mStarClientAccount,
 
-                }).then((response) => {
+                message.success('request client data')
+                setTimeout(self.requestStart, 300)
 
-                    console.log('hcia response', response)
-                    if (response.data.data) {
-                        self.setState({
-                            mNetEquity: response.data.data[0].netEquity,
-                            mName: response.data.data[0].name
-                        })
-                    } else {
-                        self.setState({
-                            mNetEquity: '',
-                            mName: '',
-                        })
-                    }
 
-                })
 
             })
         })
 
-        // window.Axios.post('back/addLogHistory', {
-        //     'moduleLog': '财务管理',
-        //     'pageLog': '入金审核',
-        //     'commentLog': '查看了入金审核',
-        //     'typeLog': 2,
-        // })
         this.columns = [
             {
                 title: '序号',
@@ -261,19 +242,6 @@ class Basic extends Component {
         this.requestPage()
 
 
-
-
-        // window.Axios.post('dict/openDict', {
-        //     'keys': 'finance_currency',
-        //
-        // }).then((response) => {
-        //     self.setState({
-        //         accountTxnCurryList: response.data.data.finance_currency
-        //     })
-        //
-        // })
-
-
         window.Axios.post('back/getBackUserList', {
             'pageSize': 1000,
             'pageNo': 0,
@@ -315,6 +283,31 @@ class Basic extends Component {
     pad = (str) => {
         return +str >= 10 ? str : '0' + str
     };
+
+    requestStart = ()=>{
+        let self = this
+
+        window.Axios.post('star/getStarLiveAccountDetail', {
+            'starClientAccount': self.state.mStarClientAccount,
+
+        }).then((response) => {
+
+            console.log('hcia response', response)
+            if (response.data.data) {
+                self.setState({
+                    mNetEquity: response.data.data[0].netEquity,
+                    mName: response.data.data[0].name
+                })
+            } else {
+                self.setState({
+                    mNetEquity: '',
+                    mName: '',
+                })
+            }
+
+        })
+
+    }
     requestPage = () => {
 
         let self = this
@@ -386,12 +379,6 @@ class Basic extends Component {
         const imgsTag = this.state.bkroleList.map(v1 => (
 
             <Option key={v1.id} value={v1.id}>{v1.displayName ? v1.displayName : 'null'}</Option>
-
-        ))
-
-        const accountTList = this.state.accountTxnCurryList.map(v1 => (
-
-            <Option key={v1.value} value={v1.value}>{v1.name ? v1.name : 'null'}</Option>
 
         ))
 
@@ -1050,11 +1037,11 @@ class Basic extends Component {
 
                                                     }}>打款备注</span>
                                     <Input value={this.state.mNote}
-                                           onChange={(e) => {
-                                               this.setState({
-                                                   mNote: e.target.value,
-                                               });
-                                           }}
+                                        // onChange={(e) => {
+                                        //     this.setState({
+                                        //         mNote: e.target.value,
+                                        //     });
+                                        // }}
                                            style={{width: '200px', height: '36px'}}
 
                                     />

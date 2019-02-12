@@ -18,7 +18,10 @@ class Notification extends Component {
 
     addNotice(notice) {
 
+
         const { notices } = this.state
+        console.log('hcia notices' , notices)
+
         notice.key = 1
         if (notices.every(item => item.key !== notice.key)) {
             if (notice.length > 0 && notices[notice.length - 1].type === 'loading') {

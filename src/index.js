@@ -119,7 +119,6 @@ window.Axios.interceptors.request.use(
 
         loginName = encodeURI(loginName)
 
-
         if (xtoken != null) {
             config.headers['X-Token'] = xtoken
             if (config.method == 'post') {
@@ -128,7 +127,9 @@ window.Axios.interceptors.request.use(
                 console.log('hcia request loadCount' , loadCount)
                 // if (loadCount>1) {
                     window.hideLoading = Toast.loading('加载中...', 0, () => {
+
                     })
+
                 // }
 
 
