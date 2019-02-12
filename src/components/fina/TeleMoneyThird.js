@@ -487,6 +487,572 @@ class Basic extends Component {
 
 
                     </div>
+                    <div style={{
+                        minWidth: '800px',
+                        padding: 12,
+                        textAlign: 'center',
+                        align: 'center',
+                        background: 'white'
+                    }}>
+                        <p style={{
+                            fontSize: 18,
+                            fontFamily: 'PingFangSC-Medium',
+                            fontWeight: 500,
+                            color: 'rgba(51,51,51,1)'
+                        }}>订单号:{this.state.mID}
+                        </p>
+                    </div>
+                    <div style={{minWidth: '800px', marginLeft: '150px', marginRight: '150px', paddingBottom: '10px'}}>
+                        <Row>
+                            <Col style={{textAlign: 'right', align: 'center', background: 'white'}} span={12}>
+
+
+                                <div style={{
+
+                                    textAlign: 'left',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                        <span style={{
+
+                                            textAlign: 'left',
+                                            marginRight: '37px',
+
+
+                                            width: '57px',
+                                            fontFamily: 'PingFangSC-Medium',
+                                            fontWeight: 500,
+                                            color: '#292929',
+                                            fontSize: '14px'
+
+
+                                        }}>客户归属</span>
+
+
+                                    {/*<Input value={this.state.mBelongBkUserName}*/}
+                                    {/*style={{width: '200px', height: '36px'}}*/}
+
+                                    {/*/>*/}
+                                    <Select
+
+                                        onChange={(value) => {
+
+
+                                            this.setState({mBelongBkUserId: value})
+                                            console.log('hcia value', value)
+                                        }}
+                                        value={this.state.mBelongBkUserId}
+                                        style={{width: '200px', height: '36px'}}>
+
+                                        {imgsTag}
+
+
+                                    </Select>
+
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    width: '100%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                            <span style={{
+                                                marginRight: '37px',
+                                                fontFamily: 'PingFangSC-Medium',
+                                                fontWeight: 500,
+                                                color: '#292929',
+                                                fontSize: '14px',
+                                                width: '57px',
+
+
+                                            }}>交易平台</span>
+
+
+                                    <Select
+                                        value={1}
+                                        style={{width: '200px', height: '36px'}}>
+                                        <Option key={1} value={1}>{'IXTrader'}</Option>
+                                    </Select>
+
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    width: '100%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                                    <span style={{
+                                                        marginRight: '37px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px',
+                                                        width: '57px',
+                                                    }}>交易账号</span>
+                                    <Input value={this.state.mStarClientAccount}
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    width: '100%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                                    <span style={{
+                                                        marginRight: '37px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px',
+                                                        width: '57px',
+
+
+                                                    }}>账户余额</span>
+                                    <Input value={this.state.mNetEquity}
+
+                                           style={{width: '200px', height: '36px'}}
+                                    />
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    width: '100%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                                    <span style={{
+                                                        marginRight: '37px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px',
+                                                        width: '57px',
+
+
+                                                    }}>执行金额</span>
+                                    <Input value={this.state.mExecTxnAmt}
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    width: '100%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                                    <span style={{
+                                                        marginRight: '37px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px',
+                                                        width: '57px',
+
+
+                                                    }}>汇率</span>
+                                    {/*<Input value={this.state.mRate}*/}
+                                    {/*onChange={(e) => {*/}
+                                    {/*this.setState({*/}
+                                    {/*mRate: e.target.value,*/}
+                                    {/*});*/}
+                                    {/*}}*/}
+                                    {/*style={{width: '200px', height: '36px'}}*/}
+
+                                    {/*/>*/}
+                                    <Input
+                                        value={this.state.mRate}
+                                        style={{width: '200px', height: '36px'}}
+                                        // mask={numberMask}
+
+                                        className="ant-input"
+                                        placeholder="汇率"
+                                        guide={true}
+                                        id="my-input-id"
+                                        // onChange={(e) => {
+                                        //     this.setState({
+                                        //         mRate: e.target.value,
+                                        //     });
+                                        // }}
+
+                                        // onBlur={() => {}}
+                                        // onChange={() => {}}
+                                    />
+                                </div>
+
+                            </Col>
+
+                            <Col style={{background: 'white'}} span={12}>
+
+                                <div style={{
+                                    textAlign: 'right',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+
+                                    <div style={{
+                                        width: '87px',
+                                        marginRight: '37px',
+                                    }}>
+                                                    <span style={{
+
+                                                        marginRight: '5px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#FF4D4D',
+                                                        fontSize: '14px'
+
+
+                                                    }}>*</span>
+
+
+                                        <span style={{
+                                            fontFamily: 'PingFangSC-Medium',
+                                            fontWeight: 500,
+                                            color: '#292929',
+                                            fontSize: '14px'
+
+                                        }}>入金渠道</span>
+                                    </div>
+                                    <Input value={'电汇'}
+
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+
+                                    <div style={{
+                                        width: '87px',
+                                        marginRight: '37px',
+                                    }}>
+                                                    <span style={{
+
+                                                        marginRight: '5px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#FF4D4D',
+                                                        fontSize: '14px'
+
+
+                                                    }}>*</span>
+
+
+                                        <span style={{
+                                            fontFamily: 'PingFangSC-Medium',
+                                            fontWeight: 500,
+                                            color: '#292929',
+                                            fontSize: '14px'
+
+
+                                        }}>支付通道</span>
+
+                                    </div>
+
+                                    <Input value={'电汇'}
+
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+
+                                    <div style={{
+                                        width: '87px',
+                                        marginRight: '37px',
+                                    }}>
+                                                    <span style={{
+                                                        textAlign: 'left',
+                                                        width: '87px',
+                                                        height: '22px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px'
+
+
+                                                    }}>期望到账时间</span>
+
+                                    </div>
+
+                                    {/*<Input value={this.state.mExpectDate}*/}
+
+                                    {/*style={{width: '200px', height: '36px'}}*/}
+
+                                    {/*/>*/}
+                                    <DatePicker
+                                        style={{width: '200px', height: '36px'}}
+                                        disabledDate={(current) => {
+                                            return current.valueOf() < (Date.now() - 86400000)
+                                        }}
+
+                                        value={this.state.mExpectDate ? moment(this.state.mExpectDate, dateFormat) : null}
+
+                                        // value={this.state.mExpectTime}
+                                        onChange={(date, dateString) => {
+
+                                            console.log('hcia date', date)
+                                            console.log('hcia dateString', dateString)
+
+
+                                            if (!date) {
+                                                this.setState({mExpectDate: null})
+                                                return
+
+                                            }
+                                            var date = new Date(dateString + ' 00:00:00:000');
+                                            console.log('hcia date', date)
+                                            var time1 = date.getTime();
+
+                                            // console.log('hcia time1', time1)
+
+                                            this.setState({mExpectDate: date})
+                                            // console.log('hcia date' , date)
+
+                                            // console.log('hcia ',date, dateString);
+                                            // console.log('hcia',date, dateString);
+                                        }}/>
+
+
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+
+                                    <div style={{
+                                        width: '87px',
+                                        marginRight: '37px',
+                                    }}>
+                                                    <span style={{
+                                                        textAlign: 'left',
+                                                        width: '87px',
+                                                        height: '22px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px'
+
+
+                                                    }}>账号币种</span>
+
+                                    </div>
+
+                                    <Input value={this.state.mAccountCurrency}
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+
+                                    <div style={{
+                                        width: '87px',
+                                        marginRight: '37px',
+                                    }}>
+                                                    <span style={{
+                                                        textAlign: 'left',
+                                                        width: '87px',
+                                                        height: '22px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px'
+
+
+                                                    }}>账户所有人</span>
+
+                                    </div>
+
+
+                                    <Input value={this.state.mName}
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+
+                                    <div style={{
+                                        width: '87px',
+                                        marginRight: '37px',
+                                    }}>
+                                                    <span style={{
+                                                        textAlign: 'left',
+                                                        width: '87px',
+                                                        height: '22px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px'
+
+
+                                                    }}>支付币种</span>
+
+                                    </div>
+
+                                    <Input value={this.state.mExecTxnCurry}
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+                                    {/*<Input value={'CNY'}*/}
+
+                                    {/*style={{width: '200px', height: '36px'}}*/}
+
+                                    {/*/>*/}
+                                </div>
+
+
+                            </Col>
+
+
+                        </Row>
+
+
+                        <div style={{
+                            marginTop: '24px',
+                            height: '1px',
+                            background: 'rgba(230,230,230,1)'
+                        }}>
+                        </div>
+
+
+                        <Row style={{marginTop: '24px', marginBottom: '24px'}}>
+                            <Col style={{textAlign: 'right', align: 'center', background: 'white'}} span={12}>
+
+
+                                <div style={{
+
+                                    textAlign: 'left',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                                    <span style={{
+
+                                                        textAlign: 'left',
+                                                        marginRight: '37px',
+                                                        width: '57px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px'
+
+
+                                                    }}>创建备注</span>
+                                    <Input value={this.state.commenS1}
+                                           onChange={(e) => {
+                                               this.setState({
+                                                   commenS1: e.target.value,
+                                               });
+                                           }}
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    width: '100%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                                    <span style={{
+                                                        marginRight: '37px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px',
+                                                        width: '57px',
+
+
+                                                    }}>打款备注</span>
+                                    <Input value={this.state.mNote}
+                                           onChange={(e) => {
+                                               this.setState({
+                                                   mNote: e.target.value,
+                                               });
+                                           }}
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+                                </div>
+
+                            </Col>
+
+                            <Col style={{background: 'white'}} span={12}>
+                                <div style={{
+
+                                    textAlign: 'left',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+                                                    <span style={{
+
+                                                        textAlign: 'left',
+                                                        marginRight: '37px',
+                                                        width: '57px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px'
+
+
+                                                    }}>操作人</span>
+                                    <Input value={this.state.opname}
+
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+                                </div>
+
+                            </Col>
+
+
+                        </Row>
+
+
+                    </div>
 
 
                 </div>
