@@ -1050,18 +1050,23 @@ class Basic extends Component {
                             </Col>
 
                             <Col style={{background: 'white'}} span={12}>
-                                <div style={{
 
-                                    textAlign: 'left',
+
+                                <div style={{
+                                    textAlign: 'right',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center'
                                 }}>
-                                                    <span style={{
 
+                                    <div style={{
+                                        width: '87px',
+                                        marginRight: '37px',
+                                    }}>
+                                                    <span style={{
                                                         textAlign: 'left',
-                                                        marginRight: '37px',
-                                                        width: '57px',
+                                                        width: '87px',
+                                                        height: '22px',
                                                         fontFamily: 'PingFangSC-Medium',
                                                         fontWeight: 500,
                                                         color: '#292929',
@@ -1069,8 +1074,75 @@ class Basic extends Component {
 
 
                                                     }}>操作人</span>
-                                    <Input value={this.state.opname}
 
+                                    </div>
+
+
+                                    <Input value={this.state.opname}
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+
+                                    <div style={{
+                                        width: '87px',
+                                        marginRight: '37px',
+                                    }}>
+                                                    <span style={{
+                                                        textAlign: 'left',
+                                                        width: '87px',
+                                                        height: '22px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px'
+
+
+                                                    }}>操作人</span>
+
+                                    </div>
+
+
+                                    <Input value={this.state.opname}
+                                           style={{width: '200px', height: '36px'}}
+
+                                    />
+                                </div>
+                                <div style={{
+                                    marginTop: '24px',
+                                    textAlign: 'right',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+
+                                    <div style={{
+                                        width: '87px',
+                                        marginRight: '37px',
+                                    }}>
+                                                    <span style={{
+                                                        textAlign: 'left',
+                                                        width: '87px',
+                                                        height: '22px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px'
+
+
+                                                    }}>入金到账时间</span>
+
+                                    </div>
+
+
+                                    <Input value={this.state.opname}
                                            style={{width: '200px', height: '36px'}}
 
                                     />
