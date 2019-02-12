@@ -206,10 +206,19 @@ class Basic extends Component {
                     <div>
                         <Button
                             size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                            disabled={record.status == 3 || record.status == 4}
+                            disabled={ record.status == 4}
                             onClick={
                                 () => {
-                                    this.props.history.push('/app/fina/d/tes' + record.id)
+
+
+                                    if(record.status==3){
+                                        this.props.history.push('/app/fina/d/ter' + record.id)
+
+                                    }else{
+                                        this.props.history.push('/app/fina/d/tes' + record.id)
+
+                                    }
+
                                 }
                             }>{record.status == 1 ? '支付成功' : record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
 
@@ -217,7 +226,6 @@ class Basic extends Component {
                         <Button
                             size={'small'} style={{minWidth: 80, background: '#FDD000'}}
                             disabled={record.status == 3 || record.status == 4 || record.status == 1}
-
 
                             onClick={
                                 () => this.showOPDAyModal3(record)

@@ -86,7 +86,14 @@ export default {
     others:
         [
 
+
             {
+                route: '/app/fina/d/ter:id',
+                tk: 'wwwer',
+                title: '入金审核',
+                icon: 'star',
+                component: 'TeleMoneyThird'
+            }, {
                 route: '/app/fina/d/tes:id',
                 tk: 'wwwew',
                 title: '入金审核',
@@ -100,9 +107,6 @@ export default {
                 icon: 'star',
                 component: 'PassOpenD'
             },
-
-
-
             {
                 route: '/app/pass/passopenrs/detail:id',
                 tk: 'tk',
