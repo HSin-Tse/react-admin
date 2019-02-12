@@ -214,7 +214,7 @@ class Basic extends Component {
                                     if(record.status==3){
                                         this.props.history.push('/app/fina/d/ter' + record.id)
 
-                                    }else{
+                                    }else if(record.status==2){
                                         this.props.history.push('/app/fina/d/tes' + record.id)
 
                                     }
