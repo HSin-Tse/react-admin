@@ -87,16 +87,18 @@ class Basic extends Component {
                 mRate: response.data.data.rate,
                 mExpectDate: response.data.data.expectDate,
                 commenS1: response.data.data.comment_step1.comment,
+                commenBk1: response.data.data.comment_step1.bkUserName,
+                commenDate1: response.data.data.comment_step1.createDate,
+                commenDate2: response.data.data.comment_step2.createDate,
+                commenBk2: response.data.data.comment_step2.bkUserName,
                 mAccountCurrency: response.data.data.accountCurrency,
             }, () => {
 
                 console.log('hcia response', response)
 
 
-
                 message.success('request client data')
                 setTimeout(self.requestStart, 300)
-
 
 
             })
@@ -284,7 +286,7 @@ class Basic extends Component {
         return +str >= 10 ? str : '0' + str
     };
 
-    requestStart = ()=>{
+    requestStart = () => {
         let self = this
 
         window.Axios.post('star/getStarLiveAccountDetail', {
@@ -1078,13 +1080,53 @@ class Basic extends Component {
                                     </div>
 
 
-                                    <Input value={this.state.opname}
+                                    <Input value={this.state.commenBk1}
                                            style={{width: '200px', height: '36px'}}
 
                                     />
                                 </div>
                                 <div style={{
-                                    marginTop: '24px',
+                                    marginTop: '11px',
+
+                                    textAlign: 'right',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+
+                                    <div style={{
+                                        width: '87px',
+                                        marginRight: '37px',
+                                    }}>
+                                                    <span style={{
+                                                        textAlign: 'left',
+                                                        width: '87px',
+                                                        height: '22px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px'
+
+
+                                                    }}></span>
+
+                                    </div>
+
+
+                                    <span
+                                        style={{
+                                            color: '#292929',
+                                            fontWeight: 400,
+                                            fontSize: '14px',
+                                            textAlign: 'center',
+                                            width: '200px',
+                                            height: '36px'
+                                        }}
+
+                                    >{this.state.commenDate1?this.timestampToTime(this.state.commenDate1):''}</span>
+                                </div>
+                                <div style={{
+                                    // marginTop: '24px',
                                     textAlign: 'right',
                                     display: 'flex',
                                     alignItems: 'center',
@@ -1110,11 +1152,52 @@ class Basic extends Component {
                                     </div>
 
 
-                                    <Input value={this.state.opname}
+                                    <Input value={this.state.commenBk2}
                                            style={{width: '200px', height: '36px'}}
 
                                     />
                                 </div>
+                                <div style={{
+                                    marginTop: '11px',
+
+                                    textAlign: 'right',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center'
+                                }}>
+
+                                    <div style={{
+                                        width: '87px',
+                                        marginRight: '37px',
+                                    }}>
+                                                    <span style={{
+                                                        textAlign: 'left',
+                                                        width: '87px',
+                                                        height: '22px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px'
+
+
+                                                    }}></span>
+
+                                    </div>
+
+
+                                    <span
+                                        style={{
+                                            color: '#292929',
+                                            fontWeight: 400,
+                                            fontSize: '14px',
+                                            textAlign: 'center',
+                                            width: '200px',
+                                            height: '36px'
+                                        }}
+
+                                    >{this.state.commenDate1?this.timestampToTime(this.state.commenDate2):''}</span>
+                                </div>
+
                                 <div style={{
                                     marginTop: '24px',
                                     textAlign: 'right',
