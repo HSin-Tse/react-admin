@@ -36,13 +36,11 @@ message.config({
 window.Axios = Axios;
 window.PAxios = aaxios;// は「http:」
 
-var hideLoading
+ // window.hideLoading={}
 
 // 请求列表
 // 取消列表
-const CancelToken = axios.CancelToken
-let sources = []
-
+let loadCount = 0;
 
 window.PAxios.interceptors.request.use(
     config => {
@@ -107,12 +105,11 @@ let removePending = (config) => {
 
 window.Axios.interceptors.request.use(
     config => {
-
+        loadCount++;
         const request = JSON.stringify(config.url) + JSON.stringify(config.data)
 
         removePending(config); //在一个ajax发送前执行一下取消操作
         config.cancelToken = new cancelToken((c) => {
-            // 这里的ajax标识我是用请求地址&请求方式拼接的字符串，当然你可以选择其他的一些方式
             pending.push({u: request, f: c});
         });
 
@@ -127,13 +124,13 @@ window.Axios.interceptors.request.use(
             config.headers['X-Token'] = xtoken
             if (config.method == 'post') {
 
-
-                if (hideLoading) {
-
-                } else {
-                    hideLoading = Toast.loading('加载中...', 0, () => {
+                
+                console.log('hcia request loadCount' , loadCount)
+                // if (loadCount>1) {
+                    window.hideLoading = Toast.loading('加载中...', 0, () => {
                     })
-                }
+                // }
+
 
 
                 config.data = {
@@ -168,10 +165,19 @@ window.Axios.interceptors.request.use(
 
 
 window.Axios.interceptors.response.use(function (response) {
-
+    loadCount--
     removePending(response.config);
     if (response.data.code != 1) {
-        setTimeout(hideLoading, 0)
+
+        if (loadCount==0) {
+            
+            console.log('hcia loadCount' , loadCount)
+            setTimeout(window.hideLoading, 0)
+
+            //LoadingBar.end();
+            //结束loading
+        }
+        // setTimeout(hideLoading, 0)
         message.error(response.data.msg)
 
         if (response.data.errorCode == 'ERROR_022' || response.data.errorCode == 'ERROR_020') {
@@ -199,19 +205,38 @@ window.Axios.interceptors.response.use(function (response) {
 
         return Promise.reject(response)
     }
-    setTimeout(hideLoading, 0)
-    hideLoading = undefined
+
+    // setTimeout(hideLoading, 0)
+
+    
+    console.log('hcia loadCount' , loadCount,(loadCount==0))
+    if (loadCount<=0) {
+        console.log('hcia hideLoading' , window.hideLoading)
+        setTimeout(window.hideLoading, 0)
+
+        //LoadingBar.end();
+        //结束loading
+    }
+    // window.hideLoading = {}
     // setTimeout(ss, 0);
 
     return response
 }, function (error) {
+
+    loadCount--
     console.log('hcia error.toString()', error.toString())
 
     if (error.toString() == 'Cancel') {
         // message.error(error.toString()+'TEST')
     } else {
-        setTimeout(hideLoading, 0)
+        // setTimeout(hideLoading, 0)
 
+        if (loadCount==0) {
+            setTimeout(window.hideLoading, 0)
+
+            //LoadingBar.end();
+            //结束loading
+        }
         message.error(error.toString())
     }
     return Promise.reject(error)

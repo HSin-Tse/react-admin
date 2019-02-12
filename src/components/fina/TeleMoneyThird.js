@@ -28,11 +28,7 @@ const Option = Select.Option;
 
 class Basic extends Component {
     changeNote = (e) => {
-
-
         console.log('hcia e.target.value', e.target.value)
-
-
         this.setState({
             changeNoteV: e.target.value
         })
@@ -74,12 +70,57 @@ class Basic extends Component {
     componentDidMount() {
 
         var self = this
-        window.Axios.post('back/addLogHistory', {
-            'moduleLog': '财务管理',
-            'pageLog': '入金审核',
-            'commentLog': '查看了入金审核',
-            'typeLog': 2,
+
+        window.Axios.post('finance/getDepositDetail', {
+            'id': self.props.match.params.id
+        }).then((response) => {
+
+            console.log('hcia response', response)
+
+            self.setState({
+                mID: response.data.data.id,
+                mBelongBkUserId: response.data.data.belongBkUserId,
+                mStarClientAccount: response.data.data.accountNo,
+                mNetEquity: response.data.data.netEquity,
+                mExecTxnAmt: response.data.data.execAmount,
+                mExecTxnCurry: response.data.data.execCurrency,
+                mRate: response.data.data.rate,
+                mExpectDate: response.data.data.expectDate,
+                commenS1: response.data.data.comment_step1.comment,
+                mAccountCurrency: response.data.data.accountCurrency,
+            }, () => {
+                console.log('hcia response', response)
+
+
+                window.Axios.post('star/getStarLiveAccountDetail', {
+                    'starClientAccount': self.state.mStarClientAccount,
+
+                }).then((response) => {
+
+                    console.log('hcia response', response)
+                    if (response.data.data) {
+                        self.setState({
+                            mNetEquity: response.data.data[0].netEquity,
+                            mName: response.data.data[0].name
+                        })
+                    } else {
+                        self.setState({
+                            mNetEquity: '',
+                            mName: '',
+                        })
+                    }
+
+                })
+
+            })
         })
+
+        // window.Axios.post('back/addLogHistory', {
+        //     'moduleLog': '财务管理',
+        //     'pageLog': '入金审核',
+        //     'commentLog': '查看了入金审核',
+        //     'typeLog': 2,
+        // })
         this.columns = [
             {
                 title: '序号',
@@ -220,15 +261,17 @@ class Basic extends Component {
         this.requestPage()
 
 
-        window.Axios.post('dict/openDict', {
-            'keys': 'finance_currency',
 
-        }).then((response) => {
-            self.setState({
-                accountTxnCurryList: response.data.data.finance_currency
-            })
 
-        })
+        // window.Axios.post('dict/openDict', {
+        //     'keys': 'finance_currency',
+        //
+        // }).then((response) => {
+        //     self.setState({
+        //         accountTxnCurryList: response.data.data.finance_currency
+        //     })
+        //
+        // })
 
 
         window.Axios.post('back/getBackUserList', {

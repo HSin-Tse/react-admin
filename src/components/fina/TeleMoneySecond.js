@@ -35,7 +35,7 @@ class Basic extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            accountTxnCurryList: [],
+            // accountTxnCurryList: [],
             bkroleList: [],
             selectedRowKeys: [],
             date: new Date(),
@@ -257,13 +257,13 @@ class Basic extends Component {
             }];
         this.requestPage()
 
-        window.Axios.post('dict/openDict', {
-            'keys': 'finance_currency',
-        }).then((response) => {
-            self.setState({
-                accountTxnCurryList: response.data.data.finance_currency
-            })
-        })
+        // window.Axios.post('dict/openDict', {
+        //     'keys': 'finance_currency',
+        // }).then((response) => {
+        //     self.setState({
+        //         accountTxnCurryList: response.data.data.finance_currency
+        //     })
+        // })
 
 
         window.Axios.post('back/getBackUserList', {
@@ -368,11 +368,11 @@ class Basic extends Component {
 
         ))
 
-        const accountTList = this.state.accountTxnCurryList.map(v1 => (
-
-            <Option key={v1.value} value={v1.value}>{v1.name ? v1.name : 'null'}</Option>
-
-        ))
+        // const accountTList = this.state.accountTxnCurryList.map(v1 => (
+        //
+        //     <Option key={v1.value} value={v1.value}>{v1.name ? v1.name : 'null'}</Option>
+        //
+        // ))
 
 
         return (
