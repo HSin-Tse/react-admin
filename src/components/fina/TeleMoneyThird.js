@@ -7,31 +7,24 @@ import {
     Table,
     message,
     Select,
-    Steps,
     Card,
     Col,
     Row,
     Input,
     Modal,
-    Tooltip,
-    Tag,
     DatePicker,
-    Divider, Tabs, Checkbox
 } from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import moment from 'moment';
-import {steps} from "./model/Steps";
 
 const {TextArea} = Input;
 
 const dateFormat = 'YYYY-MM-DD';
 
-const Step = Steps.Step;
 const Option = Select.Option;
-const TabPane = Tabs.TabPane;
 
 class Basic extends Component {
     changeNote = (e) => {
@@ -43,7 +36,6 @@ class Basic extends Component {
         this.setState({
             changeNoteV: e.target.value
         })
-        // this.state.changeNoteV = e.target.value
     }
 
     constructor(props) {
@@ -336,16 +328,6 @@ class Basic extends Component {
         }
 
 
-        var ssdds = {
-
-            paddingLeft: 15,
-            paddingRight: 15,
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            display: 'flex',
-            height: '40px',
-            borderRadius: '40px 40px 40px 40px'
-        }
         const steps = [{
             title: '新增',
             content: 'First-content',
@@ -387,8 +369,8 @@ class Basic extends Component {
                 {/*<div>mAccountTxnCurry :{JSON.stringify(this.state.mAccountTxnCurry)}</div>*/}
 
 
-                <h2 style={{marginTop: 15}}>入金审核</h2>
-                <BreadcrumbCustom first="财务管理" second="电汇入金" third="入金审核"/>
+                <h2 style={{marginTop: 15}}>入金完成</h2>
+                <BreadcrumbCustom first="财务管理" second="电汇入金" third="入金完成"/>
 
                 <div style={{
 
