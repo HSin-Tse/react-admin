@@ -115,9 +115,7 @@ class Basic extends Component {
                 render: (text, record) => (
                     <span>{record.accountNo}</span>),
             }, {
-
                 title: '姓名',
-
                 dataIndex: '姓名',
                 key: '姓名',
                 render: (text, record) => (<span>{record.name}</span>),
@@ -133,7 +131,6 @@ class Basic extends Component {
                 title: '添加时间',
                 dataIndex: '添加时间',
                 align: 'center',
-
                 key: '添加时间',
                 render: (text, record) => (
                     <span>{this.timestampToTime(record.comment_step1.createDate)}</span>)
@@ -146,7 +143,6 @@ class Basic extends Component {
                     <span>{record.accountAmount}</span>),
             }, {
                 align: 'center',
-
                 title: '入金币种',
                 dataIndex: '入金币种',
                 key: '入金币种',
@@ -154,7 +150,6 @@ class Basic extends Component {
                     <span>{record.accountCurrency}</span>)
             }, {
                 align: 'center',
-
                 title: '执行金额（$)',
                 dataIndex: '执行金额（$)',
                 key: '执行金额（$)',
