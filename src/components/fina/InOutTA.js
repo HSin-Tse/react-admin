@@ -189,7 +189,6 @@ class Basic extends Component {
             },
             {
                 align: 'center',
-
                 title: '订单编号',
                 label: '订单编号',
                 dataIndex: '订单编号',
@@ -344,7 +343,7 @@ class Basic extends Component {
                 dataIndex: '审核日志',
                 key: '审核日志',
                 render: (text, record) => (
-                    <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}onClick={() => this.showModalB(record)}>详情</Button>
+                    <Button size={'small'} style={{background: '#FDD000'}}onClick={() => this.showModalB(record)}>详情</Button>
                 )
 
             }];
@@ -651,6 +650,7 @@ class Basic extends Component {
                                            render: (text, record) => (
                                                <span>{record.comment}</span>),
                                        }]}
+
                                    dataSource={this.state.operationDiaryHistory}
                                    loading={this.state.loadingComment}
                                    pagination={{

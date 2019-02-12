@@ -1088,7 +1088,7 @@ class Basic extends Component {
                                     />
                                 </div>
                                 <div style={{
-                                    marginTop: '11px',
+                                    // marginTop: '11px',
 
                                     textAlign: 'right',
                                     display: 'flex',
@@ -1160,7 +1160,7 @@ class Basic extends Component {
                                     />
                                 </div>
                                 <div style={{
-                                    marginTop: '11px',
+                                    // marginTop: '11px',
 
                                     textAlign: 'right',
                                     display: 'flex',
@@ -1201,7 +1201,6 @@ class Basic extends Component {
                                 </div>
 
                                 <div style={{
-                                    marginTop: '24px',
                                     textAlign: 'right',
                                     display: 'flex',
                                     alignItems: 'center',
