@@ -143,7 +143,8 @@ class PassOpenD extends Component {
                 mCity: response.data.data.city,
                 leverageId: response.data.data.leverage,
                 changeNoteV: response.data.data.comment,
-                checkfromdbName: response.data.data.phoneNumber,
+                checkfromdbName: response.data.data.bindedPhoneNumber,
+                // checkfromdbName: response.data.data.bindedPhoneNumber,
             }, () => {
 
 
@@ -506,7 +507,7 @@ class PassOpenD extends Component {
     };
     checkfromdbType = (value) => {
         this.setState({
-            checkfromdbName: (value == 0 ? this.state.recordData.phoneNumber : value == 1 ? this.state.recordData.nationalID : this.state.recordData.email),
+            checkfromdbName: (value == 0 ? this.state.recordData.bindedPhoneNumber : value == 1 ? this.state.recordData.nationalID : this.state.recordData.email),
             checkfromdbTypeV: value
         });
     };
