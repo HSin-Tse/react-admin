@@ -67,8 +67,7 @@ class Basic extends Component {
         //
         //
         // });
-
-        let self = this;
+        // let self = this;
 
 
 

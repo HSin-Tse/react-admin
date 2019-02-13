@@ -136,9 +136,9 @@ class Basic extends Component {
                     <span>{this.timestampToTime(record.comment_step1.createDate)}</span>)
             }, {
                 align: 'center',
-                title: '入金金额（￥）',
-                dataIndex: '入金金额（￥）',
-                key: '入金金额（￥）',
+                title: '入金金额',
+                dataIndex: '入金金额',
+                key: '入金金额',
                 render: (text, record) => (
                     <span>{record.accountAmount}</span>),
             }, {
@@ -150,9 +150,9 @@ class Basic extends Component {
                     <span>{record.accountCurrency}</span>)
             }, {
                 align: 'center',
-                title: '执行金额（$)',
-                dataIndex: '执行金额（$)',
-                key: '执行金额（$)',
+                title: '执行金额',
+                dataIndex: '执行金额',
+                key: '执行金额',
                 render: (text, record) => (
                     <span>{record.execAmount}</span>),
             }, {
