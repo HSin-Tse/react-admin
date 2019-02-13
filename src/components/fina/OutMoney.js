@@ -79,7 +79,7 @@ class Basic extends Component {
                 dataIndex: '订单编号',
                 key: '订单编号',
                 render: (text, record) => (
-                    <span>{record.name}</span>),
+                    <span>{record.orderNo}</span>),
             }, {
 
                 title: '用户账号',
@@ -92,7 +92,7 @@ class Basic extends Component {
                 dataIndex: '姓名',
                 key: '姓名',
                 render: (text, record) => (
-                    <span>{record.broker}</span>),
+                    <span>{record.name}</span>),
                 align: 'center',
             }, {
                 align: 'center',
@@ -108,7 +108,7 @@ class Basic extends Component {
                 dataIndex: '支付渠道',
                 key: '支付渠道',
                 render: (text, record) => (
-                    <span>{record.marginLevel}</span>)
+                    <span>{record.channelName}</span>)
             }, {
                 align: 'center',
 
@@ -116,28 +116,28 @@ class Basic extends Component {
                 dataIndex: '账户币种',
                 key: '账户币种',
                 render: (text, record) => (
-                    <span>{record.cashBalance}</span>),
+                    <span>{record.accountCurrency}</span>),
             }, {
                 align: 'center',
                 title: '出金金额',
                 dataIndex: '出金金额',
                 key: '出金金额',
                 render: (text, record) => (
-                    <span>{record.netEquity}</span>),
+                    <span>{record.accountAmount}</span>),
             }, {
                 align: 'center',
                 title: '账号类型',
                 dataIndex: '账号类型',
                 key: '账号类型',
                 render: (text, record) => (
-                    <span>{record.netEquity}</span>),
+                    <span>{record.broker}</span>),
             }, {
                 align: 'center',
                 title: '执行金额',
                 dataIndex: '执行金额',
                 key: '执行金额',
                 render: (text, record) => (
-                    <span>{record.accountStatus == 1 ? '正常' : (record.accountStatus == 2) ? '禁止登陆' : '禁止交易'}</span>
+                    <span>{record.execAmount}</span>
                 )
 
             }, {
@@ -146,7 +146,7 @@ class Basic extends Component {
                 dataIndex: '执行币种',
                 key: '执行币种',
                 render: (text, record) => (
-                    <span>{record.operator}</span>)
+                    <span>{record.execCurrency}</span>)
             }
 
             , {
@@ -155,28 +155,28 @@ class Basic extends Component {
                 dataIndex: '使用汇率',
                 key: '使用汇率',
                 render: (text, record) => (
-                    <span>{record.operator}</span>)
+                    <span>{record.rate}</span>)
             }, {
                 align: 'center',
                 title: '手续费',
                 dataIndex: '手续费',
                 key: '手续费',
                 render: (text, record) => (
-                    <span>{record.operator}</span>)
+                    <span>{record.feeAmount}</span>)
             }, {
                 align: 'center',
                 title: '出金状态',
                 dataIndex: '出金状态',
                 key: '出金状态',
                 render: (text, record) => (
-                    <span>{record.operator}</span>)
+                    <span>{record.displayStatus}</span>)
             }, {
                 align: 'center',
                 title: '执行日期',
                 dataIndex: '执行日期',
                 key: '执行日期',
                 render: (text, record) => (
-                    <span>{record.operator}</span>)
+                    <span>{record.completeDate}</span>)
             }, {
                 align: 'center',
                 title: '处理人',
