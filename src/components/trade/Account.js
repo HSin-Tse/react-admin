@@ -274,6 +274,7 @@ class Basic extends Component {
                 render: (text, record) => (
                     <div>
                         <Select
+                            disabled={true}
                             size={'small'}
                             value={record.displayStatus} style={{width: 100}}
                             onChange={(value) => this.handleChange(value, record)}
@@ -920,9 +921,7 @@ class Basic extends Component {
                     />
 
                 </Modal>
-                <h2 style={{marginTop: 15}}>
-                    账户管理
-                </h2>
+                <h2 style={{marginTop: 15}}>账户管理</h2>
                 <BreadcrumbCustom first="交易管理" second="账户管理"/>
 
                 <Card title="账户管理"
@@ -937,17 +936,17 @@ class Basic extends Component {
                         titleStyle={{whiteSpace: 'nowrap'}}
                         style={{whiteSpace: 'nowrap'}}
                         rowKey="id"
-                           rowSelection={rowSelection}
-                           columns={this.columns}
-                           dataSource={this.state.userList}
-                           scroll={{x: 1600}}
-                           bordered
-                           loading={this.state.loading}
-                           pagination={{  // 分页
-                               total: this.state.pgsize * this.state.totalPage,
-                               pageSize: this.state.pgsize,
-                               onChange: this.changePage,
-                           }}
+                        rowSelection={rowSelection}
+                        columns={this.columns}
+                        dataSource={this.state.userList}
+                        scroll={{x: 1600}}
+                        bordered
+                        loading={this.state.loading}
+                        pagination={{  // 分页
+                            total: this.state.pgsize * this.state.totalPage,
+                            pageSize: this.state.pgsize,
+                            onChange: this.changePage,
+                        }}
                     />
                 </Card>
                 <Modal

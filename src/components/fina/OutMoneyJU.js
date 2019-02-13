@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Icon, Button, Tabs, Checkbox, Select, Steps, Card, Col, Divider, Row, Input, Table} from 'antd';
+import {Button, Tabs, Checkbox, Select, Steps, Card, Col, Divider, Row, Input, Table} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
