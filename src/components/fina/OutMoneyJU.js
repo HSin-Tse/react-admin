@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Tabs, Checkbox, Select, Steps, Card, Col, Divider, Row, Input, Table} from 'antd';
+import {Button, Tabs, Checkbox, Select, Card, Col, Divider, Row, Input, Table} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
@@ -14,7 +14,6 @@ const {TextArea} = Input;
 const TabPane = Tabs.TabPane;
 
 const Option = Select.Option;
-const Step = Steps.Step;
 
 class Basic extends Component {
 
@@ -74,7 +73,7 @@ class Basic extends Component {
         }
         return (
 
-            <div  style={{
+            <div style={{
 
                 display: "flex",
                 alignItems: 'center',
@@ -137,7 +136,7 @@ class Basic extends Component {
                                 <div style={{
                                     flexGrow: '1',
                                     height: '2px',
-                                    background: 'rgba(246,209,71,1)'
+                                    background: '#CCCCCC',
                                 }}></div>
                                 <div style={{
                                     display: "flex",
@@ -145,23 +144,22 @@ class Basic extends Component {
                                     justifyContent: 'center',
                                     width: '40px',
                                     height: '40px',
-                                    background: 'rgba(246,209,71,1)',
+                                    background: '#CCCCCC',
                                     borderRadius: '50%'
                                 }}>
                         <span style={{
                             fontSize: '20px',
                             fontFamily: 'PingFang-HK-Medium',
                             fontWeight: 'bold',
-                            color: 'rgba(33,33,33,1)'
+                            color: 'white'
                         }}>
                             2
                         </span>
                                 </div>
                                 <div style={{
                                     flexGrow: '1',
-
                                     height: '2px',
-                                    background: 'rgba(246,209,71,1)'
+                                    background: '#CCCCCC',
                                 }}></div>
                                 <div style={{
                                     display: "flex",
@@ -169,14 +167,14 @@ class Basic extends Component {
                                     justifyContent: 'center',
                                     width: '40px',
                                     height: '40px',
-                                    background: 'rgba(246,209,71,1)',
+                                    background: '#CCCCCC',
                                     borderRadius: '50%'
                                 }}>
                         <span style={{
                             fontSize: '20px',
                             fontFamily: 'PingFang-HK-Medium',
                             fontWeight: 'bold',
-                            color: 'rgba(33,33,33,1)'
+                            color: 'white'
                         }}>
                             3
                         </span>
