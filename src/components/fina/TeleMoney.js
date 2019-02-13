@@ -979,7 +979,7 @@ class Basic extends Component {
                                                 return
 
                                             }
-                                            var date = new Date(dateString + ' 00:00:00:000');
+                                            var date = new Date(dateString);
                                             console.log('hcia date', date)
                                             var time1 = date.getTime();
 

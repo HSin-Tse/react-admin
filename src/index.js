@@ -124,7 +124,7 @@ window.Axios.interceptors.request.use(
             if (config.method == 'post') {
 
                 
-                console.log('hcia request loadCount' , loadCount)
+                // console.log('hcia request loadCount' , loadCount)
                 // if (loadCount>1) {
                     window.hideLoading = Toast.loading('加载中...', 0, () => {
 
@@ -172,7 +172,7 @@ window.Axios.interceptors.response.use(function (response) {
 
         if (loadCount==0) {
             
-            console.log('hcia loadCount' , loadCount)
+            // console.log('hcia loadCount' , loadCount)
             setTimeout(window.hideLoading, 0)
 
             //LoadingBar.end();
@@ -210,9 +210,9 @@ window.Axios.interceptors.response.use(function (response) {
     // setTimeout(hideLoading, 0)
 
     
-    console.log('hcia loadCount' , loadCount,(loadCount==0))
+    // console.log('hcia loadCount' , loadCount,(loadCount==0))
     if (loadCount<=0) {
-        console.log('hcia hideLoading' , window.hideLoading)
+        // console.log('hcia hideLoading' , window.hideLoading)
         setTimeout(window.hideLoading, 0)
 
         //LoadingBar.end();
@@ -225,7 +225,7 @@ window.Axios.interceptors.response.use(function (response) {
 }, function (error) {
 
     loadCount--
-    console.log('hcia error.toString()', error.toString())
+    // console.log('hcia error.toString()', error.toString())
 
     if (error.toString() == 'Cancel') {
         // message.error(error.toString()+'TEST')

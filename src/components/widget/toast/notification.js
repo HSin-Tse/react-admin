@@ -20,7 +20,7 @@ class Notification extends Component {
 
 
         const { notices } = this.state
-        console.log('hcia notices' , notices)
+        // console.log('hcia notices' , notices)
 
         notice.key = 1
         if (notices.every(item => item.key !== notice.key)) {
