@@ -58,19 +58,7 @@ class Basic extends Component {
     };
 
     componentDidMount() {
-        // window.Axios.post('back/addLogHistory', {
-        //     'moduleLog': '财务管理',
-        //     'pageLog': '出金管理',
-        //     'commentLog': '查看了出金管理',
-        //     'typeLog': 2,
-        // }).then(function (response) {
-        //
-        //
-        // });
         // let self = this;
-
-
-
         this.columns = [
             {
                 align: 'center',
@@ -192,7 +180,9 @@ class Basic extends Component {
                 render: (text, record) => (
                     <div style={{whiteSpace: 'nowrap'}}>
                         <Button size={'small'} style={{width: 70, background: '#FDD000'}} onClick={() => {
-                            this.props.history.push('/app/fina/juoutma1')
+                            
+                            console.log('hcia record.id' , record.id)
+                            this.props.history.push('/app/fina/juoutma'+record.id)
                         }}>结算审核
 
                         </Button>

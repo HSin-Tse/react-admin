@@ -74,9 +74,9 @@ class Basic extends Component {
         // console.log('hcia x' , x)
         // console.log('hcia x' , x)
 
-        console.log('hcia xxxx', xxxx)
+        // console.log('hcia xxxx', xxxx)
 
-        console.log('hcia yyyy', yyyy)
+        // console.log('hcia yyyy', yyyy)
     }
 
     showOPDAyModal3 = (recodrd) => {

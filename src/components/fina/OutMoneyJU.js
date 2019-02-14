@@ -10,9 +10,7 @@ import {receiveData} from "../../action";
 import {steps} from "./model/Steps"
 
 const {TextArea} = Input;
-
 const TabPane = Tabs.TabPane;
-
 const Option = Select.Option;
 
 class Basic extends Component {
@@ -45,13 +43,11 @@ class Basic extends Component {
         console.log('hcia componentDidMount AA',)
 
         let self = this;
-        window.Axios.post('dict/openDict', {
-            'keys': 'suspend_reason_type',
-        }).then(function (response) {
-            self.setState({
-                    suspend_reason_type: response.data.data.suspend_reason_type
-                }
-            );
+
+        window.Axios.post('finance/getWithdrawDetail', {
+            'id': self.props.match.params.id,
+        }).then((response) => {
+            console.log('hcia response', response)
         })
 
 
@@ -482,10 +478,14 @@ class Basic extends Component {
 
 
                                                 <Card>
-                                                    <div><Checkbox>没有第三方资金</Checkbox></div>
-                                                    <div><Checkbox>没有未批准的信用金／奖励金</Checkbox></div>
-                                                    <div><Checkbox>初始入金至原始入金渠道</Checkbox></div>
-                                                    <div><Checkbox>盈利通过银行转账到同名交易账号</Checkbox></div>
+                                                    <div><Checkbox>完整KYC（银行资讯、客户信息）</Checkbox></div>
+                                                    <div><Checkbox>KYC文件在客户文件夹</Checkbox></div>
+                                                    <div><Checkbox>客户余额是否足够</Checkbox></div>
+                                                    <div><Checkbox>客户当日是否有入金记录</Checkbox></div>
+                                                    <div><Checkbox>检查合规性</Checkbox></div>
+                                                    <div><Checkbox>由我批准的</Checkbox></div>
+                                                    <div><Checkbox>完善备注</Checkbox></div>
+                                                    <div><Checkbox>出金小于100USD 需扣除15元手续费，10000USD大额出金与risk确认</Checkbox></div>
 
                                                     <div style={{
                                                         marginTop: 10,
