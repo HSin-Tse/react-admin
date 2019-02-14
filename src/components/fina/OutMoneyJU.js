@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Tabs, Checkbox, Select, Card, Col, Divider, Row, Input, Table} from 'antd';
+import {Button, Tabs, Checkbox, Select, Card, Col, Divider, Row, Input, Table, message} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
@@ -25,6 +25,7 @@ class Basic extends Component {
             nodeList: [],
             loading: false,
             searchPhone: '',
+            theComment: '',
             totalPage: 1,
             modeState: 1,
             forbiddenValue: 0,
@@ -525,7 +526,26 @@ class Basic extends Component {
                                                         display: 'flex'
                                                     }}>
 
-                                                        <Button style={{
+                                                        <Button
+
+                                                            onClick={() => {
+                                                                // finance/serviceCheckWithdraw
+
+                                                                let self = this;
+
+                                                                window.Axios.post('finance/serviceCheckWithdraw', {
+                                                                    'id': self.props.match.params.id,
+                                                                    'content': this.state.theComment,
+                                                                    'status': '1',
+                                                                }).then((response) => {
+                                                                    console.log('hcia response', response)
+
+                                                                    message.success('操作成功')
+
+                                                                })
+
+                                                            }}
+                                                            style={{
                                                             background: '#F6D147',
                                                             margin: 10,  fontSize:'18px',  height:40,width: 150
                                                         }}>审核通过</Button>
