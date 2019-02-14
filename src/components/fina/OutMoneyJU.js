@@ -296,7 +296,7 @@ class Basic extends Component {
                                         <span style={{fontSize: '13px'}}>00.00</span>
                                     </div>
                                     <div style={ssdds}>
-                                        <span style={{fontSize: '13px'}}>出金待审核:</span>
+                                        <span style={{fontSize: '13px'}}>出金待审核金额:</span>
                                         <span style={{fontSize: '13px'}}>00.00</span>
                                     </div>
                                     <Divider style={{paddingLeft: 15, paddingRight: 15}}/>
@@ -477,7 +477,7 @@ class Basic extends Component {
                                             <TabPane tab={steps[0].title} key="1">
 
 
-                                                <Card>
+                                                <Card bodyStyle={{padding: 0, marginTop: '24px', marginLeft: '20px'}}>
                                                     <div><Checkbox>完整KYC（银行资讯、客户信息）</Checkbox></div>
                                                     <div><Checkbox>KYC文件在客户文件夹</Checkbox></div>
                                                     <div><Checkbox>客户余额是否足够</Checkbox></div>
@@ -485,23 +485,24 @@ class Basic extends Component {
                                                     <div><Checkbox>检查合规性</Checkbox></div>
                                                     <div><Checkbox>由我批准的</Checkbox></div>
                                                     <div><Checkbox>完善备注</Checkbox></div>
-                                                    <div><Checkbox>出金小于100USD 需扣除15元手续费，10000USD大额出金与risk确认</Checkbox></div>
+                                                    <div><Checkbox>出金小于100USD 需扣除15元手续费，10000USD大额出金与risk确认</Checkbox>
+                                                    </div>
 
-                                                    <div style={{
-                                                        marginTop: 10,
-                                                        marginBottom: 10,
-                                                    }}>请注意：
-                                                    </div>
-                                                    <div>
-                                                        1.只有在提交此请求后才能将钱汇到客户银行账户。
+                                                    {/*<div style={{*/}
+                                                    {/*marginTop: 10,*/}
+                                                    {/*marginBottom: 10,*/}
+                                                    {/*}}>请注意：*/}
+                                                    {/*</div>*/}
+                                                    {/*<div>*/}
+                                                    {/*1.只有在提交此请求后才能将钱汇到客户银行账户。*/}
 
-                                                    </div>
-                                                    <div>
-                                                        2.当按下“批准出金”按钮时，出金金额将从客户的交易账户中自动扣除。
-                                                    </div>
-                                                    <div>
-                                                        此请求将被关闭并可在归档中查看。
-                                                    </div>
+                                                    {/*</div>*/}
+                                                    {/*<div>*/}
+                                                    {/*2.当按下“批准出金”按钮时，出金金额将从客户的交易账户中自动扣除。*/}
+                                                    {/*</div>*/}
+                                                    {/*<div>*/}
+                                                    {/*此请求将被关闭并可在归档中查看。*/}
+                                                    {/*</div>*/}
 
                                                     <TextArea
                                                         style={{
@@ -525,13 +526,14 @@ class Basic extends Component {
                                                     }}>
 
                                                         <Button style={{
-                                                            margin: 10, width: 150
-                                                        }}>确认扣款</Button>
+                                                            background: '#F6D147',
+                                                            margin: 10,  fontSize:'18px',  height:40,width: 150
+                                                        }}>审核通过</Button>
                                                         <Button style={{
-                                                            margin: 10, width: 150
+                                                            margin: 10,  fontSize:'18px',  height:40,width: 150
                                                         }}>挂起待确认</Button>
                                                         <Button style={{
-                                                            margin: 10, width: 150
+                                                            margin: 10,  fontSize:'18px',  height:40,width: 150
                                                         }}>取消</Button>
 
 
