@@ -478,7 +478,7 @@ class Basic extends Component {
                                     </div>
                                     <div>
                                         <Tabs justify tabBarGutter={'0%'} tabBarStyle={{width: '100%'}} type="card">
-                                            <TabPane tab={'客维审核'} key="1">
+                                            <TabPane tab={steps[0].title} key="1">
 
 
                                                 <Card>
