@@ -21,6 +21,7 @@ class Basic extends Component {
             selectedRowKeys: [],
             date: new Date(),
             userList: [],
+            powerList: [],
             leavgeList: [],
             nodeList: [],
             loading: false,
@@ -53,7 +54,12 @@ class Basic extends Component {
 
 
     }
-
+    onChange = (checkedValues) => {
+        console.log('hcia checkedValues', checkedValues)
+        this.setState({
+            powerList: checkedValues,
+        });
+    }
 
     render() {
 
@@ -475,7 +481,7 @@ class Basic extends Component {
                                     </div>
 
 
-                                    <div>
+                                    <div style={{marginTop: '48px'}}>
 
 
                                         <div style={{display: 'flex'}}>
@@ -505,15 +511,18 @@ class Basic extends Component {
                                                     margin: 0, fontSize: '18px', height: '48px', width: 150
                                                 }}>{steps[2].title}</Button>
                                         </div>
+
+                                        <Checkbox.Group style={{ width: '100%' }} onChange={this.onChange}>
+
                                         <Card bodyStyle={{padding: 0, marginTop: '0px', marginLeft: '20px'}}>
-                                            <div style={{marginTop: '25px'}}><Checkbox>完整KYC（银行资讯、客户信息）</Checkbox></div>
-                                            <div style={{marginTop: '25px'}}><Checkbox>KYC文件在客户文件夹</Checkbox></div>
-                                            <div style={{marginTop: '25px'}}><Checkbox>客户余额是否足够</Checkbox></div>
-                                            <div style={{marginTop: '25px'}}><Checkbox>客户当日是否有入金记录</Checkbox></div>
-                                            <div style={{marginTop: '25px'}}><Checkbox>检查合规性</Checkbox></div>
-                                            <div style={{marginTop: '25px'}}><Checkbox>由我批准的</Checkbox></div>
-                                            <div style={{marginTop: '25px'}}><Checkbox>完善备注</Checkbox></div>
-                                            <div style={{marginTop: '25px'}}><Checkbox>出金小于100USD 需扣除15元手续费，10000USD大额出金与risk确认</Checkbox>
+                                            <div style={{marginTop: '25px'}}><Checkbox value={1}>完整KYC（银行资讯、客户信息）</Checkbox></div>
+                                            <div style={{marginTop: '25px'}}><Checkbox value={2}>KYC文件在客户文件夹</Checkbox></div>
+                                            <div style={{marginTop: '25px'}}><Checkbox value={3}>客户余额是否足够</Checkbox></div>
+                                            <div style={{marginTop: '25px'}}><Checkbox value={4}>客户当日是否有入金记录</Checkbox></div>
+                                            <div style={{marginTop: '25px'}}><Checkbox value={5}>检查合规性</Checkbox></div>
+                                            <div style={{marginTop: '25px'}}><Checkbox value={6}>由我批准的</Checkbox></div>
+                                            <div style={{marginTop: '25px'}}><Checkbox value={7}>完善备注</Checkbox></div>
+                                            <div style={{marginTop: '25px'}}><Checkbox value={8}>出金小于100USD 需扣除15元手续费，10000USD大额出金与risk确认</Checkbox>
                                             </div>
 
                                             {/*<div style={{*/}
@@ -554,6 +563,7 @@ class Basic extends Component {
                                             }}>
 
                                                 <Button
+                                                    disabled={this.state.powerList.length<8}
 
                                                     onClick={() => {
                                                         // finance/serviceCheckWithdraw
@@ -635,7 +645,7 @@ class Basic extends Component {
                                             />
                                         </Card>
 
-
+                                        </Checkbox.Group>,
 
                                         {/*<Tabs activeKey={"1"} justify tabBarGutter={'0%'} tabBarStyle={{width: '100%'}}*/}
                                               {/*type="card">*/}
