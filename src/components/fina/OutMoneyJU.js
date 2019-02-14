@@ -473,146 +473,318 @@ class Basic extends Component {
                                         <span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}
                                                                                 placeholder=""/></span>
                                     </div>
+
+
                                     <div>
-                                        <Tabs justify tabBarGutter={'0%'} tabBarStyle={{width: '100%'}} type="card">
-                                            <TabPane tab={steps[0].title} key="1">
 
 
-                                                <Card bodyStyle={{padding: 0, marginTop: '24px', marginLeft: '20px'}}>
-                                                    <div><Checkbox>完整KYC（银行资讯、客户信息）</Checkbox></div>
-                                                    <div><Checkbox>KYC文件在客户文件夹</Checkbox></div>
-                                                    <div><Checkbox>客户余额是否足够</Checkbox></div>
-                                                    <div><Checkbox>客户当日是否有入金记录</Checkbox></div>
-                                                    <div><Checkbox>检查合规性</Checkbox></div>
-                                                    <div><Checkbox>由我批准的</Checkbox></div>
-                                                    <div><Checkbox>完善备注</Checkbox></div>
-                                                    <div><Checkbox>出金小于100USD 需扣除15元手续费，10000USD大额出金与risk确认</Checkbox>
-                                                    </div>
+                                        <div style={{display: 'flex'}}>
+                                            <Button
+
+
+                                                style={{
+                                                    background: '#F6D147',
+                                                    flexGrow: '1',
+                                                    margin: 0, fontSize: '18px', height: '48px', width: 150
+                                                }}>{steps[0].title}</Button>
+
+                                            <Button
+
+
+                                                style={{
+
+                                                    flexGrow: '1',
+                                                    margin: 0, fontSize: '18px', height: '48px', width: 150
+                                                }}>{steps[1].title}</Button>
+                                            <Button
+
+
+                                                style={{
+
+                                                    flexGrow: '1',
+                                                    margin: 0, fontSize: '18px', height: '48px', width: 150
+                                                }}>{steps[2].title}</Button>
+                                        </div>
+                                        <Card bodyStyle={{padding: 0, marginTop: '0px', marginLeft: '20px'}}>
+                                            <div style={{marginTop: '25px'}}><Checkbox>完整KYC（银行资讯、客户信息）</Checkbox></div>
+                                            <div style={{marginTop: '25px'}}><Checkbox>KYC文件在客户文件夹</Checkbox></div>
+                                            <div style={{marginTop: '25px'}}><Checkbox>客户余额是否足够</Checkbox></div>
+                                            <div style={{marginTop: '25px'}}><Checkbox>客户当日是否有入金记录</Checkbox></div>
+                                            <div style={{marginTop: '25px'}}><Checkbox>检查合规性</Checkbox></div>
+                                            <div style={{marginTop: '25px'}}><Checkbox>由我批准的</Checkbox></div>
+                                            <div style={{marginTop: '25px'}}><Checkbox>完善备注</Checkbox></div>
+                                            <div style={{marginTop: '25px'}}><Checkbox>出金小于100USD 需扣除15元手续费，10000USD大额出金与risk确认</Checkbox>
+                                            </div>
+
+                                            {/*<div style={{*/}
+                                            {/*marginTop: 10,*/}
+                                            {/*marginBottom: 10,*/}
+                                            {/*}}>请注意：*/}
+                                            {/*</div>*/}
+                                            {/*<div>*/}
+                                            {/*1.只有在提交此请求后才能将钱汇到客户银行账户。*/}
+
+                                            {/*</div>*/}
+                                            {/*<div>*/}
+                                            {/*2.当按下“批准出金”按钮时，出金金额将从客户的交易账户中自动扣除。*/}
+                                            {/*</div>*/}
+                                            {/*<div>*/}
+                                            {/*此请求将被关闭并可在归档中查看。*/}
+                                            {/*</div>*/}
+
+                                            <TextArea
+                                                style={{
+                                                    marginTop: 10,
+                                                    marginBottom: 10,
+                                                }}
+                                                rows={4}
+                                                value={this.state.theComment}
+                                                onChange={(e) => {
+                                                    let comment = e.target.value;
+                                                    this.setState({
+                                                        theComment: comment
+                                                    });
+                                                }}
+                                                placeholder="备注"/>
+
+                                            <div style={{
+                                                margin: 5,
+                                                justifyContent: "space-around",
+                                                display: 'flex'
+                                            }}>
+
+                                                <Button
+
+                                                    onClick={() => {
+                                                        // finance/serviceCheckWithdraw
+
+
+                                                        if (!this.state.theComment) {
+                                                            message.error('完善备注?')
+                                                            return
+                                                        }
+                                                        let self = this;
+
+                                                        window.Axios.post('finance/serviceCheckWithdraw', {
+                                                            'id': self.props.match.params.id,
+                                                            'content': this.state.theComment,
+                                                            'status': '1',
+                                                        }).then((response) => {
+                                                            console.log('hcia response', response)
+
+                                                            message.success('操作成功')
+
+                                                        })
+
+                                                    }}
+                                                    style={{
+                                                        background: '#F6D147',
+                                                        margin: 10, fontSize: '18px', height: 40, width: 150
+                                                    }}>审核通过</Button>
+                                                <Button
+
+
+                                                    style={{
+                                                        margin: 10, fontSize: '18px', height: 40, width: 150
+                                                    }}>挂起待确认</Button>
+                                                <Button style={{
+                                                    margin: 10, fontSize: '18px', height: 40, width: 150
+                                                }}>取消</Button>
+
+
+                                            </div>
+                                            <Table rowKey="id"
+                                                   columns={[
+
+                                                       {
+                                                           title: '日期',
+                                                           align: 'center',
+                                                           dataIndex: 'bkUserName',
+                                                           key: 'operationDiary_User',
+                                                           render: (text, record) => (
+                                                               <div>{record.bkUserName}</div>),
+                                                       }, {
+                                                           title: '备注',
+                                                           align: 'center',
+                                                           dataIndex: 'createDate',
+                                                           key: 'operationDiary_Date',
+                                                           render: (text, record) => (
+                                                               <span>{record.createDate}</span>),
+                                                       }, {
+                                                           title: '审核类型',
+                                                           align: 'center',
+                                                           dataIndex: 'comment',
+                                                           key: 'operationDiary_Status',
+                                                           render: (text, record) => (
+                                                               <span>{record.comment}</span>),
+                                                       }, {
+                                                           title: '操作人',
+                                                           align: 'center',
+                                                           dataIndex: 'comment',
+                                                           key: 'operationDiary_Status',
+                                                           render: (text, record) => (
+                                                               <span>{record.comment}</span>),
+                                                       }]}
+                                                   dataSource={this.state.operationDiaryHistory}
+                                                   loading={this.state.loadingComment}
+                                                   pagination={{
+                                                       total: this.state.totalpageComments * this.state.pgsize,
+                                                       pageSize: this.state.pgsize,
+                                                       onChange: this.changePageComment,
+                                                   }}
+                                            />
+                                        </Card>
+
+
+
+                                        {/*<Tabs activeKey={"1"} justify tabBarGutter={'0%'} tabBarStyle={{width: '100%'}}*/}
+                                              {/*type="card">*/}
+                                            {/*<TabPane tab={steps[0].title} key="1">*/}
+
+
+                                                {/*<Card bodyStyle={{padding: 0, marginTop: '24px', marginLeft: '20px'}}>*/}
+                                                    {/*<div><Checkbox>完整KYC（银行资讯、客户信息）</Checkbox></div>*/}
+                                                    {/*<div><Checkbox>KYC文件在客户文件夹</Checkbox></div>*/}
+                                                    {/*<div><Checkbox>客户余额是否足够</Checkbox></div>*/}
+                                                    {/*<div><Checkbox>客户当日是否有入金记录</Checkbox></div>*/}
+                                                    {/*<div><Checkbox>检查合规性</Checkbox></div>*/}
+                                                    {/*<div><Checkbox>由我批准的</Checkbox></div>*/}
+                                                    {/*<div><Checkbox>完善备注</Checkbox></div>*/}
+                                                    {/*<div><Checkbox>出金小于100USD 需扣除15元手续费，10000USD大额出金与risk确认</Checkbox>*/}
+                                                    {/*</div>*/}
+
+                                                    {/*/!*<div style={{*!/*/}
+                                                    {/*/!*marginTop: 10,*!/*/}
+                                                    {/*/!*marginBottom: 10,*!/*/}
+                                                    {/*/!*}}>请注意：*!/*/}
+                                                    {/*/!*</div>*!/*/}
+                                                    {/*/!*<div>*!/*/}
+                                                    {/*/!*1.只有在提交此请求后才能将钱汇到客户银行账户。*!/*/}
+
+                                                    {/*/!*</div>*!/*/}
+                                                    {/*/!*<div>*!/*/}
+                                                    {/*/!*2.当按下“批准出金”按钮时，出金金额将从客户的交易账户中自动扣除。*!/*/}
+                                                    {/*/!*</div>*!/*/}
+                                                    {/*/!*<div>*!/*/}
+                                                    {/*/!*此请求将被关闭并可在归档中查看。*!/*/}
+                                                    {/*/!*</div>*!/*/}
+
+                                                    {/*<TextArea*/}
+                                                        {/*style={{*/}
+                                                            {/*marginTop: 10,*/}
+                                                            {/*marginBottom: 10,*/}
+                                                        {/*}}*/}
+                                                        {/*rows={4}*/}
+                                                        {/*value={this.state.theComment}*/}
+                                                        {/*onChange={(e) => {*/}
+                                                            {/*let comment = e.target.value;*/}
+                                                            {/*this.setState({*/}
+                                                                {/*theComment: comment*/}
+                                                            {/*});*/}
+                                                        {/*}}*/}
+                                                        {/*placeholder="备注"/>*/}
 
                                                     {/*<div style={{*/}
-                                                    {/*marginTop: 10,*/}
-                                                    {/*marginBottom: 10,*/}
-                                                    {/*}}>请注意：*/}
+                                                        {/*margin: 5,*/}
+                                                        {/*justifyContent: "space-around",*/}
+                                                        {/*display: 'flex'*/}
+                                                    {/*}}>*/}
+
+                                                        {/*<Button*/}
+
+                                                            {/*onClick={() => {*/}
+                                                                {/*// finance/serviceCheckWithdraw*/}
+
+
+                                                                {/*if (!this.state.theComment) {*/}
+                                                                    {/*message.error('完善备注?')*/}
+                                                                    {/*return*/}
+                                                                {/*}*/}
+                                                                {/*let self = this;*/}
+
+                                                                {/*window.Axios.post('finance/serviceCheckWithdraw', {*/}
+                                                                    {/*'id': self.props.match.params.id,*/}
+                                                                    {/*'content': this.state.theComment,*/}
+                                                                    {/*'status': '1',*/}
+                                                                {/*}).then((response) => {*/}
+                                                                    {/*console.log('hcia response', response)*/}
+
+                                                                    {/*message.success('操作成功')*/}
+
+                                                                {/*})*/}
+
+                                                            {/*}}*/}
+                                                            {/*style={{*/}
+                                                                {/*background: '#F6D147',*/}
+                                                                {/*margin: 10, fontSize: '18px', height: 40, width: 150*/}
+                                                            {/*}}>审核通过</Button>*/}
+                                                        {/*<Button*/}
+
+
+                                                            {/*style={{*/}
+                                                                {/*margin: 10, fontSize: '18px', height: 40, width: 150*/}
+                                                            {/*}}>挂起待确认</Button>*/}
+                                                        {/*<Button style={{*/}
+                                                            {/*margin: 10, fontSize: '18px', height: 40, width: 150*/}
+                                                        {/*}}>取消</Button>*/}
+
+
                                                     {/*</div>*/}
-                                                    {/*<div>*/}
-                                                    {/*1.只有在提交此请求后才能将钱汇到客户银行账户。*/}
+                                                    {/*<Table rowKey="id"*/}
+                                                           {/*columns={[*/}
 
-                                                    {/*</div>*/}
-                                                    {/*<div>*/}
-                                                    {/*2.当按下“批准出金”按钮时，出金金额将从客户的交易账户中自动扣除。*/}
-                                                    {/*</div>*/}
-                                                    {/*<div>*/}
-                                                    {/*此请求将被关闭并可在归档中查看。*/}
-                                                    {/*</div>*/}
-
-                                                    <TextArea
-                                                        style={{
-                                                            marginTop: 10,
-                                                            marginBottom: 10,
-                                                        }}
-                                                        rows={4}
-                                                        value={this.state.theComment}
-                                                        onChange={(e) => {
-                                                            let comment = e.target.value;
-                                                            this.setState({
-                                                                theComment: comment
-                                                            });
-                                                        }}
-                                                        placeholder="备注"/>
-
-                                                    <div style={{
-                                                        margin: 5,
-                                                        justifyContent: "space-around",
-                                                        display: 'flex'
-                                                    }}>
-
-                                                        <Button
-
-                                                            onClick={() => {
-                                                                // finance/serviceCheckWithdraw
-
-                                                                let self = this;
-
-                                                                window.Axios.post('finance/serviceCheckWithdraw', {
-                                                                    'id': self.props.match.params.id,
-                                                                    'content': this.state.theComment,
-                                                                    'status': '1',
-                                                                }).then((response) => {
-                                                                    console.log('hcia response', response)
-
-                                                                    message.success('操作成功')
-
-                                                                })
-
-                                                            }}
-                                                            style={{
-                                                            background: '#F6D147',
-                                                            margin: 10,  fontSize:'18px',  height:40,width: 150
-                                                        }}>审核通过</Button>
-                                                        <Button style={{
-                                                            margin: 10,  fontSize:'18px',  height:40,width: 150
-                                                        }}>挂起待确认</Button>
-                                                        <Button style={{
-                                                            margin: 10,  fontSize:'18px',  height:40,width: 150
-                                                        }}>取消</Button>
+                                                               {/*{*/}
+                                                                   {/*title: '日期',*/}
+                                                                   {/*align: 'center',*/}
+                                                                   {/*dataIndex: 'bkUserName',*/}
+                                                                   {/*key: 'operationDiary_User',*/}
+                                                                   {/*render: (text, record) => (*/}
+                                                                       {/*<div>{record.bkUserName}</div>),*/}
+                                                               {/*}, {*/}
+                                                                   {/*title: '备注',*/}
+                                                                   {/*align: 'center',*/}
+                                                                   {/*dataIndex: 'createDate',*/}
+                                                                   {/*key: 'operationDiary_Date',*/}
+                                                                   {/*render: (text, record) => (*/}
+                                                                       {/*<span>{record.createDate}</span>),*/}
+                                                               {/*}, {*/}
+                                                                   {/*title: '审核类型',*/}
+                                                                   {/*align: 'center',*/}
+                                                                   {/*dataIndex: 'comment',*/}
+                                                                   {/*key: 'operationDiary_Status',*/}
+                                                                   {/*render: (text, record) => (*/}
+                                                                       {/*<span>{record.comment}</span>),*/}
+                                                               {/*}, {*/}
+                                                                   {/*title: '操作人',*/}
+                                                                   {/*align: 'center',*/}
+                                                                   {/*dataIndex: 'comment',*/}
+                                                                   {/*key: 'operationDiary_Status',*/}
+                                                                   {/*render: (text, record) => (*/}
+                                                                       {/*<span>{record.comment}</span>),*/}
+                                                               {/*}]}*/}
+                                                           {/*dataSource={this.state.operationDiaryHistory}*/}
+                                                           {/*loading={this.state.loadingComment}*/}
+                                                           {/*pagination={{*/}
+                                                               {/*total: this.state.totalpageComments * this.state.pgsize,*/}
+                                                               {/*pageSize: this.state.pgsize,*/}
+                                                               {/*onChange: this.changePageComment,*/}
+                                                           {/*}}*/}
+                                                    {/*/>*/}
+                                                {/*</Card>*/}
 
 
-                                                    </div>
-                                                    <Table rowKey="id"
-                                                           columns={[
-
-                                                               {
-                                                                   title: '日期',
-                                                                   align: 'center',
-                                                                   dataIndex: 'bkUserName',
-                                                                   key: 'operationDiary_User',
-                                                                   render: (text, record) => (
-                                                                       <div>{record.bkUserName}</div>),
-                                                               }, {
-                                                                   title: '备注',
-                                                                   align: 'center',
-                                                                   dataIndex: 'createDate',
-                                                                   key: 'operationDiary_Date',
-                                                                   render: (text, record) => (
-                                                                       <span>{record.createDate}</span>),
-                                                               }, {
-                                                                   title: '审核类型',
-                                                                   align: 'center',
-                                                                   dataIndex: 'comment',
-                                                                   key: 'operationDiary_Status',
-                                                                   render: (text, record) => (
-                                                                       <span>{record.comment}</span>),
-                                                               }, {
-                                                                   title: '操作人',
-                                                                   align: 'center',
-                                                                   dataIndex: 'comment',
-                                                                   key: 'operationDiary_Status',
-                                                                   render: (text, record) => (
-                                                                       <span>{record.comment}</span>),
-                                                               }]}
-                                                           dataSource={this.state.operationDiaryHistory}
-                                                           loading={this.state.loadingComment}
-                                                           pagination={{
-                                                               total: this.state.totalpageComments * this.state.pgsize,
-                                                               pageSize: this.state.pgsize,
-                                                               onChange: this.changePageComment,
-                                                           }}
-                                                    />
-                                                </Card>
-
-
-                                            </TabPane>
-                                            <TabPane tab={steps[1].title} key="2">
-                                                <p>Content of Tab Pane 2</p>
-                                                <p>Content of Tab Pane 2</p>
-                                                <p>Content of Tab Pane 2</p>
-                                            </TabPane>
-                                            <TabPane tab={steps[2].title} key="3">
-                                                <p>Content of Tab Pane 3</p>
-                                                <p>Content of Tab Pane 3</p>
-                                                <p>Content of Tab Pane 3</p>
-                                            </TabPane>
-                                        </Tabs>
+                                            {/*</TabPane>*/}
+                                            {/*<TabPane tab={steps[1].title} key="2">*/}
+                                                {/*<p>Content of Tab Pane 2</p>*/}
+                                                {/*<p>Content of Tab Pane 2</p>*/}
+                                                {/*<p>Content of Tab Pane 2</p>*/}
+                                            {/*</TabPane>*/}
+                                            {/*<TabPane tab={steps[2].title} key="3">*/}
+                                                {/*<p>Content of Tab Pane 3</p>*/}
+                                                {/*<p>Content of Tab Pane 3</p>*/}
+                                                {/*<p>Content of Tab Pane 3</p>*/}
+                                            {/*</TabPane>*/}
+                                        {/*</Tabs>*/}
                                     </div>
                                 </Card>
                             </Col>
