@@ -194,7 +194,7 @@ class Basic extends Component {
                 dataIndex: '订单编号',
                 key: '订单编号',
                 render: (text, record) => (
-                    <span>{record.name}</span>),
+                    <span>{record.merOrderNo}</span>),
             }, {
 
                 title: '客户邮箱',
@@ -210,7 +210,7 @@ class Basic extends Component {
                 dataIndex: '交易账户',
                 key: '交易账户',
                 render: (text, record) => (
-                    <span>{record.broker}</span>),
+                    <span>{record.accountNo}</span>),
                 align: 'center',
             }, {
 
@@ -228,7 +228,7 @@ class Basic extends Component {
                 dataIndex: '类型',
                 key: '类型',
                 render: (text, record) => (
-                    <span>{record.accountType}</span>),
+                    <span>{record.typeDesc}</span>),
                 align: 'center',
             }, {
                 align: 'center',
@@ -239,7 +239,7 @@ class Basic extends Component {
                 key: '客户申请时间',
 
                 render: (text, record) => (
-                    <span>{record.date}</span>),
+                    <span>{record.createDate}</span>),
             }, {
                 align: 'center',
 
@@ -248,7 +248,7 @@ class Basic extends Component {
                 dataIndex: '经纪商',
                 key: '经纪商',
                 render: (text, record) => (
-                    <span>{record.marginLevel}</span>)
+                    <span>{record.broker}</span>)
             }, {
                 align: 'center',
 
@@ -257,7 +257,7 @@ class Basic extends Component {
                 dataIndex: '出入金渠道',
                 key: '出入金渠道',
                 render: (text, record) => (
-                    <span>{record.cashBalance}</span>),
+                    <span>{record.channelName}</span>),
             }, {
                 align: 'center',
 
@@ -267,7 +267,7 @@ class Basic extends Component {
                 key: '交易币种',
 
                 render: (text, record) => (
-                    <span>{record.netEquity}</span>),
+                    <span>{record.accountTxnCurry}</span>),
             }, {
                 align: 'center',
 
@@ -277,7 +277,7 @@ class Basic extends Component {
                 key: '金额',
 
                 render: (text, record) => (
-                    <span>{record.lastUpdateDate}</span>),
+                    <span>{record.accountTxnAmt}</span>),
             }, {
                 align: 'center',
 
@@ -287,7 +287,7 @@ class Basic extends Component {
                 key: '执行金额',
 
                 render: (text, record) => (
-                    <span>{record.lastUpdateDate}</span>),
+                    <span>{record.execTxnAmt}</span>),
             }, {
                 align: 'center',
 
@@ -297,7 +297,7 @@ class Basic extends Component {
                 key: '执行币种',
 
                 render: (text, record) => (
-                    <span>{record.lastUpdateDate}</span>),
+                    <span>{record.execTxnCurry}</span>),
             }, {
                 align: 'center',
 
@@ -307,7 +307,7 @@ class Basic extends Component {
                 key: '使用汇率',
 
                 render: (text, record) => (
-                    <span>{record.lastUpdateDate}</span>),
+                    <span>{record.rate}</span>),
             }, {
                 align: 'center',
 
@@ -317,7 +317,7 @@ class Basic extends Component {
                 key: '手续费',
 
                 render: (text, record) => (
-                    <span>{record.lastUpdateDate}</span>),
+                    <span>{record.commission}</span>),
             }, {
                 align: 'center',
 
@@ -327,7 +327,7 @@ class Basic extends Component {
                 key: '执行时间',
 
                 render: (text, record) => (
-                    <span>{record.lastUpdateDate}</span>),
+                    <span>{record.completeDate}</span>),
             }, {
                 align: 'center',
                 title: '处理人',
@@ -458,7 +458,7 @@ class Basic extends Component {
                 loading: true,
             }
         );
-        window.Axios.post('star/getStarLiveAccountList', {
+        window.Axios.post('finance/getDepositWithdrawReport', {
             'pageSize': self.state.pgsize,
             'pageNo': self.state.current,
         }).then(function (response) {
