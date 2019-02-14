@@ -592,12 +592,57 @@ class Basic extends Component {
                                                         margin: 10, fontSize: '18px', height: 40, width: 150
                                                     }}>审核通过</Button>
                                                 <Button
+                                                    onClick={() => {
+                                                        // finance/serviceCheckWithdraw
 
+
+                                                        // if (!this.state.theComment) {
+                                                        //     message.error('完善备注?')
+                                                        //     return
+                                                        // }
+                                                        let self = this;
+
+                                                        window.Axios.post('finance/serviceCheckWithdraw', {
+                                                            'id': self.props.match.params.id,
+                                                            'content': this.state.theComment,
+                                                            'status': '2',
+                                                        }).then((response) => {
+                                                            console.log('hcia response', response)
+
+                                                            message.success('操作成功')
+
+                                                        })
+
+                                                    }}
 
                                                     style={{
                                                         margin: 10, fontSize: '18px', height: 40, width: 150
                                                     }}>挂起待确认</Button>
-                                                <Button style={{
+                                                <Button
+
+                                                    onClick={() => {
+                                                        // finance/serviceCheckWithdraw
+
+
+                                                        // if (!this.state.theComment) {
+                                                        //     message.error('完善备注?')
+                                                        //     return
+                                                        // }
+                                                        let self = this;
+
+                                                        window.Axios.post('finance/serviceCheckWithdraw', {
+                                                            'id': self.props.match.params.id,
+                                                            'content': this.state.theComment,
+                                                            'status': '3',
+                                                        }).then((response) => {
+                                                            console.log('hcia response', response)
+
+                                                            message.success('操作成功')
+
+                                                        })
+
+                                                    }}
+                                                    style={{
                                                     margin: 10, fontSize: '18px', height: 40, width: 150
                                                 }}>取消</Button>
 
