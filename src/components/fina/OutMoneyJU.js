@@ -394,10 +394,15 @@ class Basic extends Component {
                                         <span style={{fontSize: '13px'}}>00.00</span>
                                     </div>
                                     <div style={ssdds}>
-                                        <span style={{fontSize: '13px'}}><span
-                                            style={{color: 'red'}}>*</span>出金金额:</span>
-                                        <span style={{fontSize: '13px'}}><Input style={{width: 220}}
-                                                                                placeholder="100.00"/>USD</span>
+                                        <span style={{fontSize: '13px'}}>
+                                            <span
+                                                style={{color: 'red'}}>*
+                                            </span>
+                                            出金金额
+                                            :</span>
+                                        <span style={{fontSize: '13px'}}>
+                                            <Input style={{width: 220, marginRight: '16px'}}
+                                                   placeholder="100.00"/>USD</span>
                                     </div>
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}>出金日期</span>

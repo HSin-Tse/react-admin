@@ -204,6 +204,52 @@ window.onblur = function () {
     msg += "浏览器失去焦点：";
     // alert(msg);
 }
+
+
+
+
+var addww=function(x,y){
+
+
+    console.log('hcia',x+y);
+}(3,4)
+
+
+function addttww() {
+    var counter = 0;
+    function plus() {counter += 1;}
+    plus();
+    return counter;
+}
+
+// console.log('hcia addttww()' , addttww)
+// console.log('hcia addttww()' , addttww())
+// console.log('hcia addttww()' , addttww())
+// console.log('hcia addttww()' , addttww())
+
+
+var addcc = (function () {
+    var counter = 0;
+    return function () {return counter += 1;
+
+    
+    }
+})();
+
+addcc();
+addcc();
+addcc();
+
+// console.log('hcia addcc()' , addcc())
+// console.log('hcia addcc()' , addcc())
+// console.log('hcia addcc()' , addcc())
+// console.log('hcia addcc()' , addcc())
+
+
+const wwwww=addcc()
+
+// console.log('hcia wwwww' , wwwww)
+
 // timestampToTime = (timestamp) => {
 //     const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
 //     const year = dateObj.getFullYear() // 获取年，
