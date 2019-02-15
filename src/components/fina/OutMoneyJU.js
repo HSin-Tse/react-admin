@@ -27,7 +27,14 @@ class Basic extends Component {
             mBounty: '',
             totalProcessWithdraw: '',
             totalDeposit: '',
+            mAccountAmount: '',
             accountAmount: '',
+            accountCurrency: '',
+            outdate: '',
+            accountNo: '',
+            name: '',
+            orderNo: '',
+            channelName: '',
             nodeList: [],
             loading: false,
             searchPhone: '',
@@ -61,6 +68,12 @@ class Basic extends Component {
                 totalProcessWithdraw: response.data.data.totalProcessWithdraw,
                 totalDeposit: response.data.data.totalDeposit,
                 accountAmount: response.data.data.accountAmount,
+                accountCurrency: response.data.data.accountCurrency,
+                outdate: response.data.data.date,
+                accountNo: response.data.data.accountNo,
+                name: response.data.data.name,
+                orderNo: response.data.data.orderNo,
+                channelName: response.data.data.channelName,
             });
 
         })
@@ -326,7 +339,7 @@ class Basic extends Component {
                                     </div>
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}>出金:</span>
-                                        <span style={{fontSize: '13px'}}>{this.state.accountAmount}</span>
+                                        <span style={{fontSize: '13px'}}>{this.state.accountCurrency}</span>
                                     </div>
                                 </div>
 
@@ -403,11 +416,11 @@ class Basic extends Component {
                                         minHeight: 40
                                     }}>
                                         <span style={{fontSize: '15px'}}>出金申请详情</span>
-                                        <span style={{fontSize: '15px'}}>00.00</span>
+                                        <span style={{fontSize: '15px'}}></span>
                                     </div>
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}>请求出金金额:</span>
-                                        <span style={{fontSize: '13px'}}>00.00</span>
+                                        <span style={{fontSize: '13px'}}>{this.state.accountAmount}</span>
                                     </div>
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}>
@@ -417,32 +430,32 @@ class Basic extends Component {
                                             出金金额
                                             :</span>
                                         <span style={{fontSize: '13px'}}>
-                                            <Input style={{width: 220, marginRight: '16px'}}
+                                            <Input value={this.state.accountAmount} style={{width: 220, marginRight: '16px'}}
                                                    placeholder="100.00"/>USD</span>
                                     </div>
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}>出金日期</span>
-                                        <span style={{fontSize: '13px'}}>1900-10-10 10:10:10</span>
+                                        <span style={{fontSize: '13px'}}>{this.state.outdate}</span>
                                     </div>
 
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}>用户名/帐号</span>
-                                        <span style={{fontSize: '13px'}}>1900-10-10 10:10:10</span>
+                                        <span style={{fontSize: '13px'}}>{this.state.name}/{this.state.accountNo}</span>
                                     </div>
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}>订单号</span>
-                                        <span style={{fontSize: '13px'}}>0001</span>
+                                        <span style={{fontSize: '13px'}}>{this.state.orderNo}</span>
                                     </div>
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}>经济商</span>
-                                        <span style={{fontSize: '13px'}}>BBIX</span>
+                                        <span style={{fontSize: '13px'}}></span>
                                     </div>
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}>支付方式</span>
 
                                         <Select defaultValue="lucy" style={{margin: 5, width: 220}}>
-                                            <Option value="jack">001</Option>
-                                            <Option value="lucy">002</Option>
+                                            {/*<Option value="jack">{this.state.channelName}</Option>*/}
+                                            <Option value="lucy">{this.state.channelName}</Option>
                                         </Select>
 
                                     </div>
