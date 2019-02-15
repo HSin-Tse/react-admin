@@ -76,7 +76,7 @@ class Basic extends Component {
             console.log('hcia response', response)
 
             self.setState({
-                mID: response.data.data.id,
+                mID: response.data.data.orderNo,
                 mNote: response.data.data.comment_step2.comment,
                 mBelongBkUserId: response.data.data.belongBkUserId,
                 mStarClientAccount: response.data.data.accountNo,
