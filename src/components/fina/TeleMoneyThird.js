@@ -895,6 +895,7 @@ class Basic extends Component {
 
                                     {/*/>*/}
                                     <DatePicker
+                                        disabled={true}
                                         style={{width: '200px', height: '36px'}}
                                         disabledDate={(current) => {
                                             return current.valueOf() < (Date.now() - 86400000)
@@ -1252,7 +1253,7 @@ class Basic extends Component {
                                             height: '36px'
                                         }}
 
-                                    >{this.state.commenDate1 ? this.timestampToTime(this.state.commenDate2) : ''}</span>
+                                    >{this.state.commenDate2 ? this.timestampToTime(this.state.commenDate2) : ''}</span>
                                 </div>
 
                                 <div style={{
