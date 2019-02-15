@@ -23,6 +23,11 @@ class Basic extends Component {
             userList: [],
             powerList: [],
             leavgeList: [],
+            mCashBalance: '',
+            mBounty: '',
+            totalProcessWithdraw: '',
+            totalDeposit: '',
+            accountAmount: '',
             nodeList: [],
             loading: false,
             searchPhone: '',
@@ -50,6 +55,14 @@ class Basic extends Component {
             'id': self.props.match.params.id,
         }).then((response) => {
             console.log('hcia response', response)
+            self.setState({
+                mCashBalance: response.data.data.cashBalance,
+                mBounty: response.data.data.bounty,
+                totalProcessWithdraw: response.data.data.totalProcessWithdraw,
+                totalDeposit: response.data.data.totalDeposit,
+                accountAmount: response.data.data.accountAmount,
+            });
+
         })
 
 
@@ -292,28 +305,28 @@ class Basic extends Component {
                                         minHeight: 48
                                     }}>
                                         <span style={{fontSize: '15px'}}>可用余额</span>
-                                        <span style={{fontSize: '15px'}}>00.00</span>
+                                        <span style={{fontSize: '15px'}}>{this.state.mCashBalance}</span>
                                     </div>
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}>余额:</span>
-                                        <span style={{fontSize: '13px'}}>00.00</span>
+                                        <span style={{fontSize: '13px'}}>{this.state.mCashBalance}</span>
                                     </div>
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}>奖励金:</span>
-                                        <span style={{fontSize: '13px'}}>00.00</span>
+                                        <span style={{fontSize: '13px'}}>{this.state.mBounty}</span>
                                     </div>
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}>出金待审核金额:</span>
-                                        <span style={{fontSize: '13px'}}>00.00</span>
+                                        <span style={{fontSize: '13px'}}>{this.state.totalProcessWithdraw}</span>
                                     </div>
                                     <Divider style={{paddingLeft: 15, paddingRight: 15}}/>
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}>总入金:</span>
-                                        <span style={{fontSize: '13px'}}>00.00</span>
+                                        <span style={{fontSize: '13px'}}>{this.state.totalDeposit}</span>
                                     </div>
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}>出金:</span>
-                                        <span style={{fontSize: '13px'}}>00.00</span>
+                                        <span style={{fontSize: '13px'}}>{this.state.accountAmount}</span>
                                     </div>
                                 </div>
 
