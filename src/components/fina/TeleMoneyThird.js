@@ -83,7 +83,7 @@ class Basic extends Component {
                 mExecTxnAmt: response.data.data.execAmount,
                 mExecTxnCurry: response.data.data.execCurrency,
                 mRate: response.data.data.rate,
-                mIndate: response.data.data.date,
+                mIndate: response.data.data.completeDate,
                 mExpectDate: response.data.data.expectDate,
                 commenS1: response.data.data.comment_step1.comment,
                 commenBk1: response.data.data.comment_step1.bkUserName,
