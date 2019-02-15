@@ -18,9 +18,9 @@ export default class PotentialUser extends Component {
             bklistA: [],
             bklistB: [],
             bklistC: [],
-            currentA: 0,
-            currentB: 0,
-            currentC: 0,
+            currentA: 1,
+            currentB: 1,
+            currentC: 1,
             currentComment: 0,
             totalpageA: 0,
             totalpageB: 0,
@@ -233,7 +233,7 @@ export default class PotentialUser extends Component {
                 key: '序号',
                 align: 'center',
                 render: (text, record, index) => (
-                    <span>{this.state.currentA * this.state.pgsize + index + 1}</span>
+                    <span>{(this.state.currentA-1) * this.state.pgsize + index + 1}</span>
                 ),
             }, {
                 title: '手机号',
@@ -341,7 +341,7 @@ export default class PotentialUser extends Component {
                 key: '序号',
                 align: 'center',
                 render: (text, record, index) => (
-                    <span>{this.state.currentB * this.state.pgsize + index + 1}</span>
+                    <span>{(this.state.currentB-1) * this.state.pgsize + index + 1}</span>
                 ),
             },
             {
@@ -446,7 +446,7 @@ export default class PotentialUser extends Component {
                 key: '序号',
                 align: 'center',
                 render: (text, record, index) => (
-                    <span>{this.state.currentC * this.state.pgsize + index + 1}</span>
+                    <span>{(this.state.currentC-1) * this.state.pgsize + index + 1}</span>
                 ),
             },
             {
@@ -899,21 +899,21 @@ export default class PotentialUser extends Component {
 
     changePageA = (page) => {
         this.setState({
-            currentA: page - 1,
+            currentA: page,
         }, () => {
             this.requestPageA()
         })
     }
     changePageB = (page) => {
         this.setState({
-            currentB: page - 1,
+            currentB: page,
         }, () => {
             this.requestPageB()
         })
     }
     changePageC = (page) => {
         this.setState({
-            currentC: page - 1,
+            currentC: page,
         }, () => {
             this.requestPageC()
         })

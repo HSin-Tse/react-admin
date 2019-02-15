@@ -20,7 +20,7 @@ class Basic extends Component {
         super(props);
         this.state = {
             count: 0,
-            current: 0,
+            current: 1,
             pgsize: 20,
             modal2OPDAYVisible: false,
             visibleA: false,
@@ -155,7 +155,7 @@ class Basic extends Component {
     changePage = (page) => {
         console.log('hcia page', page)
         this.setState({
-            current: page - 1,
+            current: page,
         }, () => {
             this.requestPage()
         })

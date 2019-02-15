@@ -36,7 +36,7 @@ class InnerUserList extends Component {
             modeState: 1,
             blockFlag: '',
             forbiddenValue: 0,
-            current: 0,
+            current: 1,
             pgsize: 20,
             loadFor: false,
             suspend_reason_type: []
@@ -362,7 +362,7 @@ class InnerUserList extends Component {
     }
     changePage = (page) => {
         this.setState({
-            current: page - 1,
+            current: page ,
         }, () => {
             this.requestPage()
         })

@@ -25,7 +25,7 @@ class Basic extends Component {
             totalPage: 1,
             modeState: 1,
             forbiddenValue: 0,
-            current: 0,
+            current: 1,
             pgsize: 20,
             loadFor: false,
             suspend_reason_type: []
@@ -264,7 +264,7 @@ class Basic extends Component {
     changePage = (page) => {
         console.log('hcia page', page)
         this.setState({
-            current: page - 1,
+            current: page ,
         }, () => {
             this.requestPage()
         })

@@ -25,7 +25,7 @@ class Basic extends Component {
             , modal2OPDAYVisible: false
             , mStockRecordStatus: 0
             , isCanOP: 0
-            , current: 0
+            , current: 1
             , searchPhone: ''
             , refID: ''
             , mStockRecord: {

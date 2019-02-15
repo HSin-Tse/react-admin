@@ -24,7 +24,7 @@ export default class WhiteList extends Component {
 
             selectedRowKeys: [],
             bklistA: [],
-            currentA: 0,
+            currentA: 1,
             totalpageA: 0,
             opDayRecord: {},
             currentComment: 0,

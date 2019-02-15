@@ -42,7 +42,7 @@ class Basic extends Component {
             totalPage: 1,
             modeState: 1,
             forbiddenValue: 0,
-            current: 0,
+            current: 1,
             currentStep: 0,
             pgsize: 10,
             loadFor: false,
@@ -298,10 +298,14 @@ class Basic extends Component {
 
                         <div style={
                             {
+                                margin:'24px',
                                 fontSize: '24px',
+                                display:'flex',
+                                justifyContent:'center'
+
                             }}>
 
-                            TOM WANG
+                            {this.state.name}
                         </div>
                         <Row
                             style={{margin: '20px'}}

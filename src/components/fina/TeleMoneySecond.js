@@ -43,7 +43,7 @@ class Basic extends Component {
             userList: [],
             loading: false,
             totalPage: 1,
-            current: 0,
+            current: 1,
             mStarClientAccount: undefined,
             accrounRes: undefined,
             mBelongBkUserId: undefined,
@@ -413,7 +413,7 @@ class Basic extends Component {
     changePage = (page) => {
         console.log('hcia page', page)
         this.setState({
-            current: page - 1,
+            current: page,
         }, () => {
             this.requestPage()
         })

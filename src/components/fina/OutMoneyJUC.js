@@ -31,7 +31,7 @@ class Basic extends Component {
             totalPage: 1,
             modeState: 1,
             forbiddenValue: 0,
-            current: 0,
+            current: 1,
             currentStep: 2,
             pgsize: 10,
             loadFor: false,
