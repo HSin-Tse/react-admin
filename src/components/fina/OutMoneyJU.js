@@ -34,6 +34,7 @@ class Basic extends Component {
             accountNo: '',
             name: '',
             orderNo: '',
+            broker: '',
             channelName: '',
             nodeList: [],
             loading: false,
@@ -54,7 +55,6 @@ class Basic extends Component {
 
     componentDidMount() {
 
-        console.log('hcia componentDidMount AA',)
 
         let self = this;
 
@@ -73,6 +73,7 @@ class Basic extends Component {
                 accountNo: response.data.data.accountNo,
                 name: response.data.data.name,
                 orderNo: response.data.data.orderNo,
+                broker: response.data.data.broker,
                 channelName: response.data.data.channelName,
             });
 
@@ -461,8 +462,8 @@ class Basic extends Component {
                                         <span style={{fontSize: '13px'}}>{this.state.orderNo}</span>
                                     </div>
                                     <div style={ssdds}>
-                                        <span style={{fontSize: '13px'}}>经济商</span>
-                                        <span style={{fontSize: '13px'}}></span>
+                                        <span style={{fontSize: '13px'}}>经纪商</span>
+                                        <span style={{fontSize: '13px'}}>{this.state.broker}</span>
                                     </div>
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}>支付方式</span>
