@@ -273,7 +273,7 @@ class Basic extends Component {
         return +str >= 10 ? str : '0' + str
     };
     changePageComment = (page) => {
-        page = page - 1
+        // page = page - 1
         this.setState({
             currentComment: page,
         }, () => {

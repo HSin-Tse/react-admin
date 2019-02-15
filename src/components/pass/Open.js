@@ -469,7 +469,7 @@ class Basic extends Component {
     }
 
     changePage = (page) => {
-        page = page - 1
+        // page = page - 1
         console.log('hcia page', page)
         this.setState({
             current: page,
@@ -772,7 +772,7 @@ class Basic extends Component {
     }
 
     changePageComment = (page) => {
-        page = page - 1
+        // page = page - 1
         this.setState({
             currentComment: page,
         }, () => {

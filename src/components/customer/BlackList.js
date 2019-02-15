@@ -98,7 +98,7 @@ export default class BlackList extends Component {
         });
     };
     changePageComment = (page) => {
-        page = page - 1
+        // page = page - 1
         this.setState({
             currentComment: page,
         }, () => {
@@ -493,7 +493,7 @@ export default class BlackList extends Component {
 
 
     changePageA = (page) => {
-        page = page - 1
+        // page = page - 1
         this.setState({
             currentA: page,
         }, () => {
@@ -501,7 +501,7 @@ export default class BlackList extends Component {
         })
     }
     changePageB = (page) => {
-        page = page - 1
+        // page = page - 1
 
         this.setState({
             currentB: page,
@@ -510,7 +510,7 @@ export default class BlackList extends Component {
         })
     }
     changePageC = (page) => {
-        page = page - 1
+        // page = page - 1
 
         this.setState({
             currentC: page,

@@ -382,7 +382,7 @@ class Basic extends Component {
 
     };
     changePageComment = (page) => {
-        page = page - 1
+        // page = page - 1
         this.setState({
             currentComment: page,
         }, () => {

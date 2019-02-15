@@ -920,7 +920,7 @@ export default class PotentialUser extends Component {
     }
 
     changePageLog = (page) => {
-        page = page - 1
+        // page = page - 1
         this.setState({
             currentComment: page,
         }, () => {
@@ -929,7 +929,7 @@ export default class PotentialUser extends Component {
     }
 
     changePageComment = (page) => {
-        page = page - 1
+        // page = page - 1
         this.setState({
             currentComment: page,
         }, () => {

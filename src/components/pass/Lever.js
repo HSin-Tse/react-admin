@@ -328,7 +328,7 @@ class Basic extends Component {
     changePageComment = (page) => {
         let self = this
 
-        page = page - 1
+        // page = page - 1
         this.setState({
             currentComment: page,
         }, () => {

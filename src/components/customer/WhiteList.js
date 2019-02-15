@@ -285,7 +285,7 @@ export default class WhiteList extends Component {
         });
     }
     changePageA = (page) => {
-        page = page - 1
+        // page = page - 1
         this.setState({
             currentA: page,
         }, () => {
@@ -293,7 +293,7 @@ export default class WhiteList extends Component {
         })
     }
     changePageComment = (page) => {
-        page = page - 1
+        // page = page - 1
         this.setState({
             currentComment: page,
         }, () => {

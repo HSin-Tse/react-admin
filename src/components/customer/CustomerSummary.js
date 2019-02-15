@@ -1103,7 +1103,7 @@ class CustomerSummary extends Component {
 
 
     changePageA = (page) => {
-        page = page - 1
+        // page = page - 1
         this.setState({
             currentA: page,
         }, () => {
