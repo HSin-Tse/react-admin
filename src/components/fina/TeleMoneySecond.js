@@ -82,6 +82,7 @@ class Basic extends Component {
 
             self.setState({
                 mID: response.data.data.id,
+                mOrderNo: response.data.data.orderNo,
                 mBelongBkUserId: response.data.data.belongBkUserId,
                 mStarClientAccount: response.data.data.accountNo,
                 mNetEquity: response.data.data.netEquity,
@@ -602,7 +603,7 @@ class Basic extends Component {
                             fontFamily: 'PingFangSC-Medium',
                             fontWeight: 500,
                             color: 'rgba(51,51,51,1)'
-                        }}>订单号：{this.state.mID}
+                        }}>订单号：{this.state.mOrderNo}
                         </p>
                     </div>
                     <div style={{minWidth: '800px', marginLeft: '150px', marginRight: '150px', paddingBottom: '10px'}}>
