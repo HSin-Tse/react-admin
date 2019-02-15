@@ -257,6 +257,8 @@ class Basic extends Component {
                 mExecTxnCurry: response.data.data.execCurrency,
                 mRate: response.data.data.rate,
                 mIndate: response.data.data.completeDate,
+                mName: response.data.data.name,
+                mCashBalance: response.data.data.cashBalance,
                 mExpectDate: response.data.data.expectDate,
                 commenS1: response.data.data.comment_step1.comment,
                 commenBk1: response.data.data.comment_step1.bkUserName,
@@ -502,7 +504,7 @@ class Basic extends Component {
 
 
                                                     }}>账户余额</span>
-                                    <Input value={this.state.mNetEquity}
+                                    <Input value={this.state.mCashBalance}
 
                                            style={{width: '200px', height: '36px'}}
                                     />

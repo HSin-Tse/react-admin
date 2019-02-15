@@ -48,6 +48,7 @@ class Basic extends Component {
             accrounRes: undefined,
             mBelongBkUserId: undefined,
             mNetEquity: '',
+            mCashBalance: '',
             mName: '',
             mRate: '',
             mExecTxnCurry: '',
@@ -706,7 +707,7 @@ class Basic extends Component {
 
 
                                                     }}>账户余额</span>
-                                    <Input value={this.state.mNetEquity}
+                                    <Input value={this.state.mCashBalance}
 
                                            style={{width: '200px', height: '36px'}}
                                     />
