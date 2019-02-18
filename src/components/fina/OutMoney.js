@@ -179,27 +179,38 @@ class Basic extends Component {
 
                 render: (text, record) => (
                     <div style={{whiteSpace: 'nowrap'}}>
-                        <Button size={'small'} style={{width: 70, background: '#FDD000'}} onClick={() => {
+                        <Button
+                            disabled={record.status!=0}
+
+                            size={'small'} style={{width: 70, background: '#FDD000'}} onClick={() => {
                             
                             console.log('hcia record.id' , record.id)
                             this.props.history.push('/app/fina/juoutma'+record.id)
                         }}>结算审核
 
                         </Button>
-                        <Button size={'small'} style={{width: 70, background: '#FDD000'}}
+                        <Button
+                            disabled={record.status !=1}
+
+                            size={'small'} style={{width: 70, background: '#FDD000'}}
                                 onClick={() => {
                                     this.props.history.push('/app/fina/juoutmb1')
                                 }}>风险审核
 
                         </Button>
 
-                        <Button size={'small'} style={{width: 70, background: '#FDD000'}}
+                        <Button
+                            disabled={record.status!=4}
+
+                            size={'small'} style={{width: 70, background: '#FDD000'}}
                                 onClick={() => {
                                     this.props.history.push('/app/fina/juoutmc1')
                                 }}>渠道下发
 
                         </Button>
-                        <Button size={'small'} style={{width: 70, background: '#FDD000'}}
+                        <Button
+                            disabled={record.status!=7}
+                            size={'small'} style={{width: 70, background: '#FDD000'}}
                                 onClick={() => {
 
                                     console.log('hcia 出金完成 go',)
@@ -208,9 +219,9 @@ class Basic extends Component {
                                 }}>出金完成
 
                         </Button>
-                        <Button size={'small'} style={{width: 70, background: '#FDD000'}}
-                                onClick={() => this.showOPDAyModal2(record)}>已成功
-                        </Button>
+                        {/*<Button size={'small'} style={{width: 70, background: '#FDD000'}}*/}
+                                {/*onClick={() => this.showOPDAyModal2(record)}>已成功*/}
+                        {/*</Button>*/}
 
                     </div>
                 ),
