@@ -140,12 +140,10 @@ class Basic extends Component {
 
 
                     <div style={{
-
                         width: '1200px',
                         background: "white",
                         boxShadow: '0px 0px 20px 0px rgba(123,123,123,0.1)',
                         borderRadius: '4px',
-
 
                     }}>
 

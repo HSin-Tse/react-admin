@@ -26,6 +26,10 @@ class Basic extends Component {
             searchPhone: '',
             totalPage: 1,
             modeState: 1,
+            isCanOPA: false,
+            isCanOPB: false,
+            isCanOPC: false,
+            isCanOPD: false,
             forbiddenValue: 0,
             current: 1,
             pgsize: 10,
@@ -58,7 +62,92 @@ class Basic extends Component {
     };
 
     componentDidMount() {
-        // let self = this;
+        let self = this;
+
+
+
+        if (localStorage.getItem('infor')) {
+
+
+            var menuInfor = JSON.parse(localStorage.getItem('infor'))
+
+            
+            console.log('hcia menuInfor.superFlag' , menuInfor.superFlag)
+
+            if (menuInfor.superFlag === 1) {
+                self.setState({
+                    isCanOPA: true,
+                    isCanOPB: true,
+                    isCanOPC: true,
+                    isCanOPD: true,
+                });
+            } else {
+                
+                
+                var isCanOp = menuInfor.menuList.find((item) => {
+                    // console.log('hcia  this.props', this.props)
+                    return this.props.tk === item.key;
+                });
+                
+                console.log('hcia isCanOp' , isCanOp)
+
+                var chA = isCanOp.childrenMenu.find((item) => {
+                    // console.log('hcia  this.props', this.props)
+                    return item.key === 'WITHDRAW_MASTER_CHECK';
+                });
+                var chB = isCanOp.childrenMenu.find((item) => {
+                    // console.log('hcia  this.props', this.props)
+                    return item.key === 'WITHDRAW_BANK_CHECK';
+                });
+                var chC = isCanOp.childrenMenu.find((item) => {
+                    // console.log('hcia  this.props', this.props)
+                    return item.key === 'WITHDRAW_SERVICE_CHECK';
+                });
+                var chD = isCanOp.childrenMenu.find((item) => {
+                    // console.log('hcia  this.props', this.props)
+                    return item.key === 'WITHDRAW_DETAIL';
+                });
+
+                if(chA.availableFlag==0){
+                    self.setState({
+                        isCanOPA: true,
+                    });
+                }else{
+
+                }
+                if(chB.availableFlag==0){
+                    self.setState({
+                        isCanOPB: true,
+                    });
+                }else{
+
+                }
+                if(chC.availableFlag==0){
+                    self.setState({
+                        isCanOPC: true,
+                    });
+                }else{
+
+                }
+                if(chD.availableFlag==0){
+                    self.setState({
+                        isCanOPD: true,
+                    });
+                }else{
+
+                }
+
+
+                console.log('hcia chA' , this.state.isCanOPA)
+                console.log('hcia chB' , this.state.isCanOPB)
+                console.log('hcia chC' , this.state.isCanOPC)
+                console.log('hcia chD' , this.state.isCanOPD)
+            }
+
+
+        }
+
+        // w
         this.columns = [
             {
                 align: 'center',
@@ -182,7 +271,7 @@ class Basic extends Component {
                         <Button
                             disabled={record.status!=0}
 
-                            size={'small'} style={{width: 70, background: '#FDD000'}} onClick={() => {
+                            size={'small'} style={{display:this.state.isCanOPA?'':'none',width: 70, background: '#FDD000'}} onClick={() => {
                             
                             console.log('hcia record.id' , record.id)
                             this.props.history.push('/app/fina/juoutma'+record.id)
@@ -192,7 +281,7 @@ class Basic extends Component {
                         <Button
                             disabled={record.status !=1}
 
-                            size={'small'} style={{width: 70, background: '#FDD000'}}
+                            size={'small'} style={{display:this.state.isCanOPB?'':'none',  width: 70, background: '#FDD000'}}
                                 onClick={() => {
                                     this.props.history.push('/app/fina/juoutmb'+record.id)
                                 }}>风险审核
@@ -202,7 +291,7 @@ class Basic extends Component {
                         <Button
                             disabled={record.status!=4}
 
-                            size={'small'} style={{width: 70, background: '#FDD000'}}
+                            size={'small'} style={{display:this.state.isCanOPC?'':'none',width: 70, background: '#FDD000'}}
                                 onClick={() => {
                                     this.props.history.push('/app/fina/juoutmc'+record.id)
                                 }}>渠道下发
@@ -210,7 +299,7 @@ class Basic extends Component {
                         </Button>
                         <Button
                             disabled={record.status!=7}
-                            size={'small'} style={{width: 70, background: '#FDD000'}}
+                            size={'small'} style={{display:this.state.isCanOPD?'':'none',width: 70, background: '#FDD000'}}
                                 onClick={() => {
 
                                     console.log('hcia 出金完成 go',)
@@ -383,7 +472,10 @@ class Basic extends Component {
         };
         return (
             <div>
-                {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
+                {/*<div>isCanOPA :{JSON.stringify(this.state.isCanOPA)}</div>*/}
+                {/*<div>isCanOPB :{JSON.stringify(this.state.isCanOPB)}</div>*/}
+                {/*<div>isCanOPC :{JSON.stringify(this.state.isCanOPC)}</div>*/}
+                {/*<div>isCanOPD :{JSON.stringify(this.state.isCanOPD)}</div>*/}
 
                 <h2 style={{marginTop: 15}}>
                     出金管理
