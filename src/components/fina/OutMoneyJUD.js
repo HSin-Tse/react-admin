@@ -32,7 +32,7 @@ class Basic extends Component {
             modeState: 1,
             forbiddenValue: 0,
             current: 1,
-            currentStep: 3,
+            currentStep: 2,
             pgsize: 10,
             loadFor: false,
             suspend_reason_type: []
@@ -42,8 +42,6 @@ class Basic extends Component {
 
 
     componentDidMount() {
-
-        console.log('hcia componentDidMount  DDD' ,)
 
         let self = this;
         window.Axios.post('dict/openDict', {
@@ -321,14 +319,14 @@ class Basic extends Component {
                                                         marginBottom: 10,
                                                     }}
                                                     rows={4}
-                                                          value={this.state.theComment}
-                                                          onChange={(e) => {
-                                                              let comment = e.target.value;
-                                                              this.setState({
-                                                                  theComment: comment
-                                                              });
-                                                          }}
-                                                          placeholder="备注"/>
+                                                    value={this.state.theComment}
+                                                    onChange={(e) => {
+                                                        let comment = e.target.value;
+                                                        this.setState({
+                                                            theComment: comment
+                                                        });
+                                                    }}
+                                                    placeholder="备注"/>
 
                                                 <div style={{
                                                     margin: 5,

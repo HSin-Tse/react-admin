@@ -675,13 +675,13 @@ class Basic extends Component {
                                                     <Button
 
                                                         onClick={() => {
+
                                                             // finance/serviceCheckWithdraw
-
-
                                                             // if (!this.state.theComment) {
                                                             //     message.error('完善备注?')
                                                             //     return
                                                             // }
+
                                                             let self = this;
 
                                                             window.Axios.post('finance/serviceCheckWithdraw', {
