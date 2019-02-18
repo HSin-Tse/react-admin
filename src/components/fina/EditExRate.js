@@ -19,6 +19,7 @@ const numberMask = createNumberMask({
     prefix: '',
     // suffix: ' $' // This will put the dollar sign at the end, with a space.
 })
+
 class EditCha extends Component {
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
@@ -34,6 +35,7 @@ class EditCha extends Component {
     pad = (str) => {
         return +str >= 10 ? str : '0' + str
     };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -82,16 +84,16 @@ class EditCha extends Component {
                                     <h3>{pay.resourceCurrency}</h3>
                                     {/*<Input*/}
 
-                                        {/*value={pay.rate}*/}
+                                    {/*value={pay.rate}*/}
 
-                                        {/*onChange={(changeValue) => {*/}
+                                    {/*onChange={(changeValue) => {*/}
 
-                                            {/*console.log('hcia changeValue', changeValue)*/}
-                                            {/*pay.rate = changeValue.target.value*/}
-                                            {/*this.state.mMultiMap[pay.id] = pay.rate*/}
+                                    {/*console.log('hcia changeValue', changeValue)*/}
+                                    {/*pay.rate = changeValue.target.value*/}
+                                    {/*this.state.mMultiMap[pay.id] = pay.rate*/}
 
-                                            {/*this.setState({})*/}
-                                        {/*}} style={{}} placeholder=""/>*/}
+                                    {/*this.setState({})*/}
+                                    {/*}} style={{}} placeholder=""/>*/}
 
                                     <MaskedInput
                                         defaultValue={pay.rate}
@@ -234,13 +236,13 @@ class EditCha extends Component {
 
 
     requestUserCommentList = () => {
-        console.log('hcia requestUserCommentList' )
+        console.log('hcia requestUserCommentList')
 
-        var ssss =this.state.rateList.map(function(item, index, array){
+        var ssss = this.state.rateList.map(function (item, index, array) {
             return item.id
         })
 
-        console.log('hcia ssss' , ssss)
+        console.log('hcia ssss', ssss)
         var self = this;
         window.Axios.post('/auth/getRecordCommentList', {
             commentType: 12,
@@ -258,10 +260,10 @@ class EditCha extends Component {
 
 
     requestD = () => {
-        console.log('hcia requestD' )
+        console.log('hcia requestD')
         var self = this;
         window.Axios.post('finance/getChannelRateList', {}).then((response) => {
-            self.setState({rateList: response.data.data},()=>{
+            self.setState({rateList: response.data.data}, () => {
 
 
                 self.requestUserCommentList()
