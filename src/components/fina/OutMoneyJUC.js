@@ -571,12 +571,9 @@ class Basic extends Component {
 
                                             <Card bodyStyle={{padding: 0, marginTop: '0px', marginLeft: '20px'}}>
                                                 <div style={{marginTop: '25px'}}><Checkbox
-                                                    value={1}>出入金方式是否一致，没有第三方资金</Checkbox></div>
+                                                    value={1}>与渠道确认已下发</Checkbox></div>
                                                 <div style={{marginTop: '25px'}}><Checkbox
-                                                    value={2}>有没有交易记录</Checkbox></div>
-                                                <div style={{marginTop: '25px'}}>
-                                                    <Checkbox value={3}>是否有爆仓风险</Checkbox>
-                                                </div>
+                                                    value={2}>对账表已生成</Checkbox></div>
 
 
                                                 {/*<div style={{*/}
@@ -617,7 +614,7 @@ class Basic extends Component {
                                                 }}>
 
                                                     <Button
-                                                        disabled={this.state.powerList.length < 3}
+                                                        disabled={this.state.powerList.length < 2}
 
                                                         onClick={() => {
                                                             // finance/serviceCheckWithdraw
