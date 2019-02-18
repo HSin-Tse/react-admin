@@ -118,9 +118,9 @@ class Basic extends Component {
                     {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
 
                     <h2 style={{marginTop: 15}}>
-                        {steps[2].title}
+                        {steps[3].title}
                     </h2>
-                    <BreadcrumbCustom first="财务管理" second="出金管理" third={steps[2].title}/>
+                    <BreadcrumbCustom first="财务管理" second="出金管理" third={steps[3].title}/>
 
 
                     <div style={{
@@ -211,7 +211,7 @@ class Basic extends Component {
                                 <div style={{
                                     flexGrow: '1',
                                     height: '2px',
-                                    background: '#CCCCCC'
+                                    background: 'rgba(246,209,71,1)',
                                 }}></div>
                                 <div style={{
                                     marginRight: '16px',
@@ -220,14 +220,14 @@ class Basic extends Component {
                                     justifyContent: 'center',
                                     width: '40px',
                                     height: '40px',
-                                    background: '#CCCCCC',
+                                    background: 'rgba(246,209,71,1)',
                                     borderRadius: '50%'
                                 }}>
                         <span style={{
                             fontSize: '20px',
                             fontFamily: 'PingFang-HK-Medium',
                             fontWeight: 'bold',
-                            color: 'white'
+                            color: 'rgba(33,33,33,1)'
                         }}>
                             4
                         </span>
