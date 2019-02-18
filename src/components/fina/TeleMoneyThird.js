@@ -42,6 +42,9 @@ class Basic extends Component {
             mIndate: '',
             userList: [],
             loading: false,
+            isCanOPA: false,
+            isCanOPB: false,
+            isCanOPC: false,
             totalPage: 1,
             current: 1,
             mStarClientAccount: undefined,
@@ -68,6 +71,73 @@ class Basic extends Component {
     componentDidMount() {
 
         var self = this
+        if (localStorage.getItem('infor')) {
+
+            let self = this;
+
+            var menuInfor = JSON.parse(localStorage.getItem('infor'))
+
+
+            console.log('hcia menuInfor.superFlag', menuInfor.superFlag)
+
+            if (menuInfor.superFlag === 1) {
+                self.setState({
+                    isCanOPA: true,
+                    isCanOPB: true,
+                    isCanOPC: true,
+                });
+            } else {
+
+
+                var isCanOp = menuInfor.menuList.find((item) => {
+                    // console.log('hcia  this.props', this.props)
+                    return this.props.tk === item.key;
+                });
+
+                console.log('hcia isCanOp', isCanOp)
+
+                console.log('hcia isCanOp', isCanOp)
+
+                var chA = isCanOp.childrenMenu.find((item) => {
+                    // console.log('hcia  this.props', this.props)
+                    return item.key === 'DEPOSIT_MANNUAL_CREATE';
+                });
+                var chB = isCanOp.childrenMenu.find((item) => {
+                    // console.log('hcia  this.props', this.props)
+                    return item.key === 'DEPOSIT_FINANCE_CHECK';
+                });
+                var chC = isCanOp.childrenMenu.find((item) => {
+                    // console.log('hcia  this.props', this.props)
+                    return item.key === 'DEPOSIT_DETAIL';
+                });
+
+                if (chA.availableFlag == 0) {
+                    self.setState({
+                        isCanOPA: true,
+                    });
+                } else {
+
+                }
+                if (chB.availableFlag == 0) {
+                    self.setState({
+                        isCanOPB: true,
+                    });
+                } else {
+
+                }
+                if (chC.availableFlag == 0) {
+                    self.setState({
+                        isCanOPC: true,
+                    });
+                } else {
+
+                }
+
+
+            }
+
+
+        }
 
         window.Axios.post('finance/getDepositDetail', {
             'id': self.props.match.params.id
