@@ -25,6 +25,8 @@ class Basic extends Component {
             leavgeList: [],
             mCashBalance: '',
             mBounty: '',
+            bankCode: '',
+            phoneNumber: '',
             totalProcessWithdraw: '',
             totalDeposit: '',
             mAccountAmount: '',
@@ -35,6 +37,11 @@ class Basic extends Component {
             name: '',
             orderNo: '',
             broker: '',
+            province: '',
+            city: '',
+            bankName: '',
+            receiver: '',
+            cardNo: '',
             channelName: '',
             nodeList: [],
             loading: false,
@@ -73,7 +80,14 @@ class Basic extends Component {
                 accountNo: response.data.data.accountNo,
                 name: response.data.data.name,
                 orderNo: response.data.data.orderNo,
+                phoneNumber: response.data.data.phoneNumber,
                 broker: response.data.data.broker,
+                province: response.data.data.province,
+                city: response.data.data.city,
+                bankName: response.data.data.bankName,
+                bankCode: response.data.data.bankCode,
+                receiver: response.data.data.receiver,
+                cardNo: response.data.data.cardNo,
                 channelName: response.data.data.channelName,
             });
 
@@ -299,10 +313,10 @@ class Basic extends Component {
 
                         <div style={
                             {
-                                margin:'24px',
+                                margin: '24px',
                                 fontSize: '24px',
-                                display:'flex',
-                                justifyContent:'center'
+                                display: 'flex',
+                                justifyContent: 'center'
 
                             }}>
 
@@ -477,42 +491,59 @@ class Basic extends Component {
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}><span
                                             style={{color: 'red'}}>*</span>银行名称</span>
-                                        <span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}
-                                                                                placeholder=""/></span>
+                                        <span style={{fontSize: '13px'}}><Input
+
+                                            value={this.state.bankCode}
+                                            value={this.state.receiver}
+
+                                            style={{margin: 5, width: 220}}
+                                            placeholder=""/></span>
                                     </div>
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}>收款银行预留手机号</span>
-                                        <span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}
-                                                                                placeholder=""/></span>
+                                        <span style={{fontSize: '13px'}}><Input
+                                            value={this.state.phoneNumber} style={{margin: 5, width: 220}}
+                                            placeholder=""/></span>
                                     </div>
 
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}><span style={{color: 'red'}}>*</span> 省</span>
-                                        <span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}
-                                                                                placeholder=""/></span>
+                                        <span style={{fontSize: '13px'}}><Input
+                                            value={this.state.province}
+
+                                            style={{margin: 5, width: 220}}
+                                            placeholder=""/></span>
                                     </div>
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}><span style={{color: 'red'}}>*</span>城市</span>
-                                        <span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}
-                                                                                placeholder=""/></span>
+                                        <span style={{fontSize: '13px'}}><Input
+                                            value={this.state.city}
+                                            style={{margin: 5, width: 220}}
+                                            placeholder=""/></span>
                                     </div>
 
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}><span
                                             style={{color: 'red'}}>*</span>支行名称</span>
-                                        <span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}
+                                        <span style={{fontSize: '13px'}}><Input
+                                            value={this.state.bankName}
+                                            style={{margin: 5, width: 220}}
                                                                                 placeholder=""/></span>
                                     </div>
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}><span
                                             style={{color: 'red'}}>*</span>收款人姓名</span>
-                                        <span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}
+                                        <span style={{fontSize: '13px'}}><Input
+                                            value={this.state.receiver}
+                                            style={{margin: 5, width: 220}}
                                                                                 placeholder=""/></span>
                                     </div>
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}><span
                                             style={{color: 'red'}}>*</span>收款银行账户</span>
-                                        <span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}
+                                        <span style={{fontSize: '13px'}}><Input
+                                            value={this.state.cardNo}
+                                            style={{margin: 5, width: 220}}
                                                                                 placeholder=""/></span>
                                     </div>
                                     <div style={ssdds}>
