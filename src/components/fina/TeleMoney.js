@@ -1293,6 +1293,7 @@ class Basic extends Component {
                             }}
                             style={{background: '#F6D147', width: '180px', height: '40px'}}> 创建 </Button>
                         <Button
+                            disabled={!this.state.isCanOPA}
 
                             onClick={() => {
 
