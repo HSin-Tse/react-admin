@@ -64,6 +64,9 @@ class Basic extends Component {
             date: new Date(),
             userList: [],
             loading: false,
+            isCanOPA: false,
+            isCanOPB: false,
+            isCanOPC: false,
             totalPage: 1,
             current: 1,
             mStarClientAccount: undefined,
@@ -89,6 +92,79 @@ class Basic extends Component {
 
 
     componentDidMount() {
+
+
+
+        if (localStorage.getItem('infor')) {
+
+            let self = this;
+
+            var menuInfor = JSON.parse(localStorage.getItem('infor'))
+
+
+            console.log('hcia menuInfor.superFlag' , menuInfor.superFlag)
+
+            if (menuInfor.superFlag === 1) {
+                self.setState({
+                    isCanOPA: true,
+                    isCanOPB: true,
+                    isCanOPC: true,
+                });
+            } else {
+
+
+                var isCanOp = menuInfor.menuList.find((item) => {
+                    // console.log('hcia  this.props', this.props)
+                    return this.props.tk === item.key;
+                });
+                
+                console.log('hcia isCanOp' , isCanOp)
+
+                console.log('hcia isCanOp' , isCanOp)
+
+                var chA = isCanOp.childrenMenu.find((item) => {
+                    // console.log('hcia  this.props', this.props)
+                    return item.key === 'DEPOSIT_MANNUAL_CREATE';
+                });
+                var chB = isCanOp.childrenMenu.find((item) => {
+                    // console.log('hcia  this.props', this.props)
+                    return item.key === 'DEPOSIT_FINANCE_CHECK';
+                });
+                var chC = isCanOp.childrenMenu.find((item) => {
+                    // console.log('hcia  this.props', this.props)
+                    return item.key === 'DEPOSIT_DETAIL';
+                });
+
+                if(chA.availableFlag==0){
+                    self.setState({
+                        isCanOPA: true,
+                    });
+                }else{
+
+                }
+                if(chB.availableFlag==0){
+                    self.setState({
+                        isCanOPB: true,
+                    });
+                }else{
+
+                }
+                if(chC.availableFlag==0){
+                    self.setState({
+                        isCanOPC: true,
+                    });
+                }else{
+
+                }
+
+
+
+
+            }
+
+
+        }
+
 
         var self = this
         window.Axios.post('back/addLogHistory', {
@@ -474,7 +550,9 @@ class Basic extends Component {
                 {/*<div>accrounRes :{JSON.stringify(this.state.accrounRes)}</div>*/}
                 {/*<div>live931773069</div>*/}
                 {/*<div>mBelongBkUserId :{JSON.stringify(this.state.mBelongBkUserId)}</div>*/}
-                {/*<div>mNetEquity :{JSON.stringify(this.state.mNetEquity)}</div>*/}
+                <div>isCanOPA :{JSON.stringify(this.state.isCanOPA)}</div>
+                <div>isCanOPA :{JSON.stringify(this.state.isCanOPB)}</div>
+                <div>isCanOPA :{JSON.stringify(this.state.isCanOPC)}</div>
                 {/*<div>mNote :{JSON.stringify(this.state.mNote)}</div>*/}
                 {/*<div>mAccountTxnCurry :{JSON.stringify(this.state.mAccountTxnCurry)}</div>*/}
                 {/*<div>mExpectTime :{JSON.stringify(this.state.mExpectTime)}</div>*/}

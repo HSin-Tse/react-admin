@@ -472,6 +472,7 @@ class Basic extends Component {
         };
         return (
             <div>
+
                 {/*<div>isCanOPA :{JSON.stringify(this.state.isCanOPA)}</div>*/}
                 {/*<div>isCanOPB :{JSON.stringify(this.state.isCanOPB)}</div>*/}
                 {/*<div>isCanOPC :{JSON.stringify(this.state.isCanOPC)}</div>*/}
