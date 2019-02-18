@@ -607,98 +607,98 @@ class Basic extends Component {
                                                     }}
                                                     placeholder="备注"/>
 
-                                                <div style={{
-                                                    margin: 5,
-                                                    justifyContent: "space-around",
-                                                    display: 'flex'
-                                                }}>
+                                                {/*<div style={{*/}
+                                                    {/*margin: 5,*/}
+                                                    {/*justifyContent: "space-around",*/}
+                                                    {/*display: 'flex'*/}
+                                                {/*}}>*/}
 
-                                                    <Button
-                                                        disabled={this.state.powerList.length < 2}
+                                                    {/*<Button*/}
+                                                        {/*disabled={this.state.powerList.length < 2}*/}
 
-                                                        onClick={() => {
-                                                            // finance/serviceCheckWithdraw
-
-
-                                                            if (!this.state.theComment) {
-                                                                message.error('完善备注?')
-                                                                return
-                                                            }
-                                                            let self = this;
-
-                                                            window.Axios.post('finance/bankCheckWithdraw', {
-                                                                'id': self.props.match.params.id,
-                                                                'content': this.state.theComment,
-                                                                'status': '7',
-                                                            }).then((response) => {
-                                                                console.log('hcia response', response)
-
-                                                                message.success('操作成功')
-
-                                                            })
-
-                                                        }}
-                                                        style={{
-                                                            background: '#F6D147',
-                                                            margin: 10, fontSize: '18px', height: 40, width: 150
-                                                        }}>审核通过</Button>
-                                                    <Button
-                                                        onClick={() => {
-                                                            // finance/serviceCheckWithdraw
+                                                        {/*onClick={() => {*/}
+                                                            {/*// finance/serviceCheckWithdraw*/}
 
 
-                                                            // if (!this.state.theComment) {
-                                                            //     message.error('完善备注?')
-                                                            //     return
-                                                            // }
-                                                            let self = this;
+                                                            {/*if (!this.state.theComment) {*/}
+                                                                {/*message.error('完善备注?')*/}
+                                                                {/*return*/}
+                                                            {/*}*/}
+                                                            {/*let self = this;*/}
 
-                                                            window.Axios.post('finance/bankCheckWithdraw', {
-                                                                'id': self.props.match.params.id,
-                                                                'content': this.state.theComment,
-                                                                'status': '8',
-                                                            }).then((response) => {
-                                                                console.log('hcia response', response)
+                                                            {/*window.Axios.post('finance/bankCheckWithdraw', {*/}
+                                                                {/*'id': self.props.match.params.id,*/}
+                                                                {/*'content': this.state.theComment,*/}
+                                                                {/*'status': '7',*/}
+                                                            {/*}).then((response) => {*/}
+                                                                {/*console.log('hcia response', response)*/}
 
-                                                                message.success('操作成功')
+                                                                {/*message.success('操作成功')*/}
 
-                                                            })
+                                                            {/*})*/}
 
-                                                        }}
-
-                                                        style={{
-                                                            margin: 10, fontSize: '18px', height: 40, width: 150
-                                                        }}>挂起待确认</Button>
-                                                    <Button
-
-                                                        onClick={() => {
-
-                                                            // finance/serviceCheckWithdraw
-                                                            // if (!this.state.theComment) {
-                                                            //     message.error('完善备注?')
-                                                            //     return
-                                                            // }
-
-                                                            let self = this;
-
-                                                            window.Axios.post('finance/bankCheckWithdraw', {
-                                                                'id': self.props.match.params.id,
-                                                                'content': this.state.theComment,
-                                                                'status': '9',
-                                                            }).then((response) => {
-                                                                console.log('hcia response', response)
-
-                                                                message.success('操作成功')
-
-                                                            })
-
-                                                        }}
-                                                        style={{
-                                                            margin: 10, fontSize: '18px', height: 40, width: 150
-                                                        }}>取消</Button>
+                                                        {/*}}*/}
+                                                        {/*style={{*/}
+                                                            {/*background: '#F6D147',*/}
+                                                            {/*margin: 10, fontSize: '18px', height: 40, width: 150*/}
+                                                        {/*}}>审核通过</Button>*/}
+                                                    {/*<Button*/}
+                                                        {/*onClick={() => {*/}
+                                                            {/*// finance/serviceCheckWithdraw*/}
 
 
-                                                </div>
+                                                            {/*// if (!this.state.theComment) {*/}
+                                                            {/*//     message.error('完善备注?')*/}
+                                                            {/*//     return*/}
+                                                            {/*// }*/}
+                                                            {/*let self = this;*/}
+
+                                                            {/*window.Axios.post('finance/bankCheckWithdraw', {*/}
+                                                                {/*'id': self.props.match.params.id,*/}
+                                                                {/*'content': this.state.theComment,*/}
+                                                                {/*'status': '8',*/}
+                                                            {/*}).then((response) => {*/}
+                                                                {/*console.log('hcia response', response)*/}
+
+                                                                {/*message.success('操作成功')*/}
+
+                                                            {/*})*/}
+
+                                                        {/*}}*/}
+
+                                                        {/*style={{*/}
+                                                            {/*margin: 10, fontSize: '18px', height: 40, width: 150*/}
+                                                        {/*}}>挂起待确认</Button>*/}
+                                                    {/*<Button*/}
+
+                                                        {/*onClick={() => {*/}
+
+                                                            {/*// finance/serviceCheckWithdraw*/}
+                                                            {/*// if (!this.state.theComment) {*/}
+                                                            {/*//     message.error('完善备注?')*/}
+                                                            {/*//     return*/}
+                                                            {/*// }*/}
+
+                                                            {/*let self = this;*/}
+
+                                                            {/*window.Axios.post('finance/bankCheckWithdraw', {*/}
+                                                                {/*'id': self.props.match.params.id,*/}
+                                                                {/*'content': this.state.theComment,*/}
+                                                                {/*'status': '9',*/}
+                                                            {/*}).then((response) => {*/}
+                                                                {/*console.log('hcia response', response)*/}
+
+                                                                {/*message.success('操作成功')*/}
+
+                                                            {/*})*/}
+
+                                                        {/*}}*/}
+                                                        {/*style={{*/}
+                                                            {/*margin: 10, fontSize: '18px', height: 40, width: 150*/}
+                                                        {/*}}>取消</Button>*/}
+
+
+                                                {/*</div>*/}
                                                 <Table rowKey="id"
                                                        columns={[
 
