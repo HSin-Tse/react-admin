@@ -94,7 +94,6 @@ class Basic extends Component {
     componentDidMount() {
 
 
-
         if (localStorage.getItem('infor')) {
 
             let self = this;
@@ -102,7 +101,7 @@ class Basic extends Component {
             var menuInfor = JSON.parse(localStorage.getItem('infor'))
 
 
-            console.log('hcia menuInfor.superFlag' , menuInfor.superFlag)
+            console.log('hcia menuInfor.superFlag', menuInfor.superFlag)
 
             if (menuInfor.superFlag === 1) {
                 self.setState({
@@ -117,10 +116,10 @@ class Basic extends Component {
                     // console.log('hcia  this.props', this.props)
                     return this.props.tk === item.key;
                 });
-                
-                console.log('hcia isCanOp' , isCanOp)
 
-                console.log('hcia isCanOp' , isCanOp)
+                console.log('hcia isCanOp', isCanOp)
+
+                console.log('hcia isCanOp', isCanOp)
 
                 var chA = isCanOp.childrenMenu.find((item) => {
                     // console.log('hcia  this.props', this.props)
@@ -135,29 +134,27 @@ class Basic extends Component {
                     return item.key === 'DEPOSIT_DETAIL';
                 });
 
-                if(chA.availableFlag==0){
+                if (chA.availableFlag == 0) {
                     self.setState({
                         isCanOPA: true,
                     });
-                }else{
+                } else {
 
                 }
-                if(chB.availableFlag==0){
+                if (chB.availableFlag == 0) {
                     self.setState({
                         isCanOPB: true,
                     });
-                }else{
+                } else {
 
                 }
-                if(chC.availableFlag==0){
+                if (chC.availableFlag == 0) {
                     self.setState({
                         isCanOPC: true,
                     });
-                }else{
+                } else {
 
                 }
-
-
 
 
             }
@@ -173,24 +170,27 @@ class Basic extends Component {
             'commentLog': '查看了入金审核',
             'typeLog': 2,
         })
-        this.columns = [
-            {
-                title: '序号',
-                dataIndex: '序号',
-                key: '序号',
-                align: 'center',
-                render: (text, record, index) => (
-                    <span>{this.state.current * this.state.pgsize + index + 1}</span>
-                ),
-            },
-            {
-                align: 'center',
-                title: '交易账号',
-                dataIndex: '交易账号',
-                key: '交易账号',
-                render: (text, record) => (
-                    <span>{record.accountNo}</span>),
-            }, {
+        this.columns =
+
+
+            [
+                {
+                    title: '序号',
+                    dataIndex: '序号',
+                    key: '序号',
+                    align: 'center',
+                    render: (text, record, index) => (
+                        <span>{this.state.current * this.state.pgsize + index + 1}</span>
+                    ),
+                },
+                {
+                    align: 'center',
+                    title: '交易账号',
+                    dataIndex: '交易账号',
+                    key: '交易账号',
+                    render: (text, record) => (
+                        <span>{record.accountNo}</span>),
+                }, {
                 title: '姓名',
                 dataIndex: '姓名',
                 key: '姓名',
@@ -276,127 +276,129 @@ class Basic extends Component {
                     <span>{record.bkUserName}</span>)
             },
 
-            {
-                align: 'center',
-                title: '财务审核',
-                key: 'action',
-                render: (text, record) => (
-                    <div>
+                {
+                    align: 'center',
+                    title: '财务审核',
+                    key: 'action',
+                    render: (text, record) => (
+                        <div>
 
-                        <Button
-                            size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                            disabled={record.status == 4}
+                            <Button
 
-
-                            // onClick={
-                            //
-                            //
-                            //
-                            //     () => this.showOPDAyModal3(record)
-                            // }
-                            onClick={
-                                () => {
+                                size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                disabled={record.status == 4  ||  !this.state.isCanOPB}
 
 
-                                    if (record.status == 3) {
-                                        // this.props.history.pop()
-                                        this.props.history.push('/app/fina/d/ter' + record.id)
-
-                                        this.componentDidMount()
-
-                                    } else if (record.status == 2) {
-                                        this.props.history.push('/app/fina/d/tes' + record.id)
-                                        this.componentDidMount()
-
-                                    }
-
-                                }
-                            }
+                                // onClick={
+                                //
+                                //
+                                //
+                                //     () => this.showOPDAyModal3(record)
+                                // }
+                                onClick={
+                                    () => {
 
 
-                        >{record.status == 1 ? '支付成功' : record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
+                                        if (record.status == 3) {
 
+                                            // this.props.history.pop()
+                                            this.props.history.push('/app/fina/d/ter' + record.id)
 
-                        </Button>
+                                            this.componentDidMount()
 
+                                        } else if (record.status == 2) {
+                                            this.props.history.push('/app/fina/d/tes' + record.id)
+                                            this.componentDidMount()
 
-                    </div>
-                ),
-            },
-            {
-                align: 'center',
-                title: '入金完成',
-                key: 'action',
-                render: (text, record) => (
-                    <div>
-
-                        <Button
-                            size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                            disabled={record.status == 4}
-                            onClick={
-                                () => {
-
-
-                                    if (record.status == 3) {
-                                        // this.props.history.pop()
-                                        this.props.history.push('/app/fina/d/ter' + record.id)
-
-                                        this.componentDidMount()
-
-                                    } else if (record.status == 2) {
-                                        this.props.history.push('/app/fina/d/tes' + record.id)
-                                        this.componentDidMount()
+                                        }
 
                                     }
-
                                 }
-                            }
-                        >{record.status == 4 ? '已取消' : record.status == 2 ? '审核中' : (record.status == 7  && record.completeDate)  ? '已完成' : '审核中'}
-
-                        </Button>
 
 
-                    </div>
-                ),
-            },
-            // {
-            //     align: 'center',
-            //     title: '操作',
-            //     key: 'action',
-            //     render: (text, record) => (
-            //         <div>
-            //             <Button
-            //                 size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-            //                 disabled={ record.status == 4}
-            //                 onClick={
-            //                     () => {
-            //
-            //
-            //                         if(record.status==3){
-            //                             this.props.history.push('/app/fina/d/ter' + record.id)
-            //
-            //                         }else if(record.status==2){
-            //                             this.props.history.push('/app/fina/d/tes' + record.id)
-            //
-            //                         }
-            //
-            //                     }
-            //                 }>{record.status == 1 ? '支付成功' : record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
-            //
-            //             </Button>
-            //             <Button
-            //                 size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-            //                 disabled={record.status == 3 || record.status == 4 || record.status == 1}
-            //
-            //                 onClick={
-            //                     () => this.showOPDAyModal3(record)
-            //                 }>取消
-            //
-            //             </Button>
-            //
-            //         </div>
-            //     ),
-            // }
+                            >{record.status == 1 ? '支付成功' : record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
+
+
+                            </Button>
+
+
+                        </div>
+                    ),
+                },
+                {
+                    align: 'center',
+                    title: '入金完成',
+                    key: 'action',
+                    render: (text, record) => (
+                        <div>
+
+                            <Button
+                                size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                disabled={record.status == 4  ||  !this.state.isCanOPC}
+                                onClick={
+                                    () => {
+
+
+                                        if (record.status == 3) {
+                                            // this.props.history.pop()
+                                            this.props.history.push('/app/fina/d/ter' + record.id)
+
+                                            this.componentDidMount()
+
+                                        } else if (record.status == 2) {
+                                            this.props.history.push('/app/fina/d/tes' + record.id)
+                                            this.componentDidMount()
+
+                                        }
+
+                                    }
+                                }
+                            >{record.status == 4 ? '已取消' : record.status == 2 ? '审核中' : (record.status == 7 && record.completeDate) ? '已完成' : '审核中'}
+
+                            </Button>
+
+
+                        </div>
+                    ),
+                },
+                // {
+                //     align: 'center',
+                //     title: '操作',
+                //     key: 'action',
+                //     render: (text, record) => (
+                //         <div>
+                //             <Button
+                //                 size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                //                 disabled={ record.status == 4}
+                //                 onClick={
+                //                     () => {
+                //
+                //
+                //                         if(record.status==3){
+                //                             this.props.history.push('/app/fina/d/ter' + record.id)
+                //
+                //                         }else if(record.status==2){
+                //                             this.props.history.push('/app/fina/d/tes' + record.id)
+                //
+                //                         }
+                //
+                //                     }
+                //                 }>{record.status == 1 ? '支付成功' : record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
+                //
+                //             </Button>
+                //             <Button
+                //                 size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                //                 disabled={record.status == 3 || record.status == 4 || record.status == 1}
+                //
+                //                 onClick={
+                //                     () => this.showOPDAyModal3(record)
+                //                 }>取消
+                //
+                //             </Button>
+                //
+                //         </div>
+                //     ),
+                // }
             ];
         this.requestPage()
 
@@ -482,7 +484,7 @@ class Basic extends Component {
     changePage = (page) => {
         console.log('hcia page', page)
         this.setState({
-            current: page ,
+            current: page,
         }, () => {
             this.requestPage()
         })
@@ -550,9 +552,9 @@ class Basic extends Component {
                 {/*<div>accrounRes :{JSON.stringify(this.state.accrounRes)}</div>*/}
                 {/*<div>live931773069</div>*/}
                 {/*<div>mBelongBkUserId :{JSON.stringify(this.state.mBelongBkUserId)}</div>*/}
-                <div>isCanOPA :{JSON.stringify(this.state.isCanOPA)}</div>
-                <div>isCanOPA :{JSON.stringify(this.state.isCanOPB)}</div>
-                <div>isCanOPA :{JSON.stringify(this.state.isCanOPC)}</div>
+                {/*<div>isCanOPA :{JSON.stringify(this.state.isCanOPA)}</div>*/}
+                {/*<div>isCanOPA :{JSON.stringify(this.state.isCanOPB)}</div>*/}
+                {/*<div>isCanOPA :{JSON.stringify(this.state.isCanOPC)}</div>*/}
                 {/*<div>mNote :{JSON.stringify(this.state.mNote)}</div>*/}
                 {/*<div>mAccountTxnCurry :{JSON.stringify(this.state.mAccountTxnCurry)}</div>*/}
                 {/*<div>mExpectTime :{JSON.stringify(this.state.mExpectTime)}</div>*/}
