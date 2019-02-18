@@ -656,7 +656,7 @@ class Basic extends Component {
                                                             // }
                                                             let self = this;
 
-                                                            window.Axios.post('finance/serviceCheckWithdraw', {
+                                                            window.Axios.post('finance/backCheckWithdraw', {
                                                                 'id': self.props.match.params.id,
                                                                 'content': this.state.theComment,
                                                                 'status': '5',
@@ -684,7 +684,7 @@ class Basic extends Component {
 
                                                             let self = this;
 
-                                                            window.Axios.post('finance/serviceCheckWithdraw', {
+                                                            window.Axios.post('finance/backCheckWithdraw', {
                                                                 'id': self.props.match.params.id,
                                                                 'content': this.state.theComment,
                                                                 'status': '6',

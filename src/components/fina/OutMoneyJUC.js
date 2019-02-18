@@ -188,7 +188,7 @@ class Basic extends Component {
                                 <div style={{
                                     flexGrow: '1',
                                     height: '2px',
-                                    background: '#CCCCCC',
+                                    background: 'rgba(246,209,71,1)',
                                 }}></div>
                                 <div style={{
                                     display: "flex",
@@ -196,14 +196,14 @@ class Basic extends Component {
                                     justifyContent: 'center',
                                     width: '40px',
                                     height: '40px',
-                                    background: '#CCCCCC',
+                                    background: 'rgba(246,209,71,1)',
                                     borderRadius: '50%'
                                 }}>
                         <span style={{
                             fontSize: '20px',
                             fontFamily: 'PingFang-HK-Medium',
                             fontWeight: 'bold',
-                            color: 'white'
+                            color: 'rgba(33,33,33,1)'
                         }}>
                             3
                         </span>
@@ -552,7 +552,6 @@ class Basic extends Component {
 
 
                                                 style={{
-                                                    background: '#F6D147',
 
                                                     flexGrow: '1',
                                                     margin: 0, fontSize: '18px', height: '48px', width: 150
@@ -561,6 +560,7 @@ class Basic extends Component {
 
 
                                                 style={{
+                                                    background: '#F6D147',
 
                                                     flexGrow: '1',
                                                     margin: 0, fontSize: '18px', height: '48px', width: 150
@@ -629,10 +629,10 @@ class Basic extends Component {
                                                             }
                                                             let self = this;
 
-                                                            window.Axios.post('finance/backCheckWithdraw', {
+                                                            window.Axios.post('finance/bankCheckWithdraw', {
                                                                 'id': self.props.match.params.id,
                                                                 'content': this.state.theComment,
-                                                                'status': '4',
+                                                                'status': '7',
                                                             }).then((response) => {
                                                                 console.log('hcia response', response)
 
@@ -656,10 +656,10 @@ class Basic extends Component {
                                                             // }
                                                             let self = this;
 
-                                                            window.Axios.post('finance/serviceCheckWithdraw', {
+                                                            window.Axios.post('finance/bankCheckWithdraw', {
                                                                 'id': self.props.match.params.id,
                                                                 'content': this.state.theComment,
-                                                                'status': '5',
+                                                                'status': '8',
                                                             }).then((response) => {
                                                                 console.log('hcia response', response)
 
@@ -684,10 +684,10 @@ class Basic extends Component {
 
                                                             let self = this;
 
-                                                            window.Axios.post('finance/serviceCheckWithdraw', {
+                                                            window.Axios.post('finance/bankCheckWithdraw', {
                                                                 'id': self.props.match.params.id,
                                                                 'content': this.state.theComment,
-                                                                'status': '6',
+                                                                'status': '9',
                                                             }).then((response) => {
                                                                 console.log('hcia response', response)
 
