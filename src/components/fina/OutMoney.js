@@ -194,7 +194,7 @@ class Basic extends Component {
 
                             size={'small'} style={{width: 70, background: '#FDD000'}}
                                 onClick={() => {
-                                    this.props.history.push('/app/fina/juoutmb1')
+                                    this.props.history.push('/app/fina/juoutmb'+record.id)
                                 }}>风险审核
 
                         </Button>
@@ -204,7 +204,7 @@ class Basic extends Component {
 
                             size={'small'} style={{width: 70, background: '#FDD000'}}
                                 onClick={() => {
-                                    this.props.history.push('/app/fina/juoutmc1')
+                                    this.props.history.push('/app/fina/juoutmc'+record.id)
                                 }}>渠道下发
 
                         </Button>
@@ -215,7 +215,7 @@ class Basic extends Component {
 
                                     console.log('hcia 出金完成 go',)
 
-                                    this.props.history.push('/app/fina/juoutmd1')
+                                    this.props.history.push('/app/fina/juoutmd'+record.id)
                                 }}>出金完成
 
                         </Button>

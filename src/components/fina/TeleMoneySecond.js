@@ -335,7 +335,7 @@ class Basic extends Component {
 
                                 }
                             }
-                        >{record.status == 4 ? '已取消' : record.status == 2 ? '审核中' : (record.status == 7  && !record.completeDate)  ? '已完成' : '取消'}
+                        >{record.status == 4 ? '已取消' : record.status == 2 ? '审核中' : (record.status == 7  && !record.completeDate)  ? '已完成' : '审核中'}
 
                         </Button>
 

@@ -275,7 +275,7 @@ class Basic extends Component {
 
                                 }
                             }
-                        >{record.status == 1 ? '支付成功' : record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
+                        >{record.status == 4 ? '已取消' : record.status == 2 ? '审核中' : (record.status == 7  && record.completeDate)  ? '已完成' : '审核中'}
 
                         </Button>
 
@@ -1242,7 +1242,6 @@ class Basic extends Component {
 
                 <Card style={{marginTop: 15}} title="电汇入金列表"
                       bodyStyle={{padding: 0, margin: 0}}
-
                 >
 
                     <Table rowKey="id"
