@@ -209,7 +209,6 @@ class Basic extends Component {
                         </span>
                                 </div>
                                 <div style={{
-
                                     flexGrow: '1',
                                     height: '2px',
                                     background: '#CCCCCC'
@@ -545,7 +544,6 @@ class Basic extends Component {
 
 
                                                 style={{
-                                                    background: '#F6D147',
                                                     flexGrow: '1',
                                                     margin: 0, fontSize: '18px', height: '48px', width: 150
                                                 }}>{steps[0].title}</Button>
@@ -554,6 +552,7 @@ class Basic extends Component {
 
 
                                                 style={{
+                                                    background: '#F6D147',
 
                                                     flexGrow: '1',
                                                     margin: 0, fontSize: '18px', height: '48px', width: 150
@@ -572,22 +571,13 @@ class Basic extends Component {
 
                                             <Card bodyStyle={{padding: 0, marginTop: '0px', marginLeft: '20px'}}>
                                                 <div style={{marginTop: '25px'}}><Checkbox
-                                                    value={1}>完整KYC（银行资讯、客户信息）</Checkbox></div>
+                                                    value={1}>出入金方式是否一致，没有第三方资金</Checkbox></div>
                                                 <div style={{marginTop: '25px'}}><Checkbox
-                                                    value={2}>KYC文件在客户文件夹</Checkbox></div>
-                                                <div style={{marginTop: '25px'}}><Checkbox value={3}>客户余额是否足够</Checkbox>
+                                                    value={2}>有没有交易记录</Checkbox></div>
+                                                <div style={{marginTop: '25px'}}>
+                                                    <Checkbox value={3}>是否有爆仓风险</Checkbox>
                                                 </div>
-                                                <div style={{marginTop: '25px'}}><Checkbox
-                                                    value={4}>客户当日是否有入金记录</Checkbox></div>
-                                                <div style={{marginTop: '25px'}}><Checkbox value={5}>检查合规性</Checkbox>
-                                                </div>
-                                                <div style={{marginTop: '25px'}}><Checkbox value={6}>由我批准的</Checkbox>
-                                                </div>
-                                                <div style={{marginTop: '25px'}}><Checkbox value={7}>完善备注</Checkbox>
-                                                </div>
-                                                <div style={{marginTop: '25px'}}><Checkbox value={8}>出金小于100USD
-                                                    需扣除15元手续费，10000USD大额出金与risk确认</Checkbox>
-                                                </div>
+
 
                                                 {/*<div style={{*/}
                                                 {/*marginTop: 10,*/}
@@ -627,7 +617,7 @@ class Basic extends Component {
                                                 }}>
 
                                                     <Button
-                                                        disabled={this.state.powerList.length < 8}
+                                                        disabled={this.state.powerList.length < 3}
 
                                                         onClick={() => {
                                                             // finance/serviceCheckWithdraw
@@ -639,10 +629,10 @@ class Basic extends Component {
                                                             }
                                                             let self = this;
 
-                                                            window.Axios.post('finance/serviceCheckWithdraw', {
+                                                            window.Axios.post('finance/backCheckWithdraw', {
                                                                 'id': self.props.match.params.id,
                                                                 'content': this.state.theComment,
-                                                                'status': '1',
+                                                                'status': '4',
                                                             }).then((response) => {
                                                                 console.log('hcia response', response)
 
@@ -669,7 +659,7 @@ class Basic extends Component {
                                                             window.Axios.post('finance/serviceCheckWithdraw', {
                                                                 'id': self.props.match.params.id,
                                                                 'content': this.state.theComment,
-                                                                'status': '2',
+                                                                'status': '5',
                                                             }).then((response) => {
                                                                 console.log('hcia response', response)
 
@@ -697,7 +687,7 @@ class Basic extends Component {
                                                             window.Axios.post('finance/serviceCheckWithdraw', {
                                                                 'id': self.props.match.params.id,
                                                                 'content': this.state.theComment,
-                                                                'status': '3',
+                                                                'status': '6',
                                                             }).then((response) => {
                                                                 console.log('hcia response', response)
 
