@@ -788,7 +788,7 @@ class Basic extends Component {
 
             let self = this
             window.Axios.post('open/passUsStock', {
-                belongUserId: this.state.mStockRecord.belongUserId,
+                id: this.state.mStockRecord.id,
                 // mobile: this.state.phoneCn,
                 // content: this.state.changeNoteV,
             }).then((response) => {
