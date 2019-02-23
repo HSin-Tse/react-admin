@@ -167,7 +167,7 @@ class Basic extends Component {
                 console.log('hcia response', response)
 
 
-                message.success('request client data')
+                // message.success('request client data')
                 setTimeout(self.requestStart, 300)
 
 

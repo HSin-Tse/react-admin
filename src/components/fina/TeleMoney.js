@@ -482,7 +482,6 @@ class Basic extends Component {
         })
     }
     changePage = (page) => {
-        console.log('hcia page', page)
         this.setState({
             current: page,
         }, () => {

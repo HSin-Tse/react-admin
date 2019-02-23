@@ -171,6 +171,13 @@ class Basic extends Component {
                 key: '申请序号',
                 render: (text, record) => (<span>{record.accountNo}</span>),
                 align: 'center',
+            } , {
+                align: 'center',
+                title: '邮箱地址',
+                dataIndex: '邮箱地址',
+                key: '邮箱地址',
+                render: (text, record) => (
+                    <span>{record.email}</span>),
             }, {
 
                 title: '账户类型',
@@ -921,7 +928,7 @@ class Basic extends Component {
                     />
 
                 </Modal>
-                <h2 style={{marginTop: 15}}>账户管理</h2>
+                <h2 style={{marginTop: 15}}>账户管理ㄍ</h2>
                 <BreadcrumbCustom first="交易管理" second="账户管理"/>
 
                 <Card title="账户管理"
