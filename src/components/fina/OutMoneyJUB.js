@@ -565,6 +565,13 @@ class Basic extends Component {
                                                     flexGrow: '1',
                                                     margin: 0, fontSize: '18px', height: '48px', width: 150
                                                 }}>{steps[2].title}</Button>
+                                            <Button
+
+
+                                                style={{
+                                                    flexGrow: '1',
+                                                    margin: 0, fontSize: '18px', height: '48px', width: 150
+                                                }}>{steps[3].title}</Button>
                                         </div>
 
                                         <Checkbox.Group style={{width: '100%'}} onChange={this.onChange}>
