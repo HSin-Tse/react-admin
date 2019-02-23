@@ -68,7 +68,7 @@ export default class BlackList extends Component {
             MAilCn: undefined,
             TradeACcountCn: undefined,
             changeNoteVCN: undefined,
-            addBlackType: "1",
+            addBlackType: "2",
         };
     }
 
@@ -811,7 +811,7 @@ export default class BlackList extends Component {
                                             addBlackType: value
                                         })
                                     }}>
-                                <Option value="1">合规黑名单</Option>
+                                {/*<Option value="1">合规黑名单</Option>*/}
                                 <Option value="2">开户黑名单</Option>
                                 <Option value="3">交易黑名单</Option>
                             </Select>

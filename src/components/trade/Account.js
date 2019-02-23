@@ -928,7 +928,7 @@ class Basic extends Component {
                     />
 
                 </Modal>
-                <h2 style={{marginTop: 15}}>账户管理ㄍ</h2>
+                <h2 style={{marginTop: 15}}>账户管理</h2>
                 <BreadcrumbCustom first="交易管理" second="账户管理"/>
 
                 <Card title="账户管理"
