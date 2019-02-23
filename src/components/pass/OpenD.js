@@ -708,6 +708,13 @@ class PassOpenD extends Component {
         });
     }
     onChangeBirth = (value, dateString) => {
+
+
+        if (!value) {
+            this.setState({testeee: null})
+            return
+
+        }
         var date = new Date(dateString + ' 00:00:00:000');
         var time1 = date.getTime();
         this.state.waitUpdate.dateOfBirth = time1;
@@ -1248,7 +1255,9 @@ class PassOpenD extends Component {
                                         <span style={{minWidth: 120}}>*出生日期</span>
                                         <DatePicker
                                             style={{width: '256px'}}
-                                            value={moment(this.state.testeee, 'YYYY-MM-DD')}
+                                            // value={moment(this.state.testeee, 'YYYY-MM-DD')}
+                                            value={this.state.testeee ? moment(this.state.testeee, 'YYYY-MM-DD') : null}
+
                                             onChange={this.onChangeBirth}
                                             format={'YYYY-MM-DD'}/>
 
