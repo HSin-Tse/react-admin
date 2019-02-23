@@ -543,28 +543,37 @@ export default class BlackList extends Component {
     searchSelectS = () => {
 
         let self = this
-        if (self.state.nowKey === '1') {
-            this.requestPageAS()//1:合规 2:开户 3:交易
-        }
-        if (self.state.nowKey === '2') {
-            this.requestPageBS()//1:合规 2:开户 3:交易
-        }
-        if (self.state.nowKey === '3') {
-            this.requestPageCS()//1:合规 2:开户 3:交易
-        }
+        // if (self.state.nowKey === '1') {
+        //     this.requestPageAS()//1:合规 2:开户 3:交易
+        //
+        // }
+        // if (self.state.nowKey === '2') {
+        //     this.requestPageBS()//1:合规 2:开户 3:交易
+        // }
+        // if (self.state.nowKey === '3') {
+        //     this.requestPageCS()//1:合规 2:开户 3:交易
+        // }
+
+        this.requestPageAS()//1:合规 2:开户 3:交易
+        this.requestPageBS()//1:合规 2:开户 3:交易
+        this.requestPageCS()//1:合规 2:开户 3:交易
     }
     searchSelect = () => {
 
         let self = this
-        if (self.state.nowKey === '1') {
-            this.requestPageA()//1:合规 2:开户 3:交易
-        }
-        if (self.state.nowKey === '2') {
-            this.requestPageB()//1:合规 2:开户 3:交易
-        }
-        if (self.state.nowKey === '3') {
-            this.requestPageC()//1:合规 2:开户 3:交易
-        }
+        // if (self.state.nowKey === '1') {
+        //     this.requestPageA()//1:合规 2:开户 3:交易
+        // }
+        // if (self.state.nowKey === '2') {
+        //     this.requestPageB()//1:合规 2:开户 3:交易
+        // }
+        // if (self.state.nowKey === '3') {
+        //     this.requestPageC()//1:合规 2:开户 3:交易
+        // }
+
+        this.requestPageA()//1:合规 2:开户 3:交易
+        this.requestPageB()//1:合规 2:开户 3:交易
+        this.requestPageC()//1:合规 2:开户 3:交易
     }
 
     onChangeDate = (value, dateString) => {
