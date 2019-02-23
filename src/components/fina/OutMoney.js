@@ -289,7 +289,7 @@ class Basic extends Component {
                         </Button>
 
                         <Button
-                            disabled={record.status!=4}
+                            disabled={record.status!=8   &&  record.status!=4}
 
                             size={'small'} style={{display:this.state.isCanOPC?'':'none',width: 70, background: '#FDD000'}}
                                 onClick={() => {
