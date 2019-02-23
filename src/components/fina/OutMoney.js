@@ -269,7 +269,7 @@ class Basic extends Component {
                 render: (text, record) => (
                     <div style={{whiteSpace: 'nowrap'}}>
                         <Button
-                            disabled={record.status!=0}
+                            disabled={record.status!=2   && record.status!=0}
 
                             size={'small'} style={{display:this.state.isCanOPA?'':'none',width: 70, background: '#FDD000'}} onClick={() => {
                             
@@ -279,7 +279,7 @@ class Basic extends Component {
 
                         </Button>
                         <Button
-                            disabled={record.status !=1}
+                            disabled={record.status!=5   &&record.status !=1}
 
                             size={'small'} style={{display:this.state.isCanOPB?'':'none',  width: 70, background: '#FDD000'}}
                                 onClick={() => {
