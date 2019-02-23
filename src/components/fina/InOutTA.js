@@ -169,6 +169,161 @@ class Basic extends Component {
         });
 
 
+        this.columnss = [
+
+
+            {
+                align: 'center',
+                title: '订单编号',
+                label: '订单编号',
+                dataIndex: 'merOrderNo',
+                key: 'merOrderNo',
+                render: (text, record) => (
+                    <span>{record.merOrderNo}</span>),
+            }
+            , {
+
+                title: '客户邮箱',
+                label: '客户邮箱',
+                dataIndex: 'email',
+                key: 'email',
+                render: (text, record) => (<span>{record.email}</span>),
+                align: 'center',
+            }
+            , {
+
+                title: '交易账户',
+                label: '交易账户',
+                dataIndex: 'accountNo',
+                key: 'accountNo',
+                render: (text, record) => (
+                    <span>{record.accountNo}</span>),
+                align: 'center',
+            }, {
+
+                title: '交易组',
+                label: '交易组',
+                dataIndex: 'accountType',
+                key: 'accountType',
+                render: (text, record) => (
+                    <span>{record.accountType}</span>),
+                align: 'center',
+            }, {
+
+                title: '类型',
+                label: '类型',
+                dataIndex: 'typeDesc',
+                key: 'typeDesc',
+                render: (text, record) => (
+                    <span>{record.typeDesc}</span>),
+                align: 'center',
+            }, {
+                align: 'center',
+
+                title: '客户申请时间',
+                label: '客户申请时间',
+                dataIndex: 'createDate',
+                key: 'createDate',
+
+                render: (text, record) => (
+                    <span>{record.createDate}</span>),
+            }, {
+                align: 'center',
+
+                title: '经纪商',
+                label: '经纪商',
+                dataIndex: 'broker',
+                key: 'broker',
+                render: (text, record) => (
+                    <span>{record.broker}</span>)
+            }, {
+                align: 'center',
+
+                title: '出入金渠道',
+                label: '出入金渠道',
+                dataIndex: 'channelName',
+                key: 'channelName',
+                render: (text, record) => (
+                    <span>{record.channelName}</span>),
+            }, {
+                align: 'center',
+
+                title: '交易币种',
+                label: '交易币种',
+                dataIndex: 'accountTxnCurry',
+                key: 'accountTxnCurry',
+
+                render: (text, record) => (
+                    <span>{record.accountTxnCurry}</span>),
+            }, {
+                align: 'center',
+
+                title: '金额',
+                label: '金额',
+                dataIndex: 'accountTxnAmt',
+                key: 'accountTxnAmt',
+
+                render: (text, record) => (
+                    <span>{record.accountTxnAmt}</span>),
+            }, {
+                align: 'center',
+
+                title: '执行金额',
+                label: '执行金额',
+                dataIndex: 'execTxnAmt',
+                key: 'execTxnAmt',
+
+                render: (text, record) => (
+                    <span>{record.execTxnAmt}</span>),
+            }, {
+                align: 'center',
+
+                title: '执行币种',
+                label: '执行币种',
+                dataIndex: 'execTxnCurry',
+                key: 'execTxnCurry',
+
+                render: (text, record) => (
+                    <span>{record.execTxnCurry}</span>),
+            }, {
+                align: 'center',
+
+                title: '使用汇率',
+                label: '使用汇率',
+                dataIndex: 'rate',
+                key: 'rate',
+
+                render: (text, record) => (
+                    <span>{record.rate}</span>),
+            }, {
+                align: 'center',
+
+                title: '手续费',
+                label: '手续费',
+                dataIndex: '手续费',
+                key: 'commission',
+
+                render: (text, record) => (
+                    <span>{record.commission}</span>),
+            }, {
+                align: 'center',
+
+                title: '执行时间',
+                label: '执行时间',
+                dataIndex: '执行时间',
+                key: 'completeDate',
+
+                render: (text, record) => (
+                    <span>{record.completeDate}</span>),
+            }, {
+                align: 'center',
+                title: '处理人',
+                label: '处理人',
+                dataIndex: '处理人',
+                key: 'operator',
+                render: (text, record) => (
+                    <span>{record.operator}</span>)
+            }];
         this.columns = [
 
             {
@@ -558,7 +713,7 @@ class Basic extends Component {
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
-                <div>userList query :{JSON.stringify(this.state.userList)}</div>
+                {/*<div>userList query :{JSON.stringify(this.state.userList)}</div>*/}
                 {/*this.state.selectedRowKeys.length > 0*/}
                 <Modal
                     width={500}
@@ -719,7 +874,7 @@ class Basic extends Component {
 
                       extra={
 
-                          <CSVLink filename={new Date()+"出入金报表.csv"} data={this.state.userList} headers={this.columns}>
+                          <CSVLink filename={new Date()+"出入金报表.csv"} data={this.state.userList} headers={this.columnss}>
                               <Button>下载当前列表</Button>
                           </CSVLink>
                           // <Button type="default"
