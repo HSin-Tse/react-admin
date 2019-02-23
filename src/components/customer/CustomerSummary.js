@@ -254,18 +254,18 @@ class CustomerSummary extends Component {
                     <div style={{display: 'flex', justifyContent: 'space-around'}}>
 
                         {/*<Popconfirm style={{}} title={record.accountStatus === 1 ? '确认凍結' : '确认解冻'}*/}
-                                    {/*onConfirm={() => this.forzenAccount(record)} okText="Yes"*/}
-                                    {/*cancelText="No">*/}
-                            {/**/}
+                        {/*onConfirm={() => this.forzenAccount(record)} okText="Yes"*/}
+                        {/*cancelText="No">*/}
+                        {/**/}
                         {/*</Popconfirm>*/}
-                        <Button disabled={!record.belongUserId  || true} size={'small'}
+                        <Button disabled={!record.belongUserId || true} size={'small'}
                                 style={{
                                     display: !record.belongUserId ? 'none' : '',
                                     background: record.accountStatus === 1 ? '#FDD000' : '#FF6666'
                                 }}>{record.accountStatus === 1 ? '正常（可冻结)' : record.accountStatus === 2 ? '禁止登陆:解冻'
                             : record.accountStatus === 3 ? '禁止交易:解冻' : '-'}</Button>
 
-                        <Button disabled={!record.belongUserId || true } size={'small'}
+                        <Button disabled={!record.belongUserId || true} size={'small'}
                                 style={{
                                     display: !record.belongUserId ? '' : 'none',
                                     background: record.accountStatus === 1 ? '#FDD000' : 'OrangeRed'
@@ -273,7 +273,7 @@ class CustomerSummary extends Component {
                             : record.accountStatus === 3 ? '禁止交易:解冻' : '-'}</Button>
 
 
-                        <Button disabled={!record.belongUserId } size={'small'} style={{background: '#FDD000'}}
+                        <Button disabled={!record.belongUserId} size={'small'} style={{background: '#FDD000'}}
                                 onClick={() => this.resetSeret(record)}>重置密码</Button>
                     </div>
                 ),
@@ -435,29 +435,29 @@ class CustomerSummary extends Component {
 
 
                 {/*<Modal*/}
-                    {/*// width={'100%'}*/}
-                    {/*title="添加备注"*/}
-                    {/*visible={this.state.NoteModalVisible2}*/}
-                    {/*onOk={this.handleAddComment}*/}
-                    {/*onCancel={this.handleCancel}*/}
-                    {/*okText="提交"*/}
-                    {/*cancelText="取消">*/}
-                    {/*<TextArea rows={4}*/}
-                              {/*value={this.state.theComment}*/}
-                              {/*onChange={(e) => {*/}
-                                  {/*let comment = e.target.value;*/}
-                                  {/*this.setState({*/}
-                                      {/*theComment: comment*/}
-                                  {/*});*/}
-                              {/*}}*/}
-                              {/*placeholder="在这里填写回访次数以及备注信息"/>*/}
-                    {/*<Table*/}
-                        {/*style={{marginTop: 15}}*/}
-                        {/*bordered*/}
-                        {/*rowKey="id"*/}
-                        {/*columns={this.modalOPDayL2}*/}
-                        {/*dataSource={this.state.operationDiaryHistory}*/}
-                    {/*/>*/}
+                {/*// width={'100%'}*/}
+                {/*title="添加备注"*/}
+                {/*visible={this.state.NoteModalVisible2}*/}
+                {/*onOk={this.handleAddComment}*/}
+                {/*onCancel={this.handleCancel}*/}
+                {/*okText="提交"*/}
+                {/*cancelText="取消">*/}
+                {/*<TextArea rows={4}*/}
+                {/*value={this.state.theComment}*/}
+                {/*onChange={(e) => {*/}
+                {/*let comment = e.target.value;*/}
+                {/*this.setState({*/}
+                {/*theComment: comment*/}
+                {/*});*/}
+                {/*}}*/}
+                {/*placeholder="在这里填写回访次数以及备注信息"/>*/}
+                {/*<Table*/}
+                {/*style={{marginTop: 15}}*/}
+                {/*bordered*/}
+                {/*rowKey="id"*/}
+                {/*columns={this.modalOPDayL2}*/}
+                {/*dataSource={this.state.operationDiaryHistory}*/}
+                {/*/>*/}
                 {/*</Modal>*/}
 
                 <Modal
@@ -497,17 +497,17 @@ class CustomerSummary extends Component {
                         </div>
 
                         <TextArea
-                            style={{marginTop: "20px", width:'560px',marginLeft: "20px", marginRight: "20px"}}
+                            style={{marginTop: "20px", width: '560px', marginLeft: "20px", marginRight: "20px"}}
 
                             rows={4}
-                                  value={this.state.theComment}
-                                  onChange={(e) => {
-                                      let comment = e.target.value;
-                                      this.setState({
-                                          theComment: comment
-                                      });
-                                  }}
-                                  placeholder="在这里填写回访次数以及备注信息"/>
+                            value={this.state.theComment}
+                            onChange={(e) => {
+                                let comment = e.target.value;
+                                this.setState({
+                                    theComment: comment
+                                });
+                            }}
+                            placeholder="在这里填写回访次数以及备注信息"/>
                         <Table
                             style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}
                             bordered
@@ -596,7 +596,6 @@ class CustomerSummary extends Component {
                 </Modal>
 
 
-
                 <Modal
                     bodyStyle={{
                         background: 'white',
@@ -639,6 +638,7 @@ class CustomerSummary extends Component {
 
                                                 this.setState({
                                                     checkedValues: checkedValues,
+                                                    checkedValuesSe: checkedValues,
                                                     otherCommentChecks: checkedValues.toString(),
                                                 });
 
@@ -694,7 +694,7 @@ class CustomerSummary extends Component {
 
                             <Button
 
-                                disabled={this.state.checkedValues.length < 6   ||  !this.state.accountPassword}
+                                disabled={this.state.checkedValues.length < 6 || !this.state.accountPassword}
                                 onClick={
                                     () => {
 
@@ -795,28 +795,34 @@ class CustomerSummary extends Component {
                             style={{margin: '20px'}}
                             title={'请确认客户信息：'} bordered={true}>
 
-                            <Checkbox.Group style={{width: '100%'}} value={this.state.checkedValues}
-                                            onChange={(checkedValues) => {
 
-                                                this.setState({
-                                                    checkedValues: checkedValues,
-                                                    otherCommentChecks: checkedValues.toString(),
-                                                });
+                            <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
+                                <Checkbox style={{whiteSpace: 'nowrap'}} value={"手机号"}>手机号</Checkbox>
 
-                                            }}>
+                                <Checkbox.Group style={{width: '100%'}} value={this.state.checkedValues}
+                                                onChange={(checkedValues) => {
 
-                                <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
-                                    <Checkbox value={"手机号"}>手机号</Checkbox>
+                                                    console.log('hcia checkedValues', checkedValues)
+
+                                                    this.setState({
+                                                        checkedValues: checkedValues,
+                                                        otherCommentChecks: checkedValues.toString(),
+                                                    });
+
+                                                }}>
                                     <Checkbox value={"邮箱"}>邮箱</Checkbox>
                                     <Checkbox value={"账号"}>账号</Checkbox>
                                     <Checkbox value={"地址"}>地址</Checkbox>
                                     <Checkbox value={"身份证号"}>身份证号</Checkbox>
-                                </div>
-                                <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
                                     <Checkbox value={"身份证正本"}>身份证正本</Checkbox>
-                                </div>
 
-                            </Checkbox.Group>
+                                    {/*<div style={{display: 'flex', minHeight: 40, align: 'center'}}>*/}
+                                    {/*</div>*/}
+                                </Checkbox.Group>
+
+                            </div>
+
+
                             <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
                                 <span style={{minWidth: 60}}>其他：</span>
                                 <Input value={this.state.otherComment}
@@ -847,7 +853,7 @@ class CustomerSummary extends Component {
 
                             <Button
 
-                                disabled={this.state.checkedValues.length < 6}
+                                disabled={this.state.checkedValues.length < 5}
                                 onClick={() => {
                                     var self = this
                                     if (this.state.otherComment) {
@@ -1053,7 +1059,6 @@ class CustomerSummary extends Component {
 
 
     }
-
 
 
     requestDataS = () => {
