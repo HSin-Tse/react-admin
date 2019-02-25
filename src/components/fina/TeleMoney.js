@@ -548,6 +548,13 @@ class Basic extends Component {
 
         ))
 
+
+        const rateListS = this.state.rateList.map(v1 => (
+
+            <Option key={v1.id} value={v1.id}>{v1.resourceCurrency ? v1.resourceCurrency : 'null'}/{v1.destnationCurrency ? v1.destnationCurrency : 'null'}({v1.rate})</Option>
+
+        ))
+
         const accountTList = this.state.accountTxnCurryList.map(v1 => (
 
             <Option key={v1.value} value={v1.value}>{v1.name ? v1.name : 'null'}</Option>
@@ -894,49 +901,47 @@ class Basic extends Component {
                                 </div>
                                 <div style={{
                                     marginTop: '24px',
-                                    textAlign: 'right',
-                                    width: '100%',
+
+                                    textAlign: 'left',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center'
                                 }}>
-                                                    <span style={{
-                                                        marginRight: '37px',
-                                                        fontFamily: 'PingFangSC-Medium',
-                                                        fontWeight: 500,
-                                                        color: '#292929',
-                                                        fontSize: '14px',
-                                                        width: '57px',
+                                        <span style={{
+
+                                            marginRight: '37px',
+                                            textAlign: 'right',
 
 
-                                                    }}>汇率</span>
-                                    {/*<Input value={this.state.mRate}*/}
-                                    {/*onChange={(e) => {*/}
-                                    {/*this.setState({*/}
-                                    {/*mRate: e.target.value,*/}
-                                    {/*});*/}
-                                    {/*}}*/}
-                                    {/*style={{width: '200px', height: '36px'}}*/}
+                                            width: '57px',
+                                            fontFamily: 'PingFangSC-Medium',
+                                            fontWeight: 500,
+                                            color: '#292929',
+                                            fontSize: '14px'
 
-                                    {/*/>*/}
-                                    <MaskedInput
-                                        style={{width: '200px', height: '36px'}}
-                                        mask={numberMask}
 
-                                        className="ant-input"
+                                        }}>汇率</span>
+
+                                    <Select
                                         placeholder="汇率"
-                                        guide={true}
-                                        id="my-input-id"
-                                        onChange={(e) => {
-                                            this.setState({
-                                                mRate: e.target.value,
-                                            });
-                                        }}
 
-                                        // onBlur={() => {}}
-                                        // onChange={() => {}}
-                                    />
+                                        onChange={(value) => {
+
+
+                                            this.setState({mRate: value})
+                                            console.log('hcia value', value)
+                                        }}
+                                        value={this.state.mRate}
+                                        style={{width: '200px', height: '36px'}}>
+
+                                        {rateListS}
+
+
+                                    </Select>
+
+
                                 </div>
+
 
                             </Col>
 
