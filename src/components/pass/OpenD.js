@@ -114,7 +114,6 @@ class PassOpenD extends Component {
                 IXTradingObjectives: response.data.data.IX_Trading_Objectives,
                 IXRisk_Tolerance: response.data.data.IX_Risk_Tolerance,
                 accountType: response.data.data.account_type,
-
             });
         });
 
@@ -1119,7 +1118,10 @@ class PassOpenD extends Component {
                                 <Card bordered={false}>
                                     <div>
                                         交易组 :
-                                        <Select value={this.state.recordData.accountType}
+                                        <Select
+                                            disabled={true}
+
+                                            value={this.state.recordData.accountType}
                                                 style={{marginLeft: 20, width: 120}}
                                                 onChange={(v, key) => this.handleACType(v, key)}>
                                             {this.state.accountType.map(acType => <Option
@@ -1137,6 +1139,7 @@ class PassOpenD extends Component {
                                     <div>
                                         杠杆组 :
                                         <Select
+
                                             value={this.state.leverageId}
                                             style={{marginLeft: 20, width: 120}}
                                             onChange={(v, key) => this.handleChangeLeavage(v, key)}>
