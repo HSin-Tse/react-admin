@@ -250,6 +250,13 @@ class PassOpenD extends Component {
     }
 
     confirmOpen = () => {
+
+        if(this.state.musCitizenOrResidentForTaxPurpposes =='是')
+        {
+            message.error('當前用戶為美國公民')
+            return
+        }
+
         this.openOK()
     };
     timestampToTime = (timestamp) => {
@@ -1008,7 +1015,7 @@ class PassOpenD extends Component {
         return (
             <div id="openD">
 
-                {/*<div>waitUpdate :{JSON.stringify(this.state.waitUpdate)}</div>*/}
+                {/*<div>musCitizenOrResidentForTaxPurpposes :{JSON.stringify(this.state.musCitizenOrResidentForTaxPurpposes)}</div>*/}
                 <h2 style={{marginTop: 15}}>开户信息详情</h2>
                 {/*<Zmage*/}
                 {/*alt="example"*/}
