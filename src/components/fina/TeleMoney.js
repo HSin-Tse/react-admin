@@ -58,6 +58,7 @@ class Basic extends Component {
         super(props);
         this.state = {
             accountTxnCurryList: [],
+            rateList: [],
             bkroleList: [],
             selectedRowKeys: [],
             date: new Date(),
@@ -411,6 +412,17 @@ class Basic extends Component {
             })
 
         })
+
+        window.Axios.post('finance/getChannelRateList', {}).then((response) => {
+            console.log('hcia response' , response)
+            self.setState({rateList: response.data.data}, () => {
+
+
+
+            });
+        });
+
+
 
 
         window.Axios.post('back/getBackUserList', {
