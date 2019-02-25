@@ -52,7 +52,6 @@ class Basic extends Component {
         this.setState({
             changeNoteV: e.target.value
         })
-        // this.state.changeNoteV = e.target.value
     }
 
     constructor(props) {
@@ -74,7 +73,7 @@ class Basic extends Component {
             mBelongBkUserId: undefined,
             mNetEquity: '',
             mName: '',
-            mRate: '',
+            mRate: undefined,
             mExecTxnCurry: '',
             mNote: '',
             mAccountTxnCurry: '',
@@ -1303,7 +1302,7 @@ class Basic extends Component {
                                     mBelongBkUserId: undefined,
                                     mNetEquity: '',
                                     mName: '',
-                                    mRate: '',
+                                    mRate: undefined,
                                     mNote: '',
                                     mAccountTxnCurry: '',
                                     mExecTxnCurry: '',
