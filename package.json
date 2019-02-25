@@ -100,6 +100,7 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
+    "ss": "node scripts/start.js",
     "build": "node scripts/build.js",
     "bb": "yarn build && rm build/static/js/*.map",
     "nmbd": "nodemon scripts/build.js",
