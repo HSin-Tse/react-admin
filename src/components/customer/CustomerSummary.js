@@ -343,7 +343,7 @@ class CustomerSummary extends Component {
                                 this.setState({
                                     starClientAccount: e.target.value,
                                 });
-                            }} style={{marginBottom: 10}} placeholder="账户"/>
+                            }} style={{marginBottom: 10}} placeholder="交易账号"/>
                             <RangePicker
                                 showToday
                                 style={{width: '100%'}}
@@ -1069,7 +1069,7 @@ class CustomerSummary extends Component {
             email: this.state.selectMail,
             mobile: this.state.selectPhoneF,
             nationalId: this.state.selectID,
-            starClientAccount: this.state.starClientAccount,
+            accountNo: this.state.starClientAccount,
             startTime: this.state.selectTimeStart,
             endTime: this.state.selectTimeEnd,
         }).then((response) => {
@@ -1092,7 +1092,7 @@ class CustomerSummary extends Component {
             email: this.state.selectMail,
             mobile: this.state.selectPhoneF,
             nationalId: this.state.selectID,
-            starClientAccount: this.state.starClientAccount,
+            accountNo: this.state.starClientAccount,
             startTime: this.state.selectTimeStart,
             endTime: this.state.selectTimeEnd,
         }).then((response) => {
