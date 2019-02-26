@@ -59,13 +59,7 @@ class Basic extends Component {
         };
     }
 
-    showOPDAyModal3 = (recodrd) => {
-        this.requestUserCommentList(recodrd)
-        this.setState({
-            modal3OPDAYVisible: true,
-            visible: false,
-        });
-    };
+
     requestUserCommentList = (record) => {
 
 
@@ -537,17 +531,6 @@ class Basic extends Component {
 
         })
     };
-    handleChange = (value, record) => {
-        let self = this
-        self.setState({
-                modeState: value,
-                opRecord: record
-            }, () => {
-                self.showModalOP()
-            }
-        );
-
-    };
     changePageComment = (page) => {
         this.setState({
             currentComment: page,
@@ -634,28 +617,6 @@ class Basic extends Component {
             visibleOpM: true,
         });
     }
-    handleOk = () => {
-        var mStatus = this.state.modeState == '正常' ? 1 : this.state.modeState == '禁止登陆' ? 2 : 3;
-        let self = this;
-        self.setState({
-            loadFor: true
-        })
-        window.Axios.post('star/updateStarLiveAccount', {
-            'id': self.state.opRecord.id,
-            'status': mStatus,
-            'reasonType': self.state.forbiddenValue,
-        }).then(function (response) {
-            self.setState({
-                visibleOpM: false,
-                loadFor: false,
-            }, () => {
-                self.state.forbiddenValue = 0
-                self.requestPage()
-            });
-            message.success('操作成功');
-
-        })
-    };
     handleCancel = (e) => {
         console.log(e);
         this.setState({
