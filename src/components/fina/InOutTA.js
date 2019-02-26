@@ -22,7 +22,6 @@ class Basic extends Component {
             visibleOpM: false,
             date: new Date(),
             userList: [],
-            leavgeList: [],
             nodeList: [],
             detail: {
                 "name": null,
@@ -52,7 +51,6 @@ class Basic extends Component {
             current: 1,
             pgsize: 10,
             loadFor: false,
-            suspend_reason_type: []
 
         };
     }
@@ -110,26 +108,7 @@ class Basic extends Component {
 
     componentDidMount() {
 
-
         let self = this;
-        window.Axios.post('dict/openDict', {
-            'keys': 'suspend_reason_type',
-        }).then(function (response) {
-            self.setState({
-                    suspend_reason_type: response.data.data.suspend_reason_type
-                }
-            );
-        })
-
-        window.Axios.post('dict/leverageList', {
-            'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
-        }).then((response) => {
-            console.log('hcia response', response)
-            self.setState({
-                leavgeList: response.data.data,
-            })
-        });
-
 
         this.columnss = [
             {
@@ -356,16 +335,10 @@ class Basic extends Component {
 
                 render: (text, record) => (
                     <span>{record.createDate}</span>),
-            }, {
-                align: 'center',
+            }
 
-                title: '经纪商',
-                label: '经纪商',
-                dataIndex: 'broker',
-                key: 'broker',
-                render: (text, record) => (
-                    <span>{record.broker}</span>)
-            }, {
+
+            , {
                 align: 'center',
 
                 title: '出入金渠道',
@@ -511,24 +484,21 @@ class Basic extends Component {
         return +str >= 10 ? str : '0' + str
     };
     seeDetail = (record) => {
-
-        console.log('hcia record', record)
         let self = this
         window.Axios.post('star/getStarLiveAccountCommentList', {
             'pageSize': 100,
             'id': record.id,
         }).then(function (response) {
-
             self.setState({
                     nodeList: response.data.data.list
                 }, () => {
                     self.showModal()
                 }
             );
-
-
         })
     };
+
+
     changePageComment = (page) => {
         this.setState({
             currentComment: page,
@@ -536,13 +506,8 @@ class Basic extends Component {
             this.requestUserCommentList()
         })
     }
-    forbitChange = (value) => {
-        let self = this
-        self.setState({
-                forbiddenValue: value,
-            }
-        );
-    };
+
+
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
         const year = dateObj.getFullYear() // 获取年，
