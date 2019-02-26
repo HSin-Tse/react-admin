@@ -20,13 +20,25 @@ import zh from './locale/zh_CN'
 
 const middleware = [thunk];
 const store = createStore(reducer, applyMiddleware(...middleware));
+// var Axios = axios.create({
+//     baseURL: window.location.protocol + '//mobile.nooko.cn:8090/'
+// });
+
+
+// var baseURL = 'https://crmapi.ixtrader.mobi:18107'
+var    baseURL= window.location.protocol + '//mobile.nooko.cn:8090/'
+
 var Axios = axios.create({
-    baseURL: window.location.protocol + '//mobile.nooko.cn:8090/'
+    baseURL
 });
 
 var aaxios = axios.create({
-    baseURL: window.location.protocol + '//mobile.nooko.cn:8090/'
+    baseURL
 });
+
+// var aaxios = axios.create({
+//     baseURL: window.location.protocol + '//mobile.nooko.cn:8090/'
+// });
 
 
 message.config({
@@ -36,7 +48,7 @@ message.config({
 window.Axios = Axios;
 window.PAxios = aaxios;// は「http:」
 
- // window.hideLoading={}
+// window.hideLoading={}
 
 // 请求列表
 // 取消列表
@@ -123,15 +135,14 @@ window.Axios.interceptors.request.use(
             config.headers['X-Token'] = xtoken
             if (config.method == 'post') {
 
-                
+
                 // console.log('hcia request loadCount' , loadCount)
                 // if (loadCount>1) {
-                    window.hideLoading = Toast.loading('加载中...', 0, () => {
+                window.hideLoading = Toast.loading('加载中...', 0, () => {
 
-                    })
+                })
 
                 // }
-
 
 
                 config.data = {
@@ -170,8 +181,8 @@ window.Axios.interceptors.response.use(function (response) {
     removePending(response.config);
     if (response.data.code != 1) {
 
-        if (loadCount==0) {
-            
+        if (loadCount == 0) {
+
             // console.log('hcia loadCount' , loadCount)
             setTimeout(window.hideLoading, 0)
 
@@ -209,9 +220,9 @@ window.Axios.interceptors.response.use(function (response) {
 
     // setTimeout(hideLoading, 0)
 
-    
+
     // console.log('hcia loadCount' , loadCount,(loadCount==0))
-    if (loadCount<=0) {
+    if (loadCount <= 0) {
         // console.log('hcia hideLoading' , window.hideLoading)
         setTimeout(window.hideLoading, 0)
 
@@ -232,7 +243,7 @@ window.Axios.interceptors.response.use(function (response) {
     } else {
         // setTimeout(hideLoading, 0)
 
-        if (loadCount==0) {
+        if (loadCount == 0) {
             setTimeout(window.hideLoading, 0)
 
             //LoadingBar.end();
