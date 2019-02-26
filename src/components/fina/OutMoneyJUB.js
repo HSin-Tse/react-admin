@@ -542,6 +542,14 @@ class Basic extends Component {
                                         <div style={{display: 'flex'}}>
                                             <Button
 
+                                                onClick={()=>{
+
+
+                                                    console.log('hcia this.props.match.params.id' , this.props.match.params.id)
+
+                                                    this.props.history.push('/app/fina/juoutma'+this.props.match.params.id)
+
+                                                }}
 
                                                 style={{
                                                     flexGrow: '1',
