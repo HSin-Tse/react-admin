@@ -101,7 +101,6 @@ class Basic extends Component {
     }
     showModalB = (recodrd) => {
 
-        console.log('hcia recodrd', recodrd)
         this.requestUserCommentList(recodrd)
 
         let self = this
@@ -126,9 +125,11 @@ class Basic extends Component {
     }
     showOPDAyModal2 = (recodrd) => {
         this.requestUserCommentList(recodrd)
+
         this.setState({
             modal2OPDAYVisible: true,
         });
+
     };
 
     componentDidMount() {
@@ -146,8 +147,6 @@ class Basic extends Component {
 
         });
 
-        {/*<BreadcrumbCustom first="交易管理" second="出入金报表"/>*/}
-        //
 
         let self = this;
         window.Axios.post('dict/openDict', {
@@ -496,11 +495,11 @@ class Basic extends Component {
             }, {
                 align: 'center',
 
-                title: '审核日志',
-                dataIndex: '审核日志',
-                key: '审核日志',
+                title: '查看',
+                dataIndex: '查看',
+                key: '查看',
                 render: (text, record) => (
-                    <Button size={'small'} style={{background: '#FDD000'}}onClick={() => this.showOPDAyModal2(record)}>详情</Button>
+                    <Button size={'small'} style={{background: '#FDD000'}}onClick={() => this.showOPDAyModal2(record)}>日志</Button>
                 )
 
             }];
