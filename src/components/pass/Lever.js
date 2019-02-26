@@ -163,12 +163,7 @@ class Basic extends Component {
 
     componentDidMount() {
 
-        window.Axios.post('back/addLogHistory', {
-            'moduleLog': '审核管理',
-            'pageLog': '杠杆审核',
-            'commentLog': '查看了杠杆审核',
-            'typeLog': 2,
-        })
+
 
 
         this.columnsLog = [

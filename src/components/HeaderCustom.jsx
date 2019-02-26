@@ -77,8 +77,8 @@ class HeaderCustom extends Component {
 
 
         window.Axios.post('back/addLogHistory', {
-            'moduleLog': 'Logout',
-            'pageLog': 'Logout',
+            'moduleLog': '登出',
+            'pageLog': '登出',
             'commentLog': '登出',
             'typeLog': "1",
         }).then(function (response) {
