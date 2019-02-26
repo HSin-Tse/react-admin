@@ -8,7 +8,6 @@ import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import {CSVLink} from "react-csv";
-import Toast from "../widget/toast";
 
 const Option = Select.Option;
 const {TextArea} = Input;
@@ -83,22 +82,7 @@ class Basic extends Component {
             });
         });
     }
-    onChangeLe = (value) => {
-        // updateLeverageApply
-        let self = this
 
-        console.log('hcia value', value)
-        window.Axios.post('finance/updateLeverageApply', {
-            id: this.state.detail.id,
-            leverageId: value,
-        }).then((response) => {
-            // self.setState({
-            //     leavgeList: response.data.data,
-            // })
-        });
-
-
-    }
     showModalB = (recodrd) => {
 
         this.requestUserCommentList(recodrd)
@@ -134,19 +118,6 @@ class Basic extends Component {
 
     componentDidMount() {
 
-        // Toast.loading('加载中...', 0, () => {
-        //     // Toast.success('加载完成')
-        // })
-        window.Axios.post('back/addLogHistory', {
-            'moduleLog': '交易管理',
-            'pageLog': '出入金报表',
-            'commentLog': '查看了出入金报表',
-            'typeLog': 2,
-        }).then(function (response) {
-
-
-        });
-
 
         let self = this;
         window.Axios.post('dict/openDict', {
@@ -169,8 +140,6 @@ class Basic extends Component {
 
 
         this.columnss = [
-
-
             {
                 align: 'center',
                 title: '订单编号',
@@ -331,14 +300,13 @@ class Basic extends Component {
                 dataIndex: '序号',
                 key: '序号',
                 align: 'center',
-                render: (text, record, index) =>
-                {
+                render: (text, record, index) => {
 
-                    record.index =this.state.current * this.state.pgsize + index + 1
-                   return (
+                    record.index = this.state.current * this.state.pgsize + index + 1
+                    return (
 
-                       <span>{this.state.current * this.state.pgsize + index + 1}</span>
-                   )
+                        <span>{this.state.current * this.state.pgsize + index + 1}</span>
+                    )
                 }
             },
             {
@@ -499,7 +467,8 @@ class Basic extends Component {
                 dataIndex: '查看',
                 key: '查看',
                 render: (text, record) => (
-                    <Button size={'small'} style={{background: '#FDD000'}}onClick={() => this.showOPDAyModal2(record)}>日志</Button>
+                    <Button size={'small'} style={{background: '#FDD000'}}
+                            onClick={() => this.showOPDAyModal2(record)}>日志</Button>
                 )
 
             }];
@@ -580,7 +549,6 @@ class Basic extends Component {
 
     };
     changePageComment = (page) => {
-        // page = page - 1
         this.setState({
             currentComment: page,
         }, () => {
@@ -630,9 +598,8 @@ class Basic extends Component {
         })
     }
     changePage = (page) => {
-        console.log('hcia page', page)
         this.setState({
-            current: page ,
+            current: page,
         }, () => {
             this.requestPage()
         })
@@ -669,7 +636,6 @@ class Basic extends Component {
     }
     handleOk = () => {
         var mStatus = this.state.modeState == '正常' ? 1 : this.state.modeState == '禁止登陆' ? 2 : 3;
-        // var reasonType = mStatus ==2?
         let self = this;
         self.setState({
             loadFor: true
@@ -703,123 +669,11 @@ class Basic extends Component {
     }
 
     render() {
-        const {selectedRowKeys} = this.state;
-        const hasSelected = selectedRowKeys.length > 0;
-        const rowSelection = {
-            selectedRowKeys,
-            onChange: this.onSelectChange,
-        };
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 {/*<div>userList query :{JSON.stringify(this.state.userList)}</div>*/}
-                {/*this.state.selectedRowKeys.length > 0*/}
-                <Modal
-                    width={500}
-                    title={this.state.modeState == '正常' ? '恢复正常' : this.state.modeState}
-                    onCancel={(e) => {
-                        this.setState({
-                            visibleB: false,
-                        });
-                    }}
-                    visible={this.state.visibleB}
 
-                    footer={[
-                        <Popconfirm title="确认？" onConfirm={this.handleOk}
-                                    okText="Yes"
-                                    cancelText="No">
-                            <Button type="normal" key="submit">通過</Button>
-                        </Popconfirm>,
-                        <Popconfirm title="拒绝？"
-                                    onConfirm={this.handleReject} e
-                                    okText="Yes"
-                                    cancelText="No">
-                            <Button type="normal" key="back">拒絕</Button>
-                        </Popconfirm>
-                    ]}
-                >
-                    <Card
-
-                        title={'账户：' + this.state.detail.accountNo}
-                        bordered={true}>
-
-                        <div>
-                            <Row style={{marginTop: 20}}>
-                                <Col style={{textAlign: 'right'}} span={10}>当前杠杆:</Col>
-                                <Col style={{textAlign: 'center'}} span={14}>{this.state.detail.targetLeverage}</Col>
-                            </Row>
-                            <Row style={{marginTop: 20}}>
-                                <Col style={{textAlign: 'right'}} span={10}>余额:</Col>
-                                <Col style={{textAlign: 'center'}} span={14}>{this.state.detail.cashBalance}</Col>
-                            </Row>
-
-                            <Row style={{marginTop: 20}}>
-                                <Col style={{textAlign: 'right'}} span={10}>杠杆修改:</Col>
-                                <Col style={{textAlign: 'center'}} span={14}>
-                                    <Select
-                                        onChange={this.onChangeLe}
-                                        defaultValue={this.state.detail.targetLeverage}
-                                        style={{width: 100, marginLeft: 0}}>
-                                        {this.state.leavgeList.map(ccty => <Option
-                                            value={ccty.id} key={ccty.leverage}>1:{ccty.leverage}</Option>)}
-                                    </Select>
-                                </Col>
-                            </Row>
-                            <Row style={{marginTop: 20}}>
-                                <Col style={{textAlign: 'right'}} span={10}>保证金占比:</Col>
-                                <Col style={{textAlign: 'center'}} span={14}>{this.state.detail.marginLevel}</Col>
-                            </Row>
-                            <Row style={{marginTop: 20}}>
-                                <Col span={24}>处理备注：</Col>
-                                <Col style={{marginTop: 20}} span={24}>
-                                <TextArea value={this.state.detail.comment}
-                                          onChange={this.changeNote}
-                                          rows={4}></TextArea>
-                                </Col>
-                            </Row>
-
-                            <Table rowKey="id"
-                                   columns={[
-                                       {
-                                           title: '时间',
-                                           dataIndex: 'createDate',
-                                           key: 'operationDiary_Date',
-                                           render: (text, record) => (
-                                               <span>{record.createDate}</span>),
-                                       }, {
-                                           title: 'IP',
-                                           dataIndex: 'IP',
-                                           key: 'IP',
-                                           render: (text, record) => (
-                                               <span>{record.ipAddress}</span>),
-                                       }, {
-                                           title: '操作人',
-                                           width: 130,
-                                           dataIndex: 'bkUserName',
-                                           key: 'operationDiary_User',
-                                           render: (text, record) => (
-                                               <span>{record.bkUserName}</span>),
-                                       }, {
-                                           title: '操作',
-                                           dataIndex: 'comment',
-                                           key: 'operationDiary_Status',
-                                           render: (text, record) => (
-                                               <span>{record.comment}</span>),
-                                       }]}
-
-                                   dataSource={this.state.operationDiaryHistory}
-                                   loading={this.state.loadingComment}
-                                   pagination={{
-                                       total: this.state.totalpageComments * this.state.pgsize,
-                                       pageSize: this.state.pgsize,
-                                       onChange: this.changePageComment,
-                                   }}
-                            />
-                        </div>
-                    </Card>
-
-
-                </Modal>
 
                 <Modal
                     bodyStyle={{
@@ -875,49 +729,49 @@ class Basic extends Component {
 
                 </Modal>
 
-                <Modal
-                    title={this.state.modeState == '正常' ? '恢复正常' : this.state.modeState}
-                    onCancel={this.handleCancel}
-                    visible={this.state.visibleOpM}
-                    footer={[
-                        <Button key="back" onClick={this.handleCancel}>取消操作</Button>,
-                        <Button loading={this.state.loadFor} key="submit" type="primary"
-                                onClick={() => this.handleOk()}>
-                            提交
-                        </Button>,
-                    ]}
-                >
-                    <div>
-                        {this.state.modeState == '正常' ? <span>确认当前用户账户恢复正常</span> : null}
-                        {this.state.modeState == '禁止登陆' ? <span>请选择禁止登录原因</span> : null}
-                        {this.state.modeState == '禁止交易' ? <span>禁止交易</span> : null}
-                    </div>
-                    <div>
+                {/*<Modal*/}
+                {/*title={this.state.modeState == '正常' ? '恢复正常' : this.state.modeState}*/}
+                {/*onCancel={this.handleCancel}*/}
+                {/*visible={this.state.visibleOpM}*/}
+                {/*footer={[*/}
+                {/*<Button key="back" onClick={this.handleCancel}>取消操作</Button>,*/}
+                {/*<Button loading={this.state.loadFor} key="submit" type="primary"*/}
+                {/*onClick={() => this.handleOk()}>*/}
+                {/*提交*/}
+                {/*</Button>,*/}
+                {/*]}*/}
+                {/*>*/}
+                {/*<div>*/}
+                {/*{this.state.modeState == '正常' ? <span>确认当前用户账户恢复正常</span> : null}*/}
+                {/*{this.state.modeState == '禁止登陆' ? <span>请选择禁止登录原因</span> : null}*/}
+                {/*{this.state.modeState == '禁止交易' ? <span>禁止交易</span> : null}*/}
+                {/*</div>*/}
+                {/*<div>*/}
 
-                        {this.state.modeState == '禁止登陆' ?
-                            <Select style={{width: 200, marginTop: 20}} defaultValue='无效的邮箱'
-                                    onChange={(value) => this.forbitChange(value)}>
-                                {this.state.suspend_reason_type.map(ccty => <Option
-                                    value={ccty.value} key={ccty.value}>{ccty.name}</Option>)}
-                            </Select> : null}
-                    </div>
-
-
-                </Modal>
-
-                <Modal
-                    title="备注详情"
-                    onCancel={this.handleCancel}
-                    visible={this.state.visible}
-                    footer=''
-                >
-                    <Table rowKey="id"
-                           columns={this.nodeColumns}
-                           dataSource={this.state.nodeList}// nodeList
-                    />
+                {/*{this.state.modeState == '禁止登陆' ?*/}
+                {/*<Select style={{width: 200, marginTop: 20}} defaultValue='无效的邮箱'*/}
+                {/*onChange={(value) => this.forbitChange(value)}>*/}
+                {/*{this.state.suspend_reason_type.map(ccty => <Option*/}
+                {/*value={ccty.value} key={ccty.value}>{ccty.name}</Option>)}*/}
+                {/*</Select> : null}*/}
+                {/*</div>*/}
 
 
-                </Modal>
+                {/*</Modal>*/}
+
+                {/*<Modal*/}
+                {/*title="备注详情"*/}
+                {/*onCancel={this.handleCancel}*/}
+                {/*visible={this.state.visible}*/}
+                {/*footer=''*/}
+                {/*>*/}
+                {/*<Table rowKey="id"*/}
+                {/*columns={this.nodeColumns}*/}
+                {/*dataSource={this.state.nodeList}// nodeList*/}
+                {/*/>*/}
+
+
+                {/*</Modal>*/}
                 <h2 style={{marginTop: 15}}>
                     出入金报表
                 </h2>
@@ -928,7 +782,8 @@ class Basic extends Component {
 
                       extra={
 
-                          <CSVLink filename={new Date()+"出入金报表.csv"} data={this.state.userList} headers={this.columnss}>
+                          <CSVLink filename={new Date() + "出入金报表.csv"} data={this.state.userList}
+                                   headers={this.columnss}>
                               <Button>下载当前列表</Button>
                           </CSVLink>
                           // <Button type="default"
