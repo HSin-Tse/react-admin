@@ -94,12 +94,12 @@ export default class PotentialUser extends Component {
                 render: (text, record) => (
                     <span>{record.comment}</span>),
             }]
-        window.Axios.post('back/addLogHistory', {
-            'moduleLog': '用户管理',
-            'pageLog': 'Leads管理',
-            'commentLog': '查看了Leads管理',
-            'typeLog': 2,
-        })
+        // window.Axios.post('back/addLogHistory', {
+        //     'moduleLog': '用户管理',
+        //     'pageLog': 'Leads管理',
+        //     'commentLog': '查看了Leads管理',
+        //     'typeLog': 2,
+        // })
 
 
         document.addEventListener("keydown", this.handleKeyPress, false);

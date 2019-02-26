@@ -966,12 +966,12 @@ class CustomerSummary extends Component {
         }, () => {
 
 
-            window.Axios.post('back/addLogHistory', {
-                'moduleLog': '用户管理',
-                'pageLog': '用户总表',
-                'commentLog': '查看备注',
-                'typeLog': 3,
-            });
+            // window.Axios.post('back/addLogHistory', {
+            //     'moduleLog': '用户管理',
+            //     'pageLog': '用户总表',
+            //     'commentLog': '查看备注',
+            //     'typeLog': 3,
+            // });
 
             window.Axios.post('auth/getUserCommentList', {
                 'belongUserId': this.state.opDayRecord.belongUserId,
@@ -990,12 +990,12 @@ class CustomerSummary extends Component {
     handleAddComment = (e) => {
         let self = this;
 
-        window.Axios.post('back/addLogHistory', {
-            'moduleLog': '用户管理',
-            'pageLog': '用户总表',
-            'commentLog': '添加备注',
-            'typeLog': 3,
-        });
+        // window.Axios.post('back/addLogHistory', {
+        //     'moduleLog': '用户管理',
+        //     'pageLog': '用户总表',
+        //     'commentLog': '添加备注',
+        //     'typeLog': 3,
+        // });
 
 
         window.Axios.post('auth/addUserComment', {
@@ -1031,12 +1031,12 @@ class CustomerSummary extends Component {
         var self = this
 
 
-        window.Axios.post('back/addLogHistory', {
-            'moduleLog': '用户管理',
-            'pageLog': '用户总表',
-            'commentLog': '解绑',
-            'typeLog': 3,
-        });
+        // window.Axios.post('back/addLogHistory', {
+        //     'moduleLog': '用户管理',
+        //     'pageLog': '用户总表',
+        //     'commentLog': '解绑',
+        //     'typeLog': 3,
+        // });
 
 
         window.Axios.post('auth/getUserCommentList', {

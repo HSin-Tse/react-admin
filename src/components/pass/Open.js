@@ -89,15 +89,15 @@ class Basic extends Component {
     componentDidMount() {
 
 
-        window.Axios.post('back/addLogHistory', {
-            'moduleLog': '审核管理',
-            'pageLog': '开户审核',
-            'commentLog': '查看了开户审核',
-            'typeLog': 2,
-        }).then(function (response) {
-
-
-        });
+        // window.Axios.post('back/addLogHistory', {
+        //     'moduleLog': '审核管理',
+        //     'pageLog': '开户审核',
+        //     'commentLog': '查看了开户审核',
+        //     'typeLog': 2,
+        // }).then(function (response) {
+        //
+        //
+        // });
 
         this.columnsLog = [
             {
