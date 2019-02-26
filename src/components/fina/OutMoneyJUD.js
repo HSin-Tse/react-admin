@@ -33,7 +33,7 @@ class Basic extends Component {
             accountCurrency: '',
             outdate: '',
             accountNo: '',
-            name: '',
+            name: '---',
             orderNo: '',
             broker: '',
             province: '',
