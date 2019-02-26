@@ -2,10 +2,9 @@ export default {
     menus: [ // 菜单相关路由
 
 
+
+
         {
-            tk: 'dash', key: '/app/devboard/index:catch',
-            title: 'dev', icon: 'user', component: 'DEVhboard'
-        }, {
             tk: 'dash', key: '/app/dashboard/index',
             title: '欢迎', icon: 'user', component: 'Dashboard'
         },
