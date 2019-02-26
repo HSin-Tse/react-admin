@@ -129,20 +129,18 @@ export default class BlackList extends Component {
     componentDidMount() {
 
 
-        window.Axios.post('back/addLogHistory', {
-            'moduleLog': '权限管理',
-            'pageLog': '操作日志',
-            'commentLog': '查看了操作日志',
-            'typeLog': 2,
-        }).then(function (response) {
-
-
-        });
+        // window.Axios.post('back/addLogHistory', {
+        //     'moduleLog': '权限管理',
+        //     'pageLog': '操作日志',
+        //     'commentLog': '查看了操作日志',
+        //     'typeLog': 2,
+        // }).then(function (response) {
+        //
+        //
+        // });
 
         document.addEventListener("keydown", this.handleKeyPress, false);
 
-
-        console.log('hcia  Black this.props', this.props.pg)
 
         this.setState({
             nowKey: '3',
