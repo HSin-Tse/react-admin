@@ -529,11 +529,11 @@ class Basic extends Component {
                                             style={{margin: 5, width: 220}}
                                             placeholder=""/></span>
                                     </div>
-                                    <div style={ssdds}>
-                                        <span style={{fontSize: '13px'}}>备注:</span>
-                                        <span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}
-                                                                                placeholder=""/></span>
-                                    </div>
+                                    {/*<div style={ssdds}>*/}
+                                        {/*<span style={{fontSize: '13px'}}>备注:</span>*/}
+                                        {/*<span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}*/}
+                                                                                {/*placeholder=""/></span>*/}
+                                    {/*</div>*/}
 
 
                                     <div style={{marginTop: '48px'}}>
