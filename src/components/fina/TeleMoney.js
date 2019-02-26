@@ -164,12 +164,12 @@ class Basic extends Component {
 
 
         var self = this
-        window.Axios.post('back/addLogHistory', {
-            'moduleLog': '财务管理',
-            'pageLog': '入金审核',
-            'commentLog': '查看了入金审核',
-            'typeLog': 2,
-        })
+        // window.Axios.post('back/addLogHistory', {
+        //     'moduleLog': '财务管理',
+        //     'pageLog': '入金审核',
+        //     'commentLog': '查看了入金审核',
+        //     'typeLog': 2,
+        // })
         this.columns =
 
 

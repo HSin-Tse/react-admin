@@ -71,15 +71,15 @@ class CustomerSummary extends Component {
 
     componentDidMount() {
 
-        window.Axios.post('back/addLogHistory', {
-            'moduleLog': '用户管理',
-            'pageLog': 'Leads用户总表',
-            'commentLog': '查看了Leads用户总表',
-            'typeLog': 2,
-        }).then(function (response) {
-
-
-        });
+        // window.Axios.post('back/addLogHistory', {
+        //     'moduleLog': '用户管理',
+        //     'pageLog': 'Leads用户总表',
+        //     'commentLog': '查看了Leads用户总表',
+        //     'typeLog': 2,
+        // }).then(function (response) {
+        //
+        //
+        // });
 
         document.addEventListener("keydown", this.handleKeyPressOOP, false);
 
