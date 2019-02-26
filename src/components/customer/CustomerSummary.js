@@ -716,12 +716,12 @@ class CustomerSummary extends Component {
                                         }
 
 
-                                        window.Axios.post('back/addLogHistory', {
-                                            'moduleLog': '用户管理',
-                                            'pageLog': '用户总表',
-                                            'commentLog': '重置交易密码',
-                                            'typeLog': 3,
-                                        });
+                                        // window.Axios.post('back/addLogHistory', {
+                                        //     'moduleLog': '用户管理',
+                                        //     'pageLog': '用户总表',
+                                        //     'commentLog': '重置交易密码',
+                                        //     'typeLog': 3,
+                                        // });
 
 
                                         window.Axios.post('star/updateStarLiveAccount', {
@@ -867,12 +867,12 @@ class CustomerSummary extends Component {
 
                                     // return ;
 
-                                    window.Axios.post('back/addLogHistory', {
-                                        'moduleLog': '用户管理',
-                                        'pageLog': '用户总表',
-                                        'commentLog': '解绑手机号',
-                                        'typeLog': 3,
-                                    });
+                                    // window.Axios.post('back/addLogHistory', {
+                                    //     'moduleLog': '用户管理',
+                                    //     'pageLog': '用户总表',
+                                    //     'commentLog': '解绑手机号',
+                                    //     'typeLog': 3,
+                                    // });
 
 
                                     window.Axios.post('star/unBindStarLiveAccount', {
@@ -921,12 +921,12 @@ class CustomerSummary extends Component {
         }, () => {
 
 
-            window.Axios.post('back/addLogHistory', {
-                'moduleLog': '用户管理',
-                'pageLog': '用户总表',
-                'commentLog': '查看备注',
-                'typeLog': 3,
-            });
+            // window.Axios.post('back/addLogHistory', {
+            //     'moduleLog': '用户管理',
+            //     'pageLog': '用户总表',
+            //     'commentLog': '查看备注',
+            //     'typeLog': 3,
+            // });
 
             window.Axios.post('auth/getUserCommentList', {
                 'belongUserId': this.state.opDayRecord.belongUserId,

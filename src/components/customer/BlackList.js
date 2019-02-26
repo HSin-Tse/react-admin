@@ -108,12 +108,12 @@ export default class BlackList extends Component {
     requestUserCommentList = (record) => {
 
 
-        window.Axios.post('back/addLogHistory', {
-            'moduleLog': '用户管理',
-            'pageLog': '黑名单',
-            'commentLog': '查看了黑名单备注',
-            'typeLog': 3,
-        });
+        // window.Axios.post('back/addLogHistory', {
+        //     'moduleLog': '用户管理',
+        //     'pageLog': '黑名单',
+        //     'commentLog': '查看了黑名单备注',
+        //     'typeLog': 3,
+        // });
 
         var self = this;
         window.Axios.post('/auth/getRecordCommentList', {
@@ -135,15 +135,15 @@ export default class BlackList extends Component {
 
     componentDidMount() {
 
-        window.Axios.post('back/addLogHistory', {
-            'moduleLog': '用户管理',
-            'pageLog': '黑名单',
-            'commentLog': '查看了黑名单',
-            'typeLog': 2,
-        }).then(function (response) {
-
-
-        });
+        // window.Axios.post('back/addLogHistory', {
+        //     'moduleLog': '用户管理',
+        //     'pageLog': '黑名单',
+        //     'commentLog': '查看了黑名单',
+        //     'typeLog': 2,
+        // }).then(function (response) {
+        //
+        //
+        // });
 
         document.addEventListener("keydown", this.handleKeyPress, false);
 
@@ -305,12 +305,12 @@ export default class BlackList extends Component {
 
 
 
-        window.Axios.post('back/addLogHistory', {
-            'moduleLog': '用户管理',
-            'pageLog': '黑名单',
-            'commentLog': '移除黑名单',
-            'typeLog': 3,
-        });
+        // window.Axios.post('back/addLogHistory', {
+        //     'moduleLog': '用户管理',
+        //     'pageLog': '黑名单',
+        //     'commentLog': '移除黑名单',
+        //     'typeLog': 3,
+        // });
 
         let self = this
         window.Axios.post('auth/removeBlackUser', {
@@ -1020,13 +1020,13 @@ export default class BlackList extends Component {
             return
         }
 
-
-        window.Axios.post('back/addLogHistory', {
-            'moduleLog': '用户管理',
-            'pageLog': '黑名单',
-            'commentLog': '添加黑名单',
-            'typeLog': 3,
-        });
+        //
+        // window.Axios.post('back/addLogHistory', {
+        //     'moduleLog': '用户管理',
+        //     'pageLog': '黑名单',
+        //     'commentLog': '添加黑名单',
+        //     'typeLog': 3,
+        // });
 
         window.Axios.post('auth/addBlackUser', {
             'listType': me.state.addBlackType,//1:合规 2:开户 3:交易,
