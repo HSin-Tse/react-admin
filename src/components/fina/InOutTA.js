@@ -729,49 +729,7 @@ class Basic extends Component {
 
                 </Modal>
 
-                {/*<Modal*/}
-                {/*title={this.state.modeState == '正常' ? '恢复正常' : this.state.modeState}*/}
-                {/*onCancel={this.handleCancel}*/}
-                {/*visible={this.state.visibleOpM}*/}
-                {/*footer={[*/}
-                {/*<Button key="back" onClick={this.handleCancel}>取消操作</Button>,*/}
-                {/*<Button loading={this.state.loadFor} key="submit" type="primary"*/}
-                {/*onClick={() => this.handleOk()}>*/}
-                {/*提交*/}
-                {/*</Button>,*/}
-                {/*]}*/}
-                {/*>*/}
-                {/*<div>*/}
-                {/*{this.state.modeState == '正常' ? <span>确认当前用户账户恢复正常</span> : null}*/}
-                {/*{this.state.modeState == '禁止登陆' ? <span>请选择禁止登录原因</span> : null}*/}
-                {/*{this.state.modeState == '禁止交易' ? <span>禁止交易</span> : null}*/}
-                {/*</div>*/}
-                {/*<div>*/}
 
-                {/*{this.state.modeState == '禁止登陆' ?*/}
-                {/*<Select style={{width: 200, marginTop: 20}} defaultValue='无效的邮箱'*/}
-                {/*onChange={(value) => this.forbitChange(value)}>*/}
-                {/*{this.state.suspend_reason_type.map(ccty => <Option*/}
-                {/*value={ccty.value} key={ccty.value}>{ccty.name}</Option>)}*/}
-                {/*</Select> : null}*/}
-                {/*</div>*/}
-
-
-                {/*</Modal>*/}
-
-                {/*<Modal*/}
-                {/*title="备注详情"*/}
-                {/*onCancel={this.handleCancel}*/}
-                {/*visible={this.state.visible}*/}
-                {/*footer=''*/}
-                {/*>*/}
-                {/*<Table rowKey="id"*/}
-                {/*columns={this.nodeColumns}*/}
-                {/*dataSource={this.state.nodeList}// nodeList*/}
-                {/*/>*/}
-
-
-                {/*</Modal>*/}
                 <h2 style={{marginTop: 15}}>
                     出入金报表
                 </h2>
@@ -781,19 +739,10 @@ class Basic extends Component {
                       bodyStyle={{padding: 0, margin: 0}}
 
                       extra={
-
                           <CSVLink filename={new Date() + "出入金报表.csv"} data={this.state.userList}
                                    headers={this.columnss}>
                               <Button>下载当前列表</Button>
                           </CSVLink>
-                          // <Button type="default"
-                          //         onClick={() => {
-                          //
-                          //
-                          //
-                          //         }
-                          //         }>下载当前列表
-                          // </Button>
                       }>
 
                     <Table rowKey="id"
