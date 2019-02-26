@@ -170,10 +170,10 @@ export default class BlackList extends Component {
                     <span>{record.loginName}</span>
                 ),
             }, {
-                title: '项目',
+                title: '模块',
                 align: 'center',
-                dataIndex: '项目',
-                key: '项目',
+                dataIndex: '模块',
+                key: '模块',
                 render: (text, record) => (<span>{record.page}</span>),
             }, {
                 title: '详细内容',
