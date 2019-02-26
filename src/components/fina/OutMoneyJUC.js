@@ -541,7 +541,14 @@ class Basic extends Component {
 
                                         <div style={{display: 'flex'}}>
                                             <Button
+                                                onClick={()=>{
 
+
+                                                    console.log('hcia this.props.match.params.id' , this.props.match.params.id)
+
+                                                    this.props.history.push('/app/fina/juoutma'+this.props.match.params.id)
+
+                                                }}
 
                                                 style={{
                                                     flexGrow: '1',
@@ -549,7 +556,14 @@ class Basic extends Component {
                                                 }}>{steps[0].title}</Button>
 
                                             <Button
+                                                onClick={()=>{
 
+
+                                                    console.log('hcia this.props.match.params.id' , this.props.match.params.id)
+
+                                                    this.props.history.push('/app/fina/juoutmb'+this.props.match.params.id)
+
+                                                }}
 
                                                 style={{
 
@@ -566,7 +580,14 @@ class Basic extends Component {
                                                     margin: 0, fontSize: '18px', height: '48px', width: 150
                                                 }}>{steps[2].title}</Button>
                                             <Button
+                                                onClick={()=>{
 
+
+                                                    console.log('hcia this.props.match.params.id' , this.props.match.params.id)
+
+                                                    this.props.history.push('/app/fina/juoutmd'+this.props.match.params.id)
+
+                                                }}
 
                                                 style={{
                                                     flexGrow: '1',

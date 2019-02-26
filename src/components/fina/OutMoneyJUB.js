@@ -38,6 +38,7 @@ class Basic extends Component {
             broker: '',
             province: '',
             city: '',
+            status: '',
             bankName: '',
             receiver: '',
             cardNo: '',
@@ -63,7 +64,6 @@ class Basic extends Component {
         window.Axios.post('finance/getWithdrawDetail', {
             'id': self.props.match.params.id,
         }).then((response) => {
-            console.log('hcia response', response)
             self.setState({
                 mCashBalance: response.data.data.cashBalance,
                 mBounty: response.data.data.bounty,
@@ -79,6 +79,7 @@ class Basic extends Component {
                 broker: response.data.data.broker,
                 province: response.data.data.province,
                 city: response.data.data.city,
+                status: response.data.data.status,
                 bankName: response.data.data.bankName,
                 bankCode: response.data.data.bankCode,
                 receiver: response.data.data.receiver,
@@ -118,7 +119,7 @@ class Basic extends Component {
                     {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
 
                     <h2 style={{marginTop: 15}}>
-                        {steps[1].title}
+                        {steps[1].title}-{this.state.status}{this.state.status=='5'}
                     </h2>
                     <BreadcrumbCustom first="财务管理" second="出金管理" third={steps[1].title}/>
 
@@ -529,11 +530,11 @@ class Basic extends Component {
                                             style={{margin: 5, width: 220}}
                                             placeholder=""/></span>
                                     </div>
-                                    <div style={ssdds}>
-                                        <span style={{fontSize: '13px'}}>备注:</span>
-                                        <span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}
-                                                                                placeholder=""/></span>
-                                    </div>
+                                    {/*<div style={ssdds}>*/}
+                                        {/*<span style={{fontSize: '13px'}}>备注:</span>*/}
+                                        {/*<span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}*/}
+                                                                                {/*placeholder=""/></span>*/}
+                                    {/*</div>*/}
 
 
                                     <div style={{marginTop: '48px'}}>
@@ -567,7 +568,14 @@ class Basic extends Component {
                                                 }}>{steps[1].title}</Button>
                                             <Button
 
+                                                onClick={()=>{
 
+
+                                                    console.log('hcia this.props.match.params.id' , this.props.match.params.id)
+
+                                                    this.props.history.push('/app/fina/juoutmc'+this.props.match.params.id)
+
+                                                }}
                                                 style={{
 
                                                     flexGrow: '1',
@@ -575,7 +583,14 @@ class Basic extends Component {
                                                 }}>{steps[2].title}</Button>
                                             <Button
 
+                                                onClick={()=>{
 
+
+                                                    console.log('hcia this.props.match.params.id' , this.props.match.params.id)
+
+                                                    this.props.history.push('/app/fina/juoutmd'+this.props.match.params.id)
+
+                                                }}
                                                 style={{
                                                     flexGrow: '1',
                                                     margin: 0, fontSize: '18px', height: '48px', width: 150

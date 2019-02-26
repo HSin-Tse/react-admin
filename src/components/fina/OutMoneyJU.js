@@ -526,7 +526,7 @@ class Basic extends Component {
                                         <span style={{fontSize: '13px'}}><Input
                                             value={this.state.bankName}
                                             style={{margin: 5, width: 220}}
-                                                                                placeholder=""/></span>
+                                            placeholder=""/></span>
                                     </div>
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}><span
@@ -534,7 +534,7 @@ class Basic extends Component {
                                         <span style={{fontSize: '13px'}}><Input
                                             value={this.state.receiver}
                                             style={{margin: 5, width: 220}}
-                                                                                placeholder=""/></span>
+                                            placeholder=""/></span>
                                     </div>
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}><span
@@ -542,12 +542,12 @@ class Basic extends Component {
                                         <span style={{fontSize: '13px'}}><Input
                                             value={this.state.cardNo}
                                             style={{margin: 5, width: 220}}
-                                                                                placeholder=""/></span>
+                                            placeholder=""/></span>
                                     </div>
                                     {/*<div style={ssdds}>*/}
-                                        {/*<span style={{fontSize: '13px'}}>备注:</span>*/}
-                                        {/*<span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}*/}
-                                                                                {/*placeholder=""/></span>*/}
+                                    {/*<span style={{fontSize: '13px'}}>备注:</span>*/}
+                                    {/*<span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}*/}
+                                    {/*placeholder=""/></span>*/}
                                     {/*</div>*/}
 
 
@@ -558,9 +558,6 @@ class Basic extends Component {
                                             <Button
 
 
-
-
-
                                                 style={{
                                                     background: '#F6D147',
                                                     flexGrow: '1',
@@ -568,7 +565,14 @@ class Basic extends Component {
                                                 }}>{steps[0].title}</Button>
 
                                             <Button
+                                                onClick={() => {
 
+
+                                                    console.log('hcia this.props.match.params.id', this.props.match.params.id)
+
+                                                    this.props.history.push('/app/fina/juoutmb' + this.props.match.params.id)
+
+                                                }}
 
                                                 style={{
 
@@ -576,7 +580,14 @@ class Basic extends Component {
                                                     margin: 0, fontSize: '18px', height: '48px', width: 150
                                                 }}>{steps[1].title}</Button>
                                             <Button
+                                                onClick={() => {
 
+
+                                                    console.log('hcia this.props.match.params.id', this.props.match.params.id)
+
+                                                    this.props.history.push('/app/fina/juoutmc' + this.props.match.params.id)
+
+                                                }}
 
                                                 style={{
 
@@ -585,7 +596,14 @@ class Basic extends Component {
                                                 }}>{steps[2].title}</Button>
                                             <Button
 
+                                                onClick={() => {
 
+
+                                                    console.log('hcia this.props.match.params.id', this.props.match.params.id)
+
+                                                    this.props.history.push('/app/fina/juoutmd' + this.props.match.params.id)
+
+                                                }}
                                                 style={{
                                                     flexGrow: '1',
                                                     margin: 0, fontSize: '18px', height: '48px', width: 150
