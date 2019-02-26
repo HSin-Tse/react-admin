@@ -46,8 +46,6 @@ class Basic extends Component {
             visibleB: false,
             loading: false,
             modal2OPDAYVisible: false,
-            modal3OPDAYVisible: false,
-            searchPhone: '',
             totalPage: 1,
             modeState: 1,
             forbiddenValue: 0,
@@ -587,26 +585,7 @@ class Basic extends Component {
             this.requestPage()
         })
     }
-    refleshNowpage = () => {
 
-        let self = this;
-        var result = self.state.selectedRowKeys.map(Number);
-
-        window.Axios.post('star/refreshStarLiveAccount', {
-            idList: result,
-        }).then(function (response) {
-            self.setState({
-                visibleOpM: false,
-                loadFor: false,
-            }, () => {
-                self.requestPage()
-            });
-            message.success('操作成功');
-
-        })
-
-
-    }
     showModal = () => {
         this.setState({
             visible: true,
