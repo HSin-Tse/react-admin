@@ -145,22 +145,44 @@ class Basic extends Component {
 
 
             if (menuInfor.superFlag === 1) {
+                
+                console.log('hcia menuInfor.superFlag' , menuInfor.superFlag)
                 self.setState({
                     availableFlag: true,
                     isCanOP: 1
                 });
             } else {
+
+
                 var isCanOp = menuInfor.menuList.find((item) => {
                     // console.log('hcia  this.props', this.props)
                     return this.props.tk === item.key;
                 });
 
-                // console.log('hcia isCanOp', isCanOp.availableFlag)
+                console.log('hcia availableFlag', isCanOp.availableFlag,(isCanOp.availableFlag === 1))
                 // console.log('hcia isCanOp', isCanOp.availableFlag)
                 self.setState({
+
+
+
                     availableFlag: isCanOp.availableFlag === 1,
                     isCanOP: isCanOp.availableFlag
                 });
+
+
+                var isCanOpJ = menuInfor.menuList.find((item) => {
+                    // console.log('hcia  this.props', this.props)
+                    return 'LIVE_ACCOUNT_MGMT' === item.key;
+                });
+
+                if (isCanOpJ != undefined) {
+                    
+                    console.log('hcia isCanOpJ' , isCanOpJ)
+                    self.setState({
+                        availableFlag: true,
+                        isCanOP: 1
+                    });
+                }
             }
 
 
@@ -339,6 +361,12 @@ class Basic extends Component {
             // content: this.state.changeNoteV,
         })
 
+        if (this.state.isCanOP==1) {
+            this.props.history.push('/app/pass/passopen/detail' + record.id)
+            return
+        }
+
+
         if (!this.state.availableFlag) {
             this.props.history.push('/app/pass/passopen/user' + record.id)
             return
@@ -487,9 +515,9 @@ class Basic extends Component {
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
-                {/*<div>this.state.availableFlag :{JSON.stringify(this.state.availableFlag)}</div>*/}
+                <div>this.state.availableFlag :{JSON.stringify(this.state.availableFlag)}</div>
+                <div>isCanOP :{this.state.isCanOP}</div>
                 {/*<div>this.state.checkedValues :{JSON.stringify(this.state.checkedValues)}</div>*/}
-                {/*<div>isCanOP :{this.state.isCanOP}</div>*/}
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
                 {/*{JSON.stringify(this.props.todps)}*/}
                 <h2 style={{marginTop: 15}}>
