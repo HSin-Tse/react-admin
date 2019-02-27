@@ -367,7 +367,7 @@ class Basic extends Component {
                             }
                         >
                             {/*{record.status}*/}
-                            {record.status == 1 ? '(approved)' : record.status == 2 ? '(pending)' : record.status == 3 ? '(completed)' : '(not approved)'}
+                            {/*{record.status == 1 ? '(approved)' : record.status == 2 ? '(pending)' : record.status == 3 ? '(completed)' : '(not approved)'}*/}
                             {record.completeDate?record.completeDate: ''}
 
                         </Button>
