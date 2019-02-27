@@ -365,7 +365,10 @@ class Basic extends Component {
 
                                 }
                             }
-                        >{record.status == 4 ? '已取消' : record.status == 2 ? '审核中' : (record.status == 7  && !record.completeDate)  ? '已完成' : '审核中'}
+                        >
+                            {/*{record.status}*/}
+                            {record.status == 1 ? '(approved)' : record.status == 2 ? '(pending)' : record.status == 3 ? '(completed)' : '(not approved)'}
+                            {record.completeDate?record.completeDate: ''}
 
                         </Button>
 
