@@ -25,6 +25,7 @@ class Basic extends Component {
             leavgeList: [],
             mCashBalance: '',
             mBounty: '',
+            status: '',
             bankCode: '',
             phoneNumber: '',
             totalProcessWithdraw: '',
@@ -79,6 +80,7 @@ class Basic extends Component {
                 outdate: response.data.data.date,
                 accountNo: response.data.data.accountNo,
                 name: response.data.data.name,
+                status: response.data.data.status,
                 orderNo: response.data.data.orderNo,
                 phoneNumber: response.data.data.phoneNumber,
                 broker: response.data.data.broker,
@@ -134,7 +136,7 @@ class Basic extends Component {
                     {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
 
                     <h2 style={{marginTop: 15}}>
-                        {steps[0].title}
+                        {steps[0].title}-{this.state.status}{this.state.status == '5'}
                     </h2>
                     <BreadcrumbCustom first="财务管理" second="出金管理" third={steps[0].title}/>
 

@@ -26,6 +26,7 @@ class Basic extends Component {
             mBounty: '',
             bankCode: '',
             phoneNumber: '',
+            status: '',
             totalProcessWithdraw: '',
             totalDeposit: '',
             mAccountAmount: '',
@@ -79,6 +80,7 @@ class Basic extends Component {
                 broker: response.data.data.broker,
                 province: response.data.data.province,
                 city: response.data.data.city,
+                status: response.data.data.status,
                 bankName: response.data.data.bankName,
                 bankCode: response.data.data.bankCode,
                 receiver: response.data.data.receiver,
@@ -118,7 +120,7 @@ class Basic extends Component {
                     {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
 
                     <h2 style={{marginTop: 15}}>
-                        {steps[2].title}
+                       {steps[2].title}-{this.state.status}
                     </h2>
                     <BreadcrumbCustom first="财务管理" second="出金管理" third={steps[2].title}/>
 
