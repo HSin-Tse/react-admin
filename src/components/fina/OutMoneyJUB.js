@@ -651,6 +651,7 @@ class Basic extends Component {
                                                                 console.log('hcia response', response)
 
                                                                 message.success('操作成功')
+                                                                self.props.history.push('/app/fina/juoutmc' + this.props.match.params.id)
 
                                                             })
 
