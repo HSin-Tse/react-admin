@@ -287,6 +287,8 @@ class CustomerSummary extends Component {
                     <div>
                         <Button disabled={!record.belongUserId} size={'small'} style={{background: '#FDD000'}}
                                 onClick={() => this.showModalNote(record)}>添加备注</Button>
+
+
                         <Button disabled={!record.belongUserId} size={'small'} style={{background: '#FDD000'}}
                                 onClick={() => this.showModalOPDAY(record)}>日志</Button>
                     </div>
@@ -434,31 +436,6 @@ class CustomerSummary extends Component {
                 </Card>
 
 
-                {/*<Modal*/}
-                {/*// width={'100%'}*/}
-                {/*title="添加备注"*/}
-                {/*visible={this.state.NoteModalVisible2}*/}
-                {/*onOk={this.handleAddComment}*/}
-                {/*onCancel={this.handleCancel}*/}
-                {/*okText="提交"*/}
-                {/*cancelText="取消">*/}
-                {/*<TextArea rows={4}*/}
-                {/*value={this.state.theComment}*/}
-                {/*onChange={(e) => {*/}
-                {/*let comment = e.target.value;*/}
-                {/*this.setState({*/}
-                {/*theComment: comment*/}
-                {/*});*/}
-                {/*}}*/}
-                {/*placeholder="在这里填写回访次数以及备注信息"/>*/}
-                {/*<Table*/}
-                {/*style={{marginTop: 15}}*/}
-                {/*bordered*/}
-                {/*rowKey="id"*/}
-                {/*columns={this.modalOPDayL2}*/}
-                {/*dataSource={this.state.operationDiaryHistory}*/}
-                {/*/>*/}
-                {/*</Modal>*/}
 
                 <Modal
                     bodyStyle={{

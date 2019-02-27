@@ -19,6 +19,7 @@ class Basic extends Component {
             selectedRowKeys: [],
             visible: false,
             visibleOpM: false,
+            NoteModalVisible2: true,
             date: new Date(),
             userList: [],
             loading: false,
@@ -38,13 +39,50 @@ class Basic extends Component {
         };
     }
 
+    handleAddComment = (e) => {
+        let self = this;
+        window.Axios.post('auth/addRecordComment', {
+            id: self.state.theBelongUserId,
+            commentType: 6,
+            content: self.state.theComment,
+        }).then(() => {
+            message.success('操作成功')
+        })
+
+        this.setState({
+            NoteModalVisible2: false,
+            modal2Visible1: false,
+        });
+    }
+
+
+    showModalNote = (record) => {
+        this.requestUserCommentList(record)
+        let id = record.id
+        var self = this
+
+        self.setState({
+            opDayRecord: record,
+            theComment: ''
+        }, () => {
+
+            self.setState({
+                theBelongUserId: id,
+                NoteModalVisible2: true,
+            });
+        });
+
+
+    }
+
+
     requestUserCommentList = (record) => {
 
 
         var self = this;
         window.Axios.post('/auth/getRecordCommentList', {
             id: record.id,
-            commentType: 3,
+            commentType: 6,
             pageNo: this.state.currentComment,
             pageSize: this.state.pgsize,
         }).then(function (response) {
@@ -281,61 +319,13 @@ class Basic extends Component {
                                 sss = record.status == 4 ? 'b' : record.status == 6 ? 'b' : record.status == 5 ? 'b' : record.status == 7 ? 'd' : record.status == 8 ? 'c' : record.status == 9 ? 'c' : 'a'
 
 
-                                this.props.history.push('/app/fina/juoutm'+sss + record.id)
+                                this.props.history.push('/app/fina/juoutm' + sss + record.id)
 
 
                             }}> {record.status == 0 ? '提交成功(Pending)' : record.status == 1 ? '结算审核通过(Accounts OK)' : record.status == 2 ? '结算审核暂停(Suspend)' : record.status == 3 ? '结算审核失败(Failure)' : record.status == 4 ? '风险审核通过(Accepted)' : record.status == 5 ? '风险审核暂停(Suspend)' : record.status == 6 ? '风险审核失败(Failure)' : record.status == 7 ? '渠道下发通过(Completed)' : record.status == 8 ? '渠道下发暂停(Suspend)' : record.status == 9 ? '渠道下发失败(Failure)' : '??'}
 
                         </Button>
 
-                        {/*<Button*/}
-                            {/*disabled={record.status != 2 && record.status != 0}*/}
-
-                            {/*size={'small'}*/}
-                            {/*style={{display: this.state.isCanOPA ? '' : 'none', width: 70, background: '#FDD000'}}*/}
-                            {/*onClick={() => {*/}
-
-                                {/*console.log('hcia record.id', record.id)*/}
-                                {/*this.props.history.push('/app/fina/juoutma' + record.id)*/}
-                            {/*}}>结算审核*/}
-
-                        {/*</Button>*/}
-                        {/*<Button*/}
-                            {/*disabled={record.status != 5 && record.status != 1}*/}
-
-                            {/*size={'small'}*/}
-                            {/*style={{display: this.state.isCanOPB ? '' : 'none', width: 70, background: '#FDD000'}}*/}
-                            {/*onClick={() => {*/}
-                                {/*this.props.history.push('/app/fina/juoutmb' + record.id)*/}
-                            {/*}}>风险审核*/}
-
-                        {/*</Button>*/}
-
-                        {/*<Button*/}
-                            {/*disabled={record.status != 8 && record.status != 4}*/}
-
-                            {/*size={'small'}*/}
-                            {/*style={{display: this.state.isCanOPC ? '' : 'none', width: 70, background: '#FDD000'}}*/}
-                            {/*onClick={() => {*/}
-                                {/*this.props.history.push('/app/fina/juoutmc' + record.id)*/}
-                            {/*}}>渠道下发*/}
-
-                        {/*</Button>*/}
-                        {/*<Button*/}
-                            {/*disabled={record.status != 7}*/}
-                            {/*size={'small'}*/}
-                            {/*style={{display: this.state.isCanOPD ? '' : 'none', width: 70, background: '#FDD000'}}*/}
-                            {/*onClick={() => {*/}
-
-                                {/*console.log('hcia 出金完成 go',)*/}
-
-                                {/*this.props.history.push('/app/fina/juoutmd' + record.id)*/}
-                            {/*}}>出金完成*/}
-
-                        {/*</Button>*/}
-                        {/*<Button size={'small'} style={{width: 70, background: '#FDD000'}}*/}
-                        {/*onClick={() => this.showOPDAyModal2(record)}>已成功*/}
-                        {/*</Button>*/}
 
                     </div>
                 ),
@@ -536,6 +526,95 @@ class Basic extends Component {
                         }}
                     />
                 </Card>
+
+                <Modal
+                    bodyStyle={{
+                        width: '600px',
+
+                        background: 'white',
+                        padding: 0,
+                        margin: 0,
+                    }}
+                    onCancel={() => {
+                        this.setState({
+                            visible: false,
+                            modal2OPDAYVisible: false,
+                        });
+                    }}
+                    closable={false}
+                    footer={null}
+                    // onCancel={this.handleCancel}
+                    visible={this.state.modal2OPDAYVisible}
+
+
+                >
+
+                    <div style={{borderRadius: '4px'}}>
+                        <div style={{
+                            alignItems: 'center',
+                            justifyContent: 'center', height: 48, display: 'flex', padding: 0, background: '#FDD000'
+                        }}>
+                            <span style={{
+                                fontSize: 18,
+                                fontFamily: 'PingFangSC-Medium',
+                                fontWeight: 500,
+                                color: 'rgba(51,51,51,1)'
+                            }}>{'异常备注'}
+                            </span>
+                        </div>
+
+                        <TextArea
+                            style={{marginTop: "20px", width: '560px', marginLeft: "20px", marginRight: "20px"}}
+
+                            rows={4}
+                            value={this.state.theComment}
+                            onChange={(e) => {
+                                let comment = e.target.value;
+                                this.setState({
+                                    theComment: comment
+                                });
+                            }}
+                            placeholder="异常备注"/>
+                        <Table
+                            style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}
+                            bordered
+                            rowKey="id"
+                            columns={this.modalOPDayL2}
+                            dataSource={this.state.operationDiaryHistory}
+                        />
+
+                        <div style={{
+                            marginLeft: "80px", marginRight: "80px",
+                            paddingBottom: '48px',
+                            paddingTop: '48px',
+                            justifyContent: 'space-between',
+                            display: 'flex'
+                        }}>
+
+                            <Button
+
+                                onClick={
+                                    this.handleAddComment
+                                }
+                                style={{
+                                    borderRadius: '4px',
+                                    background: '#F6D147',
+                                    width: '180px',
+                                    height: '40px'
+                                }}> 提交 </Button>
+                            <Button onClick={(e) => {
+                                this.setState({
+                                    modal2OPDAYVisible: false,
+                                });
+                            }} style={{borderRadius: '4px', width: '180px', height: '40px'}}> 取消 </Button>
+
+                        </div>
+
+                    </div>
+
+
+                </Modal>
+
 
             </div>
 

@@ -222,12 +222,6 @@ export default class WhiteList extends Component {
     handleremove = (record) => {
 
 
-        // window.Axios.post('back/addLogHistory', {
-        //     'moduleLog': '用户管理',
-        //     'pageLog': '白名单',
-        //     'commentLog': '操作移除',
-        //     'typeLog': 3,
-        // });
 
 
         window.Axios.post('auth/removeWhiteUser', {
@@ -412,21 +406,10 @@ export default class WhiteList extends Component {
     };
 
     render() {
-        const {name, unreadCount} = this.state;
 
         return (
 
             <div id="whiteL">
-                {/*<p>*/}
-                {/*<FormattedMessage*/}
-                {/*id="welcome"*/}
-                {/*defaultMessage={`Hello {hello}, you have {unreadCount, number} {unreadCount, plural,*/}
-                {/*one {message}*/}
-                {/*other {messages}*/}
-                {/*}`}*/}
-                {/*values={{name: <b>{name}</b>, unreadCount}}*/}
-                {/*/>*/}
-                {/*</p>*/}
 
                 <Modal
                     width={370}

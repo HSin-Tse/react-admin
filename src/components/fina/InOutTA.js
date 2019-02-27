@@ -628,6 +628,95 @@ class Basic extends Component {
                 </Modal>
 
 
+                <Modal
+                    bodyStyle={{
+                        width: '600px',
+
+                        background: 'white',
+                        padding: 0,
+                        margin: 0,
+                    }}
+                    onCancel={() => {
+                        this.setState({
+                            visible: false,
+                            NoteModalVisible2: false,
+                        });
+                    }}
+                    closable={false}
+                    footer={null}
+                    // onCancel={this.handleCancel}
+                    visible={this.state.NoteModalVisible2}
+
+
+                >
+
+                    <div style={{borderRadius: '4px'}}>
+                        <div style={{
+                            alignItems: 'center',
+                            justifyContent: 'center', height: 48, display: 'flex', padding: 0, background: '#FDD000'
+                        }}>
+                            <span style={{
+                                fontSize: 18,
+                                fontFamily: 'PingFangSC-Medium',
+                                fontWeight: 500,
+                                color: 'rgba(51,51,51,1)'
+                            }}>{'添加备注'}
+                            </span>
+                        </div>
+
+                        <TextArea
+                            style={{marginTop: "20px", width: '560px', marginLeft: "20px", marginRight: "20px"}}
+
+                            rows={4}
+                            value={this.state.theComment}
+                            onChange={(e) => {
+                                let comment = e.target.value;
+                                this.setState({
+                                    theComment: comment
+                                });
+                            }}
+                            placeholder="在这里填写回访次数以及备注信息"/>
+                        <Table
+                            style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}
+                            bordered
+                            rowKey="id"
+                            columns={this.modalOPDayL2}
+                            dataSource={this.state.operationDiaryHistory}
+                        />
+
+                        <div style={{
+                            marginLeft: "80px", marginRight: "80px",
+                            paddingBottom: '48px',
+                            paddingTop: '48px',
+                            justifyContent: 'space-between',
+                            display: 'flex'
+                        }}>
+
+                            <Button
+
+                                onClick={
+                                    this.handleAddComment
+                                }
+                                style={{
+                                    borderRadius: '4px',
+                                    background: '#F6D147',
+                                    width: '180px',
+                                    height: '40px'
+                                }}> 提交 </Button>
+                            <Button onClick={(e) => {
+                                this.setState({
+                                    NoteModalVisible2: false,
+                                });
+                            }} style={{borderRadius: '4px', width: '180px', height: '40px'}}> 取消 </Button>
+
+                        </div>
+
+                    </div>
+
+
+                </Modal>
+
+
                 <h2 style={{marginTop: 15}}>
                     出入金报表
                 </h2>
