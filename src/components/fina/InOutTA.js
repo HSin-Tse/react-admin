@@ -533,10 +533,12 @@ class Basic extends Component {
             'pageNo': self.state.current,
         }).then(function (response) {
 
+            
+            console.log('hcia response.data.data.list?[]:response.data.data.list' , response.data.data.list==null?[]:response.data.data.list)
             self.setState({
                     totalPage: response.data.data.totalPage,
                     loading: false,
-                    userList: response.data.data.list
+                    userList: response.data.data.list==null?[]:response.data.data.list
                 }
             );
 
