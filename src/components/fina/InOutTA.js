@@ -169,15 +169,6 @@ class Basic extends Component {
             }, {
                 align: 'center',
 
-                title: '经纪商',
-                label: '经纪商',
-                dataIndex: 'broker',
-                key: 'broker',
-                render: (text, record) => (
-                    <span>{record.broker}</span>)
-            }, {
-                align: 'center',
-
                 title: '出入金渠道',
                 label: '出入金渠道',
                 dataIndex: 'channelName',

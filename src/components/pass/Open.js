@@ -515,8 +515,8 @@ class Basic extends Component {
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
-                <div>this.state.availableFlag :{JSON.stringify(this.state.availableFlag)}</div>
-                <div>isCanOP :{this.state.isCanOP}</div>
+                {/*<div>this.state.availableFlag :{JSON.stringify(this.state.availableFlag)}</div>*/}
+                {/*<div>isCanOP :{this.state.isCanOP}</div>*/}
                 {/*<div>this.state.checkedValues :{JSON.stringify(this.state.checkedValues)}</div>*/}
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
                 {/*{JSON.stringify(this.props.todps)}*/}
