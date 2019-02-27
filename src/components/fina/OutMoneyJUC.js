@@ -120,7 +120,7 @@ class Basic extends Component {
                     {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
 
                     <h2 style={{marginTop: 15}}>
-                       {steps[2].title}-{this.state.status}
+                       {steps[2].title}-{this.state.status == 0 ? '提交成功(Pending)' : this.state.status == 1 ? '结算审核通过(Accounts OK)' : this.state.status == 2 ? '结算审核暂停(Suspend)' : this.state.status == 3 ? '结算审核失败(Failure)' : this.state.status == 4 ? '风险审核通过(Accepted)' : this.state.status == 5 ? '风险审核暂停(Suspend)' : this.state.status == 6 ? '风险审核失败(Failure)' : this.state.status == 7 ? '渠道下发通过(Completed)' : this.state.status == 8 ? '渠道下发暂停(Suspend)' : this.state.status == 9 ? '渠道下发失败(Failure)' : '??'}
                     </h2>
                     <BreadcrumbCustom first="财务管理" second="出金管理" third={steps[2].title}/>
 
