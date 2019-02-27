@@ -25,8 +25,8 @@ const store = createStore(reducer, applyMiddleware(...middleware));
 // });
 
 
-var baseURL = 'https://crmapi.ixtrader.mobi:18107'
-// var    baseURL= window.location.protocol + '//mobile.nooko.cn:8090/'
+// var baseURL = 'https://crmapi.ixtrader.mobi:18107'
+var    baseURL= window.location.protocol + '//mobile.nooko.cn:8090/'
 
 var Axios = axios.create({
     baseURL
