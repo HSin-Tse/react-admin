@@ -17,6 +17,7 @@ class Basic extends Component {
         super(props);
         this.state = {
             selectedRowKeys: [],
+            operationDiaryHistory: [],
             visible: false,
             visibleOpM: false,
             NoteModalVisible2: true,
@@ -25,6 +26,8 @@ class Basic extends Component {
             loading: false,
             modal2OPDAYVisible: false,
             searchPhone: '',
+            theComment: '',
+            theBelongUserId: '',
             totalPage: 1,
             modeState: 1,
             isCanOPA: false,
@@ -49,31 +52,14 @@ class Basic extends Component {
             message.success('操作成功')
         })
 
+
+
         this.setState({
-            NoteModalVisible2: false,
-            modal2Visible1: false,
+            modal2OPDAYVisible: false,
         });
     }
 
 
-    showModalNote = (record) => {
-        this.requestUserCommentList(record)
-        let id = record.id
-        var self = this
-
-        self.setState({
-            opDayRecord: record,
-            theComment: ''
-        }, () => {
-
-            self.setState({
-                theBelongUserId: id,
-                NoteModalVisible2: true,
-            });
-        });
-
-
-    }
 
 
     requestUserCommentList = (record) => {
@@ -94,14 +80,51 @@ class Basic extends Component {
     }
     showOPDAyModal2 = (recodrd) => {
         this.requestUserCommentList(recodrd)
+
+        var self = this
+
+        let id = recodrd.id
+
+
+        self.setState({
+            theBelongUserId: id,
+        });
+        console.log('hcia id' , id)
+
         this.setState({
             modal2OPDAYVisible: true,
+            theComment: '',
         });
     };
 
     componentDidMount() {
         let self = this;
+        this.modalOPDayL2 = [
+            {
+                title: '操作人',
+                dataIndex: 'comment',
+                key: 'operationDiary_Status',
+                align: 'center',
 
+                render: (text, record) => (
+                    <span>{record.bkUserName}</span>),
+            }, {
+                title: '操作時間',
+                dataIndex: 'bkUserName',
+                key: 'operationDiary_User',
+                align: 'center',
+
+                render: (text, record) => (
+                    <span>{this.timestampToTime(record.createDate)}</span>),
+            }, {
+                title: '备注',
+                dataIndex: 'comment',
+                key: 'operationDiary_Status',
+                align: 'center',
+
+                render: (text, record) => (
+                    <span>{record.comment}</span>),
+            }]
 
         if (localStorage.getItem('infor')) {
 
@@ -530,7 +553,6 @@ class Basic extends Component {
                 <Modal
                     bodyStyle={{
                         width: '600px',
-
                         background: 'white',
                         padding: 0,
                         margin: 0,
@@ -543,7 +565,6 @@ class Basic extends Component {
                     }}
                     closable={false}
                     footer={null}
-                    // onCancel={this.handleCancel}
                     visible={this.state.modal2OPDAYVisible}
 
 
@@ -565,7 +586,6 @@ class Basic extends Component {
 
                         <TextArea
                             style={{marginTop: "20px", width: '560px', marginLeft: "20px", marginRight: "20px"}}
-
                             rows={4}
                             value={this.state.theComment}
                             onChange={(e) => {
