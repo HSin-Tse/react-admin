@@ -332,7 +332,7 @@ class Basic extends Component {
 
                         <Button
 
-                            size={'small'} style={{display: this.state.isCanOPA ? '' : '', background: '#FDD000'}}
+                            size={'small'} style={{ width:'190px', display: this.state.isCanOPA ? '' : '', background: '#FDD000'}}
                             onClick={() => {
 
                                 console.log('hcia record.id', record.id)
