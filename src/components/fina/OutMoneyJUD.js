@@ -126,13 +126,10 @@ class Basic extends Component {
 
 
                     <div style={{
-
                         width: '1200px',
                         background: "white",
                         boxShadow: '0px 0px 20px 0px rgba(123,123,123,0.1)',
                         borderRadius: '4px',
-
-
                     }}>
 
                         <div style={{paddingTop: '36px', marginLeft: '145px', marginRight: '145px'}}>
@@ -532,9 +529,9 @@ class Basic extends Component {
                                             placeholder=""/></span>
                                     </div>
                                     {/*<div style={ssdds}>*/}
-                                        {/*<span style={{fontSize: '13px'}}>备注:</span>*/}
-                                        {/*<span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}*/}
-                                                                                {/*placeholder=""/></span>*/}
+                                    {/*<span style={{fontSize: '13px'}}>备注:</span>*/}
+                                    {/*<span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}*/}
+                                    {/*placeholder=""/></span>*/}
                                     {/*</div>*/}
 
 
@@ -544,12 +541,12 @@ class Basic extends Component {
                                         <div style={{display: 'flex'}}>
                                             <Button
 
-                                                onClick={()=>{
+                                                onClick={() => {
 
 
-                                                    console.log('hcia this.props.match.params.id' , this.props.match.params.id)
+                                                    console.log('hcia this.props.match.params.id', this.props.match.params.id)
 
-                                                    this.props.history.push('/app/fina/juoutma'+this.props.match.params.id)
+                                                    this.props.history.push('/app/fina/juoutma' + this.props.match.params.id)
 
                                                 }}
                                                 style={{
@@ -559,12 +556,12 @@ class Basic extends Component {
 
                                             <Button
 
-                                                onClick={()=>{
+                                                onClick={() => {
 
 
-                                                    console.log('hcia this.props.match.params.id' , this.props.match.params.id)
+                                                    console.log('hcia this.props.match.params.id', this.props.match.params.id)
 
-                                                    this.props.history.push('/app/fina/juoutmb'+this.props.match.params.id)
+                                                    this.props.history.push('/app/fina/juoutmb' + this.props.match.params.id)
 
                                                 }}
                                                 style={{
@@ -574,12 +571,12 @@ class Basic extends Component {
                                                 }}>{steps[1].title}</Button>
                                             <Button
 
-                                                onClick={()=>{
+                                                onClick={() => {
 
 
-                                                    console.log('hcia this.props.match.params.id' , this.props.match.params.id)
+                                                    console.log('hcia this.props.match.params.id', this.props.match.params.id)
 
-                                                    this.props.history.push('/app/fina/juoutmc'+this.props.match.params.id)
+                                                    this.props.history.push('/app/fina/juoutmc' + this.props.match.params.id)
 
                                                 }}
                                                 style={{

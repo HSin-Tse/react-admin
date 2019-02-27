@@ -53,13 +53,10 @@ class Basic extends Component {
         })
 
 
-
         this.setState({
             modal2OPDAYVisible: false,
         });
     }
-
-
 
 
     requestUserCommentList = (record) => {
@@ -89,7 +86,7 @@ class Basic extends Component {
         self.setState({
             theBelongUserId: id,
         });
-        console.log('hcia id' , id)
+        console.log('hcia id', id)
 
         this.setState({
             modal2OPDAYVisible: true,
@@ -332,14 +329,14 @@ class Basic extends Component {
 
                         <Button
 
-                            size={'small'} style={{ width:'190px', display: this.state.isCanOPA ? '' : '', background: '#FDD000'}}
+                            size={'small'}
+                            style={{width: '190px', display: this.state.isCanOPA ? '' : '', background: '#FDD000'}}
                             onClick={() => {
 
                                 console.log('hcia record.id', record.id)
 
 
-                                var sss = 'a'
-                                sss = record.status == 4 ? 'b' : record.status == 6 ? 'b' : record.status == 5 ? 'b' : record.status == 7 ? 'd' : record.status == 8 ? 'c' : record.status == 9 ? 'c' : 'a'
+                                var sss = record.status == 1 ? 'b' : record.status == 2 ? 'a' : record.status == 3 ? 'a' : record.status == 4 ? 'c' : record.status == 5 ? 'b' : record.status == 6 ? 'c' : record.status == 7 ? 'd' : record.status == 8 ? 'c' : record.status == 9 ? 'd' : 'a'
 
 
                                 this.props.history.push('/app/fina/juoutm' + sss + record.id)
