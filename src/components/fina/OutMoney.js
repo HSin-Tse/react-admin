@@ -65,14 +65,13 @@ class Basic extends Component {
         let self = this;
 
 
-
         if (localStorage.getItem('infor')) {
 
 
             var menuInfor = JSON.parse(localStorage.getItem('infor'))
 
-            
-            console.log('hcia menuInfor.superFlag' , menuInfor.superFlag)
+
+            console.log('hcia menuInfor.superFlag', menuInfor.superFlag)
 
             if (menuInfor.superFlag === 1) {
                 self.setState({
@@ -82,14 +81,14 @@ class Basic extends Component {
                     isCanOPD: true,
                 });
             } else {
-                
-                
+
+
                 var isCanOp = menuInfor.menuList.find((item) => {
                     // console.log('hcia  this.props', this.props)
                     return this.props.tk === item.key;
                 });
-                
-                console.log('hcia isCanOp' , isCanOp)
+
+                console.log('hcia isCanOp', isCanOp)
 
                 var chA = isCanOp.childrenMenu.find((item) => {
                     // console.log('hcia  this.props', this.props)
@@ -108,40 +107,40 @@ class Basic extends Component {
                     return item.key === 'WITHDRAW_DETAIL';
                 });
 
-                if(chA.availableFlag==0){
+                if (chA.availableFlag == 0) {
                     self.setState({
                         isCanOPA: true,
                     });
-                }else{
+                } else {
 
                 }
-                if(chB.availableFlag==0){
+                if (chB.availableFlag == 0) {
                     self.setState({
                         isCanOPB: true,
                     });
-                }else{
+                } else {
 
                 }
-                if(chC.availableFlag==0){
+                if (chC.availableFlag == 0) {
                     self.setState({
                         isCanOPC: true,
                     });
-                }else{
+                } else {
 
                 }
-                if(chD.availableFlag==0){
+                if (chD.availableFlag == 0) {
                     self.setState({
                         isCanOPD: true,
                     });
-                }else{
+                } else {
 
                 }
 
 
-                console.log('hcia chA' , this.state.isCanOPA)
-                console.log('hcia chB' , this.state.isCanOPB)
-                console.log('hcia chC' , this.state.isCanOPC)
-                console.log('hcia chD' , this.state.isCanOPD)
+                console.log('hcia chA', this.state.isCanOPA)
+                console.log('hcia chB', this.state.isCanOPB)
+                console.log('hcia chC', this.state.isCanOPC)
+                console.log('hcia chD', this.state.isCanOPD)
             }
 
 
@@ -270,59 +269,72 @@ class Basic extends Component {
                     <div style={{whiteSpace: 'nowrap'}}>
 
 
-
                         <Button
 
-                            size={'small'} style={{display:this.state.isCanOPA?'':'none', background: '#FDD000'}} onClick={() => {
+                            size={'small'} style={{display: this.state.isCanOPA ? '' : '', background: '#FDD000'}}
+                            onClick={() => {
 
-                            console.log('hcia record.id' , record.id)
-                            this.props.history.push('/app/fina/juoutma'+record.id)
-                        }}> {record.status==0?'提交成功(Pending)':record.status==1?'结算审核通过(Accounts OK)':record.status==2?'结算审核暂停(Suspend)':record.status==3?'结算审核失败(Failure)':record.status==4?'风险审核通过(Accepted)':record.status==5?'风险审核暂停(Suspend)':record.status==6?'风险审核失败(Failure)':record.status==7?'渠道下发通过(Completed)':record.status==8?'渠道下发暂停(Suspend)':record.status==9?'渠道下发失败(Failure)':'??'}
+                                console.log('hcia record.id', record.id)
+
+
+                                var sss = 'a'
+                                sss = record.status == 4 ? 'b' : record.status == 6 ? 'b' : record.status == 5 ? 'b' : record.status == 7 ? 'd' : record.status == 8 ? 'c' : record.status == 9 ? 'c' : 'a'
+
+
+                                this.props.history.push('/app/fina/juoutm'+sss + record.id)
+
+
+                            }}> {record.status == 0 ? '提交成功(Pending)' : record.status == 1 ? '结算审核通过(Accounts OK)' : record.status == 2 ? '结算审核暂停(Suspend)' : record.status == 3 ? '结算审核失败(Failure)' : record.status == 4 ? '风险审核通过(Accepted)' : record.status == 5 ? '风险审核暂停(Suspend)' : record.status == 6 ? '风险审核失败(Failure)' : record.status == 7 ? '渠道下发通过(Completed)' : record.status == 8 ? '渠道下发暂停(Suspend)' : record.status == 9 ? '渠道下发失败(Failure)' : '??'}
 
                         </Button>
 
-                        <Button
-                            disabled={record.status!=2   && record.status!=0}
+                        {/*<Button*/}
+                            {/*disabled={record.status != 2 && record.status != 0}*/}
 
-                            size={'small'} style={{display:this.state.isCanOPA?'':'none',width: 70, background: '#FDD000'}} onClick={() => {
-                            
-                            console.log('hcia record.id' , record.id)
-                            this.props.history.push('/app/fina/juoutma'+record.id)
-                        }}>结算审核
+                            {/*size={'small'}*/}
+                            {/*style={{display: this.state.isCanOPA ? '' : 'none', width: 70, background: '#FDD000'}}*/}
+                            {/*onClick={() => {*/}
 
-                        </Button>
-                        <Button
-                            disabled={record.status!=5   &&record.status !=1}
+                                {/*console.log('hcia record.id', record.id)*/}
+                                {/*this.props.history.push('/app/fina/juoutma' + record.id)*/}
+                            {/*}}>结算审核*/}
 
-                            size={'small'} style={{display:this.state.isCanOPB?'':'none',  width: 70, background: '#FDD000'}}
-                                onClick={() => {
-                                    this.props.history.push('/app/fina/juoutmb'+record.id)
-                                }}>风险审核
+                        {/*</Button>*/}
+                        {/*<Button*/}
+                            {/*disabled={record.status != 5 && record.status != 1}*/}
 
-                        </Button>
+                            {/*size={'small'}*/}
+                            {/*style={{display: this.state.isCanOPB ? '' : 'none', width: 70, background: '#FDD000'}}*/}
+                            {/*onClick={() => {*/}
+                                {/*this.props.history.push('/app/fina/juoutmb' + record.id)*/}
+                            {/*}}>风险审核*/}
 
-                        <Button
-                            disabled={record.status!=8   &&  record.status!=4}
+                        {/*</Button>*/}
 
-                            size={'small'} style={{display:this.state.isCanOPC?'':'none',width: 70, background: '#FDD000'}}
-                                onClick={() => {
-                                    this.props.history.push('/app/fina/juoutmc'+record.id)
-                                }}>渠道下发
+                        {/*<Button*/}
+                            {/*disabled={record.status != 8 && record.status != 4}*/}
 
-                        </Button>
-                        <Button
-                            disabled={record.status!=7}
-                            size={'small'} style={{display:this.state.isCanOPD?'':'none',width: 70, background: '#FDD000'}}
-                                onClick={() => {
+                            {/*size={'small'}*/}
+                            {/*style={{display: this.state.isCanOPC ? '' : 'none', width: 70, background: '#FDD000'}}*/}
+                            {/*onClick={() => {*/}
+                                {/*this.props.history.push('/app/fina/juoutmc' + record.id)*/}
+                            {/*}}>渠道下发*/}
 
-                                    console.log('hcia 出金完成 go',)
+                        {/*</Button>*/}
+                        {/*<Button*/}
+                            {/*disabled={record.status != 7}*/}
+                            {/*size={'small'}*/}
+                            {/*style={{display: this.state.isCanOPD ? '' : 'none', width: 70, background: '#FDD000'}}*/}
+                            {/*onClick={() => {*/}
 
-                                    this.props.history.push('/app/fina/juoutmd'+record.id)
-                                }}>出金完成
+                                {/*console.log('hcia 出金完成 go',)*/}
 
-                        </Button>
+                                {/*this.props.history.push('/app/fina/juoutmd' + record.id)*/}
+                            {/*}}>出金完成*/}
+
+                        {/*</Button>*/}
                         {/*<Button size={'small'} style={{width: 70, background: '#FDD000'}}*/}
-                                {/*onClick={() => this.showOPDAyModal2(record)}>已成功*/}
+                        {/*onClick={() => this.showOPDAyModal2(record)}>已成功*/}
                         {/*</Button>*/}
 
                     </div>
@@ -440,7 +452,7 @@ class Basic extends Component {
     changePage = (page) => {
         console.log('hcia page', page)
         this.setState({
-            current: page ,
+            current: page,
         }, () => {
             this.requestPage()
         })
