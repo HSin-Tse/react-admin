@@ -678,6 +678,9 @@ class Basic extends Component {
 
                                                                 message.success('操作成功')
 
+                                                                self.props.history.push('/app/fina/juoutmb' + this.props.match.params.id)
+
+
                                                             })
 
                                                         }}
