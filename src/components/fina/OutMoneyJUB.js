@@ -119,7 +119,7 @@ class Basic extends Component {
                     {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
 
                     <h2 style={{marginTop: 15}}>
-                        {steps[1].title}-{this.state.status}{this.state.status=='5'}
+                        {steps[1].title}-{this.state.status}{this.state.status == '5'}
                     </h2>
                     <BreadcrumbCustom first="财务管理" second="出金管理" third={steps[1].title}/>
 
@@ -531,9 +531,9 @@ class Basic extends Component {
                                             placeholder=""/></span>
                                     </div>
                                     {/*<div style={ssdds}>*/}
-                                        {/*<span style={{fontSize: '13px'}}>备注:</span>*/}
-                                        {/*<span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}*/}
-                                                                                {/*placeholder=""/></span>*/}
+                                    {/*<span style={{fontSize: '13px'}}>备注:</span>*/}
+                                    {/*<span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}*/}
+                                    {/*placeholder=""/></span>*/}
                                     {/*</div>*/}
 
 
@@ -543,12 +543,12 @@ class Basic extends Component {
                                         <div style={{display: 'flex'}}>
                                             <Button
 
-                                                onClick={()=>{
+                                                onClick={() => {
 
 
-                                                    console.log('hcia this.props.match.params.id' , this.props.match.params.id)
+                                                    console.log('hcia this.props.match.params.id', this.props.match.params.id)
 
-                                                    this.props.history.push('/app/fina/juoutma'+this.props.match.params.id)
+                                                    this.props.history.push('/app/fina/juoutma' + this.props.match.params.id)
 
                                                 }}
 
@@ -568,12 +568,12 @@ class Basic extends Component {
                                                 }}>{steps[1].title}</Button>
                                             <Button
 
-                                                onClick={()=>{
+                                                onClick={() => {
 
 
-                                                    console.log('hcia this.props.match.params.id' , this.props.match.params.id)
+                                                    console.log('hcia this.props.match.params.id', this.props.match.params.id)
 
-                                                    this.props.history.push('/app/fina/juoutmc'+this.props.match.params.id)
+                                                    this.props.history.push('/app/fina/juoutmc' + this.props.match.params.id)
 
                                                 }}
                                                 style={{
@@ -583,12 +583,12 @@ class Basic extends Component {
                                                 }}>{steps[2].title}</Button>
                                             <Button
 
-                                                onClick={()=>{
+                                                onClick={() => {
 
 
-                                                    console.log('hcia this.props.match.params.id' , this.props.match.params.id)
+                                                    console.log('hcia this.props.match.params.id', this.props.match.params.id)
 
-                                                    this.props.history.push('/app/fina/juoutmd'+this.props.match.params.id)
+                                                    this.props.history.push('/app/fina/juoutmd' + this.props.match.params.id)
 
                                                 }}
                                                 style={{
@@ -608,22 +608,6 @@ class Basic extends Component {
                                                     <Checkbox value={3}>是否有爆仓风险</Checkbox>
                                                 </div>
 
-
-                                                {/*<div style={{*/}
-                                                {/*marginTop: 10,*/}
-                                                {/*marginBottom: 10,*/}
-                                                {/*}}>请注意：*/}
-                                                {/*</div>*/}
-                                                {/*<div>*/}
-                                                {/*1.只有在提交此请求后才能将钱汇到客户银行账户。*/}
-
-                                                {/*</div>*/}
-                                                {/*<div>*/}
-                                                {/*2.当按下“批准出金”按钮时，出金金额将从客户的交易账户中自动扣除。*/}
-                                                {/*</div>*/}
-                                                {/*<div>*/}
-                                                {/*此请求将被关闭并可在归档中查看。*/}
-                                                {/*</div>*/}
 
                                                 <TextArea
                                                     style={{
