@@ -256,6 +256,15 @@ class PassOpenD extends Component {
             return
         }
 
+        
+        console.log('hcia this.state.mfundsSource' , this.state.mfundsSource)
+
+        if(this.state.mfundsSource =='Benefits/Borrowing')
+        {
+            message.error('收益/借贷!')
+            return
+        }
+
         this.openOK()
     };
     timestampToTime = (timestamp) => {
