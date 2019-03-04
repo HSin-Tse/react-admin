@@ -76,6 +76,7 @@ class Basic extends Component {
             let self = this;
 
             var menuInfor = JSON.parse(localStorage.getItem('infor'))
+            console.log('hcia menuInfor' , menuInfor)
 
 
             console.log('hcia menuInfor.superFlag', menuInfor.superFlag)
@@ -96,7 +97,7 @@ class Basic extends Component {
 
                 console.log('hcia isCanOp', isCanOp)
 
-                console.log('hcia isCanOp', isCanOp)
+
 
                 var chA = isCanOp.childrenMenu.find((item) => {
                     // console.log('hcia  this.props', this.props)
