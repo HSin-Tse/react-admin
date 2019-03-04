@@ -13,7 +13,20 @@ const {TextArea} = Input;
 const Option = Select.Option;
 
 class Basic extends Component {
+    timestampToTime = (timestamp) => {
+        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
+        const year = dateObj.getFullYear() // 获取年，
+        const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
+        const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
+        const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
+        const minutes = this.pad(dateObj.getMinutes()) // 获取分
+        const seconds = this.pad(dateObj.getSeconds()) // 获取秒
+        return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
+    };
 
+    pad = (str) => {
+        return +str >= 10 ? str : '0' + str
+    };
     constructor(props) {
         super(props);
         this.state = {
@@ -629,31 +642,31 @@ class Basic extends Component {
                                                            {
                                                                title: '日期',
                                                                align: 'center',
-                                                               dataIndex: 'bkUserName',
+                                                               dataIndex: 'createDate',
                                                                key: 'operationDiary_User',
                                                                render: (text, record) => (
-                                                                   <div>{record.bkUserName}</div>),
+                                                                   <div>{this.timestampToTime(record.createDate)}</div>),
                                                            }, {
                                                                title: '备注',
                                                                align: 'center',
-                                                               dataIndex: 'createDate',
+                                                               dataIndex: 'comment',
                                                                key: 'operationDiary_Date',
                                                                render: (text, record) => (
-                                                                   <span>{record.createDate}</span>),
+                                                                   <span>{record.comment}</span>),
                                                            }, {
                                                                title: '审核类型',
                                                                align: 'center',
                                                                dataIndex: 'comment',
                                                                key: 'operationDiary_Status',
                                                                render: (text, record) => (
-                                                                   <span>{record.comment}</span>),
+                                                                   <span>{record.type}</span>),
                                                            }, {
                                                                title: '操作人',
                                                                align: 'center',
                                                                dataIndex: 'comment',
                                                                key: 'operationDiary_Status',
                                                                render: (text, record) => (
-                                                                   <span>{record.comment}</span>),
+                                                                   <span>{record.bkUserName}</span>),
                                                            }]}
                                                        dataSource={this.state.operationDiaryHistory}
                                                        loading={this.state.loadingComment}
