@@ -620,7 +620,7 @@ class Basic extends Component {
 
                                         <Checkbox.Group
 
-                                            disabled={(this.state.status == 0 || this.state.status == 1|| this.state.status == 2 || this.state.status == 3 || this.state.status == 5  || this.state.status == 6 || this.state.status == 7 || this.state.status == 9)}
+                                            disabled={(this.state.status == 0 || this.state.status == 1 || this.state.status == 2 || this.state.status == 3 || this.state.status == 5 || this.state.status == 6 || this.state.status == 7 || this.state.status == 9)}
 
                                             style={{width: '100%'}} onChange={this.onChange}>
 
@@ -632,24 +632,8 @@ class Basic extends Component {
                                                     value={2}>对账表已生成</Checkbox></div>
 
 
-                                                {/*<div style={{*/}
-                                                {/*marginTop: 10,*/}
-                                                {/*marginBottom: 10,*/}
-                                                {/*}}>请注意：*/}
-                                                {/*</div>*/}
-                                                {/*<div>*/}
-                                                {/*1.只有在提交此请求后才能将钱汇到客户银行账户。*/}
-
-                                                {/*</div>*/}
-                                                {/*<div>*/}
-                                                {/*2.当按下“批准出金”按钮时，出金金额将从客户的交易账户中自动扣除。*/}
-                                                {/*</div>*/}
-                                                {/*<div>*/}
-                                                {/*此请求将被关闭并可在归档中查看。*/}
-                                                {/*</div>*/}
-
                                                 <TextArea
-                                                    disabled={(this.state.status == 0 || this.state.status == 1|| this.state.status == 2 || this.state.status == 3 || this.state.status == 5  || this.state.status == 6 || this.state.status == 7 || this.state.status == 9)}
+                                                    disabled={(this.state.status == 0 || this.state.status == 1 || this.state.status == 2 || this.state.status == 3 || this.state.status == 5 || this.state.status == 6 || this.state.status == 7 || this.state.status == 9)}
 
                                                     style={{
                                                         marginTop: 10,
