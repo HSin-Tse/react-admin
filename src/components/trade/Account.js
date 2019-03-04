@@ -59,6 +59,7 @@ class Basic extends Component {
             current: 1,
             pgsize: 20,
             loadFor: false,
+            availableFlag: false,
             suspend_reason_type: []
 
         };
@@ -126,6 +127,47 @@ class Basic extends Component {
     };
 
     componentDidMount() {
+        let self = this;
+
+
+        if (localStorage.getItem('infor')) {
+
+            let self = this;
+
+            var menuInfor = JSON.parse(localStorage.getItem('infor'))
+
+
+            if (menuInfor.superFlag === 1) {
+
+                console.log('hcia menuInfor.superFlag' , menuInfor.superFlag)
+                self.setState({
+                    availableFlag: true,
+                    // isCanOP: 1
+                });
+            } else {
+
+
+                var isCanOp = menuInfor.menuList.find((item) => {
+                    // console.log('hcia  this.props', this.props)
+                    return this.props.tk === item.key;
+                });
+
+                console.log('hcia availableFlag', isCanOp.availableFlag,(isCanOp.availableFlag === 1))
+                // console.log('hcia isCanOp', isCanOp.availableFlag)
+                self.setState({
+
+                    availableFlag: isCanOp.availableFlag === 1,
+                    isCanOP: isCanOp.availableFlag
+                });
+
+
+
+            }
+
+
+        }
+
+
         // window.Axios.post('back/addLogHistory', {
         //     'moduleLog': '交易管理',
         //     'pageLog': '账户管理',
@@ -135,7 +177,6 @@ class Basic extends Component {
         //
         //
         // });
-        let self = this;
         window.Axios.post('dict/openDict', {
             'keys': 'suspend_reason_type',
         }).then(function (response) {
@@ -266,7 +307,10 @@ class Basic extends Component {
                 key: '当前杠杆',
                 render: (text, record) => (
 
-                    <Button size={'small'} style={{
+                    <Button
+
+                        disabled={!this.state.availableFlag}
+                        size={'small'} style={{
                         minWidth: 80,
                         background: '#FDD000',
                         display: record.displayStatus == '审核通过' ? 'none' : ''
@@ -571,6 +615,8 @@ class Basic extends Component {
         return (
             <div>
 
+
+                {/*<div>this.state.availableFlag :{JSON.stringify(this.state.availableFlag)}</div>*/}
 
                 <Modal
                     bodyStyle={{
