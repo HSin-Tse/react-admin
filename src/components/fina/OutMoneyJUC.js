@@ -63,6 +63,20 @@ class Basic extends Component {
 
     componentDidMount() {
         let self = this;
+
+
+        window.Axios.post('/auth/getRecordCommentList', {
+            id: self.props.match.params.id,
+            commentType: 17,
+            pageNo: 1,
+            pageSize: this.state.pgsize,
+        }).then(function (response) {
+            self.setState({
+                totalpageComments: response.data.data.totalPage,
+                operationDiaryHistory: response.data.data.list,
+            });
+        });
+
         window.Axios.post('finance/getWithdrawDetail', {
             'id': self.props.match.params.id,
         }).then((response) => {
