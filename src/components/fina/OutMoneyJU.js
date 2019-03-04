@@ -93,13 +93,21 @@ class Basic extends Component {
                 cardNo: response.data.data.cardNo,
                 channelName: response.data.data.channelName,
                 commentList: response.data.data.commentList,
-            },()=>{
+            }, () => {
 
 
                 self.setState({
 
-                    theComment:self.state.commentList[1]?self.state.commentList[1].comment:''
+                    theComment: self.state.commentList[1] ? self.state.commentList[1].comment : ''
                 })
+
+
+                if ((this.state.status != 0 || this.state.status != 2)) {
+
+                    self.setState({
+                        powerList: [1, 2, 3, 4, 5, 6, 7]
+                    })
+                }
 
             });
 
@@ -620,7 +628,12 @@ class Basic extends Component {
                                                 }}>{steps[3].title}</Button>
                                         </div>
 
-                                        <Checkbox.Group style={{width: '100%'}} onChange={this.onChange}>
+                                        <Checkbox.Group
+
+                                            disabled={(this.state.status != 0 || this.state.status != 2)}
+                                            value={this.state.powerList}
+
+                                            style={{width: '100%'}} onChange={this.onChange}>
 
                                             <Card bodyStyle={{padding: 0, marginTop: '0px', marginLeft: '20px'}}>
                                                 <div style={{marginTop: '25px'}}><Checkbox
@@ -648,7 +661,7 @@ class Basic extends Component {
                                                         marginBottom: 10,
                                                     }}
                                                     rows={4}
-                                                    disabled={(this.state.status !=0 || this.state.status !=2)  }
+                                                    disabled={(this.state.status != 0 || this.state.status != 2)}
                                                     value={this.state.theComment}
                                                     onChange={(e) => {
                                                         let comment = e.target.value;
