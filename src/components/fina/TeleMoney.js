@@ -286,7 +286,7 @@ class Basic extends Component {
                             <Button
 
                                 size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                                disabled={record.status == 4  ||  !this.state.isCanOPB}
+                                disabled={record.status == 4 || !this.state.isCanOPB}
 
 
                                 // onClick={
@@ -298,18 +298,13 @@ class Basic extends Component {
                                 onClick={
                                     () => {
 
-
                                         if (record.status == 3) {
-
                                             // this.props.history.pop()
                                             this.props.history.push('/app/fina/d/ter' + record.id)
-
                                             this.componentDidMount()
-
                                         } else if (record.status == 2) {
                                             this.props.history.push('/app/fina/d/tes' + record.id)
                                             this.componentDidMount()
-
                                         }
 
                                     }
@@ -334,7 +329,7 @@ class Basic extends Component {
 
                             <Button
                                 size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                                disabled={record.status == 4  ||  !this.state.isCanOPC}
+                                disabled={record.status == 4 || !this.state.isCanOPC}
                                 onClick={
                                     () => {
 
@@ -414,15 +409,12 @@ class Basic extends Component {
         })
 
         window.Axios.post('finance/getChannelRateList', {}).then((response) => {
-            console.log('hcia response' , response)
+            console.log('hcia response', response)
             self.setState({rateList: response.data.data}, () => {
-
 
 
             });
         });
-
-
 
 
         window.Axios.post('back/getBackUserList', {
@@ -551,7 +543,8 @@ class Basic extends Component {
 
         const rateListS = this.state.rateList.map(v1 => (
 
-            <Option key={v1.id} value={v1.id}>{v1.resourceCurrency ? v1.resourceCurrency : 'null'}/{v1.destnationCurrency ? v1.destnationCurrency : 'null'}({v1.rate})</Option>
+            <Option key={v1.id}
+                    value={v1.id}>{v1.resourceCurrency ? v1.resourceCurrency : 'null'}/{v1.destnationCurrency ? v1.destnationCurrency : 'null'}({v1.rate})</Option>
 
         ))
 
@@ -899,8 +892,6 @@ class Basic extends Component {
 
                                     />
                                 </div>
-
-
 
 
                                 <div style={{
