@@ -22,6 +22,8 @@ class Basic extends Component {
             userList: [],
             powerList: [],
             leavgeList: [],
+            commentList: [],
+
             mCashBalance: '',
             mBounty: '',
             bankCode: '',
@@ -85,6 +87,24 @@ class Basic extends Component {
                 receiver: response.data.data.receiver,
                 cardNo: response.data.data.cardNo,
                 channelName: response.data.data.channelName,
+                commentList: response.data.data.commentList,
+
+            }, () => {
+
+
+                self.setState({
+
+                    theComment: self.state.commentList[1] ? self.state.commentList[1].comment : ''
+                })
+
+
+                if ((this.state.status != 0 || this.state.status != 2)) {
+
+                    self.setState({
+                        powerList: [1, 2, 3]
+                    })
+                }
+
             });
         })
     }
@@ -117,9 +137,10 @@ class Basic extends Component {
 
                 <div style={{overflow: 'auto'}}>
                     {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
+                    <div>commentList query :{JSON.stringify(this.state.commentList)}</div>
 
                     <h2 style={{marginTop: 15}}>
-                        {steps[1].title}-{this.state.status == '5'}{this.state.status == 0 ? '提交成功(Pending)' : this.state.status == 1 ? '结算审核通过(Accounts OK)' : this.state.status == 2 ? '结算审核暂停(Suspend)' : this.state.status == 3 ? '结算审核失败(Failure)' : this.state.status == 4 ? '风险审核通过(Accepted)' : this.state.status == 5 ? '风险审核暂停(Suspend)' : this.state.status == 6 ? '风险审核失败(Failure)' : this.state.status == 7 ? '渠道下发通过(Completed)' : this.state.status == 8 ? '渠道下发暂停(Suspend)' : this.state.status == 9 ? '渠道下发失败(Failure)' : '??'}
+                        {this.state.status} {steps[1].title}-{this.state.status == '5'}{this.state.status == 0 ? '提交成功(Pending)' : this.state.status == 1 ? '结算审核通过(Accounts OK)' : this.state.status == 2 ? '结算审核暂停(Suspend)' : this.state.status == 3 ? '结算审核失败(Failure)' : this.state.status == 4 ? '风险审核通过(Accepted)' : this.state.status == 5 ? '风险审核暂停(Suspend)' : this.state.status == 6 ? '风险审核失败(Failure)' : this.state.status == 7 ? '渠道下发通过(Completed)' : this.state.status == 8 ? '渠道下发暂停(Suspend)' : this.state.status == 9 ? '渠道下发失败(Failure)' : '??'}
                     </h2>
                     <BreadcrumbCustom first="财务管理" second="出金管理" third={steps[1].title}/>
 
@@ -597,7 +618,10 @@ class Basic extends Component {
                                                 }}>{steps[3].title}</Button>
                                         </div>
 
-                                        <Checkbox.Group style={{width: '100%'}} onChange={this.onChange}>
+                                        <Checkbox.Group value={this.state.powerList}
+                                                        disabled={(this.state.status == 0 || this.state.status == 2 || this.state.status == 3 || this.state.status == 4 || this.state.status == 6 || this.state.status == 7 || this.state.status == 8 || this.state.status == 9)}
+
+                                                        style={{width: '100%'}} onChange={this.onChange}>
 
                                             <Card bodyStyle={{padding: 0, marginTop: '0px', marginLeft: '20px'}}>
                                                 <div style={{marginTop: '25px'}}><Checkbox
@@ -615,6 +639,7 @@ class Basic extends Component {
                                                         marginBottom: 10,
                                                     }}
                                                     rows={4}
+
                                                     value={this.state.theComment}
                                                     onChange={(e) => {
                                                         let comment = e.target.value;

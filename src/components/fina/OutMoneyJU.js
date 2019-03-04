@@ -98,14 +98,14 @@ class Basic extends Component {
 
                 self.setState({
 
-                    theComment: self.state.commentList[1] ? self.state.commentList[1].comment : ''
+                    theComment: self.state.commentList[0] ? self.state.commentList[0].comment : ''
                 })
 
 
                 if ((this.state.status != 0 || this.state.status != 2)) {
 
                     self.setState({
-                        powerList: [1, 2, 3, 4, 5, 6, 7]
+                        powerList: [1, 2, 3, 4, 5, 6, 7,8]
                     })
                 }
 
