@@ -98,7 +98,7 @@ class Basic extends Component {
                 })
 
 
-                if ((this.state.status != 0 || this.state.status != 2)) {
+                if ((this.state.status == 0 || this.state.status == 2 || this.state.status == 3 || this.state.status == 4 || this.state.status == 6 || this.state.status == 7 || this.state.status == 8 || this.state.status == 9)) {
 
                     self.setState({
                         powerList: [1, 2, 3]
@@ -634,6 +634,8 @@ class Basic extends Component {
 
 
                                                 <TextArea
+                                                    disabled={(this.state.status == 0 || this.state.status == 2 || this.state.status == 3 || this.state.status == 4 || this.state.status == 6 || this.state.status == 7 || this.state.status == 8 || this.state.status == 9)}
+
                                                     style={{
                                                         marginTop: 10,
                                                         marginBottom: 10,
