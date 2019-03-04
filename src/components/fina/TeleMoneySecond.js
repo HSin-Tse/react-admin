@@ -100,44 +100,46 @@ class Basic extends Component {
                     return this.props.tk === item.key;
                 });
 
-                console.log('hcia isCanOp', isCanOp)
 
-                console.log('hcia isCanOp', isCanOp)
+                if(isCanOp== undefined){
 
-                var chA = isCanOp.childrenMenu.find((item) => {
-                    // console.log('hcia  this.props', this.props)
-                    return item.key === 'DEPOSIT_MANNUAL_CREATE';
-                });
-                var chB = isCanOp.childrenMenu.find((item) => {
-                    // console.log('hcia  this.props', this.props)
-                    return item.key === 'DEPOSIT_FINANCE_CHECK';
-                });
-                var chC = isCanOp.childrenMenu.find((item) => {
-                    // console.log('hcia  this.props', this.props)
-                    return item.key === 'DEPOSIT_DETAIL';
-                });
-
-                if (chA.availableFlag == 0) {
-                    self.setState({
-                        isCanOPA: true,
+                }else{
+                    var chA = isCanOp.childrenMenu.find((item) => {
+                        // console.log('hcia  this.props', this.props)
+                        return item.key === 'DEPOSIT_MANNUAL_CREATE';
                     });
-                } else {
-
-                }
-                if (chB.availableFlag == 0) {
-                    self.setState({
-                        isCanOPB: true,
+                    var chB = isCanOp.childrenMenu.find((item) => {
+                        // console.log('hcia  this.props', this.props)
+                        return item.key === 'DEPOSIT_FINANCE_CHECK';
                     });
-                } else {
-
-                }
-                if (chC.availableFlag == 0) {
-                    self.setState({
-                        isCanOPC: true,
+                    var chC = isCanOp.childrenMenu.find((item) => {
+                        // console.log('hcia  this.props', this.props)
+                        return item.key === 'DEPOSIT_DETAIL';
                     });
-                } else {
 
+                    if (chA.availableFlag == 0) {
+                        self.setState({
+                            isCanOPA: true,
+                        });
+                    } else {
+
+                    }
+                    if (chB.availableFlag == 0) {
+                        self.setState({
+                            isCanOPB: true,
+                        });
+                    } else {
+
+                    }
+                    if (chC.availableFlag == 0) {
+                        self.setState({
+                            isCanOPC: true,
+                        });
+                    } else {
+
+                    }
                 }
+                
 
 
             }
