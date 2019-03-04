@@ -49,7 +49,7 @@ class Basic extends Component {
             modeState: 1,
             forbiddenValue: 0,
             current: 1,
-            pgsize: 10,
+            pgsize: 20,
             loadFor: false,
 
         };

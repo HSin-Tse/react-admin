@@ -53,7 +53,7 @@ class Basic extends Component {
             forbiddenValue: 0,
             current: 1,
             currentStep: 0,
-            pgsize: 10,
+            pgsize: 20,
             loadFor: false,
             suspend_reason_type: []
 
