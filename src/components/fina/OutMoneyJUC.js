@@ -21,6 +21,8 @@ class Basic extends Component {
             date: new Date(),
             userList: [],
             powerList: [],
+            commentList: [],
+
             leavgeList: [],
             mCashBalance: '',
             mBounty: '',
@@ -86,6 +88,24 @@ class Basic extends Component {
                 receiver: response.data.data.receiver,
                 cardNo: response.data.data.cardNo,
                 channelName: response.data.data.channelName,
+                commentList: response.data.data.commentList,
+
+            }, () => {
+
+
+                self.setState({
+
+                    theComment: self.state.commentList[2] ? self.state.commentList[2].comment : ''
+                })
+
+
+                if ((this.state.status == 0 || this.state.status == 2 || this.state.status == 3 || this.state.status == 4 || this.state.status == 6 || this.state.status == 7 || this.state.status == 8 || this.state.status == 9)) {
+
+                    self.setState({
+                        powerList: [1, 2, 3]
+                    })
+                }
+
             });
         })
     }
@@ -118,9 +138,10 @@ class Basic extends Component {
 
                 <div style={{overflow: 'auto'}}>
                     {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
+                    <div>commentList query :{JSON.stringify(this.state.commentList)}</div>
 
                     <h2 style={{marginTop: 15}}>
-                       {steps[2].title}-{this.state.status == 0 ? '提交成功(Pending)' : this.state.status == 1 ? '结算审核通过(Accounts OK)' : this.state.status == 2 ? '结算审核暂停(Suspend)' : this.state.status == 3 ? '结算审核失败(Failure)' : this.state.status == 4 ? '风险审核通过(Accepted)' : this.state.status == 5 ? '风险审核暂停(Suspend)' : this.state.status == 6 ? '风险审核失败(Failure)' : this.state.status == 7 ? '渠道下发通过(Completed)' : this.state.status == 8 ? '渠道下发暂停(Suspend)' : this.state.status == 9 ? '渠道下发失败(Failure)' : '??'}
+                        {steps[2].title}-{this.state.status == 0 ? '提交成功(Pending)' : this.state.status == 1 ? '结算审核通过(Accounts OK)' : this.state.status == 2 ? '结算审核暂停(Suspend)' : this.state.status == 3 ? '结算审核失败(Failure)' : this.state.status == 4 ? '风险审核通过(Accepted)' : this.state.status == 5 ? '风险审核暂停(Suspend)' : this.state.status == 6 ? '风险审核失败(Failure)' : this.state.status == 7 ? '渠道下发通过(Completed)' : this.state.status == 8 ? '渠道下发暂停(Suspend)' : this.state.status == 9 ? '渠道下发失败(Failure)' : '??'}
                     </h2>
                     <BreadcrumbCustom first="财务管理" second="出金管理" third={steps[2].title}/>
 
@@ -532,9 +553,9 @@ class Basic extends Component {
                                             placeholder=""/></span>
                                     </div>
                                     {/*<div style={ssdds}>*/}
-                                        {/*<span style={{fontSize: '13px'}}>备注:</span>*/}
-                                        {/*<span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}*/}
-                                                                                {/*placeholder=""/></span>*/}
+                                    {/*<span style={{fontSize: '13px'}}>备注:</span>*/}
+                                    {/*<span style={{fontSize: '13px'}}><Input style={{margin: 5, width: 220}}*/}
+                                    {/*placeholder=""/></span>*/}
                                     {/*</div>*/}
 
 
@@ -543,12 +564,12 @@ class Basic extends Component {
 
                                         <div style={{display: 'flex'}}>
                                             <Button
-                                                onClick={()=>{
+                                                onClick={() => {
 
 
-                                                    console.log('hcia this.props.match.params.id' , this.props.match.params.id)
+                                                    console.log('hcia this.props.match.params.id', this.props.match.params.id)
 
-                                                    this.props.history.push('/app/fina/juoutma'+this.props.match.params.id)
+                                                    this.props.history.push('/app/fina/juoutma' + this.props.match.params.id)
 
                                                 }}
 
@@ -558,12 +579,12 @@ class Basic extends Component {
                                                 }}>{steps[0].title}</Button>
 
                                             <Button
-                                                onClick={()=>{
+                                                onClick={() => {
 
 
-                                                    console.log('hcia this.props.match.params.id' , this.props.match.params.id)
+                                                    console.log('hcia this.props.match.params.id', this.props.match.params.id)
 
-                                                    this.props.history.push('/app/fina/juoutmb'+this.props.match.params.id)
+                                                    this.props.history.push('/app/fina/juoutmb' + this.props.match.params.id)
 
                                                 }}
 
@@ -582,12 +603,12 @@ class Basic extends Component {
                                                     margin: 0, fontSize: '18px', height: '48px', width: 150
                                                 }}>{steps[2].title}</Button>
                                             <Button
-                                                onClick={()=>{
+                                                onClick={() => {
 
 
-                                                    console.log('hcia this.props.match.params.id' , this.props.match.params.id)
+                                                    console.log('hcia this.props.match.params.id', this.props.match.params.id)
 
-                                                    this.props.history.push('/app/fina/juoutmd'+this.props.match.params.id)
+                                                    this.props.history.push('/app/fina/juoutmd' + this.props.match.params.id)
 
                                                 }}
 
@@ -597,7 +618,12 @@ class Basic extends Component {
                                                 }}>{steps[3].title}</Button>
                                         </div>
 
-                                        <Checkbox.Group style={{width: '100%'}} onChange={this.onChange}>
+                                        <Checkbox.Group
+
+                                            disabled={(this.state.status == 0 || this.state.status == 1|| this.state.status == 2 || this.state.status == 3 || this.state.status == 5  || this.state.status == 6 || this.state.status == 7 || this.state.status == 9)}
+
+                                            style={{width: '100%'}} onChange={this.onChange}>
+
 
                                             <Card bodyStyle={{padding: 0, marginTop: '0px', marginLeft: '20px'}}>
                                                 <div style={{marginTop: '25px'}}><Checkbox
@@ -623,6 +649,8 @@ class Basic extends Component {
                                                 {/*</div>*/}
 
                                                 <TextArea
+                                                    disabled={(this.state.status == 0 || this.state.status == 1|| this.state.status == 2 || this.state.status == 3 || this.state.status == 5  || this.state.status == 6 || this.state.status == 7 || this.state.status == 9)}
+
                                                     style={{
                                                         marginTop: 10,
                                                         marginBottom: 10,
