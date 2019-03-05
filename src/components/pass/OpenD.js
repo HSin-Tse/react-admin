@@ -250,17 +250,15 @@ class PassOpenD extends Component {
 
     confirmOpen = () => {
 
-        if(this.state.musCitizenOrResidentForTaxPurpposes =='是')
-        {
+        if (this.state.musCitizenOrResidentForTaxPurpposes == '是') {
             message.error('當前用戶為美國公民')
             return
         }
 
-        
-        console.log('hcia this.state.mfundsSource' , this.state.mfundsSource)
 
-        if(this.state.mfundsSource =='Benefits/Borrowing')
-        {
+        console.log('hcia this.state.mfundsSource', this.state.mfundsSource)
+
+        if (this.state.mfundsSource == 'Benefits/Borrowing') {
             message.error('收益/借贷!')
             return
         }
@@ -650,10 +648,10 @@ class PassOpenD extends Component {
         });
     }
     onChangeemail = (e) => {
-        
-        
+
+
         this.state.waitUpdate.email = e.target.value
-        console.log('hcia this.state.waitUpdate.email' , this.state.waitUpdate.email)
+        console.log('hcia this.state.waitUpdate.email', this.state.waitUpdate.email)
         this.setState({
             isNeedSave: true,
         });
@@ -1131,8 +1129,8 @@ class PassOpenD extends Component {
                                             disabled={true}
 
                                             value={this.state.recordData.accountType}
-                                                style={{marginLeft: 20, width: 120}}
-                                                onChange={(v, key) => this.handleACType(v, key)}>
+                                            style={{marginLeft: 20, width: 120}}
+                                            onChange={(v, key) => this.handleACType(v, key)}>
                                             {this.state.accountType.map(acType => <Option
                                                 key={acType.name} kk={acType.id}>{acType.name}</Option>)}
                                         </Select>
@@ -1209,7 +1207,10 @@ class PassOpenD extends Component {
 
 
                                     <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{width: 120}}>*姓（中文）</span>
+                                        {/*<span >*姓（中文）</span>*/}
+
+                                        <span style={{fontSize: '13px',width: 120}}><span
+                                            style={{color: 'red'}}>*</span >姓（中文）</span>
                                         <Form layout="vertical">
                                             <FormItem
 
@@ -1236,7 +1237,9 @@ class PassOpenD extends Component {
 
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{width: 120}}>*名（中文）</span>
+                                        {/*<span style={{width: 120}}>*名（中文）</span>*/}
+                                        <span style={{fontSize: '13px',width: 120}}><span
+                                            style={{color: 'red'}}>*</span >名（中文）</span>
                                         <Form layout="vertical">
                                             <FormItem
                                                 id="control-mention2"
@@ -1259,7 +1262,8 @@ class PassOpenD extends Component {
                                         </Form>
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{width: 120}}>*姓</span>
+                                        <span style={{fontSize: '13px',width: 120}}><span
+                                            style={{color: 'red'}}>*</span >姓</span>
                                         <Input value={this.state.recordData.lastName}
                                                onChange={this.onChangelastName}
                                                style={{width: '256px'}} placeholder=""/>
@@ -1336,10 +1340,10 @@ class PassOpenD extends Component {
                                         <span style={{minWidth: 120}}>*邮箱地址</span>
                                         {/*<Input*/}
 
-                                            {/*style={{width: '256px'}}*/}
-                                            {/*defaultValue={this.state.recordData.email}*/}
-                                            {/*onChange={this.onChangeemail}*/}
-                                            {/*placeholder=""/>*/}
+                                        {/*style={{width: '256px'}}*/}
+                                        {/*defaultValue={this.state.recordData.email}*/}
+                                        {/*onChange={this.onChangeemail}*/}
+                                        {/*placeholder=""/>*/}
 
                                         <MaskedInput
                                             defaultValue={this.state.recordData.email}
@@ -1568,15 +1572,15 @@ class PassOpenD extends Component {
                                         preset="desktop"
                                         style={{
 
-                                        display: 'block',
-                                        margin: 'auto',
-                                        width: 'auto',
-                                        // height: '300px',
-                                        maxWidth: '100%',
-                                        maxHeight: '300px',
-                                        minHeight: '0px',
-                                    }}
-                                        src={ this.state.recordData.idcard_2}/>
+                                            display: 'block',
+                                            margin: 'auto',
+                                            width: 'auto',
+                                            // height: '300px',
+                                            maxWidth: '100%',
+                                            maxHeight: '300px',
+                                            minHeight: '0px',
+                                        }}
+                                        src={this.state.recordData.idcard_2}/>
                                 </Card>
                             </Col>
                         </Row>

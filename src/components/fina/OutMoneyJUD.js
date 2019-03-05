@@ -456,7 +456,7 @@ class Basic extends Component {
                                                pageSize: this.state.pgsize,
                                                onChange: this.changePageComment,
                                            }}
-                                    />
+                                    /> 
                                     <div>
                                         <span>显示第1条到第5条，共10条</span>
                                     </div>
