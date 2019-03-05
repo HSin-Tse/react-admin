@@ -1361,7 +1361,7 @@ class PassOpenD extends Component {
                                         />
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
-                                       
+
                                         <span style={{fontSize: '13px',width: 120}}><span
                                             style={{color: 'red'}}>*</span >邮编</span>
                                         <Input value={this.state.recordData.postalCode}
@@ -1412,7 +1412,8 @@ class PassOpenD extends Component {
                                         </Select>
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{minWidth: 120}}>*是否美国公民</span>
+                                        <span style={{fontSize: '13px',width: 120}}><span
+                                            style={{color: 'red'}}>*</span >是否美国公民</span>
                                         <Select
 
                                             style={{width: '256px'}}
@@ -1443,7 +1444,8 @@ class PassOpenD extends Component {
                                         </Select>
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{minWidth: 120}}>*风险承受力</span>
+                                        <span style={{fontSize: '13px',width: 120}}><span
+                                            style={{color: 'red'}}>*</span >风险承受力</span>
                                         <Select
                                             dropdownStyle={{wordWrap: 'break-word'}}
                                             onChange={this.onChangemriskTolerance}
@@ -1462,7 +1464,8 @@ class PassOpenD extends Component {
                                                style={{width: '256px'}} placeholder=""/>
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{minWidth: 120}}>*交易密码</span>
+                                        <span style={{fontSize: '13px',width: 120}}><span
+                                            style={{color: 'red'}}>*</span >交易密码</span>
                                         <Input defaultValue={this.state.recordData.accountPassword}
                                                disabled={true}
                                                style={{width: '256px'}} placeholder=""/>
