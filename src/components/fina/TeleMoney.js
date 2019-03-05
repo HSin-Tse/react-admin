@@ -910,14 +910,25 @@ class Basic extends Component {
 
 
                                                     }}>汇率</span>
-                                    <Input value={this.state.mRate}
-                                           onChange={(e) => {
-                                               this.setState({
-                                                   mRate: e.target.value,
-                                               });
-                                           }}
-                                           style={{width: '200px', height: '36px'}}
 
+                                    <MaskedInput
+                                        value={this.state.mRate}
+                                        // style={{width: '200px', height: '36px'}}
+                                        mask={numberMask}
+
+                                        className="ant-input"
+                                        placeholder="汇率"
+                                        guide={true}
+                                        // id="my-input-id"
+                                        onChange={(e) => {
+                                            this.setState({
+                                                mRate: e.target.value,
+                                            });
+                                        }}
+                                        style={{width: '200px', height: '36px'}}
+
+                                        // onBlur={() => {}}
+                                        // onChange={() => {}}
                                     />
                                 </div>
 
