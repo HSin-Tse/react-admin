@@ -892,49 +892,33 @@ class Basic extends Component {
 
                                     />
                                 </div>
-
-
                                 <div style={{
                                     marginTop: '24px',
-
-                                    textAlign: 'left',
+                                    textAlign: 'right',
+                                    width: '100%',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center'
                                 }}>
-                                        <span style={{
-
-                                            marginRight: '37px',
-                                            textAlign: 'right',
-
-
-                                            width: '57px',
-                                            fontFamily: 'PingFangSC-Medium',
-                                            fontWeight: 500,
-                                            color: '#292929',
-                                            fontSize: '14px'
+                                                    <span style={{
+                                                        marginRight: '37px',
+                                                        fontFamily: 'PingFangSC-Medium',
+                                                        fontWeight: 500,
+                                                        color: '#292929',
+                                                        fontSize: '14px',
+                                                        width: '57px',
 
 
-                                        }}>汇率</span>
+                                                    }}>汇率</span>
+                                    <Input value={this.state.mRate}
+                                           onChange={(e) => {
+                                               this.setState({
+                                                   mRate: e.target.value,
+                                               });
+                                           }}
+                                           style={{width: '200px', height: '36px'}}
 
-                                    <Select
-                                        placeholder="汇率"
-
-                                        onChange={(value) => {
-
-
-                                            this.setState({mRate: value})
-                                            console.log('hcia value', value)
-                                        }}
-                                        value={this.state.mRate}
-                                        style={{width: '200px', height: '36px'}}>
-
-                                        {rateListS}
-
-
-                                    </Select>
-
-
+                                    />
                                 </div>
 
 
