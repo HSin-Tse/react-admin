@@ -84,13 +84,20 @@ class Basic extends Component {
 
         // window.Axios.post('/auth/getRecordCommentList', {
         //     id: self.props.match.params.id,
-        //     commentType: 17,
+        //     commentType: 13,
         //     pageNo: 1,
         //     pageSize: this.state.pgsize,
         // }).then(function (response) {
         //     self.setState({
         //         totalpageComments: response.data.data.totalPage,
-        //         operationDiaryHistory: response.data.data.list,
+        //         // operationDiaryHistory: response.data.data.list,
+        //     },()=>{
+        //
+        //         // self.setState({
+        //         //
+        //         //     theComment: response.data.data.list[0] ? response.data.data.list[0].comment : ''
+        //         // })
+        //
         //     });
         // });
 
