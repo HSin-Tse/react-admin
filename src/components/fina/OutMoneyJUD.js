@@ -77,17 +77,17 @@ class Basic extends Component {
         let self = this;
 
 
-        window.Axios.post('/auth/getRecordCommentList', {
-            id: self.props.match.params.id,
-            commentType: 17,
-            pageNo: 1,
-            pageSize: this.state.pgsize,
-        }).then(function (response) {
-            self.setState({
-                totalpageComments: response.data.data.totalPage,
-                operationDiaryHistory: response.data.data.list,
-            });
-        });
+        // window.Axios.post('/auth/getRecordCommentList', {
+        //     id: self.props.match.params.id,
+        //     commentType: 17,
+        //     pageNo: 1,
+        //     pageSize: this.state.pgsize,
+        // }).then(function (response) {
+        //     self.setState({
+        //         totalpageComments: response.data.data.totalPage,
+        //         operationDiaryHistory: response.data.data.list,
+        //     });
+        // });
 
 
         ///
@@ -116,6 +116,8 @@ class Basic extends Component {
                 receiver: response.data.data.receiver,
                 cardNo: response.data.data.cardNo,
                 channelName: response.data.data.channelName,
+                operationDiaryHistory: response.data.data.commentList,
+
             });
         })
     }
