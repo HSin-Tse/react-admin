@@ -148,7 +148,6 @@ class Basic extends Component {
                     console.log('hcia response.data.data.list?[]:response.data.data.list' , response.data.data.list==null?[]:response.data.data.list)
                     self.setState({
                             totalPage: response.data.data.totalPage,
-                            loading: false,
                             userList: response.data.data.list==null?[]:response.data.data.list
                         }
                     );
@@ -467,6 +466,7 @@ class Basic extends Component {
                                         <span style={{fontSize: '15px'}}></span>
                                     </div>
                                     <Table rowKey="id"
+                                           bordered={true}
                                            columns={[
 
                                                {
