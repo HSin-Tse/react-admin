@@ -82,6 +82,10 @@ class Basic extends Component {
 
 
 
+
+
+
+
         // window.Axios.post('/auth/getRecordCommentList', {
         //     id: self.props.match.params.id,
         //     commentType: 13,
@@ -132,6 +136,25 @@ class Basic extends Component {
             }, () => {
 
 
+
+
+                window.Axios.post('finance/getDepositWithdrawReport', {
+                    'starClientAccount': self.state.accountNo,
+                    'pageSize': self.state.pgsize,
+                    'pageNo': self.state.current,
+                }).then(function (response) {
+
+
+                    console.log('hcia response.data.data.list?[]:response.data.data.list' , response.data.data.list==null?[]:response.data.data.list)
+                    self.setState({
+                            totalPage: response.data.data.totalPage,
+                            loading: false,
+                            userList: response.data.data.list==null?[]:response.data.data.list
+                        }
+                    );
+
+
+                })
 
 
 
@@ -452,24 +475,24 @@ class Basic extends Component {
                                                    dataIndex: 'bkUserName',
                                                    key: 'operationDiary_User',
                                                    render: (text, record) => (
-                                                       <div>{record.bkUserName}</div>),
+                                                       <div>{record.createDate}    - {record.accountNo}</div>),
                                                }, {
                                                    title: '入',
                                                    align: 'center',
                                                    dataIndex: 'createDate',
                                                    key: 'operationDiary_Date',
                                                    render: (text, record) => (
-                                                       <span>{record.createDate}</span>),
+                                                       <span>{record.execTxnAmt}</span>),
                                                }, {
                                                    title: '出',
                                                    align: 'center',
                                                    dataIndex: 'comment',
                                                    key: 'operationDiary_Status',
                                                    render: (text, record) => (
-                                                       <span>{record.comment}</span>),
+                                                       <span>{record.accountTxnAmt}</span>),
                                                }]}
 
-                                           dataSource={this.state.operationDiaryHistory}
+                                           dataSource={this.state.userList}
                                            loading={this.state.loadingComment}
                                            pagination={{
                                                total: this.state.totalpageComments * this.state.pgsize,
