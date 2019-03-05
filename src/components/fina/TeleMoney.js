@@ -29,7 +29,7 @@ import moment from 'moment';
 
 const {TextArea} = Input;
 
-const dateFormat = 'YYYY-MM-DD';
+const dateFormat = 'YYYY-MM-DD HH:mm:ss';
 
 const Option = Select.Option;
 const numberMask = createNumberMask({
@@ -43,6 +43,15 @@ const numberMask = createNumberMask({
 })
 
 class Basic extends Component {
+
+     onChange=(value, dateString)=> {
+        console.log('Selected Time: ', value);
+        console.log('Formatted Selected Time: ', dateString);
+    }
+
+     onOk=(value) =>{
+        console.log('onOk: ', value);
+    }
     changeNote = (e) => {
 
 
@@ -560,6 +569,9 @@ class Basic extends Component {
             <div>
 
                 {/*<div>accrounRes :{JSON.stringify(this.state.accrounRes)}</div>*/}
+                {/*<div>mExpectTime :{JSON.stringify(this.state.mExpectTime)}</div>*/}
+                {/*<div>mExpectTime :{this.state.mExpectTime?JSON.stringify(this.state.mExpectTime.unix()):''}</div>*/}
+                {/*<div>mExpectTime :{this.state.mExpectTime.get}</div>*/}
                 {/*<div>live931773069</div>*/}
                 {/*<div>mBelongBkUserId :{JSON.stringify(this.state.mBelongBkUserId)}</div>*/}
                 {/*<div>isCanOPA :{JSON.stringify(this.state.isCanOPA)}</div>*/}
@@ -1044,11 +1056,16 @@ class Basic extends Component {
                                     </div>
 
 
+
+
                                     <DatePicker
+                                        showTime
+                                        placeholder="Select Time"
                                         style={{width: '200px', height: '36px'}}
                                         disabledDate={(current) => {
                                             return current.valueOf() < (Date.now() - 86400000)
                                         }}
+                                        format="YYYY-MM-DD HH:mm:ss"
 
                                         value={this.state.mExpectTime ? moment(this.state.mExpectTime, dateFormat) : null}
 
@@ -1058,15 +1075,15 @@ class Basic extends Component {
                                             console.log('hcia date', date)
                                             console.log('hcia dateString', dateString)
 
-
-                                            if (!date) {
-                                                this.setState({mExpectTime: null})
-                                                return
-
-                                            }
-                                            var date = new Date(dateString);
-                                            console.log('hcia date', date)
-                                            var time1 = date.getTime();
+                                            //
+                                            // if (!date) {
+                                            //     this.setState({mExpectTime: null})
+                                            //     return
+                                            //
+                                            // }
+                                            // var date = new Date(dateString);
+                                            // console.log('hcia date', date)
+                                            // var time1 = date.getTime();
 
                                             // console.log('hcia time1', time1)
 
@@ -1286,7 +1303,7 @@ class Basic extends Component {
                                     'execTxnCurry': this.state.mExecTxnCurry,
                                     'rate': this.state.mRate,
                                     'accountTxnCurry': this.state.mAccountTxnCurry,//this.state.mAccountTxnCurry
-                                    'expectTime': this.state.mExpectTime ? this.state.mExpectTime.getTime() : undefined,
+                                    'expectTime': this.state.mExpectTime ? this.state.mExpectTime.unix()+'000' : undefined,
                                     'content': this.state.mNote,
                                 }).then((response) => {
 
