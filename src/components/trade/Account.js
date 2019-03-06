@@ -687,7 +687,7 @@ class Basic extends Component {
                                 <Col style={{marginTop: 20}} span={24}>
                                 <TextArea
 
-                                    defaultValue={this.state.mChLeadComment}
+                                    value={this.state.mChLeadComment}
                                     onChange={(e) => {
                                         this.setState({
                                             mChLeadComment: e.target.value,

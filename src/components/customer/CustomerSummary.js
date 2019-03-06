@@ -919,14 +919,6 @@ class CustomerSummary extends Component {
             theComment: ''
         }, () => {
 
-
-            // window.Axios.post('back/addLogHistory', {
-            //     'moduleLog': '用户管理',
-            //     'pageLog': '用户总表',
-            //     'commentLog': '查看备注',
-            //     'typeLog': 3,
-            // });
-
             window.Axios.post('auth/getUserCommentList', {
                 'belongUserId': this.state.opDayRecord.belongUserId,
             }).then(function (response) {
@@ -1062,7 +1054,6 @@ class CustomerSummary extends Component {
 
 
     changePageA = (page) => {
-        // page = page - 1
         this.setState({
             currentA: page,
         }, () => {

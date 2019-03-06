@@ -2,18 +2,24 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, message, Select, Modal, Card, Col, Popconfirm, Row, Input} from 'antd';
+import {Button, Table, message, Select, Modal, Card, Col, Popconfirm, Row, Input, Icon, DatePicker} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import {CSVLink} from "react-csv";
+import classNames from "classnames";
+const {RangePicker} = DatePicker;
 
 const Option = Select.Option;
 const {TextArea} = Input;
 
 class Basic extends Component {
-
+    _switcherOn = () => {
+        this.setState({
+            switcherOn: !this.state.switcherOn
+        })
+    };
     constructor(props) {
         super(props);
         this.state = {
@@ -74,41 +80,29 @@ class Basic extends Component {
     }
 
     showModalB = (recodrd) => {
-
         this.requestUserCommentList(recodrd)
-
         let self = this
         self.setState({
             loading: true,
         });
-
         window.Axios.post('finance/getLeverageApplyDetail', {
             'id': recodrd.id,
         }).then(function (response) {
-
             self.setState({
-                // detail: response.data.data,
                 visibleB: true,
                 loading: false,
-
             });
-
         });
-
-
     }
     showOPDAyModal2 = (recodrd) => {
         this.requestUserCommentList(recodrd)
-
         this.setState({
             modal2OPDAYVisible: true,
         });
-
     };
 
     componentDidMount() {
 
-        let self = this;
 
         this.columnss = [
             {
@@ -119,8 +113,7 @@ class Basic extends Component {
                 key: 'merOrderNo',
                 render: (text, record) => (
                     <span>{record.merOrderNo}</span>),
-            }
-            , {
+            }, {
 
                 title: '客户邮箱',
                 label: '客户邮箱',
@@ -128,8 +121,7 @@ class Basic extends Component {
                 key: 'email',
                 render: (text, record) => (<span>{record.email}</span>),
                 align: 'center',
-            }
-            , {
+            }, {
 
                 title: '交易账户',
                 label: '交易账户',
@@ -255,7 +247,6 @@ class Basic extends Component {
                     <span>{record.operator}</span>)
             }];
         this.columns = [
-
             {
                 title: '序号',
                 label: '序号',
@@ -263,10 +254,8 @@ class Basic extends Component {
                 key: '序号',
                 align: 'center',
                 render: (text, record, index) => {
-
                     record.index = this.state.current * this.state.pgsize + index + 1
                     return (
-
                         <span>{this.state.current * this.state.pgsize + index + 1}</span>
                     )
                 }
@@ -279,8 +268,7 @@ class Basic extends Component {
                 key: 'merOrderNo',
                 render: (text, record) => (
                     <span>{record.merOrderNo}</span>),
-            }
-            , {
+            }, {
 
                 title: '客户邮箱',
                 label: '客户邮箱',
@@ -288,8 +276,7 @@ class Basic extends Component {
                 key: 'email',
                 render: (text, record) => (<span>{record.email}</span>),
                 align: 'center',
-            }
-            , {
+            }, {
 
                 title: '交易账户',
                 label: '交易账户',
@@ -326,10 +313,7 @@ class Basic extends Component {
 
                 render: (text, record) => (
                     <span>{record.createDate}</span>),
-            }
-
-
-            , {
+            }, {
                 align: 'center',
 
                 title: '出入金渠道',
@@ -428,7 +412,6 @@ class Basic extends Component {
                 )
 
             }];
-
         this.nodeColumns = [
             {
                 align: 'center',
@@ -438,8 +421,7 @@ class Basic extends Component {
                 key: '日期',
                 render: (text, record) => (
                     <span>{this.timestampToTime(record.createDate)}</span>)
-            },
-            {
+            }, {
                 align: 'center',
 
                 title: '备注',
@@ -512,6 +494,28 @@ class Basic extends Component {
     pad = (str) => {
         return +str >= 10 ? str : '0' + str
     };
+
+    requestPageS = () => {
+        let self = this
+        window.Axios.post('finance/getDepositWithdrawReport', {
+            'pageSize': self.state.pgsize,
+            'pageNo': self.state.current,
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            accountNo: this.state.starClientAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
+        }).then((response) => {
+            self.setState({
+                    totalPage: response.data.data.totalPage,
+                    loading: false,
+                    userList: response.data.data.list == null ? [] : response.data.data.list
+                }
+            );
+        })
+
+    }
     requestPage = () => {
 
         let self = this
@@ -522,14 +526,15 @@ class Basic extends Component {
         window.Axios.post('finance/getDepositWithdrawReport', {
             'pageSize': self.state.pgsize,
             'pageNo': self.state.current,
+
         }).then(function (response) {
 
-            
-            console.log('hcia response.data.data.list?[]:response.data.data.list' , response.data.data.list==null?[]:response.data.data.list)
+
+            // console.log('hcia response.data.data.list?[]:response.data.data.list', response.data.data.list == null ? [] : response.data.data.list)
             self.setState({
                     totalPage: response.data.data.totalPage,
                     loading: false,
-                    userList: response.data.data.list==null?[]:response.data.data.list
+                    userList: response.data.data.list == null ? [] : response.data.data.list
                 }
             );
 
@@ -571,6 +576,106 @@ class Basic extends Component {
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 {/*<div>userList query :{JSON.stringify(this.state.userList)}</div>*/}
+                <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
+                    <span className="sw-btn dark-white" onClick={this._switcherOn}>
+                     <Icon type="setting" className="text-dark"/>
+                    </span>
+                    <div style={{width: 270}}>
+                        <Card
+                            title="当前表搜索"
+                            extra={<Button type="primary" onClick={() => {
+                                let self = this
+                                this.setState({
+                                    selectMail: undefined,
+                                    selectID: undefined,
+                                    startTime: undefined,
+                                    selectPhoneF: undefined,
+                                    starClientAccount: undefined,
+                                    selectTimeStart: undefined,
+                                    selectTimeEnd: undefined,
+                                    filterTimeFalue: null
+                                }, () => {
+                                    self.requestPage()
+                                })
+                            }}>清除条件</Button>}>
+                            <Input value={this.state.selectMail} onChange={(e) => {
+                                this.setState({selectMail: e.target.value})
+                            }} style={{marginBottom: 10}} placeholder="邮箱"/>
+
+                            <Input value={this.state.selectPhoneF} onChange={(e) => {
+                                this.setState({
+                                    selectPhoneF: e.target.value,
+                                });
+                            }} style={{marginBottom: 10}} placeholder="手机号"/>
+
+                            <Input value={this.state.selectID} onChange={(e) => {
+                                this.setState({
+                                    selectID: e.target.value,
+                                });
+                            }} style={{marginBottom: 10}} placeholder="身份证号"/>
+
+                            <Input value={this.state.starClientAccount} onChange={(e) => {
+                                this.setState({
+                                    starClientAccount: e.target.value,
+                                });
+                            }} style={{marginBottom: 10}} placeholder="交易账号"/>
+                            <RangePicker
+                                showToday
+                                style={{width: '100%'}}
+                                showTime={{format: 'YYYY-MM-DD HH:mm:ss'}}
+                                format="YYYY-MM-DD HH:mm:ss fff"
+                                placeholder={['开始时间', '结束时间']}
+                                onChange={(value, dateString) => {
+
+
+                                    console.log('hcia value', value)
+
+
+                                    if (value.length === 0) {
+
+                                        this.setState({
+                                            filterTimeFalue: undefined,
+                                            selectTimeStart: undefined,
+                                            selectTimeEnd: undefined,
+
+                                        });
+                                    } else {
+                                        var selectTimeStart = value[0].unix() + '000'
+                                        var selectTimeEnd = value[1].unix() + '000'
+
+                                        console.log('hcia selectTimeStart', selectTimeStart)
+                                        console.log('hcia selectTimeEnd', selectTimeEnd)
+
+
+                                        this.setState({
+                                            filterTimeFalue: value,
+                                            selectTimeStart: selectTimeStart,
+                                            selectTimeEnd: selectTimeEnd,
+
+                                        });
+                                    }
+
+
+                                }}
+                                value={this.state.filterTimeFalue}
+                                onOk={(value) => {
+                                    var selectTimeStart = value[0].unix() + '000'
+                                    var selectTimeEnd = value[1].unix() + '000'
+                                    this.setState({
+                                        filterTimeFalue: value,
+                                        selectTimeStart: selectTimeStart,
+                                        selectTimeEnd: selectTimeEnd,
+
+                                    });
+                                }}
+                            />
+
+                            <Button onClick={() => this.requestPageS()} style={{marginTop: 15}} type="primary"
+                                    icon="search">Search</Button>
+
+                        </Card>
+                    </div>
+                </div>
 
 
                 <Modal
