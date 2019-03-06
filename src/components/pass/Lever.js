@@ -29,6 +29,7 @@ class Basic extends Component {
             mComment: '',
             mLeverageId: '',
             userList: [],
+            operationDiaryHistoryV2: [],
             leavgeList: [{
                 "id": 21,
                 "status": 1,
@@ -109,27 +110,27 @@ class Basic extends Component {
     }
 
     requestUserCommentList = (record) => {
-        // var self = this;
-        // window.Axios.post('/auth/getRecordCommentList', {
-        //     id: record.id,
-        //     commentType: 4,
-        //     pageNo: this.state.currentComment,
-        //     pageSize: this.state.pgsize,
-        // }).then(function (response) {
-        //     self.setState({
-        //         totalpageComments: response.data.data.totalPage,
-        //         operationDiaryHistory: response.data.data.list,
-        //     });
-        // });
+        var self = this;
+        window.Axios.post('/auth/getRecordCommentList', {
+            id: record.id,
+            commentType: 4,
+            pageNo: this.state.currentComment,
+            pageSize: this.state.pgsize,
+        }).then(function (response) {
+            self.setState({
+                totalpageComments: response.data.data.totalPage,
+                operationDiaryHistory: response.data.data.list,
+            });
+        });
     }
 
-    addOPLog = (record) => {
+    addOPLog = (record,com) => {
         var self = this;
         window.Axios.post('/auth/addOperatorLogHistory', {
             referKey: record.id,
             moduleLog: '审核管理',
             pageLog: '開戶審核',
-            commentLog: 'test',
+            commentLog: com,
             typeLog: '12',
         }).then(function (response) {
 
@@ -150,7 +151,7 @@ class Basic extends Component {
             console.log('hcia response', response)
             self.setState({
                 totalpageComments: response.data.data.totalPage,
-                operationDiaryHistory: response.data.data.list,
+                operationDiaryHistoryV2: response.data.data.list,
             });
         });
     }
@@ -158,7 +159,7 @@ class Basic extends Component {
     showOPDAyModal2 = (recodrd) => {
 
         this.requestUserCommentList(recodrd)
-        this.addOPLog(recodrd)
+        this.addOPLog(recodrd,'查看操作日志')
         this.getOPLog(recodrd)
         this.setState({
             modal2OPDAYVisible: true,
@@ -214,6 +215,36 @@ class Basic extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <span>{record.ipAddress}</span>),
+            }, {
+                title: '操作人',
+                align: 'center',
+                dataIndex: 'bkUserName',
+                key: 'operationDiary_User',
+                render: (text, record) => (
+                    <span>{record.bkUserName}</span>),
+            }, {
+                title: '操作',
+                align: 'center',
+                dataIndex: 'comment',
+                key: 'operationDiary_Status',
+                render: (text, record) => (
+                    <span>{record.comment}</span>),
+            }]
+        this.columnsLogV2 = [
+            {
+                title: '时间',
+                dataIndex: 'createDate',
+                key: 'operationDiary_Date',
+                align: 'center',
+                render: (text, record) => (
+                    <span>{record.date}</span>),
+            }, {
+                title: 'IP',
+                dataIndex: 'IP',
+                key: 'IP',
+                align: 'center',
+                render: (text, record) => (
+                    <span>{record.userIP}</span>),
             }, {
                 title: '操作人',
                 align: 'center',
@@ -360,6 +391,7 @@ class Basic extends Component {
     }
 
     showModalA = (recodrd) => {
+        this.addOPLog(recodrd,'操作查看')
 
         let self = this
 
@@ -386,6 +418,7 @@ class Basic extends Component {
 
     }
     showModalB = (recodrd) => {
+        this.addOPLog(recodrd,'操作审核')
 
         let self = this
         self.setState({
@@ -960,8 +993,8 @@ class Basic extends Component {
                             style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}
                             rowKey="id"
                             bordered
-                            columns={this.columnsLog}
-                            dataSource={this.state.operationDiaryHistory}
+                            columns={this.columnsLogV2}
+                            dataSource={this.state.operationDiaryHistoryV2}
                             loading={this.state.loadingComment}
                             pagination={{
                                 current: this.state.currentComment,
