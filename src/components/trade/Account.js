@@ -139,7 +139,7 @@ class Basic extends Component {
 
             if (menuInfor.superFlag === 1) {
 
-                console.log('hcia menuInfor.superFlag' , menuInfor.superFlag)
+                console.log('hcia menuInfor.superFlag', menuInfor.superFlag)
                 self.setState({
                     availableFlag: true,
                     // isCanOP: 1
@@ -152,14 +152,13 @@ class Basic extends Component {
                     return this.props.tk === item.key;
                 });
 
-                console.log('hcia availableFlag', isCanOp.availableFlag,(isCanOp.availableFlag === 1))
+                console.log('hcia availableFlag', isCanOp.availableFlag, (isCanOp.availableFlag === 1))
                 // console.log('hcia isCanOp', isCanOp.availableFlag)
                 self.setState({
 
                     availableFlag: isCanOp.availableFlag === 1,
                     isCanOP: isCanOp.availableFlag
                 });
-
 
 
             }
@@ -212,7 +211,7 @@ class Basic extends Component {
                 key: '申请序号',
                 render: (text, record) => (<span>{record.accountNo}</span>),
                 align: 'center',
-            } , {
+            }, {
                 align: 'center',
                 title: '邮箱地址',
                 dataIndex: '邮箱地址',
@@ -491,7 +490,7 @@ class Basic extends Component {
     changePage = (page) => {
         // console.log('hcia page', page)
         this.setState({
-            current: page ,
+            current: page,
         }, () => {
             this.requestPage()
         })
@@ -746,36 +745,36 @@ class Basic extends Component {
                             paddingBottom: "48px",
                             paddingTop: "48px",
                         }}>
-                            <Popconfirm title="确认？" onConfirm={() => {
-                                if (!this.state.mLeverageId) {
-                                    message.error('no change')
-                                    return
-                                }
-                                var self = this
-                                self.setState({
-                                        loading: true,
+                            <Popconfirm
+                                title="确认？"
+                                onConfirm={() => {
+                                    if (!this.state.mLeverageId) {
+                                        message.error('no change')
+                                        return
                                     }
-                                );
-                                window.Axios.post('open/prestoreLiveAccount', {
-                                    "id": this.state.detail.liveAccountId,
-                                    "leverageId": this.state.mLeverageId,
-                                    "content": this.state.mChLeadComment,
-                                }).then(() => {
-                                    message.success('操作成功')
+                                    var self = this
                                     self.setState({
-                                            mChLeadComment: undefined,
-                                            visibleChangeLeavgeModal: false,
-                                            visibleB: false,
-                                            loading: false,
+                                            loading: true,
                                         }
                                     );
-                                    self.requestPage()
-                                })
-
-
-                            }}
-                                        okText="Yes"
-                                        cancelText="No">
+                                    window.Axios.post('open/prestoreLiveAccount', {
+                                        "id": this.state.detail.liveAccountId,
+                                        "leverageId": this.state.mLeverageId,
+                                        "content": this.state.mChLeadComment,
+                                    }).then(() => {
+                                        message.success('操作成功')
+                                        self.setState({
+                                                mChLeadComment: undefined,
+                                                visibleChangeLeavgeModal: false,
+                                                visibleB: false,
+                                                loading: false,
+                                            }
+                                        );
+                                        self.requestPage()
+                                    })
+                                }}
+                                okText="Yes"
+                                cancelText="No">
                                 <Button
                                     loading={this.state.loading}
                                     style={{
