@@ -153,7 +153,6 @@ class Basic extends Component {
         })
     }
     changePage = (page) => {
-        console.log('hcia page', page)
         this.setState({
             current: page,
         }, () => {
@@ -162,7 +161,7 @@ class Basic extends Component {
     }
 
     componentDidMount() {
-
+        let self = this
 
         this.columnsLog = [
             {
@@ -171,11 +170,7 @@ class Basic extends Component {
                 key: 'operationDiary_Date',
                 align: 'center',
                 render: (text, record) => (
-                    <span>{
-                        this.timestampToTime(record.createDate)
-                    }</span>),
-
-
+                    <span>{this.timestampToTime(record.createDate)}</span>),
             }, {
                 title: 'IP',
                 dataIndex: 'IP',
@@ -198,7 +193,6 @@ class Basic extends Component {
                 render: (text, record) => (
                     <span>{record.comment}</span>),
             }]
-        let self = this
 
         window.Axios.post('dict/leverageList', {
             'keys': 'IX_Income,IX_Percentage,IX_FundsSource,IX_UStax,IX_Trading_Experience,IX_Trading_Objectives,IX_Risk_Tolerance,open_type_ix,account_type',
@@ -656,18 +650,6 @@ class Basic extends Component {
                                     </Select>
                                 </Col>
                             </Row>
-                            {/*<Row style={{marginTop: "24px"}}>*/}
-                            {/*<Col style={{textAlign: 'right'}} span={9}>杠杆修改:</Col>*/}
-                            {/*<Col style={{textAlign: 'center'}} span={11}>*/}
-                            {/*<Select*/}
-                            {/*onChange={this.onChangeLe}*/}
-                            {/*value={this.state.detail.targetLeverageID}*/}
-                            {/*style={{width: 100, marginLeft: 0}}>*/}
-                            {/*{this.state.leavgeList.map(ccty => <Option*/}
-                            {/*value={ccty.id} key={ccty.leverage}>1:{ccty.leverage}</Option>)}*/}
-                            {/*</Select>*/}
-                            {/*</Col>*/}
-                            {/*</Row>*/}
                             <Row style={{marginTop: "24px"}}>
                                 <Col style={{textAlign: 'right'}} span={9}>保证金占比:</Col>
                                 <Col style={{textAlign: 'center'}} span={11}>{this.state.detail.marginLevel}</Col>
@@ -685,7 +667,6 @@ class Basic extends Component {
                                 style={{marginTop: "20px", marginLeft: "80px", marginRight: "80px"}}
                                 rowKey="id"
                                 bordered
-
                                 columns={[
                                     {
                                         title: '操作人',
@@ -920,7 +901,6 @@ class Basic extends Component {
                     />
                 </Card>
 
-
                 <Modal
                     bodyStyle={{
                         background: 'white',
@@ -935,10 +915,7 @@ class Basic extends Component {
                     }}
                     closable={false}
                     footer={null}
-                    // onCancel={this.handleCancel}
                     visible={this.state.modal2OPDAYVisible}
-
-
                 >
 
                     <div style={{borderRadius: '4px'}}>
@@ -971,7 +948,6 @@ class Basic extends Component {
 
 
                     </div>
-
 
                 </Modal>
             </div>
