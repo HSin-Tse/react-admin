@@ -163,7 +163,7 @@ class Basic extends Component {
                 })
 
 
-                if ((this.state.status != 0 || this.state.status != 2)) {
+                if ((this.state.status == 1 || this.state.status == 3 || this.state.status == 4 || this.state.status == 5 || this.state.status == 6 || this.state.status == 7 || this.state.status == 8 || this.state.status == 9)) {
 
                     self.setState({
                         powerList: [1, 2, 3, 4, 5, 6, 7,8]
@@ -693,7 +693,7 @@ class Basic extends Component {
 
                                         <Checkbox.Group
 
-                                            disabled={(this.state.status != 0 || this.state.status != 2)}
+                                            disabled={(this.state.status == 1 || this.state.status == 3 || this.state.status == 4 || this.state.status == 5 || this.state.status == 6 || this.state.status == 7 || this.state.status == 8 || this.state.status == 9)}
                                             value={this.state.powerList}
 
                                             style={{width: '100%'}} onChange={this.onChange}>
@@ -724,7 +724,8 @@ class Basic extends Component {
                                                         marginBottom: 10,
                                                     }}
                                                     rows={4}
-                                                    disabled={(this.state.status != 0 || this.state.status != 2)}
+                                                    disabled={(this.state.status == 1 || this.state.status == 3 || this.state.status == 4 || this.state.status == 5 || this.state.status == 6 || this.state.status == 7 || this.state.status == 8 || this.state.status == 9)}
+
                                                     value={this.state.theComment}
                                                     onChange={(e) => {
                                                         let comment = e.target.value;

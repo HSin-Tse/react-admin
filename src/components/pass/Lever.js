@@ -122,8 +122,41 @@ class Basic extends Component {
             });
         });
     }
+
+    addOPLog = (record) => {
+        var self = this;
+        window.Axios.post('/auth/addOperatorLogHistory', {
+            referKey: record.id,
+            moduleLog: '审核管理',
+            pageLog: '開戶審核',
+            commentLog: 'test',
+            typeLog: '12',
+        }).then(function (response) {
+
+            console.log('hcia response', response)
+
+        });
+    }
+    getOPLog = (record) => {
+        var self = this;
+        window.Axios.post('/auth/getOperatorLogHistoryList', {
+            referKey: 1,
+            moduleLog: '审核管理',
+            pageLog: '開戶審核',
+            commentLog: 'test',
+            typeLog: '12',
+        }).then(function (response) {
+
+            console.log('hcia response', response)
+
+        });
+    }
+
     showOPDAyModal2 = (recodrd) => {
+
         this.requestUserCommentList(recodrd)
+        this.addOPLog(recodrd)
+        this.getOPLog(recodrd)
         this.setState({
             modal2OPDAYVisible: true,
         });
@@ -736,10 +769,7 @@ class Basic extends Component {
                                     borderRadius: "4px", background: '#FF6666'
                                 }} type="normal" key="back">拒絕</Button>
                             </Popconfirm>
-
-
                             <Button
-
                                 style={{
                                     width: "120px",
                                     height: "40px",
@@ -812,20 +842,11 @@ class Basic extends Component {
                                 <Col style={{textAlign: 'right'}} span={9}>保证金占比:</Col>
                                 <Col style={{textAlign: 'center'}} span={11}>{this.state.detail.marginLevel}</Col>
                             </Row>
-                            {/*<Row style={{marginTop: "24px", marginRight: "80px", marginLeft: "80px"}}>*/}
-                            {/*<Col style={{textAlign: 'center'}} span={24}>处理备注</Col>*/}
-                            {/*<Col style={{marginTop: 20}} span={24}>*/}
-                            {/*<TextArea value={this.state.mComment}*/}
-                            {/*onChange={this.changeNote}*/}
-                            {/*rows={4}></TextArea>*/}
-                            {/*</Col>*/}
-                            {/*</Row>*/}
 
                             <Table
                                 style={{marginTop: "20px", marginLeft: "80px", marginRight: "80px"}}
                                 rowKey="id"
                                 bordered
-
                                 columns={[
                                     {
                                         title: '操作人',
@@ -859,6 +880,7 @@ class Basic extends Component {
                                 dataSource={this.state.operationDiaryHistory}
                                 loading={this.state.loadingComment}
                                 pagination={{
+                                    hideOnSinglePage: true,
                                     total: this.state.totalpageComments * this.state.pgsize,
                                     pageSize: this.state.pgsize,
                                     onChange: this.changePageComment,
