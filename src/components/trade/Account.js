@@ -64,20 +64,7 @@ class Basic extends Component {
 
         };
 
-        // document.cookie="username=John Doe; expires=Thu, 18 Dec 2043 12:00:00 GMT; path=/";
 
-        // document.cookie1="testcoookie1"
-        var x = document.cookie;
-        var xxxx = document.cookie1;
-        var yyyy = document.cookie;
-
-        // console.log('hcia x' , x)
-        // console.log('hcia x' , x)
-        // console.log('hcia x' , x)
-
-        // console.log('hcia xxxx', xxxx)
-
-        // console.log('hcia yyyy', yyyy)
     }
 
     showOPDAyModal3 = (recodrd) => {
@@ -786,7 +773,6 @@ class Basic extends Component {
 
 
                             <Button
-
                                 style={{
                                     width: "120px",
                                     height: "40px",
@@ -866,10 +852,6 @@ class Basic extends Component {
                                 placeholder={['开始时间', '结束时间']}
                                 onChange={(value, dateString) => {
 
-
-                                    console.log('hcia value', value)
-
-
                                     if (value.length === 0) {
 
                                         this.setState({
@@ -882,10 +864,6 @@ class Basic extends Component {
                                         var selectTimeStart = value[0].unix() + '000'
                                         var selectTimeEnd = value[1].unix() + '000'
 
-                                        console.log('hcia selectTimeStart', selectTimeStart)
-                                        console.log('hcia selectTimeEnd', selectTimeEnd)
-
-
                                         this.setState({
                                             filterTimeFalue: value,
                                             selectTimeStart: selectTimeStart,
@@ -893,7 +871,6 @@ class Basic extends Component {
 
                                         });
                                     }
-
 
                                 }}
                                 value={this.state.filterTimeFalue}
