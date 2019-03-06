@@ -549,7 +549,6 @@ export default class PotentialUser extends Component {
         if (this.state.nowKey === '3') {
             logRouter = 'back/addLogIntentUser'
         }
-        // console.log('hcia record.feebackStatus' , record.feebackStatus)
         window.Axios.post(logRouter, {
             referKey: record.belongUserId,
             commentLog: '操作延期申请',
@@ -570,7 +569,7 @@ export default class PotentialUser extends Component {
         window.Axios.post('ixuser/delayDemoAccount', {
             "accountNo": accountNo,
             "belongUserId": belongUserId,
-        }).then((response) => {
+        }).then(() => {
             message.success('操作成功')
             self.reflesh()
 
@@ -585,18 +584,11 @@ export default class PotentialUser extends Component {
             if (this.state.nowKey === '3') {
                 logRouter = 'back/addLogIntentUser'
             }
-            // console.log('hcia record.feebackStatus' , record.feebackStatus)
             window.Axios.post(logRouter, {
                 referKey: record.belongUserId,
                 commentLog: '操作延期申请',
             })
 
-            // window.Axios.post('back/addLogHistory', {
-            //     'moduleLog': '用户管理',
-            //     'pageLog': 'Leads管理',
-            //     'commentLog': '操作延期申请',
-            //     'typeLog': 3,
-            // });
         }).catch(error => {
 
 
