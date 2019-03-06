@@ -233,7 +233,7 @@ export default class PotentialUser extends Component {
                 key: '序号',
                 align: 'center',
                 render: (text, record, index) => (
-                    <span>{(this.state.currentA-1) * this.state.pgsize + index + 1}</span>
+                    <span>{(this.state.currentA - 1) * this.state.pgsize + index + 1}</span>
                 ),
             }, {
                 title: '手机号',
@@ -341,7 +341,7 @@ export default class PotentialUser extends Component {
                 key: '序号',
                 align: 'center',
                 render: (text, record, index) => (
-                    <span>{(this.state.currentB-1) * this.state.pgsize + index + 1}</span>
+                    <span>{(this.state.currentB - 1) * this.state.pgsize + index + 1}</span>
                 ),
             },
             {
@@ -365,7 +365,6 @@ export default class PotentialUser extends Component {
                 dataIndex: '绑定时间',
                 width: 150,
                 align: 'center',
-
                 key: '绑定时间',
                 render: (text, record) => (<span>{record.date}</span>),
             }, {
@@ -373,19 +372,16 @@ export default class PotentialUser extends Component {
                 dataIndex: '剩余天数',
                 key: '剩余天数',
                 align: 'center',
-
                 render: (text, record) => (<span>{record.remainDay}</span>),
             }, {
                 title: '模拟账户状态',
                 align: 'center',
-
                 dataIndex: '模拟账户状态',
                 key: '模拟账户状态',
                 render: (text, record) => (<span>{record.expireStatus}</span>),
             }, {
                 title: '延期次数',
                 align: 'center',
-
                 dataIndex: '延期次数',
                 key: '延期次数',
                 render: (text, record) => (<span>{record.delayNum}</span>),
@@ -407,8 +403,7 @@ export default class PotentialUser extends Component {
                 dataIndex: '操作人',
                 key: '操作人',
                 render: (text, record) => (<span>{record.operator}</span>),
-            },
-            {
+            }, {
                 title: '查看',
                 dataIndex: '查看',
                 key: '查看',
@@ -419,8 +414,7 @@ export default class PotentialUser extends Component {
                                 onClick={() => this.shownoteModal(record.belongUserId)}>备注</Button>
                     </div>
                 )
-            }
-            , {
+            }, {
                 title: '操作',
                 key: 'action',
                 align: 'center',
@@ -446,7 +440,7 @@ export default class PotentialUser extends Component {
                 key: '序号',
                 align: 'center',
                 render: (text, record, index) => (
-                    <span>{(this.state.currentC-1) * this.state.pgsize + index + 1}</span>
+                    <span>{(this.state.currentC - 1) * this.state.pgsize + index + 1}</span>
                 ),
             },
             {
@@ -455,15 +449,12 @@ export default class PotentialUser extends Component {
                 key: '手机号',
                 align: 'center',
                 render: (text, record) => (
-
                     <span>{record.mobile}</span>
-
                 ),
             }, {
                 title: '姓名',
                 dataIndex: 'name',
                 key: 'name',
-
                 align: 'center',
                 render: (text, record) => (
                     <span>{record.name}</span>),
@@ -471,7 +462,6 @@ export default class PotentialUser extends Component {
                 title: '当前账户',
                 dataIndex: '当前账户',
                 key: '当前账户',
-
                 align: 'center',
                 render: (text, record) => (<span>{record.accountType}</span>),
             }, {
@@ -485,7 +475,6 @@ export default class PotentialUser extends Component {
                 title: '录入信息时间',
                 dataIndex: '录入信息时间',
                 width: 150,
-
                 key: '录入信息时间',
                 align: 'center',
                 render: (text, record) => (<span>{record.date}</span>),
@@ -578,8 +567,6 @@ export default class PotentialUser extends Component {
         let self = this;
 
 
-
-
         window.Axios.post('ixuser/delayDemoAccount', {
             "accountNo": accountNo,
             "belongUserId": belongUserId,
@@ -611,10 +598,9 @@ export default class PotentialUser extends Component {
             //     'typeLog': 3,
             // });
         }).catch(error => {
-            
-            
-            console.log('hcia error' , error)
 
+
+            console.log('hcia error', error)
 
 
             var logRouter = ''
@@ -728,8 +714,6 @@ export default class PotentialUser extends Component {
                 totalpageComments: response.data.data.totalPage,
                 operationDiaryHistory: response.data.data.list,
             });
-
-
 
 
         });
@@ -894,7 +878,6 @@ export default class PotentialUser extends Component {
             });
         })
     }
-
 
 
     changePageA = (page) => {
@@ -1158,22 +1141,22 @@ export default class PotentialUser extends Component {
                                 </Button>
                             }
                             bodyStyle={{padding: 0, margin: 0}}
-                              title={'潜在用户信息表'}>
+                            title={'潜在用户信息表'}>
                             <Table
                                 titleStyle={{whiteSpace: 'nowrap'}}
                                 style={{whiteSpace: 'nowrap'}}
                                 rowKey="id"
-                                   bordered
+                                bordered
                                 // rowSelection={rowSelection}
-                                   columns={this.pageAColumns()}
-                                   dataSource={this.state.bklistA}
-                                   scroll={{x: 1600}}
-                                   loading={this.state.loadingA}
-                                   pagination={{
-                                       total: this.state.totalpageA * this.state.pgsize,
-                                       pageSize: this.state.pgsize,
-                                       onChange: this.changePageA,
-                                   }}
+                                columns={this.pageAColumns()}
+                                dataSource={this.state.bklistA}
+                                scroll={{x: 1600}}
+                                loading={this.state.loadingA}
+                                pagination={{
+                                    total: this.state.totalpageA * this.state.pgsize,
+                                    pageSize: this.state.pgsize,
+                                    onChange: this.changePageA,
+                                }}
                             />
                         </Card>
 
@@ -1235,7 +1218,6 @@ export default class PotentialUser extends Component {
                         </Card>
                     </TabPane>
                 </Tabs>
-
 
 
                 <Modal
