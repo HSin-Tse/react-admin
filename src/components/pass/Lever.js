@@ -124,7 +124,7 @@ class Basic extends Component {
         });
     }
 
-    addOPLog = (record,com) => {
+    addOPLog = (record, com) => {
         var self = this;
         window.Axios.post('/auth/addOperatorLogHistory', {
             referKey: record.id,
@@ -159,7 +159,7 @@ class Basic extends Component {
     showOPDAyModal2 = (recodrd) => {
 
         this.requestUserCommentList(recodrd)
-        this.addOPLog(recodrd,'查看操作日志')
+        this.addOPLog(recodrd, '查看操作日志')
         this.getOPLog(recodrd)
         this.setState({
             modal2OPDAYVisible: true,
@@ -382,7 +382,6 @@ class Basic extends Component {
     changePageComment = (page) => {
         let self = this
 
-        // page = page - 1
         this.setState({
             currentComment: page,
         }, () => {
@@ -391,7 +390,7 @@ class Basic extends Component {
     }
 
     showModalA = (recodrd) => {
-        this.addOPLog(recodrd,'操作查看')
+        this.addOPLog(recodrd, '操作查看')
 
         let self = this
 
@@ -418,7 +417,7 @@ class Basic extends Component {
 
     }
     showModalB = (recodrd) => {
-        this.addOPLog(recodrd,'操作审核')
+        this.addOPLog(recodrd, '操作审核')
 
         let self = this
         self.setState({
