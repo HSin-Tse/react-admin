@@ -47,7 +47,6 @@ class CustomerSummary extends Component {
     }
 
     handleKeyPressOOP = (event) => {
-        // console.log('hcia event' , event)
         if (event.metaKey || event.ctrlKey) {
             if (event.key === 'o' || event.key === 'ㄟ') {
                 this.setState({
@@ -57,15 +56,13 @@ class CustomerSummary extends Component {
         }
     }
 
-    sda = setInterval(() => {
-        // console.log('hcia setInterval')
-        // this.requestData()
-
-    }, 1000)
+    // sda = setInterval(() => {
+    //     // this.requestData()
+    // }, 1000)
 
 
     componentWillUnmount() {
-        clearInterval(this.sda);
+        // clearInterval(this.sda);
         document.removeEventListener("keydown", this.handleKeyPressOOP, false);
     }
 
@@ -298,8 +295,6 @@ class CustomerSummary extends Component {
             <div>
                 {/*<div>otherComment query :{JSON.stringify(this.state.otherComment)}</div>*/}
 
-                {/*<KeyOp mCount={this.state.mCount}*/}
-
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
                     <span className="sw-btn dark-white" onClick={this._switcherOn}>
                      <Icon type="setting" className="text-dark"/>
@@ -530,7 +525,6 @@ class CustomerSummary extends Component {
                     }}
                     closable={false}
                     footer={null}
-                    // onCancel={this.handleCancel}
                     visible={this.state.modal2Visible1}
 
 
@@ -833,8 +827,6 @@ class CustomerSummary extends Component {
                                         return
                                     }
 
-
-                                    // return ;
 
                                     // window.Axios.post('back/addLogHistory', {
                                     //     'moduleLog': '用户管理',
