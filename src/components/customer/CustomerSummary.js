@@ -173,8 +173,7 @@ class CustomerSummary extends Component {
                 key: '邮箱',
                 align: 'center',
                 render: (text, record) => (<span>{record.email}</span>),
-            },
-            {
+            }, {
                 title: '交易组',
                 dataIndex: '交易组',
                 key: '交易组',
@@ -200,8 +199,6 @@ class CustomerSummary extends Component {
                 key: '激活绑定',
                 align: 'center',
                 render: (text, record) => (
-
-
                     <div style={{
                         align: 'center',
                         display: record.bindedStatus == 1 ? 'flex' : '',
@@ -211,15 +208,15 @@ class CustomerSummary extends Component {
                             display: record.bindedStatus == 1 ? '' : 'none',
                             marginLeft: 10
                         }}>{record.bindedStatus != 1 ? '' : record.bindedPhoneNumber}</span>
-                        {/*<Button style={{marginLeft: 15}}>解绑</Button>*/}
 
-
-                        <Button size={'small'} style={{
-                            background: '#FDD000',
-                            display: record.bindedStatus != 1 ? 'none' : '',
-                            marginLeft: 0
-                        }}
-                                onClick={() => this.requestUnbindAccount(record)}>解绑</Button>
+                        <Button
+                            size={'small'}
+                            style={{
+                                background: '#FDD000',
+                                display: record.bindedStatus != 1 ? 'none' : '',
+                                marginLeft: 0
+                            }}
+                            onClick={() => this.requestUnbindAccount(record)}>解绑</Button>
 
 
                         <span style={{
@@ -407,10 +404,6 @@ class CustomerSummary extends Component {
                     用户总表
                 </h2>
                 <BreadcrumbCustom first="用户管理" second="用户总表"/>
-
-                {/*<div>this.state.checkedValues :{JSON.stringify(this.state.checkedValues)}</div>*/}
-                {/*<div>this.state.checkedValues :{JSON.stringify(this.state.checkedValues.length)}</div>*/}
-
                 <Card
                     extra={[
 
@@ -434,7 +427,6 @@ class CustomerSummary extends Component {
                         }}
                     />
                 </Card>
-
 
 
                 <Modal
@@ -898,18 +890,11 @@ class CustomerSummary extends Component {
         }, () => {
 
 
-            // window.Axios.post('back/addLogHistory', {
-            //     'moduleLog': '用户管理',
-            //     'pageLog': '用户总表',
-            //     'commentLog': '查看备注',
-            //     'typeLog': 3,
-            // });
-
             window.Axios.post('auth/getUserCommentList', {
                 'belongUserId': this.state.opDayRecord.belongUserId,
             }).then(function (response) {
                 self.setState({operaftionDiaryHistory: response.data.data.list});
-            })
+            });
             self.setState({
                 modal2Visible1: true,
                 NoteModalVisible2: false,
@@ -917,7 +902,7 @@ class CustomerSummary extends Component {
         });
 
 
-    }
+    };
 
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
