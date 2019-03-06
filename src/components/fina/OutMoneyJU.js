@@ -28,6 +28,7 @@ class Basic extends Component {
     pad = (str) => {
         return +str >= 10 ? str : '0' + str
     };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -81,11 +82,6 @@ class Basic extends Component {
         let self = this;
 
 
-
-
-
-
-
         // window.Axios.post('/auth/getRecordCommentList', {
         //     id: self.props.match.params.id,
         //     commentType: 13,
@@ -136,8 +132,6 @@ class Basic extends Component {
             }, () => {
 
 
-
-
                 window.Axios.post('finance/getDepositWithdrawReport', {
                     'starClientAccount': self.state.accountNo,
                     'pageSize': self.state.pgsize,
@@ -145,28 +139,32 @@ class Basic extends Component {
                 }).then(function (response) {
 
 
-                    console.log('hcia response.data.data.list?[]:response.data.data.list' , response.data.data.list==null?[]:response.data.data.list)
+                    console.log('hcia response.data.data.list?[]:response.data.data.list', response.data.data.list == null ? [] : response.data.data.list)
                     self.setState({
                             totalPage: response.data.data.totalPage,
-                            userList: response.data.data.list==null?[]:response.data.data.list
+                            userList: response.data.data.list == null ? [] : response.data.data.list
                         }
                     );
 
 
                 })
 
-
-
+                var sss = self.state.commentList.find(function (item, index, array) {
+                    return item.type == '16';           // 取得大於五歲的
+                });
+                console.log('hcia sss' , sss)
                 self.setState({
 
-                    theComment: self.state.commentList[0] ? self.state.commentList[0].comment : ''
+
+                    theComment: sss ? sss.comment : ''
+                    // theComment: self.state.commentList[0] ? self.state.commentList[0].comment : ''
                 })
 
 
                 if ((this.state.status == 1 || this.state.status == 3 || this.state.status == 4 || this.state.status == 5 || this.state.status == 6 || this.state.status == 7 || this.state.status == 8 || this.state.status == 9)) {
 
                     self.setState({
-                        powerList: [1, 2, 3, 4, 5, 6, 7,8]
+                        powerList: [1, 2, 3, 4, 5, 6, 7, 8]
                     })
                 }
 
@@ -178,7 +176,6 @@ class Basic extends Component {
     }
 
     onChange = (checkedValues) => {
-        console.log('hcia checkedValues', checkedValues)
         this.setState({
             powerList: checkedValues,
         });
@@ -210,7 +207,7 @@ class Basic extends Component {
 
 
                 <div style={{overflow: 'auto'}}>
-                    {/*<div>commentList query :{JSON.stringify(this.state.commentList)}</div>*/}
+                    <div>commentList query :{JSON.stringify(this.state.commentList)}</div>
 
                     <h2 style={{marginTop: 15}}>
                         {steps[0].title}-{this.state.status == 0 ? '提交成功(Pending)' : this.state.status == 1 ? '结算审核通过(Accounts OK)' : this.state.status == 2 ? '结算审核暂停(Suspend)' : this.state.status == 3 ? '结算审核失败(Failure)' : this.state.status == 4 ? '风险审核通过(Accepted)' : this.state.status == 5 ? '风险审核暂停(Suspend)' : this.state.status == 6 ? '风险审核失败(Failure)' : this.state.status == 7 ? '渠道下发通过(Completed)' : this.state.status == 8 ? '渠道下发暂停(Suspend)' : this.state.status == 9 ? '渠道下发失败(Failure)' : '??'}
@@ -475,7 +472,7 @@ class Basic extends Component {
                                                    dataIndex: 'bkUserName',
                                                    key: 'operationDiary_User',
                                                    render: (text, record) => (
-                                                       <div>{record.createDate}    - {record.accountNo}</div>),
+                                                       <div>{record.createDate} - {record.accountNo}</div>),
                                                }, {
                                                    title: '入',
                                                    align: 'center',

@@ -137,11 +137,20 @@ class Basic extends Component {
 
 
                 })
+                // self.setState({
+                //
+                //     theComment: self.state.commentList[1] ? self.state.commentList[1].comment : ''
+                // })
+                var sss = self.state.commentList.find(function (item, index, array) {
+                    return item.type == '17';           // 取得大於五歲的
+                });
+                console.log('hcia sss' , sss)
                 self.setState({
 
-                    theComment: self.state.commentList[1] ? self.state.commentList[1].comment : ''
-                })
 
+                    theComment: sss ? sss.comment : ''
+                    // theComment: self.state.commentList[0] ? self.state.commentList[0].comment : ''
+                })
 
                 if ((this.state.status == 0 || this.state.status == 2 || this.state.status == 3 || this.state.status == 4 || this.state.status == 6 || this.state.status == 7 || this.state.status == 8 || this.state.status == 9)) {
 
@@ -185,7 +194,7 @@ class Basic extends Component {
                     {/*<div>commentList query :{JSON.stringify(this.state.commentList)}</div>*/}
 
                     <h2 style={{marginTop: 15}}>
-                        {this.state.status} {steps[1].title}-{this.state.status == '5'}{this.state.status == 0 ? '提交成功(Pending)' : this.state.status == 1 ? '结算审核通过(Accounts OK)' : this.state.status == 2 ? '结算审核暂停(Suspend)' : this.state.status == 3 ? '结算审核失败(Failure)' : this.state.status == 4 ? '风险审核通过(Accepted)' : this.state.status == 5 ? '风险审核暂停(Suspend)' : this.state.status == 6 ? '风险审核失败(Failure)' : this.state.status == 7 ? '渠道下发通过(Completed)' : this.state.status == 8 ? '渠道下发暂停(Suspend)' : this.state.status == 9 ? '渠道下发失败(Failure)' : '??'}
+                       {steps[1].title}-{this.state.status == '5'}{this.state.status == 0 ? '提交成功(Pending)' : this.state.status == 1 ? '结算审核通过(Accounts OK)' : this.state.status == 2 ? '结算审核暂停(Suspend)' : this.state.status == 3 ? '结算审核失败(Failure)' : this.state.status == 4 ? '风险审核通过(Accepted)' : this.state.status == 5 ? '风险审核暂停(Suspend)' : this.state.status == 6 ? '风险审核失败(Failure)' : this.state.status == 7 ? '渠道下发通过(Completed)' : this.state.status == 8 ? '渠道下发暂停(Suspend)' : this.state.status == 9 ? '渠道下发失败(Failure)' : '??'}
                     </h2>
                     <BreadcrumbCustom first="财务管理" second="出金管理" third={steps[1].title}/>
 
