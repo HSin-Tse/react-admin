@@ -645,7 +645,6 @@ export default class PotentialUser extends Component {
             belongUserId: self.state.theBelongUserId,
         }).then(() => {
             message.success('提交成功')
-
             self.reflesh()
         });
 
@@ -657,7 +656,6 @@ export default class PotentialUser extends Component {
     }
     requestUserLogList = (record) => {
         var self = this;
-
 
         var logRouter = ''
 

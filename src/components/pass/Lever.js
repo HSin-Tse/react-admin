@@ -9,7 +9,7 @@ import {addTodo} from "../../action";
 import connect from "react-redux/es/connect/connect";
 import classNames from "classnames";
 import {getCookie, setCookie} from "../../try";
-import { useState } from 'react';
+import {useState} from 'react';
 
 const {TextArea} = Input;
 const Option = Select.Option;
@@ -162,8 +162,6 @@ class Basic extends Component {
     }
 
     componentDidMount() {
-
-
 
 
         this.columnsLog = [
@@ -396,9 +394,8 @@ class Basic extends Component {
         let self = this
 
 
-        
-        console.log('hcia this.state.detail.targetLeverage' , this.state.detail.targetLeverage)
-        console.log('hcia this.state.mLeverageId' , this.state.mLeverageId)
+        console.log('hcia this.state.detail.targetLeverage', this.state.detail.targetLeverage)
+        console.log('hcia this.state.mLeverageId', this.state.mLeverageId)
 
 
         // return
@@ -478,7 +475,7 @@ class Basic extends Component {
     pad = (str) => {
         return +str >= 10 ? str : '0' + str
     };
-     Example=()=> {
+    Example = () => {
         // Declare a new state variable, which we'll call "count"
         const [count, setCount] = useState(0);
 
@@ -491,6 +488,7 @@ class Basic extends Component {
             </div>
         );
     }
+
     render() {
         const gridStyle = {
             width: '50%',
@@ -556,8 +554,6 @@ class Basic extends Component {
                                 onChange={(value, dateString) => {
 
 
-
-
                                     if (value.length === 0) {
 
                                         this.setState({
@@ -591,7 +587,6 @@ class Basic extends Component {
 
                                     var selectTimeStart = value[0].unix() + '000'
                                     var selectTimeEnd = value[1].unix() + '000'
-
 
 
                                     this.setState({
@@ -662,16 +657,16 @@ class Basic extends Component {
                                 </Col>
                             </Row>
                             {/*<Row style={{marginTop: "24px"}}>*/}
-                                {/*<Col style={{textAlign: 'right'}} span={9}>杠杆修改:</Col>*/}
-                                {/*<Col style={{textAlign: 'center'}} span={11}>*/}
-                                    {/*<Select*/}
-                                        {/*onChange={this.onChangeLe}*/}
-                                        {/*value={this.state.detail.targetLeverageID}*/}
-                                        {/*style={{width: 100, marginLeft: 0}}>*/}
-                                        {/*{this.state.leavgeList.map(ccty => <Option*/}
-                                            {/*value={ccty.id} key={ccty.leverage}>1:{ccty.leverage}</Option>)}*/}
-                                    {/*</Select>*/}
-                                {/*</Col>*/}
+                            {/*<Col style={{textAlign: 'right'}} span={9}>杠杆修改:</Col>*/}
+                            {/*<Col style={{textAlign: 'center'}} span={11}>*/}
+                            {/*<Select*/}
+                            {/*onChange={this.onChangeLe}*/}
+                            {/*value={this.state.detail.targetLeverageID}*/}
+                            {/*style={{width: 100, marginLeft: 0}}>*/}
+                            {/*{this.state.leavgeList.map(ccty => <Option*/}
+                            {/*value={ccty.id} key={ccty.leverage}>1:{ccty.leverage}</Option>)}*/}
+                            {/*</Select>*/}
+                            {/*</Col>*/}
                             {/*</Row>*/}
                             <Row style={{marginTop: "24px"}}>
                                 <Col style={{textAlign: 'right'}} span={9}>保证金占比:</Col>
@@ -837,12 +832,12 @@ class Basic extends Component {
                                 <Col style={{textAlign: 'center'}} span={11}>{this.state.detail.marginLevel}</Col>
                             </Row>
                             {/*<Row style={{marginTop: "24px", marginRight: "80px", marginLeft: "80px"}}>*/}
-                                {/*<Col style={{textAlign: 'center'}} span={24}>处理备注</Col>*/}
-                                {/*<Col style={{marginTop: 20}} span={24}>*/}
-                                {/*<TextArea value={this.state.mComment}*/}
-                                          {/*onChange={this.changeNote}*/}
-                                          {/*rows={4}></TextArea>*/}
-                                {/*</Col>*/}
+                            {/*<Col style={{textAlign: 'center'}} span={24}>处理备注</Col>*/}
+                            {/*<Col style={{marginTop: 20}} span={24}>*/}
+                            {/*<TextArea value={this.state.mComment}*/}
+                            {/*onChange={this.changeNote}*/}
+                            {/*rows={4}></TextArea>*/}
+                            {/*</Col>*/}
                             {/*</Row>*/}
 
                             <Table
@@ -899,12 +894,7 @@ class Basic extends Component {
 
                 <h2 style={{marginTop: 15}}>杠杆审核</h2>
                 {/*<div>this.state.detail :{JSON.stringify(this.state.detail)}</div>*/}
-
-
                 <BreadcrumbCustom first="审核管理" second="杠杆审核"/>
-
-
-
                 <Card title="杠杆审核"
                       extra={
                           <Button type="default"
@@ -915,47 +905,21 @@ class Basic extends Component {
                 >
 
                     <Table
-
-
                         rowKey="id"
-
-                           columns={this.columns}
-                           dataSource={this.state.userList}
-                           scroll={{x: 1600}}
-                           bordered
-                           loading={this.state.loading}
-                           pagination={{
-                               showQuickJumper: true,
-                               total: this.state.pgsize * this.state.totalPage,
-                               pageSize: this.state.pgsize,
-                               onChange: this.changePage,
-                           }}
+                        columns={this.columns}
+                        dataSource={this.state.userList}
+                        scroll={{x: 1600}}
+                        bordered
+                        loading={this.state.loading}
+                        pagination={{
+                            showQuickJumper: true,
+                            total: this.state.pgsize * this.state.totalPage,
+                            pageSize: this.state.pgsize,
+                            onChange: this.changePage,
+                        }}
                     />
                 </Card>
-                {/*<Modal*/}
-                    {/*title="查看操作日志"*/}
-                    {/*visible={this.state.modal2OPDAYVisible}*/}
-                    {/*onCancel={() => {*/}
-                        {/*this.setState({*/}
-                            {/*visible: false,*/}
-                            {/*modal2OPDAYVisible: false,*/}
-                        {/*});*/}
-                    {/*}}*/}
-                    {/*width={'80%'}*/}
-                    {/*footer={null}>*/}
-                    {/*<Table rowKey="id"*/}
-                           {/*bordered*/}
-                           {/*columns={this.columnsLog}*/}
-                           {/*dataSource={this.state.operationDiaryHistory}*/}
-                           {/*loading={this.state.loadingComment}*/}
-                           {/*pagination={{*/}
-                               {/*total: this.state.totalpageComments * this.state.pgsize,*/}
-                               {/*pageSize: this.state.pgsize,*/}
-                               {/*onChange: this.changePageComment,*/}
-                           {/*}}*/}
-                    {/*/>*/}
 
-                {/*</Modal>*/}
 
                 <Modal
                     bodyStyle={{
