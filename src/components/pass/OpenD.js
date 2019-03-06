@@ -461,6 +461,8 @@ class PassOpenD extends Component {
             });
             if (response.data.code == 1) {
                 message.info('拒絕成功')
+
+                me.props.history.goBack()
                 me.setState({
                     showREJECTmodel: false,
                 });
@@ -1209,8 +1211,8 @@ class PassOpenD extends Component {
                                     <div style={{display: 'flex', minHeight: 40}}>
                                         {/*<span >*姓（中文）</span>*/}
 
-                                        <span style={{fontSize: '13px',width: 120}}><span
-                                            style={{color: 'red'}}>*</span >姓（中文）</span>
+                                        <span style={{fontSize: '13px', width: 120}}><span
+                                            style={{color: 'red'}}>*</span>姓（中文）</span>
                                         <Form layout="vertical">
                                             <FormItem
 
@@ -1238,8 +1240,8 @@ class PassOpenD extends Component {
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
                                         {/*<span style={{width: 120}}>*名（中文）</span>*/}
-                                        <span style={{fontSize: '13px',width: 120}}><span
-                                            style={{color: 'red'}}>*</span >名（中文）</span>
+                                        <span style={{fontSize: '13px', width: 120}}><span
+                                            style={{color: 'red'}}>*</span>名（中文）</span>
                                         <Form layout="vertical">
                                             <FormItem
                                                 id="control-mention2"
@@ -1262,22 +1264,22 @@ class PassOpenD extends Component {
                                         </Form>
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{fontSize: '13px',width: 120}}><span
-                                            style={{color: 'red'}}>*</span >姓</span>
+                                        <span style={{fontSize: '13px', width: 120}}><span
+                                            style={{color: 'red'}}>*</span>姓</span>
                                         <Input value={this.state.recordData.lastName}
                                                onChange={this.onChangelastName}
                                                style={{width: '256px'}} placeholder=""/>
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{fontSize: '13px',width: 120}}><span
-                                            style={{color: 'red'}}>*</span >名</span>
+                                        <span style={{fontSize: '13px', width: 120}}><span
+                                            style={{color: 'red'}}>*</span>名</span>
                                         <Input value={this.state.recordData.firstName}
                                                onChange={this.onChangefirstName}
                                                style={{width: '256px'}} placeholder=""/>
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{fontSize: '13px',width: 120}}><span
-                                            style={{color: 'red'}}>*</span >出生日期</span>
+                                        <span style={{fontSize: '13px', width: 120}}><span
+                                            style={{color: 'red'}}>*</span>出生日期</span>
                                         <DatePicker
                                             style={{width: '256px'}}
                                             // value={moment(this.state.testeee, 'YYYY-MM-DD')}
@@ -1289,8 +1291,8 @@ class PassOpenD extends Component {
 
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{fontSize: '13px',width: 120}}><span
-                                            style={{color: 'red'}}>*</span >性别</span>
+                                        <span style={{fontSize: '13px', width: 120}}><span
+                                            style={{color: 'red'}}>*</span>性别</span>
                                         <Select value={this.state.mGender}
                                                 onChange={this.onChangegender}
                                                 style={{width: '256px'}}>
@@ -1299,16 +1301,16 @@ class PassOpenD extends Component {
                                         </Select>
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{fontSize: '13px',width: 120}}><span
-                                            style={{color: 'red'}}>*</span >身份证号码</span>
+                                        <span style={{fontSize: '13px', width: 120}}><span
+                                            style={{color: 'red'}}>*</span>身份证号码</span>
                                         <Input value={this.state.recordData.nationalID}
                                                onChange={this.onChangenationalId}
                                                style={{width: '256px'}} placeholder=""/>
                                     </div>
 
                                     <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{fontSize: '13px',width: 120}}><span
-                                            style={{color: 'red'}}>*</span >城市</span>
+                                        <span style={{fontSize: '13px', width: 120}}><span
+                                            style={{color: 'red'}}>*</span>城市</span>
                                         <Select
                                             value={this.state.mState}
                                             style={{width: '128px'}}
@@ -1330,21 +1332,21 @@ class PassOpenD extends Component {
 
 
                                     <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{fontSize: '13px',width: 120}}><span
-                                            style={{color: 'red'}}>*</span >详细地址</span>
+                                        <span style={{fontSize: '13px', width: 120}}><span
+                                            style={{color: 'red'}}>*</span>详细地址</span>
                                         <Input defaultValue={this.state.recordData.street}
                                                onChange={this.onChangestreet}
                                                style={{width: '256px'}} placeholder=""/>
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{fontSize: '13px',width: 120}}><span
-                                            style={{color: 'red'}}>*</span >联系电话</span>
+                                        <span style={{fontSize: '13px', width: 120}}><span
+                                            style={{color: 'red'}}>*</span>联系电话</span>
                                         <Input defaultValue={this.state.recordData.phoneNumber} disabled={true}
                                                style={{width: '256px'}} placeholder=""/>
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{fontSize: '13px',width: 120}}><span
-                                            style={{color: 'red'}}>*</span >邮箱地址</span>
+                                        <span style={{fontSize: '13px', width: 120}}><span
+                                            style={{color: 'red'}}>*</span>邮箱地址</span>
 
                                         <MaskedInput
                                             defaultValue={this.state.recordData.email}
@@ -1362,8 +1364,8 @@ class PassOpenD extends Component {
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
 
-                                        <span style={{fontSize: '13px',width: 120}}><span
-                                            style={{color: 'red'}}>*</span >邮编</span>
+                                        <span style={{fontSize: '13px', width: 120}}><span
+                                            style={{color: 'red'}}>*</span>邮编</span>
                                         <Input value={this.state.recordData.postalCode}
                                                onChange={this.onChangepostalCode}
                                                style={{width: '256px'}} placeholder="邮编"/>
@@ -1412,8 +1414,8 @@ class PassOpenD extends Component {
                                         </Select>
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{fontSize: '13px',width: 120}}><span
-                                            style={{color: 'red'}}>*</span >是否美国公民</span>
+                                        <span style={{fontSize: '13px', width: 120}}><span
+                                            style={{color: 'red'}}>*</span>是否美国公民</span>
                                         <Select
 
                                             style={{width: '256px'}}
@@ -1444,8 +1446,8 @@ class PassOpenD extends Component {
                                         </Select>
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{fontSize: '13px',width: 120}}><span
-                                            style={{color: 'red'}}>*</span >风险承受力</span>
+                                        <span style={{fontSize: '13px', width: 120}}><span
+                                            style={{color: 'red'}}>*</span>风险承受力</span>
                                         <Select
                                             dropdownStyle={{wordWrap: 'break-word'}}
                                             onChange={this.onChangemriskTolerance}
@@ -1464,8 +1466,8 @@ class PassOpenD extends Component {
                                                style={{width: '256px'}} placeholder=""/>
                                     </div>
                                     <div style={{display: 'flex', minHeight: 40}}>
-                                        <span style={{fontSize: '13px',width: 120}}><span
-                                            style={{color: 'red'}}>*</span >交易密码</span>
+                                        <span style={{fontSize: '13px', width: 120}}><span
+                                            style={{color: 'red'}}>*</span>交易密码</span>
                                         <Input defaultValue={this.state.recordData.accountPassword}
                                                disabled={true}
                                                style={{width: '256px'}} placeholder=""/>
