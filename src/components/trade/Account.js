@@ -129,20 +129,15 @@ class Basic extends Component {
                 console.log('hcia menuInfor.superFlag', menuInfor.superFlag)
                 self.setState({
                     availableFlag: true,
-                    // isCanOP: 1
                 });
             } else {
 
 
                 var isCanOp = menuInfor.menuList.find((item) => {
-                    // console.log('hcia  this.props', this.props)
                     return this.props.tk === item.key;
                 });
 
-                console.log('hcia availableFlag', isCanOp.availableFlag, (isCanOp.availableFlag === 1))
-                // console.log('hcia isCanOp', isCanOp.availableFlag)
                 self.setState({
-
                     availableFlag: isCanOp.availableFlag === 1,
                     isCanOP: isCanOp.availableFlag
                 });
