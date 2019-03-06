@@ -109,18 +109,18 @@ class Basic extends Component {
     }
 
     requestUserCommentList = (record) => {
-        var self = this;
-        window.Axios.post('/auth/getRecordCommentList', {
-            id: record.id,
-            commentType: 4,
-            pageNo: this.state.currentComment,
-            pageSize: this.state.pgsize,
-        }).then(function (response) {
-            self.setState({
-                totalpageComments: response.data.data.totalPage,
-                operationDiaryHistory: response.data.data.list,
-            });
-        });
+        // var self = this;
+        // window.Axios.post('/auth/getRecordCommentList', {
+        //     id: record.id,
+        //     commentType: 4,
+        //     pageNo: this.state.currentComment,
+        //     pageSize: this.state.pgsize,
+        // }).then(function (response) {
+        //     self.setState({
+        //         totalpageComments: response.data.data.totalPage,
+        //         operationDiaryHistory: response.data.data.list,
+        //     });
+        // });
     }
 
     addOPLog = (record) => {
@@ -140,7 +140,7 @@ class Basic extends Component {
     getOPLog = (record) => {
         var self = this;
         window.Axios.post('/auth/getOperatorLogHistoryList', {
-            referKey: 1,
+            referKey: record.id,
             moduleLog: '审核管理',
             pageLog: '開戶審核',
             commentLog: 'test',
@@ -148,7 +148,10 @@ class Basic extends Component {
         }).then(function (response) {
 
             console.log('hcia response', response)
-
+            self.setState({
+                totalpageComments: response.data.data.totalPage,
+                operationDiaryHistory: response.data.data.list,
+            });
         });
     }
 
