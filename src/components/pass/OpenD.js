@@ -479,32 +479,7 @@ class PassOpenD extends Component {
             visible: false,
         });
     };
-    openGallery = (item) => {
-        const items = [
-            {
-                src: item,
-                w: 0,
-                h: 0,
-            }
-        ];
-        const pswpElement = this.pswpElement;
-        const options = {index: 0};
-        this.gallery = new PhotoSwipe(pswpElement, PhotoswipeUIDefault, items, options);
-        this.gallery.listen('gettingData', (index, item) => {
-            const _this = this;
-            if (item.w < 1 || item.h < 1) { // unknown size
-                var img = new Image();
-                img.onload = function () { // will get size after load
-                    item.w = this.width; // set image width
-                    item.h = this.height; // set image height
-                    _this.gallery.invalidateCurrItems(); // reinit Items
-                    _this.gallery.updateSize(true); // reinit Items
-                };
-                img.src = item.src; // let's download image
-            }
-        });
-        this.gallery.init();
-    };
+
     handleACType = (value, label) => {
         var self = this
         self.setState({
