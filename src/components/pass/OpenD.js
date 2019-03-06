@@ -1743,25 +1743,15 @@ class PassOpenD extends Component {
                                     }} loading={this.state.iconcanLoading}>拒绝</Button>
 
                             </div>
-                            {/*disabled={!this.state.isNeedSave || this.state.recordData.status != 0}*/}
                         </Row>
-
                     </div>
-
-
                 </div>
-
-
                 <div className="gutter-example button-demo">
-
                     <div className="pswp" tabIndex="-1" role="dialog" aria-hidden="true" ref={(div) => {
                         this.pswpElement = div;
                     }}>
-
                         <div className="pswp__bg"/>
-
                         <div className="pswp__scroll-wrap">
-
                             <div className="pswp__container">
                                 <div className="pswp__item"/>
                                 <div className="pswp__item"/>

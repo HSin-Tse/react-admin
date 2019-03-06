@@ -2,12 +2,6 @@ import React, {Component} from 'react';
 import {DatePicker, Input, Modal, Button, Table, message, Card, Icon, Select, Popconfirm} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import classNames from "classnames";
-import {CSVLink, CSVDownload} from "react-csv";
-
-import ExportJsonExcel from "js-export-excel";
-// import ReactHTMLTableToExcel from 'react-html-table-to-excel'
-import * as ReactDOM from "react-dom";
-import {FormattedMessage} from 'react-intl';
 import {addLogWhite} from '@/axios/logs';
 
 const {RangePicker} = DatePicker;
@@ -21,7 +15,6 @@ export default class WhiteList extends Component {
         this.state = {
             name: 'Eric',
             unreadCount: 1000,
-
             selectedRowKeys: [],
             bklistA: [],
             currentA: 1,
@@ -43,8 +36,6 @@ export default class WhiteList extends Component {
 
     componentWillUnmount() {
         document.removeEventListener("keydown", this.handleKeyPress, false);
-
-        // maintbale
     }
 
     showModalNote = (record) => {
@@ -56,28 +47,15 @@ export default class WhiteList extends Component {
             opDayRecord: record,
             theComment: ''
         }, () => {
-
             self.setState({
                 theBelongUserId: id,
                 NoteModalVisible2: true,
             });
         });
-
-
     }
 
     componentDidMount() {
-
-
         addLogWhite()
-        // window.Axios.post('back/addLogHistory', {
-        //     'moduleLog': '用户管理',
-        //     'pageLog': '白名单',
-        //     'commentLog': '查看了白名单',
-        //     'typeLog': 2,
-        // })
-
-
         document.addEventListener("keydown", this.handleKeyPress, false);
         this.columns = [
             {
@@ -119,9 +97,7 @@ export default class WhiteList extends Component {
                 dataIndex: '操作时间',
                 key: 'date',
                 render: (text, record) => (<span>{record.date}</span>),
-            }
-
-            , {
+            }, {
                 width: 150,
                 align: 'center',
                 title: '身份证号',
@@ -129,8 +105,7 @@ export default class WhiteList extends Component {
                 dataIndex: '身份证号',
                 key: 'nationalId',
                 render: (text, record) => (<span>{record.nationalId}</span>),
-            }
-            , {
+            }, {
                 width: 150,
                 align: 'center',
                 title: '邮箱地址',
@@ -197,15 +172,6 @@ export default class WhiteList extends Component {
     };
     requestUserCommentList = (record) => {
 
-        // window.Axios.post('back/addLogHistory', {
-        //     'moduleLog': '用户管理',
-        //     'pageLog': '白名单',
-        //     'commentLog': '查看了备注',
-        //     'typeLog': 3,
-        // }).then(function (response) {
-        //
-        //
-        // });
         var self = this;
         window.Axios.post('/auth/getRecordCommentList', {
             id: record.id,
@@ -221,9 +187,6 @@ export default class WhiteList extends Component {
     }
     handleremove = (record) => {
 
-
-
-
         window.Axios.post('auth/removeWhiteUser', {
             'id': record.id//
         }).then(() => {
@@ -237,7 +200,6 @@ export default class WhiteList extends Component {
             loadingA: true
         })
 
-        var param = {}
         window.Axios.post('auth/getWhiteList', {
             'pageNo': this.state.current,
             'pageSize': this.state.pgsize,
@@ -261,7 +223,6 @@ export default class WhiteList extends Component {
             loadingA: true
         })
 
-        var param = {}
         window.Axios.post('auth/getWhiteList', {
             'pageSize': this.state.pgsize,
             email: this.state.selectMail,
@@ -755,7 +716,6 @@ export default class WhiteList extends Component {
 
 
                 <Modal
-                    // width={'100%'}
                     title="添加备注"
                     visible={this.state.NoteModalVisible2}
                     onOk={this.handleAddComment}
@@ -771,12 +731,6 @@ export default class WhiteList extends Component {
                                   });
                               }}
                               placeholder="在这里填写回访次数以及备注信息"/>
-                    {/*<Table*/}
-                    {/*bordered*/}
-                    {/*rowKey="id"*/}
-                    {/*columns={this.modalOPDayL2}*/}
-                    {/*dataSource={this.state.operationDiaryHistory}*/}
-                    {/*/>*/}
 
                     <Table rowKey="id"
                            style={{marginTop: 15}}
