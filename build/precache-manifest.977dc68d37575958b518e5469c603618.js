@@ -1,23 +1,23 @@
 self.__precacheManifest = [
   {
-    "revision": "25eecd889ebf93c37f91",
-    "url": "./static/css/main.846ae2ed.chunk.css"
+    "revision": "dae47ee025920bb1dea1",
+    "url": "./static/css/main.b7a81407.chunk.css"
   },
   {
-    "revision": "25eecd889ebf93c37f91",
-    "url": "./static/js/main.25eecd88.chunk.js"
+    "revision": "dae47ee025920bb1dea1",
+    "url": "./static/js/main.dae47ee0.chunk.js"
   },
   {
     "revision": "188c62ff765781d2aba0",
     "url": "./static/js/1.188c62ff.chunk.js"
   },
   {
-    "revision": "127efb6f631f236f6812",
+    "revision": "ac265f83b9fd5880668a",
     "url": "./static/css/2.8d206c31.chunk.css"
   },
   {
-    "revision": "127efb6f631f236f6812",
-    "url": "./static/js/2.127efb6f.chunk.js"
+    "revision": "ac265f83b9fd5880668a",
+    "url": "./static/js/2.ac265f83.chunk.js"
   },
   {
     "revision": "2f2f65985ecf55fd0cbe",
@@ -40,7 +40,7 @@ self.__precacheManifest = [
     "url": "./static/media/beauty.defb9858.jpg"
   },
   {
-    "revision": "e11588048c684ed4ca5e42617a390933",
+    "revision": "af36935ab51db7ebb6bbd43b89cd043b",
     "url": "./index.html"
   }
 ];
