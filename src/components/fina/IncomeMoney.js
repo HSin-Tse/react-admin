@@ -322,7 +322,7 @@ class Basic extends Component {
     }
     changePage = (page) => {
         this.setState({
-            current: page ,
+            current: page,
         }, () => {
             this.requestPage()
         })
@@ -361,11 +361,16 @@ class Basic extends Component {
                 </Card>
 
                 <Modal
+                    width={1000}
+
+                    style={{width: '1000'}}
                     bodyStyle={{
                         background: 'white',
                         padding: 0,
                         margin: 0,
-                        width: 1000,
+                        align: 'center',
+
+                        width: '1000',
                         height: 780
                     }}
                     title={null}
@@ -390,7 +395,7 @@ class Basic extends Component {
                         }}>订单号:{this.state.mID}
                         </p>
                     </div>
-                    <div style={{minWidth: '800px', marginLeft: '150px', marginRight: '150px', paddingBottom: '10px'}}>
+                    <div style={{align: 'center',minWidth: '800px', marginLeft: '90px', marginRight: '100px', paddingBottom: '10px'}}>
                         <Row>
                             <Col style={{textAlign: 'right', align: 'center', background: 'white'}} span={12}>
 
@@ -547,15 +552,6 @@ class Basic extends Component {
 
 
                                                     }}>汇率</span>
-                                    {/*<Input value={this.state.mRate}*/}
-                                    {/*onChange={(e) => {*/}
-                                    {/*this.setState({*/}
-                                    {/*mRate: e.target.value,*/}
-                                    {/*});*/}
-                                    {/*}}*/}
-                                    {/*style={{width: '200px', height: '36px'}}*/}
-
-                                    {/*/>*/}
                                     <Input
                                         value={this.state.mRate}
                                         style={{width: '200px', height: '36px'}}
@@ -818,11 +814,6 @@ class Basic extends Component {
                                            style={{width: '200px', height: '36px'}}
 
                                     />
-                                    {/*<Input value={'CNY'}*/}
-
-                                    {/*style={{width: '200px', height: '36px'}}*/}
-
-                                    {/*/>*/}
                                 </div>
 
 
@@ -864,11 +855,7 @@ class Basic extends Component {
 
                                                     }}>创建备注</span>
                                     <Input value={this.state.commenS1}
-                                           // onChange={(e) => {
-                                           //     this.setState({
-                                           //         commenS1: e.target.value,
-                                           //     });
-                                           // }}
+
                                            style={{width: '200px'}}
 
                                     />
@@ -892,11 +879,7 @@ class Basic extends Component {
 
                                                     }}>打款备注</span>
                                     <Input value={this.state.mNote}
-                                        // onChange={(e) => {
-                                        //     this.setState({
-                                        //         mNote: e.target.value,
-                                        //     });
-                                        // }}
+
                                            style={{width: '200px'}}
 
                                     />
