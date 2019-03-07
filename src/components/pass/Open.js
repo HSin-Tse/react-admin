@@ -21,6 +21,7 @@ class Basic extends Component {
             , loading: false
             , showAmeStockModla: false
             , availableFlag: false
+            , availableJeffFlag: false
             , mStockRecordBEn: false
             , modal2OPDAYVisible: false
             , mStockRecordStatus: 0
@@ -48,15 +49,7 @@ class Basic extends Component {
         clearFilters();
         this.setState({searchPhone: ''});
     }
-    // sda = setInterval(() => {
-    //     // console.log('hcia setInterval')
-    //     // this.requestData()
-    //     // this.requestPageWinoRe()
-    //
-    //
-    // }, 5000)
     handleKeyPressOOP = (event) => {
-        // console.log('hcia event' , event)
         if (event.metaKey || event.ctrlKey) {
             if (event.key === 'o' || event.key === 'ㄅ') {
                 this.setState({
@@ -67,7 +60,6 @@ class Basic extends Component {
     }
 
     componentWillUnmount() {
-        // clearInterval(this.sda);
         document.removeEventListener("keydown", this.handleKeyPressOOP, false);
     }
 
@@ -141,7 +133,7 @@ class Basic extends Component {
 
 
             var menuInfor = JSON.parse(localStorage.getItem('infor'))
-
+            console.log('hcia menuInfor', menuInfor)
 
             if (menuInfor.superFlag === 1) {
 
@@ -161,10 +153,7 @@ class Basic extends Component {
                 console.log('hcia availableFlag', isCanOp.availableFlag, (isCanOp.availableFlag === 1))
                 // console.log('hcia isCanOp', isCanOp.availableFlag)
                 self.setState({
-
-
                     availableFlag: isCanOp.availableFlag === 1,
-                    isCanOP: isCanOp.availableFlag
                 });
 
 
@@ -172,14 +161,18 @@ class Basic extends Component {
                     // console.log('hcia  this.props', this.props)
                     return 'LIVE_ACCOUNT_MGMT' === item.key;
                 });
+                console.log('hcia isCanOpJ', isCanOpJ)
+
 
                 if (isCanOpJ != undefined) {
 
-                    console.log('hcia isCanOpJ', isCanOpJ)
+                    console.log('hcia isCanOpJ  in', isCanOpJ)
                     self.setState({
-                        availableFlag: true,
-                        isCanOP: 1
+                        availableJeffFlag: true,
                     });
+                } else {
+
+
                 }
             }
 
@@ -364,6 +357,11 @@ class Basic extends Component {
             return
         }
 
+        if (this.state.availableJeffFlag) {
+            this.props.history.push('/app/pass/passopen/detail' + record.id)
+            return
+        }
+
 
         if (!this.state.availableFlag) {
             this.props.history.push('/app/pass/passopen/user' + record.id)
@@ -375,9 +373,6 @@ class Basic extends Component {
         //     this.props.history.push('/app/pass/passopen/detail' + record.id)
         //     return
         // }
-
-
-        // !this.state.availableFlag?'查看'
 
 
         var gogo = record.status === 0 ? 'detail' : (record.status === 1) ? 'user' : 'user'
@@ -513,11 +508,13 @@ class Basic extends Component {
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
-                {/*<div>this.state.availableFlag :{JSON.stringify(this.state.availableFlag)}</div>*/}
                 {/*<div>isCanOP :{this.state.isCanOP}</div>*/}
+                {/*<div>this.state.availableFlag :{JSON.stringify(this.state.availableFlag)}</div>*/}
                 {/*<div>this.state.checkedValues :{JSON.stringify(this.state.checkedValues)}</div>*/}
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
                 {/*{JSON.stringify(this.props.todps)}*/}
+
+
                 <h2 style={{marginTop: 15}}>
                     开户审核
                     {/*{this.state.availableFlag ? 'W' : 'R'}*/}
