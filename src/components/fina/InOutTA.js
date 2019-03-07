@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, message, Select, Modal, Card, Col, Popconfirm, Row, Input, Icon, DatePicker} from 'antd';
+import {Button, Table, Modal, Card, Input, Icon, DatePicker} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
@@ -492,7 +492,7 @@ class Basic extends Component {
             self.setState({
                 totalpageComments: response.data.data.totalPage,
                 operationDiaryHistory: response.data.data.list,
-            },()=>{
+            }, () => {
 
                 self.setState({
                     visibleB: true,
