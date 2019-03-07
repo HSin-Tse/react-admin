@@ -8,7 +8,6 @@ import {bindActionCreators} from "redux";
 import {addTodo} from "../../action";
 import connect from "react-redux/es/connect/connect";
 import classNames from "classnames";
-import {getCookie, setCookie} from "../../try";
 import {useState} from 'react';
 
 const {TextArea} = Input;
