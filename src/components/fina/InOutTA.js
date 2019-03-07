@@ -60,6 +60,37 @@ class Basic extends Component {
             loadFor: false,
 
         };
+        this.columnsLogV2 = [
+            {
+                title: '时间',
+                dataIndex: 'createDate',
+                key: 'operationDiary_Date',
+                align: 'center',
+                render: (text, record) => (
+                    <span>{record.date}</span>),
+            }, {
+                title: 'IP',
+                dataIndex: 'IP',
+                key: 'IP',
+                align: 'center',
+                render: (text, record) => (
+                    <span>{record.userIP}</span>),
+            }, {
+                title: '操作人',
+                align: 'center',
+                dataIndex: 'bkUserName',
+                key: 'operationDiary_User',
+                render: (text, record) => (
+                    <span>{record.bkUserName}</span>),
+            }, {
+                title: '操作',
+                align: 'center',
+                dataIndex: 'comment',
+                key: 'operationDiary_Status',
+                render: (text, record) => (
+                    <span>{record.comment}</span>),
+            }]
+
     }
 
 
@@ -81,22 +112,26 @@ class Basic extends Component {
     }
 
     showModalB = (recodrd) => {
-        this.requestUserCommentList(recodrd)
+        // this.requestUserCommentList(recodrd)
+        this.getOPLog(recodrd)
+
         let self = this
         self.setState({
             loading: true,
         });
-        window.Axios.post('finance/getLeverageApplyDetail', {
-            'id': recodrd.id,
-        }).then(function (response) {
-            self.setState({
-                visibleB: true,
-                loading: false,
-            });
-        });
+        // window.Axios.post('finance/getLeverageApplyDetail', {
+        //     'id': recodrd.id,
+        // }).then(function (response) {
+        //     self.setState({
+        //         visibleB: true,
+        //         loading: false,
+        //     });
+        // });
     }
     showOPDAyModal2 = (recodrd) => {
-        this.requestUserCommentList(recodrd)
+        // this.requestUserCommentList(recodrd)
+        this.getOPLog(recodrd)
+
         this.setState({
             modal2OPDAYVisible: true,
         });
@@ -444,6 +479,34 @@ class Basic extends Component {
         this.requestPage()
     }
 
+    getOPLog = (record) => {
+        var self = this;
+        window.Axios.post('/auth/getOperatorLogHistoryList', {
+            moduleLog: '交易管理',
+            pageLog: '出入金报表',
+            commentLog: 'test',
+            typeLog: '18',
+        }).then(function (response) {
+
+            console.log('hcia response', response)
+            self.setState({
+                totalpageComments: response.data.data.totalPage,
+                operationDiaryHistory: response.data.data.list,
+            },()=>{
+
+                self.setState({
+                    visibleB: true,
+                    loading: false,
+                });
+            });
+
+            // self.setState({
+            //     visibleB: true,
+            //     loading: false,
+            // });
+        });
+    }
+
     timestampToTime = (timestamp) => {
         const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
         const year = dateObj.getFullYear() // 获取年，
@@ -576,7 +639,7 @@ class Basic extends Component {
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
-                {/*<div>userList query :{JSON.stringify(this.state.userList)}</div>*/}
+                {/*<div>operationDiaryHistory query :{JSON.stringify(this.state.operationDiaryHistory)}</div>*/}
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
                     <span className="sw-btn dark-white" onClick={this._switcherOn}>
                      <Icon type="setting" className="text-dark"/>
@@ -709,14 +772,14 @@ class Basic extends Component {
                                 fontFamily: 'PingFangSC-Medium',
                                 fontWeight: 500,
                                 color: 'rgba(51,51,51,1)'
-                            }}>{'查看审核日志'}
+                            }}>{'查看出入金报表日志'}
                             </span>
                         </div>
                         <Table
                             style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}
                             rowKey="id"
                             bordered
-                            columns={this.columnsLog}
+                            columns={this.columnsLogV2}
                             dataSource={this.state.operationDiaryHistory}
                             loading={this.state.loadingComment}
                             pagination={{
@@ -834,7 +897,24 @@ class Basic extends Component {
                       extra={
                           <CSVLink filename={new Date() + "出入金报表.csv"} data={this.state.userList}
                                    headers={this.columnss}>
-                              <Button>下载当前列表</Button>
+                              <Button onClick={() => {
+
+                                  console.log('hcia Button')
+
+                                  window.Axios.post('/auth/addOperatorLogHistory', {
+                                      moduleLog: '交易管理',
+                                      pageLog: '出入金报表',
+                                      commentLog: '下载当前列表',
+                                      typeLog: '18',
+                                  }).then(function (response) {
+
+                                      console.log('hcia response', response)
+
+                                  });
+
+
+                              }
+                              }>下载当前列表</Button>
                           </CSVLink>
                       }>
 
