@@ -18,15 +18,12 @@ import {
     Input,
     Checkbox,
     DatePicker,
-    notification,
     Form,
 } from 'antd';
 import {message} from 'antd';
 import html2canvas from 'html2canvas';
 import * as jsPDF from 'jspdf'
 import BreadcrumbCustom from '../BreadcrumbCustom';
-import PhotoSwipe from "photoswipe";
-import PhotoswipeUIDefault from "photoswipe/dist/photoswipe-ui-default";
 import 'photoswipe/dist/photoswipe.css';
 import 'photoswipe/dist/default-skin/default-skin.css';
 import moment from 'moment';
@@ -37,7 +34,6 @@ const Search = Input.Search;
 const {TextArea} = Input;
 const Option = Select.Option;
 const FormItem = Form.Item;
-
 
 class PassOpenD extends Component {
 
@@ -88,7 +84,6 @@ class PassOpenD extends Component {
     }
 
     componentDidMount() {
-
 
         var self = this;
 
@@ -256,8 +251,6 @@ class PassOpenD extends Component {
         }
 
 
-        console.log('hcia this.state.mfundsSource', this.state.mfundsSource)
-
         if (this.state.mfundsSource == 'Benefits/Borrowing') {
             message.error('收益/借贷!')
             return
@@ -340,7 +333,6 @@ class PassOpenD extends Component {
                     checkderesb: response.data.data.isExist
 
                 });
-
                 message.info(response.data.data.isExist ? '邮箱有重合' : '邮箱無重合')
             });
         }

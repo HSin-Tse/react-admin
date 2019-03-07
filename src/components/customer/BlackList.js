@@ -34,6 +34,7 @@ export default class BlackList extends Component {
     pad = (str) => {
         return +str >= 10 ? str : '0' + str
     };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -57,6 +58,7 @@ export default class BlackList extends Component {
             modal3OPDAYVisible: false,
             loadingB: false,
             loadingC: false,
+            modal2Visible1: false,
             selectMail: "",
             selectPhone: "",
             selectID: "",
@@ -205,7 +207,8 @@ export default class BlackList extends Component {
                 key: '查看',
                 render: (text, record) => (
                     <div>
-                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal3(record)}>备注</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                onClick={() => this.showOPDAyModal3(record)}>备注</Button>
                     </div>
                 ),
             }
@@ -226,7 +229,7 @@ export default class BlackList extends Component {
             //     ),
             // }
 
-            ];
+        ];
         this.columns = [
             {
                 title: '手机号',
@@ -277,7 +280,8 @@ export default class BlackList extends Component {
                 key: '查看',
                 render: (text, record) => (
                     <div>
-                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal3(record)}>备注</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                onClick={() => this.showOPDAyModal3(record)}>备注</Button>
                     </div>
                 ),
             }, {
@@ -291,7 +295,7 @@ export default class BlackList extends Component {
 
                         <Popconfirm title="移除?" onConfirm={() => this.handleremove(record)} okText="Yes"
                                     cancelText="No">
-                            <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}}>移除</Button>
+                            <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}>移除</Button>
                         </Popconfirm>
                     </div>
                 ),
@@ -539,7 +543,6 @@ export default class BlackList extends Component {
     };
 
 
-
     searchSelectS = () => {
 
         let self = this
@@ -590,7 +593,7 @@ export default class BlackList extends Component {
     }
 
     render() {
-       var  self=this
+        var self = this
 
         return (
             <div>
@@ -709,6 +712,164 @@ export default class BlackList extends Component {
                 <h2 style={{marginTop: 15}}>
                     黑名单
                 </h2>
+                <Modal
+                    bodyStyle={{
+                        background: 'white',
+                        padding: 0,
+                        margin: 0,
+                    }}
+                    width={370}
+                    onCancel={() => {
+                        this.setState({
+                            visible: false,
+                            modal2Visible1: false,
+                        });
+                    }}
+                    closable={false}
+                    footer={null}
+                    visible={this.state.modal2Visible1}
+
+
+                >
+
+                    <div style={{borderRadius: '4px'}}>
+                        <div style={{
+                            alignItems: 'center',
+                            justifyContent: 'center', height: 48, display: 'flex', padding: 0, background: '#FDD000'
+                        }}>
+                            <span style={{
+                                fontSize: 18,
+                                fontFamily: 'PingFangSC-Medium',
+                                fontWeight: 500,
+                                color: 'rgba(51,51,51,1)'
+                            }}>{'添加黑名单'}
+                            </span>
+                        </div>
+                        <Card bordered={true}>
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <span style={{minWidth: 100}}>类型：</span>
+                                <Select value={this.state.addBlackType} style={{minWidth: 160}}
+                                        onChange={(value) => {
+
+                                            this.setState({
+                                                addBlackType: value
+                                            })
+                                        }}>
+                                    {/*<Option value="1">合规黑名单</Option>*/}
+                                    <Option value="2">开户黑名单</Option>
+                                    <Option value="3">交易黑名单</Option>
+                                </Select>
+                            </div>
+
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <span style={{minWidth: 100}}>用户姓名：</span>
+                                <Input defaultValue={this.state.NameCn}
+                                       onChange={(e) => {
+                                           this.setState({
+                                               NameCn: e.target.value,
+                                           });
+                                       }}
+                                       style={{minWidth: 160}}
+                                       tagkey="lastNameCn"
+                                       sdsd={'dd'}/>
+                            </div>
+
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <span style={{minWidth: 100}}>手机号码：</span>
+                                <Input defaultValue={this.state.phoneCn}
+                                       onChange={(e) => {
+                                           this.setState({
+                                               phoneCn: e.target.value,
+                                           });
+                                       }} style={{minWidth: 160}}
+                                       sdsd={'dd'}
+                                />
+                            </div>
+
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <span style={{minWidth: 100}}>身份证</span>
+                                <Input defaultValue={this.state.IDCn}
+                                       onChange={(e) => {
+                                           this.setState({
+                                               IDCn: e.target.value,
+                                           });
+                                       }}
+                                       style={{minWidth: 160}}
+                                       sdsd={'dd'}
+                                />
+                            </div>
+
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <span style={{minWidth: 100}}>邮箱</span>
+                                <Input defaultValue={this.state.MAilCn}
+                                       onChange={(e) => {
+                                           this.setState({
+                                               MAilCn: e.target.value,
+                                           });
+                                       }}
+                                       style={{minWidth: 160}}
+                                       sdsd={'dd'}
+                                />
+                            </div>
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <span style={{minWidth: 100}}>交易账号</span>
+                                <Input defaultValue={this.state.TradeACcountCn}
+                                       onChange={(e) => {
+                                           this.setState({
+                                               TradeACcountCn: e.target.value,
+                                           });
+                                       }}
+                                       style={{minWidth: 160}}
+                                       sdsd={'dd'}
+                                />
+                            </div>
+
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <span style={{minWidth: 100}}>操作备注</span>
+                                <TextArea style={{minWidth: 160}}
+                                          value={this.state.changeNoteVCN}
+                                          rows={4}
+                                          onChange={(e) => {
+                                              this.setState({
+                                                  changeNoteVCN: e.target.value,
+                                              });
+                                          }}/>
+                            </div>
+
+                        </Card>
+
+                        <div style={{
+                            marginLeft: "20px", marginRight: "20px",
+                            paddingBottom: '48px',
+                            paddingTop: '48px',
+                            justifyContent: 'space-between',
+                            display: 'flex'
+                        }}>
+
+                            <Button
+
+                                onClick={this.handleADdBlackListByType}
+                                style={{
+                                    borderRadius: '4px',
+                                    background: '#F6D147',
+                                    width: '180px',
+                                    height: '40px'
+                                }}> 提交 </Button>
+                            <Button onClick={(e) => {
+                                this.setState({
+                                    modal2Visible1: false,
+                                });
+                            }} style={{borderRadius: '4px', width: '180px', height: '40px'}}> 取消 </Button>
+
+                        </div>
+
+
+
+                    </div>
+
+
+                </Modal>
+
                 <BreadcrumbCustom first="用户管理" second="黑名单"/>
                 <Tabs
                     activeKey={this.state.nowKey}
@@ -720,11 +881,7 @@ export default class BlackList extends Component {
                         <Card
                             bodyStyle={{padding: 0, margin: 0}}
                             title={'合规黑名单'}
-                            extra={<Button onClick={() => {
-                                this.setState({
-                                    showModaladdblack: true,
-                                });
-                            }}>添加黑名单</Button>}
+
 
                         >
 
@@ -750,7 +907,7 @@ export default class BlackList extends Component {
                             title={'开户黑名单'}
                             extra={<Button onClick={() => {
                                 this.setState({
-                                    showModaladdblack: true,
+                                    modal2Visible1: true,
                                 });
                             }}>添加黑名单</Button>}
                         >
@@ -777,7 +934,7 @@ export default class BlackList extends Component {
                             title={'交易黑名单'}
                             extra={<Button onClick={() => {
                                 this.setState({
-                                    showModaladdblack: true,
+                                    modal2Visible1: true,
                                 });
                             }}>添加黑名单</Button>}
                         >

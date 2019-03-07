@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, Input, Card, Modal, Checkbox, message, Icon, DatePicker, Row, Col} from 'antd';
+import {Button, Table, Input, Card, Modal, Checkbox, message, Icon, DatePicker} from 'antd';
 
 
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
@@ -36,7 +36,6 @@ class Basic extends Component {
             , pgsize: 20
 
         };
-        // console.log('hcia  this.props', this.props)
 
     }
 
@@ -145,8 +144,8 @@ class Basic extends Component {
 
 
             if (menuInfor.superFlag === 1) {
-                
-                console.log('hcia menuInfor.superFlag' , menuInfor.superFlag)
+
+                console.log('hcia menuInfor.superFlag', menuInfor.superFlag)
                 self.setState({
                     availableFlag: true,
                     isCanOP: 1
@@ -159,10 +158,9 @@ class Basic extends Component {
                     return this.props.tk === item.key;
                 });
 
-                console.log('hcia availableFlag', isCanOp.availableFlag,(isCanOp.availableFlag === 1))
+                console.log('hcia availableFlag', isCanOp.availableFlag, (isCanOp.availableFlag === 1))
                 // console.log('hcia isCanOp', isCanOp.availableFlag)
                 self.setState({
-
 
 
                     availableFlag: isCanOp.availableFlag === 1,
@@ -176,8 +174,8 @@ class Basic extends Component {
                 });
 
                 if (isCanOpJ != undefined) {
-                    
-                    console.log('hcia isCanOpJ' , isCanOpJ)
+
+                    console.log('hcia isCanOpJ', isCanOpJ)
                     self.setState({
                         availableFlag: true,
                         isCanOP: 1
@@ -361,7 +359,7 @@ class Basic extends Component {
             // content: this.state.changeNoteV,
         })
 
-        if (this.state.isCanOP==1) {
+        if (this.state.isCanOP == 1) {
             this.props.history.push('/app/pass/passopen/detail' + record.id)
             return
         }
@@ -521,7 +519,6 @@ class Basic extends Component {
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
                 {/*{JSON.stringify(this.props.todps)}*/}
                 <h2 style={{marginTop: 15}}>
-                    {/*开户审核{this.state.availableFlag}*/}
                     开户审核
                     {/*{this.state.availableFlag ? 'W' : 'R'}*/}
                 </h2>
