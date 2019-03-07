@@ -9,9 +9,9 @@ import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import {CSVLink} from "react-csv";
 import classNames from "classnames";
+
 const {RangePicker} = DatePicker;
 
-const Option = Select.Option;
 const {TextArea} = Input;
 
 class Basic extends Component {
@@ -20,6 +20,7 @@ class Basic extends Component {
             switcherOn: !this.state.switcherOn
         })
     };
+
     constructor(props) {
         super(props);
         this.state = {
