@@ -83,8 +83,8 @@ class Login extends React.Component {
                         // self.props.setUSER(response.data.data)
 
                         window.Axios.post('back/addLogHistory', {
-                            'moduleLog': 'loging',
-                            'pageLog': 'loging',
+                            'moduleLog': '登入',
+                            'pageLog': '登入',
                             'commentLog': '登入',
                             'typeLog': 1,
                         });

@@ -81,14 +81,14 @@ export default class WhiteList extends Component {
                 label: '交易组',
                 dataIndex: '交易组',
                 key: 'activeFlag',
-                render: (text, record) => (<span>{record.activeFlag}</span>),
+                render: (text, record) => (<span>{record.accountType}</span>),
             }, {
                 align: 'center',
                 title: '交易账户',
                 label: '交易账户',
                 dataIndex: '交易账户',
                 key: 'activeFlag',
-                render: (text, record) => (<span>{record.activeFlag}</span>),
+                render: (text, record) => (<span>{record.accountNo}</span>),
             }, {
                 width: 150,
                 align: 'center',
@@ -146,8 +146,8 @@ export default class WhiteList extends Component {
                                     cancelText="No">
                             <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}>移除</Button>
                         </Popconfirm>
-                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                                onClick={() => this.showOPDAyModal2(record)}>日志</Button>
+                        {/*<Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}*/}
+                                {/*onClick={() => this.showOPDAyModal2(record)}>日志</Button>*/}
 
                         {/*<Button onClick={() => this.handleremove(record)}>操作日志</Button>*/}
                     </div>
