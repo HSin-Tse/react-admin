@@ -278,8 +278,8 @@ class CustomerSummary extends Component {
                                 onClick={() => this.showModalNote(record)}>添加备注</Button>
 
 
-                        <Button disabled={!record.belongUserId} size={'small'} style={{background: '#FDD000'}}
-                                onClick={() => this.showModalOPDAY(record)}>日志</Button>
+                        {/*<Button disabled={!record.belongUserId} size={'small'} style={{background: '#FDD000'}}*/}
+                                {/*onClick={() => this.showModalOPDAY(record)}>日志</Button>*/}
                     </div>
                 ),
             }];

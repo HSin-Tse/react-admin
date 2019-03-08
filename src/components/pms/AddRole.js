@@ -9,7 +9,6 @@ import {
     Icon,
     Checkbox,
     Popconfirm,
-    Select,
     message,
     Form
 } from 'antd';
