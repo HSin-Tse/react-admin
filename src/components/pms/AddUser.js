@@ -66,7 +66,7 @@ class AddUser extends Component {
         }
 
         if (this.state.idList.length==0) {
-            message.error('角色?')
+            message.error('权限没有配置')
             return
         }
 
