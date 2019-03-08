@@ -273,14 +273,86 @@ class Basic extends Component {
 
                 render: (text, record) => (
                     <span>{record.completeDate}</span>),
-            }, {
+            }
+
+            , {
                 align: 'center',
                 title: '处理人',
                 label: '处理人',
                 dataIndex: '处理人',
-                key: 'operator',
+                key: 'accountName',
                 render: (text, record) => (
                     <span>{record.operator}</span>)
+            }
+
+
+            , {
+                align: 'center',
+                title: '客户归属',
+                label: '客户归属',
+                dataIndex: '客户归属',
+                key: 'belongBkUserName',
+                render: (text, record) => (
+                    <span>{record.belongBkUserName}</span>)
+            }
+            , {
+                align: 'center',
+                title: '户名',
+                label: '户名',
+                dataIndex: '户名',
+                key: 'bankCode',
+                render: (text, record) => (
+                    <span>{record.bankCode}</span>)
+            } , {
+                align: 'center',
+                title: '开户行',
+                label: '开户行',
+                dataIndex: '开户行',
+                key: 'bankName',
+                render: (text, record) => (
+                    <span>{record.bankName}</span>)
+            } , {
+                align: 'center',
+                title: '支行信息',
+                label: '支行信息',
+                dataIndex: '支行信息',
+                key: 'accountName',
+                render: (text, record) => (
+                    <span>{record.accountName}</span>)
+            } , {
+                align: 'center',
+                title: '开户行所在省',
+                label: '开户行所在省',
+                dataIndex: '开户行所在省',
+                key: 'bankProvince',
+                render: (text, record) => (
+                    <span>{record.bankProvince}</span>)
+            }
+            , {
+                align: 'center',
+                title: '开户行所在市',
+                label: '开户行所在市',
+                dataIndex: '开户行所在市',
+                key: 'bankCity',
+                render: (text, record) => (
+                    <span>{record.bankCity}</span>)
+            }
+            , {
+                align: 'center',
+                title: '银行卡绑定手机号码',
+                label: '银行卡绑定手机号码',
+                dataIndex: '银行卡绑定手机号码',
+                key: 'accountPhoneNumber',
+                render: (text, record) => (
+                    <span>{record.accountPhoneNumber}</span>)
+            }, {
+                align: 'center',
+                title: '银行卡号',
+                label: '银行卡号',
+                dataIndex: '银行卡号',
+                key: 'bankCardNo',
+                render: (text, record) => (
+                    <span>{record.bankCardNo}</span>)
             }];
         this.columns = [
             {

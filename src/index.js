@@ -50,8 +50,6 @@ window.PAxios = aaxios;// は「http:」
 
 // window.hideLoading={}
 
-// 请求列表
-// 取消列表
 let loadCount = 0;
 
 window.PAxios.interceptors.request.use(
