@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {DatePicker, Input, Modal, Button, Table, message, Card, Icon, Select, Popconfirm} from 'antd';
+import {DatePicker, Input, Modal, Button, Table, message, Card, Icon, Popconfirm} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import classNames from "classnames";
 import {addLogWhite} from '@/axios/logs';
@@ -147,13 +147,13 @@ export default class WhiteList extends Component {
                             <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}>移除</Button>
                         </Popconfirm>
                         {/*<Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}*/}
-                                {/*onClick={() => this.showOPDAyModal2(record)}>日志</Button>*/}
+                        {/*onClick={() => this.showOPDAyModal2(record)}>日志</Button>*/}
 
                         {/*<Button onClick={() => this.handleremove(record)}>操作日志</Button>*/}
                     </div>
                 ),
             }];
-        this.requestPageA()//1:合规 2:开户 3:交易
+        this.requestPageA()
     }
 
     showOPDAyModal2 = (recodrd) => {
