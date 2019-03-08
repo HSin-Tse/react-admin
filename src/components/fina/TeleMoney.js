@@ -179,28 +179,29 @@ class Basic extends Component {
         //     'commentLog': '查看了入金审核',
         //     'typeLog': 2,
         // })
-        this.columns =
 
 
-            [
-                {
-                    title: '序号',
-                    dataIndex: '序号',
-                    key: '序号',
-                    align: 'center',
-                    render: (text, record, index) => (
-                        <span>{this.state.current * this.state.pgsize + index + 1}</span>
-                    ),
-                },
-                {
-                    align: 'center',
-                    title: '交易账号',
-                    dataIndex: '交易账号',
-                    key: '交易账号',
-                    render: (text, record) => (
-                        <span>{record.accountNo}</span>),
-                }, {
+        this.columns = [
+            {
+                title: '序号',
+                dataIndex: '序号',
+                key: '序号',
+                align: 'center',
+                render: (text, record, index) => (
+                    <span>{this.state.current * this.state.pgsize + index + 1}</span>
+                ),
+            },
+            {
+                align: 'center',
+                title: '交易账号',
+                dataIndex: '交易账号',
+                key: '交易账号',
+                render: (text, record) => (
+                    <span>{record.accountNo}</span>),
+            }, {
+
                 title: '姓名',
+
                 dataIndex: '姓名',
                 key: '姓名',
                 render: (text, record) => (<span>{record.name}</span>),
@@ -216,6 +217,7 @@ class Basic extends Component {
                 title: '添加时间',
                 dataIndex: '添加时间',
                 align: 'center',
+
                 key: '添加时间',
                 render: (text, record) => (
                     <span>{this.timestampToTime(record.comment_step1.createDate)}</span>)
@@ -228,6 +230,7 @@ class Basic extends Component {
                     <span>{record.accountAmount}</span>),
             }, {
                 align: 'center',
+
                 title: '入金币种',
                 dataIndex: '入金币种',
                 key: '入金币种',
@@ -235,6 +238,7 @@ class Basic extends Component {
                     <span>{record.accountCurrency}</span>)
             }, {
                 align: 'center',
+
                 title: '执行金额',
                 dataIndex: '执行金额',
                 key: '执行金额',
@@ -242,26 +246,32 @@ class Basic extends Component {
                     <span>{record.execAmount}</span>),
             }, {
                 align: 'center',
+
                 title: '执行币种',
                 dataIndex: '执行币种',
                 key: '执行币种',
+
                 render: (text, record) => (
                     <span>{record.execCurrency}</span>),
             }, {
                 align: 'center',
+
                 title: '使用汇率',
                 dataIndex: '使用汇率',
                 key: '使用汇率',
+
                 render: (text, record) => (
                     <span>{record.rate}</span>),
             }, {
                 align: 'center',
+
                 title: '手续费',
                 dataIndex: '手续费',
                 key: '手续费',
                 render: (text, record) => (
                     <span>{record.feeAmount}</span>
                 )
+
             }, {
                 align: 'center',
                 title: '账户余额',
@@ -271,6 +281,7 @@ class Basic extends Component {
                     <span>{record.cashBalance}</span>)
             }, {
                 align: 'center',
+
                 title: '期望到账时间',
                 dataIndex: '期望到账时间',
                 key: '期望到账时间',
@@ -278,6 +289,7 @@ class Basic extends Component {
                     <span>{record.expectDate}</span>)
             }, {
                 align: 'center',
+
                 title: '创建人',
                 dataIndex: '创建人',
                 key: '创建人',
@@ -285,125 +297,96 @@ class Basic extends Component {
                     <span>{record.bkUserName}</span>)
             },
 
-                {
-                    align: 'center',
-                    title: '财务审核',
-                    key: 'action',
-                    render: (text, record) => (
-                        <div>
+            {
+                align: 'center',
+                title: '财务审核',
+                key: 'action',
+                render: (text, record) => (
+                    <div>
 
-                            <Button
-
-                                size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                                disabled={record.status == 4 || !this.state.isCanOPB}
-
-
-                                // onClick={
-                                //
-                                //
-                                //
-                                //     () => this.showOPDAyModal3(record)
-                                // }
-                                onClick={
-                                    () => {
-
-                                        if (record.status == 3) {
-                                            // this.props.history.pop()
-                                            this.props.history.push('/app/fina/d/ter' + record.id)
-                                            this.componentDidMount()
-                                        } else if (record.status == 2) {
-                                            this.props.history.push('/app/fina/d/tes' + record.id)
-                                            this.componentDidMount()
-                                        }
-
-                                    }
-                                }
+                        <Button
+                            size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                            disabled={record.status == 4 }
 
 
-                            >{record.status == 1 ? '支付成功' : record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
+                            // onClick={
+                            //
+                            //
+                            //
+                            //     () => this.showOPDAyModal3(record)
+                            // }
+                            onClick={
+                                () => {
 
 
-                            </Button>
+                                    if(record.status==3){
+                                        // this.props.history.pop()
+                                        this.props.history.push('/app/fina/d/ter' + record.id)
 
+                                        this.componentDidMount()
 
-                        </div>
-                    ),
-                },
-                {
-                    align: 'center',
-                    title: '入金完成',
-                    key: 'action',
-                    render: (text, record) => (
-                        <div>
-
-                            <Button
-                                size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                                disabled={record.status == 4 || !this.state.isCanOPC}
-                                onClick={
-                                    () => {
-
-
-                                        if (record.status == 3) {
-                                            // this.props.history.pop()
-                                            this.props.history.push('/app/fina/d/ter' + record.id)
-
-                                            this.componentDidMount()
-
-                                        } else if (record.status == 2) {
-                                            this.props.history.push('/app/fina/d/tes' + record.id)
-                                            this.componentDidMount()
-
-                                        }
+                                    }else if(record.status==2){
+                                        this.props.history.push('/app/fina/d/tes' + record.id)
 
                                     }
+
                                 }
-                            >{record.status == 4 ? '已取消' : record.status == 2 ? '审核中' : (record.status == 7 && record.completeDate) ? '已完成' : '审核中'}
-
-                            </Button>
+                            }
 
 
-                        </div>
-                    ),
-                },
-                // {
-                //     align: 'center',
-                //     title: '操作',
-                //     key: 'action',
-                //     render: (text, record) => (
-                //         <div>
-                //             <Button
-                //                 size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                //                 disabled={ record.status == 4}
-                //                 onClick={
-                //                     () => {
-                //
-                //
-                //                         if(record.status==3){
-                //                             this.props.history.push('/app/fina/d/ter' + record.id)
-                //
-                //                         }else if(record.status==2){
-                //                             this.props.history.push('/app/fina/d/tes' + record.id)
-                //
-                //                         }
-                //
-                //                     }
-                //                 }>{record.status == 1 ? '支付成功' : record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
-                //
-                //             </Button>
-                //             <Button
-                //                 size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                //                 disabled={record.status == 3 || record.status == 4 || record.status == 1}
-                //
-                //                 onClick={
-                //                     () => this.showOPDAyModal3(record)
-                //                 }>取消
-                //
-                //             </Button>
-                //
-                //         </div>
-                //     ),
-                // }
-            ];
+
+                        >{record.status == 1 ? '支付成功(approved)' : record.status == 2 ? '审核中(pending)' : record.status == 3 ? '审核成功(completed)' : '取消(not approved)'}
+
+
+                        </Button>
+
+
+                    </div>
+                ),
+            },
+            {
+                align: 'center',
+                title: '入金完成',
+                key: 'action',
+                render: (text, record) => (
+                    <div>
+
+                        <Button
+                            size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                            disabled={ record.status == 4}
+                            onClick={
+                                () => {
+
+
+                                    if(record.status==3){
+                                        // this.props.history.pop()
+                                        this.props.history.push('/app/fina/d/ter' + record.id)
+
+                                        this.componentDidMount()
+
+                                    }else if(record.status==2){
+                                        this.props.history.push('/app/fina/d/tes' + record.id)
+                                        this.componentDidMount()
+
+                                    }
+
+                                }
+                            }
+                        >
+                            {/*{record.status}*/}
+                            {/*{record.status == 1 ? '(approved)' : record.status == 2 ? '(pending)' : record.status == 3 ? '(completed)' : '(not approved)'}*/}
+                            {record.completeDate?record.completeDate: '(pending)'}
+
+                        </Button>
+
+
+                    </div>
+                ),
+            },
+
+        ];
+
+
         this.requestPage()
 
 
