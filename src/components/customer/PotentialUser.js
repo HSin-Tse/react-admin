@@ -1045,7 +1045,7 @@ export default class PotentialUser extends Component {
                                 showToday
                                 style={{width: '100%'}}
                                 showTime={{format: 'YYYY-MM-DD HH:mm:ss'}}
-                                format="YYYY-MM-DD HH:mm:ss fff"
+                                format="YYYY-MM-DD HH:mm:ss"
                                 placeholder={['开始时间', '结束时间']}
                                 onChange={(value, dateString) => {
 
