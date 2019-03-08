@@ -1135,11 +1135,11 @@ class Basic extends Component {
 
                                                     }}>创建备注</span>
                                     <Input value={this.state.commenS1}
-                                           onChange={(e) => {
-                                               this.setState({
-                                                   commenS1: e.target.value,
-                                               });
-                                           }}
+                                           // onChange={(e) => {
+                                           //     this.setState({
+                                           //         commenS1: e.target.value,
+                                           //     });
+                                           // }}
                                            style={{width: '200px', height: '36px'}}
 
                                     />
