@@ -192,7 +192,6 @@ class Basic extends Component {
             })
         })
 
-
         this.columns = [
             {
                 title: '序号',
@@ -309,29 +308,6 @@ class Basic extends Component {
                     <span>{record.bkUserName}</span>)
             },
 
-            // , {
-            //     align: 'center',
-            //     title: '操作',
-            //     key: 'action',
-            //     render: (text, record) => (
-            //         <div>
-            //
-            //             <Button
-            //                 size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-            //                 disabled={record.status == 3 || record.status == 4}
-            //
-            //
-            //                 onClick={
-            //                     () => this.showOPDAyModal3(record)
-            //                 }>{record.status == 1 ? '支付成功' : record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
-            //
-            //             </Button>
-            //
-            //
-            //         </div>
-            //     ),
-            // }
-
             {
                 align: 'center',
                 title: '财务审核',
@@ -341,7 +317,7 @@ class Basic extends Component {
 
                         <Button
                             size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                            disabled={record.status == 4}
+                            disabled={record.status == 4 }
 
 
                             // onClick={
@@ -354,15 +330,14 @@ class Basic extends Component {
                                 () => {
 
 
-                                    if (record.status == 3) {
+                                    if(record.status==3){
                                         // this.props.history.pop()
                                         this.props.history.push('/app/fina/d/ter' + record.id)
 
                                         this.componentDidMount()
 
-                                    } else if (record.status == 2) {
+                                    }else if(record.status==2){
                                         this.props.history.push('/app/fina/d/tes' + record.id)
-                                        this.componentDidMount()
 
                                     }
 
@@ -370,7 +345,8 @@ class Basic extends Component {
                             }
 
 
-                        >{record.status == 1 ? '支付成功' : record.status == 2 ? '审核中' : record.status == 3 ? '审核成功' : '取消'}
+
+                        >{record.status == 1 ? '支付成功(approved)' : record.status == 2 ? '审核中(pending)' : record.status == 3 ? '审核成功(completed)' : '取消(not approved)'}
 
 
                         </Button>
@@ -388,18 +364,18 @@ class Basic extends Component {
 
                         <Button
                             size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                            disabled={record.status == 4}
+                            disabled={ record.status == 4}
                             onClick={
                                 () => {
 
 
-                                    if (record.status == 3) {
+                                    if(record.status==3){
                                         // this.props.history.pop()
                                         this.props.history.push('/app/fina/d/ter' + record.id)
 
                                         this.componentDidMount()
 
-                                    } else if (record.status == 2) {
+                                    }else if(record.status==2){
                                         this.props.history.push('/app/fina/d/tes' + record.id)
                                         this.componentDidMount()
 
@@ -407,7 +383,10 @@ class Basic extends Component {
 
                                 }
                             }
-                        >{record.status == 4 ? '已取消' : record.status == 2 ? '审核中' : (record.status == 7  && !record.completeDate)  ? '已完成' : '审核中'}
+                        >
+                            {/*{record.status}*/}
+                            {/*{record.status == 1 ? '(approved)' : record.status == 2 ? '(pending)' : record.status == 3 ? '(completed)' : '(not approved)'}*/}
+                            {record.completeDate?record.completeDate: '(pending)'}
 
                         </Button>
 
@@ -417,6 +396,7 @@ class Basic extends Component {
             },
 
         ];
+
         this.requestPage()
 
         // window.Axios.post('dict/openDict', {
