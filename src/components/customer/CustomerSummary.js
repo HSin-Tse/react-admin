@@ -56,13 +56,8 @@ class CustomerSummary extends Component {
         }
     }
 
-    // sda = setInterval(() => {
-    //     // this.requestData()
-    // }, 1000)
-
 
     componentWillUnmount() {
-        // clearInterval(this.sda);
         document.removeEventListener("keydown", this.handleKeyPressOOP, false);
     }
 
