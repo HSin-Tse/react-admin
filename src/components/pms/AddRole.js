@@ -29,7 +29,6 @@ class AddRole extends Component {
             powerList: [],
             modal2Visible: false,
             operationDiaryHistory: [],
-            anyThing: 'asdasd',
             changeNoteV: '',
             name: '',
             seret: '',
