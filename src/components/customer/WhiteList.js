@@ -122,17 +122,6 @@ export default class WhiteList extends Component {
                 render: (text, record) => (<span>{record.operator}</span>),
             }, {
                 align: 'center',
-                title: '查看',
-                key: '查看',
-                render: (text, record) => (
-                    <div>
-                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                                onClick={() => this.showOPDAyModal3(record)}>备注</Button>
-
-                    </div>
-                ),
-            }, {
-                align: 'center',
                 title: '操作',
                 key: 'action',
                 render: (text, record) => (
@@ -239,6 +228,20 @@ export default class WhiteList extends Component {
             });
         });
     }
+    timestampToTime = (timestamp) => {
+        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
+        const year = dateObj.getFullYear() // 获取年，
+        const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
+        const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
+        const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
+        const minutes = this.pad(dateObj.getMinutes()) // 获取分
+        const seconds = this.pad(dateObj.getSeconds()) // 获取秒
+        return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
+    };
+
+    pad = (str) => {
+        return +str >= 10 ? str : '0' + str
+    };
     changePageA = (page) => {
         // page = page - 1
         this.setState({
@@ -467,6 +470,129 @@ export default class WhiteList extends Component {
 
                     </Card>
                 </Modal>
+
+
+
+                <Modal
+                    bodyStyle={{
+                        width: '600px',
+
+                        background: 'white',
+                        padding: 0,
+                        margin: 0,
+                    }}
+                    onCancel={() => {
+                        this.setState({
+                            visible: false,
+                            NoteModalVisible2: false,
+                        });
+                    }}
+                    closable={false}
+                    footer={null}
+                    // onCancel={this.handleCancel}
+                    visible={this.state.NoteModalVisible2  }
+
+
+                >
+
+                    <div style={{borderRadius: '4px'}}>
+                        <div style={{
+                            alignItems: 'center',
+                            justifyContent: 'center', height: 48, display: 'flex', padding: 0, background: '#FDD000'
+                        }}>
+                            <span style={{
+                                fontSize: 18,
+                                fontFamily: 'PingFangSC-Medium',
+                                fontWeight: 500,
+                                color: 'rgba(51,51,51,1)'
+                            }}>{'添加备注'}
+                            </span>
+                        </div>
+
+                        <TextArea
+                            style={{marginTop: "20px", width: '560px', marginLeft: "20px", marginRight: "20px"}}
+
+                            rows={4}
+                            value={this.state.theComment}
+                            onChange={(e) => {
+                                let comment = e.target.value;
+                                this.setState({
+                                    theComment: comment
+                                });
+                            }}
+                            placeholder="在这里填写回访次数以及备注信息"/>
+                        <Table rowKey="id"
+                               style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}
+                               bordered
+
+                               columns={[
+                                   {
+                                       title: '操作人',
+                                       dataIndex: 'comment',
+                                       key: 'operationDiary_Status',
+                                       align: 'center',
+
+                                       render: (text, record) => (
+                                           <span>{record.bkUserName}</span>),
+                                   }, {
+                                       title: '操作時間',
+                                       dataIndex: 'bkUserName',
+                                       key: 'operationDiary_User',
+                                       align: 'center',
+
+                                       render: (text, record) => (
+                                           <span>{this.timestampToTime(record.createDate)}</span>),
+                                   }, {
+                                       title: '备注',
+                                       dataIndex: 'comment',
+                                       key: 'operationDiary_Status',
+                                       align: 'center',
+
+                                       render: (text, record) => (
+                                           <span>{record.comment}</span>),
+                                   }]}
+                               dataSource={this.state.operationDiaryHistory}
+                               loading={this.state.loadingComment}
+                               pagination={{
+                                   total: this.state.totalpageComments * this.state.pgsize,
+                                   pageSize: this.state.pgsize,
+                                   onChange: this.changePageComment,
+                               }}
+                        />
+
+
+                        <div style={{
+                            marginLeft: "80px", marginRight: "80px",
+                            paddingBottom: '48px',
+                            paddingTop: '48px',
+                            justifyContent: 'space-between',
+                            display: 'flex'
+                        }}>
+
+                            <Button
+
+                                onClick={
+                                    this.handleAddComment
+                                }
+                                style={{
+                                    borderRadius: '4px',
+                                    background: '#F6D147',
+                                    width: '180px',
+                                    height: '40px'
+                                }}> 提交 </Button>
+                            <Button onClick={(e) => {
+                                this.setState({
+                                    NoteModalVisible2: false,
+                                });
+                            }} style={{borderRadius: '4px', width: '180px', height: '40px'}}> 取消 </Button>
+
+                        </div>
+
+                    </div>
+
+
+                </Modal>
+
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
                     <span className="sw-btn dark-white" onClick={this._switcherOn}>
                      <Icon type="setting" className="text-dark"/>
@@ -717,7 +843,7 @@ export default class WhiteList extends Component {
 
                 <Modal
                     title="添加备注"
-                    visible={this.state.NoteModalVisible2}
+                    // visible={this.state.NoteModalVisible2}
                     onOk={this.handleAddComment}
                     onCancel={this.handleCancel}
                     okText="提交"
