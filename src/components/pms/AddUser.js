@@ -65,6 +65,11 @@ class AddUser extends Component {
             return
         }
 
+        if (this.state.idList.length==0) {
+            message.error('角色?')
+            return
+        }
+
         window.Axios.post('back/saveOrUpdateBackUser', {
             name: self.state.name,
             email: self.state.email,

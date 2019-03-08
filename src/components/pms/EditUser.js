@@ -165,6 +165,16 @@ class EditUser extends PureComponent {
                 }, () => {
 
 
+                    if(!this.state.allRole){
+
+
+                        message.error('角色缺失')
+                        // this.props.history.goBack()
+
+                        return
+                    }
+
+
                     var value = Object.keys(this.state.allRole).map(Number).map((item1, number) => {
                         return (
                             item1
