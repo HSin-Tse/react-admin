@@ -36,8 +36,18 @@ const numberMask = createNumberMask({
     includeThousandsSeparator: false,
     allowLeadingZeroes: true,
     requireDecimal: true,
-    decimalLimit: 6,
-    integerLimit: 5,
+    decimalLimit: 8,
+    integerLimit: 8,
+    prefix: '',
+    // suffix: ' $' // This will put the dollar sign at the end, with a space.
+})
+
+const numberMaskVs = createNumberMask({
+    includeThousandsSeparator: false,
+    allowLeadingZeroes: true,
+    requireDecimal: true,
+    decimalLimit: 2,
+    integerLimit: 8,
     prefix: '',
     // suffix: ' $' // This will put the dollar sign at the end, with a space.
 })
@@ -553,20 +563,6 @@ class Basic extends Component {
 
                 {/*<div>accrounRes :{JSON.stringify(this.state.accrounRes)}</div>*/}
                 {/*<div>mExpectTime :{JSON.stringify(this.state.mExpectTime)}</div>*/}
-                {/*<div>mExpectTime :{this.state.mExpectTime?JSON.stringify(this.state.mExpectTime.unix()):''}</div>*/}
-                {/*<div>mExpectTime :{this.state.mExpectTime.get}</div>*/}
-                {/*<div>live931773069</div>*/}
-                {/*<div>mBelongBkUserId :{JSON.stringify(this.state.mBelongBkUserId)}</div>*/}
-                {/*<div>isCanOPA :{JSON.stringify(this.state.isCanOPA)}</div>*/}
-                {/*<div>isCanOPA :{JSON.stringify(this.state.isCanOPB)}</div>*/}
-                {/*<div>isCanOPA :{JSON.stringify(this.state.isCanOPC)}</div>*/}
-                {/*<div>mNote :{JSON.stringify(this.state.mNote)}</div>*/}
-                {/*<div>mAccountTxnCurry :{JSON.stringify(this.state.mAccountTxnCurry)}</div>*/}
-                {/*<div>mExpectTime :{JSON.stringify(this.state.mExpectTime)}</div>*/}
-                {/*<div>mExecTxnAmt :{JSON.stringify(this.state.mExecTxnAmt)}</div>*/}
-                {/*<div>mRate :{JSON.stringify(this.state.mRate)}</div>*/}
-                {/*<div>mExecTxnCurry :{JSON.stringify(this.state.mExecTxnCurry)}</div>*/}
-                {/*<div>mAccountTxnCurry :{JSON.stringify(this.state.mAccountTxnCurry)}</div>*/}
 
 
                 <h2 style={{marginTop: 15}}>新增电汇入金</h2>
@@ -877,15 +873,34 @@ class Basic extends Component {
 
 
                                                     }}>执行金额</span>
-                                    <Input value={this.state.mExecTxnAmt}
-                                           onChange={(e) => {
-                                               this.setState({
-                                                   mExecTxnAmt: e.target.value,
-                                               });
-                                           }}
-                                           style={{width: '200px', height: '36px'}}
+                                    {/*<Input value={this.state.mExecTxnAmt}*/}
+                                           {/*onChange={(e) => {*/}
+                                               {/*this.setState({*/}
+                                                   {/*mExecTxnAmt: e.target.value,*/}
+                                               {/*});*/}
+                                           {/*}}*/}
+                                           {/*style={{width: '200px', height: '36px'}}*/}
 
+                                    {/*/>*/}
+
+                                    <MaskedInput
+                                        defaultValue={this.state.mExecTxnAmt}
+                                        style={{width: '200px', height: '36px'}}
+                                        mask={numberMaskVs}
+
+                                        className="ant-input"
+                                        placeholder="执行金额"
+                                        guide={true}
+                                        // id="my-input-id"
+                                        onChange={(e) => {
+                                            this.setState({
+                                                mExecTxnAmt: e.target.value,
+                                            });
+                                        }}
+                                        // onBlur={() => {}}
+                                        // onChange={() => {}}
                                     />
+
                                 </div>
                                 <div style={{
                                     marginTop: '24px',
