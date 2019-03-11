@@ -54,12 +54,12 @@ const numberMaskVs = createNumberMask({
 
 class Basic extends Component {
 
-     onChange=(value, dateString)=> {
+    onChange = (value, dateString) => {
         console.log('Selected Time: ', value);
         console.log('Formatted Selected Time: ', dateString);
     }
 
-     onOk=(value) =>{
+    onOk = (value) => {
         console.log('onOk: ', value);
     }
     changeNote = (e) => {
@@ -316,7 +316,7 @@ class Basic extends Component {
 
                         <Button
                             size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                            disabled={record.status == 4 }
+                            disabled={record.status == 4}
 
 
                             // onClick={
@@ -329,20 +329,19 @@ class Basic extends Component {
                                 () => {
 
 
-                                    if(record.status==3){
+                                    if (record.status == 3) {
                                         // this.props.history.pop()
                                         this.props.history.push('/app/fina/d/ter' + record.id)
 
                                         this.componentDidMount()
 
-                                    }else if(record.status==2){
+                                    } else if (record.status == 2) {
                                         this.props.history.push('/app/fina/d/tes' + record.id)
 
                                     }
 
                                 }
                             }
-
 
 
                         >{record.status == 1 ? '支付成功(approved)' : record.status == 2 ? '审核中(pending)' : record.status == 3 ? '审核成功(completed)' : '取消(not approved)'}
@@ -363,18 +362,18 @@ class Basic extends Component {
 
                         <Button
                             size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                            disabled={ record.status == 4}
+                            disabled={record.status == 4}
                             onClick={
                                 () => {
 
 
-                                    if(record.status==3){
+                                    if (record.status == 3) {
                                         // this.props.history.pop()
                                         this.props.history.push('/app/fina/d/ter' + record.id)
 
                                         this.componentDidMount()
 
-                                    }else if(record.status==2){
+                                    } else if (record.status == 2) {
                                         this.props.history.push('/app/fina/d/tes' + record.id)
                                         this.componentDidMount()
 
@@ -385,7 +384,7 @@ class Basic extends Component {
                         >
                             {/*{record.status}*/}
                             {/*{record.status == 1 ? '(approved)' : record.status == 2 ? '(pending)' : record.status == 3 ? '(completed)' : '(not approved)'}*/}
-                            {record.completeDate?record.completeDate: '(pending)'}
+                            {record.completeDate ? record.completeDate : '(pending)'}
 
                         </Button>
 
@@ -873,32 +872,19 @@ class Basic extends Component {
 
 
                                                     }}>执行金额</span>
-                                    {/*<Input value={this.state.mExecTxnAmt}*/}
-                                           {/*onChange={(e) => {*/}
-                                               {/*this.setState({*/}
-                                                   {/*mExecTxnAmt: e.target.value,*/}
-                                               {/*});*/}
-                                           {/*}}*/}
-                                           {/*style={{width: '200px', height: '36px'}}*/}
-
-                                    {/*/>*/}
 
                                     <MaskedInput
                                         defaultValue={this.state.mExecTxnAmt}
                                         style={{width: '200px', height: '36px'}}
                                         mask={numberMaskVs}
-
                                         className="ant-input"
                                         placeholder="执行金额"
                                         guide={true}
-                                        // id="my-input-id"
                                         onChange={(e) => {
                                             this.setState({
                                                 mExecTxnAmt: e.target.value,
                                             });
                                         }}
-                                        // onBlur={() => {}}
-                                        // onChange={() => {}}
                                     />
 
                                 </div>
@@ -1052,8 +1038,6 @@ class Basic extends Component {
                                                     }}>期望到账时间</span>
 
                                     </div>
-
-
 
 
                                     <DatePicker
@@ -1301,7 +1285,7 @@ class Basic extends Component {
                                     'execTxnCurry': this.state.mExecTxnCurry,
                                     'rate': this.state.mRate,
                                     'accountTxnCurry': this.state.mAccountTxnCurry,//this.state.mAccountTxnCurry
-                                    'expectTime': this.state.mExpectTime ? this.state.mExpectTime.unix()+'000' : undefined,
+                                    'expectTime': this.state.mExpectTime ? this.state.mExpectTime.unix() + '000' : undefined,
                                     'content': this.state.mNote,
                                 }).then((response) => {
 
