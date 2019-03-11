@@ -2,13 +2,12 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, message, Select, Modal, Card, Col, Popconfirm, Row, Input} from 'antd';
+import {Button, Table, message, Modal, Card, Input} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 
-const Option = Select.Option;
 const {TextArea} = Input;
 
 class Basic extends Component {
