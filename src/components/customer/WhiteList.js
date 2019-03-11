@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {DatePicker, Input, Modal, Button, Table, message, Card, Icon, Popconfirm} from 'antd';
+import {DatePicker, Input, Modal, Button, Table, message, Card, Icon, Popconfirm, Select} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import classNames from "classnames";
 import {addLogWhite} from '@/axios/logs';
@@ -202,7 +202,8 @@ export default class WhiteList extends Component {
             self.setState({
                 totalpageA: response.data.data.totalPage,
                 bklistA: response.data.data.list,
-                loadingA: false
+                loadingA: false,
+                showModaladdWhite: false
             });
         });
     }
@@ -472,7 +473,6 @@ export default class WhiteList extends Component {
                 </Modal>
 
 
-
                 <Modal
                     bodyStyle={{
                         width: '600px',
@@ -490,7 +490,7 @@ export default class WhiteList extends Component {
                     closable={false}
                     footer={null}
                     // onCancel={this.handleCancel}
-                    visible={this.state.NoteModalVisible2  }
+                    visible={this.state.NoteModalVisible2}
 
 
                 >
@@ -892,6 +892,154 @@ export default class WhiteList extends Component {
                            }}
                     />
                 </Modal>
+
+                <Modal
+                    bodyStyle={{
+                        background: 'white',
+                        padding: 0,
+                        margin: 0,
+                    }}
+                    width={370}
+                    onCancel={() => {
+                        this.setState({
+                            visible: false,
+                            showModaladdWhite: false,
+                        });
+                    }}
+                    closable={false}
+                    footer={null}
+                    visible={this.state.showModaladdWhite }
+
+
+                >
+
+                    <div style={{borderRadius: '4px'}}>
+                        <div style={{
+                            alignItems: 'center',
+                            justifyContent: 'center', height: 48, display: 'flex', padding: 0, background: '#FDD000'
+                        }}>
+                            <span style={{
+                                fontSize: 18,
+                                fontFamily: 'PingFangSC-Medium',
+                                fontWeight: 500,
+                                color: 'rgba(51,51,51,1)'
+                            }}>{'添加白名单'}
+                            </span>
+                        </div>
+                        <Card
+
+
+                            bordered={true}>
+
+
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <span style={{minWidth: 100}}>用户姓名：</span>
+                                <Input defaultValue={this.state.NameCn}
+                                       onChange={(e) => {
+                                           this.setState({
+                                               NameCn: e.target.value,
+                                           });
+                                       }}
+                                       style={{minWidth: 160}}
+                                       tagkey="lastNameCn"
+                                       sdsd={'dd'}/>
+                            </div>
+
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <span style={{minWidth: 100}}>手机号码：</span>
+                                <Input defaultValue={this.state.phoneCn}
+                                       onChange={(e) => {
+                                           this.setState({
+                                               phoneCn: e.target.value,
+                                           });
+                                       }} style={{minWidth: 160}}
+                                       sdsd={'dd'}
+                                />
+                            </div>
+
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <span style={{minWidth: 100}}>身份证</span>
+                                <Input defaultValue={this.state.IDCn}
+                                       onChange={(e) => {
+                                           this.setState({
+                                               IDCn: e.target.value,
+                                           });
+                                       }}
+                                       style={{minWidth: 160}}
+                                       sdsd={'dd'}
+                                />
+                            </div>
+
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <span style={{minWidth: 100}}>邮箱</span>
+                                <Input defaultValue={this.state.MAilCn}
+                                       onChange={(e) => {
+                                           this.setState({
+                                               MAilCn: e.target.value,
+                                           });
+                                       }}
+                                       style={{minWidth: 160}}
+                                       sdsd={'dd'}
+                                />
+                            </div>
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <span style={{minWidth: 100}}>交易账号</span>
+                                <Input defaultValue={this.state.TradeACcountCn}
+                                       onChange={(e) => {
+                                           this.setState({
+                                               TradeACcountCn: e.target.value,
+                                           });
+                                       }}
+                                       style={{minWidth: 160}}
+                                       sdsd={'dd'}
+                                />
+                            </div>
+
+                            <div style={{display: 'flex', minHeight: 40}}>
+                                <span style={{minWidth: 100}}>操作备注</span>
+                                <TextArea style={{minWidth: 160}}
+                                          value={this.state.changeNoteVCN}
+                                          rows={4}
+                                          onChange={(e) => {
+                                              this.setState({
+                                                  changeNoteVCN: e.target.value,
+                                              });
+                                          }}/>
+                            </div>
+
+                        </Card>
+
+                        <div style={{
+                            marginLeft: "20px", marginRight: "20px",
+                            paddingBottom: '48px',
+                            paddingTop: '48px',
+                            justifyContent: 'space-between',
+                            display: 'flex'
+                        }}>
+
+                            <Button
+
+                                onClick={this.handleAddWhite}
+                                style={{
+                                    borderRadius: '4px',
+                                    background: '#F6D147',
+                                    width: '180px',
+                                    height: '40px'
+                                }}> 提交 </Button>
+                            <Button onClick={(e) => {
+                                this.setState({
+                                    showModaladdWhite: false,
+                                });
+                            }} style={{borderRadius: '4px', width: '180px', height: '40px'}}> 取消 </Button>
+
+                        </div>
+
+
+                    </div>
+
+
+                </Modal>
+
             </div>
         )
     }
