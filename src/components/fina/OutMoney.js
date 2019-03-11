@@ -50,8 +50,6 @@ class Basic extends Component {
         }).then(() => {
             message.success('操作成功')
         })
-
-
         this.setState({
             modal2OPDAYVisible: false,
         });
@@ -59,8 +57,6 @@ class Basic extends Component {
 
 
     requestUserCommentList = (record) => {
-
-
         var self = this;
         window.Axios.post('/auth/getRecordCommentList', {
             id: record.id,
@@ -76,17 +72,11 @@ class Basic extends Component {
     }
     showOPDAyModal2 = (recodrd) => {
         this.requestUserCommentList(recodrd)
-
         var self = this
-
         let id = recodrd.id
-
-
         self.setState({
             theBelongUserId: id,
         });
-        console.log('hcia id', id)
-
         this.setState({
             modal2OPDAYVisible: true,
             theComment: '',
