@@ -36,8 +36,8 @@ const numberMask = createNumberMask({
     includeThousandsSeparator: false,
     allowLeadingZeroes: true,
     requireDecimal: true,
-    decimalLimit: 8,
-    integerLimit: 8,
+    decimalLimit: 6,
+    integerLimit: 6,
     prefix: '',
     // suffix: ' $' // This will put the dollar sign at the end, with a space.
 })
