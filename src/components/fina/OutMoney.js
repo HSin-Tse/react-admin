@@ -626,32 +626,32 @@ class Basic extends Component {
                 <Card title="出金管理"
                       bodyStyle={{padding: 0, margin: 0}}
 
-                      extra={
-                          <Button type="default" disabled={!hasSelected}
+                      extra={[
+                          <Button style={{marginRight:'10px'}} type="default" disabled={!hasSelected}
                                   onClick={() => this.refleshNowpage()}>刷新当前页面
                           </Button>,
 
-                          <CSVLink filename={new Date() + "出入金管理报表.csv"} data={this.state.userList}
-                          headers={this.columnss}>
-                          <Button onClick={() => {
+                          <CSVLink filename={new Date() + "出金管理报表.csv"} data={this.state.userList}
+                                   headers={this.columnss}>
+                              <Button onClick={() => {
 
-                              console.log('hcia Button')
+                                  console.log('hcia Button')
 
-                              window.Axios.post('/auth/addOperatorLogHistory', {
-                                  moduleLog: '交易管理',
-                                  pageLog: '出金报表',
-                                  commentLog: '下载当前列表',
-                                  typeLog: '18',
-                              }).then(function (response) {
+                                  window.Axios.post('/auth/addOperatorLogHistory', {
+                                      moduleLog: '交易管理',
+                                      pageLog: '出金报表',
+                                      commentLog: '下载当前列表',
+                                      typeLog: '18',
+                                  }).then(function (response) {
 
-                                  console.log('hcia response', response)
+                                      console.log('hcia response', response)
 
-                              });
+                                  });
 
 
-                          }
-                          }>下载当前列表</Button>
-                          </CSVLink>
+                              }
+                              }>下载当前列表</Button>
+                          </CSVLink>]
                       }>
 
                     <Table
