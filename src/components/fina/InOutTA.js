@@ -967,7 +967,7 @@ class Basic extends Component {
                       bodyStyle={{padding: 0, margin: 0}}
 
                       extra={
-                          <CSVLink filename={new Date() + "出入金报表.csv"} data={this.state.userList}
+                          <CSVLink filename={new Date() + "入金管理报表.csv"} data={this.state.userList}
                                    headers={this.columnss}>
                               <Button onClick={() => {
 

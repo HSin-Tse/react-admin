@@ -8,9 +8,9 @@ import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import moment from 'moment';
+import {CSVLink} from "react-csv";
 
 const Option = Select.Option;
-const {TextArea} = Input;
 const dateFormat = 'YYYY-MM-DD';
 
 class Basic extends Component {
@@ -83,6 +83,118 @@ class Basic extends Component {
         //     'commentLog': '查看了入金管理',
         //     'typeLog': 2,
         // })
+
+
+        this.columnss = [
+            {
+
+                label: '订单编号',
+                key: 'orderNo',
+
+                align: 'center',
+                title: '订单编号',
+                dataIndex: '订单编号',
+                render: (text, record) => (
+                    <span>{record.orderNo}</span>),
+            }, {
+                label: '用户账号',
+                dataIndex: '用户账号',
+                key: 'accountNo',
+                render: (text, record) => (<span>{record.accountNo}</span>),
+                align: 'center',
+            }, {
+                label: '用户姓名',
+                dataIndex: '用户姓名',
+                key: 'name',
+                align: 'center',
+                render: (text, record) => (
+                    <span>{record.name}</span>),
+            }, {
+                align: 'center',
+                label: '申请时间',
+                dataIndex: '申请时间',
+                key: 'creatDate',
+                width: '100px',
+                render: (text, record) => (
+                    <span>{this.timestampToTime(record.comment_step1.createDate)}</span>)
+            }, {
+                align: 'center',
+                label: '转入金额',
+                dataIndex: '转入金额',
+                key: 'accountAmount',
+                render: (text, record) => (
+                    <span>{record.accountAmount}</span>)
+            }, {
+                align: 'center',
+                label: '账户币种',
+                dataIndex: '账户币种',
+                key: 'accountCurrency',
+                render: (text, record) => (
+                    <span>{record.accountCurrency}</span>),
+            }, {
+                align: 'center',
+                label: '执行金额',
+                dataIndex: '执行金额',
+                key: 'execAmount',
+                render: (text, record) => (
+                    <span>{record.execAmount}</span>),
+            }, {
+                align: 'center',
+                label: '执行币种',
+                dataIndex: '执行币种',
+                key: 'execCurrency',
+                render: (text, record) => (
+                    <span>{record.execCurrency}</span>),
+            }, {
+                align: 'center',
+                label: '账号类型',
+                dataIndex: '账号类型',
+                key: 'broker',
+                render: (text, record) => (
+                    <span>{record.broker}</span>)
+            }, {
+                align: 'center',
+                label: '使用汇率',
+                dataIndex: '使用汇率',
+                key: 'rate',
+                render: (text, record) => (
+                    <span>{record.rate}</span>)
+            }, {
+                align: 'center',
+                label: '手续费',
+                dataIndex: '手续费',
+                key: 'feeAmount',
+                render: (text, record) => (
+                    <span>{record.feeAmount}</span>)
+            }, {
+                align: 'center',
+                label: '入金渠道',
+                dataIndex: '入金渠道',
+                key: 'channelName',
+                render: (text, record) => (
+                    <span>{record.channelName}</span>)
+            }, {
+                align: 'center',
+                label: '支付通道',
+                dataIndex: '支付通道',
+                key: 'tradeChannelName',
+                render: (text, record) => (
+                    <span>{record.tradeChannelName}</span>)
+            }, {
+                align: 'center',
+                label: '状态',
+                dataIndex: '状态',
+                key: 'displayStatus',
+                render: (text, record) => (
+                    <span>{record.displayStatus}</span>)
+            }, {
+                align: 'center',
+                label: '处理人',
+                dataIndex: '处理人',
+                key: 'bkUserName',
+                render: (text, record) => (
+                    <span>{record.bkUserName}</span>)
+            }];
 
 
         this.columns = [
@@ -311,6 +423,10 @@ class Basic extends Component {
                     totalPage: response.data.data.totalPage,
                     loading: false,
                     userList: response.data.data.list
+                }, () => {
+                    self.state.userList.forEach(function (item, index, array) {
+                        item.creatDate = self.timestampToTime(item.comment_step1.createDate);         // forEach 就如同 for，不過寫法更容易
+                    });
                 }
             );
 
@@ -343,7 +459,33 @@ class Basic extends Component {
                 </h2>
                 <BreadcrumbCustom first="交易管理" second="入金管理"/>
 
-                <Card title="入金管理" bodyStyle={{padding: 0, margin: 0}}>
+                <Card
+
+
+                    extra={
+                        <CSVLink filename={new Date() + "出入金报表.csv"} data={this.state.userList}
+                                 headers={this.columnss}>
+                            <Button onClick={() => {
+
+                                console.log('hcia Button')
+
+                                window.Axios.post('/auth/addOperatorLogHistory', {
+                                    moduleLog: '交易管理',
+                                    pageLog: '出入金报表',
+                                    commentLog: '下载当前列表',
+                                    typeLog: '18',
+                                }).then(function (response) {
+
+                                    console.log('hcia response', response)
+
+                                });
+
+
+                            }
+                            }>下载当前列表</Button>
+                        </CSVLink>
+                    }
+                    title="入金管理" bodyStyle={{padding: 0, margin: 0}}>
 
                     <Table rowKey="id"
                            columns={this.columns}
