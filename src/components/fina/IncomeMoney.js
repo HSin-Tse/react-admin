@@ -2,12 +2,11 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, message, Select, Modal, Card, Col, Popconfirm, Row, Input, DatePicker} from 'antd';
+import {Button, Table, Select, Modal, Card, Col, Row, Input, DatePicker} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
-import Toast from "../widget/toast";
 import moment from 'moment';
 
 const Option = Select.Option;
@@ -395,7 +394,13 @@ class Basic extends Component {
                         }}>订单号:{this.state.mID}
                         </p>
                     </div>
-                    <div style={{align: 'center',minWidth: '800px', marginLeft: '90px', marginRight: '100px', paddingBottom: '10px'}}>
+                    <div style={{
+                        align: 'center',
+                        minWidth: '800px',
+                        marginLeft: '90px',
+                        marginRight: '100px',
+                        paddingBottom: '10px'
+                    }}>
                         <Row>
                             <Col style={{textAlign: 'right', align: 'center', background: 'white'}} span={12}>
 
