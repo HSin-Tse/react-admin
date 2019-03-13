@@ -502,7 +502,7 @@ class Basic extends Component {
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 {/*<div>isCanOP :{this.state.isCanOP}</div>*/}
                 {/*<div>this.state.availableFlag :{JSON.stringify(this.state.availableFlag)}</div>*/}
-                <div>this.state.availableJeffFlag :{JSON.stringify(this.state.availableJeffFlag)}</div>
+                {/*<div>this.state.availableJeffFlag :{JSON.stringify(this.state.availableJeffFlag)}</div>*/}
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
                 {/*{JSON.stringify(this.props.todps)}*/}
 
