@@ -545,8 +545,6 @@ class Basic extends Component {
                         }}
                     />
                 </Card>
-
-
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
                     <span className="sw-btn dark-white" onClick={this._switcherOn}>
                      <Icon type="setting" className="text-dark"/>
@@ -659,7 +657,6 @@ class Basic extends Component {
 
                     </div>
                 </div>
-
                 <Modal
                     bodyStyle={{
                         background: 'white',
@@ -731,8 +728,6 @@ class Basic extends Component {
 
 
                 </Modal>
-
-
                 <Modal
                     bodyStyle={{
                         background: 'white',

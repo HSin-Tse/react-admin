@@ -34,6 +34,7 @@ class Basic extends Component {
             isCanOPB: false,
             isCanOPC: false,
             isCanOPD: false,
+            availableFlag: false,
             forbiddenValue: 0,
             current: 1,
             pgsize: 20,
@@ -135,6 +136,13 @@ class Basic extends Component {
                     // console.log('hcia  this.props', this.props)
                     return this.props.tk === item.key;
                 });
+
+                console.log('hcia availableFlag', isCanOp.availableFlag, (isCanOp.availableFlag === 1))
+                // console.log('hcia isCanOp', isCanOp.availableFlag)
+                self.setState({
+                    availableFlag: isCanOp.availableFlag === 1,
+                });
+
 
                 console.log('hcia isCanOp', isCanOp)
 
@@ -432,7 +440,7 @@ class Basic extends Component {
 
 
                         <Button
-
+                            disabled={!this.state.availableFlag}
                             size={'small'}
                             style={{width: '190px', background: '#FDD000'}}
                             onClick={() => {
@@ -613,8 +621,9 @@ class Basic extends Component {
         return (
             <div>
 
-                {/*<div>isCanOPA :{JSON.stringify(this.state.isCanOPA)}</div>*/}
+                <div>availableFlag :{JSON.stringify(this.state.availableFlag)}</div>
                 {/*<div>isCanOPB :{JSON.stringify(this.state.isCanOPB)}</div>*/}
+                {/*<div>isCanOPC :{JSON.stringify(this.state.isCanOPC)}</div>*/}
                 {/*<div>isCanOPC :{JSON.stringify(this.state.isCanOPC)}</div>*/}
                 {/*<div>isCanOPD :{JSON.stringify(this.state.isCanOPD)}</div>*/}
 
@@ -627,7 +636,7 @@ class Basic extends Component {
                       bodyStyle={{padding: 0, margin: 0}}
 
                       extra={[
-                          <Button style={{marginRight:'10px'}} type="default" disabled={!hasSelected}
+                          <Button style={{marginRight: '10px'}} type="default" disabled={!hasSelected}
                                   onClick={() => this.refleshNowpage()}>刷新当前页面
                           </Button>,
 
