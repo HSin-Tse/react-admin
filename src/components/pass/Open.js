@@ -346,8 +346,11 @@ class Basic extends Component {
             return
         }
 
-        if (this.state.availableJeffFlag) {
-            this.props.history.push('/app/pass/passopen/detail' + record.id)
+        if (this.state.availableJeffFlag     ) {
+
+           var ssdsd =  record.status == 0 ? 'passopen': 'passopenrs'
+
+            this.props.history.push('/app/pass/'+ssdsd+'/detail' + record.id)
             return
         }
 
@@ -499,7 +502,7 @@ class Basic extends Component {
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 {/*<div>isCanOP :{this.state.isCanOP}</div>*/}
                 {/*<div>this.state.availableFlag :{JSON.stringify(this.state.availableFlag)}</div>*/}
-                {/*<div>this.state.checkedValues :{JSON.stringify(this.state.checkedValues)}</div>*/}
+                <div>this.state.availableJeffFlag :{JSON.stringify(this.state.availableJeffFlag)}</div>
                 {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
                 {/*{JSON.stringify(this.props.todps)}*/}
 
