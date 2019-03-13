@@ -199,8 +199,6 @@ class PassOpenD extends Component {
     }
     checkMention = (rule, value, callback) => {
         var sss = this.checkLenAndIsChinese(value)
-        console.log('hcia sss', sss)
-        console.log('hcia value', value)
         if (sss) {
             this.state.waitUpdate.lastNameCn = value
             this.setState({
