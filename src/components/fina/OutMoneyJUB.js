@@ -464,14 +464,14 @@ class Basic extends Component {
                                                    dataIndex: 'createDate',
                                                    key: 'operationDiary_Date',
                                                    render: (text, record) => (
-                                                       <span>{record.execTxnAmt}</span>),
+                                                       <span>{record.typeDesc == '入金' ? record.execTxnAmt : ''}</span>),
                                                }, {
                                                    title: '出',
                                                    align: 'center',
                                                    dataIndex: 'comment',
                                                    key: 'operationDiary_Status',
                                                    render: (text, record) => (
-                                                       <span>{record.accountTxnAmt}</span>),
+                                                       <span>{record.typeDesc == '出金' ? record.execTxnAmt : ''}</span>),
                                                }]}
 
                                            dataSource={this.state.userList}

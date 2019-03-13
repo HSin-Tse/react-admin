@@ -128,6 +128,7 @@ class Basic extends Component {
                     isCanOPB: true,
                     isCanOPC: true,
                     isCanOPD: true,
+                    availableFlag: true,
                 });
             } else {
 

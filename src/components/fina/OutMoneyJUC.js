@@ -456,22 +456,23 @@ class Basic extends Component {
                                                    dataIndex: 'bkUserName',
                                                    key: 'operationDiary_User',
                                                    render: (text, record) => (
-                                                       <div>{record.createDate}    - {record.accountNo}</div>),
+                                                       <div>{record.createDate} - {record.accountNo}</div>),
                                                }, {
                                                    title: '入',
                                                    align: 'center',
                                                    dataIndex: 'createDate',
                                                    key: 'operationDiary_Date',
                                                    render: (text, record) => (
-                                                       <span>{record.execTxnAmt}</span>),
+                                                       <span>{record.typeDesc == '入金' ? record.execTxnAmt : ''}</span>),
                                                }, {
                                                    title: '出',
                                                    align: 'center',
                                                    dataIndex: 'comment',
                                                    key: 'operationDiary_Status',
                                                    render: (text, record) => (
-                                                       <span>{record.accountTxnAmt}</span>),
+                                                       <span>{record.typeDesc == '出金' ? record.execTxnAmt : ''}</span>),
                                                }]}
+
 
                                            dataSource={this.state.userList}
                                            loading={this.state.loadingComment}
