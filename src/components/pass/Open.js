@@ -298,17 +298,6 @@ class Basic extends Component {
     requestUserCommentList = (record) => {
 
 
-        // window.Axios.post('/auth/getRecordCommentList', {
-        //     id: record.id,
-        //     commentType: 2,
-        //     pageNo: this.state.currentComment,
-        //     pageSize: this.state.pgsize,
-        // }).then(function (response) {
-        //     self.setState({
-        //         totalpageComments: response.data.data.totalPage,
-        //         operationDiaryHistory: response.data.data.list,
-        //     });
-        // });
         var self = this;
 
         window.Axios.post('/back/getLogOpenAccountAudit', {
