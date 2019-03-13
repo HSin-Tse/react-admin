@@ -543,7 +543,7 @@ class PassOpenD extends Component {
         }
     }
     onChangefirstNameCn = (e) => {
-        var reg = new RegExp("[\u4e00-\u9fa5]");
+        // var reg = new RegExp("[\u4e00-\u9fa5]");
         var input = e.target.value
 
         var isCh = new RegExp("[\u4e00-\u9fa5]").test(input)
