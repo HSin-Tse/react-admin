@@ -306,7 +306,7 @@ class EditRole extends Component {
 
                                         <br/>
                                         <Checkbox
-                                            style={{display: item1.childrenMenu.length == 0 ? '' : 'none'}}
+                                            style={{display: item1.childrenMenu.length == 0 ? '' : ''}}
                                             disabled={!item1.sscheck}
                                             key={number}
                                             value={-item1.id} id={number}>可操作</Checkbox>
