@@ -29,6 +29,10 @@ class Dashboard extends React.Component {
             resp: undefined,
             displayName: '',
             lastLoginIP: '',
+            regDate: '',
+            location: '',
+            email: '',
+            mobile: '',
             lastLoginTime: '',
             requestBody: '{"a":1,"b":"aa"}',
             HOST: 'http://mobile.nooko.cn:8090/',
@@ -58,13 +62,16 @@ class Dashboard extends React.Component {
         // if()
 
 
-        if(mImfor){
+        if (mImfor) {
             this.setState({lastLoginIP: mImfor.lastLoginIP ? mImfor.lastLoginIP : ''});
+            this.setState({regDate: mImfor.regDate ? mImfor.regDate : ''});
+            this.setState({email: mImfor.email ? mImfor.email : ''});
+            this.setState({location: mImfor.location ? mImfor.location : ''});
+            this.setState({mobile: mImfor.mobile ? mImfor.mobile : ''});
             this.setState({lastLoginTime: mImfor.lastLoginTime});
 
         }
         // this.setState({lastLoginIP: mImfor.lastLoginIP ? mImfor.lastLoginIP : ''});
-
 
 
         // console.log('hcia window.Axios.baseURL' , window.Axios.config.baseURL)
@@ -103,6 +110,9 @@ class Dashboard extends React.Component {
                         <Col md={6}>
                             <p>手机:</p>
                         </Col>
+                        <Col md={6}>
+                            <p>{this.state.mobile}</p>
+                        </Col>
 
                     </Row>
                     <Row gutter={1}>
@@ -110,12 +120,20 @@ class Dashboard extends React.Component {
                         <Col md={6}>
                             <p>邮箱:</p>
                         </Col>
+                        <Col md={6}>
+                            <p>{this.state.email}</p>
+                        </Col>
+
 
                     </Row>
                     <Row gutter={1}>
                         <Col md={6}>
                             <p>注册时间:</p>
                         </Col>
+                        <Col md={6}>
+                            <p>{this.state.regDate}</p>
+                        </Col>
+
 
                     </Row>
                     <Row gutter={1}>
@@ -140,7 +158,9 @@ class Dashboard extends React.Component {
                         <Col md={6}>
                             <p>地理位置:</p>
                         </Col>
-
+                        <Col md={6}>
+                            <p>{this.state.location}</p>
+                        </Col>
                     </Row>
                 </Card>
                 <Card style={{marginTop: 15}} disabled={true} title="待办事项 " bordered={true}>
