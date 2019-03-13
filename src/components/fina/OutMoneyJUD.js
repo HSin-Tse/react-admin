@@ -9,7 +9,6 @@ import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import {steps} from "./model/Steps"
 
-const {TextArea} = Input;
 const Option = Select.Option;
 
 class Basic extends Component {
