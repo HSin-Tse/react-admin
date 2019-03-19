@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import {Col, Card, Row, DatePicker, Input, Modal, Button, Table, Icon, Checkbox} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import {parse} from 'querystring';
+
 const {Meta} = Card;
 
 class CustomerUserInfo extends Component {
@@ -199,7 +200,11 @@ class CustomerUserInfo extends Component {
         window.Axios.post('ixuser/userOverView', {
             'belongUserId': self.props.match.params.id,
         }).then((response) => {
-            self.setState({userList: response.data.data});
+
+            if (response.data.data.base != null) {
+                self.setState({userList: response.data.data});
+
+            }
         });
     };
 }
