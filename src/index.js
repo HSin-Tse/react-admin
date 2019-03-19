@@ -20,9 +20,6 @@ import zh from './locale/zh_CN'
 
 const middleware = [thunk];
 const store = createStore(reducer, applyMiddleware(...middleware));
-// var Axios = axios.create({
-//     baseURL: window.location.protocol + '//mobile.nooko.cn:8090/'
-// });
 
 
 // var baseURL = 'https://crmapi.ixtrader.mobi:18107'
@@ -35,10 +32,6 @@ var Axios = axios.create({
 var aaxios = axios.create({
     baseURL
 });
-
-// var aaxios = axios.create({
-//     baseURL: window.location.protocol + '//mobile.nooko.cn:8090/'
-// });
 
 
 message.config({
