@@ -736,7 +736,7 @@ class PassOpenD extends Component {
                                           <h3 className="pa-m">
                                               <a href={this.state.recordData.idcard_0}
                                                  target="_blank"
-                                                 rel="noopener noreferrer">身份证反面照片</a>
+                                                 rel="noopener noreferrer">身分证正面</a>
                                           </h3>]
                                       }>
                                     <Zmage
@@ -789,7 +789,7 @@ class PassOpenD extends Component {
                                           <h3 className="pa-m">
                                               <a href={this.state.recordData.idcard_2}
                                                  target="_blank"
-                                                 rel="noopener noreferrer">身份证反面照片</a>
+                                                 rel="noopener noreferrer">身分证反面(手持)</a>
                                           </h3>]
                                       }>
                                     <Zmage

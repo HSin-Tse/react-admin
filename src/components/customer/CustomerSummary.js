@@ -590,6 +590,7 @@ class CustomerSummary extends Component {
 
                             style={{margin: '20px'}}
                             title={'请确认客户信息：'} bordered={true}>
+                            <Checkbox  style={{width: '100%', minHeight: 40,}} value={"手机号"}>手机号</Checkbox>
 
                             <Checkbox.Group style={{width: '100%'}} value={this.state.checkedValues}
                                             onChange={(checkedValues) => {
@@ -603,14 +604,14 @@ class CustomerSummary extends Component {
                                             }}>
 
                                 <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
-                                    <Checkbox value={"手机号"}>手机号</Checkbox>
                                     <Checkbox value={"邮箱"}>邮箱</Checkbox>
                                     <Checkbox value={"账号"}>账号</Checkbox>
                                     <Checkbox value={"地址"}>地址</Checkbox>
                                     <Checkbox value={"身份证号"}>身份证号</Checkbox>
+                                    <Checkbox value={"身份证正本"}>身份证正本</Checkbox>
+
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
-                                    <Checkbox value={"身份证正本"}>身份证正本</Checkbox>
                                 </div>
                                 <div style={{display: 'flex', minHeight: 40, align: 'center'}}>
                                     <span style={{minWidth: 80}}>其他：</span>
@@ -652,7 +653,7 @@ class CustomerSummary extends Component {
 
                             <Button
 
-                                disabled={this.state.checkedValues.length < 6 || !this.state.accountPassword}
+                                disabled={this.state.checkedValues.length < 5 || !this.state.accountPassword}
                                 onClick={
                                     () => {
 
