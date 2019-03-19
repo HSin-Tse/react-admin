@@ -198,25 +198,13 @@ window.Axios.interceptors.response.use(function (response) {
 
             var gogogo = window.location.protocol + '//' + window.location.host + pasub + "/#/login"
             window.location = gogogo;
-            // this.props.history.push('/login')
         }
 
         return Promise.reject(response)
     }
-
-    // setTimeout(hideLoading, 0)
-
-
-    // console.log('hcia loadCount' , loadCount,(loadCount==0))
     if (loadCount <= 0) {
-        // console.log('hcia hideLoading' , window.hideLoading)
         setTimeout(window.hideLoading, 0)
-
-        //LoadingBar.end();
-        //结束loading
     }
-    // window.hideLoading = {}
-    // setTimeout(ss, 0);
 
     return response
 }, function (error) {
@@ -225,15 +213,9 @@ window.Axios.interceptors.response.use(function (response) {
     // console.log('hcia error.toString()', error.toString())
 
     if (error.toString() == 'Cancel') {
-        // message.error(error.toString()+'TEST')
     } else {
-        // setTimeout(hideLoading, 0)
-
         if (loadCount == 0) {
             setTimeout(window.hideLoading, 0)
-
-            //LoadingBar.end();
-            //结束loading
         }
         message.error(error.toString())
     }
@@ -250,7 +232,4 @@ ReactDOM.render(
     </IntlProvider>,
     document.getElementById('root')
 );
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.register();
