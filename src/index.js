@@ -23,7 +23,7 @@ const store = createStore(reducer, applyMiddleware(...middleware));
 
 
 // var baseURL = 'https://crmapi.ixtrader.mobi:18107'
-var    baseURL= window.location.protocol + '//mobile.nooko.cn:8090/'
+var baseURL = window.location.protocol + '//mobile.nooko.cn:8090/'
 
 var Axios = axios.create({
     baseURL
@@ -173,12 +173,7 @@ window.Axios.interceptors.response.use(function (response) {
     if (response.data.code != 1) {
 
         if (loadCount == 0) {
-
-            // console.log('hcia loadCount' , loadCount)
             setTimeout(window.hideLoading, 0)
-
-            //LoadingBar.end();
-            //结束loading
         }
         // setTimeout(hideLoading, 0)
         message.error(response.data.msg)
