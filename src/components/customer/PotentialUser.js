@@ -94,12 +94,6 @@ export default class PotentialUser extends Component {
                 render: (text, record) => (
                     <span>{record.comment}</span>),
             }]
-        // window.Axios.post('back/addLogHistory', {
-        //     'moduleLog': '用户管理',
-        //     'pageLog': 'Leads管理',
-        //     'commentLog': '查看了Leads管理',
-        //     'typeLog': 2,
-        // })
 
 
         document.addEventListener("keydown", this.handleKeyPress, false);
@@ -1018,9 +1012,6 @@ export default class PotentialUser extends Component {
                             }}
                             >清除条件</Button>}
                         >
-                            <Input value={this.state.selectMail} onChange={(e) => {
-                                this.setState({selectMail: e.target.value})
-                            }} style={{marginBottom: 10}} placeholder="邮箱"/>
 
                             <Input value={this.state.selectPhoneF} onChange={(e) => {
                                 this.setState({
@@ -1029,17 +1020,12 @@ export default class PotentialUser extends Component {
                             }} style={{marginBottom: 10}} placeholder="手机号"/>
 
 
-                            <Input value={this.state.selectID} onChange={(e) => {
-                                this.setState({
-                                    selectID: e.target.value,
-                                });
-                            }} style={{marginBottom: 10}} placeholder="身份证号"/>
 
                             <Input value={this.state.starClientAccount} onChange={(e) => {
                                 this.setState({
                                     starClientAccount: e.target.value,
                                 });
-                            }} style={{marginBottom: 10}} placeholder="账户"/>
+                            }} style={{marginBottom: 10}} placeholder="模拟账号"/>
                             <RangePicker
 
                                 showToday

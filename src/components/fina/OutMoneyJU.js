@@ -2,12 +2,13 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Tabs, Checkbox, Select, Card, Col, Divider, Row, Input, Table, message} from 'antd';
+import {Button, Tabs, Checkbox, Select, Card, Col, Divider, Row, Input, Table, message, Icon, DatePicker} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import {steps} from "./model/Steps"
+import classNames from "classnames";
 
 const {TextArea} = Input;
 const TabPane = Tabs.TabPane;
@@ -206,6 +207,10 @@ class Basic extends Component {
             }}>
 
 
+
+
+
+
                 <div style={{overflow: 'auto'}}>
                     {/*<div>commentList query :{JSON.stringify(this.state.commentList)}</div>*/}
 
@@ -213,7 +218,6 @@ class Basic extends Component {
                         {steps[0].title}-{this.state.status == 0 ? '提交成功(Pending)' : this.state.status == 1 ? '结算审核通过(Accounts OK)' : this.state.status == 2 ? '结算审核暂停(Suspend)' : this.state.status == 3 ? '结算审核失败(Failure)' : this.state.status == 4 ? '风险审核通过(Accepted)' : this.state.status == 5 ? '风险审核暂停(Suspend)' : this.state.status == 6 ? '风险审核失败(Failure)' : this.state.status == 7 ? '渠道下发通过(Completed)' : this.state.status == 8 ? '渠道下发暂停(Suspend)' : this.state.status == 9 ? '渠道下发失败(Failure)' : '??'}
                     </h2>
                     <BreadcrumbCustom first="财务管理" second="出金管理" third={steps[0].title}/>
-
 
                     <div style={{
                         width: '1200px',

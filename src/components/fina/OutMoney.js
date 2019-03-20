@@ -2,14 +2,16 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, message, Modal, Card, Input} from 'antd';
+import {Button, Table, message, Modal, Card, Input, Icon, DatePicker} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import {CSVLink} from "react-csv";
+import classNames from "classnames";
 
 const {TextArea} = Input;
+const {RangePicker} = DatePicker;
 
 class Basic extends Component {
 
@@ -549,6 +551,38 @@ class Basic extends Component {
     pad = (str) => {
         return +str >= 10 ? str : '0' + str
     };
+
+    requestPageR = () => {
+
+        let self = this
+        self.setState({
+                loading: true,
+            }
+        );
+
+        window.Axios.post('finance/getWithdrawHistory', {
+            'pageSize': self.state.pgsize,
+
+            orderNo: this.state.delectOrderNo,
+            name: this.state.selectName,
+            accountNo: this.state.selectAccount,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
+
+
+        }).then(function (response) {
+            console.log(response);
+            self.setState({
+                    totalPage: response.data.data.totalPage,
+                    loading: false,
+                    userList: response.data.data.list
+                }
+            );
+
+
+        })
+
+    }
     requestPage = () => {
 
         let self = this
@@ -573,6 +607,9 @@ class Basic extends Component {
         })
 
     }
+
+
+
     changePage = (page) => {
         console.log('hcia page', page)
         this.setState({
@@ -627,6 +664,104 @@ class Basic extends Component {
                 {/*<div>isCanOPC :{JSON.stringify(this.state.isCanOPC)}</div>*/}
                 {/*<div>isCanOPC :{JSON.stringify(this.state.isCanOPC)}</div>*/}
                 {/*<div>isCanOPD :{JSON.stringify(this.state.isCanOPD)}</div>*/}
+                <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
+                    <span className="sw-btn dark-white" onClick={() => {
+                        this.setState({
+                            switcherOn: !this.state.switcherOn
+                        })
+                    }}>
+                     <Icon type="setting" className="text-dark"/>
+                    </span>
+                    <div style={{width: 270}}>
+                        <Card
+                            title="当前表搜索"
+                            extra={<Button type="primary" onClick={() => {
+                                let self = this
+                                this.setState({
+                                    selectOrderNo: undefined,
+                                    selectName: undefined,
+                                    selectAccount: undefined,
+                                    selectTimeStart: undefined,
+                                    selectTimeEnd: undefined,
+                                    filterTimeFalue: null
+                                }, () => {
+                                    self.requestPage()
+                                })
+                            }}
+                            >清除条件</Button>}
+                        >
+
+
+                            <Input value={this.state.selectName} onChange={(e) => {
+                                this.setState({
+                                    selectName: e.target.value,
+                                });
+                            }} style={{marginBottom: 10}} placeholder="姓名"/>
+                            <Input value={this.state.selectAccount} onChange={(e) => {
+                                this.setState({
+                                    selectAccount: e.target.value,
+                                });
+                            }} style={{marginBottom: 10}} placeholder="交易账户"/>
+
+                            <Input value={this.state.selectOrderNo} onChange={(e) => {
+                                this.setState({
+                                    selectOrderNo: e.target.value,
+                                });
+                            }} style={{marginBottom: 10}} placeholder="订单编号"/>
+
+
+                            <RangePicker
+
+                                showToday
+                                style={{width: '100%'}}
+                                showTime={{format: 'YYYY-MM-DD HH:mm:ss'}}
+                                format="YYYY-MM-DD HH:mm:ss"
+                                placeholder={['开始时间', '结束时间']}
+                                onChange={(value, dateString) => {
+
+                                    if (value.length === 0) {
+
+                                        this.setState({
+                                            filterTimeFalue: undefined,
+                                            selectTimeStart: undefined,
+                                            selectTimeEnd: undefined,
+
+                                        });
+                                    } else {
+                                        var selectTimeStart = value[0].unix() + '000'
+                                        var selectTimeEnd = value[1].unix() + '000'
+
+                                        this.setState({
+                                            filterTimeFalue: value,
+                                            selectTimeStart: selectTimeStart,
+                                            selectTimeEnd: selectTimeEnd,
+
+                                        });
+                                    }
+
+                                }}
+                                value={this.state.filterTimeFalue}
+                                onOk={(value) => {
+                                    var selectTimeStart = value[0].unix() + '000'
+                                    var selectTimeEnd = value[1].unix() + '000'
+
+                                    this.setState({
+                                        filterTimeFalue: value,
+                                        selectTimeStart: selectTimeStart,
+                                        selectTimeEnd: selectTimeEnd,
+
+                                    });
+                                }}
+                            />
+
+                            <Button onClick={() => this.requestPageR()} style={{marginTop: 15}} type="primary"
+                                    icon="search">Search</Button>
+
+                        </Card>
+
+
+                    </div>
+                </div>
 
                 <h2 style={{marginTop: 15}}>
                     出金管理
