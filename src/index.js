@@ -52,23 +52,11 @@ window.PAxios.interceptors.request.use(
 
         loginName = encodeURI(loginName)
 
-        // console.log('hcia loginName' , loginName)
-        // console.log('hcia xtoken' , xtoken)
 
         if (xtoken != null) {
             config.headers['X-Token'] = xtoken
             if (config.method == 'post') {
 
-
-                // config.data = {
-                //     ...config.data,
-                //     'token': xtoken,
-                //     'loginName': loginName,
-                //     'language': 'zh-CN',
-                //
-                // }
-
-                // config.timeout = 30 * 1000
 
                 config.headers = {
                     'Content-Type': 'multipart/form-data',
