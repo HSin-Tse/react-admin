@@ -92,7 +92,7 @@ window.PAxios.interceptors.request.use(
     })
 
 
-let pending = []; //声明一个数组用于存储每个ajax请求的取消函数和ajax标识
+let pending = [];
 let cancelToken = axios.CancelToken;
 let removePending = (config) => {
     for (let p in pending) {
