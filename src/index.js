@@ -86,7 +86,7 @@ let removePending = (config) => {
     for (let p in pending) {
 
 
-        if (pending[p].u === JSON.stringify(config.url) + JSON.stringify(config.data)) { 
+        if (pending[p].u === JSON.stringify(config.url) + JSON.stringify(config.data)) {
             pending[p].f();
             pending.splice(p, 1);
         }
@@ -99,7 +99,7 @@ window.Axios.interceptors.request.use(
         loadCount++;
         const request = JSON.stringify(config.url) + JSON.stringify(config.data)
 
-        removePending(config); //在一个ajax发送前执行一下取消操作
+        removePending(config);
         config.cancelToken = new cancelToken((c) => {
             pending.push({u: request, f: c});
         });
@@ -115,13 +115,9 @@ window.Axios.interceptors.request.use(
             if (config.method == 'post') {
 
 
-                // console.log('hcia request loadCount' , loadCount)
-                // if (loadCount>1) {
                 window.hideLoading = Toast.loading('加载中...', 0, () => {
 
                 })
-
-                // }
 
 
                 config.data = {
@@ -198,7 +194,6 @@ window.Axios.interceptors.response.use(function (response) {
 }, function (error) {
 
     loadCount--
-    // console.log('hcia error.toString()', error.toString())
 
     if (error.toString() == 'Cancel') {
     } else {
