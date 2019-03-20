@@ -11,7 +11,6 @@ import {steps} from "./model/Steps"
 import classNames from "classnames";
 
 const {TextArea} = Input;
-const TabPane = Tabs.TabPane;
 const Option = Select.Option;
 
 class Basic extends Component {
