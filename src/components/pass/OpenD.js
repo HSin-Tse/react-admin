@@ -1540,15 +1540,11 @@ class PassOpenD extends Component {
                                               </h3>
                                           </Upload>]}>
                                     <Zmage
-
-
                                         preset="desktop"
                                         style={{
-
                                             display: 'block',
                                             margin: 'auto',
                                             width: 'auto',
-                                            // height: '300px',
                                             maxWidth: '100%',
                                             maxHeight: '300px',
                                             minHeight: '0px',
