@@ -2,13 +2,12 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Tabs, Checkbox, Select, Card, Col, Divider, Row, Input, Table, message, Icon, DatePicker} from 'antd';
+import {Button, Checkbox, Select, Card, Col, Divider, Row, Input, Table, message, Icon, DatePicker} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import {steps} from "./model/Steps"
-import classNames from "classnames";
 
 const {TextArea} = Input;
 const Option = Select.Option;
