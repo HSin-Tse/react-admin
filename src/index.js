@@ -86,9 +86,9 @@ let removePending = (config) => {
     for (let p in pending) {
 
 
-        if (pending[p].u === JSON.stringify(config.url) + JSON.stringify(config.data)) { //当当前请求在数组中存在时执行函数体
-            pending[p].f(); //执行取消操作
-            pending.splice(p, 1); //把这条记录从数组中移除
+        if (pending[p].u === JSON.stringify(config.url) + JSON.stringify(config.data)) { 
+            pending[p].f();
+            pending.splice(p, 1);
         }
     }
 }
