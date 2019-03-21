@@ -102,7 +102,7 @@ class CustomerSummary extends Component {
     }
 
 
-    addOPSLog = ( com) => {
+    addOPSLog = (com) => {
         window.Axios.post('/auth/addOperatorLogHistory', {
             moduleLog: '用户管理',
             pageLog: '用户总表',
@@ -142,17 +142,8 @@ class CustomerSummary extends Component {
 
     componentDidMount() {
 
-        // window.Axios.post('back/addLogHistory', {
-        //     'moduleLog': '用户管理',
-        //     'pageLog': 'Leads用户总表',
-        //     'commentLog': '查看了Leads用户总表',
-        //     'typeLog': 2,
-        // }).then(function (response) {
-        //
-        //
-        // });
 
-        this.addOPSLog( '用户总表')
+        this.addOPSLog('用户总表')
 
 
         document.addEventListener("keydown", this.handleKeyPressOOP, false);
@@ -323,7 +314,7 @@ class CustomerSummary extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div style={{display: 'flex', justifyContent: 'space-around'}}>
-                        <Button size={'small'} style={{ background: '#FDD000'}}
+                        <Button size={'small'} style={{background: '#FDD000'}}
                                 onClick={() => this.showOPDAyModal2(record)}>日志</Button>
 
                         <Button disabled={!record.belongUserId || true} size={'small'}
@@ -717,7 +708,7 @@ class CustomerSummary extends Component {
 
                             style={{margin: '20px'}}
                             title={'请确认客户信息：'} bordered={true}>
-                            <Checkbox  style={{width: '100%', minHeight: 40,}} value={"手机号"}>手机号</Checkbox>
+                            <Checkbox style={{width: '100%', minHeight: 40,}} value={"手机号"}>手机号</Checkbox>
 
                             <Checkbox.Group style={{width: '100%'}} value={this.state.checkedValues}
                                             onChange={(checkedValues) => {
@@ -959,7 +950,6 @@ class CustomerSummary extends Component {
                                     this.addOPLog(this.state.nowRECODE, '解绑手机号')
 
 
-
                                     window.Axios.post('star/unBindStarLiveAccount', {
                                         "id": this.state.nowRECODE.starAccountId,
                                         "belongUserId": this.state.nowRECODE.belongUserId,
@@ -1021,7 +1011,7 @@ class CustomerSummary extends Component {
     };
 
     timestampToTime = (timestamp) => {
-        const dateObj = new Date(+timestamp) 
+        const dateObj = new Date(+timestamp)
         const year = dateObj.getFullYear() // 获取年，
         const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
         const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
@@ -1037,8 +1027,7 @@ class CustomerSummary extends Component {
     showModalNote = (record) => {
 
 
-
-        this.addOPLog(record,'添加备注')
+        this.addOPLog(record, '添加备注')
 
         let belongUserId = record.belongUserId
         var self = this
@@ -1119,7 +1108,6 @@ class CustomerSummary extends Component {
         }).then(function (response) {
             self.setState({operationDiaryHistory: response.data.data.list});
         })
-
 
 
         this.state.checkedValues.length = 0
@@ -1213,7 +1201,7 @@ class CustomerSummary extends Component {
     }
     goToUserInfo = (record) => {
 
-        this.addOPLog(record,'查看行为')
+        this.addOPLog(record, '查看行为')
 
         this.props.history.push('/app/customer/CustomerUserInfo' + record.belongUserId)
 
@@ -1221,8 +1209,7 @@ class CustomerSummary extends Component {
     goToUserAccountInfo = (record) => {
 
 
-
-        this.addOPLog(record,'查看開户')
+        this.addOPLog(record, '查看開户')
         var gogo = 'user'
         this.props.history.push('/app/pass/passopen/' + gogo + record.leadId)
 
@@ -1260,7 +1247,7 @@ class CustomerSummary extends Component {
 
         // resetSeretModal5
         console.log('hcia record', record)
-        this.addOPLog(record,'重置密码')
+        this.addOPLog(record, '重置密码')
 
         let belongUserId = record.belongUserId
 
