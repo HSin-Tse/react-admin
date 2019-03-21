@@ -13,13 +13,13 @@ const Option = Select.Option;
 
 class Basic extends Component {
     timestampToTime = (timestamp) => {
-        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
-        const year = dateObj.getFullYear() // 获取年，
-        const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
-        const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
-        const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
-        const minutes = this.pad(dateObj.getMinutes()) // 获取分
-        const seconds = this.pad(dateObj.getSeconds()) // 获取秒
+        const dateObj = new Date(+timestamp)
+        const year = dateObj.getFullYear()
+        const month = dateObj.getMonth() + 1
+        const date = dateObj.getDate()
+        const hours = this.pad(dateObj.getHours())
+        const minutes = this.pad(dateObj.getMinutes())
+        const seconds = this.pad(dateObj.getSeconds())
         return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
     };
 
@@ -117,7 +117,7 @@ class Basic extends Component {
                 channelName: response.data.data.channelName,
                 operationDiaryHistory: response.data.data.commentList,
 
-            },()=>{
+            }, () => {
 
 
                 window.Axios.post('finance/getDepositWithdrawReport', {
@@ -127,10 +127,10 @@ class Basic extends Component {
                 }).then(function (response) {
 
 
-                    console.log('hcia response.data.data.list?[]:response.data.data.list' , response.data.data.list==null?[]:response.data.data.list)
+                    console.log('hcia response.data.data.list?[]:response.data.data.list', response.data.data.list == null ? [] : response.data.data.list)
                     self.setState({
                             totalPage: response.data.data.totalPage,
-                            userList: response.data.data.list==null?[]:response.data.data.list
+                            userList: response.data.data.list == null ? [] : response.data.data.list
                         }
                     );
 
@@ -456,7 +456,7 @@ class Basic extends Component {
                                                pageSize: this.state.pgsize,
                                                onChange: this.changePageComment,
                                            }}
-                                    /> 
+                                    />
                                     <div>
                                         <span>显示第1条到第5条，共10条</span>
                                     </div>
