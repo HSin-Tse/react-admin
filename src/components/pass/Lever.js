@@ -17,6 +17,7 @@ const {RangePicker} = DatePicker;
 class Basic extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             count: 0,
             current: 1,
@@ -382,7 +383,12 @@ class Basic extends Component {
                 ),
             }];
         this.requestPage()
-
+        window.Axios.post('/auth/addOperatorLogHistory', {
+            moduleLog: '审核管理',
+            pageLog: '杠杆审核',
+            commentLog: '杠杆审核',
+            typeLog: '2',
+        })
     }
 
     changePageComment = (page) => {
