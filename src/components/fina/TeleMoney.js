@@ -113,6 +113,15 @@ class Basic extends Component {
     componentDidMount() {
 
 
+
+        window.Axios.post('/auth/addOperatorLogHistory', {
+            'moduleLog': '财务管理',
+            'pageLog': '电汇入金',
+            'commentLog': '电汇入金新增',
+            'typeLog': 2,
+        })
+
+
         if (localStorage.getItem('infor')) {
 
             let self = this;
@@ -561,12 +570,10 @@ class Basic extends Component {
             <div>
 
                 {/*<div>accrounRes :{JSON.stringify(this.state.accrounRes)}</div>*/}
-                {/*<div>mExpectTime :{JSON.stringify(this.state.mExpectTime)}</div>*/}
 
 
                 <h2 style={{marginTop: 15}}>新增电汇入金</h2>
                 <BreadcrumbCustom first="财务管理" second="电汇入金" third="新增"/>
-
                 <div style={{
                     display: "flex",
                     justifyContent: 'center',
@@ -584,7 +591,6 @@ class Basic extends Component {
                         minWidth: '800px',
                         paddingTop: '36px', marginLeft: '150px', marginRight: '150px'
                     }}>
-
 
                         <div style={{
                             justifyContent: 'space-around',

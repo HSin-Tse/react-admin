@@ -77,12 +77,13 @@ class Basic extends Component {
     componentDidMount() {
 
 
-        // window.Axios.post('back/addLogHistory', {
-        //     'moduleLog': '财务管理',
-        //     'pageLog': '入金管理',
-        //     'commentLog': '查看了入金管理',
-        //     'typeLog': 2,
-        // })
+        window.Axios.post('/auth/addOperatorLogHistory', {
+            'moduleLog': '财务管理',
+            'pageLog': '入金管理',
+            'commentLog': '入金管理',
+            'typeLog': 2,
+        })
+
 
 
         this.columnss = [

@@ -92,15 +92,13 @@ class Basic extends Component {
 
     componentDidMount() {
 
-        // window.Axios.post('back/addLogHistory', {
-        //     'moduleLog': '财务审核',
-        //     'pageLog': '渠道管理',
-        //     'commentLog': '查看了渠道管理',
-        //     'typeLog': 2,
-        // }).then(function (response) {
-        //
-        //
-        // });
+
+        window.Axios.post('/auth/addOperatorLogHistory', {
+            'moduleLog': '财务审核',
+            'pageLog': '渠道管理',
+            'commentLog': '渠道管理',
+            'typeLog': 2,
+        })
 
 
         this.columns = [
@@ -179,7 +177,8 @@ class Basic extends Component {
                 key: '查看',
                 render: (text, record) => (
                     <div>
-                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal3(record)}>备注</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                onClick={() => this.showOPDAyModal3(record)}>备注</Button>
                     </div>
                 ),
             }, {
@@ -189,12 +188,14 @@ class Basic extends Component {
                 key: '操作',
                 render: (text, record) => (
                     <div>
-                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record)}>日志</Button>
-                        <Button size={'small'} style={{marginLeft: 12,minWidth: 80, background: '#FDD000'}} onClick={() => {
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                onClick={() => this.showOPDAyModal2(record)}>日志</Button>
+                        <Button size={'small'} style={{marginLeft: 12, minWidth: 80, background: '#FDD000'}}
+                                onClick={() => {
 
-                            this.props.history.push('/app/fina/editcha' + record.id)
+                                    this.props.history.push('/app/fina/editcha' + record.id)
 
-                        }} >渠道设置</Button>
+                                }}>渠道设置</Button>
                     </div>
                 ),
             }];
@@ -288,7 +289,7 @@ class Basic extends Component {
     changePage = (page) => {
         console.log('hcia page', page)
         this.setState({
-            current: page ,
+            current: page,
         }, () => {
             this.requestPage()
         })
@@ -386,13 +387,13 @@ class Basic extends Component {
                       extra={[
 
                           <Button
-                              style={{background:'#F6D147'}}
+                              style={{background: '#F6D147'}}
 
                               onClick={() => {
-                              this.props.history.push('/app/fina/editexrate')
+                                  this.props.history.push('/app/fina/editexrate')
 
 
-                          }}>汇率调整</Button>,
+                              }}>汇率调整</Button>,
 
 
                           <Button

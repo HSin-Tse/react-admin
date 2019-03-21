@@ -62,6 +62,12 @@ export default class PotentialUser extends Component {
 
     componentDidMount() {
 
+        window.Axios.post('/auth/addOperatorLogHistory', {
+            moduleLog: '用户管理',
+            pageLog: 'Leads管理',
+            commentLog: 'Leads管理',
+            typeLog: '2',
+        })
         this.columnsLog = [
             {
                 title: '时间',
@@ -614,8 +620,11 @@ export default class PotentialUser extends Component {
         //     'moduleLog': '用户管理',
         //     'pageLog': 'Leads管理',
         //     'commentLog': '查看用户',
-        //     'typeLog': 3,
+        //     'typeLog': 2,
         // });
+
+
+
         this.props.history.push('/app/pass/passopen/user' + record.leadId)
     }
     handleCancel = (e) => {

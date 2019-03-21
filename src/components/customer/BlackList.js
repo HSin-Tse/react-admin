@@ -137,15 +137,15 @@ export default class BlackList extends Component {
 
     componentDidMount() {
 
-        // window.Axios.post('back/addLogHistory', {
-        //     'moduleLog': '用户管理',
-        //     'pageLog': '黑名单',
-        //     'commentLog': '查看了黑名单',
-        //     'typeLog': 2,
-        // }).then(function (response) {
-        //
-        //
-        // });
+
+
+        window.Axios.post('/auth/addOperatorLogHistory', {
+            moduleLog: '用户管理',
+            pageLog: '黑名单',
+            commentLog: '黑名单',
+            typeLog: '2',
+        })
+
 
         document.addEventListener("keydown", this.handleKeyPress, false);
 

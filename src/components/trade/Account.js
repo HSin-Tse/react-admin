@@ -116,6 +116,12 @@ class Basic extends Component {
     componentDidMount() {
         let self = this;
 
+        window.Axios.post('/auth/addOperatorLogHistory', {
+            moduleLog: '交易管理',
+            pageLog: '账户管理',
+            commentLog: '账户管理',
+            typeLog: '2',
+        })
 
         if (localStorage.getItem('infor')) {
 

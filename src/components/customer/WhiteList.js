@@ -55,6 +55,14 @@ export default class WhiteList extends Component {
     }
 
     componentDidMount() {
+
+        window.Axios.post('/auth/addOperatorLogHistory', {
+            moduleLog: '用户管理',
+            pageLog: '白名单',
+            commentLog: '白名单',
+            typeLog: '2',
+        })
+
         addLogWhite()
         document.addEventListener("keydown", this.handleKeyPress, false);
         this.columns = [
@@ -376,101 +384,7 @@ export default class WhiteList extends Component {
 
             <div id="whiteL">
 
-                {/*<Modal*/}
-                    {/*width={370}*/}
-                    {/*title="添加白名单"*/}
-                    {/*visible={this.state.showModaladdWhite}*/}
-                    {/*onOk={this.handleAddWhite}*/}
-                    {/*onCancel={(e) => {*/}
-                        {/*this.setState({*/}
-                            {/*showModaladdWhite: false,*/}
-                        {/*});*/}
-                    {/*}}*/}
-                {/*>*/}
 
-                    {/*<Card*/}
-
-
-                        {/*bordered={true}>*/}
-
-
-                        {/*<div style={{display: 'flex', minHeight: 40}}>*/}
-                            {/*<span style={{minWidth: 100}}>用户姓名：</span>*/}
-                            {/*<Input defaultValue={this.state.NameCn}*/}
-                                   {/*onChange={(e) => {*/}
-                                       {/*this.setState({*/}
-                                           {/*NameCn: e.target.value,*/}
-                                       {/*});*/}
-                                   {/*}}*/}
-                                   {/*style={{minWidth: 160}}*/}
-                                   {/*tagkey="lastNameCn"*/}
-                                   {/*sdsd={'dd'}/>*/}
-                        {/*</div>*/}
-
-                        {/*<div style={{display: 'flex', minHeight: 40}}>*/}
-                            {/*<span style={{minWidth: 100}}>手机号码：</span>*/}
-                            {/*<Input defaultValue={this.state.phoneCn}*/}
-                                   {/*onChange={(e) => {*/}
-                                       {/*this.setState({*/}
-                                           {/*phoneCn: e.target.value,*/}
-                                       {/*});*/}
-                                   {/*}} style={{minWidth: 160}}*/}
-                                   {/*sdsd={'dd'}*/}
-                            {/*/>*/}
-                        {/*</div>*/}
-
-                        {/*<div style={{display: 'flex', minHeight: 40}}>*/}
-                            {/*<span style={{minWidth: 100}}>身份证</span>*/}
-                            {/*<Input defaultValue={this.state.IDCn}*/}
-                                   {/*onChange={(e) => {*/}
-                                       {/*this.setState({*/}
-                                           {/*IDCn: e.target.value,*/}
-                                       {/*});*/}
-                                   {/*}}*/}
-                                   {/*style={{minWidth: 160}}*/}
-                                   {/*sdsd={'dd'}*/}
-                            {/*/>*/}
-                        {/*</div>*/}
-
-                        {/*<div style={{display: 'flex', minHeight: 40}}>*/}
-                            {/*<span style={{minWidth: 100}}>邮箱</span>*/}
-                            {/*<Input defaultValue={this.state.MAilCn}*/}
-                                   {/*onChange={(e) => {*/}
-                                       {/*this.setState({*/}
-                                           {/*MAilCn: e.target.value,*/}
-                                       {/*});*/}
-                                   {/*}}*/}
-                                   {/*style={{minWidth: 160}}*/}
-                                   {/*sdsd={'dd'}*/}
-                            {/*/>*/}
-                        {/*</div>*/}
-                        {/*<div style={{display: 'flex', minHeight: 40}}>*/}
-                            {/*<span style={{minWidth: 100}}>交易账号</span>*/}
-                            {/*<Input defaultValue={this.state.TradeACcountCn}*/}
-                                   {/*onChange={(e) => {*/}
-                                       {/*this.setState({*/}
-                                           {/*TradeACcountCn: e.target.value,*/}
-                                       {/*});*/}
-                                   {/*}}*/}
-                                   {/*style={{minWidth: 160}}*/}
-                                   {/*sdsd={'dd'}*/}
-                            {/*/>*/}
-                        {/*</div>*/}
-
-                        {/*<div style={{display: 'flex', minHeight: 40}}>*/}
-                            {/*<span style={{minWidth: 100}}>操作备注</span>*/}
-                            {/*<TextArea style={{minWidth: 160}}*/}
-                                      {/*value={this.state.changeNoteVCN}*/}
-                                      {/*rows={4}*/}
-                                      {/*onChange={(e) => {*/}
-                                          {/*this.setState({*/}
-                                              {/*changeNoteVCN: e.target.value,*/}
-                                          {/*});*/}
-                                      {/*}}/>*/}
-                        {/*</div>*/}
-
-                    {/*</Card>*/}
-                {/*</Modal>*/}
 
 
                 <Modal
@@ -687,8 +601,6 @@ export default class WhiteList extends Component {
                                     var selectTimeStart = value[0].unix() + '000'
                                     var selectTimeEnd = value[1].unix() + '000'
 
-                                    console.log('hcia selectTimeStart', selectTimeStart)
-                                    console.log('hcia selectTimeEnd', selectTimeEnd)
 
 
                                     this.setState({

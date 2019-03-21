@@ -80,15 +80,13 @@ class Basic extends Component {
     componentDidMount() {
 
 
-        // window.Axios.post('back/addLogHistory', {
-        //     'moduleLog': '审核管理',
-        //     'pageLog': '开户审核',
-        //     'commentLog': '查看了开户审核',
-        //     'typeLog': 2,
-        // }).then(function (response) {
-        //
-        //
-        // });
+
+        window.Axios.post('/auth/addOperatorLogHistory', {
+            moduleLog: '审核管理',
+            pageLog: '开户审核',
+            commentLog: '开户审核',
+            typeLog: '2',
+        })
 
         this.columnsLog = [
             {
@@ -500,11 +498,6 @@ class Basic extends Component {
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
-                {/*<div>isCanOP :{this.state.isCanOP}</div>*/}
-                {/*<div>this.state.availableFlag :{JSON.stringify(this.state.availableFlag)}</div>*/}
-                {/*<div>this.state.availableJeffFlag :{JSON.stringify(this.state.availableJeffFlag)}</div>*/}
-                {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
-                {/*{JSON.stringify(this.props.todps)}*/}
 
 
                 <h2 style={{marginTop: 15}}>

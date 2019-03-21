@@ -139,7 +139,12 @@ class Basic extends Component {
 
     componentDidMount() {
 
-
+        window.Axios.post('/auth/addOperatorLogHistory', {
+            moduleLog: '交易管理',
+            pageLog: '出入金报表',
+            commentLog: '出入金报表',
+            typeLog: '2',
+        })
         this.columnss = [
             {
                 align: 'center',

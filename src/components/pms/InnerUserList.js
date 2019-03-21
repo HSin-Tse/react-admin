@@ -56,16 +56,16 @@ class InnerUserList extends Component {
     }
 
     componentDidMount() {
-        //
-        // window.Axios.post('back/addLogHistory', {
-        //     'moduleLog': '权限管理',
-        //     'pageLog': '内部成员配置',
-        //     'commentLog': '查看了内部成员配置',
-        //     'typeLog': 2,
-        // }).then(function (response) {
-        //
-        //
-        // });
+
+
+
+        window.Axios.post('/auth/addOperatorLogHistory', {
+            'moduleLog': '权限管理',
+            'pageLog': '内部成员配置',
+            'commentLog': '内部成员配置',
+            'typeLog': 2,
+        })
+
 
 
 
