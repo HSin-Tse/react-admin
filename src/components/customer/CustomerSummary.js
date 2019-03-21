@@ -101,6 +101,20 @@ class CustomerSummary extends Component {
         });
     }
 
+
+    addOPSLog = ( com) => {
+        var self = this;
+        window.Axios.post('/auth/addOperatorLogHistory', {
+            moduleLog: '用户管理',
+            pageLog: '用户总表',
+            commentLog: com,
+            typeLog: '2',
+        }).then(function (response) {
+
+            console.log('hcia response', response)
+
+        });
+    }
     addOPLog = (record, com) => {
         var self = this;
         window.Axios.post('/auth/addOperatorLogHistory', {
@@ -143,7 +157,7 @@ class CustomerSummary extends Component {
         //
         // });
 
-        this.addOPLog(this.state, '查看了Leads用户总表')
+        this.addOPSLog( '查看了Leads用户总表')
 
 
         document.addEventListener("keydown", this.handleKeyPressOOP, false);
