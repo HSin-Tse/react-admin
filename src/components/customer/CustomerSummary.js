@@ -86,7 +86,7 @@ class CustomerSummary extends Component {
     getOPLog = (record) => {
         var self = this;
         window.Axios.post('/auth/getOperatorLogHistoryList', {
-            referKey: record.id,
+            referKey: record.belongUserId,
             moduleLog: '用户管理',
             pageLog: '用户总表',
             commentLog: 'test',
@@ -104,7 +104,7 @@ class CustomerSummary extends Component {
     addOPLog = (record, com) => {
         var self = this;
         window.Axios.post('/auth/addOperatorLogHistory', {
-            referKey: record.id,
+            referKey: record.belongUserId,
             moduleLog: '用户管理',
             pageLog: '用户总表',
             commentLog: com,
@@ -301,7 +301,7 @@ class CustomerSummary extends Component {
                         <Button size={'small'} style={{background: '#FDD000'}}
                                 onClick={() => this.goToUserAccountInfo(record)}>開户</Button>
                         <Button disabled={!record.belongUserId} size={'small'} style={{background: '#FDD000'}}
-                                onClick={() => this.goToUserInfo(record.belongUserId)}>行为</Button>
+                                onClick={() => this.goToUserInfo(record)}>行为</Button>
                     </div>
                 )
             }, {
@@ -651,12 +651,11 @@ class CustomerSummary extends Component {
                                 fontFamily: 'PingFangSC-Medium',
                                 fontWeight: 500,
                                 color: 'rgba(51,51,51,1)'
-                            }}>{'查看操作日志'}
+                            }}>{'查看备注'}
                             </span>
                         </div>
                         <Table
                             style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}
-
                             rowKey="id"
                             bordered
                             columns={this.modalOPDayColumns}
@@ -945,6 +944,9 @@ class CustomerSummary extends Component {
                                     //     'typeLog': 3,
                                     // });
 
+                                    this.addOPLog(this.state.nowRECODE, '解绑手机号')
+
+
 
                                     window.Axios.post('star/unBindStarLiveAccount', {
                                         "id": this.state.nowRECODE.starAccountId,
@@ -1021,6 +1023,11 @@ class CustomerSummary extends Component {
         return +str >= 10 ? str : '0' + str
     };
     showModalNote = (record) => {
+
+
+
+        this.addOPLog(record,'添加备注')
+
         let belongUserId = record.belongUserId
         var self = this
 
@@ -1192,12 +1199,18 @@ class CustomerSummary extends Component {
     searchSelect = () => {
         this.requestData()
     }
-    goToUserInfo = (belongUserId) => {
-        this.props.history.push('/app/customer/CustomerUserInfo' + belongUserId)
+    goToUserInfo = (record) => {
+
+        this.addOPLog(record,'查看行为')
+
+        this.props.history.push('/app/customer/CustomerUserInfo' + record.belongUserId)
 
     }
     goToUserAccountInfo = (record) => {
 
+
+
+        this.addOPLog(record,'查看開户')
         var gogo = 'user'
         this.props.history.push('/app/pass/passopen/' + gogo + record.leadId)
 
@@ -1235,6 +1248,7 @@ class CustomerSummary extends Component {
 
         // resetSeretModal5
         console.log('hcia record', record)
+        this.addOPLog(record,'重置密码')
 
         let belongUserId = record.belongUserId
 
