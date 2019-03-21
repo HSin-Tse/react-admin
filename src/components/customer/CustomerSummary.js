@@ -39,6 +39,81 @@ class CustomerSummary extends Component {
             NoteModalVisible2: false,
             modal2Visible1: false,
         };
+
+        this.columnsLogV2 = [
+            {
+                title: '时间',
+                dataIndex: 'createDate',
+                key: 'operationDiary_Date',
+                align: 'center',
+                render: (text, record) => (
+                    <span>{record.date}</span>),
+            }, {
+                title: 'IP',
+                dataIndex: 'IP',
+                key: 'IP',
+                align: 'center',
+                render: (text, record) => (
+                    <span>{record.userIP}</span>),
+            }, {
+                title: '操作人',
+                align: 'center',
+                dataIndex: 'bkUserName',
+                key: 'operationDiary_User',
+                render: (text, record) => (
+                    <span>{record.bkUserName}</span>),
+            }, {
+                title: '操作',
+                align: 'center',
+                dataIndex: 'comment',
+                key: 'operationDiary_Status',
+                render: (text, record) => (
+                    <span>{record.comment}</span>),
+            }]
+
+    }
+
+    showOPDAyModal2 = (recodrd) => {
+
+        // this.requestUserCommentList(recodrd)
+        this.addOPLog(recodrd, '查看操作日志')
+        this.getOPLog(recodrd)
+        this.setState({
+            modal2OPDAYVisible: true,
+        });
+    };
+
+    getOPLog = (record) => {
+        var self = this;
+        window.Axios.post('/auth/getOperatorLogHistoryList', {
+            referKey: record.id,
+            moduleLog: '用户管理',
+            pageLog: '用户总表',
+            commentLog: 'test',
+            typeLog: '7',
+        }).then(function (response) {
+
+            console.log('hcia response', response)
+            self.setState({
+                totalpageComments: response.data.data.totalPage,
+                operationDiaryHistoryV2: response.data.data.list,
+            });
+        });
+    }
+
+    addOPLog = (record, com) => {
+        var self = this;
+        window.Axios.post('/auth/addOperatorLogHistory', {
+            referKey: record.id,
+            moduleLog: '用户管理',
+            pageLog: '用户总表',
+            commentLog: com,
+            typeLog: '7',
+        }).then(function (response) {
+
+            console.log('hcia response', response)
+
+        });
     }
 
     handleKeyPressOOP = (event) => {
@@ -236,7 +311,8 @@ class CustomerSummary extends Component {
                 align: 'center',
                 render: (text, record) => (
                     <div style={{display: 'flex', justifyContent: 'space-around'}}>
-
+                        <Button size={'small'} style={{ background: '#FDD000'}}
+                                onClick={() => this.showOPDAyModal2(record)}>日志</Button>
 
                         <Button disabled={!record.belongUserId || true} size={'small'}
                                 style={{
@@ -258,7 +334,6 @@ class CustomerSummary extends Component {
                     </div>
                 ),
             }, {
-                //账户状态：1:正常（可冻结） 2:禁止登陆（可解冻） 3:禁止交易（可解冻）
                 title: '其他',
                 key: '其他',
                 dataIndex: '其他',
@@ -379,6 +454,58 @@ class CustomerSummary extends Component {
                         </Card>
                     </div>
                 </div>
+
+
+                <Modal
+                    bodyStyle={{
+                        background: 'white',
+                        padding: 0,
+                        margin: 0,
+                    }}
+                    onCancel={() => {
+                        this.setState({
+                            visible: false,
+                            modal2OPDAYVisible: false,
+                        });
+                    }}
+                    closable={false}
+                    footer={null}
+                    visible={this.state.modal2OPDAYVisible}
+                >
+
+                    <div style={{borderRadius: '4px'}}>
+                        <div style={{
+                            alignItems: 'center',
+                            justifyContent: 'center', height: 48, display: 'flex', padding: 0, background: '#FDD000'
+                        }}>
+                            <span style={{
+                                fontSize: 18,
+                                fontFamily: 'PingFangSC-Medium',
+                                fontWeight: 500,
+                                color: 'rgba(51,51,51,1)'
+                            }}>{'查看操作日志'}
+                            </span>
+                        </div>
+                        <Table
+                            style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}
+                            rowKey="id"
+                            bordered
+                            columns={this.columnsLogV2}
+                            dataSource={this.state.operationDiaryHistoryV2}
+                            loading={this.state.loadingComment}
+                            pagination={{
+                                current: this.state.currentComment,
+                                total: this.state.totalpageComments * this.state.pgsize,
+                                pageSize: this.state.pgsize,
+                                onChange: this.changePageComment,
+                            }}
+                        />
+
+
+                    </div>
+
+                </Modal>
+
                 <h2 style={{marginTop: 15}}>
                     用户总表
                 </h2>
@@ -975,7 +1102,6 @@ class CustomerSummary extends Component {
         })
 
 
-        console.log('hcia record', record)
 
         this.state.checkedValues.length = 0
         this.setState({
@@ -1071,14 +1197,10 @@ class CustomerSummary extends Component {
 
     }
     goToUserAccountInfo = (record) => {
-        console.log('hcia record', record)
 
         var gogo = 'user'
         this.props.history.push('/app/pass/passopen/' + gogo + record.leadId)
 
-        // route: '/app/pass/passopenrs/detail:id',
-        // var gogo = record.status === 0 ? 'detail' : (record.status === 1) ? 'user' : 'user'
-        // this.props.history.push('/app/pass/passopen/' + gogo + record.id)
 
     }
 

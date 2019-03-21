@@ -164,6 +164,11 @@ class Basic extends Component {
             modal2OPDAYVisible: true,
         });
     };
+
+
+
+
+
     requestPage = () => {
         let self = this
         self.setState({
@@ -358,6 +363,8 @@ class Basic extends Component {
                     <div>
                         <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
                                 onClick={() => this.showOPDAyModal2(record)}>日志</Button>
+
+
                         <Button size={'small'} style={{
                             minWidth: 80,
                             background: '#FDD000',
