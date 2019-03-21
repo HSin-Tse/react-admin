@@ -303,7 +303,7 @@ class Basic extends Component {
                 key: 'bankCode',
                 render: (text, record) => (
                     <span>{record.bankCode}</span>)
-            } , {
+            }, {
                 align: 'center',
                 title: '开户行',
                 label: '开户行',
@@ -311,7 +311,7 @@ class Basic extends Component {
                 key: 'bankName',
                 render: (text, record) => (
                     <span>{record.bankName}</span>)
-            } , {
+            }, {
                 align: 'center',
                 title: '支行信息',
                 label: '支行信息',
@@ -319,7 +319,7 @@ class Basic extends Component {
                 key: 'accountName',
                 render: (text, record) => (
                     <span>{record.accountName}</span>)
-            } , {
+            }, {
                 align: 'center',
                 title: '开户行所在省',
                 label: '开户行所在省',
@@ -560,7 +560,6 @@ class Basic extends Component {
             typeLog: '18',
         }).then(function (response) {
 
-            console.log('hcia response', response)
             self.setState({
                 totalpageComments: response.data.data.totalPage,
                 operationDiaryHistory: response.data.data.list,
@@ -658,19 +657,13 @@ class Basic extends Component {
         window.Axios.post('finance/getDepositWithdrawReport', {
             'pageSize': self.state.pgsize,
             'pageNo': self.state.current,
-
         }).then(function (response) {
-
-
-            // console.log('hcia response.data.data.list?[]:response.data.data.list', response.data.data.list == null ? [] : response.data.data.list)
             self.setState({
                     totalPage: response.data.data.totalPage,
                     loading: false,
                     userList: response.data.data.list == null ? [] : response.data.data.list
                 }
             );
-
-
         })
     }
     changePage = (page) => {
@@ -692,14 +685,12 @@ class Basic extends Component {
         });
     }
     handleCancel = (e) => {
-        console.log(e);
         this.setState({
             visible: false,
             visibleOpM: false,
         });
     };
     onSelectChange = (selectedRowKeys) => {
-        console.log('hcia', 'selectedRowKeys changed: ', selectedRowKeys);
         this.setState({selectedRowKeys});
     }
 
@@ -707,7 +698,6 @@ class Basic extends Component {
         return (
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
-                {/*<div>operationDiaryHistory query :{JSON.stringify(this.state.operationDiaryHistory)}</div>*/}
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
                     <span className="sw-btn dark-white" onClick={this._switcherOn}>
                      <Icon type="setting" className="text-dark"/>
@@ -760,7 +750,6 @@ class Basic extends Component {
                                 onChange={(value, dateString) => {
 
 
-                                    console.log('hcia value', value)
 
 
                                     if (value.length === 0) {
@@ -775,8 +764,6 @@ class Basic extends Component {
                                         var selectTimeStart = value[0].unix() + '000'
                                         var selectTimeEnd = value[1].unix() + '000'
 
-                                        console.log('hcia selectTimeStart', selectTimeStart)
-                                        console.log('hcia selectTimeEnd', selectTimeEnd)
 
 
                                         this.setState({
@@ -967,7 +954,6 @@ class Basic extends Component {
                                    headers={this.columnss}>
                               <Button onClick={() => {
 
-                                  console.log('hcia Button')
 
                                   window.Axios.post('/auth/addOperatorLogHistory', {
                                       moduleLog: '交易管理',
@@ -976,7 +962,6 @@ class Basic extends Component {
                                       typeLog: '18',
                                   }).then(function (response) {
 
-                                      console.log('hcia response', response)
 
                                   });
 
