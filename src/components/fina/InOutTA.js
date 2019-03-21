@@ -572,10 +572,6 @@ class Basic extends Component {
                 });
             });
 
-            // self.setState({
-            //     visibleB: true,
-            //     loading: false,
-            // });
         });
     }
 
