@@ -9,16 +9,11 @@ import {
     message,
     Card,
     Icon,
-    Popconfirm,
     Checkbox,
-    Row,
-    Col,
-    Select
 } from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 
 import classNames from "classnames";
-// import CustomerUserInfo from "./CustomerUserInfo";
 
 const {RangePicker} = DatePicker;
 const {TextArea} = Input;
@@ -242,11 +237,7 @@ class CustomerSummary extends Component {
                 render: (text, record) => (
                     <div style={{display: 'flex', justifyContent: 'space-around'}}>
 
-                        {/*<Popconfirm style={{}} title={record.accountStatus === 1 ? '确认凍結' : '确认解冻'}*/}
-                        {/*onConfirm={() => this.forzenAccount(record)} okText="Yes"*/}
-                        {/*cancelText="No">*/}
-                        {/**/}
-                        {/*</Popconfirm>*/}
+
                         <Button disabled={!record.belongUserId || true} size={'small'}
                                 style={{
                                     display: !record.belongUserId ? 'none' : '',
@@ -278,8 +269,6 @@ class CustomerSummary extends Component {
                                 onClick={() => this.showModalNote(record)}>添加备注</Button>
 
 
-                        {/*<Button disabled={!record.belongUserId} size={'small'} style={{background: '#FDD000'}}*/}
-                                {/*onClick={() => this.showModalOPDAY(record)}>日志</Button>*/}
                     </div>
                 ),
             }];
@@ -775,8 +764,6 @@ class CustomerSummary extends Component {
                                     <Checkbox value={"身份证号"}>身份证号</Checkbox>
                                     <Checkbox value={"身份证正本"}>身份证正本</Checkbox>
 
-                                    {/*<div style={{display: 'flex', minHeight: 40, align: 'center'}}>*/}
-                                    {/*</div>*/}
                                 </Checkbox.Group>
 
                             </div>
@@ -893,7 +880,7 @@ class CustomerSummary extends Component {
     };
 
     timestampToTime = (timestamp) => {
-        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
+        const dateObj = new Date(+timestamp) 
         const year = dateObj.getFullYear() // 获取年，
         const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
         const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
