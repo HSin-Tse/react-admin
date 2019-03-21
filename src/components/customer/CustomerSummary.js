@@ -143,6 +143,9 @@ class CustomerSummary extends Component {
         //
         // });
 
+        this.addOPLog(this.state, '查看了Leads用户总表')
+
+
         document.addEventListener("keydown", this.handleKeyPressOOP, false);
 
         this.requestData()
