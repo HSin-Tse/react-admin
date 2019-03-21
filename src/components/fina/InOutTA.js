@@ -750,8 +750,6 @@ class Basic extends Component {
                                 onChange={(value, dateString) => {
 
 
-
-
                                     if (value.length === 0) {
 
                                         this.setState({
@@ -763,7 +761,6 @@ class Basic extends Component {
                                     } else {
                                         var selectTimeStart = value[0].unix() + '000'
                                         var selectTimeEnd = value[1].unix() + '000'
-
 
 
                                         this.setState({
@@ -932,12 +929,8 @@ class Basic extends Component {
                                     NoteModalVisible2: false,
                                 });
                             }} style={{borderRadius: '4px', width: '180px', height: '40px'}}> 取消 </Button>
-
                         </div>
-
                     </div>
-
-
                 </Modal>
 
 
@@ -953,19 +946,12 @@ class Basic extends Component {
                           <CSVLink filename={new Date() + "出入金管理报表.csv"} data={this.state.userList}
                                    headers={this.columnss}>
                               <Button onClick={() => {
-
-
                                   window.Axios.post('/auth/addOperatorLogHistory', {
                                       moduleLog: '交易管理',
                                       pageLog: '出入金报表',
                                       commentLog: '下载当前列表',
                                       typeLog: '18',
-                                  }).then(function (response) {
-
-
-                                  });
-
-
+                                  })
                               }
                               }>下载当前列表</Button>
                           </CSVLink>
@@ -981,16 +967,13 @@ class Basic extends Component {
                            scroll={{x: 1600}}
                            bordered
                            loading={this.state.loading}
-                           pagination={{  // 分页
+                           pagination={{
                                total: this.state.pgsize * this.state.totalPage,
                                pageSize: this.state.pgsize,
                                onChange: this.changePage,
                            }}
                     />
-
-
                 </Card>
-
             </div>
 
         )
