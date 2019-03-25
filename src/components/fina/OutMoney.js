@@ -576,9 +576,9 @@ class Basic extends Component {
         window.Axios.post('finance/getWithdrawHistory', {
             'pageSize': self.state.pgsize,
 
-            orderNo: this.state.selectOrderNo,
+            merOrderNo: this.state.selectOrderNo,
             name: this.state.selectName,
-            accountNo: this.state.accountNo,
+            starClientAccount: this.state.accountNo,
             startTime: this.state.selectTimeStart,
             endTime: this.state.selectTimeEnd,
 
