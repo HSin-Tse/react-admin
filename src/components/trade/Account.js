@@ -451,7 +451,7 @@ class Basic extends Component {
             email: this.state.selectMail,
             mobile: this.state.selectPhoneF,
             nationalId: this.state.selectID,
-            starClientAccount: this.state.starClientAccount,
+            accountNo: this.state.accountNo,
             startTime: this.state.selectTimeStart,
             endTime: this.state.selectTimeEnd,
         }).then(function (response) {
@@ -799,13 +799,13 @@ class Basic extends Component {
                             extra={<Button type="primary" onClick={() => {
                                 let self = this
                                 this.setState({
-                                    selectMail: '',
-                                    selectID: '',
-                                    startTime: '',
-                                    selectPhoneF: '',
-                                    starClientAccount: '',
-                                    selectTimeStart: '',
-                                    selectTimeEnd: '',
+                                    selectMail:undefined,
+                                    selectID: undefined,
+                                    startTime: undefined,
+                                    selectPhoneF: undefined,
+                                    accountNo: undefined,
+                                    selectTimeStart: undefined,
+                                    selectTimeEnd: undefined,
                                     filterTimeFalue: null
                                 }, () => {
                                     self.requestPage()
@@ -830,11 +830,11 @@ class Basic extends Component {
                                 });
                             }} style={{marginBottom: 10}} placeholder="身份证号"/>
 
-                            <Input value={this.state.starClientAccount} onChange={(e) => {
+                            <Input value={this.state.accountNo} onChange={(e) => {
                                 this.setState({
-                                    starClientAccount: e.target.value,
+                                    accountNo: e.target.value,
                                 });
-                            }} style={{marginBottom: 10}} placeholder="账户"/>
+                            }} style={{marginBottom: 10}} placeholder="账户管理"/>
                             <RangePicker
 
                                 showToday
