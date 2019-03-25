@@ -168,7 +168,29 @@ class Basic extends Component {
 
 
 
-
+    requestPageS = () => {
+        let self = this
+        self.setState({
+                loading: true,
+            }
+        );
+        window.Axios.post('finance/getLeverageApplyList', {
+            'pageSize': self.state.pgsize,
+            email: this.state.selectMail,
+            mobile: this.state.selectPhoneF,
+            nationalId: this.state.selectID,
+            accountNo: this.state.accountNo,
+            startTime: this.state.selectTimeStart,
+            endTime: this.state.selectTimeEnd,
+        }).then(function (response) {
+            self.setState({
+                    totalPage: response.data.data.totalPage,
+                    loading: false,
+                    userList: response.data.data.list
+                }
+            );
+        })
+    }
 
     requestPage = () => {
         let self = this
@@ -182,7 +204,7 @@ class Basic extends Component {
             email: this.state.selectMail,
             mobile: this.state.selectPhoneF,
             nationalId: this.state.selectID,
-            starClientAccount: this.state.starClientAccount,
+            accountNo: this.state.accountNo,
             startTime: this.state.selectTimeStart,
             endTime: this.state.selectTimeEnd,
         }).then(function (response) {
@@ -586,7 +608,7 @@ class Basic extends Component {
                                     selectID: '',
                                     startTime: '',
                                     selectPhoneF: '',
-                                    starClientAccount: '',
+                                    accountNo: '',
                                     selectTimeStart: '',
                                     selectTimeEnd: '',
                                     filterTimeFalue: null
@@ -613,11 +635,11 @@ class Basic extends Component {
                                 });
                             }} style={{marginBottom: 10}} placeholder="身份证号"/>
 
-                            <Input value={this.state.starClientAccount} onChange={(e) => {
+                            <Input value={this.state.accountNo} onChange={(e) => {
                                 this.setState({
-                                    starClientAccount: e.target.value,
+                                    accountNo: e.target.value,
                                 });
-                            }} style={{marginBottom: 10}} placeholder="账户"/>
+                            }} style={{marginBottom: 10}} placeholder="交易账号"/>
                             <RangePicker
 
                                 showToday
@@ -672,7 +694,7 @@ class Basic extends Component {
                                 }}
                             />
 
-                            <Button onClick={() => this.requestPage()} style={{marginTop: 15}} type="primary"
+                            <Button onClick={() => this.requestPageS()} style={{marginTop: 15}} type="primary"
                                     icon="search">Search</Button>
 
                         </Card>

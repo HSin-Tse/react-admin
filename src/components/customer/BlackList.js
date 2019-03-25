@@ -640,7 +640,7 @@ export default class BlackList extends Component {
                                 this.setState({
                                     starClientAccount: e.target.value,
                                 });
-                            }} style={{marginBottom: 10}} placeholder="账户"/>
+                            }} style={{marginBottom: 10}} placeholder="交易账号"/>
                             <RangePicker
 
                                 showToday

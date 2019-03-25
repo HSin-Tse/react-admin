@@ -572,11 +572,11 @@ class Basic extends Component {
                                 });
                             }} style={{marginBottom: 10}} placeholder="身份证号"/>
 
-                            <Input value={this.state.starClientAccount} onChange={(e) => {
-                                this.setState({
-                                    starClientAccount: e.target.value,
-                                });
-                            }} style={{marginBottom: 10}} placeholder="账户"/>
+                            {/*<Input value={this.state.starClientAccount} onChange={(e) => {*/}
+                                {/*this.setState({*/}
+                                    {/*starClientAccount: e.target.value,*/}
+                                {/*});*/}
+                            {/*}} style={{marginBottom: 10}} placeholder="账户"/>*/}
                             <RangePicker
 
                                 showToday
