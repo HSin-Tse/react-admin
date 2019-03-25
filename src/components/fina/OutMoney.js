@@ -576,9 +576,9 @@ class Basic extends Component {
         window.Axios.post('finance/getWithdrawHistory', {
             'pageSize': self.state.pgsize,
 
-            orderNo: this.state.delectOrderNo,
+            orderNo: this.state.selectOrderNo,
             name: this.state.selectName,
-            accountNo: this.state.selectAccount,
+            accountNo: this.state.accountNo,
             startTime: this.state.selectTimeStart,
             endTime: this.state.selectTimeEnd,
 
@@ -693,7 +693,7 @@ class Basic extends Component {
                                 this.setState({
                                     selectOrderNo: undefined,
                                     selectName: undefined,
-                                    selectAccount: undefined,
+                                    accountNo: undefined,
                                     selectTimeStart: undefined,
                                     selectTimeEnd: undefined,
                                     filterTimeFalue: null
@@ -710,9 +710,9 @@ class Basic extends Component {
                                     selectName: e.target.value,
                                 });
                             }} style={{marginBottom: 10}} placeholder="姓名"/>
-                            <Input value={this.state.selectAccount} onChange={(e) => {
+                            <Input value={this.state.accountNo} onChange={(e) => {
                                 this.setState({
-                                    selectAccount: e.target.value,
+                                    accountNo: e.target.value,
                                 });
                             }} style={{marginBottom: 10}} placeholder="交易账户"/>
 

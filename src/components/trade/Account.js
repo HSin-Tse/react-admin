@@ -834,7 +834,7 @@ class Basic extends Component {
                                 this.setState({
                                     accountNo: e.target.value,
                                 });
-                            }} style={{marginBottom: 10}} placeholder="账户管理"/>
+                            }} style={{marginBottom: 10}} placeholder="交易账号"/>
                             <RangePicker
 
                                 showToday
