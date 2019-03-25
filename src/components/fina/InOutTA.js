@@ -635,11 +635,10 @@ class Basic extends Component {
         let self = this
         window.Axios.post('finance/getDepositWithdrawReport', {
             'pageSize': self.state.pgsize,
-            'pageNo': self.state.current,
-            email: this.state.selectMail,
-            mobile: this.state.selectPhoneF,
-            nationalId: this.state.selectID,
-            accountNo: this.state.starClientAccount,
+
+            orderNo: this.state.selectOrderNo,
+            name: this.state.selectName,
+            accountNo: this.state.accountNo,
             startTime: this.state.selectTimeStart,
             endTime: this.state.selectTimeEnd,
         }).then((response) => {
@@ -652,6 +651,8 @@ class Basic extends Component {
         })
 
     }
+
+
     requestPage = () => {
 
         let self = this
@@ -704,7 +705,11 @@ class Basic extends Component {
             <div>
                 {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
-                    <span className="sw-btn dark-white" onClick={this._switcherOn}>
+                    <span className="sw-btn dark-white" onClick={() => {
+                        this.setState({
+                            switcherOn: !this.state.switcherOn
+                        })
+                    }}>
                      <Icon type="setting" className="text-dark"/>
                     </span>
                     <div style={{width: 270}}>
@@ -713,47 +718,46 @@ class Basic extends Component {
                             extra={<Button type="primary" onClick={() => {
                                 let self = this
                                 this.setState({
-                                    selectMail: undefined,
-                                    selectID: undefined,
-                                    startTime: undefined,
-                                    selectPhoneF: undefined,
-                                    starClientAccount: undefined,
+                                    selectOrderNo: undefined,
+                                    selectName: undefined,
+                                    accountNo: undefined,
                                     selectTimeStart: undefined,
                                     selectTimeEnd: undefined,
                                     filterTimeFalue: null
                                 }, () => {
                                     self.requestPage()
                                 })
-                            }}>清除条件</Button>}>
-                            <Input value={this.state.selectMail} onChange={(e) => {
-                                this.setState({selectMail: e.target.value})
-                            }} style={{marginBottom: 10}} placeholder="邮箱"/>
+                            }}
+                            >清除条件</Button>}
+                        >
 
-                            <Input value={this.state.selectPhoneF} onChange={(e) => {
-                                this.setState({
-                                    selectPhoneF: e.target.value,
-                                });
-                            }} style={{marginBottom: 10}} placeholder="手机号"/>
 
-                            <Input value={this.state.selectID} onChange={(e) => {
+                            <Input value={this.state.selectName} onChange={(e) => {
                                 this.setState({
-                                    selectID: e.target.value,
+                                    selectName: e.target.value,
                                 });
-                            }} style={{marginBottom: 10}} placeholder="身份证号"/>
+                            }} style={{marginBottom: 10}} placeholder="姓名"/>
+                            <Input value={this.state.accountNo} onChange={(e) => {
+                                this.setState({
+                                    accountNo: e.target.value,
+                                });
+                            }} style={{marginBottom: 10}} placeholder="交易账户"/>
 
-                            <Input value={this.state.starClientAccount} onChange={(e) => {
+                            <Input value={this.state.selectOrderNo} onChange={(e) => {
                                 this.setState({
-                                    starClientAccount: e.target.value,
+                                    selectOrderNo: e.target.value,
                                 });
-                            }} style={{marginBottom: 10}} placeholder="交易账号"/>
+                            }} style={{marginBottom: 10}} placeholder="订单编号"/>
+
+
                             <RangePicker
+
                                 showToday
                                 style={{width: '100%'}}
                                 showTime={{format: 'YYYY-MM-DD HH:mm:ss'}}
                                 format="YYYY-MM-DD HH:mm:ss"
                                 placeholder={['开始时间', '结束时间']}
                                 onChange={(value, dateString) => {
-
 
                                     if (value.length === 0) {
 
@@ -767,7 +771,6 @@ class Basic extends Component {
                                         var selectTimeStart = value[0].unix() + '000'
                                         var selectTimeEnd = value[1].unix() + '000'
 
-
                                         this.setState({
                                             filterTimeFalue: value,
                                             selectTimeStart: selectTimeStart,
@@ -776,12 +779,12 @@ class Basic extends Component {
                                         });
                                     }
 
-
                                 }}
                                 value={this.state.filterTimeFalue}
                                 onOk={(value) => {
                                     var selectTimeStart = value[0].unix() + '000'
                                     var selectTimeEnd = value[1].unix() + '000'
+
                                     this.setState({
                                         filterTimeFalue: value,
                                         selectTimeStart: selectTimeStart,
@@ -795,6 +798,8 @@ class Basic extends Component {
                                     icon="search">Search</Button>
 
                         </Card>
+
+
                     </div>
                 </div>
 
