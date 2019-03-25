@@ -1,9 +1,5 @@
 export default {
-    menus: [ // 菜单相关路由
-
-
-
-
+    menus: [
         {
             tk: 'dash', key: '/app/dashboard/index',
             title: '欢迎', icon: 'user', component: 'Dashboard'
@@ -53,9 +49,6 @@ export default {
                     component: 'BlackList',
                     pg: '3'
                 },
-
-
-                // {tk: 'SERVICE_GROUP_MGMT', key: '/app/trade/depart', title: '組管理', component: 'TradeDepart'},
             ],
         },
         {
@@ -69,12 +62,23 @@ export default {
                 {tk: 'CHANNEL_MGMT', key: '/app/fina/cha', title: '渠道管理', component: 'ChannelMY'},
             ],
         },
+
         {
             tk: 'SERVICE_GROUP_MGMT', key: '/app/pms', title: '权限管理', icon: 'safety',
             subs: [
                 {tk: 'SERVICE_GROUP_MGMT', key: '/app/pms/inneruserlist', title: '内部成员配置', component: 'InnerUserList'},
                 {tk: 'ROLE_MGMT', key: '/app/pms/roleset', title: '角色配置', component: 'RoleSet'},
                 {tk: 'ROLE_MGs', key: '/app/pms/oplog', title: '操作日志', component: 'OpLog'},
+                // {tk:'OPERATION_HISTORY,key: '/app/pms/rolelog', title: '操作日志', component: 'RoleLog'},
+
+            ],
+        },
+        {
+            tk: 'SERVICE_GROUP_MGMT', key: '/app/pms', title: '营销管理', icon: 'safety',
+            subs: [
+                {tk: 'SERVICE_GROUP_MGMT', key: '/app/pms/inneruserlist', title: '渠道管理', component: 'InnerUserList'},
+                {tk: 'ROLE_MGMT', key: '/app/pms/roleset', title: '客维管理', component: 'RoleSet'},
+                {tk: 'ROLE_MGs', key: '/app/pms/oplog', title: '互推管理', component: 'OpLog'},
                 // {tk:'OPERATION_HISTORY,key: '/app/pms/rolelog', title: '操作日志', component: 'RoleLog'},
 
             ],
@@ -93,12 +97,12 @@ export default {
                 icon: 'star',
                 component: 'TeleMoneyThird'
             }, {
-                route: '/app/fina/d/tes:id',
-                tk: 'wwwew',
-                title: '入金审核',
-                icon: 'star',
-                component: 'TeleMoneySecond'
-            },
+            route: '/app/fina/d/tes:id',
+            tk: 'wwwew',
+            title: '入金审核',
+            icon: 'star',
+            component: 'TeleMoneySecond'
+        },
             {
                 route: '/app/pass/passopen/detail:id',
                 tk: 'OPEN_AUDIT_LIST',
