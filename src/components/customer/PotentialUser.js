@@ -1030,11 +1030,11 @@ export default class PotentialUser extends Component {
 
 
 
-                            {/*<Input value={this.state.starClientAccount} onChange={(e) => {*/}
-                                {/*this.setState({*/}
-                                    {/*starClientAccount: e.target.value,*/}
-                                {/*});*/}
-                            {/*}} style={{marginBottom: 10}} placeholder="模拟账号"/>*/}
+                            <Input value={this.state.starClientAccount} onChange={(e) => {
+                                this.setState({
+                                    starClientAccount: e.target.value,
+                                });
+                            }} style={{marginBottom: 10}} placeholder="模拟账户"/>
                             <RangePicker
 
                                 showToday
