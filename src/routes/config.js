@@ -74,11 +74,11 @@ export default {
             ],
         },
         {
-            tk: 'SERVICE_GROUP_MGMT', key: '/app/pms', title: '营销管理', icon: 'safety',
+            tk: 'SERVICE_GROUP_MGMT', key: '/app/mar', title: '营销管理', icon: 'safety',
             subs: [
-                {tk: 'SERVICE_GROUP_MGMT', key: '/app/pms/inneruserlist', title: '渠道管理', component: 'InnerUserList'},
-                {tk: 'ROLE_MGMT', key: '/app/pms/roleset', title: '客维管理', component: 'RoleSet'},
-                {tk: 'ROLE_MGs', key: '/app/pms/oplog', title: '互推管理', component: 'OpLog'},
+                {tk: 'SERVICE_GROUP_MGMT', key: '/app/mar/cha', title: '渠道管理', component: 'InnerUserList'},
+                {tk: 'ROLE_MGMT', key: '/app/mar/cus', title: '客维管理', component: 'RoleSet'},
+                {tk: 'ROLE_MGs', key: '/app/mar/puu', title: '互推管理', component: 'OpLog'},
                 // {tk:'OPERATION_HISTORY,key: '/app/pms/rolelog', title: '操作日志', component: 'RoleLog'},
 
             ],
