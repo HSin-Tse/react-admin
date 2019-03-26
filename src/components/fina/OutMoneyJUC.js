@@ -52,6 +52,7 @@ class Basic extends Component {
             name: '',
             orderNo: '',
             broker: '',
+            bankCardStatus: '',
             province: '',
             city: '',
             bankName: '',
@@ -107,6 +108,7 @@ class Basic extends Component {
                 orderNo: response.data.data.orderNo,
                 phoneNumber: response.data.data.phoneNumber,
                 broker: response.data.data.broker,
+                bankCardStatus: response.data.data.bankCardStatus,
                 province: response.data.data.province,
                 city: response.data.data.city,
                 status: response.data.data.status,
@@ -539,6 +541,10 @@ class Basic extends Component {
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}>经纪商</span>
                                         <span style={{fontSize: '13px'}}>{this.state.broker}</span>
+                                    </div>
+                                    <div style={ssdds}>
+                                        <span style={{fontSize: '13px'}}>银行卡状态</span>
+                                        <span style={{fontSize: '13px'}}>{this.state.bankCardStatus}</span>
                                     </div>
                                     <div style={ssdds}>
                                         <span style={{fontSize: '13px'}}>支付方式</span>
