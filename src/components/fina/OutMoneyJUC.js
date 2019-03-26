@@ -27,6 +27,7 @@ class Basic extends Component {
     pad = (str) => {
         return +str >= 10 ? str : '0' + str
     };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -129,28 +130,23 @@ class Basic extends Component {
                 }).then(function (response) {
 
 
-                    console.log('hcia response.data.data.list?[]:response.data.data.list' , response.data.data.list==null?[]:response.data.data.list)
+                    console.log('hcia response.data.data.list?[]:response.data.data.list', response.data.data.list == null ? [] : response.data.data.list)
                     self.setState({
                             totalPage: response.data.data.totalPage,
-                            userList: response.data.data.list==null?[]:response.data.data.list
+                            userList: response.data.data.list == null ? [] : response.data.data.list
                         }
                     );
 
 
                 })
-                // self.setState({
-                //
-                //     theComment: self.state.commentList[2] ? self.state.commentList[2].comment : ''
-                // })
                 var sss = self.state.commentList.find(function (item, index, array) {
                     return item.type == '19';
                 });
-                console.log('hcia sss' , sss)
+                console.log('hcia sss', sss)
                 self.setState({
 
 
                     theComment: sss ? sss.comment : ''
-                    // theComment: self.state.commentList[0] ? self.state.commentList[0].comment : ''
                 })
 
                 if ((this.state.status == 0 || this.state.status == 2 || this.state.status == 3 || this.state.status == 4 || this.state.status == 6 || this.state.status == 7 || this.state.status == 8 || this.state.status == 9)) {
