@@ -55,6 +55,7 @@ import OpLog from './pms/OpLog'
 import AddRole from './pms/AddRole'
 import EditRole from './pms/EditRole'
 import InnerUserList from './pms/InnerUserList'
+import CA from './fina/CA'
 
 
 const WysiwygBundle = Loadable({ // 按需加载富文本配置
@@ -65,6 +66,7 @@ const WysiwygBundle = Loadable({ // 按需加载富文本配置
 export default {
     BasicForm,
     InnerUserList,
+    CA,
     RoleSet,
     OpLog,
     AdvancedTable,
