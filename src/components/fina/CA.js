@@ -11,7 +11,6 @@ import {CSVLink} from "react-csv";
 import classNames from "classnames";
 
 const {TextArea} = Input;
-const {RangePicker} = DatePicker;
 
 class Basic extends Component {
 
