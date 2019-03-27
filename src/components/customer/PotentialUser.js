@@ -592,7 +592,6 @@ export default class PotentialUser extends Component {
         }).catch(error => {
 
 
-            console.log('hcia error', error)
 
 
             var logRouter = ''

@@ -131,7 +131,6 @@ class Basic extends Component {
 
 
             var menuInfor = JSON.parse(localStorage.getItem('infor'))
-            console.log('hcia menuInfor', menuInfor)
 
             if (menuInfor.superFlag === 1) {
 
@@ -148,7 +147,6 @@ class Basic extends Component {
                     return this.props.tk === item.key;
                 });
 
-                console.log('hcia availableFlag', isCanOp.availableFlag, (isCanOp.availableFlag === 1))
                 // console.log('hcia isCanOp', isCanOp.availableFlag)
                 self.setState({
                     availableFlag: isCanOp.availableFlag === 1,
@@ -159,7 +157,6 @@ class Basic extends Component {
                     // console.log('hcia  this.props', this.props)
                     return 'LIVE_ACCOUNT_MGMT' === item.key;
                 });
-                console.log('hcia isCanOpJ', isCanOpJ)
 
 
                 if (isCanOpJ != undefined) {

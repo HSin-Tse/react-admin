@@ -370,8 +370,6 @@ class InnerUserList extends Component {
     newUSer = (record) => {
         // this.props.history.push('/app/pms/adduser' + 0)
         if (record) {
-            console.log('hcia record', record)
-            console.log('hcia record.id', record.id)
             this.props.history.push('/app/pms/edituser' + record.id)
 
         } else {

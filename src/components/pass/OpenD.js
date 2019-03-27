@@ -541,12 +541,10 @@ class PassOpenD extends Component {
         }
     }
     onChangefirstNameCn = (e) => {
-        var reg = new RegExp("[\u4e00-\u9fa5]");
         var input = e.target.value
 
         var isCh = new RegExp("[\u4e00-\u9fa5]").test(input)
 
-        console.log('hcia isCh', isCh)
         if (isCh) {
             this.state.waitUpdate.firstNameCn = e.target.value
             this.setState({
@@ -629,7 +627,6 @@ class PassOpenD extends Component {
         var input = e.target.value
 
         var isNum = reg.test(input)
-        console.log('hcia isNum', isNum)
         if (isNum) {
             this.state.waitUpdate.postalCode = e.target.value
             this.setState({
@@ -641,7 +638,6 @@ class PassOpenD extends Component {
             message.error('只能输入数字:' + input)
         }
 
-        console.log('hcia input', input)
 
 
     }
@@ -704,7 +700,6 @@ class PassOpenD extends Component {
         });
     }
     onChangegender = (value) => {
-        // console.log('hcia value', value)
         this.state.waitUpdate.gender = (value === 'Male' ? 1 : 0);
         this.setState({
             mGender: value,//1:male 0:female
@@ -812,7 +807,6 @@ class PassOpenD extends Component {
 
     addBlackRequest() {
 
-        console.log('hcia addBlackRequest')
         let me = this
         if (!me.state.changeNoteV) {
             message.error('備註必填')
@@ -882,7 +876,6 @@ class PassOpenD extends Component {
                         })
                     })
                     .catch(error => {
-                        console.log('hcia error', error)
                     });
 
 
@@ -1811,7 +1804,6 @@ class PassOpenD extends Component {
 
                                 onChange={(e) => {
 
-                                    console.log('hcia e.target.checked', e.target.checked)
                                     this.setState({
                                         mIsNeedAddBlack: e.target.checked,
                                     });

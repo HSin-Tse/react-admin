@@ -11,7 +11,6 @@ import {CSVLink} from "react-csv";
 import classNames from "classnames";
 
 const {TextArea} = Input;
-const {RangePicker} = DatePicker;
 
 class Basic extends Component {
 
@@ -45,7 +44,7 @@ class Basic extends Component {
         };
     }
 
-    handleAddComment = (e) => {
+    handleAddComment = () => {
         let self = this;
         window.Axios.post('auth/addRecordComment', {
             id: self.state.theBelongUserId,
@@ -91,12 +90,12 @@ class Basic extends Component {
         let self = this;
 
 
-        window.Axios.post('/auth/addOperatorLogHistory', {
-            'moduleLog': '营销管理',
-            'pageLog': '渠道管理',
-            'commentLog': '渠道管理',
-            'typeLog': 2,
-        })
+        // window.Axios.post('/auth/addOperatorLogHistory', {
+        //     'moduleLog': '营销管理',
+        //     'pageLog': '渠道管理',
+        //     'commentLog': '渠道管理',
+        //     'typeLog': 2,
+        // })
 
 
         this.modalOPDayL2 = [
