@@ -77,9 +77,7 @@ export default {
             tk: 'SERVICE_GROUP_MGMT', key: '/app/mar', title: '营销管理', icon: 'safety',
             subs: [
                 {tk: 'SERVICE_GROUP_MGMT', key: '/app/mar/cha', title: '渠道管理', component: 'CA'},
-                {tk: 'ROLE_MGMT', key: '/app/mar/cus', title: '客维管理', component: 'RoleSet'},
-                {tk: 'ROLE_MGs', key: '/app/mar/puu', title: '互推管理', component: 'OpLog'},
-                // {tk:'OPERATION_HISTORY,key: '/app/pms/rolelog', title: '操作日志', component: 'RoleLog'},
+                {tk: 'SERVICE_GROUP_MGMT', key: '/app/mar/chb', title: '渠道管理', component: 'CB'},
 
             ],
         },
