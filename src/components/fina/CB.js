@@ -663,30 +663,50 @@ class Basic extends Component {
 
 
                         <Card>
+                            <div style={{display: 'flex', minHeight: 40, width: 200}}>
+                                <span style={{minWidth: 100}}>渠道名称：</span>
+                                <Input defaultValue={this.state.NameCn}
+                                       onChange={(e) => {
+                                           this.setState({
+                                               NameCn: e.target.value,
+                                           });
+                                       }}
+                                       style={{minWidth: 160}}
+                                       tagkey="lastNameCn"
+                                       sdsd={'dd'}/>
+                            </div>
 
-                            <Row gutter={1}>
-                                <Col md={6}>
-                                    <p>渠道名称： :</p>
-                                </Col>
-                                <Col md={6}>
-                                    <p>{this.state.displayName}</p>
-                                </Col>
-                            </Row>
-                            <Row gutter={1}>
-                                <Col md={6}>
-                                    <p>渠道链接： :</p>
-                                </Col>
-                                <Col md={6}>
-                                    <p>{this.state.location}</p>
-                                </Col>
-                            </Row> <Row gutter={1}>
-                            <Col md={6}>
-                                <p>渠道状态：:</p>
-                            </Col>
-                            <Col md={6}>
-                                <p>{this.state.location}</p>
-                            </Col>
-                        </Row>
+                            <div style={{display: 'flex', minHeight: 40, width: 200}}>
+                                <span style={{minWidth: 100}}>渠道链接：</span>
+                                <Input defaultValue={this.state.NameCn}
+                                       onChange={(e) => {
+                                           this.setState({
+                                               NameCn: e.target.value,
+                                           });
+                                       }}
+                                       style={{minWidth: 160}}
+                                       tagkey="lastNameCn"
+                                       sdsd={'dd'}/>
+                            </div>
+                            <div style={{display: 'flex', minHeight: 40, width: 200}}>
+                                <span style={{minWidth: 100}}>渠道状态：</span>
+                                <Input defaultValue={this.state.NameCn}
+                                       onChange={(e) => {
+                                           this.setState({
+                                               NameCn: e.target.value,
+                                           });
+                                       }}
+                                       style={{minWidth: 160}}
+                                       tagkey="lastNameCn"
+                                       sdsd={'dd'}/>
+                            </div>
+
+                            <Button onClick={(e) => {
+
+
+                            }} style={{borderRadius: '4px', height: '30px'}}> 添加备注并保存 </Button>
+
+
                         </Card>
 
                     </div>
