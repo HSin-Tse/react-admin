@@ -272,11 +272,9 @@ class Basic extends Component {
         }).then(function (response) {
             console.log(response);
 
-            if (response.data.code == 1) {
                 message.success('操作成功');
                 self.requestPage()
 
-            }
 
         })
 
