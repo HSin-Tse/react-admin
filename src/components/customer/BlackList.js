@@ -141,9 +141,6 @@ export default class BlackList extends Component {
 
         document.addEventListener("keydown", this.handleKeyPress, false);
 
-
-        // console.log('hcia  Black this.props', this.props.pg)
-
         this.setState({
             nowKey: this.props.pg,
         })
@@ -524,7 +521,6 @@ export default class BlackList extends Component {
     }
 
     onSelectChange = (selectedRowKeys) => {
-        console.log('hcia', 'selectedRowKeys changed: ', selectedRowKeys);
         this.setState({selectedRowKeys});
     }
 
@@ -537,38 +533,17 @@ export default class BlackList extends Component {
 
     searchSelectS = () => {
 
-        let self = this
-        // if (self.state.nowKey === '1') {
-        //     this.requestPageAS()//1:合规 2:开户 3:交易
-        //
-        // }
-        // if (self.state.nowKey === '2') {
-        //     this.requestPageBS()//1:合规 2:开户 3:交易
-        // }
-        // if (self.state.nowKey === '3') {
-        //     this.requestPageCS()//1:合规 2:开户 3:交易
-        // }
 
-        this.requestPageAS()//1:合规 2:开户 3:交易
-        this.requestPageBS()//1:合规 2:开户 3:交易
-        this.requestPageCS()//1:合规 2:开户 3:交易
+        this.requestPageAS()
+        this.requestPageBS()
+        this.requestPageCS()
     }
     searchSelect = () => {
 
-        let self = this
-        // if (self.state.nowKey === '1') {
-        //     this.requestPageA()//1:合规 2:开户 3:交易
-        // }
-        // if (self.state.nowKey === '2') {
-        //     this.requestPageB()//1:合规 2:开户 3:交易
-        // }
-        // if (self.state.nowKey === '3') {
-        //     this.requestPageC()//1:合规 2:开户 3:交易
-        // }
 
-        this.requestPageA()//1:合规 2:开户 3:交易
-        this.requestPageB()//1:合规 2:开户 3:交易
-        this.requestPageC()//1:合规 2:开户 3:交易
+        this.requestPageA()
+        this.requestPageB()
+        this.requestPageC()
     }
 
     onChangeDate = (value, dateString) => {
