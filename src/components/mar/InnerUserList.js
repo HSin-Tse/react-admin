@@ -2,16 +2,13 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, message, Select, Modal, Card, Col, Popconfirm, Tag, Input, Form, Icon, DatePicker} from 'antd';
+import {Button, Table, Modal, Card, Input, Form} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
-import classNames from "classnames";
 
-const Option = Select.Option;
 const {TextArea} = Input;
-const {RangePicker} = DatePicker;
 
 class InnerUserList extends Component {
     changeScret = (e) => {
@@ -58,16 +55,12 @@ class InnerUserList extends Component {
     componentDidMount() {
 
 
-
         window.Axios.post('/auth/addOperatorLogHistory', {
             'moduleLog': '权限管理',
             'pageLog': '内部成员配置',
             'commentLog': '内部成员配置',
             'typeLog': 2,
         })
-
-
-
 
 
         let self = this;
@@ -201,10 +194,12 @@ class InnerUserList extends Component {
 
                     <div>
 
-                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}} className="ant-dropdown-link" onClick={() => this.newUSer(record)}>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                className="ant-dropdown-link" onClick={() => this.newUSer(record)}>
                             编辑</Button>
 
-                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.handleFreeze(record)} className="ant-dropdown-link">冻结</Button>
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                onClick={() => this.handleFreeze(record)} className="ant-dropdown-link">冻结</Button>
 
                     </div>
                 ),
@@ -287,7 +282,6 @@ class InnerUserList extends Component {
         window.Axios.post('back/getBackUserDetail', {
             'id': record.id,
         }).then(function (response) {
-            console.log(response);
 
 
             if (response.data.code == 1) {
@@ -362,7 +356,7 @@ class InnerUserList extends Component {
     }
     changePage = (page) => {
         this.setState({
-            current: page ,
+            current: page,
         }, () => {
             this.requestPage()
         })

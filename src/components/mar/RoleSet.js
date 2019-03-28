@@ -44,7 +44,7 @@ class Basic extends Component {
         let self = this;
         window.Axios.post('dict/openDict', {
             'keys': 'suspend_reason_type',
-        }).then( (response)=> {
+        }).then((response) => {
 
             self.setState({
                     suspend_reason_type: response.data.data.suspend_reason_type
@@ -271,8 +271,8 @@ class Basic extends Component {
             'idList': [record.id],
         }).then(function (response) {
 
-                message.success('操作成功');
-                self.requestPage()
+            message.success('操作成功');
+            self.requestPage()
 
 
         })
@@ -361,7 +361,7 @@ class Basic extends Component {
                 >
                     <Table rowKey="id"
                            columns={this.nodeColumns}
-                           dataSource={this.state.nodeList}// nodeList
+                           dataSource={this.state.nodeList}
                     />
 
 
