@@ -270,7 +270,6 @@ class Basic extends Component {
         window.Axios.post('back/removeRole', {
             'idList': [record.id],
         }).then(function (response) {
-            console.log(response);
 
                 message.success('操作成功');
                 self.requestPage()
