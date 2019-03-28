@@ -232,19 +232,13 @@ class Basic extends Component {
             'pageSize': self.state.pgsize,
             'pageNo': self.state.current,
         }).then(function (response) {
-            // console.log(response);
-
             self.setState({
                     totalPage: response.data.data.totalPage,
                     loading: false,
                     userList: response.data.data.list
                 }
             );
-
-
-        }).catch(function (error) {
-            console.log(error);
-        });
+        })
 
     }
     changePage = (page) => {
@@ -284,9 +278,7 @@ class Basic extends Component {
 
             }
 
-        }).catch(function (error) {
-            console.log(error);
-        });
+        })
 
 
     }
@@ -302,7 +294,6 @@ class Basic extends Component {
     }
     handleOk = () => {
         var mStatus = this.state.modeState == '正常' ? 1 : this.state.modeState == '禁止登陆' ? 2 : 3;
-        // var reasonType = mStatus ==2?
         let self = this;
         self.setState({
             loadFor: true
@@ -312,7 +303,6 @@ class Basic extends Component {
             'status': mStatus,
             'reasonType': self.state.forbiddenValue,
         }).then(function (response) {
-            console.log(response);
             self.setState({
                 visibleOpM: false,
                 loadFor: false,
@@ -322,9 +312,7 @@ class Basic extends Component {
             });
             message.success('操作成功');
 
-        }).catch(function (error) {
-            console.log(error);
-        });
+        })
     };
     handleCancel = (e) => {
         console.log(e);
