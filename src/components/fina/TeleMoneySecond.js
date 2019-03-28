@@ -670,10 +670,7 @@ class Basic extends Component {
                                         }}
                                         value={this.state.mBelongBkUserId}
                                         style={{width: '200px', height: '36px'}}>
-
                                         {imgsTag}
-
-
                                     </Select>
 
                                 </div>

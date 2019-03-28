@@ -18,7 +18,7 @@ class RouterEnter extends Component {
             <div>
                 <BreadcrumbCustom first="权限管理" second="路由拦截" />
                 <AuthWidget
-                    children={auth => (
+                    children={() => (
                         <Row>
                             <Col span={24}>
                                 <Card bordered={false} bodyStyle={{minHeight: 600}}>
