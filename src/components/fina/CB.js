@@ -470,18 +470,14 @@ class Basic extends Component {
             'pageSize': self.state.pgsize,
             'pageNo': self.state.current,
         }).then(function (response) {
-            console.log(response);
             self.setState({
                     totalPage: response.data.data.totalPage,
                     loading: false,
                     userList: response.data.data.list
                 }
             );
-
-
         })
-
-    }
+    };
 
 
     changePage = (page) => {
@@ -490,7 +486,7 @@ class Basic extends Component {
         }, () => {
             this.requestPage()
         })
-    }
+    };
     refleshNowpage = () => {
 
         let self = this;
@@ -499,7 +495,6 @@ class Basic extends Component {
         window.Axios.post('star/refreshStarLiveAccount', {
             idList: result,
         }).then(function (response) {
-            console.log(response);
             self.setState({
                 visibleOpM: false,
                 loadFor: false,
@@ -526,18 +521,9 @@ class Basic extends Component {
     render() {
         const {selectedRowKeys} = this.state;
         const hasSelected = selectedRowKeys.length > 0;
-        const rowSelection = {
-            selectedRowKeys,
-            onChange: this.onSelectChange,
-        };
         return (
             <div>
 
-                {/*<div>availableFlag :{JSON.stringify(this.state.availableFlag)}</div>*/}
-                {/*<div>isCanOPB :{JSON.stringify(this.state.isCanOPB)}</div>*/}
-                {/*<div>isCanOPC :{JSON.stringify(this.state.isCanOPC)}</div>*/}
-                {/*<div>isCanOPC :{JSON.stringify(this.state.isCanOPC)}</div>*/}
-                {/*<div>isCanOPD :{JSON.stringify(this.state.isCanOPD)}</div>*/}
                 <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
                     <span className="sw-btn dark-white" onClick={() => {
                         this.setState({
