@@ -87,15 +87,6 @@ class Basic extends Component {
     };
 
     componentDidMount() {
-        let self = this;
-
-
-        // window.Axios.post('/auth/addOperatorLogHistory', {
-        //     'moduleLog': '营销管理',
-        //     'pageLog': '渠道管理',
-        //     'commentLog': '渠道管理',
-        //     'typeLog': 2,
-        // })
 
 
         this.modalOPDayL2 = [
