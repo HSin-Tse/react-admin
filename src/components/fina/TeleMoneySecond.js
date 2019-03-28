@@ -655,26 +655,16 @@ class Basic extends Component {
                                     justifyContent: 'center'
                                 }}>
                                         <span style={{
-
                                             textAlign: 'left',
                                             marginRight: '37px',
-
-
                                             width: '57px',
                                             fontFamily: 'PingFangSC-Medium',
                                             fontWeight: 500,
                                             color: '#292929',
                                             fontSize: '14px'
-
-
                                         }}>客户归属</span>
-
-
                                     <Select
-
                                         onChange={(value) => {
-
-
                                             this.setState({mBelongBkUserId: value})
                                             console.log('hcia value', value)
                                         }}
