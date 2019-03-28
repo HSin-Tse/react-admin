@@ -22,13 +22,13 @@ const {TextArea} = Input;
 
 export default class BlackList extends Component {
     timestampToTime = (timestamp) => {
-        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
-        const year = dateObj.getFullYear() // 获取年，
-        const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
-        const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
-        const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
-        const minutes = this.pad(dateObj.getMinutes()) // 获取分
-        const seconds = this.pad(dateObj.getSeconds()) // 获取秒
+        const dateObj = new Date(+timestamp)
+        const year = dateObj.getFullYear()
+        const month = dateObj.getMonth() + 1
+        const date = dateObj.getDate()
+        const hours = this.pad(dateObj.getHours())
+        const minutes = this.pad(dateObj.getMinutes())
+        const seconds = this.pad(dateObj.getSeconds())
         return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
     };
     pad = (str) => {
@@ -110,13 +110,6 @@ export default class BlackList extends Component {
     requestUserCommentList = (record) => {
 
 
-        // window.Axios.post('back/addLogHistory', {
-        //     'moduleLog': '用户管理',
-        //     'pageLog': '黑名单',
-        //     'commentLog': '查看了黑名单备注',
-        //     'typeLog': 3,
-        // });
-
         var self = this;
         window.Axios.post('/auth/getRecordCommentList', {
             id: record.id,
@@ -136,7 +129,6 @@ export default class BlackList extends Component {
     }
 
     componentDidMount() {
-
 
 
         window.Axios.post('/auth/addOperatorLogHistory', {
@@ -862,7 +854,6 @@ export default class BlackList extends Component {
                             }} style={{borderRadius: '4px', width: '180px', height: '40px'}}> 取消 </Button>
 
                         </div>
-
 
 
                     </div>

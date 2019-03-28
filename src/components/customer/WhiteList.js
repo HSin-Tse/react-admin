@@ -39,9 +39,9 @@ export default class WhiteList extends Component {
     }
 
     showModalNote = (record) => {
-        this.requestUserCommentList(record)
-        let id = record.id
-        var self = this
+        this.requestUserCommentList(record);
+        let id = record.id;
+        var self = this;
 
         self.setState({
             opDayRecord: record,
@@ -52,7 +52,7 @@ export default class WhiteList extends Component {
                 NoteModalVisible2: true,
             });
         });
-    }
+    };
 
     componentDidMount() {
 
@@ -63,7 +63,7 @@ export default class WhiteList extends Component {
             typeLog: '2',
         })
 
-        addLogWhite()
+        addLogWhite();
         document.addEventListener("keydown", this.handleKeyPress, false);
         this.columns = [
             {
@@ -134,7 +134,6 @@ export default class WhiteList extends Component {
                 key: 'action',
                 render: (text, record) => (
                     <div>
-                        {/*<Button>添加备注</Button>*/}
                         <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
                                 onClick={() => this.showModalNote(record)}>添加备注</Button>
 
@@ -143,10 +142,6 @@ export default class WhiteList extends Component {
                                     cancelText="No">
                             <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}>移除</Button>
                         </Popconfirm>
-                        {/*<Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}*/}
-                        {/*onClick={() => this.showOPDAyModal2(record)}>日志</Button>*/}
-
-                        {/*<Button onClick={() => this.handleremove(record)}>操作日志</Button>*/}
                     </div>
                 ),
             }];
@@ -188,7 +183,7 @@ export default class WhiteList extends Component {
             'id': record.id//
         }).then(() => {
             message.success('操作成功')
-            this.requestPageA()//1:合规 2:开户 3:交易
+            this.requestPageA()
         });
     };
     requestPageA = () => {
@@ -383,14 +378,9 @@ export default class WhiteList extends Component {
         return (
 
             <div id="whiteL">
-
-
-
-
                 <Modal
                     bodyStyle={{
                         width: '600px',
-
                         background: 'white',
                         padding: 0,
                         margin: 0,
@@ -403,10 +393,7 @@ export default class WhiteList extends Component {
                     }}
                     closable={false}
                     footer={null}
-                    // onCancel={this.handleCancel}
                     visible={this.state.NoteModalVisible2}
-
-
                 >
 
                     <div style={{borderRadius: '4px'}}>
@@ -512,7 +499,6 @@ export default class WhiteList extends Component {
                      <Icon type="setting" className="text-dark"/>
                     </span>
                     <div style={{width: 270}}>
-
                         <Card
                             title="当前表搜索"
                             extra={<Button type="primary" onClick={() => {
@@ -600,7 +586,6 @@ export default class WhiteList extends Component {
 
                                     var selectTimeStart = value[0].unix() + '000'
                                     var selectTimeEnd = value[1].unix() + '000'
-
 
 
                                     this.setState({
@@ -820,7 +805,7 @@ export default class WhiteList extends Component {
                     }}
                     closable={false}
                     footer={null}
-                    visible={this.state.showModaladdWhite }
+                    visible={this.state.showModaladdWhite}
 
 
                 >
