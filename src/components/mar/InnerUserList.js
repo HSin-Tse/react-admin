@@ -67,7 +67,6 @@ class InnerUserList extends Component {
         window.Axios.post('dict/openDict', {
             'keys': 'suspend_reason_type',
         }).then((response) => {
-            console.log(response);
 
             self.setState({
                     suspend_reason_type: response.data.data.suspend_reason_type
@@ -357,13 +356,9 @@ class InnerUserList extends Component {
     }
     newUSer = (record) => {
         if (record) {
-            console.log('hcia record', record)
-            console.log('hcia record.id', record.id)
             this.props.history.push('/app/pms/edituser' + record.id)
-
         } else {
             this.props.history.push('/app/pms/adduser' + 0)
-
         }
 
     }
