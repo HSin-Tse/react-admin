@@ -35,20 +35,16 @@ class Basic extends Component {
 
 
     componentDidMount() {
-
-
         window.Axios.post('/auth/addOperatorLogHistory', {
             'moduleLog': '权限管理',
             'pageLog': '角色配置',
             'commentLog': '角色配置',
             'typeLog': 2,
-        })
-
-
+        });
         let self = this;
         window.Axios.post('dict/openDict', {
             'keys': 'suspend_reason_type',
-        }).then(function (response) {
+        }).then( (response)=> {
 
             self.setState({
                     suspend_reason_type: response.data.data.suspend_reason_type
@@ -56,14 +52,7 @@ class Basic extends Component {
             );
 
 
-        }).catch(function (error) {
-            console.log(error);
-        });
-        // comment: null
-        // createBackUserName: null
-        // createDate: ""
-        // operator: null
-        // roleComment: null
+        })
         this.columns = [
             {
                 title: '编号',
@@ -73,9 +62,7 @@ class Basic extends Component {
                 key: '编号',
                 render: (text, record) => (
                     <span>{record.idNo}</span>),
-            },
-
-            {
+            }, {
                 title: '角色名称',
                 dataIndex: '角色名称',
                 align: 'center',
@@ -190,7 +177,6 @@ class Basic extends Component {
             'pageSize': 100,
             'id': record.id,
         }).then(function (response) {
-            console.log(response);
 
             self.setState({
                     nodeList: response.data.data.list
@@ -200,9 +186,7 @@ class Basic extends Component {
             );
 
 
-        }).catch(function (error) {
-            console.log(error);
-        });
+        })
     };
     handleChange = (value, record) => {
         let self = this
