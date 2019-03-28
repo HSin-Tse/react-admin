@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, message, Select, Modal, Card, Col, Popconfirm} from 'antd';
+import {Button, Table, message, Select, Modal, Card, Popconfirm} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
@@ -37,14 +37,12 @@ class Basic extends Component {
     componentDidMount() {
 
 
-
         window.Axios.post('/auth/addOperatorLogHistory', {
             'moduleLog': '权限管理',
             'pageLog': '角色配置',
             'commentLog': '角色配置',
             'typeLog': 2,
         })
-
 
 
         let self = this;
@@ -129,16 +127,17 @@ class Basic extends Component {
                 key: 'action',
                 render: (text, record) => (
                     <div
-                        // style={{ width: 240}}
                     >
-                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}} className="ant-dropdown-link"
+                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                className="ant-dropdown-link"
                                 onClick={() => this.addRole(record)}>编辑</Button>
 
 
                         <Popconfirm title="删除"
                                     onConfirm={() => this.deleteRole(record)} okText="Yes"
                                     cancelText="No">
-                            <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}}className="ant-dropdown-link"
+                            <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
+                                    className="ant-dropdown-link"
                             >删除</Button>
                         </Popconfirm>
                     </div>
@@ -267,7 +266,7 @@ class Basic extends Component {
     changePage = (page) => {
         console.log('hcia page', page)
         this.setState({
-            current: page ,
+            current: page,
         }, () => {
             this.requestPage()
         })
@@ -354,9 +353,6 @@ class Basic extends Component {
     render() {
         return (
             <div>
-                {/*<div>waitUpdate :{JSON.stringify(this.state)}</div>*/}
-                {/*<div>searchPhone query :{JSON.stringify(this.state.searchPhone)}</div>*/}
-                {/*this.state.selectedRowKeys.length > 0*/}
 
                 <Modal
                     title={this.state.modeState == '正常' ? '恢复正常' : this.state.modeState}
@@ -421,7 +417,7 @@ class Basic extends Component {
 
                         bordered
                         loading={this.state.loading}
-                        pagination={{  // 分页
+                        pagination={{
                             total: this.state.pgsize * this.state.totalPage,
                             pageSize: this.state.pgsize,
                             onChange: this.changePage,
