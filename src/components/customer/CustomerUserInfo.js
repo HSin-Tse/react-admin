@@ -1,9 +1,8 @@
 /* eslint-disable react/sort-comp */
 
 import React, {Component} from 'react';
-import {Col, Card, Row, DatePicker, Input, Modal, Button, Table, Icon, Checkbox} from 'antd';
+import {Card, Table} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
-import {parse} from 'querystring';
 
 const {Meta} = Card;
 
@@ -174,13 +173,13 @@ class CustomerUserInfo extends Component {
     }
 
     timestampToTimeNI = (timestamp) => {
-        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
-        const year = dateObj.getFullYear() // 获取年，
-        const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
-        const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
-        const hours = this.pad(dateObj.getHours())  // 获取时, this.pad函数用来补0
-        const minutes = this.pad(dateObj.getMinutes()) // 获取分
-        const seconds = this.pad(dateObj.getSeconds()) // 获取秒
+        const dateObj = new Date(+timestamp)
+        const year = dateObj.getFullYear()
+        const month = dateObj.getMonth() + 1
+        const date = dateObj.getDate()
+        const hours = this.pad(dateObj.getHours())
+        const minutes = this.pad(dateObj.getMinutes())
+        const seconds = this.pad(dateObj.getSeconds())
         return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
     };
     pad = (str) => {
@@ -188,8 +187,8 @@ class CustomerUserInfo extends Component {
     };
 
     timestampToTime = (timestamp) => {
-        const dateObj = new Date(+timestamp) // ps, 必须是数字类型，不能是字符串, +运算符把字符串转化为数字，更兼容
-        const year = dateObj.getFullYear() // 获取年，
+        const dateObj = new Date(+timestamp)
+        const year = dateObj.getFullYear()
         const month = dateObj.getMonth() + 1 // 获取月，必须要加1，因为月份是从0开始计算的
         const date = dateObj.getDate() // 获取日，记得区分getDay()方法是获取星期几的。
 
