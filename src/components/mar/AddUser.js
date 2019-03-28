@@ -1,4 +1,3 @@
-/* eslint-disable react/sort-comp */
 
 import React, {Component} from 'react';
 import {
@@ -18,7 +17,6 @@ import {
     message, Tooltip
 } from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
-import {parse} from 'querystring';
 import connect from "react-redux/es/connect/connect";
 
 const FormItem = Form.Item;
