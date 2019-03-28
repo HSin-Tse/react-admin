@@ -1208,24 +1208,14 @@ class CustomerSummary extends Component {
 
     }
     resetSeret = (record) => {
-
-        // resetSeretModal5
-        console.log('hcia record', record)
         this.addOPLog(record, '重置密码')
-
         let belongUserId = record.belongUserId
-
         var self = this
-
-
         window.Axios.post('auth/getUserCommentList', {
             'belongUserId': belongUserId,
         }).then(function (response) {
             self.setState({operationDiaryHistory: response.data.data.list});
         })
-
-
-
         this.state.checkedValues.length = 0
         this.setState({
             checkedValues: [],
