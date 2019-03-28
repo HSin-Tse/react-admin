@@ -180,7 +180,6 @@ class CustomerSummary extends Component {
                 dataIndex: 'comment',
                 key: 'operationDiary_Status',
                 align: 'center',
-
                 render: (text, record) => (
                     <span>{record.bkUserName}</span>),
             }, {
@@ -195,7 +194,6 @@ class CustomerSummary extends Component {
                 dataIndex: 'comment',
                 key: 'operationDiary_Status',
                 align: 'center',
-
                 render: (text, record) => (
                     <span>{record.comment}</span>),
             }]
@@ -208,8 +206,7 @@ class CustomerSummary extends Component {
                 render: (text, record, index) => (
                     <span>{this.state.currentA * this.state.pgsize + index + 1}</span>
                 ),
-            },
-            {
+            }, {
                 title: '开户手机号',
                 dataIndex: '开户手机号',
                 key: '开户手机号',
