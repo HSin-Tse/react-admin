@@ -1,34 +1,23 @@
-/* eslint-disable react/sort-comp */
-
 import React, {Component} from 'react';
 import {
     Col,
     Card,
     Row,
-    Radio,
     Input,
-    Modal,
     Button,
     Table,
     Icon,
     Checkbox,
-    Select,
     Popconfirm,
     message,
     Form
 } from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
-import axios from 'axios';
-import {parse} from 'querystring';
 import {bindActionCreators} from "redux";
 import {setINFOR} from "../../action";
 import connect from "react-redux/es/connect/connect";
-import AllComponents from "../index";
-import {Route} from "react-router-dom";
 
-const RadioGroup = Radio.Group;
 const {TextArea} = Input;
-const CheckboxGroup = Checkbox.Group;
 
 class EditRole extends Component {
 
@@ -192,12 +181,12 @@ class EditRole extends Component {
             return
         }
         console.log('hcia AAA')
-        
-        console.log('hcia this.state.realp' , this.state.realp)
 
-        
-        console.log('hcia this.state.realp.length' , this.state.realp.length)
-        if (this.state.realp.length<6) {
+        console.log('hcia this.state.realp', this.state.realp)
+
+
+        console.log('hcia this.state.realp.length', this.state.realp.length)
+        if (this.state.realp.length < 6) {
             message.error('請輸入你的密碼六位以上')
             return
         }
@@ -215,20 +204,6 @@ class EditRole extends Component {
             message.success('操作成功')
         });
 
-        // window.Axios.post('back/saveOrUpdateRole', {
-        //     id: this.props.match.params.id,
-        //     name: self.state.name,
-        //     content: self.state.changeNoteV,
-        //     multilevelList: sorted,
-        //     password: self.state.realp,
-        // }).then(function (response) {
-        //     console.log('hcia response', response)
-        //
-        //     if (response.data.code == 1) {
-        //         message.success('操作成功')
-        //
-        //     }
-        // });
 
     }
 
@@ -357,8 +332,6 @@ class EditRole extends Component {
         return (
             <div>
                 <h2 style={{marginTop: 15}}>内部用户权限设置</h2>
-                {/*<div>name :{JSON.stringify(this.state.name)}</div>*/}
-                {/*<div>powerList :{JSON.stringify(this.state.powerList)}</div>*/}
 
 
                 <BreadcrumbCustom first="内部成员列表" second="内部人员配置"/>
@@ -497,10 +470,7 @@ const mapStateToPorps = state => {
     return {auth, infor};
 };
 const mapDispatchToProps = dispatch => ({
-    // fetchData: bindActionCreators(fetchData, dispatch),
-    // receiveData: bindActionCreators(receiveData, dispatch),
     setUSER: bindActionCreators(setINFOR, dispatch),
-
 });
 
 
