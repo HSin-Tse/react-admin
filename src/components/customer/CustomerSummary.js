@@ -143,7 +143,7 @@ class CustomerSummary extends Component {
     componentDidMount() {
 
 
-        this.addOPSLog('用户总表')
+        this.addOPSLog('用户总表');
 
 
         document.addEventListener("keydown", this.handleKeyPressOOP, false);
@@ -169,7 +169,6 @@ class CustomerSummary extends Component {
                 title: '操作人',
                 dataIndex: 'comment',
                 key: 'operationDiary_Status',
-
                 render: (text, record) => (
                     <span>{record.bkUserName}</span>),
             }, {
@@ -177,7 +176,6 @@ class CustomerSummary extends Component {
                 title: '操作',
                 dataIndex: 'bkUserName',
                 key: 'operationDiary_User',
-
                 render: (text, record) => (
                     <span>{record.comment}</span>),
             }]
@@ -195,7 +193,6 @@ class CustomerSummary extends Component {
                 dataIndex: 'bkUserName',
                 key: 'operationDiary_User',
                 align: 'center',
-
                 render: (text, record) => (
                     <span>{this.timestampToTime(record.createDate)}</span>),
             }, {
@@ -407,11 +404,6 @@ class CustomerSummary extends Component {
                                 format="YYYY-MM-DD HH:mm:ss"
                                 placeholder={['开始时间', '结束时间']}
                                 onChange={(value, dateString) => {
-
-
-                                    console.log('hcia value', value)
-
-
                                     if (value.length === 0) {
 
                                         this.setState({
@@ -554,10 +546,7 @@ class CustomerSummary extends Component {
                     }}
                     closable={false}
                     footer={null}
-                    // onCancel={this.handleCancel}
                     visible={this.state.NoteModalVisible2}
-
-
                 >
 
                     <div style={{borderRadius: '4px'}}>
@@ -664,14 +653,8 @@ class CustomerSummary extends Component {
                             columns={this.modalOPDayColumns}
                             dataSource={this.state.operationDiaryHistory}
                         />
-
-
                     </div>
-
-
                 </Modal>
-
-
                 <Modal
                     bodyStyle={{
                         background: 'white',
@@ -774,10 +757,7 @@ class CustomerSummary extends Component {
                                 disabled={this.state.checkedValues.length < 5 || !this.state.accountPassword}
                                 onClick={
                                     () => {
-
-
                                         if (!this.state.accountPassword) {
-
                                             message.error("密码?")
                                             return
                                         }
@@ -791,14 +771,6 @@ class CustomerSummary extends Component {
                                             message.error('dev log belongUserId :' + this.state.nowRECODE.belongUserId)
                                             return
                                         }
-
-
-                                        // window.Axios.post('back/addLogHistory', {
-                                        //     'moduleLog': '用户管理',
-                                        //     'pageLog': '用户总表',
-                                        //     'commentLog': '重置交易密码',
-                                        //     'typeLog': 3,
-                                        // });
 
 
                                         window.Axios.post('star/updateStarLiveAccount', {
@@ -1095,14 +1067,6 @@ class CustomerSummary extends Component {
         var self = this
 
 
-        // window.Axios.post('back/addLogHistory', {
-        //     'moduleLog': '用户管理',
-        //     'pageLog': '用户总表',
-        //     'commentLog': '解绑',
-        //     'typeLog': 3,
-        // });
-
-
         window.Axios.post('auth/getUserCommentList', {
             'belongUserId': belongUserId,
         }).then(function (response) {
@@ -1261,7 +1225,6 @@ class CustomerSummary extends Component {
         })
 
 
-        console.log('hcia record', record)
 
         this.state.checkedValues.length = 0
         this.setState({
