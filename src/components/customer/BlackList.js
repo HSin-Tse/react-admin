@@ -532,15 +532,11 @@ export default class BlackList extends Component {
 
 
     searchSelectS = () => {
-
-
         this.requestPageAS()
         this.requestPageBS()
         this.requestPageCS()
     }
     searchSelect = () => {
-
-
         this.requestPageA()
         this.requestPageB()
         this.requestPageC()
@@ -550,7 +546,6 @@ export default class BlackList extends Component {
     }
 
     onOk = (value) => {
-        console.log('hcia', 'onOk: ', value);
         var selectTimeStart = value[0].unix() + '000'
         var selectTimeEnd = value[1].unix() + '000'
         this.setState({
@@ -616,11 +611,6 @@ export default class BlackList extends Component {
                                 format="YYYY-MM-DD HH:mm:ss"
                                 placeholder={['开始时间', '结束时间']}
                                 onChange={(value, dateString) => {
-
-
-                                    console.log('hcia value', value)
-
-
                                     if (value.length === 0) {
 
                                         this.setState({
