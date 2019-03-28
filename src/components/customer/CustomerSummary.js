@@ -1232,7 +1232,7 @@ class CustomerSummary extends Component {
                 'belongUserId': this.state.opDayRecord.belongUserId,
             }).then(function (response) {
                 self.setState({operationDiaryHistory: response.data.data.list});
-            })
+            });
             self.setState({
                 theBelongUserId: belongUserId,
                 NoteModalVisible2: false,

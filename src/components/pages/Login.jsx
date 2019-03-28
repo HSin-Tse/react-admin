@@ -2,20 +2,18 @@
  * Created by hao.cheng on 2017/4/16.
  */
 import React from 'react';
-import {Form, Icon, Input, Button, Checkbox} from 'antd';
+import {Form, Icon, Input, Button} from 'antd';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {fetchData, receiveData} from '@/action';
 import {message} from 'antd';
-import {addTodo, setINFOR} from "../../action";
+import {setINFOR} from "../../action";
 import avater from '@/style/imgs/ixlogo.png';
 import ReactCanvasNest from 'react-canvas-nest';
-import {setCookie,getCookie} from "../../try";
+import {setCookie, getCookie} from "../../try";
 
 const FormItem = Form.Item;
 
-
-// var cn = new CanvasNest(document.getElementById('Loggin'), config);
 
 class Login extends React.Component {
     componentWillMount() {
@@ -31,7 +29,6 @@ class Login extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-
 
 
         let self = this;
@@ -68,9 +65,9 @@ class Login extends React.Component {
 
                         const ssss = localStorage.getItem('too');
                         // setCookie("a",ssss,0)
-                        var ss=getCookie("a")
-                        console.log('hcia ss' , ss)
-                        console.log('hcia ssss' , ssss)
+                        var ss = getCookie("a")
+                        console.log('hcia ss', ss)
+                        console.log('hcia ssss', ssss)
 
                         if (ssss) {
 
@@ -116,9 +113,6 @@ class Login extends React.Component {
                     <div className="login-logoa">
                         <img style={{height: 35, width: 35}} src={avater} alt="头像"/>
                     </div>
-                    {/*<div className="login-logo">*/}
-                    {/*<span>IX TRADER CRM</span>*/}
-                    {/*</div>*/}
                     <Form onSubmit={this.handleSubmit} style={{maxWidth: '300px'}}>
                         <FormItem>
                             {getFieldDecorator('userName', {
@@ -137,15 +131,10 @@ class Login extends React.Component {
                             )}
                         </FormItem>
                         <FormItem>
-                            {/*{getFieldDecorator('remember', {*/}
-                                {/*valuePropName: 'checked',*/}
-                                {/*initialValue: true,*/}
-                            {/*})(*/}
-                                {/*<Checkbox>记住我</Checkbox>*/}
-                            {/*)}*/}
+
                             <span className="login-form-forgot" href="" style={{float: 'right'}}></span>
-                            <Button   htmlType="submit" className="login-form-button"
-                                    style={{background:'#FDD000',width: '100%'}}>
+                            <Button htmlType="submit" className="login-form-button"
+                                    style={{background: '#FDD000', width: '100%'}}>
                                 登录
                             </Button>
 
