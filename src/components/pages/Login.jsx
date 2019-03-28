@@ -21,7 +21,6 @@ class Login extends React.Component {
     }
 
 
-
     handleSubmit = (e) => {
         e.preventDefault();
 
@@ -61,15 +60,8 @@ class Login extends React.Component {
                         const ssss = localStorage.getItem('too');
 
                         if (ssss) {
-
-
                             self.props.history.push('/app/dashboard/index');
-                        } else {
-                            // message.error('等待跳轉~'+ssss )
-
                         }
-                        // self.props.setUSER(response.data.data)
-
                         window.Axios.post('back/addLogHistory', {
                             'moduleLog': '登入',
                             'pageLog': '登入',
