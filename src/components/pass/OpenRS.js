@@ -898,13 +898,10 @@ class PassOpenD extends Component {
                 'Content-Type': 'multipart/form-data',
             },
             onStart(file) {
-                console.log('onStart', file, file.name);
             },
             onSuccess(ret, file) {
-                console.log('onSuccess', ret, file.name);
             },
             onError(err) {
-                console.log('onError', err);
             },
             onProgress({percent}, file) {
                 console.log('onProgress', `${percent}%`, file.name);
