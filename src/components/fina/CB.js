@@ -633,9 +633,6 @@ class Basic extends Component {
 
 
                     <div className="gutter-example button-demo">
-                        {/*{JSON.stringify(this.props.todps)}*/}
-                        {/*{JSON.stringify(this.props.infor)}*/}
-                        {/*{JSON.stringify(localStorage.getItem('infor'))}*/}
 
 
                         <Card>
