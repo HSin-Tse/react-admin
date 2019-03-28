@@ -111,18 +111,13 @@ class CustomerSummary extends Component {
         })
     }
     addOPLog = (record, com) => {
-        var self = this;
         window.Axios.post('/auth/addOperatorLogHistory', {
             referKey: record.belongUserId,
             moduleLog: '用户管理',
             pageLog: '用户总表',
             commentLog: com,
             typeLog: '7',
-        }).then(function (response) {
-
-            console.log('hcia response', response)
-
-        });
+        })
     }
 
     handleKeyPressOOP = (event) => {
