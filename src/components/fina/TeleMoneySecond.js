@@ -26,7 +26,6 @@ const dateFormat = 'YYYY/MM/DD';
 const {TextArea} = Input;
 const Option = Select.Option;
 
-// First, you need to create the `numberMask` with your desired configurations
 
 class Basic extends Component {
     changeNote = (e) => {
@@ -101,19 +100,16 @@ class Basic extends Component {
                 });
 
 
-                if(isCanOp== undefined){
+                if (isCanOp == undefined) {
 
-                }else{
+                } else {
                     var chA = isCanOp.childrenMenu.find((item) => {
-                        // console.log('hcia  this.props', this.props)
                         return item.key === 'DEPOSIT_MANNUAL_CREATE';
                     });
                     var chB = isCanOp.childrenMenu.find((item) => {
-                        // console.log('hcia  this.props', this.props)
                         return item.key === 'DEPOSIT_FINANCE_CHECK';
                     });
                     var chC = isCanOp.childrenMenu.find((item) => {
-                        // console.log('hcia  this.props', this.props)
                         return item.key === 'DEPOSIT_DETAIL';
                     });
 
@@ -135,11 +131,8 @@ class Basic extends Component {
                         self.setState({
                             isCanOPC: true,
                         });
-                    } else {
-
                     }
                 }
-
 
 
             }
@@ -317,7 +310,7 @@ class Basic extends Component {
 
                         <Button
                             size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                            disabled={record.status == 4 }
+                            disabled={record.status == 4}
 
 
                             // onClick={
@@ -330,20 +323,19 @@ class Basic extends Component {
                                 () => {
 
 
-                                    if(record.status==3){
+                                    if (record.status == 3) {
                                         // this.props.history.pop()
                                         this.props.history.push('/app/fina/d/ter' + record.id)
 
                                         this.componentDidMount()
 
-                                    }else if(record.status==2){
+                                    } else if (record.status == 2) {
                                         this.props.history.push('/app/fina/d/tes' + record.id)
 
                                     }
 
                                 }
                             }
-
 
 
                         >{record.status == 1 ? '支付成功(approved)' : record.status == 2 ? '审核中(pending)' : record.status == 3 ? '审核成功(completed)' : '取消(not approved)'}
@@ -364,18 +356,18 @@ class Basic extends Component {
 
                         <Button
                             size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                            disabled={ record.status == 4}
+                            disabled={record.status == 4}
                             onClick={
                                 () => {
 
 
-                                    if(record.status==3){
+                                    if (record.status == 3) {
                                         // this.props.history.pop()
                                         this.props.history.push('/app/fina/d/ter' + record.id)
 
                                         this.componentDidMount()
 
-                                    }else if(record.status==2){
+                                    } else if (record.status == 2) {
                                         this.props.history.push('/app/fina/d/tes' + record.id)
                                         this.componentDidMount()
 
@@ -386,7 +378,7 @@ class Basic extends Component {
                         >
                             {/*{record.status}*/}
                             {/*{record.status == 1 ? '(approved)' : record.status == 2 ? '(pending)' : record.status == 3 ? '(completed)' : '(not approved)'}*/}
-                            {record.completeDate?record.completeDate: '(pending)'}
+                            {record.completeDate ? record.completeDate : '(pending)'}
 
                         </Button>
 
@@ -510,18 +502,10 @@ class Basic extends Component {
 
         ))
 
-        // const accountTList = this.state.accountTxnCurryList.map(v1 => (
-        //
-        //     <Option key={v1.value} value={v1.value}>{v1.name ? v1.name : 'null'}</Option>
-        //
-        // ))
-
 
         return (
 
             <div>
-
-                {/*<div>accrounRes :{JSON.stringify(this.state.accrounRes)}</div>*/}
 
 
                 <h2 style={{marginTop: 15}}>入金审核</h2>
@@ -686,10 +670,6 @@ class Basic extends Component {
                                         }}>客户归属</span>
 
 
-                                    {/*<Input value={this.state.mBelongBkUserName}*/}
-                                    {/*style={{width: '200px', height: '36px'}}*/}
-
-                                    {/*/>*/}
                                     <Select
 
                                         onChange={(value) => {
@@ -1135,11 +1115,11 @@ class Basic extends Component {
 
                                                     }}>创建备注</span>
                                     <Input value={this.state.commenS1}
-                                           // onChange={(e) => {
-                                           //     this.setState({
-                                           //         commenS1: e.target.value,
-                                           //     });
-                                           // }}
+                                        // onChange={(e) => {
+                                        //     this.setState({
+                                        //         commenS1: e.target.value,
+                                        //     });
+                                        // }}
                                            style={{width: '200px', height: '36px'}}
 
                                     />
