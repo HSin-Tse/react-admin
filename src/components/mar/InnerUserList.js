@@ -340,16 +340,12 @@ class InnerUserList extends Component {
             startTime: this.state.selectTimeStart,
             endTime: this.state.selectTimeEnd,
         }).then(function (response) {
-            console.log(response);
-
             self.setState({
                     totalPage: response.data.data.totalPage,
                     loading: false,
                     userList: response.data.data.list
                 }
             );
-
-
         })
     }
     changePage = (page) => {
@@ -360,7 +356,6 @@ class InnerUserList extends Component {
         })
     }
     newUSer = (record) => {
-        // this.props.history.push('/app/pms/adduser' + 0)
         if (record) {
             console.log('hcia record', record)
             console.log('hcia record.id', record.id)
@@ -507,7 +502,7 @@ class InnerUserList extends Component {
                            scroll={{x: 1600}}
                            bordered
                            loading={this.state.loading}
-                           pagination={{  // 分页
+                           pagination={{
                                total: this.state.pgsize * this.state.totalPage,
                                pageSize: this.state.pgsize,
                                onChange: this.changePage,
