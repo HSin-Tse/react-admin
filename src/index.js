@@ -41,7 +41,6 @@ message.config({
 window.Axios = Axios;
 window.PAxios = aaxios;// は「http:」
 
-// window.hideLoading={}
 
 let loadCount = 0;
 
