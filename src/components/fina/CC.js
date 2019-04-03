@@ -136,7 +136,6 @@ export default class BlackList extends Component {
         })
 
 
-
         this.setState({
             nowKey: this.props.pg,
         })
@@ -197,7 +196,6 @@ export default class BlackList extends Component {
                     </div>
                 ),
             }
-
 
 
         ];
@@ -813,12 +811,12 @@ export default class BlackList extends Component {
                     activeKey={this.state.nowKey}
                     onChange={this.callback}
                     type="card">
-                    <TabPane type={'primary'} tab="合规黑名单" key="1">
+                    <TabPane type={'primary'} tab="当日" key="1">
 
 
                         <Card
                             bodyStyle={{padding: 0, margin: 0}}
-                            title={'合规黑名单'}
+                            title={'当日'}
 
 
                         >
@@ -839,37 +837,10 @@ export default class BlackList extends Component {
                             />
                         </Card>
                     </TabPane>
-                    <TabPane tab="开户黑名单" key="2">
+                    <TabPane tab="当周" key="2">
                         <Card
                             bodyStyle={{padding: 0, margin: 0}}
-                            title={'开户黑名单'}
-                            extra={<Button onClick={() => {
-                                this.setState({
-                                    modal2Visible1: true,
-                                });
-                            }}>添加黑名单</Button>}
-                        >
-                            <Table rowKey="id"
-
-                                   bordered
-
-                                   columns={this.columns}
-                                   dataSource={this.state.bklistB}
-                                   scroll={{x: 1300}}
-                                   loading={this.state.loadingB}
-                                   pagination={{  // 分页
-                                       total: this.state.totalpageB * this.state.pgsize,
-                                       pageSize: this.state.pgsize,
-                                       onChange: this.changePageB,
-                                   }}
-                            />
-                        </Card>
-
-                    </TabPane>
-                    <TabPane tab="交易黑名单" key="3">
-                        <Card
-                            bodyStyle={{padding: 0, margin: 0}}
-                            title={'交易黑名单'}
+                            title={'当周'}
                             extra={<Button onClick={() => {
                                 this.setState({
                                     modal2Visible1: true,
@@ -892,6 +863,59 @@ export default class BlackList extends Component {
                         </Card>
 
                     </TabPane>
+                    <TabPane tab="当月" key="3">
+                        <Card
+                            bodyStyle={{padding: 0, margin: 0}}
+                            title={'当月'}
+                            extra={<Button onClick={() => {
+                                this.setState({
+                                    modal2Visible1: true,
+                                });
+                            }}>添加黑名单</Button>}
+                        >
+                            <Table rowKey="id"
+                                   bordered
+
+                                   columns={this.columns}
+                                   dataSource={this.state.bklistC}
+                                   scroll={{x: 1300}}
+                                   loading={this.state.loadingC}
+                                   pagination={{  // 分页
+                                       total: this.state.totalpageC * this.state.pgsize,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePageC,
+                                   }}
+                            />
+                        </Card>
+
+                    </TabPane>
+                    <TabPane tab="年度" key="4">
+                        <Card
+                            bodyStyle={{padding: 0, margin: 0}}
+                            title={'年度'}
+                            extra={<Button onClick={() => {
+                                this.setState({
+                                    modal2Visible1: true,
+                                });
+                            }}>添加黑名单</Button>}
+                        >
+                            <Table rowKey="id"
+                                   bordered
+
+                                   columns={this.columns}
+                                   dataSource={this.state.bklistC}
+                                   scroll={{x: 1300}}
+                                   loading={this.state.loadingC}
+                                   pagination={{  // 分页
+                                       total: this.state.totalpageC * this.state.pgsize,
+                                       pageSize: this.state.pgsize,
+                                       onChange: this.changePageC,
+                                   }}
+                            />
+                        </Card>
+
+                    </TabPane>
+
                 </Tabs>
 
                 <Modal
