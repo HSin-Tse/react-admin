@@ -9,6 +9,7 @@ import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import {CSVLink} from "react-csv";
 import classNames from "classnames";
+import EchartsViews from "../dashboard/EchartsViews";
 
 const {TextArea} = Input;
 
@@ -769,6 +770,7 @@ class Basic extends Component {
 
 
                 </Modal>
+                <EchartsViews />
 
 
             </div>

@@ -235,7 +235,6 @@ class Dashboard extends React.Component {
                         {/*</Card>*/}
                     {/*</div>*/}
                 {/*</Col>*/}
-                <EchartsViews />
 
             </div>
         )
