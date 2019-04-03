@@ -569,9 +569,10 @@ class Basic extends Component {
                 </div>
 
                 <h2 style={{marginTop: 15}}>
-                    客维管理
+                    客维统计
+
                 </h2>
-                <BreadcrumbCustom first="营销管理" second="渠道管理" third={"客维主页"}/>
+                <BreadcrumbCustom first="营销管理" second="渠道管理" third={"客维统计"}/>
 
                 <Card title="渠道列表"
                       bodyStyle={{padding: 0, margin: 0}}

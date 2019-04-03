@@ -57,6 +57,7 @@ import EditRole from './pms/EditRole'
 import InnerUserList from './pms/InnerUserList'
 import CA from './fina/CA'
 import CB from './fina/CB'
+import CC from './fina/CC'
 
 
 
@@ -70,6 +71,7 @@ export default {
     InnerUserList,
     CA,
     CB,
+    CC,
     RoleSet,
     OpLog,
     AdvancedTable,

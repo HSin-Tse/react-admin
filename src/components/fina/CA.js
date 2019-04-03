@@ -594,7 +594,7 @@ class Basic extends Component {
                 <h2 style={{marginTop: 15}}>
                     渠道管理
                 </h2>
-                <BreadcrumbCustom first="营销管理" second="渠道管理"/>
+                <BreadcrumbCustom first="营销管理" second="渠道管理" third={"渠道列表"}/>
 
                 <Card title="渠道列表"
                       bodyStyle={{padding: 0, margin: 0}}
