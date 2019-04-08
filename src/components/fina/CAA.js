@@ -503,7 +503,7 @@ class Basic extends Component {
     refleshNowpage = () => {
 
         let self = this;
-        this.props.history.push('/app/fiza/caa')
+        this.props.history.goBack()
 
 
     }
@@ -570,13 +570,14 @@ class Basic extends Component {
                 <h2 style={{marginTop: 15}}>
                     渠道管理
                 </h2>
-                <BreadcrumbCustom first="营销管理" second="渠道管理" third={"渠道列表"}/>
+                <BreadcrumbCustom first="营销管理" second="渠道管理" third={"投放渠道"}/>
 
-                <Card title="渠道列表"
+                <Card title="投放渠道"
                       bodyStyle={{padding: 0, margin: 0}}
 
                       extra={[
-                          <Button style={{marginRight: '10px'}} type="default" onClick={() => this.refleshNowpage()}>投放渠道</Button>,
+                          <Button style={{marginRight: '10px'}} type="default" onClick={() => this.refleshNowpage()}>渠道列表
+                          </Button>,
 
                           <CSVLink filename={new Date() + "出金管理报表.csv"} data={this.state.userList}
                                    headers={this.columnss}>

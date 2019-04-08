@@ -56,6 +56,7 @@ import AddRole from './pms/AddRole'
 import EditRole from './pms/EditRole'
 import InnerUserList from './pms/InnerUserList'
 import CA from './fina/CA'
+import CAA from './fina/CAA'
 import CB from './fina/CB'
 import CC from './fina/CC'
 
@@ -70,6 +71,7 @@ export default {
     BasicForm,
     InnerUserList,
     CA,
+    CAA,
     CB,
     CC,
     RoleSet,

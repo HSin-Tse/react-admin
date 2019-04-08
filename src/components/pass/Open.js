@@ -143,11 +143,9 @@ class Basic extends Component {
 
 
                 var isCanOp = menuInfor.menuList.find((item) => {
-                    // console.log('hcia  this.props', this.props)
                     return this.props.tk === item.key;
                 });
 
-                // console.log('hcia isCanOp', isCanOp.availableFlag)
                 self.setState({
                     availableFlag: isCanOp.availableFlag === 1,
                 });

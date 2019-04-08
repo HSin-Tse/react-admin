@@ -268,7 +268,7 @@ export default class BlackList extends Component {
                     </div>
                 ),
             }];
-        this.requestPageA()//1:合规 2:开户 3:交易
+        this.requestPageA()
         this.requestPageB()
         this.requestPageC()
     }

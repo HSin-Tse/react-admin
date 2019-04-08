@@ -188,6 +188,11 @@ export default {
             tk: 'tk', title: 'EditExRate',
             icon: 'star',
             component: 'EditExRate'
+        }, {
+            route: '/app/fiza/caa',
+            tk: 'tk', title: 'EditExRate',
+            icon: 'star',
+            component: 'CAA'
         },
         ]
 }
