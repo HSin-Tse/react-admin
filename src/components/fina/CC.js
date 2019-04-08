@@ -828,8 +828,7 @@ export default class BlackList extends Component {
                                    dataSource={this.state.bklistA}
                                    scroll={{x: 1300}}
                                    loading={this.state.loadingA}
-                                   pagination={{  // 分页
-                                       // showQuickJumper:true,
+                                   pagination={{
                                        total: this.state.totalpageA * this.state.pgsize,
                                        pageSize: this.state.pgsize,
                                        onChange: this.changePageA,
@@ -849,12 +848,11 @@ export default class BlackList extends Component {
                         >
                             <Table rowKey="id"
                                    bordered
-
                                    columns={this.columns}
                                    dataSource={this.state.bklistC}
                                    scroll={{x: 1300}}
                                    loading={this.state.loadingC}
-                                   pagination={{  // 分页
+                                   pagination={{
                                        total: this.state.totalpageC * this.state.pgsize,
                                        pageSize: this.state.pgsize,
                                        onChange: this.changePageC,
@@ -939,7 +937,6 @@ export default class BlackList extends Component {
                                             addBlackType: value
                                         })
                                     }}>
-                                {/*<Option value="1">合规黑名单</Option>*/}
                                 <Option value="2">开户黑名单</Option>
                                 <Option value="3">交易黑名单</Option>
                             </Select>
