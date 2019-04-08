@@ -138,7 +138,7 @@ export default class BlackList extends Component {
 
         this.setState({
             nowKey: this.props.pg,
-        })
+        });
 
 
         this.columnsA = [
@@ -260,7 +260,6 @@ export default class BlackList extends Component {
                 key: 'action',
                 render: (text, record) => (
                     <div>
-                        {/*<Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record)}>日志</Button>*/}
 
                         <Popconfirm title="移除?" onConfirm={() => this.handleremove(record)} okText="Yes"
                                     cancelText="No">
@@ -277,18 +276,10 @@ export default class BlackList extends Component {
     handleremove = (record) => {
 
 
-
-        // window.Axios.post('back/addLogHistory', {
-        //     'moduleLog': '用户管理',
-        //     'pageLog': '黑名单',
-        //     'commentLog': '移除黑名单',
-        //     'typeLog': 3,
-        // });
-
         let self = this
         window.Axios.post('auth/removeBlackUser', {
-            'id': record.id//1:合规 2:开户 3:交易
-        }).then((response) => {
+            'id': record.id
+        }).then(() => {
             message.success('操作成功')
             self.searchSelect()
         });
