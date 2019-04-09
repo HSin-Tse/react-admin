@@ -40,6 +40,7 @@ class Basic extends Component {
             forbiddenValue: 0,
             current: 1,
             pgsize: 20,
+            backUserId: 20,
             loadFor: false,
 
         };
@@ -257,10 +258,32 @@ class Basic extends Component {
 
     }
     requestD = () => {
+        var mImfor = JSON.parse(localStorage.getItem('infor'))
+        console.log('hcia mImfor' , mImfor)
 
+
+        var iidd = {backUserId: mImfor.backUserId ? mImfor.backUserId : ''}
+        console.log('hcia iidd' , iidd)
+        console.log('hcia iidd' , iidd)
+        console.log('hcia iidd' , iidd)
         let self = this
         window.Axios.post('ib/getIBUserDetail', {
-            'id': 0,
+            'id': mImfor.backUserId ? mImfor.backUserId : '',
+        }).then(function (response) {
+            console.log('hcia response' , response)
+
+            // self.setState({
+            //         totalPage: response.data.data.totalPage,
+            //         loading: false,
+            //         userList: response.data.data.list
+            //     }
+            // );
+        })
+
+
+        window.Axios.post('ib/getIBUserDetailStat', {
+            'id': mImfor.backUserId ? mImfor.backUserId : '',
+            'filterDateType': 1,
         }).then(function (response) {
             console.log('hcia response' , response)
 
@@ -281,6 +304,7 @@ class Basic extends Component {
         );
 
         window.Axios.post('finance/getWithdrawHistory', {
+
             'pageSize': self.state.pgsize,
             'pageNo': self.state.current,
         }).then(function (response) {
