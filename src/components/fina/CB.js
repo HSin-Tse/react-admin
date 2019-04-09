@@ -303,7 +303,8 @@ class Basic extends Component {
             }
         );
 
-        window.Axios.post('finance/getWithdrawHistory', {
+        window.Axios.post('ib/getIBUserList', {
+            'filterDateType': 1,
 
             'pageSize': self.state.pgsize,
             'pageNo': self.state.current,
