@@ -38,6 +38,7 @@ class Basic extends Component {
             isCanOPD: false,
             availableFlag: false,
             forbiddenValue: 0,
+            filterDateType: 1,
             current: 1,
             pgsize: 20,
             backUserId: 20,
@@ -259,18 +260,18 @@ class Basic extends Component {
     }
     requestD = () => {
         var mImfor = JSON.parse(localStorage.getItem('infor'))
-        console.log('hcia mImfor' , mImfor)
+        console.log('hcia mImfor', mImfor)
 
 
         var iidd = {backUserId: mImfor.backUserId ? mImfor.backUserId : ''}
-        console.log('hcia iidd' , iidd)
-        console.log('hcia iidd' , iidd)
-        console.log('hcia iidd' , iidd)
+        console.log('hcia iidd', iidd)
+        console.log('hcia iidd', iidd)
+        console.log('hcia iidd', iidd)
         let self = this
         window.Axios.post('ib/getIBUserDetail', {
             'id': mImfor.backUserId ? mImfor.backUserId : '',
         }).then(function (response) {
-            console.log('hcia response' , response)
+            console.log('hcia response', response)
 
             // self.setState({
             //         totalPage: response.data.data.totalPage,
@@ -285,7 +286,7 @@ class Basic extends Component {
             'id': mImfor.backUserId ? mImfor.backUserId : '',
             'filterDateType': 1,
         }).then(function (response) {
-            console.log('hcia response' , response)
+            console.log('hcia response', response)
 
             // self.setState({
             //         totalPage: response.data.data.totalPage,
@@ -405,26 +406,45 @@ class Basic extends Component {
                     extra={[
 
                         <Button
+                            style={{background: this.state.filterDateType == 1 ? '#F6D147' : ''}}
 
                             onClick={() => {
-                                this.props.history.push('/app/fina/editexrate')
+                                this.setState({
+                                    filterDateType: 1
+                                })
 
-
-                            }}>当日</Button>, <Button
-                            // style={{background: '#F6D147'}}
+                            }}>当日
+                        </Button>,
+                        <Button
+                            style={{background: this.state.filterDateType == 2 ? '#F6D147' : ''}}
 
                             onClick={() => {
-                                this.props.history.push('/app/fina/editexrate')
-
+                                this.setState({
+                                    filterDateType: 2
+                                })
 
                             }}>当周
-                        </Button>, <Button
+                        </Button>,
+                        <Button
+                            style={{background: this.state.filterDateType == 3 ? '#F6D147' : ''}}
 
                             onClick={() => {
-                                this.props.history.push('/app/fina/editexrate')
+                                this.setState({
+                                    filterDateType: 3
+                                })
 
+                            }}>当月
+                        </Button>,
+                        <Button
+                            style={{background: this.state.filterDateType == 4 ? '#F6D147' : ''}}
 
-                            }}>当月</Button>,
+                            onClick={() => {
+
+                                this.setState({
+                                    filterDateType: 4
+                                })
+                            }}>当年
+                        </Button>,
 
 
                     ]}
