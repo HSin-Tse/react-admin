@@ -585,48 +585,18 @@ class Basic extends Component {
 
 
                         <Card>
-                            <div style={{display: 'flex', minHeight: 40, width: 200}}>
-                                <span style={{minWidth: 100}}>渠道名称：</span>
-                                <Input defaultValue={this.state.NameCn}
-                                       onChange={(e) => {
-                                           this.setState({
-                                               NameCn: e.target.value,
-                                           });
-                                       }}
-                                       style={{minWidth: 160}}
-                                       tagkey="lastNameCn"
-                                       sdsd={'dd'}/>
+                            <h3>某某客维返佣账户</h3>
+
+                            <div style={{marginTop: 15, display: 'flex', minHeight: 40, width: 200}}>
+                                <span style={{minWidth: 100}}>渠道名称：a</span>
                             </div>
 
                             <div style={{display: 'flex', minHeight: 40, width: 200}}>
-                                <span style={{minWidth: 100}}>渠道链接：</span>
-                                <Input defaultValue={this.state.NameCn}
-                                       onChange={(e) => {
-                                           this.setState({
-                                               NameCn: e.target.value,
-                                           });
-                                       }}
-                                       style={{minWidth: 160}}
-                                       tagkey="lastNameCn"
-                                       sdsd={'dd'}/>
+                                <span style={{minWidth: 100}}>渠道链接：b</span>
                             </div>
                             <div style={{display: 'flex', minHeight: 40, width: 200}}>
-                                <span style={{minWidth: 100}}>渠道状态：</span>
-                                <Input defaultValue={this.state.NameCn}
-                                       onChange={(e) => {
-                                           this.setState({
-                                               NameCn: e.target.value,
-                                           });
-                                       }}
-                                       style={{minWidth: 160}}
-                                       tagkey="lastNameCn"
-                                       sdsd={'dd'}/>
+                                <span style={{minWidth: 100}}>渠道状态：c</span>
                             </div>
-
-                            <Button onClick={(e) => {
-
-
-                            }} style={{borderRadius: '4px', height: '30px'}}> 添加备注并保存 </Button>
 
 
                         </Card>
@@ -636,7 +606,35 @@ class Basic extends Component {
                 <Card
                     style={{marginTop: 15}}
                     title="数据统计"
+
                     bodyStyle={{padding: 0, margin: 0}}
+
+                    extra={[
+
+                        <Button
+
+                            onClick={() => {
+                                this.props.history.push('/app/fina/editexrate')
+
+
+                            }}>当日</Button>, <Button
+                            // style={{background: '#F6D147'}}
+
+                            onClick={() => {
+                                this.props.history.push('/app/fina/editexrate')
+
+
+                            }}>当周
+                        </Button>, <Button
+
+                            onClick={() => {
+                                this.props.history.push('/app/fina/editexrate')
+
+
+                            }}>当月</Button>,
+
+
+                    ]}
                 >
 
 
@@ -645,49 +643,18 @@ class Basic extends Component {
 
                         <Card>
                             <div style={{display: 'flex', minHeight: 40, width: 200}}>
-                                <span style={{minWidth: 100}}>渠道名称：</span>
-                                <Input defaultValue={this.state.NameCn}
-                                       onChange={(e) => {
-                                           this.setState({
-                                               NameCn: e.target.value,
-                                           });
-                                       }}
-                                       style={{minWidth: 160}}
-                                       tagkey="lastNameCn"
-                                       sdsd={'dd'}/>
+                                <span style={{minWidth: 100}}>总佣金$：</span>
+                                <span style={{minWidth: 100}}>外汇交易量：</span>
+                                <span style={{minWidth: 100}}>股票交易量：</span>
+                                <span style={{minWidth: 100}}>净入金$：</span>
+                                <span style={{minWidth: 100}}>新增直客数：</span>
+
                             </div>
 
-                            <div style={{display: 'flex', minHeight: 40, width: 200}}>
-                                <span style={{minWidth: 100}}>渠道链接：</span>
-                                <Input defaultValue={this.state.NameCn}
-                                       onChange={(e) => {
-                                           this.setState({
-                                               NameCn: e.target.value,
-                                           });
-                                       }}
-                                       style={{minWidth: 160}}
-                                       tagkey="lastNameCn"
-                                       sdsd={'dd'}/>
-                            </div>
-                            <div style={{display: 'flex', minHeight: 40, width: 200}}>
-                                <span style={{minWidth: 100}}>渠道状态：</span>
-                                <Input defaultValue={this.state.NameCn}
-                                       onChange={(e) => {
-                                           this.setState({
-                                               NameCn: e.target.value,
-                                           });
-                                       }}
-                                       style={{minWidth: 160}}
-                                       tagkey="lastNameCn"
-                                       sdsd={'dd'}/>
-                            </div>
-                            <EchartsViews/>
 
-
-                            <Button onClick={(e) => {
-
-
-                            }} style={{borderRadius: '4px', height: '30px'}}> 添加备注并保存 </Button>
+                            <EchartsViews
+                                style={{marginTop: 15}}
+                            ></EchartsViews>
 
 
                         </Card>
@@ -696,37 +663,9 @@ class Basic extends Component {
                 </Card>
                 <Card
                     style={{marginTop: 15}}
-
                     title="我的状态"
-                      bodyStyle={{padding: 0, margin: 0}}
-
-                      extra={[
-                          <Button style={{marginRight: '10px'}} type="default" disabled={!hasSelected}
-                                  onClick={() => this.refleshNowpage()}>渠道列表
-                          </Button>,
-
-                          <CSVLink filename={new Date() + "出金管理报表.csv"} data={this.state.userList}
-                                   headers={this.columnss}>
-                              <Button onClick={() => {
-
-                                  console.log('hcia Button')
-
-                                  window.Axios.post('/auth/addOperatorLogHistory', {
-                                      moduleLog: '交易管理',
-                                      pageLog: '出金报表',
-                                      commentLog: '下载当前列表',
-                                      typeLog: '18',
-                                  }).then(function (response) {
-
-                                      console.log('hcia response', response)
-
-                                  });
-
-
-                              }
-                              }>下载当前列表</Button>
-                          </CSVLink>]
-                      }>
+                    bodyStyle={{padding: 0, margin: 0}}
+                >
 
                     <Table
 

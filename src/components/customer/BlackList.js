@@ -202,21 +202,7 @@ export default class BlackList extends Component {
                 ),
             }
 
-            // , {
-            //
-            //
-            //     title: '操作',
-            //
-            //     align: 'center',
-            //     key: 'action',
-            //     render: (text, record) => (
-            //         <div>
-            //             <Button  size={'small'} style={{minWidth: 80, background: '#FDD000'}} onClick={() => this.showOPDAyModal2(record)}>日志</Button>
-            //
-            //
-            //         </div>
-            //     ),
-            // }
+
 
         ];
         this.columns = [
@@ -298,12 +284,7 @@ export default class BlackList extends Component {
 
 
 
-        // window.Axios.post('back/addLogHistory', {
-        //     'moduleLog': '用户管理',
-        //     'pageLog': '黑名单',
-        //     'commentLog': '移除黑名单',
-        //     'typeLog': 3,
-        // });
+
 
         let self = this
         window.Axios.post('auth/removeBlackUser', {
@@ -347,8 +328,8 @@ export default class BlackList extends Component {
         })
         window.Axios.post('auth/getBlackList', {
             pageNo: this.state.currentA,
-            'listType': 1,//1:合规 2:开户 3:交易
-            'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易,
+            'listType': 1,
+            'pageSize': this.state.pgsize,
             email: this.state.selectMail,
             mobile: this.state.selectPhoneF,
             nationalId: this.state.selectID,
