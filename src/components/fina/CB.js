@@ -574,62 +574,10 @@ class Basic extends Component {
                 </h2>
                 <BreadcrumbCustom first="营销管理" second="渠道管理" third={"客维主页"}/>
 
-                <Card title="渠道列表"
-                      bodyStyle={{padding: 0, margin: 0}}
-
-                      extra={[
-                          <Button style={{marginRight: '10px'}} type="default" disabled={!hasSelected}
-                                  onClick={() => this.refleshNowpage()}>渠道列表
-                          </Button>,
-
-                          <CSVLink filename={new Date() + "出金管理报表.csv"} data={this.state.userList}
-                                   headers={this.columnss}>
-                              <Button onClick={() => {
-
-                                  console.log('hcia Button')
-
-                                  window.Axios.post('/auth/addOperatorLogHistory', {
-                                      moduleLog: '交易管理',
-                                      pageLog: '出金报表',
-                                      commentLog: '下载当前列表',
-                                      typeLog: '18',
-                                  }).then(function (response) {
-
-                                      console.log('hcia response', response)
-
-                                  });
-
-
-                              }
-                              }>下载当前列表</Button>
-                          </CSVLink>]
-                      }>
-
-                    <Table
-
-                        titleStyle={{whiteSpace: 'nowrap'}}
-                        style={{whiteSpace: 'nowrap'}}
-                        rowKey="id"
-
-                        columns={this.columns}
-                        dataSource={this.state.userList}
-                        scroll={{x: 1600}}
-                        bordered
-                        loading={this.state.loading}
-                        pagination={{  // 分页
-                            total: this.state.pgsize * this.state.totalPage,
-                            pageSize: this.state.pgsize,
-                            onChange: this.changePage,
-                        }}
-                    />
-                </Card>
                 <Card
-
                     style={{marginTop: 15}}
-                    title="添加下载渠道
-"
+                    title="返佣账户"
                     bodyStyle={{padding: 0, margin: 0}}
-
                 >
 
 
@@ -684,6 +632,119 @@ class Basic extends Component {
                         </Card>
 
                     </div>
+                </Card>
+                <Card
+                    style={{marginTop: 15}}
+                    title="数据统计"
+                    bodyStyle={{padding: 0, margin: 0}}
+                >
+
+
+                    <div className="gutter-example button-demo">
+
+
+                        <Card>
+                            <div style={{display: 'flex', minHeight: 40, width: 200}}>
+                                <span style={{minWidth: 100}}>渠道名称：</span>
+                                <Input defaultValue={this.state.NameCn}
+                                       onChange={(e) => {
+                                           this.setState({
+                                               NameCn: e.target.value,
+                                           });
+                                       }}
+                                       style={{minWidth: 160}}
+                                       tagkey="lastNameCn"
+                                       sdsd={'dd'}/>
+                            </div>
+
+                            <div style={{display: 'flex', minHeight: 40, width: 200}}>
+                                <span style={{minWidth: 100}}>渠道链接：</span>
+                                <Input defaultValue={this.state.NameCn}
+                                       onChange={(e) => {
+                                           this.setState({
+                                               NameCn: e.target.value,
+                                           });
+                                       }}
+                                       style={{minWidth: 160}}
+                                       tagkey="lastNameCn"
+                                       sdsd={'dd'}/>
+                            </div>
+                            <div style={{display: 'flex', minHeight: 40, width: 200}}>
+                                <span style={{minWidth: 100}}>渠道状态：</span>
+                                <Input defaultValue={this.state.NameCn}
+                                       onChange={(e) => {
+                                           this.setState({
+                                               NameCn: e.target.value,
+                                           });
+                                       }}
+                                       style={{minWidth: 160}}
+                                       tagkey="lastNameCn"
+                                       sdsd={'dd'}/>
+                            </div>
+                            <EchartsViews/>
+
+
+                            <Button onClick={(e) => {
+
+
+                            }} style={{borderRadius: '4px', height: '30px'}}> 添加备注并保存 </Button>
+
+
+                        </Card>
+
+                    </div>
+                </Card>
+                <Card
+                    style={{marginTop: 15}}
+
+                    title="我的状态"
+                      bodyStyle={{padding: 0, margin: 0}}
+
+                      extra={[
+                          <Button style={{marginRight: '10px'}} type="default" disabled={!hasSelected}
+                                  onClick={() => this.refleshNowpage()}>渠道列表
+                          </Button>,
+
+                          <CSVLink filename={new Date() + "出金管理报表.csv"} data={this.state.userList}
+                                   headers={this.columnss}>
+                              <Button onClick={() => {
+
+                                  console.log('hcia Button')
+
+                                  window.Axios.post('/auth/addOperatorLogHistory', {
+                                      moduleLog: '交易管理',
+                                      pageLog: '出金报表',
+                                      commentLog: '下载当前列表',
+                                      typeLog: '18',
+                                  }).then(function (response) {
+
+                                      console.log('hcia response', response)
+
+                                  });
+
+
+                              }
+                              }>下载当前列表</Button>
+                          </CSVLink>]
+                      }>
+
+                    <Table
+
+                        titleStyle={{whiteSpace: 'nowrap'}}
+                        style={{whiteSpace: 'nowrap'}}
+                        rowKey="id"
+
+                        columns={this.columns}
+                        dataSource={this.state.userList}
+                        scroll={{x: 1600}}
+                        bordered
+                        loading={this.state.loading}
+                        pagination={{
+                            total: this.state.pgsize * this.state.totalPage,
+                            pageSize: this.state.pgsize,
+                            onChange: this.changePage,
+                        }}
+                    />
                 </Card>
 
                 <Modal
@@ -770,7 +831,6 @@ class Basic extends Component {
 
 
                 </Modal>
-                <EchartsViews />
 
 
             </div>

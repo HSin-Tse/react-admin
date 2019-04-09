@@ -503,7 +503,7 @@ class Basic extends Component {
     refleshNowpage = () => {
 
         let self = this;
-        this.props.history.goBack()
+        self.props.history.goBack()
 
 
     }
