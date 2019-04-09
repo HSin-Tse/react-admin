@@ -45,20 +45,6 @@ class Basic extends Component {
         };
     }
 
-    handleAddComment = () => {
-        let self = this;
-        window.Axios.post('auth/addRecordComment', {
-            id: self.state.theBelongUserId,
-            commentType: 6,
-            content: self.state.theComment,
-        }).then(() => {
-            message.success('操作成功')
-        })
-        this.setState({
-            modal2OPDAYVisible: false,
-        });
-    }
-
 
     requestUserCommentList = (record) => {
         var self = this;
@@ -90,160 +76,8 @@ class Basic extends Component {
     componentDidMount() {
 
 
-        this.modalOPDayL2 = [
-            {
-                title: '操作人',
-                dataIndex: 'comment',
-                key: 'operationDiary_Status',
-                align: 'center',
-
-                render: (text, record) => (
-                    <span>{record.bkUserName}</span>),
-            }, {
-                title: '操作時間',
-                dataIndex: 'bkUserName',
-                key: 'operationDiary_User',
-                align: 'center',
-
-                render: (text, record) => (
-                    <span>{this.timestampToTime(record.createDate)}</span>),
-            }, {
-                title: '备注',
-                dataIndex: 'comment',
-                key: 'operationDiary_Status',
-                align: 'center',
-
-                render: (text, record) => (
-                    <span>{record.comment}</span>),
-            }]
-
-
-        this.columnss = [
-
-            {
-                align: 'center',
-                label: '订单编号',
-                dataIndex: '订单编号',
-                key: 'orderNo',
-                render: (text, record) => (
-                    <span>{record.orderNo}</span>),
-            }, {
-
-                label: '用户账号',
-                dataIndex: '用户账号',
-                key: 'accountNo',
-                render: (text, record) => (<span>{record.accountNo}</span>),
-                align: 'center',
-            }, {
-                label: '姓名',
-                dataIndex: '姓名',
-                key: 'name',
-                render: (text, record) => (
-                    <span>{record.name}</span>),
-                align: 'center',
-            }, {
-                align: 'center',
-                label: '申请时间',
-                dataIndex: '申请时间',
-                key: 'date',
-                width: 100,
-                render: (text, record) => (
-                    <span>{record.date}</span>),
-            }, {
-                align: 'center',
-                label: '支付渠道',
-                dataIndex: '支付渠道',
-                key: 'channelName',
-                render: (text, record) => (
-                    <span>{record.channelName}</span>)
-            }, {
-                align: 'center',
-
-                label: '账户币种',
-                dataIndex: '账户币种',
-                key: 'accountCurrency',
-                render: (text, record) => (
-                    <span>{record.accountCurrency}</span>),
-            }, {
-                align: 'center',
-                label: '出金金额',
-                dataIndex: '出金金额',
-                key: 'accountAmount',
-                render: (text, record) => (
-                    <span>{record.accountAmount}</span>),
-            }, {
-                align: 'center',
-                label: '账号类型',
-                dataIndex: '账号类型',
-                key: 'broker',
-                render: (text, record) => (
-                    <span>{record.broker}</span>),
-            }, {
-                align: 'center',
-                label: '执行金额',
-                dataIndex: '执行金额',
-                key: 'execAmount',
-                render: (text, record) => (
-                    <span>{record.execAmount}</span>
-                )
-
-            }, {
-                align: 'center',
-                label: '执行币种',
-                dataIndex: '执行币种',
-                key: 'execCurrency',
-                render: (text, record) => (
-                    <span>{record.execCurrency}</span>)
-            }
-
-            , {
-                align: 'center',
-                label: '使用汇率',
-                dataIndex: '使用汇率',
-                key: 'rate',
-                render: (text, record) => (
-                    <span>{record.rate}</span>)
-            }, {
-                align: 'center',
-                label: '手续费',
-                dataIndex: '手续费',
-                key: 'feeAmount',
-                render: (text, record) => (
-                    <span>{record.feeAmount}</span>)
-            }, {
-                align: 'center',
-                label: '出金状态',
-                dataIndex: '出金状态',
-                key: 'displayStatus',
-                render: (text, record) => (
-                    <span>{record.displayStatus}</span>)
-            }, {
-                align: 'center',
-                label: '执行日期',
-                dataIndex: '执行日期',
-                key: 'completeDate',
-                render: (text, record) => (
-                    <span>{record.completeDate}</span>)
-            }, {
-                align: 'center',
-                label: '处理人',
-                dataIndex: '处理人',
-                key: 'operator',
-                render: (text, record) => (
-                    <span>{record.operator}</span>)
-            }
-
-        ];
         this.columns = [
-            {
-                title: '序号',
-                dataIndex: '序号',
-                key: '序号',
-                align: 'center',
-                render: (text, record, index) => (
-                    <span>{(this.state.current - 1) * this.state.pgsize + index + 1}</span>
-                ),
-            },
+
             {
                 align: 'center',
                 title: '渠道列表',
@@ -341,48 +175,8 @@ class Basic extends Component {
                 key: '月留存',
                 render: (text, record) => (
                     <span>{record.displayStatus}</span>)
-            }, {
-                align: 'center',
-                title: '操作',
-                key: '操作',
-                render: (text, record) => (
-                    <div>
-                        <Button size={'small'} style={{minWidth: 70, background: '#FDD000'}}
-                                onClick={() => this.showOPDAyModal2(record)}>删除</Button>
-
-                    </div>
-                ),
             }];
 
-        this.nodeColumns = [
-            {
-                align: 'center',
-                title: '日期',
-                width: 140,
-                dataIndex: '日期',
-                key: '日期',
-                render: (text, record) => (
-                    <span>{this.timestampToTime(record.createDate)}</span>)
-            },
-            {
-                align: 'center',
-
-                title: '备注',
-                dataIndex: '备注',
-                key: '备注',
-                width: 120,
-                render: (text, record) => (
-                    <span>{record.comment}</span>)
-            }, {
-                align: 'center',
-
-                title: '操作人',
-                dataIndex: '操作人',
-                width: 120,
-                key: '操作人',
-                render: (text, record) => (
-                    <span>{record.bkUserName}</span>)
-            }];
         this.requestPage()
     }
 
@@ -520,54 +314,9 @@ class Basic extends Component {
     }
 
     render() {
-        const {selectedRowKeys} = this.state;
-        const hasSelected = selectedRowKeys.length > 0;
         return (
             <div>
 
-                <div className={classNames('switcher dark-white', {active: this.state.switcherOn})}>
-                    <span className="sw-btn dark-white" onClick={() => {
-                        this.setState({
-                            switcherOn: !this.state.switcherOn
-                        })
-                    }}>
-                     <Icon type="setting" className="text-dark"/>
-                    </span>
-                    <div style={{width: 270}}>
-                        <Card
-                            title="当前表搜索"
-                            extra={<Button type="primary" onClick={() => {
-                                let self = this
-                                this.setState({
-                                    selectOrderNo: undefined,
-                                    selectName: undefined,
-                                    accountNo: undefined,
-                                    selectTimeStart: undefined,
-                                    selectTimeEnd: undefined,
-                                    filterTimeFalue: null
-                                }, () => {
-                                    self.requestPage()
-                                })
-                            }}
-                            >清除条件</Button>}
-                        >
-
-
-                            <Input value={this.state.selectName} onChange={(e) => {
-                                this.setState({
-                                    selectName: e.target.value,
-                                });
-                            }} style={{marginBottom: 10}} placeholder="渠道名称"/>
-
-
-                            <Button onClick={() => this.requestPageR()} style={{marginTop: 15}} type="primary"
-                                    icon="search">Search</Button>
-
-                        </Card>
-
-
-                    </div>
-                </div>
 
                 <h2 style={{marginTop: 15}}>
                     客维管理
@@ -588,14 +337,14 @@ class Basic extends Component {
                             <h3>某某客维返佣账户</h3>
 
                             <div style={{marginTop: 15, display: 'flex', minHeight: 40, width: 200}}>
-                                <span style={{minWidth: 100}}>渠道名称：a</span>
+                                <span style={{minWidth: 100}}>总佣金：a</span>
                             </div>
 
                             <div style={{display: 'flex', minHeight: 40, width: 200}}>
-                                <span style={{minWidth: 100}}>渠道链接：b</span>
+                                <span style={{minWidth: 100}}>已返佣：b</span>
                             </div>
                             <div style={{display: 'flex', minHeight: 40, width: 200}}>
-                                <span style={{minWidth: 100}}>渠道状态：c</span>
+                                <span style={{minWidth: 100}}>未返佣：c</span>
                             </div>
 
 
@@ -685,91 +434,6 @@ class Basic extends Component {
                         }}
                     />
                 </Card>
-
-                <Modal
-                    bodyStyle={{
-                        width: '600px',
-                        background: 'white',
-                        padding: 0,
-                        margin: 0,
-                    }}
-                    onCancel={() => {
-                        this.setState({
-                            visible: false,
-                            modal2OPDAYVisible: false,
-                        });
-                    }}
-                    closable={false}
-                    footer={null}
-                    visible={this.state.modal2OPDAYVisible}
-
-
-                >
-
-                    <div style={{borderRadius: '4px'}}>
-                        <div style={{
-                            alignItems: 'center',
-                            justifyContent: 'center', height: 48, display: 'flex', padding: 0, background: '#FDD000'
-                        }}>
-                            <span style={{
-                                fontSize: 18,
-                                fontFamily: 'PingFangSC-Medium',
-                                fontWeight: 500,
-                                color: 'rgba(51,51,51,1)'
-                            }}>{'异常备注'}
-                            </span>
-                        </div>
-
-                        <TextArea
-                            style={{marginTop: "20px", width: '560px', marginLeft: "20px", marginRight: "20px"}}
-                            rows={4}
-                            value={this.state.theComment}
-                            onChange={(e) => {
-                                let comment = e.target.value;
-                                this.setState({
-                                    theComment: comment
-                                });
-                            }}
-                            placeholder="异常备注"/>
-                        <Table
-                            style={{marginTop: "20px", marginLeft: "20px", marginRight: "20px"}}
-                            bordered
-                            rowKey="id"
-                            columns={this.modalOPDayL2}
-                            dataSource={this.state.operationDiaryHistory}
-                        />
-
-                        <div style={{
-                            marginLeft: "80px", marginRight: "80px",
-                            paddingBottom: '48px',
-                            paddingTop: '48px',
-                            justifyContent: 'space-between',
-                            display: 'flex'
-                        }}>
-
-                            <Button
-
-                                onClick={
-                                    this.handleAddComment
-                                }
-                                style={{
-                                    borderRadius: '4px',
-                                    background: '#F6D147',
-                                    width: '180px',
-                                    height: '40px'
-                                }}> 提交 </Button>
-                            <Button onClick={(e) => {
-                                this.setState({
-                                    modal2OPDAYVisible: false,
-                                });
-                            }} style={{borderRadius: '4px', width: '180px', height: '40px'}}> 取消 </Button>
-
-                        </div>
-
-                    </div>
-
-
-                </Modal>
 
 
             </div>
