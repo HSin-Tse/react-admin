@@ -80,99 +80,99 @@ class Basic extends Component {
 
             {
                 align: 'center',
-                title: '渠道列表',
-                dataIndex: '渠道列表',
-                key: '渠道列表',
+                title: '已分配',
+                dataIndex: '已分配',
+                key: '已分配',
                 render: (text, record) => (
                     <span>{record.orderNo}</span>),
             }, {
 
-                title: '点击次数',
-                dataIndex: '点击次数',
-                key: '点击次数',
+                title: '已跟踪',
+                dataIndex: '已跟踪',
+                key: '已跟踪',
                 render: (text, record) => (<span>{record.accountNo}</span>),
                 align: 'center',
             }, {
-                title: '浏览次数',
-                dataIndex: '浏览次数',
-                key: '浏览次数',
+                title: '未跟踪',
+                dataIndex: '未跟踪',
+                key: '未跟踪',
                 render: (text, record) => (
                     <span>{record.name}</span>),
                 align: 'center',
             }, {
                 align: 'center',
-                title: '下载次数',
-                dataIndex: '下载次数',
-                key: '下载次数',
+                title: '已开户',
+                dataIndex: '已开户',
+                key: '已开户',
                 width: 100,
                 render: (text, record) => (
                     <span>{record.date}</span>),
             }, {
                 align: 'center',
-                title: '注册账号',
-                dataIndex: '注册账号',
-                key: '注册账号',
+                title: '已失效客户',
+                dataIndex: '已失效客户',
+                key: '已失效客户',
                 render: (text, record) => (
                     <span>{record.channelName}</span>)
             }, {
                 align: 'center',
 
-                title: '新增开户数',
-                dataIndex: '新增开户数',
-                key: '新增开户数',
+                title: '净入金',
+                dataIndex: '净入金',
+                key: '净入金',
                 render: (text, record) => (
                     <span>{record.accountCurrency}</span>),
             }, {
                 align: 'center',
-                title: '累计开户数',
-                dataIndex: '累计开户数',
-                key: '累计开户数',
+                title: '交易量',
+                dataIndex: '交易量',
+                key: '交易量',
                 render: (text, record) => (
                     <span>{record.accountAmount}</span>),
             }, {
                 align: 'center',
-                title: 'DAU',
-                dataIndex: 'DAU',
-                key: 'DAU',
+                title: '已返佣',
+                dataIndex: '已返佣',
+                key: '已返佣',
                 render: (text, record) => (
                     <span>{record.broker}</span>),
             }, {
                 align: 'center',
-                title: 'MAU',
-                dataIndex: 'MAU',
-                key: 'MAU',
+                title: '未返佣',
+                dataIndex: '未返佣',
+                key: '未返佣',
                 render: (text, record) => (
                     <span>{record.execAmount}</span>
                 )
 
             }, {
                 align: 'center',
-                title: '总用户',
-                dataIndex: '总用户',
-                key: '总用户',
+                title: '入职时间',
+                dataIndex: '入职时间',
+                key: '入职时间',
                 render: (text, record) => (
                     <span>{record.execCurrency}</span>)
             }
 
             , {
                 align: 'center',
-                title: '次日留存',
-                dataIndex: '次日留存',
-                key: '次日留存',
+                title: 'LEADS处理率',
+                dataIndex: 'LEADS处理率',
+                key: 'LEADS处理率',
                 render: (text, record) => (
                     <span>{record.rate}</span>)
             }, {
                 align: 'center',
-                title: '周留存',
-                dataIndex: '周留存',
-                key: '周留存',
+                title: 'LEADS流失率',
+                dataIndex: 'LEADS流失率',
+                key: 'LEADS流失率',
                 render: (text, record) => (
                     <span>{record.feeAmount}</span>)
             }, {
                 align: 'center',
-                title: '月留存',
-                dataIndex: '月留存',
-                key: '月留存',
+                title: '开户成功率',
+                dataIndex: '开户成功率',
+                key: '开户成功率',
                 render: (text, record) => (
                     <span>{record.displayStatus}</span>)
             }];
