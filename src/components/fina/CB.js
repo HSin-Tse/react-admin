@@ -178,6 +178,9 @@ class Basic extends Component {
             }];
 
         this.requestPage()
+        this.requestD()
+
+
     }
 
     timestampToTime = (timestamp) => {
@@ -253,6 +256,22 @@ class Basic extends Component {
         })
 
     }
+    requestD = () => {
+
+        let self = this
+        window.Axios.post('ib/getIBUserDetail', {
+            'id': 0,
+        }).then(function (response) {
+            console.log('hcia response' , response)
+
+            // self.setState({
+            //         totalPage: response.data.data.totalPage,
+            //         loading: false,
+            //         userList: response.data.data.list
+            //     }
+            // );
+        })
+    };
     requestPage = () => {
 
         let self = this
