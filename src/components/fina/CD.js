@@ -1099,7 +1099,7 @@ export default class PotentialUser extends Component {
                                 </Button>
                             }
                             bodyStyle={{padding: 0, margin: 0}}
-                            title={'潜在用户信息表'}>
+                            title={'某某的LEADS列表'}>
                             <Table
                                 titleStyle={{whiteSpace: 'nowrap'}}
                                 style={{whiteSpace: 'nowrap'}}
@@ -1129,7 +1129,7 @@ export default class PotentialUser extends Component {
                                         onClick={() => this.requestPageB()}>刷新
                                 </Button>
                             }
-                            bodyStyle={{padding: 0, margin: 0}} title={'模拟用户信息表'}>
+                            bodyStyle={{padding: 0, margin: 0}} title={'某某的LEADS列表'}>
 
                             <Table rowKey="id"
                                    bordered
@@ -1158,7 +1158,7 @@ export default class PotentialUser extends Component {
                                         onClick={() => this.requestPageC()}>刷新
                                 </Button>
                             }
-                            bodyStyle={{padding: 0, margin: 0}} title={'意向用户信息表'}>
+                            bodyStyle={{padding: 0, margin: 0}} title={'某某的LEADS列表'}>
                             <Table rowKey="id"
                                    titleStyle={{whiteSpace: 'nowrap'}}
                                    style={{whiteSpace: 'nowrap'}}
