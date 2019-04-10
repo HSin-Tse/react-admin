@@ -696,7 +696,7 @@ export default class PotentialUser extends Component {
         self.setState({
             loadingA: true
         })
-        window.Axios.post('ixuser/getUserList', {
+        window.Axios.post('ib/getIBLeadsList', {
             'listType': 1,
             'pageSize': this.state.pgsize,
             email: this.state.selectMail,
@@ -721,7 +721,7 @@ export default class PotentialUser extends Component {
         self.setState({
             loadingA: true
         })
-        window.Axios.post('ixuser/getUserList', {
+        window.Axios.post('ib/getIBLeadsList', {
             pageNo: this.state.currentA,
             'listType': 1,
             'pageSize': this.state.pgsize,
@@ -750,7 +750,7 @@ export default class PotentialUser extends Component {
         self.setState({
             loadingB: true
         })
-        window.Axios.post('ixuser / getUserList', {
+        window.Axios.post('ib/getIBLeadsList', {
             'pageSize': this.state.pgsize,
             'listType': 2,
             email: this.state.selectMail,
@@ -778,7 +778,7 @@ export default class PotentialUser extends Component {
         self.setState({
             loadingB: true
         })
-        window.Axios.post('ixuser / getUserList', {
+        window.Axios.post('ib/getIBLeadsList', {
             pageNo: this.state.currentB,
             'pageSize': this.state.pgsize,
             'listType': 2,
@@ -807,7 +807,7 @@ export default class PotentialUser extends Component {
         self.setState({
             loadingC: true
         })
-        window.Axios.post('ixuser/getUserList', {
+        window.Axios.post('ib/getIBLeadsList', {
             'listType': 3,
             'pageSize': this.state.pgsize,
             email: this.state.selectMail,
@@ -831,7 +831,7 @@ export default class PotentialUser extends Component {
         self.setState({
             loadingC: true
         })
-        window.Axios.post('ixuser/getUserList', {
+        window.Axios.post('ib/getIBLeadsList', {
             pageNo: this.state.currentC,
             'listType': 3,
             'pageSize': this.state.pgsize,
