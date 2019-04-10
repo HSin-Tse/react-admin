@@ -10,12 +10,14 @@ class BreadcrumbCustom extends React.Component {
         const first = <Breadcrumb.Item>{this.props.first}</Breadcrumb.Item> || '';
         const second = <Breadcrumb.Item>{this.props.second}</Breadcrumb.Item> || '';
         const thied = <Breadcrumb.Item>{this.props.third}</Breadcrumb.Item> || '';
+        const four = <Breadcrumb.Item>{this.props.four}</Breadcrumb.Item> || '';
         return (
             <span>
                 <Breadcrumb style={{margin: '12px 0'}}>
                     {first}
                     {second}
                     {thied}
+                    {four}
                 </Breadcrumb>
             </span>
         )

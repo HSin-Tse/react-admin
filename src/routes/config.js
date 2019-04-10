@@ -79,6 +79,7 @@ export default {
                 {tk: 'SERVICE_GROUP_MGMT', key: '/app/mar/cha', title: '渠道管理', component: 'CA'},
                 {tk: 'SERVICE_GROUP_MGMT', key: '/app/mar/chb', title: '客维主页', component: 'CB'},
                 {tk: 'SERVICE_GROUP_MGMT', key: '/app/mar/chc', title: '客维统计', component: 'CC'},
+                {tk: 'SERVICE_GROUP_MGMT', key: '/app/mar/chd', title: '客维统计', component: 'CD'},
 
             ],
         },

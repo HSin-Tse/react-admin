@@ -59,6 +59,7 @@ import CA from './fina/CA'
 import CAA from './fina/CAA'
 import CB from './fina/CB'
 import CC from './fina/CC'
+import CD from './fina/CD'
 
 
 
@@ -74,6 +75,7 @@ export default {
     CAA,
     CB,
     CC,
+    CD,
     RoleSet,
     OpLog,
     AdvancedTable,

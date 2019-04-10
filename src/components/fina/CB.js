@@ -284,7 +284,7 @@ class Basic extends Component {
 
         window.Axios.post('ib/getIBUserDetailStat', {
             'id': mImfor.backUserId ? mImfor.backUserId : '',
-            'filterDateType': 1,
+            'filterDateType': this.state.filterDateType,
         }).then(function (response) {
             console.log('hcia response', response)
 
@@ -305,7 +305,7 @@ class Basic extends Component {
         );
 
         window.Axios.post('ib/getIBUserList', {
-            'filterDateType': 1,
+            'filterDateType': this.state.filterDateType,
 
             'pageSize': self.state.pgsize,
             'pageNo': self.state.current,
