@@ -591,8 +591,6 @@ export default class PotentialUser extends Component {
         }).catch(error => {
 
 
-
-
             var logRouter = ''
 
             if (this.state.nowKey === '1') {
@@ -614,7 +612,6 @@ export default class PotentialUser extends Component {
 
     }
     seeUSer = (record) => {
-
 
 
         this.props.history.push('/app/pass/passopen/user' + record.leadId)
@@ -1006,7 +1003,6 @@ export default class PotentialUser extends Component {
                             }} style={{marginBottom: 10}} placeholder="手机号"/>
 
 
-
                             <Input value={this.state.starClientAccount} onChange={(e) => {
                                 this.setState({
                                     starClientAccount: e.target.value,
@@ -1038,7 +1034,6 @@ export default class PotentialUser extends Component {
                                         var selectTimeEnd = value[1].unix() + '000'
 
 
-
                                         this.setState({
                                             filterTimeFalue: value,
                                             selectTimeStart: selectTimeStart,
@@ -1051,14 +1046,8 @@ export default class PotentialUser extends Component {
                                 }}
                                 value={this.state.filterTimeFalue}
                                 onOk={(value) => {
-                                    console.log('hcia', 'onOk: ', value);
-
-
                                     var selectTimeStart = value[0].unix() + '000'
                                     var selectTimeEnd = value[1].unix() + '000'
-
-
-
                                     this.setState({
                                         filterTimeFalue: value,
                                         selectTimeStart: selectTimeStart,
@@ -1081,7 +1070,6 @@ export default class PotentialUser extends Component {
 
 
                 <Tabs
-                    // tabBarGutter={0}
                     onChange={(key) => {
 
                         this.setState({
@@ -1105,7 +1093,6 @@ export default class PotentialUser extends Component {
                                 style={{whiteSpace: 'nowrap'}}
                                 rowKey="id"
                                 bordered
-                                // rowSelection={rowSelection}
                                 columns={this.pageAColumns()}
                                 dataSource={this.state.bklistA}
                                 scroll={{x: 1600}}
@@ -1213,12 +1200,10 @@ export default class PotentialUser extends Component {
                             bordered
                             rowKey="id"
                             columns={this.columnsLog}
-
                             dataSource={this.state.operationLogHistory}
                             loading={this.state.loadingComment}
                             pagination={{
                                 current: this.state.currentComment,
-
                                 total: this.state.totalpageComments * this.state.pgsize,
                                 pageSize: this.state.pgsize,
                                 onChange: this.changePageLog,

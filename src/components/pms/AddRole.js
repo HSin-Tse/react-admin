@@ -144,6 +144,9 @@ class AddRole extends Component {
     render() {
 
         const {getFieldDecorator} = this.props.form;
+
+
+        console.log('hcia menuList' , this.state.menuList)
         const setingBlok = this.state.menuList.map(function (item, index) {
                 const _childList = item.childrenMenu
                 return (
@@ -152,7 +155,14 @@ class AddRole extends Component {
                           bordered={true}>
                         {
                             _childList.map(function (item1, number) {
-                                // console.log('hcia item1', item1)
+
+
+                                if(this.state.menuList.length==0)
+
+                                    return
+
+                                
+                                console.log('hcia item1', item1)
 
 
                                 return (
