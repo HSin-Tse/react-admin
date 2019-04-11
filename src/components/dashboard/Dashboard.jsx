@@ -2,16 +2,12 @@
  * Created by hao.cheng on 2017/5/3.
  */
 import React from 'react';
-import {Row, Col, Card, Button, Icon, Input, message} from 'antd';
+import {Row, Col, Card} from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
-import EchartsViews from './EchartsViews';
 import {bindActionCreators} from "redux";
 import {addTodo, setINFOR} from "../../action";
 import connect from "react-redux/es/connect/connect";
-import axios from "axios";
-import ReactJson from 'react-json-view'
 
-const {TextArea} = Input;
 
 
 class Dashboard extends React.Component {
@@ -97,7 +93,6 @@ class Dashboard extends React.Component {
         };
     }
 
-    // Request URL: http://127.0.0.1:8080/open/getOpenApplyList60
 
 
     componentDidMount() {
@@ -111,7 +106,6 @@ class Dashboard extends React.Component {
 
 
         var mImfor = JSON.parse(localStorage.getItem('infor')),
-
             // console.log('hcia mImfor', mImfor)
             console
 
@@ -142,8 +136,6 @@ class Dashboard extends React.Component {
     render() {
         return (
             <div className="gutter-example button-demo">
-                {/*{JSON.stringify(this.props.todps)}*/}
-                {/*{JSON.stringify(this.props.infor)}*/}
                 {/*{JSON.stringify(localStorage.getItem('infor'))}*/}
 
 

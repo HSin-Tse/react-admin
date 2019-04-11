@@ -112,8 +112,6 @@ window.Axios.interceptors.request.use(
         if (xtoken != null) {
             config.headers['X-Token'] = xtoken
             if (config.method == 'post') {
-
-
                 window.hideLoading = Toast.loading('加载中...', 0, () => {
 
                 })
@@ -121,8 +119,6 @@ window.Axios.interceptors.request.use(
 
                 config.data = {
                     ...config.data,
-                    // 'token': xtoken,
-                    // 'loginName': loginName,
                     'language': 'zh-CN',
 
                 }
@@ -145,7 +141,6 @@ window.Axios.interceptors.request.use(
         return config
     }, function (error) {
 
-        console.log('hcia error', error)
         return Promise.reject(error)
     })
 

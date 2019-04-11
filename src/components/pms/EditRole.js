@@ -192,12 +192,12 @@ class EditRole extends Component {
             return
         }
         console.log('hcia AAA')
-        
-        console.log('hcia this.state.realp' , this.state.realp)
 
-        
-        console.log('hcia this.state.realp.length' , this.state.realp.length)
-        if (this.state.realp.length<6) {
+        console.log('hcia this.state.realp', this.state.realp)
+
+
+        console.log('hcia this.state.realp.length', this.state.realp.length)
+        if (this.state.realp.length < 6) {
             message.error('請輸入你的密碼六位以上')
             return
         }
@@ -285,12 +285,13 @@ class EditRole extends Component {
                           bordered={true}>
                         {
                             _childList.map(function (item1, number) {
-
+                                if (item1.childrenMenu == null) {
+                                    item1.childrenMenu = []
+                                }
                                 var isOut2 = self.state.powerList.some(function (_item, index, array) {
                                     return _item == item1.id
                                 });
 
-                                // console.log('hcia item1', item1)
                                 item1.sscheck = isOut2
 
                                 return (
