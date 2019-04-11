@@ -2,16 +2,13 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, message, Modal, Card, Input, Icon} from 'antd';
+import {Button, Table, message, Card, Input} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
-import {CSVLink} from "react-csv";
-import classNames from "classnames";
 import EchartsViews from "../dashboard/EchartsViews";
 
-const {TextArea} = Input;
 
 class Basic extends Component {
 
@@ -342,7 +339,6 @@ class Basic extends Component {
                 self.requestPage()
             });
             message.success('操作成功');
-            // To disabled submit button at the beginning.
 
         })
 
