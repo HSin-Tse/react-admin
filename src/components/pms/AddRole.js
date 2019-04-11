@@ -156,13 +156,18 @@ class AddRole extends Component {
                         {
                             _childList.map(function (item1, number) {
 
-
-                                if(this.state.menuList.length==0)
-
-                                    return
-
-
                                 console.log('hcia item1', item1)
+
+                                if(item1.childrenMenu==null)
+                                {item1.childrenMenu=[]
+                                }
+                                console.log('hcia item1.childrenMenu' , item1.childrenMenu)
+
+                                // if(this.state.menuList.length==0)
+                                //
+                                //     return
+
+
 
 
                                 return (
@@ -179,7 +184,7 @@ class AddRole extends Component {
 
                                         <br/>
                                         <Checkbox
-                                            style={{display: item1.childrenMenu.length == 0 ? '' : ''}}
+                                            // style={{display: item1.childrenMenu.length == 0 ? '' : ''}}
                                             disabled={!item1.sscheck}
                                             key={number}
                                             value={-item1.id} id={number}>可操作</Checkbox>
