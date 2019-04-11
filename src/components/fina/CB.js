@@ -2,7 +2,7 @@
  * Created by tse on 2017/7/31.
  */
 import React, {Component} from 'react';
-import {Button, Table, message, Card, Input} from 'antd';
+import {Button, Table, Card} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
@@ -263,7 +263,6 @@ class Basic extends Component {
         var iidd = {backUserId: mImfor.backUserId ? mImfor.backUserId : ''}
         console.log('hcia iidd', iidd)
         console.log('hcia iidd', iidd)
-        console.log('hcia iidd', iidd)
         let self = this
         window.Axios.post('ib/getIBUserDetail', {
             'id': mImfor.backUserId ? mImfor.backUserId : '',
@@ -324,26 +323,7 @@ class Basic extends Component {
             this.requestPage()
         })
     };
-    refleshNowpage = () => {
 
-        let self = this;
-        var result = self.state.selectedRowKeys.map(Number);
-
-        window.Axios.post('star/refreshStarLiveAccount', {
-            idList: result,
-        }).then(function (response) {
-            self.setState({
-                visibleOpM: false,
-                loadFor: false,
-            }, () => {
-                self.requestPage()
-            });
-            message.success('操作成功');
-
-        })
-
-
-    }
     showModal = () => {
         this.setState({
             visible: true,

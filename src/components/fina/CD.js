@@ -104,8 +104,8 @@ export default class PotentialUser extends Component {
         document.addEventListener("keydown", this.handleKeyPress, false);
 
         this.requestPageA()
-        this.requestPageB()
-        this.requestPageC()
+        // this.requestPageB()
+        // this.requestPageC()
     }
 
     componentWillUnmount() {
@@ -714,20 +714,25 @@ export default class PotentialUser extends Component {
         })
     }
     requestPageA = () => {
+
+
+        var mImfor = JSON.parse(localStorage.getItem('infor'))
+        console.log('hcia mImfor', mImfor)
+
+
+        var iidd = {backUserId: mImfor.backUserId ? mImfor.backUserId : ''}
+        console.log('hcia iidd', iidd)
+        console.log('hcia iidd', iidd)
         let self = this
         self.setState({
             loadingA: true
         })
         window.Axios.post('ib/getIBLeadsList', {
+            'id': mImfor.backUserId ? mImfor.backUserId : '',
+
             pageNo: this.state.currentA,
-            'listType': 1,
+            'filterLeadsType': 1,
             'pageSize': this.state.pgsize,
-            email: this.state.selectMail,
-            mobile: this.state.selectPhoneF,
-            nationalId: this.state.selectID,
-            starClientAccount: this.state.starClientAccount,
-            startTime: this.state.selectTimeStart,
-            endTime: this.state.selectTimeEnd,
 
         }).then((response) => {
             self.setState({
@@ -1081,11 +1086,7 @@ export default class PotentialUser extends Component {
                     <TabPane tab="已分配" key="1">
                         <Card
 
-                            extra={
-                                <Button type="default"
-                                        onClick={() => this.requestPageA()}>刷新
-                                </Button>
-                            }
+
                             bodyStyle={{padding: 0, margin: 0}}
                             title={'某某的LEADS列表'}>
                             <Table
@@ -1111,11 +1112,7 @@ export default class PotentialUser extends Component {
                     <TabPane tab="已跟踪" key="2">
                         <Card
 
-                            extra={
-                                <Button type="default"
-                                        onClick={() => this.requestPageB()}>刷新
-                                </Button>
-                            }
+
                             bodyStyle={{padding: 0, margin: 0}} title={'某某的LEADS列表'}>
 
                             <Table rowKey="id"
@@ -1140,11 +1137,7 @@ export default class PotentialUser extends Component {
                     <TabPane tab="未跟踪" key="3">
                         <Card
 
-                            extra={
-                                <Button type="default"
-                                        onClick={() => this.requestPageC()}>刷新
-                                </Button>
-                            }
+
                             bodyStyle={{padding: 0, margin: 0}} title={'某某的LEADS列表'}>
                             <Table rowKey="id"
                                    titleStyle={{whiteSpace: 'nowrap'}}
