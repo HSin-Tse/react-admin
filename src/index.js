@@ -121,8 +121,8 @@ window.Axios.interceptors.request.use(
 
                 config.data = {
                     ...config.data,
-                    'token': xtoken,
-                    'loginName': loginName,
+                    // 'token': xtoken,
+                    // 'loginName': loginName,
                     'language': 'zh-CN',
 
                 }

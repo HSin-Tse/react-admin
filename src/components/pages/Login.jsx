@@ -62,12 +62,12 @@ class Login extends React.Component {
                         if (ssss) {
                             self.props.history.push('/app/dashboard/index');
                         }
-                        window.Axios.post('back/addLogHistory', {
-                            'moduleLog': '登入',
-                            'pageLog': '登入',
-                            'commentLog': '登入',
-                            'typeLog': 1,
-                        });
+                        // window.Axios.post('back/addLogHistory', {
+                        //     'moduleLog': '登入',
+                        //     'pageLog': '登入',
+                        //     'commentLog': '登入',
+                        //     'typeLog': 1,
+                        // });
 
                     }
 

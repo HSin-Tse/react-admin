@@ -76,34 +76,37 @@ class HeaderCustom extends Component {
         })
 
 
-        window.Axios.post('back/addLogHistory', {
-            'moduleLog': '登出',
-            'pageLog': '登出',
-            'commentLog': '登出',
-            'typeLog': "1",
-        }).then(function (response) {
-            localStorage.removeItem('infor');
-            localStorage.removeItem('user');
-            localStorage.removeItem('too');
-            localStorage.removeItem('displayName');
+        // window.Axios.post('back/addLogHistory', {
+        //     'moduleLog': '登出',
+        //     'pageLog': '登出',
+        //     'commentLog': '登出',
+        //     'typeLog': "1",
+        // }).then(function (response) {
+        //     localStorage.removeItem('infor');
+        //     localStorage.removeItem('user');
+        //     localStorage.removeItem('too');
+        //     localStorage.removeItem('displayName');
+        //
+        //
+        //
+        //     self.props.history.push('/login')
+        //
+        // }).catch(error => {
+        //     localStorage.removeItem('infor');
+        //     localStorage.removeItem('user');
+        //     localStorage.removeItem('too');
+        //     localStorage.removeItem('displayName');
+        //
+        //     self.props.history.push('/login')
+        //
+        //     console.log('Error', error);
+        // })
 
 
-
-            self.props.history.push('/login')
-
-        }).catch(error => {
-            localStorage.removeItem('infor');
-            localStorage.removeItem('user');
-            localStorage.removeItem('too');
-            localStorage.removeItem('displayName');
-
-            self.props.history.push('/login')
-
-            console.log('Error', error);
-        })
-
-
-
+        localStorage.removeItem('infor');
+        localStorage.removeItem('user');
+        localStorage.removeItem('too');
+        localStorage.removeItem('displayName');
 
     };
     popoverHide = () => {
