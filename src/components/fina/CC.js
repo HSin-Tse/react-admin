@@ -136,6 +136,16 @@ export default class BlackList extends Component {
                 render: (text, record, index) => (
                     <span>{(this.state.currentA) * this.state.pgsize + index + 1}</span>
                 ),
+            },
+            {
+                title: '登录名',
+                align: 'center',
+
+                dataIndex: '登录名',
+                key: '登录名',
+                render: (text, record) => (
+                    <span>{record.mobile}</span>
+                ),
             }, {
                 title: '姓名',
                 align: 'center',
@@ -146,30 +156,78 @@ export default class BlackList extends Component {
                     <span>{record.name}</span>
                 ),
             }, {
-                title: '邮箱地址',
+                title: '已分配',
                 align: 'center',
-                dataIndex: '邮箱地址',
-                key: '邮箱地址',
+                dataIndex: '已分配',
+                key: '已分配',
                 render: (text, record) => (<span>{record.email}</span>),
             }, {
-                title: '身份证号',
+                title: '已跟踪',
                 align: 'center',
-                dataIndex: '身份证号',
-                key: '身份证号',
+                dataIndex: '已跟踪',
+                key: '已跟踪',
                 render: (text, record) => (<span>{record.nationalId}</span>),
             }, {
-                title: '操作时间',
+                title: '未跟踪',
                 align: 'center',
 
-                dataIndex: '操作时间',
-                key: '操作时间',
+                dataIndex: '未跟踪',
+                key: '未跟踪',
                 render: (text, record) => (<span>{record.date}</span>),
             }, {
-                title: '操作人',
+                title: '已开户',
                 align: 'center',
-                dataIndex: '操作人',
-                key: '操作人',
+                dataIndex: '已开户',
+                key: '已开户',
                 render: (text, record) => (<span>{record.operator}</span>),
+            }, {
+                title: '已失效客户',
+                align: 'center',
+                dataIndex: '已失效客户',
+                key: '已失效客户',
+                render: (text, record) => (<span>{record.operator}</span>),
+            }, {
+                title: '净入金',
+                align: 'center',
+                dataIndex: '净入金',
+                key: '净入金',
+                render: (text, record) => (<span>{record.operator}</span>),
+            }, {
+                title: '交易量',
+                align: 'center',
+                dataIndex: '交易量',
+                key: '交易量',
+                render: (text, record) => (<span>{record.operator}</span>),
+            }, {
+                title: '已返佣',
+                align: 'center',
+                dataIndex: '已返佣',
+                key: '已返佣',
+                render: (text, record) => (<span style={{color: 'red'}}>{record.operator}</span>),
+            }, {
+                title: '未返佣',
+                align: 'center',
+                dataIndex: '未返佣',
+                key: '未返佣',
+                render: (text, record) => (<span style={{color: 'red'}}>{record.operator}</span>),
+            }, {
+                title: 'LEADS处理率',
+                align: 'center',
+                dataIndex: 'LEADS处理率',
+                key: 'LEADS处理率',
+                render: (text, record) => (<span style={{color: 'red'}}>{record.operator}</span>),
+            }, {
+                title: 'LEADS流失率',
+                align: 'center',
+                dataIndex: 'LEADS流失率',
+                key: 'LEADS流失率',
+                render: (text, record) => (<span style={{color: 'red'}}>{record.operator}</span>),
+            }, {
+                title: '开户成功率',
+                align: 'center',
+                dataIndex: '开户成功率',
+                key: '开户成功率',
+                render: (text, record) => (<span style={{color: 'red'}}>{record.operator}</span>),
             }, {
                 align: 'center',
                 title: '查看',
@@ -177,7 +235,7 @@ export default class BlackList extends Component {
                 render: (text, record) => (
                     <div>
                         <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                                onClick={() => this.showOPDAyModal3(record)}>备注</Button>
+                                onClick={() => this.showOPDAyModal3(record)}>日志</Button>
                     </div>
                 ),
             }
@@ -232,24 +290,38 @@ export default class BlackList extends Component {
         self.setState({
             loadingA: true
         })
-        window.Axios.post('auth/getBlackList', {
-            pageNo: this.state.currentA,
-            'listType': 1,//1:合规 2:开户 3:交易
-            'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易,
-            email: this.state.selectMail,
-            mobile: this.state.selectPhoneF,
-            nationalId: this.state.selectID,
-            starClientAccount: this.state.starClientAccount,
-            startTime: this.state.selectTimeStart,
-            endTime: this.state.selectTimeEnd,
-        }).then((response) => {
+        var mImfor = JSON.parse(localStorage.getItem('infor'))
+
+        window.Axios.post('ib/getIBUserDetailStat', {
+            'id': mImfor.backUserId ? mImfor.backUserId : '',
+            'filterDateType': this.state.filterDateType,
+        }).then(function (response) {
             self.setState({
                 totalpageA: response.data.data.totalPage,
                 bklistA: response.data.data.list,
                 loadingA: false
             });
+        })
 
-        });
+
+        // window.Axios.post('auth/getBlackList', {
+        //     pageNo: this.state.currentA,
+        //     'listType': 1,//1:合规 2:开户 3:交易
+        //     'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易,
+        //     email: this.state.selectMail,
+        //     mobile: this.state.selectPhoneF,
+        //     nationalId: this.state.selectID,
+        //     starClientAccount: this.state.starClientAccount,
+        //     startTime: this.state.selectTimeStart,
+        //     endTime: this.state.selectTimeEnd,
+        // }).then((response) => {
+        //     self.setState({
+        //         totalpageA: response.data.data.totalPage,
+        //         bklistA: response.data.data.list,
+        //         loadingA: false
+        //     });
+        //
+        // });
     }
     requestPageAS = () => {
         let self = this;
