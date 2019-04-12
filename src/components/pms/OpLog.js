@@ -433,7 +433,7 @@ export default class BlackList extends Component {
         return (
             <div>
                 <h2 style={{marginTop: 15}}>
-                    操作日志123
+                    操作日志
                 </h2>
 
                 {/*<div>totalpageAASIZE :{JSON.stringify(this.state.totalpageAASIZE)}</div>*/}
