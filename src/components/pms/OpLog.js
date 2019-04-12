@@ -304,7 +304,6 @@ export default class BlackList extends Component {
             }, () => {
 
 
-
             });
 
         });
@@ -327,7 +326,6 @@ export default class BlackList extends Component {
             }, () => {
 
 
-
             });
 
         });
@@ -346,7 +344,6 @@ export default class BlackList extends Component {
                 totalpageCCSIZE: response.data.data,
                 bklistC: response.data.data.list,
             }, () => {
-
 
 
             });
@@ -437,7 +434,6 @@ export default class BlackList extends Component {
                 </h2>
 
                 {/*<div>totalpageAASIZE :{JSON.stringify(this.state.totalpageAASIZE)}</div>*/}
-                {/*<div>bklistA :{JSON.stringify(this.state.bklistA)}</div>*/}
 
                 <BreadcrumbCustom first="权限管理" second="操作日志"/>
 
@@ -455,12 +451,10 @@ export default class BlackList extends Component {
 
                             <Table rowKey="id"
                                    bordered
-
-                                // rowSelection={rowSelection}
                                    columns={this.columnsA}
                                    dataSource={this.state.bklistA}
                                    loading={this.state.loadingA}
-                                   pagination={{  // 分页
+                                   pagination={{
                                        total: this.state.totalpageA * this.state.pgsize,
                                        pageSize: this.state.pgsize,
                                        onChange: this.changePageA,
@@ -483,7 +477,7 @@ export default class BlackList extends Component {
                                    dataSource={this.state.bklistB}
                                    loading={this.state.loadingB}
                                    pagination={{  // 分页
-                                       total: this.state.totalpageBBSIZE* this.state.pgsize,
+                                       total: this.state.totalpageBBSIZE * this.state.pgsize,
                                        pageSize: this.state.pgsize,
                                        onChange: this.changePageB,
                                        current: this.state.currentB,
@@ -504,7 +498,7 @@ export default class BlackList extends Component {
                                    dataSource={this.state.bklistC}
                                    loading={this.state.loadingC}
                                    pagination={{  // 分页
-                                       total: this.state.totalpageCCSIZE* this.state.pgsize,
+                                       total: this.state.totalpageCCSIZE * this.state.pgsize,
                                        pageSize: this.state.pgsize,
                                        onChange: this.changePageC,
                                        current: this.state.currentC,
