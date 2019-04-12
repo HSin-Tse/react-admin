@@ -129,13 +129,12 @@ export default class BlackList extends Component {
 
         this.columnsA = [
             {
-                title: '手机号',
+                title: '序号',
+                dataIndex: '序号',
+                key: '序号',
                 align: 'center',
-
-                dataIndex: 'phoneNumber',
-                key: 'phoneNumber',
-                render: (text, record) => (
-                    <span>{record.mobile}</span>
+                render: (text, record, index) => (
+                    <span>{(this.state.currentA) * this.state.pgsize + index + 1}</span>
                 ),
             }, {
                 title: '姓名',
@@ -185,75 +184,6 @@ export default class BlackList extends Component {
 
 
         ];
-        this.columns = [
-            {
-                title: '手机号',
-                align: 'center',
-
-                dataIndex: 'phoneNumber',
-                key: 'phoneNumber',
-                render: (text, record) => (
-                    <span>{record.mobile}</span>
-                ),
-            }, {
-                title: '姓名',
-                align: 'center',
-
-                dataIndex: 'name',
-                key: 'name',
-                render: (text, record) => (
-                    <span>{record.name}</span>
-                ),
-            }, {
-                title: '邮箱地址',
-                align: 'center',
-                dataIndex: '邮箱地址',
-                key: '邮箱地址',
-                render: (text, record) => (<span>{record.email}</span>),
-            }, {
-                title: '身份证号',
-                align: 'center',
-                dataIndex: '身份证号',
-                key: '身份证号',
-                render: (text, record) => (<span>{record.nationalId}</span>),
-            }, {
-                title: '操作时间',
-                align: 'center',
-
-                dataIndex: '操作时间',
-                key: '操作时间',
-                render: (text, record) => (<span>{record.date}</span>),
-            }, {
-                title: '操作人',
-                align: 'center',
-                dataIndex: '操作人',
-                key: '操作人',
-                render: (text, record) => (<span>{record.operator}</span>),
-            }, {
-                align: 'center',
-                title: '查看',
-                key: '查看',
-                render: (text, record) => (
-                    <div>
-                        <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}
-                                onClick={() => this.showOPDAyModal3(record)}>备注</Button>
-                    </div>
-                ),
-            }, {
-                title: '操作',
-
-                align: 'center',
-                key: 'action',
-                render: (text, record) => (
-                    <div>
-
-                        <Popconfirm title="移除?" onConfirm={() => this.handleremove(record)} okText="Yes"
-                                    cancelText="No">
-                            <Button size={'small'} style={{minWidth: 80, background: '#FDD000'}}>移除</Button>
-                        </Popconfirm>
-                    </div>
-                ),
-            }];
         this.requestPageA()
         this.requestPageB()
         this.requestPageC()
@@ -825,7 +755,7 @@ export default class BlackList extends Component {
                         >
                             <Table rowKey="id"
                                    bordered
-                                   columns={this.columns}
+                                   columns={this.columnsA}
                                    dataSource={this.state.bklistC}
                                    scroll={{x: 1300}}
                                    loading={this.state.loadingC}
@@ -851,7 +781,7 @@ export default class BlackList extends Component {
                             <Table rowKey="id"
                                    bordered
 
-                                   columns={this.columns}
+                                   columns={this.columnsA}
                                    dataSource={this.state.bklistC}
                                    scroll={{x: 1300}}
                                    loading={this.state.loadingC}
@@ -877,7 +807,7 @@ export default class BlackList extends Component {
                             <Table rowKey="id"
                                    bordered
 
-                                   columns={this.columns}
+                                   columns={this.columnsA}
                                    dataSource={this.state.bklistC}
                                    scroll={{x: 1300}}
                                    loading={this.state.loadingC}
