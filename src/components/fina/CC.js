@@ -22,7 +22,7 @@ const {TextArea} = Input;
 
 export default class BlackList extends Component {
     timestampToTime = (timestamp) => {
-        const dateObj = new Date(+timestamp)
+        const dateObj = new Date(+timestamp);
         const year = dateObj.getFullYear()
         const month = dateObj.getMonth() + 1
         const date = dateObj.getDate()
@@ -43,7 +43,6 @@ export default class BlackList extends Component {
             bklistB: [],
             bklistC: [],
             currentComment: 0,
-
             currentA: 0,
             currentB: 0,
             currentC: 0,
@@ -126,19 +125,6 @@ export default class BlackList extends Component {
 
 
     componentDidMount() {
-
-
-        window.Axios.post('/auth/addOperatorLogHistory', {
-            moduleLog: '用户管理',
-            pageLog: '黑名单',
-            commentLog: '黑名单',
-            typeLog: '2',
-        })
-
-
-        this.setState({
-            nowKey: this.props.pg,
-        });
 
 
         this.columnsA = [
