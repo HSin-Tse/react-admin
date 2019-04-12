@@ -119,7 +119,7 @@ export default class BlackList extends Component {
         const date = dateObj.getDate()
         const hours = this.pad(dateObj.getHours())
         const minutes = this.pad(dateObj.getMinutes())
-        const seconds = this.pad(dateObj.getSeconds()) 
+        const seconds = this.pad(dateObj.getSeconds())
         return year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ':' + seconds
     };
     pad = (str) => {
@@ -153,9 +153,7 @@ export default class BlackList extends Component {
                 render: (text, record) => (
 
 
-                    <span>{
-                        this.timestampToTime(record.date)}
-                    </span>
+                    <span>{record.date}</span>
                 ),
             }, {
                 title: '使用者',
@@ -163,7 +161,7 @@ export default class BlackList extends Component {
                 dataIndex: '使用者',
                 key: '使用者',
                 render: (text, record) => (
-                    <span>{record.loginName}</span>
+                    <span>{record.bkUserName}</span>
                 ),
             }, {
                 title: '模块',
@@ -185,11 +183,8 @@ export default class BlackList extends Component {
                 dataIndex: '日期/时间',
                 key: '日期/时间',
                 render: (text, record) => (
-                    <span>{
+                    <span>{record.date}</span>
 
-                        this.timestampToTime(record.date)
-
-                    }</span>
                 ),
             }, {
                 title: '使用者',
@@ -197,7 +192,7 @@ export default class BlackList extends Component {
                 dataIndex: '使用者',
                 key: '使用者',
                 render: (text, record) => (
-                    <span>{record.loginName}</span>
+                    <span>{record.bkUserName}</span>
                 ),
             }, {
                 title: '模块',
@@ -233,7 +228,7 @@ export default class BlackList extends Component {
                 dataIndex: '使用者',
                 key: '使用者',
                 render: (text, record) => (
-                    <span>{record.id}</span>
+                    <span>{record.bkUserName}</span>
                 ),
             }, {
                 title: '模块',
@@ -292,31 +287,14 @@ export default class BlackList extends Component {
     };
     requestPageA = () => {
         let self = this;
-        self.setState({
-            loadingA: true
-        })
-        // window.Axios.post('auth/getBlackList', {
-        //     pageNo: this.state.currentA,
-        //     'listType': 1,//1:合规 2:开户 3:交易
-        //     'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易,
-        //     email: this.state.selectMail,
-        //     mobile: this.state.selectPhoneF,
-        //     nationalId: this.state.selectID,
-        //     starClientAccount: this.state.starClientAccount,
-        //     startTime: this.state.selectTimeStart,
-        //     endTime: this.state.selectTimeEnd,
-        // }).then((response) => {
-        //     self.setState({
-        //         totalpageA: response.data.data.totalPage,
-        //         bklistA: response.data.data.list,
-        //         loadingA: false
-        //     });
-        //
-        // });
+        // self.setState({
+        //     loadingA: true
+        // })
 
 
-        window.Axios.post('back/getLogHistoryListSize', {
+        window.Axios.post('auth/getOperatorLogHistoryList', {
             pageNo: this.state.currentA,
+            pageSize: this.state.pgsize,
             'typeLog': 1,//1:合规 2:开户 3:交易
         }).then((response) => {
             self.setState({
@@ -325,18 +303,6 @@ export default class BlackList extends Component {
                 bklistA: response.data.data.list,
             }, () => {
 
-
-                window.Axios.post('back/getLogHistoryList', {
-                    'typeLog': 1,//1:合规 2:开户 3:交易
-                    size: this.state.pgsize,
-                    index: this.state.currentA * this.state.pgsize,
-                }).then((response) => {
-                    self.setState({
-                        bklistA: response.data.data,
-                        loadingA: false
-                    });
-
-                });
 
 
             });
@@ -348,51 +314,18 @@ export default class BlackList extends Component {
     requestPageB = () => {
         let self = this
 
-        self.setState({
-            loadingB: true
-        })
-        // window.Axios.post('auth/getBlackList', {
-        //     pageNo: this.state.currentB,
-        //     'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易,
-        //     'listType': 2,//1:合规 2:开户 3:交易
-        //     email: this.state.selectMail,
-        //     mobile: this.state.selectPhoneF,
-        //     nationalId: this.state.selectID,
-        //     starClientAccount: this.state.starClientAccount,
-        //     startTime: this.state.selectTimeStart,
-        //     endTime: this.state.selectTimeEnd,
-        // }).then((response) => {
-        //     self.setState({
-        //         totalpageB: response.data.data.totalPage,
-        //         bklistB: response.data.data.list,
-        //         loadingB: false
-        //     });
-        //
-        // });
 
-
-        window.Axios.post('back/getLogHistoryListSize', {
-            pageNo: this.state.currentB,
-            'typeLog': 2,//1:登入紀錄 2:瀏覽紀錄 3:操作紀錄 99:API調用紀錄
+        window.Axios.post('auth/getOperatorLogHistoryList', {
+            pageNo: this.state.currentA,
+            pageSize: this.state.pgsize,
+            'typeLog': 2,//1:合规 2:开户 3:交易
         }).then((response) => {
             self.setState({
-                totalpageA: response.data.data.totalPage,
+                totalpageB: response.data.data.totalPage,
                 totalpageBBSIZE: response.data.data,
                 bklistB: response.data.data.list,
             }, () => {
 
-
-                window.Axios.post('back/getLogHistoryList', {
-                    'typeLog': 2,//1:合规 2:开户 3:交易
-                    size: this.state.pgsize,
-                    index: this.state.currentB * this.state.pgsize,
-                }).then((response) => {
-                    self.setState({
-                        bklistB: response.data.data,
-                        loadingB: false
-                    });
-
-                });
 
 
             });
@@ -402,51 +335,18 @@ export default class BlackList extends Component {
     }
     requestPageC = () => {
         let self = this
-        self.setState({
-            loadingC: true
-        })
-        // window.Axios.post('auth/getBlackList', {
-        //     pageNo: this.state.currentC,
-        //     'listType': 3,//1:合规 2:开户 3:交易
-        //     'pageSize': this.state.pgsize,//1:合规 2:开户 3:交易,
-        //     email: this.state.selectMail,
-        //     mobile: this.state.selectPhoneF,
-        //     nationalId: this.state.selectID,
-        //     starClientAccount: this.state.starClientAccount,
-        //     startTime: this.state.selectTimeStart,
-        //     endTime: this.state.selectTimeEnd,
-        // }).then((response) => {
-        //
-        //     self.setState({
-        //         totalpageC: response.data.data.totalPage,
-        //         bklistC: response.data.data.list,
-        //         loadingC: false
-        //     });
-        // });
 
-
-        window.Axios.post('back/getLogHistoryListSize', {
-            pageNo: this.state.currentC,
-            'typeLog': 3,//1:登入紀錄 2:瀏覽紀錄 3:操作紀錄 99:API調用紀錄
+        window.Axios.post('auth/getOperatorLogHistoryList', {
+            pageNo: this.state.currentA,
+            pageSize: this.state.pgsize,
+            'typeLog': 3,//1:合规 2:开户 3:交易
         }).then((response) => {
             self.setState({
-                totalpageA: response.data.data.totalPage,
+                totalpageC: response.data.data.totalPage,
                 totalpageCCSIZE: response.data.data,
                 bklistC: response.data.data.list,
             }, () => {
 
-
-                window.Axios.post('back/getLogHistoryList', {
-                    'typeLog': 3,//1:合规 2:开户 3:交易
-                    size: this.state.pgsize,
-                    index: this.state.currentC * this.state.pgsize,
-                }).then((response) => {
-                    self.setState({
-                        bklistC: response.data.data,
-                        loadingC: false
-                    });
-
-                });
 
 
             });
@@ -533,7 +433,7 @@ export default class BlackList extends Component {
         return (
             <div>
                 <h2 style={{marginTop: 15}}>
-                    操作日志
+                    操作日志123
                 </h2>
 
                 {/*<div>totalpageAASIZE :{JSON.stringify(this.state.totalpageAASIZE)}</div>*/}
@@ -555,17 +455,20 @@ export default class BlackList extends Component {
 
                             <Table rowKey="id"
                                    bordered
+
                                 // rowSelection={rowSelection}
                                    columns={this.columnsA}
                                    dataSource={this.state.bklistA}
                                    loading={this.state.loadingA}
                                    pagination={{  // 分页
-                                       // showQuickJumper:true,
-                                       total: this.state.totalpageAASIZE,
+                                       total: this.state.totalpageA * this.state.pgsize,
                                        pageSize: this.state.pgsize,
                                        onChange: this.changePageA,
+                                       current: this.state.currentA,
+
                                    }}
                             />
+
                         </Card>
                     </TabPane>
                     <TabPane tab="浏览记录" key="2">
@@ -580,9 +483,11 @@ export default class BlackList extends Component {
                                    dataSource={this.state.bklistB}
                                    loading={this.state.loadingB}
                                    pagination={{  // 分页
-                                       total: this.state.totalpageBBSIZE,
+                                       total: this.state.totalpageBBSIZE* this.state.pgsize,
                                        pageSize: this.state.pgsize,
                                        onChange: this.changePageB,
+                                       current: this.state.currentB,
+
                                    }}
                             />
                         </Card>
@@ -592,18 +497,18 @@ export default class BlackList extends Component {
                         <Card
                             bodyStyle={{padding: 0, margin: 0}}
                             title={'操作记录'}
-
                         >
-
                             <Table rowKey="id"
                                    bordered
                                    columns={this.columnsB}
                                    dataSource={this.state.bklistC}
                                    loading={this.state.loadingC}
                                    pagination={{  // 分页
-                                       total: this.state.totalpageCCSIZE,
+                                       total: this.state.totalpageCCSIZE* this.state.pgsize,
                                        pageSize: this.state.pgsize,
                                        onChange: this.changePageC,
+                                       current: this.state.currentC,
+
                                    }}
                             />
                         </Card>
