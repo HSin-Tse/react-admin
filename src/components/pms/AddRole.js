@@ -42,10 +42,18 @@ class AddRole extends Component {
 
     componentDidMount() {
         var self = this;
+
+
         window.Axios.post('back/getMenuList', {}).then(function (response) {
             self.setState({
                 menuList: response.data.data
             });
+            self.setState({
+                name: ''
+            });
+        });
+        self.setState({
+            name: ''
         });
     }
 
@@ -130,6 +138,9 @@ class AddRole extends Component {
         }).then(function (response) {
             console.log('hcia response', response)
             message.success('操作成功')
+            self.setState({
+                name: ''
+            });
         });
 
     }
@@ -258,16 +269,17 @@ class AddRole extends Component {
                                 minHeight: 50
                             }}>
                                 <span style={{width: 100}}>角色名称:</span>
-                                <Input
+                                <TextArea
                                     onChange={(e) => {
                                         this.setState({
                                             name: e.target.value,
                                         });
                                     }}
-                                    defaultValue={this.state.name}
-                                    style={{width: 180}}/>
+                                    value={this.state.name}
+                                    style={{width: 180 ,maxHeight:40,minHeight:40}}/>
                             </div>
                             <div style={{
+                                marginTop:'10px',
                                 fontWeight: 'bold',
                                 fontSize: 16,
                                 display: 'flex',
