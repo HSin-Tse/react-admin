@@ -76,10 +76,10 @@ export default {
         {
             tk: 'SERVICE_GROUP_MGMT', key: '/app/mar', title: '营销管理', icon: 'safety',
             subs: [
-                {tk: 'SERVICE_GROUP_MGMT', key: '/app/mar/cha', title: '渠道管理', component: 'CA'},
-                {tk: 'SERVICE_GROUP_MGMT', key: '/app/mar/chb', title: '客维主页', component: 'CB'},
-                {tk: 'SERVICE_GROUP_MGMT', key: '/app/mar/chc', title: '客维统计', component: 'CC'},
-                {tk: 'SERVICE_GROUP_MGMT', key: '/app/mar/chd', title: '客维LEADS管理', component: 'CD'},
+                // {tk: 'SERVICE_GROUP_MGMT', key: '/app/mar/cha', title: '渠道管理', component: 'CA'},
+                {tk: 'CUSTOMER_RETENTION_HOMEPAGE', key: '/app/mar/chb', title: '客维主页', component: 'CB'},
+                {tk: 'CUSTOMER_RETENTION_STAT', key: '/app/mar/chc', title: '客维统计', component: 'CC'},
+                {tk: 'CUSTOMER_RETENTION_STAT', key: '/app/mar/chd', title: '客维LEADS管理', component: 'CD'},
 
             ],
         },
