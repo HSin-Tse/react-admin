@@ -233,8 +233,11 @@ class AddUser extends Component {
                 console.log('hcia  Object.keys(item.allMenu)', Object.keys(item.allMenu))
 
                 return (
-                    <div style={{display: 'flex', minHeight: 50}}>
+
+                    <div>
                         <h3 style={{minWidth: 80}}>{item.name}:</h3>
+
+                        <div style={{display: 'flex',flexWrap:'wrap', minHeight: 50}}>
                         {
 
                             Object.keys(item.allMenu).map((item1, number) => {
@@ -253,6 +256,8 @@ class AddUser extends Component {
                             })
                         }
                     </div>
+                    </div>
+
                 );
             }
         )
@@ -429,10 +434,11 @@ class AddUser extends Component {
                                 </Select>
 
                             </div>
-                            <div style={{marginTop: 20, display: 'flex', minHeight: 50}}>
+                            <div style={{marginTop: 20, flexWrap:'nowrap',display: 'flex', minHeight: 50}}>
                                 <h3 style={{width: 60}}>权限:</h3>
-                                <Row gutter={0}>
-                                    <Checkbox.Group style={{width: '100%'}} value={[]}
+
+                                <Row style={{width: '100%'}}gutter={0}>
+                                    <Checkbox.Group  value={[]}
                                         // onChange={this.onChange}
                                     >
                                         <Col md={24}>
