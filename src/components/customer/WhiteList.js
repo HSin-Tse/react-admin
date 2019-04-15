@@ -63,7 +63,7 @@ export default class WhiteList extends Component {
             typeLog: '2',
         })
 
-        addLogWhite();
+        // addLogWhite();
         document.addEventListener("keydown", this.handleKeyPress, false);
         this.columns = [
             {
