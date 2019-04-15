@@ -303,25 +303,28 @@ class EditUser extends PureComponent {
                 console.log('hcia  Object.keys(item.allMenu)', Object.keys(item.allMenu))
 
                 return (
-                    <div style={{display: 'flex', minHeight: 50}}>
+                    <div>
                         <h3 style={{minWidth: 80}}>{item.name}:</h3>
-                        {
 
-                            Object.keys(item.allMenu).map((item1, number) => {
+                        <div style={{display: 'flex',flexWrap:'wrap', minHeight: 50}}>
+                            {
 
-                                var isCanOP = item.allMenu[item1].availableFlag == 1
+                                Object.keys(item.allMenu).map((item1, number) => {
 
-                                console.log('hcia isCanOP', isCanOP)
-                                return (
+                                    var isCanOP = item.allMenu[item1].availableFlag == 1
 
-                                    <Tooltip style={{maxWidth: '80%'}} placement="top" title={isCanOP ? "可操作" : "只讀"}>
-                                        <Tag color={isCanOP ? "magenta" : "green"} key={number}
-                                             value={item1}>{item.allMenu[item1].name}</Tag>
-                                    </Tooltip>
+                                    console.log('hcia isCanOP', isCanOP)
+                                    return (
 
-                                );
-                            })
-                        }
+                                        <Tooltip style={{maxWidth: '80%'}} placement="top" title={isCanOP ? "可操作" : "只讀"}>
+                                            <Tag color={isCanOP ? "magenta" : "green"} key={number}
+                                                 value={item1}>{item.allMenu[item1].name}</Tag>
+                                        </Tooltip>
+
+                                    );
+                                })
+                            }
+                        </div>
                     </div>
                 );
             }
@@ -465,7 +468,7 @@ class EditUser extends PureComponent {
                             <div style={{marginTop: 20, display: 'flex', minHeight: 50}}>
                                 <h3 style={{minWidth: 60}}>权限:</h3>
                                 <Row gutter={0}>
-                                    <Checkbox.Group style={{maxWidth: '80%'}} value={[]}
+                                    <Checkbox.Group value={[]}
                                         // onChange={this.onChange}
                                     >
                                         <Col md={24}>
@@ -475,6 +478,21 @@ class EditUser extends PureComponent {
                                 </Row>
 
                             </div>
+                            {/*<div style={{marginTop: 20, flexWrap:'nowrap',display: 'flex', minHeight: 50}}>*/}
+                                {/*<h3 style={{width: 60}}>权限:</h3>*/}
+
+                                {/*<Row style={{width: '100%'}}gutter={0}>*/}
+                                    {/*<Checkbox.Group  value={[]}*/}
+                                        {/*// onChange={this.onChange}*/}
+                                    {/*>*/}
+                                        {/*<Col md={24}>*/}
+                                            {/*{ssss}*/}
+                                        {/*</Col>*/}
+                                    {/*</Checkbox.Group>*/}
+                                {/*</Row>*/}
+
+                            {/*</div>*/}
+
 
                         </Col>
                     </Row>
