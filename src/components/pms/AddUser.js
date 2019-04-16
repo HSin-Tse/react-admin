@@ -1,4 +1,3 @@
-/* eslint-disable react/sort-comp */
 
 import React, {Component} from 'react';
 import {
@@ -18,7 +17,6 @@ import {
     message, Tooltip
 } from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
-import {parse} from 'querystring';
 import connect from "react-redux/es/connect/connect";
 
 const FormItem = Form.Item;
@@ -135,18 +133,7 @@ class AddUser extends Component {
             console.log(error);
         });
 
-        // window.Axios.post('back/getRoleList', {
-        //     'pageSize': 100,
-        //     'pageNo': 0,
-        // }).then((response) => {
-        //     self.setState({
-        //             mRoleList: response.data.data.list
-        //         }
-        //     );
-        //
-        // }).catch(function (error) {
-        //     console.log(error);
-        // });
+
 
     }
 
@@ -262,48 +249,11 @@ class AddUser extends Component {
             }
         )
 
-        // const ss = this.state.menuList.filter(
-        //     (item) => {
-        //
-        //         return this.state.idList.some((itemS) => {
-        //             return itemS == item.id
-        //         })
-        //     }).map(function (item, index) {
-        //         return (
-        //             <div style={{display: 'flex', minHeight: 50}}>
-        //                 <h3 style={{minWidth: 80}}>{item.name}:</h3>
-        //                 {
-        //                     Object.keys(item.allMenu).map((item1, number) => {
-        //                         // console.log('hcia item1', item1)
-        //                         // console.log('hcia item.allMenu', item.allMenu)
-        //                         // console.log('hcia item.allMenu', item.allMenu[item1])
-        //
-        //                         return (
-        //                             <Tag key={number} value={item1}>{item.allMenu[item1]}</Tag>
-        //                         );
-        //                     })
-        //                 }
-        //             </div>
-        //
-        //
-        //         );
-        //     }
-        // )
+
 
         return (
             <div>
                 {/*<div>姓名 name:{JSON.stringify(this.state.name)}</div>*/}
-                {/*<div>邮箱 email:{JSON.stringify(this.state.email)}</div>*/}
-                {/*<div>手机 mobile:{JSON.stringify(this.state.mobile)}</div>*/}
-                {/*<div>wechat wechat:{JSON.stringify(this.state.wechat)}</div>*/}
-                {/*<div>性别 gender:{JSON.stringify(this.state.gender)}</div>*/}
-                {/*<div>新的登陆名 newLoginName:{JSON.stringify(this.state.newLoginName)}</div>*/}
-                {/*<div>新的密码 newPassword:{JSON.stringify(this.state.newPassword)}</div>*/}
-                {/*<div>驗證密码 secondPassword:{JSON.stringify(this.state.secondPassword)}</div>*/}
-                {/*<div>角色 idList:{JSON.stringify(this.state.idList)}</div>*/}
-                {/*<div>内部人员备注 content:{JSON.stringify(this.state.content)}</div>*/}
-                {/*<div>当前操作人员的密码 password:{JSON.stringify(this.state.password)}</div>*/}
-                {/*<div> menuList:{JSON.stringify(this.state.menuList)}</div>*/}
 
                 <h2 style={{marginTop: 15}}>权限管理表</h2>
                 <div><BreadcrumbCustom first="内部成员列表" second="编辑资料"/></div>

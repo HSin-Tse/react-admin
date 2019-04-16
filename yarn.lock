@@ -8881,6 +8881,11 @@ react-loadable@^5.5.0:
   dependencies:
     prop-types "^15.5.0"
 
+react-password-mask@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/react-password-mask/-/react-password-mask-3.3.1.tgz#c92ce71f30de2157de32da4d88616a6ace00ec40"
+  integrity sha512-/MpZs25k36W1h7e/CKvyHsoRYxqmSZGDakhgs9GohfxPdGf8wgLhSkPPvNX5XJZDtriWduH7rnMYE2RJUGpdkA==
+
 react-pose@^4.0.5:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/react-pose/-/react-pose-4.0.5.tgz#056309b62e32ce0190f90ef35d7ade1b4c463d85"
