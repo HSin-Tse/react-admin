@@ -88,8 +88,6 @@ export default {
 
     others:
         [
-
-
             {
                 route: '/app/fina/d/ter:id',
                 tk: 'wwwer',
