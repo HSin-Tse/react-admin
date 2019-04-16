@@ -1,5 +1,6 @@
 
 import React, {Component} from 'react';
+import PasswordMask from 'react-password-mask';
 import {
     Col,
     Card,
@@ -44,6 +45,7 @@ class AddUser extends Component {
             , wechat: ''
             , email: '@'
             , newPassword: ''
+            , passwordkkk: ''
             , secondPassword: ''
             , password: ''
         };
@@ -253,9 +255,11 @@ class AddUser extends Component {
 
         return (
             <div>
-                {/*<div>姓名 name:{JSON.stringify(this.state.name)}</div>*/}
+
+
 
                 <h2 style={{marginTop: 15}}>权限管理表</h2>
+
                 <div><BreadcrumbCustom first="内部成员列表" second="编辑资料"/></div>
 
                 <Card title={<span style={{fontSize: 18}}> 基本信息 </span>} bordered={true} style={{marginTop: 15}}>
@@ -427,6 +431,11 @@ class AddUser extends Component {
                 <Card bodyStyle={{marginLeft: 10}} title={<span style={{fontSize: 18}}> 安全验证 </span>} bordered={true}
                       style={{marginTop: 15}}>
 
+
+                    {/*<Input*/}
+                        {/*style={{width: 800 ,display:'none'}}*/}
+                        {/*type="password"*/}
+                    {/*/>*/}
                     <Row gutter={8}>
                         <Col md={24}>
 
@@ -439,9 +448,15 @@ class AddUser extends Component {
                                         validator: this.validateToNextPassword,
                                     }],
                                 })(
-                                    <Input style={{width: 800}}
+                                    <Input
+                                        input="text"
+                                        onfocus="this.type='password'"
+                                        style={{width: 800}}
                                            addonAfter={<Icon type="star" theme="twoTone"/>}
-                                           onChange={this.checkScret} placeholder="請輸入你的密碼加以驗證:" type="password"/>
+                                           onChange={this.checkScret}
+                                        placeholder="請輸入你的密碼加以驗證:"
+                                        type="password"
+                                        autocomplete="new-password"/>
                                 )}
                             </div>
                         </Col>

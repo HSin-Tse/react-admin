@@ -36,14 +36,9 @@ class AddRole extends Component {
         };
     }
 
-    handleChange = (value) => {
-        console.log('hcia s value', value)
-    }
 
     componentDidMount() {
         var self = this;
-
-
         window.Axios.post('back/getMenuList', {}).then(function (response) {
             self.setState({
                 menuList: response.data.data
@@ -62,8 +57,6 @@ class AddRole extends Component {
 
         let list = this.state.powerList;
 
-        // let isOut1 = false
-        // let isOut2 = false
 
         var isOut1 = list.some(function (item, index, array) {
             return item == 25
@@ -92,9 +85,6 @@ class AddRole extends Component {
 
         }
 
-        console.log('hcia isOut1', isOut1)
-        console.log('hcia list', list)
-
 
         var groupBy = (array, f) => {
             let ansList = [];
@@ -118,14 +108,14 @@ class AddRole extends Component {
             return [item.name];
         });
         // console.log(sorted);
-        console.log('hcia sorted', sorted)
+        // console.log('hcia sorted', sorted)
 
 
         if (sorted.length == 0) {
             message.error('权限沒有配置')
             return
         }
-        if (!this.state.realp ) {
+        if (!this.state.realp) {
             message.error('請輸入你的密碼')
             return
         }
@@ -157,7 +147,7 @@ class AddRole extends Component {
         const {getFieldDecorator} = this.props.form;
 
 
-        console.log('hcia menuList' , this.state.menuList)
+        // console.log('hcia menuList', this.state.menuList)
         const setingBlok = this.state.menuList.map(function (item, index) {
                 const _childList = item.childrenMenu
                 return (
@@ -167,18 +157,16 @@ class AddRole extends Component {
                         {
                             _childList.map(function (item1, number) {
 
-                                console.log('hcia item1', item1)
+                                // console.log('hcia item1', item1)
 
-                                if(item1.childrenMenu==null)
-                                {item1.childrenMenu=[]
+                                if (item1.childrenMenu == null) {
+                                    item1.childrenMenu = []
                                 }
-                                console.log('hcia item1.childrenMenu' , item1.childrenMenu)
+                                // console.log('hcia item1.childrenMenu', item1.childrenMenu)
 
                                 // if(this.state.menuList.length==0)
                                 //
                                 //     return
-
-
 
 
                                 return (
@@ -251,7 +239,7 @@ class AddRole extends Component {
 
                 <BreadcrumbCustom first="权限管理" second="内部人员配置" third="新增角色"/>
 
-                {/*<div>subSelectList :{JSON.stringify(this.state.powerList)}</div>*/}
+                <div>subSelectList :{JSON.stringify(this.state.powerList)}</div>
 
                 {/*subSelectList*/}
 
@@ -276,10 +264,10 @@ class AddRole extends Component {
                                         });
                                     }}
                                     value={this.state.name}
-                                    style={{width: 180 ,maxHeight:40,minHeight:40}}/>
+                                    style={{width: 180, maxHeight: 40, minHeight: 40}}/>
                             </div>
                             <div style={{
-                                marginTop:'10px',
+                                marginTop: '10px',
                                 fontWeight: 'bold',
                                 fontSize: 16,
                                 display: 'flex',
@@ -311,9 +299,68 @@ class AddRole extends Component {
                     <Row gutter={8}>
                         <Checkbox.Group style={{width: '100%'}} onChange={(checkedValues) => {
                             console.log('hcia checkedValues', checkedValues)
+
+
+                            var aaa = checkedValues.filter(function (item, index, array) {
+                                return item < 0;
+                            });
+                            // console.log('hcia aaa', aaa)
+
+
+                            aaa.forEach(function (item, index, array) {
+
+
+                                var ans = checkedValues.some(function (ssss, index, array) {
+                                    return ssss == -item // 當全部 age 大於 10 才能回傳 true
+                                });
+
+                                if (!ans) {
+                                    checkedValues.remove(item)
+
+                                }
+                            });
+
+
+                            var has43 = checkedValues.some(function (is43, index, array) {
+                                return is43 == 16 // 當全部 age 大於 10 才能回傳 true
+                            });
+
+                            console.log('hcia has43', has43)
+                            if (!has43) {
+                                checkedValues.remove(43)
+
+                            }
+
+
+                            var has25 = checkedValues.some(function (is25, index, array) {
+                                return is25 == 25 // 當全部 age 大於 10 才能回傳 true
+                            });
+
+                            if (!has25) {
+                                checkedValues.remove(26)
+                                checkedValues.remove(27)
+                                checkedValues.remove(28)
+                                checkedValues.remove(40)
+
+                            }
+
+                            var has41 = checkedValues.some(function (is41, index, array) {
+                                return is41 == 41 // 當全部 age 大於 10 才能回傳 true
+                            });
+
+                            if (!has41) {
+                                checkedValues.remove(23)
+                                checkedValues.remove(22)
+                                checkedValues.remove(36)
+
+                            }
+
+
                             this.setState({
                                 powerList: checkedValues,
                             });
+
+
                         }}>
                             <Col md={24}>
                                 {setingBlok}
@@ -321,8 +368,6 @@ class AddRole extends Component {
                         </Checkbox.Group>
                     </Row>
                 </Card>
-
-
 
 
                 <Card bodyStyle={{marginLeft: 10}} title={<span style={{fontSize: 18}}> 操作日志 </span>}
