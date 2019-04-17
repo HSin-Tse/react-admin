@@ -16,7 +16,7 @@ import {message} from 'antd';
 import Toast from './components/widget/toast'
 import {IntlProvider, addLocaleData} from 'react-intl';
 import en from './locale/en_US'
-import zh from './locale/zh_CN'
+import zh from './locale/zh_CN'//を
 
 const middleware = [thunk];
 const store = createStore(reducer, applyMiddleware(...middleware));

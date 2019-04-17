@@ -297,71 +297,73 @@ class AddRole extends Component {
                       style={{marginTop: 15}}>
 
                     <Row gutter={8}>
-                        <Checkbox.Group style={{width: '100%'}} onChange={(checkedValues) => {
-                            console.log('hcia checkedValues', checkedValues)
+                        <Checkbox.Group style={{width: '100%'}}
+                                        onChange={(checkedValues) => {
+                                            console.log('hcia checkedValues', checkedValues)
 
 
-                            var aaa = checkedValues.filter(function (item, index, array) {
-                                return item < 0;
-                            });
-                            // console.log('hcia aaa', aaa)
+                                            var aaa = checkedValues.filter(function (item, index, array) {
+                                                return item < 0;
+                                            });
+                                            // console.log('hcia aaa', aaa)
 
 
-                            aaa.forEach(function (item, index, array) {
+                                            aaa.forEach(function (item, index, array) {
 
 
-                                var ans = checkedValues.some(function (ssss, index, array) {
-                                    return ssss == -item // 當全部 age 大於 10 才能回傳 true
-                                });
+                                                var ans = checkedValues.some(function (ssss, index, array) {
+                                                    return ssss == -item // 當全部 age 大於 10 才能回傳 true
+                                                });
 
-                                if (!ans) {
-                                    checkedValues.remove(item)
+                                                if (!ans) {
+                                                    checkedValues.remove(item)
 
-                                }
-                            });
-
-
-                            var has43 = checkedValues.some(function (is43, index, array) {
-                                return is43 == 16 // 當全部 age 大於 10 才能回傳 true
-                            });
-
-                            console.log('hcia has43', has43)
-                            if (!has43) {
-                                checkedValues.remove(43)
-
-                            }
+                                                }
+                                            });
 
 
-                            var has25 = checkedValues.some(function (is25, index, array) {
-                                return is25 == 25 // 當全部 age 大於 10 才能回傳 true
-                            });
+                                            var has43 = checkedValues.some(function (is43, index, array) {
+                                                return is43 == 16 // 當全部 age 大於 10 才能回傳 true
+                                            });
 
-                            if (!has25) {
-                                checkedValues.remove(26)
-                                checkedValues.remove(27)
-                                checkedValues.remove(28)
-                                checkedValues.remove(40)
+                                            console.log('hcia has43', has43)
+                                            if (!has43) {
+                                                checkedValues.remove(43)
 
-                            }
-
-                            var has41 = checkedValues.some(function (is41, index, array) {
-                                return is41 == 41 // 當全部 age 大於 10 才能回傳 true
-                            });
-
-                            if (!has41) {
-                                checkedValues.remove(23)
-                                checkedValues.remove(22)
-                                checkedValues.remove(36)
-
-                            }
+                                            }
 
 
-                            this.setState({
-                                powerList: checkedValues,
-                            });
+                                            var has25 = checkedValues.some(function (is25, index, array) {
+                                                return is25 == 25 // 當全部 age 大於 10 才能回傳 true
+                                            });
+
+                                            if (!has25) {
+                                                checkedValues.remove(26)
+                                                checkedValues.remove(27)
+                                                checkedValues.remove(28)
+                                                checkedValues.remove(40)
+
+                                            }
+
+                                            var has41 = checkedValues.some(function (is41, index, array) {
+                                                return is41 == 41 // 當全部 age 大於 10 才能回傳 true
+                                            });
+
+                                            if (!has41) {
+                                                checkedValues.remove(23)
+                                                checkedValues.remove(22)
+                                                checkedValues.remove(36)
+
+                                            }
 
 
-                        }}>
+                                            this.setState({
+                                                powerList: checkedValues,
+                                            });
+
+
+                                        }}
+                        >
                             <Col md={24}>
                                 {setingBlok}
                             </Col>

@@ -301,6 +301,7 @@ class EditRole extends Component {
                                             onChange={(value) => {
                                                 item1.sscheck = value.target.checked
                                             }}
+
                                             key={number}
                                             value={item1.id}
                                             id={number}>{item1.name}</Checkbox>
@@ -376,7 +377,7 @@ class EditRole extends Component {
 
                                 <Input
                                     onChange={this.changeName}
-                                    defaultValue={this.state.name}
+                                    value={this.state.name}
                                     style={{width: 180}}/>
                             </div>
                             <div style={{fontWeight: 'bold', fontSize: 16, display: 'flex', minHeight: 50}}>
@@ -399,7 +400,74 @@ class EditRole extends Component {
                       style={{marginTop: 15}}>
 
                     <Row gutter={8}>
-                        <Checkbox.Group style={{width: '100%'}} value={this.state.powerList} onChange={this.onChange}>
+                        <Checkbox.Group style={{width: '100%'}} value={this.state.powerList}
+                                        onChange={(checkedValues) => {
+                                            console.log('hcia checkedValues', checkedValues)
+
+
+                                            var aaa = checkedValues.filter(function (item, index, array) {
+                                                return item < 0;
+                                            });
+                                            // console.log('hcia aaa', aaa)
+
+
+                                            aaa.forEach(function (item, index, array) {
+
+
+                                                var ans = checkedValues.some(function (ssss, index, array) {
+                                                    return ssss == -item // 當全部 age 大於 10 才能回傳 true
+                                                });
+
+                                                if (!ans) {
+                                                    checkedValues.remove(item)
+
+                                                }
+                                            });
+
+
+                                            var has43 = checkedValues.some(function (is43, index, array) {
+                                                return is43 == 16 // 當全部 age 大於 10 才能回傳 true
+                                            });
+
+                                            console.log('hcia has43', has43)
+                                            if (!has43) {
+                                                checkedValues.remove(43)
+
+                                            }
+
+
+                                            var has25 = checkedValues.some(function (is25, index, array) {
+                                                return is25 == 25 // 當全部 age 大於 10 才能回傳 true
+                                            });
+
+                                            if (!has25) {
+                                                checkedValues.remove(26)
+                                                checkedValues.remove(27)
+                                                checkedValues.remove(28)
+                                                checkedValues.remove(40)
+
+                                            }
+
+                                            var has41 = checkedValues.some(function (is41, index, array) {
+                                                return is41 == 41 // 當全部 age 大於 10 才能回傳 true
+                                            });
+
+                                            if (!has41) {
+                                                checkedValues.remove(23)
+                                                checkedValues.remove(22)
+                                                checkedValues.remove(36)
+
+                                            }
+
+
+                                            this.setState({
+                                                powerList: checkedValues,
+                                            });
+
+
+                                        }}
+
+                        >
                             <Col md={24}>
                                 {setBlock}
                             </Col>
@@ -420,7 +488,7 @@ class EditRole extends Component {
                                    dataSource={this.state.userList}
                                    bordered
                                    loading={this.state.loading}
-                                   pagination={{  // 分页
+                                   pagination={{
                                        total: this.state.pgsize * this.state.totalPage,
                                        pageSize: this.state.pgsize,
                                        onChange: this.changePage,
@@ -498,8 +566,6 @@ const mapStateToPorps = state => {
     return {auth, infor};
 };
 const mapDispatchToProps = dispatch => ({
-    // fetchData: bindActionCreators(fetchData, dispatch),
-    // receiveData: bindActionCreators(receiveData, dispatch),
     setUSER: bindActionCreators(setINFOR, dispatch),
 
 });
