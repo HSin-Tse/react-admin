@@ -124,7 +124,7 @@ export default class PotentialUser extends Component {
             logRouter = '5'
         }
         if (this.state.nowKey === '3') {
-            logRouter = '/6'
+            logRouter = '6'
         }
 
 
@@ -164,7 +164,7 @@ export default class PotentialUser extends Component {
             logRouter = '5'
         }
         if (this.state.nowKey === '3') {
-            logRouter = '/6'
+            logRouter = '6'
         }
 
         window.Axios.post('/auth/getOperatorLogHistoryList', {
@@ -181,37 +181,11 @@ export default class PotentialUser extends Component {
             });
         });
 
-        // window.Axios.post(logRouter, {
-        //     referKey: this.state.refID,
-        //     pageNo: this.state.currentComment,
-        //     pageSize: this.state.pgsize,
-        // }).then(function (response) {
-        //     self.setState({
-        //         totalpageComments: response.data.data.totalPage,
-        //         operationLogHistory: response.data.data.list,
-        //     });
-        // });
-
 
     }
 
     shownoteModal = (belongUserId) => {
 
-        // var logRouter = ''
-        // if (this.state.nowKey === '1') {
-        //     logRouter = '/back/addLogPotentialUser'
-        // }
-        // if (this.state.nowKey === '2') {
-        //     logRouter = '/back/addLogDemoUser'
-        // }
-        // if (this.state.nowKey === '3') {
-        //     logRouter = '/back/addLogIntentUser'
-        // }
-        //
-        // window.Axios.post(logRouter, {
-        //     referKey: belongUserId,
-        //     commentLog: '点击备注',
-        // })
 
         var logRouter = ''
         if (this.state.nowKey === '1') {
@@ -221,7 +195,7 @@ export default class PotentialUser extends Component {
             logRouter = '5'
         }
         if (this.state.nowKey === '3') {
-            logRouter = '/6'
+            logRouter = '6'
         }
 
 
@@ -257,7 +231,7 @@ export default class PotentialUser extends Component {
             logRouter = '5'
         }
         if (this.state.nowKey === '3') {
-            logRouter = '/6'
+            logRouter = '6'
         }
 
 
