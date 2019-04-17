@@ -118,19 +118,27 @@ export default class PotentialUser extends Component {
 
         var logRouter = ''
         if (this.state.nowKey === '1') {
-            logRouter = '/back/addLogPotentialUser'
+            logRouter = '4'
         }
         if (this.state.nowKey === '2') {
-            logRouter = '/back/addLogDemoUser'
+            logRouter = '5'
         }
         if (this.state.nowKey === '3') {
-            logRouter = '/back/addLogIntentUser'
+            logRouter = '/6'
         }
 
-        window.Axios.post(logRouter, {
+
+        window.Axios.post('/auth/addOperatorLogHistory', {
             referKey: belongUserId,
+            moduleLog: '用户管理',
+            pageLog: 'Leads管理',
             commentLog: '点击日志',
-        })
+            typeLog: logRouter,
+        }).then(function (response) {
+
+            console.log('hcia response', response)
+
+        });
         var self = this
         this.setState({
             currentComment: 0,
@@ -145,23 +153,89 @@ export default class PotentialUser extends Component {
         });
 
     };
-    shownoteModal = (belongUserId) => {
+    requestUserLogList = (record) => {
+        var self = this;
 
         var logRouter = ''
         if (this.state.nowKey === '1') {
-            logRouter = '/back/addLogPotentialUser'
+            logRouter = '4'
         }
         if (this.state.nowKey === '2') {
-            logRouter = '/back/addLogDemoUser'
+            logRouter = '5'
         }
         if (this.state.nowKey === '3') {
-            logRouter = '/back/addLogIntentUser'
+            logRouter = '/6'
         }
 
-        window.Axios.post(logRouter, {
+        window.Axios.post('/auth/getOperatorLogHistoryList', {
+            referKey: record,
+            moduleLog: '用户管理',
+            pageLog: 'Leads管理',
+            typeLog: logRouter,
+        }).then(function (response) {
+
+            console.log('hcia response', response)
+            self.setState({
+                totalpageComments: response.data.data.totalPage,
+                operationLogHistory: response.data.data.list,
+            });
+        });
+
+        // window.Axios.post(logRouter, {
+        //     referKey: this.state.refID,
+        //     pageNo: this.state.currentComment,
+        //     pageSize: this.state.pgsize,
+        // }).then(function (response) {
+        //     self.setState({
+        //         totalpageComments: response.data.data.totalPage,
+        //         operationLogHistory: response.data.data.list,
+        //     });
+        // });
+
+
+    }
+
+    shownoteModal = (belongUserId) => {
+
+        // var logRouter = ''
+        // if (this.state.nowKey === '1') {
+        //     logRouter = '/back/addLogPotentialUser'
+        // }
+        // if (this.state.nowKey === '2') {
+        //     logRouter = '/back/addLogDemoUser'
+        // }
+        // if (this.state.nowKey === '3') {
+        //     logRouter = '/back/addLogIntentUser'
+        // }
+        //
+        // window.Axios.post(logRouter, {
+        //     referKey: belongUserId,
+        //     commentLog: '点击备注',
+        // })
+
+        var logRouter = ''
+        if (this.state.nowKey === '1') {
+            logRouter = '4'
+        }
+        if (this.state.nowKey === '2') {
+            logRouter = '5'
+        }
+        if (this.state.nowKey === '3') {
+            logRouter = '/6'
+        }
+
+
+        window.Axios.post('/auth/addOperatorLogHistory', {
             referKey: belongUserId,
+            moduleLog: '用户管理',
+            pageLog: 'Leads管理',
             commentLog: '点击备注',
-        })
+            typeLog: logRouter,
+        }).then(function (response) {
+
+            console.log('hcia response', response)
+
+        });
 
         this.setState({
             currentComment: 0,
@@ -173,21 +247,31 @@ export default class PotentialUser extends Component {
     };
 
     showAddbAckModal = (record) => {
+
+
         var logRouter = ''
         if (this.state.nowKey === '1') {
-            logRouter = '/back/addLogPotentialUser'
+            logRouter = '4'
         }
         if (this.state.nowKey === '2') {
-            logRouter = '/back/addLogDemoUser'
+            logRouter = '5'
         }
         if (this.state.nowKey === '3') {
-            logRouter = '/back/addLogIntentUser'
+            logRouter = '/6'
         }
 
-        window.Axios.post(logRouter, {
+
+        window.Axios.post('/auth/addOperatorLogHistory', {
             referKey: record.belongUserId,
+            moduleLog: '用户管理',
+            pageLog: 'Leads管理',
             commentLog: '点击添加回访',
-        })
+            typeLog: logRouter,
+        }).then(function (response) {
+
+            console.log('hcia response', response)
+
+        });
 
         this.requestUserCommentList(record.belongUserId)
         this.setState({
@@ -592,8 +676,6 @@ export default class PotentialUser extends Component {
         }).catch(error => {
 
 
-
-
             var logRouter = ''
 
             if (this.state.nowKey === '1') {
@@ -621,7 +703,6 @@ export default class PotentialUser extends Component {
         //     'commentLog': '查看用户',
         //     'typeLog': 2,
         // });
-
 
 
         this.props.history.push('/app/pass/passopen/user' + record.leadId)
@@ -655,35 +736,6 @@ export default class PotentialUser extends Component {
             theComment: '',
             modal2OPDAYVisible: false,
         });
-    }
-    requestUserLogList = (record) => {
-        var self = this;
-
-        var logRouter = ''
-
-        if (this.state.nowKey === '1') {
-            logRouter = '/back/getLogPotentialUser'
-        }
-        if (this.state.nowKey === '2') {
-            logRouter = '/back/getLogDemoUser'
-
-        }
-        if (this.state.nowKey === '3') {
-            logRouter = '/back/getLogIntentUser'
-        }
-
-        window.Axios.post(logRouter, {
-            referKey: this.state.refID,
-            pageNo: this.state.currentComment,
-            pageSize: this.state.pgsize,
-        }).then(function (response) {
-            self.setState({
-                totalpageComments: response.data.data.totalPage,
-                operationLogHistory: response.data.data.list,
-            });
-        });
-
-
     }
     requestUserCommentList = (record) => {
         var self = this;
@@ -899,7 +951,7 @@ export default class PotentialUser extends Component {
         this.setState({
             currentComment: page,
         }, () => {
-            this.requestUserLogList()
+            // this.requestUserLogList()
         })
     }
 
@@ -1026,7 +1078,6 @@ export default class PotentialUser extends Component {
                                     selectPhoneF: e.target.value,
                                 });
                             }} style={{marginBottom: 10}} placeholder="手机号"/>
-
 
 
                             <Input value={this.state.starClientAccount} onChange={(e) => {
