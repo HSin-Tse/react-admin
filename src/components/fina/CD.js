@@ -293,16 +293,30 @@ export default class PotentialUser extends Component {
                 render: (text, record) => (
                     <span>{record.lastLoginIP}</span>),
             }, {
-                title: '回访状态',
-                dataIndex: '回访状态',
-                key: '回访状态',
+                title: '跟踪状态',
+                dataIndex: '跟踪状态',
+                key: '跟踪状态',
                 align: 'center',
                 render: (text, record) => (<span>{record.feebackStatus}</span>),
 
             }, {
-                title: '操作人',
-                dataIndex: '操作人',
-                key: '操作人',
+                title: '客户归属',
+                dataIndex: '客户归属',
+                key: '客户归属',
+                align: 'center',
+                render: (text, record) => (<span>{record.feebackStatus}</span>),
+
+            }, {
+                title: '模拟用户',
+                dataIndex: '模拟用户',
+                key: '模拟用户',
+                align: 'center',
+                render: (text, record) => (<span>{record.feebackStatus}</span>),
+
+            }, {
+                title: '开户资料',
+                dataIndex: '开户资料',
+                key: '开户资料',
                 align: 'center',
                 render: (text, record) => (
                     <span>{record.operator}</span>),
