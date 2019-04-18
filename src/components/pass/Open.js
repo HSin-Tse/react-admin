@@ -327,12 +327,12 @@ class Basic extends Component {
 
 
         var op = !this.state.availableFlag ? '点击查看' : record.status == 0 ? '点击审核' : (record.status == 1) ? '点击查看' : '点击查看'
-        window.Axios.post('back/addLogOpenAccountAudit', {
-            referKey: record.id,
-            commentLog: op,
-            // mobile: this.state.phoneCn,
-            // content: this.state.changeNoteV,
-        })
+        // window.Axios.post('back/addLogOpenAccountAudit', {
+        //     referKey: record.id,
+        //     commentLog: op,
+        //     // mobile: this.state.phoneCn,
+        //     // content: this.state.changeNoteV,
+        // })
 
         if (this.state.isCanOP == 1) {
             this.props.history.push('/app/pass/passopen/detail' + record.id)
@@ -369,12 +369,12 @@ class Basic extends Component {
 
     handleAmStok = (record) => {
 
-        window.Axios.post('back/addLogOpenAccountAudit', {
-            referKey: record.id,
-            commentLog: "美股授权",
-            // mobile: this.state.phoneCn,
-            // content: this.state.changeNoteV,
-        })
+        // window.Axios.post('back/addLogOpenAccountAudit', {
+        //     referKey: record.id,
+        //     commentLog: "美股授权",
+        //     // mobile: this.state.phoneCn,
+        //     // content: this.state.changeNoteV,
+        // })
 
 
         let self = this
