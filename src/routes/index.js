@@ -1,7 +1,7 @@
 /**
  * Created by 叶子 on 2017/8/13.
  */
-import React, {Component} from 'react';
+import React, {Component,Suspense} from 'react';
 import {Route, Redirect, Switch} from 'react-router-dom';
 import AllComponents from '../components';
 import * as Immutable from 'immutable';
@@ -134,13 +134,27 @@ export default class CRouter extends Component {
         }
         // return permission ? this.requireAuth(permission, component) : component;
     };
-
+     WaitingComponent=(Component)=> {
+        return props => (
+            <Suspense fallback={<div>Loading...</div>}>
+                <Component {...props} />
+            </Suspense>
+        );
+    }
     render() {
         return (
             <Switch>
                 {
                     Object.keys(this.state.cconfig).map(key =>
+                        
+                        
+                        
+                        
+
                         this.state.cconfig[key].map(r => {
+
+                            console.log('hcia key' , r)
+
                             const route = r => {
                                 const Component = AllComponents[r.component];
                                 // console.log('hcia r', r)
