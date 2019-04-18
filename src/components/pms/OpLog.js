@@ -30,9 +30,9 @@ export default class BlackList extends Component {
             bklistB: [],
             bklistC: [],
             currentComment: 0,
-            currentA: 0,
-            currentB: 0,
-            currentC: 0,
+            currentA: 1,
+            currentB: 1,
+            currentC: 1,
             totalpageA: 0,
             totalpageAASIZE: 0,
             totalpageBBSIZE: 0,
@@ -245,7 +245,7 @@ export default class BlackList extends Component {
             }];
 
 
-        this.requestPageA()//1:合规 2:开户 3:交易
+        this.requestPageA()
         this.requestPageB()
         this.requestPageC()
     }
@@ -295,7 +295,7 @@ export default class BlackList extends Component {
         window.Axios.post('auth/getOperatorLogHistoryList', {
             pageNo: this.state.currentA,
             pageSize: this.state.pgsize,
-            'typeLog': 1,//1:合规 2:开户 3:交易
+            'typeLog': 1,
         }).then((response) => {
             self.setState({
                 totalpageA: response.data.data.totalPage,

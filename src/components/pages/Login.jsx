@@ -69,6 +69,13 @@ class Login extends React.Component {
                         //     'typeLog': 1,
                         // });
 
+                        window.Axios.post('/auth/addOperatorLogHistory', {
+                            moduleLog: '登入',
+                            pageLog: '登入',
+                            commentLog: '登入',
+                            typeLog: '1',
+                        })
+
                     }
 
 
