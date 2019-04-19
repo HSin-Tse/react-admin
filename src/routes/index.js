@@ -1,11 +1,12 @@
 /**
- * Created by 叶子 on 2017/8/13.
+ * Created by tse on 2017/8/13.
  */
-import React, {Component, Suspense,lazy} from 'react';
+import React, {Component, Suspense, lazy} from 'react';
 import {Route, Redirect, Switch} from 'react-router-dom';
 import AllComponents from '../components';
 import * as Immutable from 'immutable';
 import routesAD from '@/routes/config';
+
 const NotFound = lazy(() => import('@/components/pages/NotFound'));
 
 
@@ -82,7 +83,6 @@ export default class CRouter extends Component {
                     inforMenuList.forEach((item, index, array) => {
 
                         if (sbkey.tk == item.key) {
-                            // console.log('hcia sbkey.tk', sbkey.tk, item.key, item.availableFlag, (sbkey.tk == item.key))
                             back = true
                             sbkey.op = item.availableFlag
 
@@ -106,12 +106,11 @@ export default class CRouter extends Component {
     requireLogin = (component) => {
 
 
-        if (!localStorage.getItem('too')) { // 线上环境判断是否登录
+        if (!localStorage.getItem('too')) {
             return <Redirect to={'/login'}/>;
         } else {
             return component
         }
-        // return permission ? this.requireAuth(permission, component) : component;
     };
     WaitingComponent = (Component) => {
         return props => (
@@ -124,14 +123,10 @@ export default class CRouter extends Component {
     render() {
         return (
             <Switch>
-                <Route path="/asd" component={this.WaitingComponent(NotFound)} />
-
+                <Route path="/asd" component={this.WaitingComponent(NotFound)}/>
                 {
                     Object.keys(this.state.cconfig).map(key =>
-
-
                         this.state.cconfig[key].map(r => {
-
                             const route = r => {
                                 const Component = this.WaitingComponent(AllComponents[r.component]);
                                 return (
