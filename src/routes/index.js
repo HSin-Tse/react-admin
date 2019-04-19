@@ -1,13 +1,11 @@
 /**
  * Created by 叶子 on 2017/8/13.
  */
-import React, {Component,Suspense} from 'react';
+import React, {Component, Suspense} from 'react';
 import {Route, Redirect, Switch} from 'react-router-dom';
 import AllComponents from '../components';
 import * as Immutable from 'immutable';
 import routesAD from '@/routes/config';
-
-
 
 
 export default class CRouter extends Component {
@@ -20,8 +18,6 @@ export default class CRouter extends Component {
             visible: false,
             gallery: null
         };
-
-
     }
 
 
@@ -53,14 +49,9 @@ export default class CRouter extends Component {
 
     componentWillMount() {
 
-
         if (!this.state.infor) {
-
             var bbRouter = this.deepClone(routesAD);
             this.setState({cconfig: bbRouter});
-
-            // this.props.history.push('/app')
-
             return
         }
 
@@ -68,10 +59,8 @@ export default class CRouter extends Component {
         var inforMenuList = this.state.infor.menuList
 
         if (inforSuperFlag === 1) {
-            // this.setState({cconfig: {...routesAD}});
             var imuRou = Immutable.Map(routesAD).toObject()
             this.setState({cconfig: imuRou});
-            // console.log('hcia imuRou', imuRou)
             return
         }
         var bbRouter = this.deepClone(routesAD);
@@ -90,7 +79,6 @@ export default class CRouter extends Component {
                 var ssb = key.subs.filter((sbkey, index, array) => {
                     var back = false
                     inforMenuList.forEach((item, index, array) => {
-                        // console.log('hcia sbkey.tk', sbkey.tk, item.key, item.availableFlag, (sbkey.tk == item.key))
 
                         if (sbkey.tk == item.key) {
                             // console.log('hcia sbkey.tk', sbkey.tk, item.key, item.availableFlag, (sbkey.tk == item.key))
@@ -118,43 +106,33 @@ export default class CRouter extends Component {
 
 
         if (!localStorage.getItem('too')) { // 线上环境判断是否登录
-            console.log('hcia component ！！！', component)
-
-            // console.log('hcia requireLogin localStorage.getItem too', localStorage.getItem('too'))
             return <Redirect to={'/login'}/>;
         } else {
-            // console.log('hcia requireLogin component', component)
-            // console.log('hcia component ！！！', component)
-
             return component
         }
         // return permission ? this.requireAuth(permission, component) : component;
     };
-     WaitingComponent=(Component)=> {
+    WaitingComponent = (Component) => {
         return props => (
             <Suspense fallback={<div>Loading...</div>}>
                 <Component {...props} />
             </Suspense>
         );
     }
+
     render() {
         return (
             <Switch>
                 {
                     Object.keys(this.state.cconfig).map(key =>
-                        
-                        
-                        
-                        
+
 
                         this.state.cconfig[key].map(r => {
 
-                            console.log('hcia key' , r)
+                            console.log('hcia key', r)
 
                             const route = r => {
                                 const Component = AllComponents[r.component];
-                                // console.log('hcia r', r)
-
                                 return (
                                     <Route
                                         key={r.route || r.key}
