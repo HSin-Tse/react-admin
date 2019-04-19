@@ -5,7 +5,6 @@ import React, {Component,Suspense} from 'react';
 import {Route, Redirect, Switch} from 'react-router-dom';
 import AllComponents from '../components';
 import * as Immutable from 'immutable';
-// import routes from './config';
 import routesAD from '@/routes/config';
 
 
