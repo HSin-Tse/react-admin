@@ -133,7 +133,7 @@ export default class CRouter extends Component {
                         this.state.cconfig[key].map(r => {
 
                             const route = r => {
-                                const Component = AllComponents[r.component];
+                                const Component = this.WaitingComponent(AllComponents[r.component]);
                                 return (
                                     <Route
                                         key={r.route || r.key}

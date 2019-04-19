@@ -2,65 +2,70 @@
  * 路由组件出口文件
  * yezi 2018年6月24日
  */
+import {lazy} from "react";
+
 import Loadable from 'react-loadable';
 import Loading from './widget/Loading';
-import BasicForm from './forms/BasicForm';
-import AdvancedTable from './tables/AdvancedTables';
-import AsynchronousTable from './tables/AsynchronousTable';
-import Echarts from './charts/Echarts';
-import Recharts from './charts/Recharts';
-import Buttons from './ui/Buttons';
-import Spins from './ui/Spins';
-import Modals from './ui/Modals';
-import Banners from './ui/banners';
-import Drags from './ui/Draggable';
-import Dashboard from './dashboard/Dashboard';
-import DEVhboard from './dashboard/DEVhboard';
-import Gallery from './ui/Gallery';
-import BasicAnimations from './animation/BasicAnimations';
-import AuthBasic from './auth/Basic';
-import RouterEnter from './auth/RouterEnter';
-import PassOpen from './pass/Open';
-import PassOpenD from './pass/OpenD';
-import PassOpenS from './pass/OpenS';
-import PassOpenRS from './pass/OpenRS';
-import PassLever from './pass/Lever';
 
-import SimulatorUser from './customer/SimulatorUser';
-import IntendingUser from './pass/IntendingUser';
-import PotentialUser from './customer/PotentialUser'
-import CustomerSummary from './customer/CustomerSummary'
-import BlackList from './customer/BlackList'
-import WhiteList from './customer/WhiteList'
-import CustomerUserInfo from './customer/CustomerUserInfo'
-import AddUser from './pms/AddUser'
-import EditUser from './pms/EditUser'
-import TradeAccount from './trade/Account'
-import InComeMoney from './fina/IncomeMoney'
-import EditCha from './fina/EditCha'
-import EditExRate from './fina/EditExRate'
-import TeleMoney from './fina/TeleMoney'
-import TeleMoneySecond from './fina/TeleMoneySecond'
-import TeleMoneyThird from './fina/TeleMoneyThird'
-import OutMoneyJU from './fina/OutMoneyJU'
-import OutMoneyJUB from './fina/OutMoneyJUB'
-import OutMoneyJUC from './fina/OutMoneyJUC'
-import OutMoneyJUD from './fina/OutMoneyJUD'
-import OutMoney from './fina/OutMoney'
-import InOutTA from './fina/InOutTA'
-import ChannelMY from './fina/ChannelMY'
-import TradeDepart from './trade/Depart'
-import RoleSet from './pms/RoleSet'
-import OpLog from './pms/OpLog'
-import AddRole from './pms/AddRole'
-import EditRole from './pms/EditRole'
-import InnerUserList from './pms/InnerUserList'
-import CA from './fina/CA'
-import CAA from './fina/CAA'
-import CB from './fina/CB'
-import CC from './fina/CC'
-import CD from './fina/CD'
 
+const BasicForm = lazy(() => import('./forms/BasicForm'));
+const AdvancedTable = lazy(() => import('./tables/AdvancedTables'));
+const AsynchronousTable = lazy(() => import('./tables/AsynchronousTable'));
+const Echarts = lazy(() => import('./charts/Echarts'));
+const Recharts = lazy(() => import('./charts/Recharts'));
+const Buttons = lazy(() => import('./ui/Buttons'));
+const Spins = lazy(() => import('./ui/Spins'));
+const Modals = lazy(() => import('./ui/Modals'));
+const Banners = lazy(() => import('./ui/banners'));
+const Drags = lazy(() => import('./ui/Draggable'));
+const Dashboard = lazy(() => import('./dashboard/Dashboard'));
+const DEVhboard = lazy(() => import('./dashboard/DEVhboard'));
+const Gallery = lazy(() => import('./ui/Gallery'));
+const BasicAnimations = lazy(() => import('./animation/BasicAnimations'));
+const AuthBasic = lazy(() => import('./auth/Basic'));
+const RouterEnter = lazy(() => import('./auth/RouterEnter'));
+const SimulatorUser = lazy(() => import('./customer/SimulatorUser'));
+const IntendingUser = lazy(() => import('./pass/IntendingUser'));
+const PotentialUser = lazy(() => import('./customer/PotentialUser'));
+const CustomerSummary = lazy(() => import('./customer/CustomerSummary'));
+const BlackList = lazy(() => import('./customer/BlackList'));
+const AddUser = lazy(() => import('./pms/AddUser'));
+const EditUser = lazy(() => import('./pms/EditUser'));
+const TradeAccount = lazy(() => import('./trade/Account'));
+const InComeMoney = lazy(() => import('./fina/IncomeMoney'));
+const EditCha = lazy(() => import('./fina/EditCha'));
+const EditExRate = lazy(() => import('./fina/EditExRate'));
+const TeleMoney = lazy(() => import('./fina/TeleMoney'));
+const TeleMoneySecond = lazy(() => import('./fina/TeleMoneySecond'));
+const TeleMoneyThird = lazy(() => import('./fina/TeleMoneyThird'));
+const OutMoneyJU = lazy(() => import('./fina/OutMoneyJU'));
+const OutMoneyJUB = lazy(() => import('./fina/OutMoneyJUB'));
+const OutMoneyJUC = lazy(() => import('./fina/OutMoneyJUC'));
+const OutMoneyJUD = lazy(() => import('./fina/OutMoneyJUD'));
+const OutMoney = lazy(() => import('./fina/OutMoney'));
+const InOutTA = lazy(() => import('./fina/InOutTA'));
+const ChannelMY = lazy(() => import('./fina/ChannelMY'));
+const TradeDepart = lazy(() => import('./trade/Depart'));
+const RoleSet = lazy(() => import('./pms/RoleSet'));
+const OpLog = lazy(() => import('./pms/OpLog'));
+const AddRole = lazy(() => import('./pms/AddRole'));
+const EditRole = lazy(() => import('./pms/EditRole'));
+const InnerUserList = lazy(() => import('./pms/InnerUserList'));
+const CA = lazy(() => import('./fina/CA'));
+const CAA = lazy(() => import('./fina/CAA'));
+const CB = lazy(() => import('./fina/CB'));
+const CC = lazy(() => import('./fina/CC'));
+const CD = lazy(() => import('./fina/CD'));
+
+const CustomerUserInfo = lazy(() => import('./customer/CustomerUserInfo'));
+
+const PassOpen = lazy(() => import( './pass/Open'));
+const PassOpenD = lazy(() => import( './pass/OpenD'));
+const PassOpenS = lazy(() => import( './pass/OpenS'));
+const PassOpenRS = lazy(() => import( './pass/OpenRS'));
+const PassLever = lazy(() => import( './pass/Lever'));
+
+const WhiteList = lazy(() => import('./customer/WhiteList'));
 
 
 const WysiwygBundle = Loadable({ // 按需加载富文本配置
