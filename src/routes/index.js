@@ -1,11 +1,12 @@
 /**
  * Created by 叶子 on 2017/8/13.
  */
-import React, {Component, Suspense} from 'react';
+import React, {Component, Suspense,lazy} from 'react';
 import {Route, Redirect, Switch} from 'react-router-dom';
 import AllComponents from '../components';
 import * as Immutable from 'immutable';
 import routesAD from '@/routes/config';
+const NotFound = lazy(() => import('@/components/pages/NotFound'));
 
 
 export default class CRouter extends Component {
@@ -123,13 +124,13 @@ export default class CRouter extends Component {
     render() {
         return (
             <Switch>
+                <Route path="/page1" component={this.WaitingComponent(NotFound)} />
+
                 {
                     Object.keys(this.state.cconfig).map(key =>
 
 
                         this.state.cconfig[key].map(r => {
-
-                            console.log('hcia key', r)
 
                             const route = r => {
                                 const Component = AllComponents[r.component];
