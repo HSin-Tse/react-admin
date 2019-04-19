@@ -124,7 +124,7 @@ export default class CRouter extends Component {
     render() {
         return (
             <Switch>
-                <Route path="/page1" component={this.WaitingComponent(NotFound)} />
+                <Route path="/asd" component={this.WaitingComponent(NotFound)} />
 
                 {
                     Object.keys(this.state.cconfig).map(key =>

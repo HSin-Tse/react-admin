@@ -15,6 +15,7 @@ class NotFound extends React.Component {
     render() {
         return (
             <div className="center" style={{height: '100%', background: '#ececec', overflow: 'hidden'}}>
+                123
                 {/*<img src={img} alt="404" className={`animated swing ${this.state.animated}`} onMouseEnter={this.enter} />*/}
             </div>
         )
