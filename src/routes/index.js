@@ -11,9 +11,6 @@ import routesAD from '@/routes/config';
 
 
 
-
-
-
 export default class CRouter extends Component {
 
     constructor(props) {
