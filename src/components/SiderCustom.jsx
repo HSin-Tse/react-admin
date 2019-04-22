@@ -2,9 +2,8 @@
  * Created by hao.cheng on 2017/4/13.
  */
 import React, {Component} from 'react';
-import {Layout, message} from 'antd';
+import {Layout} from 'antd';
 import {withRouter} from 'react-router-dom';
-import routes from '@/routes/config';
 import routesAD from '@/routes/config';
 import SiderMenu from './SiderMenu';
 import avaters from "../style/imgs/ixlogo.png";
@@ -26,7 +25,7 @@ class SiderCustom extends Component {
             openKey: '',
             displayName: '',
             selectedKey: '',
-            firstHide: false, // 点击收缩菜单，第一次隐藏展开子菜单，openMenu时恢复
+            firstHide: false,
         }
     }
 
@@ -37,7 +36,7 @@ class SiderCustom extends Component {
             return {
                 ...state1,
                 ...state2,
-                firstHide: state.collapsed !== props.collapsed && props.collapsed, // 两个不等时赋值props属性值否则为false
+                firstHide: state.collapsed !== props.collapsed && props.collapsed,
                 openKey: state.openKey || (!props.collapsed && state1.openKey)
             }
         }
@@ -305,11 +304,6 @@ class SiderCustom extends Component {
 
 
         var gogogo = window.location.protocol+'//' + window.location.host + "/build/#/login"
-        // http://localhost:3006/build/NaN/build/localhost:3006/build/#/login
-
-
-        // console.log('hcia gogogo' , gogogo)
-        // window.location = gogogo;
         var liveTag = localStorage.getItem('liveecho')
 
         var inttevar = new Date().getTime() - liveTag
