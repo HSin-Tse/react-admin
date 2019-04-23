@@ -207,17 +207,16 @@ class SiderCustom extends Component {
         // localStorage.removeItem('infor');
 
         localStorage.setItem('liveecho', new Date().getTime());
-        var lastLoginTime=localStorage.getItem('logint');
+        var lastLoginTime = localStorage.getItem('logint');
 
 
         var loginDura = new Date().getTime() - lastLoginTime
-      // var loginDura=  nowTime-lastLoginTime
-      //   console.log('hcia window.location.host' , window.location.host)
-      //   console.log('hcia loginDura' , loginDura)
+        // var loginDura=  nowTime-lastLoginTime
+        //   console.log('hcia window.location.host' , window.location.host)
+        //   console.log('hcia loginDura' , loginDura)
 
 
-
-        if(loginDura>86400000){
+        if (loginDura > 86400000) {
             localStorage.removeItem('infor');
             localStorage.removeItem('user');
             localStorage.removeItem('too');
@@ -303,7 +302,7 @@ class SiderCustom extends Component {
     componentDidMount() {
 
 
-        var gogogo = window.location.protocol+'//' + window.location.host + "/build/#/login"
+        var gogogo = window.location.protocol + '//' + window.location.host + "/build/#/login"
         var liveTag = localStorage.getItem('liveecho')
 
         var inttevar = new Date().getTime() - liveTag
@@ -361,32 +360,19 @@ class SiderCustom extends Component {
 
 
         document.addEventListener("keydown", this.handleKeyPress, false);
-        // document.addEventListener("keyup", this.handleKeyPress, false);
-
-
-        // console.log('hcia  SiderCustom componentDidMount')
-        // if (!this.state.infor) {return}
-        // console.log('hcia  SiderCustom index componentWillMount AAAAAa')
         if (!this.state.infor) {
             return
         }
-
-
-        // console.log('hcia this.state.infor' , this.state.infor)
-        // console.log('hcia  SiderCustom index componentWillMount  BBBBB')
-
         var inforSuperFlag = this.state.infor.superFlag
         // console.log('hcia  SiderCustom index componentWillMount  CCCCCCC')
 
         var inforMenuList = this.state.infor.menuList
 
         if (inforSuperFlag === 1) {
-            // this.setState({cconfig: {...routesAD}});
             var imuRou = Immutable.Map(routesAD).toObject()
             this.setState({cconfig: imuRou});
             return
         }
-        // var bbRouter = {...routes}
 
         var bbRouter = this.deepClone(routesAD);
 
@@ -405,7 +391,6 @@ class SiderCustom extends Component {
                     var back = false
 
                     inforMenuList.forEach((item, index, array) => {
-                        // console.log('hcia sbkey.title','side', sbkey.title, item.name, item.key, (sbkey.title == item.name))
 
                         if (sbkey.tk == item.key) {
                             back = true
@@ -457,7 +442,6 @@ class SiderCustom extends Component {
                          alt="头像"/>
                     <img style={{height: 45, width: 45 * (this.props.collapsed ? 1 : 0)}} src={avaters} alt="头像"/>
 
-                    {/*{this.state.openKey}*/}
                     {this.props.collapsed ? '' : ''}
 
 
