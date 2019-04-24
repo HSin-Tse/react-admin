@@ -326,10 +326,6 @@ class SiderCustom extends Component {
         }
 
 
-
-
-
-
         document.addEventListener("keydown", this.handleKeyPress, false);
         if (!this.state.infor) {
             return
@@ -405,7 +401,6 @@ class SiderCustom extends Component {
                 style={{overflowY: 'auto'}}
             >
 
-                {/*<div><h1>{this.state.openKey}</h1></div>*/}
 
                 <div className="logo">
                     <img style={{height: 18 * 1.3, width: 130 * (this.props.collapsed ? 0 : 1.3)}} src={avater}
