@@ -86,9 +86,7 @@ class SiderCustom extends Component {
     }
     handleKeyPress = (event) => {
 
-        // console.log('hcia event' , event)
 
-        var self = this
 
         if (event.metaKey || event.ctrlKey) {
             if (event.key === '1') {
@@ -265,15 +263,9 @@ class SiderCustom extends Component {
     };
 
     componentWillUnmount() {
-        // console.log('hcia componentWillUnmount')
         clearInterval(this.sda);
-        // clearInterval(this.jugeTime);
-
         document.removeEventListener("keydown", this.handleKeyPress, false);
-
-
         this.props.history.push('/login')
-        // document.removeEventListener("keyup", this.handleKeyPress, false);
     }
 
     componentDidMount() {
