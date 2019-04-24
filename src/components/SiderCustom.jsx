@@ -336,28 +336,7 @@ class SiderCustom extends Component {
         // });
 
 
-        var isme = window.location.host == '127.0.0.1:3006'
-        // console.log('hcia isme' , isme)
-        if (isme) {
-        } else {
-            // window.addEventListener("beforeunload", (ev) =>
-            // {
-            //
-            //     localStorage.removeItem('infor');
-            //     localStorage.removeItem('user');
-            //     localStorage.removeItem('too');
-            //     localStorage.removeItem('displayName');
-            //
-            //     window.Axios.post('back/addLogHistory', {
-            //         'moduleLog': 'Logout',
-            //         'pageLog': 'Logout',
-            //         'commentLog': '登出',
-            //         'typeLog': "1",
-            //     }).then(function (response) {
-            //     })
-            // });
-        }
-
+        
 
         document.addEventListener("keydown", this.handleKeyPress, false);
         if (!this.state.infor) {
