@@ -325,18 +325,10 @@ class SiderCustom extends Component {
 
         }
 
-        // this.context.router.history.listen((route) => {
-        //
-        //
-        //     console.log('hcia route.pathname' , route.pathname)
-        //
-        //     route.next()
-        //     // if(route.pathname === '/xxx') {
-        //     // }
-        // });
+   
 
 
-        
+
 
         document.addEventListener("keydown", this.handleKeyPress, false);
         if (!this.state.infor) {
