@@ -325,7 +325,7 @@ class SiderCustom extends Component {
 
         }
 
-   
+
 
 
 
@@ -386,7 +386,7 @@ class SiderCustom extends Component {
         this.setState({
             selectedKey: e.key
         });
-        const {popoverHide} = this.props; // 响应式布局控制小屏幕点击菜单时隐藏菜单操作
+        const {popoverHide} = this.props;
         popoverHide && popoverHide();
     };
     openMenu = v => {
