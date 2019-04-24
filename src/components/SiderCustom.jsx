@@ -229,24 +229,7 @@ class SiderCustom extends Component {
 
     }, 1000)
 
-    jugeTime = setInterval(() => {
-        //   console.log('hcia setInterval'+new Date().getTime())
-        //   // this.requestData()
-        //   // this.requestPageWinoRe()
-        //
-        //
-        //   // localStorage.removeItem('infor');
-        //
-        //   // localStorage.setItem('liveecho', new Date().getTime()-);
-        //
-        // var  liveTag=localStorage.getItem('liveecho')
-        //
-        // var inttevar = new Date().getTime()-liveTag
-        //
-        //   console.log('hcia inttevar' , inttevar)
 
-
-    }, 1000)
 
     // componentWillUnmount() {
     logout = () => {
@@ -285,7 +268,7 @@ class SiderCustom extends Component {
     componentWillUnmount() {
         // console.log('hcia componentWillUnmount')
         clearInterval(this.sda);
-        clearInterval(this.jugeTime);
+        // clearInterval(this.jugeTime);
 
         document.removeEventListener("keydown", this.handleKeyPress, false);
 
