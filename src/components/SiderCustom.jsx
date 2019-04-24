@@ -249,13 +249,8 @@ class SiderCustom extends Component {
     }, 1000)
 
     // componentWillUnmount() {
-    // document.removeEventListener("keydown", this.handleKeyPressOOP, false);
-    // }
     logout = () => {
         // localStorage.setItem('infor', JSON.stringify(response.data.data));
-        // localStorage.setItem('displayName', response.data.data.displayName);
-        // localStorage.setItem('loginName', response.data.data.loginName);
-        // localStorage.setItem('too', response.data.data.token);
 
         var self = this
 
@@ -302,7 +297,7 @@ class SiderCustom extends Component {
     componentDidMount() {
 
 
-        var gogogo = window.location.protocol + '//' + window.location.host + "/build/#/login"
+        // var gogogo = window.location.protocol + '//' + window.location.host + "/build/#/login"
         var liveTag = localStorage.getItem('liveecho')
 
         var inttevar = new Date().getTime() - liveTag
