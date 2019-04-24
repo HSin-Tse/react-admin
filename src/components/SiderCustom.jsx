@@ -230,7 +230,6 @@ class SiderCustom extends Component {
     }, 1000)
 
 
-
     // componentWillUnmount() {
     logout = () => {
         // localStorage.setItem('infor', JSON.stringify(response.data.data));
@@ -279,8 +278,6 @@ class SiderCustom extends Component {
 
     componentDidMount() {
 
-
-        // var gogogo = window.location.protocol + '//' + window.location.host + "/build/#/login"
         var liveTag = localStorage.getItem('liveecho')
 
         var inttevar = new Date().getTime() - liveTag
@@ -289,18 +286,10 @@ class SiderCustom extends Component {
 
 
         if (inttevar > 7 * 1000) {
-
-            // console.log('hcia inttevar', inttevar)
-
             localStorage.removeItem('infor');
             localStorage.removeItem('user');
             localStorage.removeItem('too');
             localStorage.removeItem('displayName');
-            // self.props.history.push('/login')
-
-        } else {
-            // console.log('hcia inttevar', inttevar)
-
         }
 
 
