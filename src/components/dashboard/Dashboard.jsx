@@ -241,16 +241,7 @@ class Dashboard extends React.Component {
                     />
                 </h1>
                 <FormattedDate value={Date.now()} />
-                {/*<p>*/}
-                    {/*<FormattedMessage*/}
-                        {/*id="welcome"*/}
-                        {/*defaultMessage={`Hello {name}, you have {unreadCount, number} {unreadCount, plural,*/}
-                      {/*one {message}*/}
-                      {/*other {messages}*/}
-                    {/*}`}*/}
-                        {/*values={{name: <b>{name}</b>, unreadCount}}*/}
-                    {/*/>*/}
-                {/*</p>*/}
+
             </div>
         )
     }

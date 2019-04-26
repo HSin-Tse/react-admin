@@ -2,7 +2,7 @@
  * Created by hao.cheng on 2017/4/13.
  */
 import React, {Component} from 'react';
-import {Menu, Icon, Layout, Badge, Popover} from 'antd';
+import {Menu, Icon, Layout, Button, Popover} from 'antd';
 import screenfull from 'screenfull';
 import {gitOauthToken, gitOauthInfo} from '../axios';
 import {queryString} from '../utils';
@@ -17,6 +17,12 @@ const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
 class HeaderCustom extends Component {
+
+    changeLanguage() {
+        let lang = this.props.responsive.locale;
+        lang = lang === 'zh' ? 'en' : 'zh';
+        this.props.changeLanguage(lang);
+    }
     state = {
         user: '',
         displayName: '',
@@ -46,7 +52,7 @@ class HeaderCustom extends Component {
         // this.setState({displayName: localStorage.getItem('displayName')});
         this.setState({displayName: localStorage.getItem('loginName')});
         
-        console.log('hcia this.state.locale' , this.state.locale)
+        console.log('hcia this.state.responsive' , this.props.responsive.locale)
 
     };
 
@@ -58,7 +64,7 @@ class HeaderCustom extends Component {
     };
     menuClick = e => {
         console.log(e);
-        e.key === 'logout' && this.logout();
+        // e.key === 'logout' && this.logout();
     };
     logout = () => {
         // localStorage.setItem('infor', JSON.stringify(response.data.data));
@@ -78,37 +84,12 @@ class HeaderCustom extends Component {
         })
 
 
-        // window.Axios.post('back/addLogHistory', {
-        //     'moduleLog': '登出',
-        //     'pageLog': '登出',
-        //     'commentLog': '登出',
-        //     'typeLog': "1",
-        // }).then(function (response) {
-        //     localStorage.removeItem('infor');
-        //     localStorage.removeItem('user');
-        //     localStorage.removeItem('too');
-        //     localStorage.removeItem('displayName');
-        //
-        //
-        //
-        //     self.props.history.push('/login')
-        //
-        // }).catch(error => {
-        //     localStorage.removeItem('infor');
-        //     localStorage.removeItem('user');
-        //     localStorage.removeItem('too');
-        //     localStorage.removeItem('displayName');
-        //
-        //     self.props.history.push('/login')
-        //
-        //     console.log('Error', error);
-        // })
-
-
         localStorage.removeItem('infor');
         localStorage.removeItem('user');
         localStorage.removeItem('too');
         localStorage.removeItem('displayName');
+        self.props.history.push('/login')
+
 
     };
     popoverHide = () => {
@@ -141,30 +122,26 @@ class HeaderCustom extends Component {
                 }
                 <Menu
                     mode="horizontal"
-                    style={{lineHeight: '64px', float: 'right'}}
-                    onClick={this.menuClick}
+                    style={{lineHeight: '68px', float: 'right',width: 240}}
+                    // onClick={this.menuClick}
                 >
 
 
-                    <SubMenu title={
+                    <SubMenu
 
-                        <span className="avatar">
-
-                           <h1>{this.state.locale}</h1>
-                        </span>}
-                    >
-
-
-                    </SubMenu>
-                    <SubMenu title={
+                        title={
 
                         <span className="avatar">
                         <img src={avater} alt="头像"/>
                         </span>}>
-
+                        <MenuItemGroup title="用户中心">
+                            <Menu.Item key="logout"><span onClick={this.logout}>退出登录</span></Menu.Item>
+                        </MenuItemGroup>
 
                     </SubMenu>
-                    <SubMenu title={
+                    <SubMenu
+
+                        title={
                         <span className="avatar">{this.state.displayName}</span>}>
 
                         <MenuItemGroup title="用户中心">
@@ -172,6 +149,11 @@ class HeaderCustom extends Component {
                         </MenuItemGroup>
                     </SubMenu>
 
+
+
+
+                    <Button
+                        onClick={() => this.changeLanguage()}>{this.props.responsive.locale === 'zh' ? 'zh' : 'cn'}</Button>
 
                 </Menu>
             </Header>
@@ -193,4 +175,4 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, ownProps) => ({
     changeLanguage: (val) => dispatch(actions.changeLanguage(val))
 });
-export default withRouter(connect(mapStateToProps)(HeaderCustom));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(HeaderCustom));
