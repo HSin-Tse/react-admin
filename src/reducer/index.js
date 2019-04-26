@@ -3,7 +3,8 @@
  */
 import {combineReducers} from 'redux';
 import * as type from '../action/type';
-
+import demo from './demo';
+import root from './root';
 const handleData = (state = {isFetching: true, data: {}}, action) => {
     switch (action.type) {
         case type.REQUEST_DATA:
@@ -63,4 +64,6 @@ export default combineReducers({
     httpData,
     todos,
     infor,
+    demo,
+    root
 });

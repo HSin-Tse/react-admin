@@ -3,13 +3,17 @@
  */
 import React from 'react';
 import {Row, Col, Card} from 'antd';
+// import Appwww from './AppDD.js';
 import BreadcrumbCustom from '../BreadcrumbCustom';
 import {bindActionCreators} from "redux";
 import {addTodo, setINFOR} from "../../action";
 import connect from "react-redux/es/connect/connect";
-
-
+// import { useTranslation, withTranslation, Trans } from 'react-i18next';
+import { withNamespaces, NamespacesConsumer, Trans } from 'react-i18next';
+import { FormattedDate ,FormattedMessage} from 'react-intl';
+import  i18n from '../../i18n'
 class Dashboard extends React.Component {
+
     getOption = () => {
         return {
             title: {
@@ -77,6 +81,8 @@ class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            name       : 'Eric',
+            unreadCount: 1000,
             menuList: [],
             resp: undefined,
             displayName: '',
@@ -94,6 +100,7 @@ class Dashboard extends React.Component {
 
 
     componentDidMount() {
+        // const { t, i18n } = useTranslation();
 
         this.setState(
             {
@@ -132,7 +139,15 @@ class Dashboard extends React.Component {
 
 
     render() {
+        const { t, i18n } = this.props;
+        const changeLanguage = lng => {
+            i18n.changeLanguage(lng);
+        };
+        const {name, unreadCount} = this.state;
+
+
         return (
+
             <div className="gutter-example button-demo">
                 {/*{JSON.stringify(localStorage.getItem('infor'))}*/}
 
@@ -214,7 +229,28 @@ class Dashboard extends React.Component {
 
 
                 </Card>
+                {/*<Appwww />*/}
+                {/*<div>{this.t('description.part2')}</div>*/}
 
+                {/*<button onClick={() => changeLanguage('de')}>de</button>*/}
+                {/*<button onClick={() => changeLanguage('en')}>en</button>*/}
+                {/*<div>{useTranslation.t('description.part2')}</div>*/}
+                <h1 >
+                    <FormattedMessage
+                        id="hello"
+                    />
+                </h1>
+                <FormattedDate value={Date.now()} />
+                {/*<p>*/}
+                    {/*<FormattedMessage*/}
+                        {/*id="welcome"*/}
+                        {/*defaultMessage={`Hello {name}, you have {unreadCount, number} {unreadCount, plural,*/}
+                      {/*one {message}*/}
+                      {/*other {messages}*/}
+                    {/*}`}*/}
+                        {/*values={{name: <b>{name}</b>, unreadCount}}*/}
+                    {/*/>*/}
+                {/*</p>*/}
             </div>
         )
     }
@@ -230,4 +266,4 @@ const mapDispatchToProps = dispatch => ({
     addTodo: bindActionCreators(addTodo, dispatch),
     setUSER: bindActionCreators(setINFOR, dispatch),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default Dashboard;

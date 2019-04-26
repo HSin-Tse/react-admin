@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import './i18n';
+
 import {Layout, notification, Icon} from 'antd';
 import SiderCustom from './components/SiderCustom';
 import HeaderCustom from './components/HeaderCustom';

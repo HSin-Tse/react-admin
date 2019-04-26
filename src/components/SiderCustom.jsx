@@ -265,7 +265,7 @@ class SiderCustom extends Component {
     componentWillUnmount() {
         clearInterval(this.sda);
         document.removeEventListener("keydown", this.handleKeyPress, false);
-        this.props.history.push('/login')
+        // this.props.history.push('/login')
     }
 
     componentDidMount() {

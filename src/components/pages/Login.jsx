@@ -96,7 +96,7 @@ class Login extends React.Component {
         const {getFieldDecorator} = this.props.form;
         return (
 
-            <dic id="Loggin" className="login">
+            <div id="Loggin" className="login">
 
                 <div style={{zIndex: 10}} className="login-form">
 
@@ -135,7 +135,7 @@ class Login extends React.Component {
                 <ReactCanvasNest className='canvasNest' config={{pointColor: ' 255, 255, 255 ', count: 100}}
                                  style={{zIndex: 0}}/>
 
-            </dic>
+            </div>
         );
     }
 }

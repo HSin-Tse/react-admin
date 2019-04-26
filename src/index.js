@@ -14,9 +14,13 @@ import './style/index.less';
 import axios from "axios";
 import {message} from 'antd';
 import Toast from './components/widget/toast'
-import {IntlProvider, addLocaleData} from 'react-intl';
-import en from './locale/en_US'
-import zh from './locale/zh_CN'//を
+import {IntlProvider} from 'react-intl';
+import Intl from './Intl';
+
+// import {IntlProvider, addLocaleData} from 'react-intl';
+// import i18n from './i18n';
+// import './i18n';
+// import {I18nextProvider} from 'react-i18next';
 
 const middleware = [thunk];
 const store = createStore(reducer, applyMiddleware(...middleware));
@@ -200,13 +204,13 @@ window.Axios.interceptors.response.use(function (response) {
 })
 
 ReactDOM.render(
-    <IntlProvider locale="en">
-        <AppContainer>
             <Provider store={store}>
-                <Page store={store}/>
+                <Intl>
+                    <Page />
+                </Intl>
             </Provider>
-        </AppContainer>
-    </IntlProvider>,
+
+    ,
     document.getElementById('root')
 );
 serviceWorker.register();
