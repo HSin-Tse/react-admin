@@ -10,6 +10,7 @@ import avater from '../style/imgs/icon_admin_1.png';
 import SiderCustom from './SiderCustom';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+import actions from '../actions/index.js';
 
 const {Header} = Layout;
 const SubMenu = Menu.SubMenu;
@@ -44,6 +45,8 @@ class HeaderCustom extends Component {
 
         // this.setState({displayName: localStorage.getItem('displayName')});
         this.setState({displayName: localStorage.getItem('loginName')});
+        
+        console.log('hcia this.state.locale' , this.state.locale)
 
     };
 
@@ -65,8 +68,7 @@ class HeaderCustom extends Component {
 
 
         var self = this
-        window.Axios.post('auth/logout', {
-        }).then(function (response) {
+        window.Axios.post('auth/logout', {}).then(function (response) {
             localStorage.removeItem('infor');
             localStorage.removeItem('user');
             localStorage.removeItem('too');
@@ -143,26 +145,24 @@ class HeaderCustom extends Component {
                     onClick={this.menuClick}
                 >
 
-                    {/*<Menu.Item key="full" onClick={this.screenFull} >*/}
-                    {/*<Icon type="arrows-alt" onClick={this.screenFull} />*/}
-                    {/*</Menu.Item>*/}
-                    {/*<Menu.Item key="1">*/}
-                    {/*<Badge count={25} overflowCount={10} style={{marginLeft: 10}}>*/}
-                    {/*<Icon type="notification" />*/}
-                    {/*</Badge>*/}
-                    {/*</Menu.Item>*/}
+
                     <SubMenu title={
 
+                        <span className="avatar">
+
+                           <h1>{this.state.locale}</h1>
+                        </span>}
+                    >
+
+
+                    </SubMenu>
+                    <SubMenu title={
 
                         <span className="avatar">
                         <img src={avater} alt="头像"/>
-
-                        {/*<i className="on bottom b-white"> {this.state.displayName} </i>*/}
                         </span>}>
 
-                        <MenuItemGroup title="用户中心">
-                            <Menu.Item key="logout"><span onClick={this.logout}>退出登录</span></Menu.Item>
-                        </MenuItemGroup>
+
                     </SubMenu>
                     <SubMenu title={
                         <span className="avatar">{this.state.displayName}</span>}>
@@ -172,7 +172,6 @@ class HeaderCustom extends Component {
                         </MenuItemGroup>
                     </SubMenu>
 
-                    {/*<Menu.Item>{this.state.displayName}</Menu.Item>*/}
 
                 </Menu>
             </Header>
@@ -181,8 +180,17 @@ class HeaderCustom extends Component {
 }
 
 const mapStateToProps = state => {
+
+    console.log('hcia state', state)
     const {responsive = {data: {}}} = state.httpData;
+    responsive.locale = state.root.language
+    console.log('hcia responsive', responsive)
+
+
     return {responsive};
 };
 
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    changeLanguage: (val) => dispatch(actions.changeLanguage(val))
+});
 export default withRouter(connect(mapStateToProps)(HeaderCustom));
