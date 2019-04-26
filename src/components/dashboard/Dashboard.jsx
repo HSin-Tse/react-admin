@@ -153,7 +153,10 @@ class Dashboard extends React.Component {
 
 
                 <h2 style={{marginTop: 15}}>
-                    个人待办事项
+                    <FormattedMessage
+                        id="个人待办事项"
+                    />
+
                 </h2>
 
                 <BreadcrumbCustom first="" second="个人待办事项"/>
@@ -226,7 +229,7 @@ class Dashboard extends React.Component {
                     </Row>
                 </Card>
                 <Card style={{marginTop: 15}} disabled={true} title="待办事项 " bordered={true}>
-
+                    <FormattedDate value={Date.now()} />
 
                 </Card>
                 {/*<Appwww />*/}
@@ -235,12 +238,18 @@ class Dashboard extends React.Component {
                 {/*<button onClick={() => changeLanguage('de')}>de</button>*/}
                 {/*<button onClick={() => changeLanguage('en')}>en</button>*/}
                 {/*<div>{useTranslation.t('description.part2')}</div>*/}
-                <h1 >
-                    <FormattedMessage
-                        id="hello"
-                    />
-                </h1>
-                <FormattedDate value={Date.now()} />
+                {/*<h1 >*/}
+                    {/*<FormattedMessage*/}
+                        {/*id="hello"*/}
+                    {/*/>*/}
+                {/*</h1>*/}
+                {/*<h1 >*/}
+                    {/*<FormattedMessage*/}
+                        {/*id="hello"*/}
+                        {/*values={"FormattedMessage"}*/}
+                    {/*/>*/}
+                {/*</h1>*/}
+
 
             </div>
         )
