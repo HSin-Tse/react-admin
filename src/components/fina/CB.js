@@ -370,7 +370,7 @@ class Basic extends Component {
                 <h2 style={{marginTop: 15}}>
                     客维管理
                 </h2>
-                <div>mDetail :{JSON.stringify(this.state.mDetail)}</div>
+                {/*<div>mDetail :{JSON.stringify(this.state.mDetail)}</div>*/}
 
                 <BreadcrumbCustom first="营销管理" second="渠道管理" third={"客维主页"}/>
 
