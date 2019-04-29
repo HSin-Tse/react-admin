@@ -174,7 +174,7 @@ class Basic extends Component {
                 dataIndex: '入职时间',
                 key: '入职时间',
                 render: (text, record) => (
-                    <span>{record.execCurrency}</span>)
+                    <span>{record.entryTime}</span>)
             }
 
             , {
@@ -293,8 +293,12 @@ class Basic extends Component {
         }).then(function (response) {
             console.log('hcia response', response)
 
+            var ss=[]
+            ss.push(response.data.data)
+
             self.setState({
                 mDetail: response.data.data,
+                userList:ss
                 }
             );
         })
@@ -384,14 +388,14 @@ class Basic extends Component {
                             <h3>{this.state.mDetail.displayName}返佣账户</h3>
 
                             <div style={{marginTop: 15, display: 'flex', minHeight: 40, width: 200}}>
-                                <span style={{minWidth: 100}}>总佣金：a</span>
+                                <span style={{minWidth: 100}}>总佣金：{this.state.mDetail.allVolume}</span>
                             </div>
 
                             <div style={{display: 'flex', minHeight: 40, width: 200}}>
-                                <span style={{minWidth: 100}}>已返佣：b</span>
+                                <span style={{minWidth: 100}}>已返佣：{this.state.mDetail.earnedVolume}</span>
                             </div>
                             <div style={{display: 'flex', minHeight: 40, width: 200}}>
-                                <span style={{minWidth: 100}}>未返佣：c</span>
+                                <span style={{minWidth: 100}}>未返佣：{this.state.mDetail.noEarnedVolume}</span>
                             </div>
 
 
