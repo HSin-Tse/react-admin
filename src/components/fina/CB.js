@@ -35,6 +35,30 @@ class Basic extends Component {
             isCanOPD: false,
             availableFlag: false,
             forbiddenValue: 0,
+            mDetail: {
+                "displayName": "",//客维显示名称
+                "bkUserId": 3,//客维ID
+                "loginName": "",//客维登陆名称
+                "entryTime": "",//入职日期
+                "assignedCustomerCnt": "",//已分配客户人数
+                "tracedCustomerCnt": "",//已跟踪客户人数
+                "notTracedCustomerCnt": "",//未跟踪客户人数
+                "openedCustomerCnt": "",//已开户客户人数
+                "invalidCustomerCnt": "",//已失效客户人数
+                "netDepositVolume": "",//净入金
+                "businessVolume": "",//交易量
+                "allVolume": "",//总佣金
+                "earnedVolume": "",//已返佣
+                "noEarnedVolume": "",//未返佣
+                "handleLeadsPercent": "",//Leads处理率
+                "lostLeadsPercent": "",//Leads流失率
+                "openAccountPercent": "",//开户成功率
+                "allVolume_filter": "",//总佣金(默认：当日)
+                "fxBusinessVolume_filter": "",//外汇交易量(默认：当日)
+                "stockBusinessVolume_filter": "",//股票交易量(默认：当日）
+                "netDepositVolume_filter": "",//净入金(默认：当日）
+                "openedCustomerCnt_filter": ""//新增直客数（默认：当日）
+            },
             filterDateType: 1,
             current: 1,
             pgsize: 20,
@@ -176,7 +200,7 @@ class Basic extends Component {
                     <span>{record.openAccountPercent}</span>)
             }];
 
-        this.requestPage()
+        // this.requestPage()
         this.requestD()
 
 
@@ -269,12 +293,10 @@ class Basic extends Component {
         }).then(function (response) {
             console.log('hcia response', response)
 
-            // self.setState({
-            //         totalPage: response.data.data.totalPage,
-            //         loading: false,
-            //         userList: response.data.data.list
-            //     }
-            // );
+            self.setState({
+                mDetail: response.data.data,
+                }
+            );
         })
 
 
@@ -339,9 +361,13 @@ class Basic extends Component {
             <div>
 
 
+
+
                 <h2 style={{marginTop: 15}}>
                     客维管理
                 </h2>
+                <div>mDetail :{JSON.stringify(this.state.mDetail)}</div>
+
                 <BreadcrumbCustom first="营销管理" second="渠道管理" third={"客维主页"}/>
 
                 <Card
@@ -355,7 +381,7 @@ class Basic extends Component {
 
 
                         <Card>
-                            <h3>某某客维返佣账户</h3>
+                            <h3>{this.state.mDetail.displayName}返佣账户</h3>
 
                             <div style={{marginTop: 15, display: 'flex', minHeight: 40, width: 200}}>
                                 <span style={{minWidth: 100}}>总佣金：a</span>
