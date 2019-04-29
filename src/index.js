@@ -17,10 +17,6 @@ import Toast from './components/widget/toast'
 import {IntlProvider} from 'react-intl';
 import Intl from './Intl';
 
-// import {IntlProvider, addLocaleData} from 'react-intl';
-// import i18n from './i18n';
-// import './i18n';
-// import {I18nextProvider} from 'react-i18next';
 
 const middleware = [thunk];
 const store = createStore(reducer, applyMiddleware(...middleware));

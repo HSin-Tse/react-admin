@@ -80,7 +80,6 @@ class Basic extends Component {
     componentDidMount() {
 
 
-
         window.Axios.post('/auth/addOperatorLogHistory', {
             moduleLog: '审核管理',
             pageLog: '开户审核',
@@ -221,6 +220,13 @@ class Basic extends Component {
                     <span>{record.displayApplyType}</span>),
             }, {
                 align: 'center',
+                title: '交易账号',
+                dataIndex: '交易账号',
+                key: '交易账号',
+                render: (text, record) => (
+                    <span>{record.accountNo}</span>),
+            }, {
+                align: 'center',
                 width: 80,
                 title: '申请时间',
                 dataIndex: '申请时间',
@@ -322,28 +328,22 @@ class Basic extends Component {
 
         });
     };
-
     handleEdit = (record) => {
 
 
         var op = !this.state.availableFlag ? '点击查看' : record.status == 0 ? '点击审核' : (record.status == 1) ? '点击查看' : '点击查看'
-        // window.Axios.post('back/addLogOpenAccountAudit', {
-        //     referKey: record.id,
-        //     commentLog: op,
-        //     // mobile: this.state.phoneCn,
-        //     // content: this.state.changeNoteV,
-        // })
+
 
         if (this.state.isCanOP == 1) {
             this.props.history.push('/app/pass/passopen/detail' + record.id)
             return
         }
 
-        if (this.state.availableJeffFlag     ) {
+        if (this.state.availableJeffFlag) {
 
-           var ssdsd =  record.status == 0 ? 'passopen': 'passopenrs'
+            var ssdsd = record.status == 0 ? 'passopen' : 'passopenrs'
 
-            this.props.history.push('/app/pass/'+ssdsd+'/detail' + record.id)
+            this.props.history.push('/app/pass/' + ssdsd + '/detail' + record.id)
             return
         }
 
@@ -354,27 +354,12 @@ class Basic extends Component {
         }
 
 
-        // if (this.state.availableFlag) {
-        //     this.props.history.push('/app/pass/passopen/detail' + record.id)
-        //     return
-        // }
-
-
         var gogo = record.status === 0 ? 'detail' : (record.status === 1) ? 'user' : 'user'
         this.props.history.push('/app/pass/passopen/' + gogo + record.id)
 
 
     };
-
-
     handleAmStok = (record) => {
-
-        // window.Axios.post('back/addLogOpenAccountAudit', {
-        //     referKey: record.id,
-        //     commentLog: "美股授权",
-        //     // mobile: this.state.phoneCn,
-        //     // content: this.state.changeNoteV,
-        // })
 
 
         let self = this
@@ -395,31 +380,6 @@ class Basic extends Component {
 
 
     };
-
-
-    requestPageWinoRe = () => {
-        let self = this
-        window.Axios.post('open/getOpenApplyList', {
-            'pageSize': this.state.pgsize,
-            'pageNo': this.state.current,
-            email: this.state.selectMail,
-            mobile: this.state.selectPhoneF,
-            nationalId: this.state.selectID,
-            starClientAccount: this.state.starClientAccount,
-            startTime: this.state.selectTimeStart,
-            endTime: this.state.selectTimeEnd,
-        }).then((response) => {
-
-            self.setState({
-                    totalPage: response.data.data.totalPage,
-                    loading: false,
-                    userList: response.data.data.list
-                }
-            );
-
-        })
-    }
-
     requestPageS = () => {
         let self = this
         self.setState({
@@ -473,16 +433,12 @@ class Basic extends Component {
 
         })
     }
-
     changePage = (page) => {
-        // page = page - 1
         console.log('hcia page', page)
         this.setState({
             current: page,
         }, () => {
-
             this.requestPage()
-
         })
     }
 
@@ -561,17 +517,19 @@ class Basic extends Component {
                             }} style={{marginBottom: 10}} placeholder="手机号"/>
 
 
+
                             <Input value={this.state.selectID} onChange={(e) => {
                                 this.setState({
                                     selectID: e.target.value,
                                 });
                             }} style={{marginBottom: 10}} placeholder="身份证号"/>
 
-                            {/*<Input value={this.state.starClientAccount} onChange={(e) => {*/}
-                                {/*this.setState({*/}
-                                    {/*starClientAccount: e.target.value,*/}
-                                {/*});*/}
-                            {/*}} style={{marginBottom: 10}} placeholder="账户"/>*/}
+                            <Input value={this.state.starClientAccount} onChange={(e) => {
+                            this.setState({
+                            starClientAccount: e.target.value,
+                            });
+                            }} style={{marginBottom: 10}} placeholder="交易账号"/>
+
                             <RangePicker
 
                                 showToday
