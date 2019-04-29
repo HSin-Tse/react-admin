@@ -83,20 +83,20 @@ class Basic extends Component {
                 dataIndex: '已分配',
                 key: '已分配',
                 render: (text, record) => (
-                    <span>{record.orderNo}</span>),
+                    <span>{record.assignedCustomerCnt}</span>),
             }, {
 
                 title: '已跟踪',
                 dataIndex: '已跟踪',
                 key: '已跟踪',
-                render: (text, record) => (<span>{record.accountNo}</span>),
+                render: (text, record) => (<span>{record.tracedCustomerCnt}</span>),
                 align: 'center',
             }, {
                 title: '未跟踪',
                 dataIndex: '未跟踪',
                 key: '未跟踪',
                 render: (text, record) => (
-                    <span>{record.name}</span>),
+                    <span>{record.notTracedCustomerCnt}</span>),
                 align: 'center',
             }, {
                 align: 'center',
@@ -105,14 +105,14 @@ class Basic extends Component {
                 key: '已开户',
                 width: 100,
                 render: (text, record) => (
-                    <span>{record.date}</span>),
+                    <span>{record.openedCustomerCnt}</span>),
             }, {
                 align: 'center',
                 title: '已失效客户',
                 dataIndex: '已失效客户',
                 key: '已失效客户',
                 render: (text, record) => (
-                    <span>{record.channelName}</span>)
+                    <span>{record.invalidCustomerCnt}</span>)
             }, {
                 align: 'center',
 
@@ -120,28 +120,28 @@ class Basic extends Component {
                 dataIndex: '净入金',
                 key: '净入金',
                 render: (text, record) => (
-                    <span>{record.accountCurrency}</span>),
+                    <span>{record.netDepositVolume}</span>),
             }, {
                 align: 'center',
                 title: '交易量',
                 dataIndex: '交易量',
                 key: '交易量',
                 render: (text, record) => (
-                    <span>{record.accountAmount}</span>),
+                    <span>{record.businessVolume}</span>),
             }, {
                 align: 'center',
                 title: '已返佣',
                 dataIndex: '已返佣',
                 key: '已返佣',
                 render: (text, record) => (
-                    <span>{record.broker}</span>),
+                    <span>{record.earnedVolume}</span>),
             }, {
                 align: 'center',
                 title: '未返佣',
                 dataIndex: '未返佣',
                 key: '未返佣',
                 render: (text, record) => (
-                    <span>{record.execAmount}</span>
+                    <span>{record.noEarnedVolume}</span>
                 )
 
             }, {
@@ -159,21 +159,21 @@ class Basic extends Component {
                 dataIndex: 'LEADS处理率',
                 key: 'LEADS处理率',
                 render: (text, record) => (
-                    <span>{record.rate}</span>)
+                    <span>{record.handleLeadsPercent}</span>)
             }, {
                 align: 'center',
                 title: 'LEADS流失率',
                 dataIndex: 'LEADS流失率',
                 key: 'LEADS流失率',
                 render: (text, record) => (
-                    <span>{record.feeAmount}</span>)
+                    <span>{record.lostLeadsPercent}</span>)
             }, {
                 align: 'center',
                 title: '开户成功率',
                 dataIndex: '开户成功率',
                 key: '开户成功率',
                 render: (text, record) => (
-                    <span>{record.displayStatus}</span>)
+                    <span>{record.openAccountPercent}</span>)
             }];
 
         this.requestPage()
