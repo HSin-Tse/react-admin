@@ -8,6 +8,7 @@ import connect from "react-redux/es/connect/connect";
 import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import EchartsViews from "../dashboard/EchartsViews";
+import Svg from "../fina/weget/Svg";
 
 
 class Basic extends Component {
@@ -293,12 +294,12 @@ class Basic extends Component {
         }).then(function (response) {
             console.log('hcia response', response)
 
-            var ss=[]
+            var ss = []
             ss.push(response.data.data)
 
             self.setState({
-                mDetail: response.data.data,
-                userList:ss
+                    mDetail: response.data.data,
+                    userList: ss
                 }
             );
         })
@@ -363,8 +364,6 @@ class Basic extends Component {
     render() {
         return (
             <div>
-
-
 
 
                 <h2 style={{marginTop: 15}}>
@@ -474,7 +473,7 @@ class Basic extends Component {
                             <EchartsViews
                                 style={{marginTop: 15}}
                             ></EchartsViews>
-
+                            <Svg style={{marginTop: 15}}></Svg>
 
                         </Card>
 
