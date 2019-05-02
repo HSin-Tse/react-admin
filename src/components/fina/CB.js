@@ -1,7 +1,7 @@
 /**
  * Created by tse on 2017/7/31.
  */
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {Button, Table, Card} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
@@ -11,7 +11,7 @@ import EchartsViews from "../dashboard/EchartsViews";
 import Svg from "../fina/weget/Svg";
 
 
-class Basic extends Component {
+class Basic extends PureComponent {
 
     constructor(props) {
         super(props);
