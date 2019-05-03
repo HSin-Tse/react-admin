@@ -22,11 +22,7 @@ export default class Svg extends PureComponent {
   })
 
   render() {
-    let code = "<ReactEcharts \n" +
-      "  option={this.getOption()} \n" +
-      "  style={{height: '400px', width: '100%'}}  \n" +
-      "  opts={{renderer: 'svg'}}  \n" +
-      "  className='react_for_echarts' />";
+
     return (
       <div className='examples'>
         <div className='parent'>
@@ -36,10 +32,6 @@ export default class Svg extends PureComponent {
             style={{height: '400px', width: '100%'}}
             opts={{ renderer: 'svg' }}
             className='react_for_echarts' />
-          {/*<label> code below: </label>*/}
-          {/*<pre>*/}
-            {/*<code>{code}</code>*/}
-          {/*</pre>*/}
         </div>
       </div>
     );
