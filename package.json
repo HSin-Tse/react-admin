@@ -163,5 +163,9 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "compression-webpack-plugin": "^2.0.0",
+    "webpack-bundle-analyzer": "^3.3.2"
   }
 }

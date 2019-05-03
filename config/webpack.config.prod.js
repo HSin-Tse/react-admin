@@ -18,6 +18,8 @@ const paths = require('./paths');
 const getClientEnvironment = require('./env');
 const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
+var UglifyJsPlugin=require('uglifyjs-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin')
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -142,12 +144,22 @@ module.exports = {
 						// https://github.com/facebook/create-react-app/issues/2376
 						// Pending further investigation:
 						// https://github.com/mishoo/UglifyJS2/issues/2011
-						comparisons: false,
+                        comparisons: true,
 						// Disabled because of an issue with Terser breaking valid code:
 						// https://github.com/facebook/create-react-app/issues/5250
 						// Pending futher investigation:
 						// https://github.com/terser-js/terser/issues/120
 						inline: 2,
+                        // warnings: false,
+                        // screw_ie8: true,
+                        // conditionals: true,
+                        // unused: true,
+                        // comparisons: true,
+                        // sequences: true,
+                        dead_code: true,
+                        // evaluate: true,
+                        // if_return: true,
+                        // join_vars: true
 					},
 					mangle: {
 						safari10: true,
@@ -182,6 +194,12 @@ module.exports = {
 						: false,
 				},
 			}),
+
+            // new UglifyJsPlugin({
+            //     uglifyOptions: {
+            //         compress: false
+            //     }
+            // }),
 		],
 		// Automatically split vendor and commons
 		// https://twitter.com/wSokra/status/969633336732905474
@@ -458,6 +476,11 @@ module.exports = {
 				minifyURLs: true,
 			},
 		}),
+
+        // new CompressionPlugin({
+        //     algorithm: "gzip",
+		//
+        // }),
 		// Inlines the webpack runtime script. This script is too small to warrant
 		// a network request.
 		new InlineChunkHtmlPlugin(HtmlWebpackPlugin, [/runtime~.+[.]js/]),
