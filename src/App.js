@@ -8,7 +8,6 @@ import {receiveData} from './action';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import Routes from './routes';
-import {ThemePicker} from './components/widget';
 
 const {Content, Footer} = Layout;
 
@@ -18,17 +17,11 @@ class App extends Component {
     };
 
     componentWillMount() {
-        // const {receiveData} = this.props;
 
         this.getClientWidth();
-        // window.onresize = () => {
-        //     this.getClientWidth();
-        // }
     }
 
     componentDidMount() {
-
-
 
 
         const openNotification = () => {
@@ -38,7 +31,7 @@ class App extends Component {
         !isFirst && openNotification();
     }
 
-    getClientWidth = () => { // 获取当前浏览器宽度并设置responsive管理响应式
+    getClientWidth = () => {
         const {receiveData} = this.props;
         const clientWidth = window.innerWidth;
         receiveData({isMobile: clientWidth <= 992}, 'responsive');
