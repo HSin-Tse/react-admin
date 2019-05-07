@@ -1,7 +1,7 @@
 /**
  * Created by tse on 2017/7/31.
  */
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import {Button, Table, Card} from 'antd';
 import BreadcrumbCustom from '@/components/BreadcrumbCustom';
 import connect from "react-redux/es/connect/connect";
@@ -11,7 +11,7 @@ import EchartsViews from "../dashboard/EchartsViews";
 import Svg from "../fina/weget/Svg";
 
 
-class Basic extends PureComponent {
+class Basic extends Component {
 
     constructor(props) {
         super(props);
@@ -283,41 +283,50 @@ class Basic extends PureComponent {
     requestD = () => {
         var mImfor = JSON.parse(localStorage.getItem('infor'))
         console.log('hcia mImfor', mImfor)
+        console.log('hcia mImfor', mImfor)
+        console.log('hcia mImfor', mImfor)
 
 
-        var iidd = {backUserId: mImfor.backUserId ? mImfor.backUserId : ''}
-        console.log('hcia iidd', iidd)
-        console.log('hcia iidd', iidd)
-        let self = this
-        window.Axios.post('ib/getIBUserDetail', {
-            'id': mImfor.backUserId ? mImfor.backUserId : '',
-        }).then(function (response) {
-            console.log('hcia response', response)
+        if(mImfor){
+            var iidd = {backUserId: mImfor.backUserId ? mImfor.backUserId : ''}
+            console.log('hcia iidd', iidd)
+            console.log('hcia iidd', iidd)
+            let self = this
+            window.Axios.post('ib/getIBUserDetail', {
+                'id': mImfor.backUserId ? mImfor.backUserId : '',
+            }).then(function (response) {
+                console.log('hcia response', response)
 
-            var ss = []
-            ss.push(response.data.data)
+                var ss = []
+                ss.push(response.data.data)
 
-            self.setState({
-                    mDetail: response.data.data,
-                    userList: ss
-                }
-            );
-        })
+                self.setState({
+                        mDetail: response.data.data,
+                        userList: ss
+                    }
+                );
+            })
 
 
-        window.Axios.post('ib/getIBUserDetailStat', {
-            'id': mImfor.backUserId ? mImfor.backUserId : '',
-            'filterDateType': this.state.filterDateType,
-        }).then(function (response) {
-            console.log('hcia response', response)
+            window.Axios.post('ib/getIBUserDetailStat', {
+                'id': mImfor.backUserId ? mImfor.backUserId : '',
+                'filterDateType': this.state.filterDateType,
+            }).then(function (response) {
+                console.log('hcia response', response)
 
-            // self.setState({
-            //         totalPage: response.data.data.totalPage,
-            //         loading: false,
-            //         userList: response.data.data.list
-            //     }
-            // );
-        })
+                // self.setState({
+                //         totalPage: response.data.data.totalPage,
+                //         loading: false,
+                //         userList: response.data.data.list
+                //     }
+                // );
+            })
+        }
+
+
+
+
+
     };
     requestPage = () => {
 
