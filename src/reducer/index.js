@@ -1,5 +1,5 @@
 /**
- * Created by 叶子 on 2017/7/30.
+ * Created by tse on 2017/7/30.
  */
 import {combineReducers} from 'redux';
 import * as type from '../action/type';

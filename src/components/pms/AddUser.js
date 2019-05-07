@@ -1,6 +1,5 @@
 
 import React, {Component} from 'react';
-import PasswordMask from 'react-password-mask';
 import {
     Col,
     Card,
@@ -26,7 +25,6 @@ const RadioGroup = Radio.Group;
 const Option = Select.Option;
 
 class AddUser extends Component {
-    // state = {visible: false, modal2Visible: false}
 
     constructor(props) {
         super(props);

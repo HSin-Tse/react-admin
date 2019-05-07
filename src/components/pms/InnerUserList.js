@@ -9,9 +9,7 @@ import {bindActionCreators} from "redux";
 import {receiveData} from "../../action";
 import classNames from "classnames";
 
-const Option = Select.Option;
 const {TextArea} = Input;
-const {RangePicker} = DatePicker;
 
 class InnerUserList extends Component {
     changeScret = (e) => {
