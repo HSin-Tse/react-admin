@@ -107,7 +107,7 @@ export default class CRouter extends Component {
 
 
         if (!localStorage.getItem('too')) {
-            return component
+            // return component
 
             return <Redirect to={'/login'}/>;
         } else {
