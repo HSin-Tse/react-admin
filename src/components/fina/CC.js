@@ -819,11 +819,7 @@ export default class BlackList extends Component {
                         <Card
                             bodyStyle={{padding: 0, margin: 0}}
                             title={'当周'}
-                            extra={<Button onClick={() => {
-                                this.setState({
-                                    modal2Visible1: true,
-                                });
-                            }}>添加黑名单</Button>}
+
                         >
                             <Table rowKey="id"
                                    bordered
@@ -844,11 +840,7 @@ export default class BlackList extends Component {
                         <Card
                             bodyStyle={{padding: 0, margin: 0}}
                             title={'当月'}
-                            extra={<Button onClick={() => {
-                                this.setState({
-                                    modal2Visible1: true,
-                                });
-                            }}>添加黑名单</Button>}
+
                         >
                             <Table rowKey="id"
                                    bordered
@@ -870,11 +862,7 @@ export default class BlackList extends Component {
                         <Card
                             bodyStyle={{padding: 0, margin: 0}}
                             title={'年度'}
-                            extra={<Button onClick={() => {
-                                this.setState({
-                                    modal2Visible1: true,
-                                });
-                            }}>添加黑名单</Button>}
+
                         >
                             <Table rowKey="id"
                                    bordered
