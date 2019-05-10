@@ -15,9 +15,11 @@ const renderMenuItem = item => (
 );
 
 const renderSubMenu = item => (
+
     <Menu.SubMenu
         key={item.key}
         title={
+
             <span>
                 {item.icon && <Icon type={item.icon}/>}
                 <span className="nav-text">
